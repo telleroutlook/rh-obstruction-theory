@@ -1,0 +1,61 @@
+{
+  "contract_version": "2",
+  "claim_id": "B2-exact-collision-theorem",
+  "note": "Theorem B2 (WP-B, B2). Exact finite-observation collision in 𝔛_sym. CONDITIONAL on rank conjecture. PROOF-DRAFT. No computational witness yet.",
+
+  "theorem_id": "B2-exact-collision",
+  "paper": "A (primary if rank closes; else lemma of C)",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "B2-exact-collision",
+    "ambient_class": "𝔛_sym: locally finite zero multisets in the critical strip, symmetric under conjugation and rho->1-rho, admissibility exponent bound",
+    "resource_bound": "fixed finite test family (m, Phi); exact collision (zero tolerance); integer multiplicities required",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "Euler product, gamma factor, analytic continuation, coefficient arithmetic, infinite test hierarchy; additionally: integer-multiplicity constraint (if violated, B2 retracts to B1)"
+  },
+
+  "normalization_choice": {
+    "note": "Same W1/W2 convention as B1. Weil tests use W2 (imaginary part evaluation).",
+    "selected": "W2-weil-imaginary-part"
+  },
+
+  "dependencies": [
+    {"claim_id": "B1-OFF-LINE-QUARTET-LEMMA", "ledger_math": "PROOF-DRAFT", "role": "quartet tail decay; inherited from B1 proof.md §2"},
+    {"claim_id": "SYMMETRIC-ZERO-CLASS-DEF", "ledger_math": "DEFINITION", "role": "ambient class"},
+    {"claim_id": "B2-RANK-CONJECTURE", "ledger_math": "PROOF-DRAFT", "role": "central rank step; Chebyshev T-system argument in proof.md §4.3; integer-sign step still open (proof.md §4.5)"},
+    {"claim_id": "CURTO-FIALKOW-FLAT-EXTENSION", "ledger_math": "REFEREED", "role": "background moment theory context for B3"}
+  ],
+
+  "obligations": [
+    "B2.rank.proof: prove or refute J has full rank over Q for natural test families at rational heights (proof.md §4) — OPEN",
+    "B2.analytic.quartet-decay: inherits from B1 proof.md §2",
+    "B2.analytic.construction: conditional on rank; outlined in proof.md §5",
+    "B2.integer-mult: verify alpha_k are nonneg integers (not fractional or signed) — OPEN",
+    "B2.scope: conditionality stated; fixed-K limitation stated; no K->infty overclaim"
+  ],
+
+  "acceptance_test_results": {
+    "note": "CONDITIONAL — rank step not yet proved. Status is PROOF-DRAFT-CONDITIONAL.",
+    "class": "PASS — 𝔛_sym membership checkable",
+    "non_vacuity": "PASS — formal zeta zero multiset is a member",
+    "target": "CONDITIONAL — Z_- exists only if rank step succeeds",
+    "observation": "CONDITIONAL — exact collision (zero tolerance) requires rank step",
+    "invariant": "PASS — O_Phi is representation-independent",
+    "no_rh": "PASS — no RH or RH-equivalent hypothesis",
+    "escape": "PASS — escape routes listed including integer-mult self-retraction condition",
+    "scope": "PASS — names 𝔛_sym and fixed-m resource bound"
+  },
+
+  "checker": {
+    "protocol": "analytic-only-pending-rank",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "N/A-conditional", "byte_exact": "not_required"},
+  "spec_status": "PROOF-DRAFT-CONDITIONAL",
+  "status_note": "Rank step promoted to PROOF-DRAFT (Chebyshev T-system argument, proof.md §4.3). Integer-sign constraint (add-only vs add-and-remove) still OPEN (proof.md §4.5). Do not cite as an established result until both steps close."
+}

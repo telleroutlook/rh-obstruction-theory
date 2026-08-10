@@ -1,0 +1,69 @@
+# Dependencies — Theorem B2
+
+theorem_id: B2-exact-collision
+status: PROOF-DRAFT (conditional on rank analysis)
+
+dependencies:
+
+  - id: B1-OFF-LINE-QUARTET-LEMMA
+    statement: >
+      Off-line quartet Q(sigma_0, T) has observation contribution delta_j(T) -> 0
+      as T -> infinity for Li, Weil-W2, and moment test families.
+    source: "theorems/B1-finite-inequality/proof.md §2"
+    mathematical: PROOF-DRAFT
+    computational: NONE
+    usable_as_premise: true
+    role: "Quartet tail decay; used in proof.md §3."
+
+  - id: SYMMETRIC-ZERO-CLASS-DEF
+    statement: "Definition of 𝔛_sym (same as in B1)."
+    source: "spec/PROGRAM.md §7.B.1; B1/statement.md"
+    mathematical: DEFINITION
+    computational: NONE
+    usable_as_premise: true
+    role: "Ambient class."
+
+  - id: B2-RANK-CONJECTURE
+    statement: >
+      For Li-type or moment-type test families Phi with m tests and on-line heights
+      t_1 < ... < t_m (rational, distinct, positive), the m x m Jacobian J has
+      det(J) != 0 over Q.  For Li-type: J_{jk} = 2(1 - cos(j*theta_k)) where
+      theta_k = 2*arctan(2*t_k) - pi; full rank follows from Chebyshev T-system
+      theory (Karlin-Studden) applied to {cos(j*theta): j=1,...,m} at distinct
+      theta_k in (0,pi).  For moment-type: analogous cosine-Vandermonde argument.
+    source: "proof.md §4.3-§4.4 (Chebyshev/Vandermonde analytic argument, PROOF-DRAFT)"
+    mathematical: PROOF-DRAFT
+    computational: EXPLORATORY
+    usable_as_premise: true
+    role: >
+      Central rank step for B2 construction.  Promoted from CONJECTURE to
+      PROOF-DRAFT after the Chebyshev-system analytic argument was written in
+      proof.md §4.3 and discovery-tier exact rational verification confirmed
+      det(J) != 0 for m=3,4,5 at multiple rational heights
+      (discovery/jacobian_rank_results.md).  Still needs Karlin-Studden citation
+      by precise theorem number before INDEPENDENTLY-CHECKED.
+    gate_a_status: PROOF-DRAFT-PENDING-CITATION
+    caveat: >
+      Chebyshev T-system argument in proof.md §4.3 is a proof sketch; the
+      Karlin-Studden (or equivalent) theorem must be cited by number.
+      The integer-sign step (add-only vs add-and-remove) is still OPEN (proof.md
+      §4.5).  B2 remains CONDITIONAL until both are resolved.
+
+  - id: CURTO-FIALKOW-FLAT-EXTENSION
+    statement: >
+      Curto-Fialkow flat extension theorem: a truncated moment sequence has a
+      unique representing measure (with support determined by rank flatness).
+    source: "Curto-Fialkow, Memoirs AMS 136 (1998)"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: >
+      Background: B3 (truncated moment support) will build on this. Not needed
+      for B2 rank step but provides the moment-theoretic context.
+
+gate_a_status: CONDITIONAL
+gate_a_note: >
+  B2 is BLOCKED as an established theorem until B2-RANK-CONJECTURE is proved or
+  refuted. The construction in proof.md §5 is conditional on that conjecture.
+  The non-conditional parts (quartet decay, symmetry check) inherit from B1 which
+  is Gate A clear.
