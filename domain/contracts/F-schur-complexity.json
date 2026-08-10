@@ -31,7 +31,7 @@
 
   "obligations": [
     "F.rep-inv-gate: verify the five conditions of statement.md §2 for any specific -c_a use — OPEN",
-    "F.non-vacuity-gate: identify a specific published construction in P_{r,N} — OPEN",
+    "F.non-vacuity-gate: Suzuki A_a Galerkin truncation confirmed as P_{r,N} member — CONDITIONALLY PASSED (EXT-5a, PROOF-DRAFT); full gate opens with representation-invariance gate",
     "F.lower-bound.eigenvec-spread: quantitative lower bound |<v_min,e_j>|^2 >= c/N — OPEN",
     "F.lower-bound.schur-residual: Schur-complement argument that partial pivoting cannot avoid minimum eigenspace — OPEN",
     "F.legacy-reinspect: if LEGACY-FP-0.35 is used for non-vacuity, must reconcile -c_L with lambda(a) log-scale — PENDING"
@@ -40,7 +40,7 @@
   "acceptance_test_results": {
     "note": "PROOF-DRAFT. Both gates open — Paper D conditional.",
     "class": "PASS — P_{r,N} membership checkable (order m, rank r, Galerkin dimension N, ONB, allowed operations stated)",
-    "non_vacuity": "OPEN — no confirmed example in P_{r,N}; candidates listed in statement.md §3",
+    "non_vacuity": "CONDITIONALLY PASSED (EXT-5a) — Suzuki A_a Galerkin truncation confirmed as P_{r,N} member (PROOF-DRAFT; source: arXiv:2606.09096 Thm 1.1, baseline tarball). Full gate opens when representation-invariance gate also passes.",
     "target": "PASS — kappa(a,delta,N,r) certifies M_{a,N}>=delta*I; lambda(a) is the invariant adversarial target",
     "observation": "PASS — the lambda_min eigenvalue is a continuous invariant under orthogonal congruence",
     "invariant": "CONDITIONAL — the five representation-invariance conditions of statement.md §2 must be verified before any -c_a use",

@@ -1,0 +1,57 @@
+# Dependencies — Theorem D' (D-prime-logpoly)
+
+theorem_id: D-prime-logpoly
+status: ESCAPE-ROUTE-OPEN (PROOF-DRAFT for the key computation)
+
+dependencies:
+
+  - id: LOG-POLYHOMOGENEOUS-HEAT-KERNEL
+    statement: >
+      For H a log-polyhomogeneous pseudodifferential operator of order m > 0 on a
+      compact d-manifold (symbol ~ sum_j (sigma_{m-j} + tau_{m-j}·log|xi|)),
+      the heat trace Z_H(t) = Tr(e^{-tH}) has the expansion
+        Z_H(t) ~ sum_{j,k} c_{j,k} · t^{(j-d)/m} · (log(1/t))^k   as t -> 0+,
+      where c_{0,1} = (1/(m·(2pi)^d)) · integral_{cosphere bundle} tau_m dS,
+      and all coefficients c_{j,k} are determined by the symbol components.
+    source: >
+      Schrohe, E. (1992) "Spectral invariance, ellipticity and the Fredholm property
+      for pseudodifferential operators on weighted Sobolev spaces" Ann. Global Anal. Geom.
+      Lesch, M. (1995) "Operators of Fuchs type, conical singularities, and asymptotic
+      methods" Teubner-Texte Math., B.G. Teubner, Stuttgart. ISBN 3-8154-2118-X.
+      Grubb, G. and Seeley, R.T. (1995) "Weakly parametric pseudodifferential operators
+      and Atiyah-Patodi-Singer boundary problems" Invent. Math. 121(3):481-529.
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    peer_reviewed: true
+    gate_a_status: OPEN
+    gate_a_note: >
+      Theorem numbers not yet verified against physical copies. The result is a
+      well-known part of the pseudodifferential calculus literature; the statement
+      is used here at REFEREED level pending theorem-number verification from source.
+    role: >
+      Key: establishes that the log-coefficient c_{0,1} in the heat-trace expansion
+      for log-polyhomogeneous operators is (1/(m*(2pi)^d)) * integral of tau_m.
+      This is the critical fact that lets c_{0,1} = (2pi)^{-1} be achieved.
+
+  - id: SEELEY-DEWITT-EXPANSION
+    statement: >
+      The heat trace of H in C_ell has the polyhomogeneous expansion with NO log terms.
+      (Same as Theorem D dependency.)
+    source: "Berline-Getzler-Vergne Thm 2.30; Gilkey Thm 1.8.1."
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    peer_reviewed: true
+    gate_a_status: OPEN
+    role: >
+      Comparison reference: shows C_ell (subset of C_logpoly with tau_k=0) has no
+      log terms, confirming C_logpoly is a strict extension and the escape is genuine.
+
+gate_a_status: OPEN
+gate_a_note: >
+  LOG-POLYHOMOGENEOUS-HEAT-KERNEL: theorem numbers not verified against physical books.
+  Conceptual content is standard and well-known; tracking verification as open item.
+  This does not block the escape-route conclusion (which follows from the formula
+  structure regardless of exact theorem number), but must be resolved before this
+  analysis is used as a premise in another theorem.

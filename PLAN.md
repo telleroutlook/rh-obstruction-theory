@@ -157,3 +157,173 @@ downstream `BLOCKED`.
   falsely universal.
 
 None of these is "RH proved." That phrase never appears as a conclusion of this repo.
+
+---
+
+## Part VIII · Extension program — broader classes and escape-route audits
+
+Each existing theorem has a natural extension direction. The goal is not to exclude "all
+methods" (that is a self-defeating and open meta-mathematical claim) but to either:
+(a) **extend** the excluded class to a strictly larger, still-natural class; or
+(b) **audit an escape route** — prove it is genuinely open (positive result) or close it
+    with a new obstruction theorem.
+
+Both outcomes are valuable per the program contract.
+
+### EXT-1 · D' — log-polyhomogeneous operator class (extends Theorem D)
+
+**Escape route being audited:** D's escape route §3 item 3: "nonlocal or
+log-polyhomogeneous symbols" can have `t^{-1} log(1/t)` heat-trace terms.
+
+**Question:** Does the log-polyhomogeneous class 𝒞_logpoly (Schrohe 1992, Lesch 1995)
+actually reproduce `Z_ζ(t) ∼ log(1/t)/t`? Two sub-cases:
+
+- **EXT-1a (closure attempt):** If the log-polyhomogeneous heat-trace expansion has a
+  strictly different `log`-coefficient structure than `1/(2π)·log(1/t)/t` — i.e. if the
+  coefficient of the log term is determined by the principal symbol and cannot match the
+  Riemann–von Mangoldt constant — then Theorem D' extends to cover 𝒞_logpoly.
+- **EXT-1b (open escape):** If a log-polyhomogeneous operator can be constructed with
+  heat-trace exactly `∼ C·log(1/t)/t` for any `C > 0`, this escape route is genuinely
+  open and 𝒞_logpoly is a live candidate class for Hilbert–Pólya.
+
+**Method:** Read Schrohe (1992) / Lesch (1995) / Grubb–Seeley (1995) heat-kernel
+coefficients for log-polyhomogeneous symbols. Determine the full expansion including
+log-coefficient formula. Compare with `(2π)^{-1}` from Riemann–von Mangoldt.
+
+**Expected deliverable:** `theorems/D-prime-logpoly/` with either an extended no-go
+(structural obstruction) or a confirmed-open escape record.
+
+**Priority:** HIGH — tools are available (pseudodifferential calculus literature),
+question is sharp, outcome is binary.
+
+---
+
+### EXT-2 · Unified information layer theorem (extends B1 + G)
+
+**Goal:** Replace three separate information obstructions (B1 finite-K, G theta-level)
+with a single layered theorem over the observation lattice:
+```
+O_finite ⊂ O_theta ⊂ O_vonMangoldt ⊂ O_oracle
+```
+For each layer `L`, characterize: what zero multisets are `L`-indistinguishable?
+
+**Sub-tasks:**
+- **EXT-2a:** Show B1 and G are special cases of the same abstract information
+  obstruction (observation map O, two admissible objects with same O-image, differing
+  on target predicate). Write a unified `theorems/H-information-hierarchy/` with a
+  general theorem parametrized by observation layer.
+- **EXT-2b:** Determine at which layer indistinguishability first fails — i.e. does
+  `O_vonMangoldt` (full explicit formula) distinguish all admissible zero multisets?
+  If yes: the "information barrier" is precisely the gap between O_theta and O_vonMangoldt.
+  If no: the obstruction is deeper.
+
+**Blocker:** EXT-2b requires progress on G-hard (CONJECTURE: S(T) irrecoverable from
+zero-free arithmetic). EXT-2a is independent and can proceed now.
+
+**Priority:** MEDIUM — conceptually unifying but EXT-2b has an unresolved conjecture.
+
+---
+
+### EXT-3 · E-neg for Suzuki meromorphic target (extends Theorem E)
+
+**Escape route being audited:** E covers CCM entire-Ξ normalization only; Suzuki
+meromorphic target `z²ξ(s)/ξ'(s)` (poles at zeros) is the other major normalization.
+
+**Question:** Does E-neg (non-uniqueness / information obstruction) hold for the
+Suzuki meromorphic target?
+
+**Technical gap:** Hurwitz's theorem (used in E-pos) applies to entire functions.
+For the meromorphic target, the convergence theorem needs an argument-principle
+(pole + residue) version. The non-uniqueness construction (perturbed tail zeros) is
+structurally the same, but the quantification step needs a meromorphic-Hadamard
+uniqueness lemma.
+
+**Sub-tasks:**
+- **EXT-3a:** State a meromorphic-Hadamard uniqueness lemma: a meromorphic function
+  of order 1 with prescribed poles and zeros is determined by (poles, zeros, one value).
+  This is classical (Weierstrass–Mittag-Leffler product), but needs to be stated
+  precisely for the Suzuki target.
+- **EXT-3b:** Construct the E-neg counterexample for the meromorphic target using the
+  pole/residue version of the non-uniqueness argument.
+- **EXT-3c:** Determine E-pos sufficient conditions for the meromorphic target —
+  the (H-bound)/(H-tail) analogue — and check whether Suzuki Cor. 6 provides them.
+
+**Expected deliverable:** Extension of `theorems/E-compactness/` with a `§6 Suzuki
+meromorphic track` (or a new `theorems/E-prime-meromorphic/`).
+
+**Priority:** MEDIUM-HIGH — directly addresses the main open normalization gap in E.
+
+---
+
+### EXT-4 · C' — Selberg class generalization (extends Theorem C)
+
+**Goal:** Extend C from Helson zeta (unimodular multiplicative characters) to the full
+Selberg class 𝒮 or a natural sub-class.
+
+**Question:** Can a member of 𝒮 \ {ζ} (or a family parametrized by Selberg-class
+axioms) be used to constrain Riemann zero locations? If not, this is a structural
+feature of the Selberg class, not just Helson zeta.
+
+**Key tool needed:** A "Selberg-class Mittag-Leffler theorem" — the analogue of
+Andersson Thm 5 for 𝒮. This does not appear to exist in the literature. If it can
+be proved (or if the analogous freedom is already known), C extends immediately.
+
+**Sub-tasks:**
+- **EXT-4a (literature search):** Does a prescribed-zero result for Selberg-class
+  L-functions exist? Check: Kaczorowski–Perelli structure theory, Selberg orthogonality,
+  Steuding's book.
+- **EXT-4b (if literature gap):** Formulate as a conjecture and record in `discovery/`;
+  mark as a research program item.
+- **EXT-4c (if available):** Upgrade Theorem C to use the Selberg-class result,
+  extending the excluded comparison class.
+
+**Priority:** LOW-MEDIUM — depends on a literature item that may not exist yet.
+EXT-4a is a pure literature search, low cost.
+
+---
+
+### EXT-5 · F non-vacuity gate — find a confirmed P_{r,N} example
+
+**Escape route being audited (internally):** Theorem F is currently
+PROOF-DRAFT-CONDITIONAL because its non-vacuity gate is OPEN — no confirmed published
+construction in class `P_{r,N}` (frozen Galerkin + Weil matrix Schur system).
+
+**This is not an extension of the class but a prerequisite** for F to become a
+non-vacuous obstruction theorem. Without a confirmed member of `P_{r,N}`, Theorem F is
+vacuously true and hence not a barrier.
+
+**Sub-tasks:**
+- **EXT-5a:** Check whether the Connes–Consani–Moscovici spectral triple (truncated
+  to finite N) produces a system in `P_{r,N}`. The CCM finite-rank approximation at
+  level N is a natural candidate.
+- **EXT-5b:** Check whether the kappa_toeplitz construction (sibling repo) restricted
+  to a Galerkin subspace falls in `P_{r,N}`.
+- **EXT-5c:** If neither works, check Zagier's period-polynomial Weil form (if any
+  finite-dimensional version produces a P_{r,N} system).
+
+**Expected deliverable:** Either a confirmed non-vacuity witness (unblocking Theorem F)
+or a precise record of why all known candidates are outside `P_{r,N}` (which itself
+may be a new no-go result about the class).
+
+**Priority:** MEDIUM — Theorem F is currently blocked; this unblocks it or closes it.
+
+---
+
+### Execution order and gates
+
+| Task | Depends on | Expected outcome | Priority |
+|---|---|---|---|
+| EXT-1a/b (D' log-poly) | Schrohe/Lesch literature | New theorem D' or confirmed escape | HIGH |
+| EXT-3a (meromorphic Hadamard) | Classical Weierstrass–Mittag-Leffler | Lemma for E extension | MEDIUM-HIGH |
+| EXT-3b/c (E-neg Suzuki) | EXT-3a | Extended E-compactness | MEDIUM-HIGH |
+| EXT-5a/b (F non-vacuity) | sibling repo + CCM analysis | Unblock Theorem F | MEDIUM |
+| EXT-2a (unified info theorem H) | B1 + G scaffold | New Theorem H | MEDIUM |
+| EXT-4a (Selberg literature) | Pure search | Unblock EXT-4b/c | LOW-MEDIUM |
+| EXT-2b (O_vonMangoldt layer) | G-hard conjecture progress | Conditional on G-hard | LOW (blocked) |
+
+**Hard rule (program §3.3):** Every EXT task that produces a positive obstruction result
+must pass the full §14 acceptance test (class, non-vacuity, target, observation,
+invariant, no-RH, escape, scope). Every EXT task that confirms an open escape route
+is recorded as such — not relabeled as a failure.
+
+**No task here proves, disproves, or claims progress toward RH.**

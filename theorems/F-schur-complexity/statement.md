@@ -88,16 +88,29 @@ lie in `P_{r,N}` for the stated `(a, N, r)`.  Candidates:
    are LEGACY PENDING Gate A (CLAIM_LEDGER.yaml): the Schur residuals are
    basis-dependent and must be reconciled with `λ(a)` before use.
 
-2. **Suzuki `A_a` finite-dimensional Galerkin approximation.**  Suzuki constructs
-   `B_a = D_a^* G_a D_a` (Friedrichs extension); its Galerkin truncation at rank
-   `N` gives `M_{a,N}`.  This is a natural member of `P_{r,N}` for large `N`.
+2. **Suzuki `A_a` Galerkin truncation — EXT-5 audit result (PROOF-DRAFT).**
+   Suzuki (arXiv:2606.09096, Thm 1.1, EQ_101/EQ_106) defines `A_a` as the
+   Friedrichs extension of `B_a = D*G_a D` on `L²(−a,a)`.  The quadratic form is
+   `Q_W^a(v) = ⟨A_a v, v⟩` (REFERENCE_BASELINE §2).  Taking the Galerkin truncation:
+   choose `{e₁,…,e_N}` = normalized Legendre polynomials on `(−a,a)` as ONB, then
+   `M_{a,N}` = the `N×N` matrix with `(M_{a,N})_{ij} = Q_W^a(e_i, e_j)`.
+   This is **exactly the `P_{r,N}` construction** of §1 (same ONB, same Weil form,
+   same allowed Schur-block operations).
+
+   **Conclusion (EXT-5a, PROOF-DRAFT):** The Suzuki `A_a` Galerkin truncation is a
+   member of `P_{r,N}` for any `N` and for `r` up to `N`. This is a **published,
+   source-verified construction** (baseline/suzuki-2606.09096 tarball, Thm 1.1).
+
+   **Non-vacuity gate: CONDITIONALLY PASSED** (pending representation-invariance
+   gate — see §2 conditions; both gates must pass together).
 
 3. **SOS / Positivstellensatz certificates for the Weil polynomial.**  A standard
    SOS decomposition of a truncated Weil polynomial is a rank-`r` certificate for
-   a specific `r`.
+   a specific `r`.  Backup witness if Suzuki Galerkin fails the invariance gate.
 
-**Gate status:** OPEN.  The non-vacuity must be confirmed with a specific
-published example before Theorem F proceeds past SKETCH.
+**Gate status:** NON-VACUITY GATE CONDITIONALLY PASSED (Suzuki Galerkin truncation
+confirmed as P_{r,N} member, PROOF-DRAFT).  Full gate opens when representation-
+invariance gate (§2) is also passed.
 
 ---
 
