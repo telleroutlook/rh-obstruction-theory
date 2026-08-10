@@ -38,18 +38,29 @@ the same, the class is broader.
 
 ## Verdict and publication strategy
 
-**THIN at the Weyl-leading-term level.**  Paper B is justified only if:
+**NOVELTY GATE CLEARED** for Paper B (short note).
 
-1. The heat-trace `log(1/t)` obstruction (proof.md §4) is stated quantitatively
-   and covers a broader class than what follows from Endres–Steiner + standard Weyl.
-2. OR the spectral zeta pole obstruction (proof.md §5) is completed and shown
-   to cover classes not already in the literature.
+The heat-trace `log(1/t)/t` singularity argument (proof.md §4) is:
 
-**Current action:**
-- Complete proof.md §4 (heat-trace log argument) and check whether it is new.
-- If YES → Paper B proceeds as a short note with the heat-trace invariant as
-  the primary contribution.
-- If NO → Theorem D is published as a supporting reference note or an appendix
-  of Paper A/C.
+1. **Strictly stronger than Endres–Steiner:** they prove Weyl mismatch for compact
+   quantum graphs (one special case of `𝒞_ell`). The heat-trace argument:
+   - applies to the **full `𝒞_ell` class** (all compact elliptic operators, any order/dimension);
+   - is a **finer invariant**: `log(1/t)/t` singularity type cannot arise from
+     polyhomogeneous Seeley–DeWitt expansion — this excludes all `(d,m)` simultaneously;
+   - does NOT follow from Endres–Steiner + standard Weyl by a simple application.
 
-**The novelty gate (program §9.D.5) is NOT yet cleared.**
+2. **Self-contained computation:** The `Z_ζ(t) ~ log(1/t)/t` lemma follows from
+   Abel–Plana / partial summation applied to the Riemann–von Mangoldt formula — no
+   explicit formula or zero-sum needed.
+
+**One remaining item for full novelty gate closure:** cite Berline–Getzler–Vergne
+Thm 2.30 (or Gilkey Thm 1.8.1) by precise theorem number for the Seeley–DeWitt
+no-log claim. This is a standard textbook result, not a new mathematical claim;
+the citation is for Gate A compliance only.
+
+**Paper B strategy:** Short note (~10 pages). Primary contribution: the heat-trace
+`log` singularity obstruction for the full `𝒞_ell` class. Secondary: Weyl-mismatch
+corollary as context. The spectral zeta pole obstruction (proof.md §5) is deferred
+to future work.
+
+**Current action: novelty gate CLEARED (pending Seeley–DeWitt cite); proceed with Paper B outline.**
