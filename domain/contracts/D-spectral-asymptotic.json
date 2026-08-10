@@ -1,0 +1,61 @@
+{
+  "contract_version": "2",
+  "claim_id": "D-spectral-asymptotic-theorem",
+  "note": "Theorem D (WP-D). Spectral-asymptotic exclusion for compact elliptic class. PROOF-DRAFT. Novelty gate NOT yet cleared — heat-trace log argument is the candidate new content.",
+
+  "theorem_id": "D-spectral-asymptotic",
+  "paper": "B (conditional on novelty gate) or reference note",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "D-spectral-asymptotic",
+    "ambient_class": "C_ell: positive elliptic pseudodifferential operators of order m>0 on compact d-dimensional smooth manifolds; extensions C_ell^+ include finite sums, compact perturbations preserving Weyl law, compact quantum graphs, polynomial transforms",
+    "resource_bound": "all T: N_H(T) ~ C_H T^{d/m}; incompatible with T log T Riemann-von Mangoldt",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "noncompact/infinite-volume systems; infinite quantum graphs; nonlocal/log-polyhomogeneous symbols; energy-dependent boundary conditions; arithmetic/NCG geometries; explicit T log T escape example: hyperbolic surface (Selberg trace formula)"
+  },
+
+  "normalization_choice": {
+    "note": "N/A — spectral exclusion theorem, not a convergence/normalization theorem.",
+    "selected": "N/A"
+  },
+
+  "dependencies": [
+    {"claim_id": "WEYL-LAW-CLASSICAL", "ledger_math": "REFEREED", "role": "main Weyl law used in §1 contradiction"},
+    {"claim_id": "RIEMANN-VON-MANGOLDT", "ledger_math": "REFEREED", "role": "T log T counting law"},
+    {"claim_id": "SEELEY-DEWITT-EXPANSION", "ledger_math": "REFEREED", "role": "no log term in heat trace; sharpened obstruction proof.md §4"},
+    {"claim_id": "COURANT-WEYL-PERTURBATION", "ledger_math": "REFEREED", "role": "extension to perturbations (Theorem D')"},
+    {"claim_id": "ENDRES-STEINER-NO-GO", "ledger_math": "REFEREED", "role": "closest prior art — novelty gate requires beating this"}
+  ],
+
+  "obligations": [
+    "D.weyl-mismatch: T^{d/m} != T log T proved by direct comparison — PROOF-DRAFT done",
+    "D.heat-trace-log: Z_zeta has log(1/t) singularity; Seeley-DeWitt class does not — PROOF-DRAFT (quantitative version needed for novelty)",
+    "D.novelty-gate: assess whether heat-trace argument goes beyond Endres-Steiner — OPEN",
+    "D.escape-example: explicit T log T example outside C_ell (hyperbolic surface) — STATED, needs precision"
+  ],
+
+  "acceptance_test_results": {
+    "note": "PROOF-DRAFT. Novelty gate OPEN — Paper B conditional.",
+    "class": "PASS — C_ell membership checkable (order m, dimension d, compact manifold)",
+    "non_vacuity": "PASS — Laplace-Beltrami on S^d is a serious member; Dirac operator on compact spin manifold is a member",
+    "target": "PASS — spectrum of H in C_ell is {lambda_n} with N_H ~ C T^{d/m}; zeta ordinates have N_zeta ~ T log T",
+    "observation": "PASS — the Weyl law is an exact asymptotic, not a numerical coincidence",
+    "invariant": "PASS — the leading Weyl term C_H T^{d/m} is invariant under the declared perturbation class (Courant-Weyl)",
+    "no_rh": "PASS — no RH in hypotheses; uses Riemann-von Mangoldt (unconditional)",
+    "escape": "PASS — 6 escape routes named including explicit T log T example",
+    "scope": "PASS — C_ell named; T -> infty resource bound; all-T conclusion stated"
+  },
+
+  "checker": {
+    "protocol": "analytic-only",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
+  "spec_status": "PROOF-DRAFT",
+  "status_note": "Weyl-mismatch argument is PROOF-DRAFT-CLEAR (standard). Heat-trace log argument (proof.md §4) is PROOF-DRAFT and the novelty candidate. Paper B conditional on novelty gate decision."
+}

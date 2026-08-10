@@ -280,6 +280,114 @@ def test_e_no_rh_claim():
                 f"E {fname} contains forbidden phrase: {phrase!r}"
 
 
+# ---- C-euler-tail theorem scaffold tests ----
+
+C_DIR = ROOT / "theorems" / "C-euler-tail"
+C_CONTRACT = ROOT / "domain" / "contracts" / "C-euler-tail.json"
+
+
+def test_c_required_files_exist():
+    for rel in REQUIRED_FILES:
+        assert (C_DIR / rel).exists(), f"missing C file: {rel}"
+
+
+def test_c_contract_exists_and_parses():
+    assert C_CONTRACT.exists()
+    with C_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["theorem_id"] == "C-euler-tail"
+    assert data["metadata"]["is_barrier_claim"] is True
+    assert data["metadata"]["escape_route_present"] is True
+
+
+def test_c_contract_required_metadata_keys():
+    with (ROOT / "domain" / "policy-v2.json").open() as f:
+        policy = json.load(f)
+    required = set(policy["required_metadata_keys"])
+    with C_CONTRACT.open() as f:
+        contract = json.load(f)
+    missing = required - set(contract.get("metadata", {}).keys())
+    assert not missing, f"C contract missing metadata keys: {missing}"
+
+
+def test_c_andersson_gate_a_pending():
+    """Andersson dependency must be marked PENDING (Gate A not yet cleared)."""
+    with C_CONTRACT.open() as f:
+        data = json.load(f)
+    andersson_deps = [d for d in data.get("dependencies", [])
+                      if "ANDERSSON" in d["claim_id"]]
+    assert andersson_deps, "C contract must list Andersson as a dependency"
+    dep = andersson_deps[0]
+    assert dep.get("usable_as_premise") is not True, \
+        "Andersson dep must not be usable_as_premise=true until Gate A clears"
+
+
+def test_c_davenport_heilbronn_kept_separate():
+    """Davenport-Heilbronn must be a comparison only, not combined with C."""
+    lim = (C_DIR / "limitations.md").read_text()
+    assert "Davenport" in lim or "Heilbronn" in lim or "functional equation" in lim.lower(), \
+        "C limitations.md must mention Davenport-Heilbronn separation"
+    # The combination is explicitly forbidden
+    proof = (C_DIR / "proof.md").read_text()
+    assert "separate" in proof.lower() or "Davenport" in proof or "§8.C.2" in proof, \
+        "C proof.md must keep Davenport-Heilbronn logically separate"
+
+
+# ---- D-spectral-asymptotic theorem scaffold tests ----
+
+D_DIR = ROOT / "theorems" / "D-spectral-asymptotic"
+D_CONTRACT = ROOT / "domain" / "contracts" / "D-spectral-asymptotic.json"
+
+
+def test_d_required_files_exist():
+    for rel in REQUIRED_FILES:
+        assert (D_DIR / rel).exists(), f"missing D file: {rel}"
+
+
+def test_d_contract_exists_and_parses():
+    assert D_CONTRACT.exists()
+    with D_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["theorem_id"] == "D-spectral-asymptotic"
+    assert data["metadata"]["is_barrier_claim"] is True
+    assert data["metadata"]["escape_route_present"] is True
+
+
+def test_d_contract_required_metadata_keys():
+    with (ROOT / "domain" / "policy-v2.json").open() as f:
+        policy = json.load(f)
+    required = set(policy["required_metadata_keys"])
+    with D_CONTRACT.open() as f:
+        contract = json.load(f)
+    missing = required - set(contract.get("metadata", {}).keys())
+    assert not missing, f"D contract missing metadata keys: {missing}"
+
+
+def test_d_novelty_gate_stated():
+    """D must state novelty gate is OPEN and not overclaim Paper B."""
+    nov = (D_DIR / "novelty.md").read_text()
+    assert "Endres" in nov or "Steiner" in nov, \
+        "D novelty.md must reference Endres-Steiner prior art"
+    assert "THIN" in nov or "thin" in nov.lower() or "not yet cleared" in nov.lower(), \
+        "D novelty.md must state THIN / novelty gate not cleared"
+
+
+def test_d_escape_example_present():
+    """D must include an explicit escape example with T log T counting."""
+    stmt = (D_DIR / "statement.md").read_text()
+    assert "hyperbolic" in stmt.lower() or "Selberg" in stmt or "T log T" in stmt, \
+        "D statement.md must give an explicit T log T escape example"
+
+
+def test_d_no_rh_claim():
+    for fname in ["statement.md", "proof.md", "limitations.md"]:
+        content = (D_DIR / fname).read_text()
+        forbidden = ["proves rh", "disproves rh", "rh is proved"]
+        for phrase in forbidden:
+            assert phrase not in content.lower(), \
+                f"D {fname} contains forbidden phrase: {phrase!r}"
+
+
 if __name__ == "__main__":
     test_all_claims_parse_and_validate()
     test_no_pending_gate_a_item_is_a_premise()
@@ -306,4 +414,15 @@ if __name__ == "__main__":
     test_e_statement_has_two_parts()
     test_e_limitations_excludes_suzuki()
     test_e_no_rh_claim()
+    test_c_required_files_exist()
+    test_c_contract_exists_and_parses()
+    test_c_contract_required_metadata_keys()
+    test_c_andersson_gate_a_pending()
+    test_c_davenport_heilbronn_kept_separate()
+    test_d_required_files_exist()
+    test_d_contract_exists_and_parses()
+    test_d_contract_required_metadata_keys()
+    test_d_novelty_gate_stated()
+    test_d_escape_example_present()
+    test_d_no_rh_claim()
     print("ok")

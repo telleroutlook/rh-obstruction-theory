@@ -1,0 +1,64 @@
+# Dependencies — Theorem C (C-euler-tail)
+
+theorem_id: C-euler-tail
+status: PROOF-DRAFT (conditional on Andersson Gate A)
+
+dependencies:
+
+  - id: ANDERSSON-HELSON-PRESCRIBED-ZERO
+    statement: >
+      For any prescribed finite zero set {z_1,...,z_k} in the continuation domain
+      of the Helson zeta class (0 < Re(z_j) < 1, z_j != 1), with |chi(p)|=1, there
+      exists a Helson zeta function zeta_chi having zeros of the prescribed
+      multiplicities at those points.
+    source: "Andersson, arXiv:2408.15713 (2024), 'Mittag-Leffler type theorems for Helson zeta-functions' — THEOREM NUMBER NOT YET VERIFIED FROM SOURCE"
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: false
+    gate_a_status: PENDING
+    caveat: >
+      Source tarball NOT yet in baseline/. Must be downloaded, theorem number
+      checked, and claim added to CLAIM_LEDGER.yaml before this proof advances
+      past PROOF-DRAFT-CONDITIONAL. Action: add
+      baseline/andersson-2408.15713-helson-zeta.tar.gz and verify.
+
+  - id: HELSON-CLASS-DEFINITION
+    statement: >
+      A Helson zeta function is an L-function with completely multiplicative
+      chi with |chi(p)| = 1, Euler product, and meromorphic continuation.
+    source: "Helson 1954; Bayart 2002; Andersson 2408.15713 §1"
+    mathematical: DEFINITION
+    computational: NONE
+    usable_as_premise: true
+    role: "Ambient class definition."
+
+  - id: DAVENPORT-HEILBRONN-COMPARISON
+    statement: >
+      The Davenport-Heilbronn function satisfies a Riemann-type functional
+      equation but has zeros off the critical line (Re(s) = 1/2).
+    source: "Davenport-Heilbronn 1936; see also Titchmarsh 'Theory of the Riemann Zeta Function' §9.19"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: >
+      Comparison example showing functional equation alone does not force
+      critical-line zeros. Kept SEPARATE from Theorem C (program §8.C.2):
+      Davenport-Heilbronn lacks Euler product; C-euler-tail lacks functional
+      equation. The two obstructions are not combined.
+
+  - id: DIRICHLET-POLYNOMIAL-ZERO-FREE
+    statement: >
+      The finite factor R(s; P_0, chi) = product_{p <= P_0} (1 - chi(p) p^{-s})
+      / (1 - p^{-s}) is holomorphic and nowhere zero in the open strip
+      {0 < Re(s) < 1}.
+    source: "proof.md §3 — elementary: zeros and poles of R lie on Re(s) = 0"
+    mathematical: PROOF-DRAFT
+    computational: NONE
+    usable_as_premise: true
+    role: "Key step ensuring zero preservation under finite-factor modification."
+
+gate_a_status: CONDITIONAL
+gate_a_note: >
+  BLOCKED on ANDERSSON-HELSON-PRESCRIBED-ZERO Gate A verification.
+  All other dependencies are either DEFINITION, REFEREED, or proved inline.
+  No LEGACY private results imported.

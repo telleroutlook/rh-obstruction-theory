@@ -1,0 +1,59 @@
+{
+  "contract_version": "2",
+  "claim_id": "C-euler-tail-theorem",
+  "note": "Theorem C (WP-C). Finite Euler factors do not force critical-line zeros in the Helson class. PROOF-DRAFT conditional on Andersson Gate A verification.",
+
+  "theorem_id": "C-euler-tail",
+  "paper": "A (supporting section) or standalone short note",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "C-euler-tail",
+    "ambient_class": "Helson zeta functions zeta_chi with |chi(p)|=1, completely multiplicative, Euler product, meromorphic continuation; chi P_0-standard means chi(p)=1 for p <= P_0",
+    "resource_bound": "fixed finite prime cutoff P_0; prescribed zero in a bounded region Omega",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "Selberg class (functional equation + Ramanujan + full Euler product axioms); zeta itself (gamma factor, coefficient arithmetic, analytic continuation); combined axioms not jointly covered"
+  },
+
+  "normalization_choice": {
+    "note": "N/A — theorem is about Helson class zeros, not spectral normalization.",
+    "selected": "N/A"
+  },
+
+  "dependencies": [
+    {"claim_id": "ANDERSSON-HELSON-PRESCRIBED-ZERO", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "PENDING Gate A — load-bearing; theorem conditional until verified", "usable_as_premise": false},
+    {"claim_id": "HELSON-CLASS-DEFINITION", "ledger_math": "DEFINITION", "role": "ambient class"},
+    {"claim_id": "DAVENPORT-HEILBRONN-COMPARISON", "ledger_math": "REFEREED", "role": "comparison example; kept logically separate per program §8.C.2"},
+    {"claim_id": "DIRICHLET-POLYNOMIAL-ZERO-FREE", "ledger_math": "PROOF-DRAFT", "role": "R(s;P_0,chi) holomorphic+nonzero in critical strip; proved inline in proof.md §3"}
+  ],
+
+  "obligations": [
+    "C.gate-a: verify Andersson arXiv:2408.15713 by theorem number; add to CLAIM_LEDGER.yaml — PENDING",
+    "C.analytic.R-zero-free: proof.md §3 (R holomorphic, nonzero in strip) — PROOF-DRAFT done",
+    "C.scope: Helson class only; Selberg/zeta escape stated; Davenport-Heilbronn kept separate"
+  ],
+
+  "acceptance_test_results": {
+    "note": "CONDITIONAL on Andersson Gate A.",
+    "class": "PASS — Helson class membership checkable",
+    "non_vacuity": "PASS — chi=1 (zeta itself) is a member; chi=Dirichlet characters are members",
+    "target": "PASS — zeta_chi_tilde has off-line zero; reference chi=1 has (conjectured) on-line zeros",
+    "observation": "N/A — this is an existence result, not an observation-collision theorem",
+    "invariant": "PASS — the Helson class axioms are algebraic; conclusion is independent of representation",
+    "no_rh": "PASS — no RH in hypotheses",
+    "escape": "PASS — Selberg class / zeta escape stated",
+    "scope": "PASS — Helson class and P_0 resource bound named"
+  },
+
+  "checker": {
+    "protocol": "analytic-only",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
+  "spec_status": "PROOF-DRAFT-CONDITIONAL",
+  "status_note": "BLOCKED on Andersson Gate A. Action: add baseline/andersson-2408.15713.tar.gz and verify theorem number."
+}
