@@ -1,0 +1,62 @@
+{
+  "contract_version": "2",
+  "claim_id": "H-information-hierarchy-theorem",
+  "note": "Theorem H. Unified information-obstruction framework for O_finite and O_theta layers. PROOF-DRAFT (inherits from B2 and G).",
+
+  "theorem_id": "H-information-hierarchy",
+  "paper": "A or E (as unifying framework section)",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "H-information-hierarchy",
+    "ambient_class": "Observation layers O_finite ⊂ O_theta ⊂ O_vM ⊂ O_oracle over admissible zero multisets X_sym",
+    "resource_bound": "Each layer's obstruction is exact (not asymptotic); separation is strict",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "O_oracle layer: a method with access to all zero ordinates trivially resolves all obstructions. O_vM layer: conditionally an escape if G-hard is false."
+  },
+
+  "normalization_choice": {
+    "note": "N/A — information-hierarchy theorem, not a convergence/normalization theorem.",
+    "selected": "N/A"
+  },
+
+  "dependencies": [
+    {"claim_id": "HADAMARD-FACTORIZATION-ORDER-1", "ledger_math": "REFEREED", "role": "Step B of all instantiations: distinct zero multisets give distinct entire functions"},
+    {"claim_id": "RIEMANN-ARGUMENT-COUNTING-IDENTITY", "ledger_math": "REFEREED", "role": "S(T) gap; O_theta / O_oracle separation"},
+    {"claim_id": "B2-RANK-RESULT", "ledger_math": "PROOF-DRAFT", "usable_as_premise": false, "role": "O_finite instantiation (inherits B2)"},
+    {"claim_id": "G-INFO-OBSTRUCTION", "ledger_math": "PROOF-DRAFT", "usable_as_premise": false, "role": "O_theta instantiation (inherits G-info)"}
+  ],
+
+  "obligations": [
+    "H.finite-instantiation: inherits B2 Jacobian rank proof — PROOF-DRAFT",
+    "H.theta-instantiation: inherits G Prop. G.3 — PROOF-DRAFT (open step)",
+    "H.separation-finite-theta: B2 quartet has different d_n from Z_RH — OPEN (explicit computation)",
+    "H.separation-theta-oracle: S(T) perturbation gives same d_n — PROOF-DRAFT (G Prop. G.3)",
+    "H.vM-layer: controlled by G-hard CONJECTURE — not a proof step"
+  ],
+
+  "acceptance_test_results": {
+    "note": "PROOF-DRAFT. Inherits from B2 and G. H' separation has open explicit computations.",
+    "class": "PASS — four named observation layers; membership checkable",
+    "non_vacuity": "PASS — B2 quartet (O_finite) and kappa_toeplitz (O_theta) are witnesses",
+    "target": "PASS — Hadamard uniqueness ensures distinct zero multisets give distinct entire functions",
+    "observation": "PROOF-DRAFT — B2 collision PROOF-DRAFT; G collision PROOF-DRAFT (Prop. G.3 open)",
+    "invariant": "PASS — observation layers are basis-independent (counting function invariant)",
+    "no_rh": "PASS — no RH in hypotheses",
+    "escape": "PASS — O_oracle explicit; O_vM conditional",
+    "scope": "PASS — four named layers; resource bounds inherited from B2/G"
+  },
+
+  "checker": {
+    "protocol": "analytic-only (inherits from B2 and G)",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
+  "obstruction_type": "information",
+  "spec_status": "PROOF-DRAFT",
+  "spec_status_note": "Unification of B2 and G. No new mathematics; adds explicit observation-lattice structure and strict separation theorem (H'). H' separation has two open explicit computation steps."
+}
