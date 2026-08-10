@@ -1,0 +1,91 @@
+{
+  "contract_version": "2",
+  "version": "2",
+  "domain": "rh-obstruction-theory",
+  "target": "portfolio-of-boundary-theorems",
+  "note": "proofctl domain policy for RH Obstruction Theory. Unlike the AASVS sibling (which gates a single RH-implying certificate via CORE-0..5), this domain gates PER-THEOREM evidence: each theorems/<id> must pass the program §14 acceptance tests, and its status is BLOCKED if any analytic dependency is missing or a premise is used above its inspected evidence level (CLAIM_LEDGER two-axis). Status is derived by proofctl; producer PASS flags are ignored.",
+
+  "allowed_assurances": [
+    "formal-kernel",
+    "deterministic-cap",
+    "exact-replay",
+    "reproducible-computation",
+    "independent-review"
+  ],
+  "forbidden_assurances": [
+    "ai-review",
+    "assumption",
+    "shadow-review"
+  ],
+  "forbidden_runtimes": [
+    "shadow",
+    "network-fetch",
+    "zeta-zero-table",
+    "fitted-zero-ordinates",
+    "target-sample-extraction",
+    "rh-equivalent-positivity-as-premise"
+  ],
+  "forbidden_runtimes_note": "A theorem may STUDY zeros/RH-equivalences as its object (e.g. the CCM convergence conjecture); the ban is on using a zero table / fitted ordinate / RH-equivalent positivity as an established PREMISE inside a proof step. discovery/ may use them; theorems/*/checker may not.",
+
+  "required_claims": [],
+  "required_claims_note": "No global required claims: the deliverable is a portfolio, not one certificate. Each theorems/<id> registers its own contract under domain/contracts/ and is judged independently.",
+
+  "required_metadata_keys": [
+    "theorem_id",
+    "ambient_class",
+    "resource_bound",
+    "is_barrier_claim",
+    "escape_route_present"
+  ],
+
+  "acceptance_tests": {
+    "note": "Program §14. A contract asserting is_barrier_claim=true MUST carry a passing result for every formal test below; computational tests apply when a witness is present.",
+    "formal": [
+      "class:        membership in the method/candidate class is mathematically checkable",
+      "non_vacuity:  at least one serious published construction lies in the class",
+      "target:       the two adversarial objects genuinely differ on the target predicate",
+      "observation:  equality of observations is exact, not numerical coincidence",
+      "invariant:    the obstruction survives all equivalences allowed by the class",
+      "no_rh:        neither RH nor a known RH-equivalent is among the hypotheses",
+      "escape:       at least one explicit route outside the class is identified",
+      "scope:        the conclusion names the ambient class and the resource bound"
+    ],
+    "computational": [
+      "exact rational or interval replay where applicable",
+      "independent reconstruction from raw prime-power / moment data",
+      "precision-escalation and conditioning report",
+      "adversarial mutation of every witness field",
+      "deterministic offline checker",
+      "cross-implementation agreement for >=1 nontrivial instance"
+    ]
+  },
+
+  "evidence_gate": {
+    "note": "Gate A (program §6.A). A dependency may back a proof step only if its CLAIM_LEDGER mathematical axis is INDEPENDENTLY-CHECKED or REFEREED. Anything at PROOF-DRAFT/CONJECTURE, or any item with usable_as_premise:false, must appear instead as an explicit assumption in statement.md, or the theorem status is BLOCKED.",
+    "min_mathematical_for_premise": "INDEPENDENTLY-CHECKED",
+    "ledger": "baseline/CLAIM_LEDGER.yaml"
+  },
+
+  "non_barrier_labels": {
+    "note": "CLAUDE.md hard boundary + program §3.3. A contract MUST set is_barrier_claim=false if the result is any of these; it may still be published as the stated kind.",
+    "kinds": [
+      "rh_equivalence",
+      "fixed_parameter_inequality_failure",
+      "margin_tending_to_zero",
+      "off_line_config_outside_ambient_class",
+      "negative_literature_search",
+      "finite_arithmetic_without_analytic_bridge",
+      "difficulty_conservation_philosophy"
+    ]
+  },
+
+  "module_import_policy": {
+    "note": "Per-theorem non-anticipation barrier: a construction/adversary module must not import the target-predicate or comparison module of the same theorem. Concrete module names are declared in each theorem's contract.",
+    "roles": ["construction", "adversary", "observation", "target", "comparison", "conclusion"],
+    "forbidden_imports": {
+      "construction": ["target", "comparison", "conclusion"],
+      "adversary": ["target", "comparison", "conclusion"],
+      "observation": ["target", "comparison", "conclusion"]
+    }
+  }
+}

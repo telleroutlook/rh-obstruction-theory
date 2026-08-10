@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://telleroutlook.github.io/rh-obstruction-theory/schemas/claim-ledger-v1.schema.json",
+  "title": "Two-axis evidence ledger claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "statement", "source", "peer_reviewed", "mathematical", "computational", "usable_as_premise"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]*$"},
+    "statement": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "peer_reviewed": {"type": "boolean"},
+    "mathematical": {
+      "type": "string",
+      "enum": ["DEFINITION", "CONJECTURE", "PROOF-DRAFT", "INDEPENDENTLY-CHECKED", "REFEREED"]
+    },
+    "computational": {
+      "type": "string",
+      "enum": ["NONE", "EXPLORATORY", "REPRODUCIBLE", "INDEPENDENT-CHECKER", "FORMALIZED"]
+    },
+    "usable_as_premise": {
+      "type": "boolean",
+      "description": "Derived, not self-declared: true only if mathematical in {INDEPENDENTLY-CHECKED, REFEREED} AND gate_a_status != PENDING."
+    },
+    "premise_caveat": {"type": "string"},
+    "gate_a_status": {"type": "string", "enum": ["PENDING", "CLOSED"]},
+    "role": {"type": "string"},
+    "note": {"type": "string"},
+    "caveat": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "$comment": "A claim usable as a premise must be at least INDEPENDENTLY-CHECKED on the mathematical axis.",
+      "if": {"properties": {"usable_as_premise": {"const": true}}},
+      "then": {"properties": {"mathematical": {"enum": ["INDEPENDENTLY-CHECKED", "REFEREED"]}}}
+    },
+    {
+      "$comment": "A claim with an open Gate-A inspection may not be used as a premise.",
+      "if": {"properties": {"gate_a_status": {"const": "PENDING"}}},
+      "then": {"properties": {"usable_as_premise": {"const": false}}}
+    }
+  ]
+}

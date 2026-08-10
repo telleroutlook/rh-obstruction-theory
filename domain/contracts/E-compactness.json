@@ -1,0 +1,63 @@
+{
+  "contract_version": "2",
+  "claim_id": "E-compactness-missing-theorem",
+  "note": "Paper C (WP-E). SKELETON — not yet a claim. Negative: a finite evidence record for real-rooted spectral approximants does NOT imply locally uniform convergence to the declared limit; Positive: an explicit normal-family + tail modulus that does. Stated in ONE frozen normalization (Suzuki z^2 xi/xi' OR CCM normalized det -> Xi), never both. This file fixes the contract shape; digests are PLACEHOLDER until the theorem is drafted and frozen.",
+
+  "theorem_id": "E-compactness",
+  "paper": "C",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "E-compactness",
+    "ambient_class": "sequences of order-one entire functions F_N with declared finite evidence record (self-adjointness of H_N, real-rootedness of F_N, first k_N zeros matching verified ordinates, finitely many Taylor coeffs/traces, finite det identity, interval-certified sampled residuals)",
+    "resource_bound": "finite per stage; the record contains NO proved tail envelope",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "normalization at z0 + local boundedness M_R + identification (Taylor jet with summable uniform tail) + certified nonzero lower bound + effective modulus N(R,eps); Montel/Vitali identifies the limit and (entire target) Hurwitz transfers real zeros"
+  },
+
+  "normalization_choice": {
+    "note": "EXACTLY ONE per instance. The two are distinct objects (REFERENCE_BASELINE §5).",
+    "options": {
+      "suzuki": "target z^2 * xi(1/2-iz)/xi'(1/2-iz) (MEROMORPHIC; poles at zeros; Hurwitz needs pole/residue version)",
+      "ccm": "target: suitably-normalized det_reg -> Xi (ENTIRE xihat; beware the lambda^{-iz} phase which preserves zeros but not the uniform limit)"
+    },
+    "selected": "PLACEHOLDER"
+  },
+
+  "dependencies": [
+    {"claim_id": "SUZUKI-THM-1.5", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "characteristic function real zeros"},
+    {"claim_id": "SUZUKI-COR-6", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "the meromorphic convergence target (if selected=suzuki)"},
+    {"claim_id": "CCM-DETREG-IDENTITY", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "the entire determinant target (if selected=ccm)"},
+    {"claim_id": "CCM-CONVERGENCE-OPEN", "ledger_math": "CONJECTURE", "role": "OBJECT OF STUDY — not a premise", "usable_as_premise": false}
+  ],
+
+  "obligations": [
+    "E.neg.finite-record-insufficiency: exhibit a sequence satisfying every finite-stage condition yet failing locally-uniform convergence (or converging to a different allowed limit); quantify the invisible tail/growth d.o.f.",
+    "E.pos.normal-family-sufficiency: the escape package implies locally uniform convergence in the selected normalization",
+    "E.transfer.real-zeros: real-zero location transfers to the limit (entire: Hurwitz; suzuki-meromorphic: reciprocal/argument-principle on pole-avoiding contours)"
+  ],
+
+  "acceptance_test_results": {
+    "note": "Filled by the checker on freeze; PLACEHOLDER now.",
+    "class": "PLACEHOLDER",
+    "non_vacuity": "expected PASS — Suzuki W(a,theta;z) and CCM det_reg are serious published members",
+    "target": "PLACEHOLDER",
+    "observation": "PLACEHOLDER",
+    "invariant": "PLACEHOLDER",
+    "no_rh": "expected PASS — hypotheses are finite-record + compactness, not RH",
+    "escape": "PASS — escape package specified above",
+    "scope": "PLACEHOLDER"
+  },
+
+  "checker": {
+    "protocol": "proofctl-checker/v2",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "required", "byte_exact": "not_required"},
+  "spec_status": "OBL",
+  "status_note": "OBL — the theorem is not drafted. This contract only fixes shape + gates. Do not treat any field as an established result."
+}
