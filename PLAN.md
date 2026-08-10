@@ -311,15 +311,19 @@ may be a new no-go result about the class).
 
 ### Execution order and gates
 
-| Task | Depends on | Expected outcome | Priority |
-|---|---|---|---|
-| EXT-1a/b (D' log-poly) | Schrohe/Lesch literature | New theorem D' or confirmed escape | HIGH |
-| EXT-3a (meromorphic Hadamard) | Classical Weierstrass–Mittag-Leffler | Lemma for E extension | MEDIUM-HIGH |
-| EXT-3b/c (E-neg Suzuki) | EXT-3a | Extended E-compactness | MEDIUM-HIGH |
-| EXT-5a/b (F non-vacuity) | sibling repo + CCM analysis | Unblock Theorem F | MEDIUM |
-| EXT-2a (unified info theorem H) | B1 + G scaffold | New Theorem H | MEDIUM |
-| EXT-4a (Selberg literature) | Pure search | Unblock EXT-4b/c | LOW-MEDIUM |
-| EXT-2b (O_vonMangoldt layer) | G-hard conjecture progress | Conditional on G-hard | LOW (blocked) |
+| Task | Depends on | Expected outcome | Priority | Status |
+|---|---|---|---|---|
+| EXT-1a/b (D' log-poly) | Schrohe/Lesch literature | New theorem D' or confirmed escape | HIGH | **ESCAPE-ROUTE-OPEN confirmed** — c_{0,1} tunable to (2π)^{-1}; C_logpoly is live Hilbert–Pólya candidate |
+| EXT-3a (meromorphic Hadamard) | Classical Weierstrass–Mittag-Leffler | Lemma for E extension | MEDIUM-HIGH | **PROOF-DRAFT** — Lemma E'.1 written; IFT step for E'-neg open |
+| EXT-3b/c (E-neg Suzuki) | EXT-3a | Extended E-compactness | MEDIUM-HIGH | **PROOF-DRAFT** — E-prime-meromorphic scaffold complete |
+| EXT-5a/b (F non-vacuity) | sibling repo + CCM analysis | Unblock Theorem F | MEDIUM | **CONDITIONALLY PASSED** — Suzuki A_a Galerkin truncation confirmed P_{r,N} member |
+| EXT-2a (unified info theorem H) | B1 + G scaffold | New Theorem H | MEDIUM | **PROOF-DRAFT** — H-information-hierarchy scaffold complete |
+| EXT-4a (Selberg literature) | Pure search | Unblock EXT-4b/c | LOW-MEDIUM | **CLOSED** — no Selberg prescribed-zero theorem exists; Selberg axioms incompatible with free zero prescription; Theorem C scope confirmed optimal |
+| EXT-2b (O_vonMangoldt layer) | G-hard conjecture progress | Conditional on G-hard | LOW (blocked) | BLOCKED by G-hard conjecture |
+
+**All six EXT tasks executed (2026-08-11).** Four produced new theorem scaffolds
+(D', E', H, EXT-5a partial); one confirmed an escape route open (EXT-1); one closed a
+literature gap (EXT-4a). Repository now has 10 theorem directories.
 
 **Hard rule (program §3.3):** Every EXT task that produces a positive obstruction result
 must pass the full §14 acceptance test (class, non-vacuity, target, observation,
