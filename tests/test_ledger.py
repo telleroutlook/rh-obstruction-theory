@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Regression: the ledger checker parses all claims and they satisfy the derived rules.
+"""Regression tests: ledger + B1 theorem scaffold integrity.
 
-Run: python3 -m pytest tests/ -x   (or: python3 tests/test_ledger.py)
+Run: python3 -m pytest tests/ -x
 stdlib-only.
 """
 from __future__ import annotations
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -13,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from checker.validate_ledger import load_claims, validate  # noqa: E402
 
+
+# ---- Ledger tests ----
 
 def test_all_claims_parse_and_validate():
     claims = load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")
@@ -34,8 +37,99 @@ def test_checker_exit_code_zero():
     assert r.returncode == 0, r.stdout + r.stderr
 
 
+# ---- B1 theorem scaffold tests ----
+
+B1_DIR = ROOT / "theorems" / "B1-finite-inequality"
+B1_CONTRACT = ROOT / "domain" / "contracts" / "B1-finite-inequality.json"
+
+REQUIRED_FILES = [
+    "statement.md",
+    "dependencies.yaml",
+    "proof.md",
+    "limitations.md",
+    "novelty.md",
+    "witness/README.md",
+    "checker/README.md",
+]
+
+
+def test_b1_required_files_exist():
+    """Every §12.2 artifact must be present."""
+    for rel in REQUIRED_FILES:
+        p = B1_DIR / rel
+        assert p.exists(), f"missing B1 file: {rel}"
+
+
+def test_b1_contract_exists_and_parses():
+    assert B1_CONTRACT.exists(), "missing B1 domain contract"
+    with B1_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["theorem_id"] == "B1-finite-inequality"
+    assert data["metadata"]["is_barrier_claim"] is True
+    assert data["metadata"]["escape_route_present"] is True
+
+
+def test_b1_contract_required_metadata_keys():
+    """policy-v2.json required_metadata_keys must all be present."""
+    with (ROOT / "domain" / "policy-v2.json").open() as f:
+        policy = json.load(f)
+    required = set(policy["required_metadata_keys"])
+    with B1_CONTRACT.open() as f:
+        contract = json.load(f)
+    meta = set(contract.get("metadata", {}).keys())
+    missing = required - meta
+    assert not missing, f"B1 contract missing metadata keys: {missing}"
+
+
+def test_b1_no_rh_in_dependencies():
+    """Gate A: B1 must not use a PENDING or CONJECTURE item as a premise."""
+    with B1_CONTRACT.open() as f:
+        contract = json.load(f)
+    ledger_claims = {c["id"]: c for c in load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")}
+    for dep in contract.get("dependencies", []):
+        cid = dep["claim_id"]
+        if cid in ledger_claims:
+            c = ledger_claims[cid]
+            if c.get("usable_as_premise") is False:
+                assert dep.get("role", "").lower().startswith("background") or \
+                       "not a premise" in dep.get("role", "").lower() or \
+                       "object of study" in dep.get("role", "").lower(), \
+                    f"B1 uses non-premise claim {cid} without marking it background/non-premise"
+
+
+def test_b1_statement_has_escape_section():
+    stmt = (B1_DIR / "statement.md").read_text()
+    assert "Escape" in stmt or "escape" in stmt, \
+        "statement.md must contain an escape route section"
+
+
+def test_b1_limitations_has_fixed_k_warning():
+    lim = (B1_DIR / "limitations.md").read_text()
+    assert "fixed" in lim.lower() or "Fixed" in lim, \
+        "limitations.md must warn about fixed-K restriction"
+    # Must not contain forbidden overclaim phrases
+    forbidden = ["proves rh", "disproves rh", "barrier for all", "all rh methods"]
+    for phrase in forbidden:
+        assert phrase not in lim.lower(), \
+            f"limitations.md contains forbidden phrase: {phrase!r}"
+
+
+def test_b1_proof_separates_analytic_from_finite():
+    proof = (B1_DIR / "proof.md").read_text()
+    # Proof must be marked as analytic only (no finite certificate claimed)
+    assert "NONE" in proof or "analytic" in proof.lower(), \
+        "proof.md should state it is analytic-only (no finite certificate)"
+
+
 if __name__ == "__main__":
     test_all_claims_parse_and_validate()
     test_no_pending_gate_a_item_is_a_premise()
     test_checker_exit_code_zero()
+    test_b1_required_files_exist()
+    test_b1_contract_exists_and_parses()
+    test_b1_contract_required_metadata_keys()
+    test_b1_no_rh_in_dependencies()
+    test_b1_statement_has_escape_section()
+    test_b1_limitations_has_fixed_k_warning()
+    test_b1_proof_separates_analytic_from_finite()
     print("ok")

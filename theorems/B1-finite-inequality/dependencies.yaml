@@ -1,0 +1,77 @@
+# Dependencies — Theorem B1
+
+# Program §12.2: every dependency carries both axes.
+# mathematical: DEFINITION | CONJECTURE | PROOF-DRAFT | INDEPENDENTLY-CHECKED | REFEREED
+# computational: NONE | EXPLORATORY | REPRODUCIBLE | INDEPENDENT-CHECKER | FORMALIZED
+
+theorem_id: B1-finite-inequality
+status: PROOF-DRAFT
+
+dependencies:
+
+  # ---- External references (no LEGACY import needed for B1) ----
+
+  - id: WEIL-CRITERION
+    statement: >
+      RH is equivalent to Q_W(v) >= 0 for every v in C_c^infty(R).
+      The Weil functional and observation map O_Phi are standard (Weil 1952;
+      Connes 1999 trace formula).
+    source: "Classical; see e.g. Connes arXiv:math/9811068; Suzuki 2606.09096 §1"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: "Background motivation. B1 does not use this as a hypothesis (Gate A: no RH-equivalent among premises)."
+
+  - id: SYMMETRIC-ZERO-CLASS-DEF
+    statement: >
+      Definition of 𝔛_sym: locally finite multisets in the critical strip
+      invariant under conjugation and rho -> 1-rho, with convergence exponent bound.
+    source: "spec/PROGRAM.md §7.B.1; statement.md §Setting"
+    mathematical: DEFINITION
+    computational: NONE
+    usable_as_premise: true
+    role: "Ambient class definition."
+
+  - id: OFF-LINE-QUARTET-LEMMA
+    statement: >
+      For any sigma_0 in (0,1) \ {1/2} and any T_0 > 0, the off-line quartet
+      {sigma_0 + iT, 1-sigma_0 + iT, sigma_0 - iT, 1-sigma_0 - iT}
+      belongs to 𝔛_sym (satisfies conjugation + FE symmetry) and its contribution
+      to O_Phi(Z) is continuous in T; as T -> infinity with sigma_0, m, Phi fixed,
+      the contribution to each phi_j tends to 0.
+    source: "proof.md §2; standard absolute convergence from the admissibility condition"
+    mathematical: PROOF-DRAFT
+    computational: NONE
+    usable_as_premise: true
+    role: "Core construction lemma. Proved in proof.md §2."
+
+  - id: VOROS-LI-ASYMPTOTICS
+    statement: >
+      For off-line zeros (Re(rho) != 1/2), the large-index Li coefficients lambda_j
+      have a different asymptotic regime than for the on-line case (lambda_j ~ j log j).
+      Voros (2005): off-line zeros produce a different sign pattern for large j.
+    source: "Voros arXiv:math/0506326; Burnol arXiv:math/0103058"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: "Context: B1 operates at FIXED K so off-line large-j asymptotics are outside scope."
+
+  - id: BAEZ-DUARTE-NB-LOWER-BOUND
+    statement: >
+      The Nyman-Beurling approximation error has a lower bound of order 1/sqrt(log n)
+      for the first n functions; sharpened by zeros (Burnol, Baez-Duarte).
+    source: "Burnol arXiv:math/0103058 Adv. Math. 170 (2002); Baez-Duarte arXiv:math/0205003"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: false
+    role: "Prior art for Paper A novelty check. B1 is strictly weaker: fixed K, not asymptotic."
+
+  # ---- No LEGACY imports: B1 does not need the finite-window certificates ----
+  # (They would need Gate A re-inspection; B1 is self-contained via the
+  #  quartet construction and absolute-convergence argument alone.)
+
+gate_a_status: CLEAR
+gate_a_note: >
+  B1 uses no private or machine-verified result as a premise.
+  The only analytic inputs are the classical Weil functional (REFEREED),
+  the definition of 𝔛_sym, and the off-line-quartet lemma proved inline.

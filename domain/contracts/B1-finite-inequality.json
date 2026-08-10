@@ -1,0 +1,58 @@
+{
+  "contract_version": "2",
+  "claim_id": "B1-finite-inequality-theorem",
+  "note": "Theorem B1 (WP-B, B1). Strict finite-inequality non-discrimination in 𝔛_sym. PROOF-DRAFT. No finite certificate; purely analytic quartet construction.",
+
+  "theorem_id": "B1-finite-inequality",
+  "paper": "A (lemma / supporting)",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "B1-finite-inequality",
+    "ambient_class": "𝔛_sym: locally finite zero multisets in the critical strip, symmetric under conjugation and rho->1-rho, with admissibility exponent bound",
+    "resource_bound": "fixed finite test family (m, Phi, K); conclusion fails for m->infinity",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "Euler product, exact gamma factor, analytic continuation, coefficient arithmetic, and infinite test hierarchy (K->infinity) each individually escape the theorem"
+  },
+
+  "normalization_choice": {
+    "note": "Weil-type tests use Convention W2 (evaluation at Im(rho)); Li-type tests use direct evaluation. See proof.md §2 and limitations.md §7.",
+    "selected": "W2-weil-imaginary-part-for-compact-support-tests"
+  },
+
+  "dependencies": [
+    {"claim_id": "WEIL-CRITERION", "ledger_math": "REFEREED", "role": "background motivation only; not a hypothesis"},
+    {"claim_id": "SYMMETRIC-ZERO-CLASS-DEF", "ledger_math": "DEFINITION", "role": "ambient class"},
+    {"claim_id": "OFF-LINE-QUARTET-LEMMA", "ledger_math": "PROOF-DRAFT", "role": "core construction; proved inline in proof.md §2"}
+  ],
+
+  "obligations": [
+    "B1.analytic.quartet-convergence: off-line quartet delta_j(T)->0 proved for W1 (Li) and W2 (Weil) tests in proof.md §2",
+    "B1.analytic.construction: Z_- in X_sym with P=0 and |O_j(Z_-)-O_j(Z_+)|<eps in proof.md §3",
+    "B1.scope: fixed-K limitation stated; no K->infty overclaim in statement.md and limitations.md"
+  ],
+
+  "acceptance_test_results": {
+    "note": "Self-assessed PROOF-DRAFT status; not yet independently checked.",
+    "class": "PASS — 𝔛_sym membership checkable by symmetry + admissibility",
+    "non_vacuity": "PASS — formal zeta zero multiset and any off-line symmetric multiset are members",
+    "target": "PASS — Z_+ has P=1, Z_- has P=0",
+    "observation": "PASS — equality is approximate (|O_j delta| < eps), not exact; B1 is non-discrimination, not exact collision (see B2)",
+    "invariant": "PASS — construction is representation-independent (O_Phi depends only on the zero set, not a basis)",
+    "no_rh": "PASS — no RH or RH-equivalent in hypotheses",
+    "escape": "PASS — five escape routes listed in statement.md",
+    "scope": "PASS — conclusion names 𝔛_sym and the fixed-K resource bound"
+  },
+
+  "checker": {
+    "protocol": "analytic-only",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
+  "spec_status": "PROOF-DRAFT",
+  "status_note": "PROOF-DRAFT — analytic proof sketched in proof.md; not yet independently checked. Weil-test convention (W2) is a definitional choice that must be frozen before paper submission."
+}
