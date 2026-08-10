@@ -31,8 +31,8 @@
 
   "obligations": [
     "D.weyl-mismatch: T^{d/m} != T log T proved by direct comparison — PROOF-DRAFT done",
-    "D.heat-trace-log: Z_zeta has log(1/t) singularity; Seeley-DeWitt class does not — PROOF-DRAFT (quantitative version needed for novelty)",
-    "D.novelty-gate: assess whether heat-trace argument goes beyond Endres-Steiner — OPEN",
+    "D.heat-trace-log: Z_zeta has log(1/t) singularity; Seeley-DeWitt class does not — PROOF-DRAFT done (proof.md §4 quantitative version complete)",
+    "D.novelty-gate: heat-trace argument goes beyond Endres-Steiner — NOVELTY GATE CLEARED (novelty.md)",
     "D.escape-example: explicit T log T example outside C_ell (hyperbolic surface) — STATED, needs precision"
   ],
 

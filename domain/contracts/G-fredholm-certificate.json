@@ -1,0 +1,64 @@
+{
+  "contract_version": "2",
+  "claim_id": "G-fredholm-certificate-theorem",
+  "note": "Theorem G. Information obstruction for Fredholm certificate methods with theta-level observation. PROOF-DRAFT (G-info); G-hard is CONJECTURE (not a premise).",
+
+  "theorem_id": "G-fredholm-certificate",
+  "paper": "D (candidate, pending novelty gate)",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "G-fredholm-certificate",
+    "ambient_class": "M_FC: Fredholm certificate methods using O_theta observation (theta-level archimedean levels, zero-free arithmetic input, no fitted parameters)",
+    "resource_bound": "All N: the eigenvalue error gamma_n - d_n ~ S(gamma_n) / N'(gamma_n) persists as N -> infinity",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "Step outside M_FC by supplying S(T) via non-zero-free route, or by proving the determinant identity via a non-spectral entire-function identity not relying on eigenvalue approximation"
+  },
+
+  "normalization_choice": {
+    "note": "The target is the CCM-style entire function Xi(z) = xi(1/2 + iz). Distinct from the Suzuki meromorphic target. This distinction is essential: G applies to the entire-Xi target used in the Fredholm certificate framework.",
+    "selected": "ccm-entire-Xi",
+    "warning": "Never conflate with Suzuki meromorphic target (poles at zeros). G is an information obstruction for M_FC; it does not apply to the Suzuki meromorphic track."
+  },
+
+  "dependencies": [
+    {"claim_id": "HADAMARD-FACTORIZATION-ORDER-1", "ledger_math": "REFEREED", "role": "Lemma G.1: two order-1 entire functions with same zeros and normalization are equal"},
+    {"claim_id": "RIEMANN-ARGUMENT-COUNTING-IDENTITY", "ledger_math": "REFEREED", "role": "Lemma G.2: S(T) gap between theta-levels and true zero ordinates"},
+    {"claim_id": "HADAMARD-PRODUCT-XI", "ledger_math": "REFEREED", "role": "Hadamard product for Xi; eigenvalues of K must be {1/gamma_n^2} for CORE-4"},
+    {"claim_id": "AASVS-CORE4-OBL", "ledger_math": "PROOF-DRAFT", "usable_as_premise": false, "role": "non-vacuity witness only (sibling repo engineering record); NOT a mathematical premise"}
+  ],
+
+  "obligations": [
+    "G.hadamard-uniqueness: Lemma G.1 — REFEREED (classical, cited)",
+    "G.st-gap: Lemma G.2 — REFEREED (Titchmarsh §9.4)",
+    "G.obs-indistinguishability: Prop. G.3 — PROOF-DRAFT (explicit epsilon-tilde exhibit open; same template as E-neg §3)",
+    "G.core4-obstruction: Theorem G main statement — PROOF-DRAFT (follows from G.1 + G.2 + G.3)",
+    "G.hard: CONJECTURE (S(T) irrecoverable from zero-free primes) — NOT a proof premise",
+    "G.non-vacuity: kappa_toeplitz + Bochner positivity (sibling repo) — PROOF-DRAFT"
+  ],
+
+  "acceptance_test_results": {
+    "note": "PROOF-DRAFT. Novelty gate OPEN (new class M_FC + S(T) obstruction; prior art check incomplete).",
+    "class": "PASS — M_FC membership checkable: O_theta observation + zero-free arithmetic + no fitting; sibling repo guard.py enforces syntactically",
+    "non_vacuity": "PROOF-DRAFT — kappa_toeplitz is a serious constructed member; Bochner positivity needs independent review",
+    "target": "PASS — adversary pair: Z_RH and Z_epsilon differ as entire functions by Hadamard uniqueness",
+    "observation": "PROOF-DRAFT — O_theta returns same d_n for both; explicit exhibit open (Prop. G.3)",
+    "invariant": "PASS — S(T) gap is a counting-function identity, basis-independent",
+    "no_rh": "PASS — obstruction holds whether or not RH is true; Riemann-von Mangoldt is unconditional",
+    "escape": "PASS — two explicit escape routes: (1) non-zero-free S(T) supply, (2) non-spectral identity",
+    "scope": "PASS — M_FC named; theta-level observation resource bound; conclusion names ambient class"
+  },
+
+  "checker": {
+    "protocol": "analytic-only (REFEREED premises) + numerical corroboration (S(T) gap table, EXPLORATORY)",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
+  "spec_status": "PROOF-DRAFT",
+  "obstruction_type": "information",
+  "spec_status_note": "G-info (information obstruction) PROOF-DRAFT. G-hard is CONJECTURE, not a premise. Non-vacuity witness PROOF-DRAFT. Gate A OPEN (Prop. G.3 open step)."
+}

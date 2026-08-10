@@ -1,0 +1,85 @@
+# Dependencies — Theorem G (G-fredholm-certificate)
+
+theorem_id: G-fredholm-certificate
+status: PROOF-DRAFT (G-info; G-hard is CONJECTURE — not a premise)
+
+dependencies:
+
+  - id: HADAMARD-FACTORIZATION-ORDER-1
+    statement: >
+      An entire function of order at most 1 with zeros {z_n} (n>=1, |z_n| -> inf)
+      and value F(0) != 0 is uniquely determined by its zeros and F(0).
+      Explicitly: F(z) = F(0) * exp(az) * prod_n (1 - z/z_n) exp(z/z_n).
+    source: >
+      Titchmarsh 'Theory of Functions' §8.24; Ahlfors 'Complex Analysis' §5.3;
+      any standard complex analysis text. Classical theorem.
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: >
+      Lemma G.1: two entire functions of order 1 with the same zeros and same value
+      at one point are equal. Used to show that the determinant det(I-z^2 K) either
+      equals Xi exactly or is a distinct entire function.
+
+  - id: RIEMANN-ARGUMENT-COUNTING-IDENTITY
+    statement: >
+      N(T) = theta(T)/pi + 1 + S(T), where N(T) is the count of zeros of zeta
+      with 0 < Im < T, theta(T) = Im(log Gamma(1/4 + iT/2)) - T log(pi)/2,
+      and S(T) = (1/pi) arg zeta(1/2 + iT). This is exact (not asymptotic).
+    source: >
+      Titchmarsh 'Theory of the Riemann Zeta Function' §9.4;
+      Davenport 'Multiplicative Number Theory' Ch. 15.
+      Standard application of the argument principle.
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: >
+      Lemma G.2: the archimedean levels d_n = theta_level(n) differ from
+      gamma_n by the S(T) discrepancy. This is the load-bearing step: the
+      eigenvalue error in any P in M_FC is controlled by S(T), which is
+      not available in O_theta.
+
+  - id: AASVS-CORE4-OBL
+    statement: >
+      In the sibling repository absolute-arithmetic-spectral-verification,
+      CORE-4 (the determinant identity Xi(z) = det(I - z^2 K)) is [OBL]:
+      the kappa_toeplitz construction achieves ~6% eigenvalue error from the
+      S(T) fluctuation and cannot close the CORE-4 gate without reading zero
+      ordinates. Documented in proof/m5/determinant_approximation.py.
+    source: >
+      Sibling repository: absolute-arithmetic-spectral-verification
+      proof/m5/determinant_approximation.py; PLAN.md §Phase P4/P5 honest obstruction.
+      NOT a peer-reviewed result — an engineering observation from that project.
+    mathematical: PROOF-DRAFT
+    computational: REPRODUCIBLE
+    usable_as_premise: false
+    gate_a_status: NOT-APPLICABLE
+    role: >
+      Non-vacuity witness for M_FC: establishes that a serious constructed
+      method exists in the class. NOT used as a mathematical premise; used
+      only to demonstrate the class is non-vacuous. The mathematical argument
+      (Lemma G.2 + G.1) does not depend on this source.
+
+  - id: HADAMARD-PRODUCT-XI
+    statement: >
+      Xi(z) = Xi(0) * prod_n (1 - z^2/gamma_n^2) (the Hadamard product over
+      the Riemann zero ordinates, assuming RH so all gamma_n > 0).
+      The product converges absolutely for all z.
+    source: >
+      Titchmarsh 'Theory of the Riemann Zeta Function' §2.12;
+      standard reference for the Hadamard product of xi(s).
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: >
+      Used in the CORE-4 obstruction argument: for det(I - z^2 K) = Xi(z),
+      the eigenvalues of K must be exactly {1/gamma_n^2}, not {1/d_n^2}.
+
+gate_a_status: OPEN
+gate_a_note: >
+  REFEREED items (Hadamard, Riemann-argument) are usable as premises.
+  AASVS-CORE4-OBL is not a premise (non-vacuity only).
+  Open step: the explicit perturbed-zero exhibit in Prop. G.3 is PROOF-DRAFT
+  (same structure as E-neg §3; needs a concrete epsilon-tilde construction).
+  G-hard is CONJECTURE and is not a premise anywhere.
+  Gate A will be CLEAR once Prop. G.3 is made fully explicit.

@@ -74,17 +74,19 @@ P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅ P5 ✅ P6 ✅ **P7 gate passed (≥2 complete
 - B2: PROOF-DRAFT complete (self-contained rank + integer-sign) ✅
 - C: PROOF-DRAFT (Gate A cleared — Andersson Thm 5 verified from source) ✅
 - E: PROOF-DRAFT complete (§3 self-contained — Hadamard growth + Vandermonde IFT) ✅
-- D: PROOF-DRAFT — novelty gate open (Endres-Steiner quantitative comparison)
+- D: PROOF-DRAFT — novelty gate **CLEARED** (heat-trace log singularity; Paper B scope confirmed)
 - F: PROOF-DRAFT-CONDITIONAL — non-vacuity + invariance gates open
+- G: PROOF-DRAFT (G-info; information obstruction for Fredholm certificate class 𝔐_FC)
 
-**Four theorems at complete PROOF-DRAFT.** P7 synthesis gate is passed.
-Next: write Paper A (B1+B2) and Paper C (E-compactness) outlines; then submit for independent review.
-
+**Five theorems at complete PROOF-DRAFT; G-info adds a new information-obstruction theorem
+incorporating the sibling-repo AASVS CORE-4 engineering record into a scoped no-go.**
+Paper outlines for A (B1+B2), B (D), C (E-compactness) written.
+Next: write Paper D outline (Theorem G); submit A and C for independent review.
 
 - Both gates OPEN: non-vacuity (no confirmed `P_{r,N}` example) and representation-
   invariance (five conditions stated but not yet verified for any specific `c_a` use).
 - No `−c_a I` claim promoted past frozen-system diagnostic; Paper D conditional.
-- Next: P7 synthesis — only after ≥2 theorem papers close (program §17).
+- Theorem G: G-hard (S(T) irrecoverable from zero-free primes) is CONJECTURE only, not a premise.
 
 ---
 

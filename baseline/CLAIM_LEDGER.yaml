@@ -165,10 +165,33 @@ claims:
       itself; Thm 5 (thm5) is the most general (signed multiset, maximal domain).
       For Theorem C we use Thm 5 with a single prescribed zero at z_1 in the open strip.
 
+  - id: RIEMANN-ARGUMENT-COUNTING-IDENTITY
+    statement: >
+      The exact identity N(T) = theta(T)/pi + 1 + S(T), where N(T) is the count of
+      nontrivial zeros of zeta with 0 < Im(s) < T (counted with multiplicity),
+      theta(T) = Im(log Gamma(1/4 + iT/2)) - T*log(pi)/2 is the Riemann-Siegel theta
+      function, and S(T) = (1/pi) * arg zeta(1/2 + iT) is the argument function.
+      Consequence: the archimedean level d_n = theta_level(n) (solution to theta(T)/pi+1=n)
+      differs from the n-th zero ordinate gamma_n by the S(T) discrepancy:
+        gamma_n - d_n ~ S(gamma_n) / N'(gamma_n),  N'(T) ~ log(T/2pi)/(2pi).
+    source: >
+      Titchmarsh 'Theory of the Riemann Zeta Function' §9.4 (exact identity);
+      Davenport 'Multiplicative Number Theory' Ch. 15 (counting formula derivation).
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    peer_reviewed: true
+    gate_a_status: CLEAR
+    role: >
+      Load-bearing for Theorem G: the S(T) gap between theta-levels and true zero
+      ordinates is the core information-obstruction in the Fredholm certificate method
+      class M_FC. This identity is exact (not asymptotic) for the main N(T) formula.
+
 # Gate A summary (program §6.A.4):
 #   - Baseline Suzuki/CCM statements: INDEPENDENTLY-CHECKED (source), usable as
 #     unrefereed-preprint premises with an assumptions flag.
 #   - Andersson Thm 5: INDEPENDENTLY-CHECKED (source verified), GATE A CLEARED.
+#   - RIEMANN-ARGUMENT-COUNTING-IDENTITY: REFEREED (Titchmarsh §9.4), GATE A CLEAR.
 #   - CCM convergence + all LEGACY items: NOT usable as premises yet (PENDING re-inspection
 #     or are the object of study). Any theorems/<id> depending on them is BLOCKED until
 #     resolved or the dependency is downgraded to an explicit assumption.

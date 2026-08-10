@@ -19,7 +19,7 @@ from checker.validate_ledger import load_claims, validate  # noqa: E402
 
 def test_all_claims_parse_and_validate():
     claims = load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")
-    assert len(claims) == 11, f"expected 11 claims, parsed {len(claims)}"
+    assert len(claims) == 12, f"expected 12 claims, parsed {len(claims)}"
     for c in claims:
         assert not validate(c), f"{c.get('id')}: {validate(c)}"
 
@@ -484,6 +484,104 @@ def test_f_limitations_no_margin_claim():
     lim = (F_DIR / "limitations.md").read_text()
     assert "margin" in lim.lower() or "tending" in lim.lower() or "lambda" in lim.lower(), \
         "F limitations.md must disclaim margin-tending-to-zero (program §3.3 criterion 3)"
+
+
+# ---- G-fredholm-certificate theorem scaffold tests ----
+
+G_DIR = ROOT / "theorems" / "G-fredholm-certificate"
+G_CONTRACT = ROOT / "domain" / "contracts" / "G-fredholm-certificate.json"
+
+
+def test_g_required_files_exist():
+    for rel in REQUIRED_FILES:
+        assert (G_DIR / rel).exists(), f"missing G file: {rel}"
+
+
+def test_g_contract_exists_and_parses():
+    assert G_CONTRACT.exists()
+    with G_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["theorem_id"] == "G-fredholm-certificate"
+    assert data["metadata"]["is_barrier_claim"] is True
+    assert data["metadata"]["escape_route_present"] is True
+
+
+def test_g_contract_required_metadata_keys():
+    with (ROOT / "domain" / "policy-v2.json").open() as f:
+        policy = json.load(f)
+    required = set(policy["required_metadata_keys"])
+    with G_CONTRACT.open() as f:
+        contract = json.load(f)
+    missing = required - set(contract.get("metadata", {}).keys())
+    assert not missing, f"G contract missing metadata keys: {missing}"
+
+
+def test_g_hard_is_conjecture_not_premise():
+    """G-hard must be labeled CONJECTURE and must not be used as a proof premise."""
+    proof = (G_DIR / "proof.md").read_text()
+    assert "CONJECTURE" in proof, "G proof.md must label G-hard as CONJECTURE"
+    stmt = (G_DIR / "statement.md").read_text()
+    assert "CONJECTURE" in stmt, "G statement.md must label G-hard as CONJECTURE"
+    with G_CONTRACT.open() as f:
+        data = json.load(f)
+    # The AASVS dependency must NOT be usable as premise
+    for dep in data.get("dependencies", []):
+        if "AASVS" in dep["claim_id"] or "CORE4" in dep["claim_id"]:
+            assert dep.get("usable_as_premise") is not True, \
+                f"G contract: {dep['claim_id']} must not be usable_as_premise"
+
+
+def test_g_st_gap_in_claim_ledger():
+    """RIEMANN-ARGUMENT-COUNTING-IDENTITY must be in the ledger as REFEREED."""
+    ledger = {c["id"]: c for c in load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")}
+    assert "RIEMANN-ARGUMENT-COUNTING-IDENTITY" in ledger, \
+        "RIEMANN-ARGUMENT-COUNTING-IDENTITY must be in CLAIM_LEDGER"
+    claim = ledger["RIEMANN-ARGUMENT-COUNTING-IDENTITY"]
+    assert claim.get("mathematical") == "REFEREED", \
+        "RIEMANN-ARGUMENT-COUNTING-IDENTITY must be REFEREED"
+    assert claim.get("usable_as_premise") is True
+
+
+def test_g_information_obstruction_type():
+    """G must be an information obstruction (not structural)."""
+    with G_CONTRACT.open() as f:
+        data = json.load(f)
+    obs_type = data.get("obstruction_type", "")
+    assert "information" in obs_type.lower(), \
+        "G contract must specify obstruction_type: information"
+
+
+def test_g_escape_route_explicit():
+    """G must name an explicit escape route outside M_FC."""
+    stmt = (G_DIR / "statement.md").read_text()
+    assert "escape" in stmt.lower() or "Escape" in stmt, \
+        "G statement.md must contain an escape route section"
+    with G_CONTRACT.open() as f:
+        data = json.load(f)
+    escape = data.get("metadata", {}).get("escape_route", "")
+    assert len(escape) > 20, "G contract escape_route must be non-trivial"
+
+
+def test_g_no_rh_in_hypotheses():
+    """G must not require RH as a hypothesis."""
+    with G_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data.get("metadata", {}).get("is_barrier_claim") is True
+    # no_rh acceptance test must pass
+    no_rh_result = data.get("acceptance_test_results", {}).get("no_rh", "")
+    assert "PASS" in no_rh_result, "G contract no_rh acceptance test must PASS"
+
+
+def test_g_normalization_frozen_to_ccm_entire():
+    """G must use CCM entire-Xi normalization, not Suzuki meromorphic."""
+    with G_CONTRACT.open() as f:
+        data = json.load(f)
+    norm = data.get("normalization_choice", {}).get("selected", "")
+    assert "ccm" in norm.lower() or "entire" in norm.lower(), \
+        "G must be frozen to CCM entire-Xi target"
+    warning = data.get("normalization_choice", {}).get("warning", "")
+    assert "Suzuki" in warning or "meromorphic" in warning.lower(), \
+        "G normalization warning must mention Suzuki meromorphic distinction"
 
 
 if __name__ == "__main__":
