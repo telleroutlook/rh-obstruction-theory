@@ -1,0 +1,63 @@
+# Dependencies for Theorem F (F-schur-complexity)
+#
+# Gate A status:
+#   - No PENDING items in the proof path.
+#   - The LEGACY items below are candidates for non-vacuity but are PENDING Gate A
+#     re-inspection under the a/Q_W^a/lambda(a) convention; they are NOT used as premises.
+#
+# Two-axis evidence ledger (math x comp) per dependency.
+
+theorem_id: F-schur-complexity
+gate_a_status: PENDING  # non-vacuity gate OPEN; representation-invariance gate OPEN
+
+dependencies:
+
+  - id: SUZUKI-THM-1.3
+    description: "lambda(a) continuous on (0,infty); Q_W^a is a well-defined quadratic form"
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    role: "foundation for M_{a,N} well-definedness"
+    source: "baseline/suzuki-2606.09096/ Thm 1.3"
+
+  - id: SUZUKI-THM-1.4
+    description: "lambda(a) positive + simple for small a; asymptotics log(1/a)+const+O(a)"
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    role: "confirms lambda(a)>0 for the regime where delta<lambda(a) is non-vacuous"
+    source: "baseline/suzuki-2606.09096/ Thm 1.4"
+
+  - id: GALERKIN-CONVERGENCE
+    description: "lambda_min(M_{a,N}) -> lambda(a) as N->infty for Galerkin truncation"
+    mathematical: CONJECTURE
+    computational: NONE
+    usable_as_premise: false
+    gate_a_status: PENDING
+    role: "links finite matrix to invariant lambda(a); stated as explicit assumption in statement.md"
+    note: "Standard variational argument but not source-verified for Q_W^a specifically"
+
+  - id: LEGACY-FP-0.35
+    description: "Weil-window at a=0.35: Schur residual -0.35... (basis-dependent)"
+    mathematical: PROOF-DRAFT
+    computational: EXPLORATORY
+    usable_as_premise: false
+    gate_a_status: PENDING
+    role: "non-vacuity candidate only; NOT a premise; must be re-inspected under lambda(a) convention"
+    note: "Schur residuals are basis-dependent artifacts; must reconcile with lambda(a) before use"
+
+  - id: LEGACY-SECOND-WINDOW
+    description: "Weil-window at second parameter: Schur residual result (basis-dependent)"
+    mathematical: PROOF-DRAFT
+    computational: EXPLORATORY
+    usable_as_premise: false
+    gate_a_status: PENDING
+    role: "non-vacuity candidate only; NOT a premise; same re-inspection required"
+
+  - id: F-SCHUR-LOWER-BOUND
+    description: "Lower bound: certificate complexity k(a,delta,N,r) grows with a or N"
+    mathematical: PROOF-DRAFT
+    computational: NONE
+    usable_as_premise: false
+    gate_a_status: PENDING
+    role: "the theorem itself; open steps: eigenvector-spread bound + Schur-residual argument"

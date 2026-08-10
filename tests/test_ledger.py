@@ -388,6 +388,93 @@ def test_d_no_rh_claim():
                 f"D {fname} contains forbidden phrase: {phrase!r}"
 
 
+# ---- F-schur-complexity theorem scaffold tests ----
+
+F_DIR = ROOT / "theorems" / "F-schur-complexity"
+F_CONTRACT = ROOT / "domain" / "contracts" / "F-schur-complexity.json"
+
+
+def test_f_required_files_exist():
+    for rel in REQUIRED_FILES:
+        assert (F_DIR / rel).exists(), f"missing F file: {rel}"
+
+
+def test_f_contract_exists_and_parses():
+    assert F_CONTRACT.exists()
+    with F_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["theorem_id"] == "F-schur-complexity"
+    assert data["metadata"]["is_barrier_claim"] is True
+    assert data["metadata"]["escape_route_present"] is True
+
+
+def test_f_contract_required_metadata_keys():
+    with (ROOT / "domain" / "policy-v2.json").open() as f:
+        policy = json.load(f)
+    required = set(policy["required_metadata_keys"])
+    with F_CONTRACT.open() as f:
+        contract = json.load(f)
+    missing = required - set(contract.get("metadata", {}).keys())
+    assert not missing, f"F contract missing metadata keys: {missing}"
+
+
+def test_f_conditionality_stated():
+    """F must be marked conditional on both gates."""
+    with F_CONTRACT.open() as f:
+        data = json.load(f)
+    status = data.get("spec_status", "")
+    assert "CONDITIONAL" in status or "conditional" in status.lower(), \
+        "F contract must mark spec_status as conditional"
+
+
+def test_f_no_ca_overclaim():
+    """Theorem F must not promote -c_a I to a universal barrier."""
+    for fname in ["statement.md", "proof.md", "limitations.md"]:
+        content = (F_DIR / fname).read_text()
+        forbidden = [
+            "proves rh", "disproves rh",
+            "barrier for all methods",
+        ]
+        for phrase in forbidden:
+            assert phrase not in content.lower(), \
+                f"F {fname} contains forbidden phrase: {phrase!r}"
+    # The contract warning must mention representation-invariance or lambda(a)
+    with F_CONTRACT.open() as f:
+        data = json.load(f)
+    norm_note = data.get("normalization_choice", {}).get("warning", "")
+    assert "lambda" in norm_note.lower() or "basis-dependent" in norm_note.lower(), \
+        "F contract normalization_choice must warn about -c_a representation artifact"
+
+
+def test_f_legacy_not_a_premise():
+    """LEGACY items in F must not be usable_as_premise."""
+    with F_CONTRACT.open() as f:
+        data = json.load(f)
+    for dep in data.get("dependencies", []):
+        if "LEGACY" in dep["claim_id"]:
+            assert dep.get("usable_as_premise") is not True, \
+                f"F uses LEGACY claim {dep['claim_id']} as premise — forbidden until Gate A"
+
+
+def test_f_non_vacuity_gate_open():
+    """F must explicitly state non-vacuity gate is OPEN."""
+    stmt = (F_DIR / "statement.md").read_text()
+    assert "OPEN" in stmt or "non-vacuity" in stmt.lower(), \
+        "F statement.md must state non-vacuity gate is OPEN"
+    with F_CONTRACT.open() as f:
+        data = json.load(f)
+    nv = data.get("acceptance_test_results", {}).get("non_vacuity", "")
+    assert "OPEN" in nv or "open" in nv.lower(), \
+        "F contract non_vacuity acceptance test must be marked OPEN"
+
+
+def test_f_limitations_no_margin_claim():
+    """F limitations must disclaim margin-tending-to-zero as a barrier."""
+    lim = (F_DIR / "limitations.md").read_text()
+    assert "margin" in lim.lower() or "tending" in lim.lower() or "lambda" in lim.lower(), \
+        "F limitations.md must disclaim margin-tending-to-zero (program §3.3 criterion 3)"
+
+
 if __name__ == "__main__":
     test_all_claims_parse_and_validate()
     test_no_pending_gate_a_item_is_a_premise()
@@ -425,4 +512,12 @@ if __name__ == "__main__":
     test_d_novelty_gate_stated()
     test_d_escape_example_present()
     test_d_no_rh_claim()
+    test_f_required_files_exist()
+    test_f_contract_exists_and_parses()
+    test_f_contract_required_metadata_keys()
+    test_f_conditionality_stated()
+    test_f_no_ca_overclaim()
+    test_f_legacy_not_a_premise()
+    test_f_non_vacuity_gate_open()
+    test_f_limitations_no_margin_claim()
     print("ok")

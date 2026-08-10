@@ -1,0 +1,62 @@
+{
+  "contract_version": "2",
+  "claim_id": "F-schur-complexity-theorem",
+  "note": "Theorem F (WP-F). Lower bound on restricted Schur-certificate complexity for the localized Weil quadratic form. PROOF-DRAFT conditional on non-vacuity gate + representation-invariance gate.",
+
+  "theorem_id": "F-schur-complexity",
+  "paper": "D (conditional on both gates)",
+  "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
+
+  "metadata": {
+    "theorem_id": "F-schur-complexity",
+    "ambient_class": "Frozen system P_{r,N}: Galerkin subspace G_{a,N} of L^2(-a,a) with ONB; Weil matrix M_{a,N} = (Q_W^a(e_i,e_j)); allowed operations: orthogonal congruence + rank-r Schur-block decomposition; certificate complexity kappa(a,delta,N,r) = minimum pivot rank to witness M_{a,N} >= delta I",
+    "resource_bound": "fixed r (Schur pivot rank); lower bound requires r growing with a or N",
+    "is_barrier_claim": true,
+    "escape_route_present": true,
+    "escape_route": "unbounded rank (r->infty with a); non-Galerkin proof method (analytic spectral theory of A_a directly); different block structure outside P_{r,N}; infinite-dimensional argument bypassing Galerkin truncation"
+  },
+
+  "normalization_choice": {
+    "note": "Representation-invariance gate is mandatory. The invariant target is M_{a,N} >= delta*I (equivalently lambda_min(M_{a,N}) >= delta). Any -c_a*I shift appearing in a Schur decomposition is a basis-dependent artifact unless the five conditions of statement.md §2 are verified. The positive leading term log(1/a) in lambda(a) must not be confused with a negative shift in an unnormalized basis.",
+    "selected": "galerkin-lambda-min-invariant",
+    "warning": "LEGACY FP-0.35 and SECOND-WINDOW Schur residuals are basis-dependent; they are non-vacuity candidates only and must be reconciled with lambda(a) before any use as premises"
+  },
+
+  "dependencies": [
+    {"claim_id": "SUZUKI-THM-1.4", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "lambda(a) positive for small a; asymptotics log(1/a)+const; confirms non-trivial regime"},
+    {"claim_id": "GALERKIN-CONVERGENCE", "ledger_math": "CONJECTURE", "role": "explicit assumption: lambda_min(M_{a,N})->lambda(a); NOT a premise", "usable_as_premise": false},
+    {"claim_id": "LEGACY-FP-0.35", "ledger_math": "PROOF-DRAFT", "role": "non-vacuity candidate only — PENDING Gate A re-inspection under lambda(a) convention; NOT a premise", "usable_as_premise": false},
+    {"claim_id": "F-SCHUR-LOWER-BOUND", "ledger_math": "PROOF-DRAFT", "role": "the theorem itself — open steps: eigenvector-spread bound + Schur-residual argument", "usable_as_premise": false}
+  ],
+
+  "obligations": [
+    "F.rep-inv-gate: verify the five conditions of statement.md §2 for any specific -c_a use — OPEN",
+    "F.non-vacuity-gate: identify a specific published construction in P_{r,N} — OPEN",
+    "F.lower-bound.eigenvec-spread: quantitative lower bound |<v_min,e_j>|^2 >= c/N — OPEN",
+    "F.lower-bound.schur-residual: Schur-complement argument that partial pivoting cannot avoid minimum eigenspace — OPEN",
+    "F.legacy-reinspect: if LEGACY-FP-0.35 is used for non-vacuity, must reconcile -c_L with lambda(a) log-scale — PENDING"
+  ],
+
+  "acceptance_test_results": {
+    "note": "PROOF-DRAFT. Both gates open — Paper D conditional.",
+    "class": "PASS — P_{r,N} membership checkable (order m, rank r, Galerkin dimension N, ONB, allowed operations stated)",
+    "non_vacuity": "OPEN — no confirmed example in P_{r,N}; candidates listed in statement.md §3",
+    "target": "PASS — kappa(a,delta,N,r) certifies M_{a,N}>=delta*I; lambda(a) is the invariant adversarial target",
+    "observation": "PASS — the lambda_min eigenvalue is a continuous invariant under orthogonal congruence",
+    "invariant": "CONDITIONAL — the five representation-invariance conditions of statement.md §2 must be verified before any -c_a use",
+    "no_rh": "PASS — no RH in hypotheses; uses Suzuki Thm 1.4 (unconditional positivity for small a)",
+    "escape": "PASS — four explicit escape routes named",
+    "scope": "PASS — P_{r,N} named; rank-r resource bound stated; conclusion is kappa > r_0(a)"
+  },
+
+  "checker": {
+    "protocol": "analytic-only (pending: interval-arithmetic eigenvalue checker when non-vacuity closes)",
+    "checker_digest": "sha256:PLACEHOLDER",
+    "schema_digest": "sha256:PLACEHOLDER"
+  },
+  "runtime": {"class": "native-dev", "network": "none"},
+  "assurance": {"required": ["formal-kernel"]},
+  "replay": {"semantic": "N/A-analytic-only-pending", "byte_exact": "not_required"},
+  "spec_status": "PROOF-DRAFT-CONDITIONAL",
+  "status_note": "BLOCKED on non-vacuity gate AND representation-invariance gate. No -c_a I claim promoted past frozen-system diagnostic. Paper D conditional on both gates closing."
+}

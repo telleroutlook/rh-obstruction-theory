@@ -65,9 +65,9 @@ Work is **stopped or narrowed** at each hard gate. A clean negative novelty resu
 failed exact-collision construction, or a proof that a proposed class is vacuous is
 **recorded, not relabeled as success.**
 
-**Current phase: P4 complete / entering P5.**
+**Current phase: P6 complete / entering P7.**
 
-P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅
+P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅ P5 ✅ P6 ✅
 
 **Day-30 decision (recorded 2026-08-10):**  
 - B2 rank step promoted to PROOF-DRAFT (Chebyshev T-system argument); integer-sign
@@ -75,7 +75,15 @@ P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅
 - E-compactness E-pos is PROOF-DRAFT-CLEAR; E-neg quantitative tail (§3) is OPEN →
   Paper C proceeds unconditionally at the non-uniqueness level; quantitative bound
   strengthens it.
-- Both Paper A and Paper C tracks are live.  Next: P5 (WP-C, WP-D spectral/Euler).
+- Both Paper A and Paper C tracks are live.  P5 complete (WP-C, WP-D scaffolds done).
+
+**P6 decision (recorded 2026-08-10):**  
+- Theorem F scaffold complete: statement, proof, dependencies, limitations, novelty,
+  witness/README, checker/README, domain contract, 8 new tests (44 total, all passing).
+- Both gates OPEN: non-vacuity (no confirmed `P_{r,N}` example) and representation-
+  invariance (five conditions stated but not yet verified for any specific `c_a` use).
+- No `−c_a I` claim promoted past frozen-system diagnostic; Paper D conditional.
+- Next: P7 synthesis — only after ≥2 theorem papers close (program §17).
 
 ---
 
