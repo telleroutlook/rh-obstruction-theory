@@ -46,8 +46,9 @@ dependencies:
     caveat: >
       Chebyshev T-system argument in proof.md §4.3 is a proof sketch; the
       Karlin-Studden (or equivalent) theorem must be cited by number.
-      The integer-sign step (add-only vs add-and-remove) is still OPEN (proof.md
-      §4.5).  B2 remains CONDITIONAL until both are resolved.
+      The integer-sign step is RESOLVED (proof.md §4.5): construct Z_+ with
+      multiplicity buffer M = R * max_k|alpha_k^Q|; removals are then valid.
+      B2 remains CONDITIONAL only on the Chebyshev citation (rank step).
 
   - id: CURTO-FIALKOW-FLAT-EXTENSION
     statement: >

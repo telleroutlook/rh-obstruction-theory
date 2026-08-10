@@ -172,67 +172,83 @@ same Chebyshev-system argument, `det J ≠ 0` for distinct positive `t_k`.
 
 **Status:** PROOF-DRAFT (same caveat: Chebyshev citation needed).
 
-### §4.5 Exact-collision with integer multiplicities
+### §4.5 Exact-collision with integer multiplicities (RESOLVED — PROOF-DRAFT)
 
-**Key scaling trick.** Suppose `rank_ℚ J = m` (established above for rational `t_k`).
-Given `T` large, the target `b = −δ^{off}(T) ∈ ℚ^m` (all entries rational when
-`T, σ₀` are rational and tests are Li/moment).  The exact solution is
-`α^ℚ = J^{−1} b ∈ ℚ^m`.  Let `R = \mathrm{lcm}` of denominators of `α^ℚ_k`.  Set:
+**Setup.** Fix rational `t₁, …, t_n` distinct positive, rational `σ₀ = 3/4`,
+rational `T` large.  By §4.3, `det J ≠ 0` over `ℚ`, so `α^ℚ = J^{-1}b ∈ ℚ^n`
+where `b = −δ^{off}(T) ∈ ℚ^n` (rational when `T, σ₀` rational, tests Li/moment).
 
-- Multiply the quartet by `R`: replace `Q(σ₀, T)` by `R` copies of `Q(σ₀, T)`
-  (add `4R` off-line zeros).
-- Multiply each on-line adjustment by `R`: `α_k ← R · α^ℚ_k ∈ ℤ`.
+**Key scaling trick.** Let `R = lcm(denominators of α^ℚ_k)`.  Set:
 
-This scales both sides of `J α = b` by `R` and gives integer solutions.
+- Replace `Q(σ₀, T)` by `R` copies: `4R` off-line atoms.
+- Multiply adjustments: `α_k := R · α^ℚ_k ∈ ℤ` (possibly negative).
 
-**Issue: signs.** If some `α_k < 0`, the construction requires removing `|α_k|`
-zeros from `𝒵_+` at height `t_k`.  This is valid if `𝒵_+` contains zeros at
-those heights with sufficient multiplicity.  For `𝒵_+` = formal zero multiset of ζ,
-the zeros are simple and the removal convention must be in the definition of
-`𝔛_sym`.  The theorem statement allows `𝔛_sym` members with multiplicity; the
-reference multiset `𝒵_+` can be any member, not necessarily ζ's zeros.
+This scales `(*) J α = b` by `R` and gives `J (R α^ℚ) = R b` — the scaled
+integer vector satisfies the scaled equation exactly.
 
-**Resolution:** We may choose `𝒵_+ ∈ 𝔛_sym` that has zeros at the chosen
-heights `t_1, …, t_n` with large multiplicity (e.g., `N` copies each).  Then the
-removal of `|α_k|` zeros is valid if `|α_k| ≤ N`.  For large `T`, `|b| → 0`,
-so `|α^ℚ_k| → 0`, and for any fixed `N`, there exists `T_*` large enough that
-`|R · α^ℚ_k| ≤ N`.
+**Sign resolution (the key insight).** The theorem asserts existence of an
+indistinguishable pair `(𝒵_+, 𝒵_-)` in `𝔛_sym`.  Both adversaries are
+**constructed** — we are not fixing `𝒵_+` to be ζ's zeros.  We are free to
+choose `𝒵_+` with any configuration in `𝔛_sym`.
 
-**Remaining open item:** we need `𝒵_+` to be a **specific** multiset (ideally the
-Riemann zero multiset), not an abstract member of `𝔛_sym` with artificially
-planted zeros.  If `𝒵_+` = Riemann zero multiset (simple zeros on the critical
-line), then the removal requires `α_k ≤ 1` (can remove at most 1 copy) or
-`α_k ≥ 0` (only add).
+**Construction of `𝒵_+`.** Set the multiplicity buffer:
+```
+M := R · max_{k=1,...,n} |α^ℚ_k|    (well-defined, finite).
+```
+Let `𝒵_+` be the finite multiset:
+```
+𝒵_+ := { 1/2 ± it_k  :  k = 1, …, n,  each with multiplicity  M }.
+```
+Verification that `𝒵_+ ∈ 𝔛_sym`:
+- Locally finite: yes (finite multiset).
+- Symmetric under `ρ ↦ ρ̄` and `ρ ↦ 1−ρ`: yes (pairs `1/2 ± it_k` are symmetric).
+- Admissibility: finite sum, converges trivially.
+- `P(𝒵_+) = 1`: all zeros on the critical line.  ✓
 
-**Two sub-cases:**
-- **Add-only model:** require `α_k ≥ 0` for all `k`.  Then the construction
-  works whenever the solution `J^{-1} b` has all nonneg components.  For
-  `b ≈ 0` (large `T`), this requires either that the unique solution `α = 0`
-  (trivial, useless) or that `b` can be chosen with a sign that forces
-  `α ≥ 0` — this depends on the sign of `δ^{off}(T)`.
-- **Add-and-remove model:** allows removing on-line zeros from `𝒵_+`; valid
-  if `𝒵_+` is generic enough.  For a theorem in `𝔛_sym` (not specifically ζ),
-  this is the easier model.
+**Construction of `𝒵_-`.**
+```
+𝒵_- := 𝒵_+
+       ∪ { 1/2 ± it_k  :  α_k > 0,  each added α_k times }
+       ∖ { 1/2 ± it_k  :  α_k < 0,  each removed |α_k| times }
+       ∪ R copies of Q(σ₀, T).
+```
+**Removals are valid** because each height `t_k` in `𝒵_+` has multiplicity `M`:
+```
+|α_k| = |R · α^ℚ_k| ≤ R · max_k |α^ℚ_k| = M.
+```
+So `𝒵_-` never removes more copies than `𝒵_+` has.
 
-**Status of integer step: OPEN.**  The scaling trick gives integers; the sign
-constraint (nonneg vs. signed) needs resolution.  The theorem can proceed with
-the add-and-remove model (relaxed `α ∈ ℤ`) pending this refinement.
+**Observation equality.** By construction:
+```
+O_j(𝒵_-) − O_j(𝒵_+) = Σ_k α_k A_{jk} + R δ_j^{off}(T) = J(Rα^ℚ)_j + R b_j = 0.
+```
+So `O_Φ(𝒵_-) = O_Φ(𝒵_+)` exactly.  ✓
 
-For the full B2 theorem (exact collision, integer multiplicities), the program is:
+**Predicate difference.** `P(𝒵_-) = 0` because `Q(σ₀, T)` contributes zeros at
+`σ₀ = 3/4 ≠ 1/2`.  `P(𝒵_+) = 1`.  ✓
 
-1. Choose `n = m` (square Jacobian), `t_k` rational, `σ₀ = 3/4`. ✓
-2. Show `det J ≠ 0` (over `ℚ`): PROOF-DRAFT (Chebyshev argument above). ✓
-3. Solve `J α = −δ^{off}(T)` over `ℚ` via `J^{-1}`.  ✓ (conditional on rank)
-4. Scale by `R = lcm(denominators)`: integer solution. ✓
-5. Verify `α_k ∈ ℤ` (with sign model): OPEN (add-only vs. add-and-remove).
-3. Solve `J α = −δ^{off}(T_*)` over `ℚ`.
-4. Scale `T_*` so that `α_k = q_k / r` with bounded denominator `r`, then take
-   `r` copies of the quartet and `r · α_k` copies of the on-line atoms.
-   → Works if the scaling keeps all objects in `𝔛_sym`.
-5. Verify `α_k ∈ ℤ_{≥1}` (or `ℤ_{\geq 0}` with removal).
+**Admissibility of `𝒵_-`.** The added/removed atoms are at bounded heights and
+finite in number; `𝒵_-` is locally finite, symmetric, and admissible.  ✓
 
-If Step 2 fails for all rational `t_k` and natural test families `Φ`, then B2
-does **not** hold for those families and the theorem is downgraded to B1.
+**Status: PROOF-DRAFT (integer-sign step RESOLVED).**
+
+The add-only model (requiring `α_k ≥ 0`) is NOT needed.  The add-and-remove
+model works because we construct `𝒵_+` with sufficient multiplicity.
+
+**Limitation:** The collision pair `(𝒵_+, 𝒵_-)` consists of **finite** multisets
+in `𝔛_sym`, not the specific Riemann zero multiset.  The theorem asserts existence
+of an indistinguishable pair in the class; it does NOT claim the Riemann zero
+multiset is indistinguishable from an off-line object.
+
+For the full B2 theorem (exact collision, integer multiplicities), the steps are:
+
+1. Choose `n = m`, `t_k` rational, `σ₀ = 3/4`.  ✓
+2. `det J ≠ 0` over `ℚ` (Chebyshev, §4.3): PROOF-DRAFT.  ✓
+3. Solve `J α^ℚ = −δ^{off}(T) / R` over `ℚ`.  ✓ (conditional on rank)
+4. Scale by `R`: integer vector `α ∈ ℤ^n`.  ✓
+5. Construct `𝒵_+` with multiplicity buffer `M = R · max_k |α^ℚ_k|`.  ✓
+6. Construct `𝒵_-` (add/remove/quartet).  ✓
+7. Verify membership, observation equality, predicate difference.  ✓ (above)
 
 ---
 
@@ -272,11 +288,15 @@ This is left for refinement after the rank step.
 
 | Step | Status |
 |---|---|
-| Parameterization (§2) | DONE |
-| Quartet tail decay (§3) | DONE (inherits from B1) |
-| Real rank generically full (§4.1) | PLAUSIBLE, needs proof |
-| Integer/rational solution (§4.5) | OPEN — central task of Days 15–21 |
-| Vandermonde analysis for moment tests (§4.4) | CONJECTURE |
-| Full construction (§5) | CONDITIONAL on rank |
-| Admissibility check (§6) | DONE conditionally |
+| Parameterization (§2) | PROOF-DRAFT ✓ |
+| Quartet tail decay (§3) | PROOF-DRAFT ✓ (inherits from B1) |
+| Li Jacobian full rank (§4.3, Chebyshev) | PROOF-DRAFT — citation needed |
+| Moment Jacobian full rank (§4.4) | PROOF-DRAFT — same citation |
+| Integer solution via scaling trick (§4.5) | PROOF-DRAFT ✓ (sign resolved) |
+| 𝒵_+ construction with multiplicity buffer | PROOF-DRAFT ✓ |
+| 𝒵_- construction (add/remove/quartet) | PROOF-DRAFT ✓ (conditional on rank) |
+| Admissibility + symmetry (§6) | PROOF-DRAFT ✓ |
+| Observation equality exact (§4.5) | PROOF-DRAFT ✓ (conditional on rank) |
+| Predicate P(𝒵_-) = 0, P(𝒵_+) = 1 | PROOF-DRAFT ✓ |
 | Counting-law refinement (§7) | DEFERRED |
+| Gate A: Chebyshev citation by theorem number | PENDING → INDEPENDENTLY-CHECKED |
