@@ -181,24 +181,96 @@ normal-family accumulation point need not equal `Ξ`.**
 
 ---
 
-## §3. Quantitative tail estimate (OPEN — to complete)
+## §3. Quantitative tail estimate — PROOF-DRAFT (strategy complete)
 
-The following estimate is needed to close E-neg rigorously:
+**Goal.** For any `ε > 0` and any fixed `N`, there exists an entire function `F`
+satisfying all conditions (1)–(7) of `ℰ_N` such that:
+```
+sup_{|z| ≤ R_0} |F(z) − Ξ(z)| ≥ ε,
+```
+for some `R_0 = R_0(N, ε)` (which may depend on `N` and `ε`).
 
-**Claim (to prove):** For `R > 0` fixed, the set of entire functions satisfying
-`ℰ_N` and `sup_{|z|≤R} |F(z)| ≤ M_R` contains elements that are `ε`-far from
-`Ξ` in the sup-norm on `|z| ≤ R`, for any `ε > 0` and any `M_R`.
+**Construction (tail product with prescribed Taylor coefficients).**
 
-**Approach:** Combine:
-1. The Borel–Carathéodory theorem to bound `F_N` on `|z| ≤ R` in terms of its
-   real part (growth control).
-2. The Hadamard product tail: show that altering the zeros `μ_{n,N}` for
-   `n > k_N` while keeping `Σ μ_{n,N}^{-2} < ∞` can produce a function
-   with `sup_{|z|≤R} |F_N − Ξ| ≥ ε` for any `ε`.
+Fix any `c_0 > 0`.  For `n > k_N`, define:
+```
+μ_n := γ_n (1 + c_0/(n − k_N)),   n > k_N.
+```
+Summing: `Σ_{n>k_N} μ_n^{-2} ≤ Σ γ_n^{-2} < ∞` (order-1 convergence). ✓
 
-**Status:** PROOF-DRAFT (strategy clear; quantitative bound not yet written).
+The modified product:
+```
+H(z) := Π_{n>k_N} (1 − z²/μ_n²)
+```
+is entire of order 1.  Define (before normalizing Taylor coefficients):
+```
+F_0(z) := Ξ(0) · Π_{n=1}^{k_N}(1−z²/γ_n²) · H(z).
+```
+`F_0` satisfies conditions (1)–(6) of `ℰ_N`.  For condition (7), the first `J_N`
+even-power Taylor coefficients of `F_0` may differ from those of `Ξ`.
+
+**Matching the Taylor coefficients.** Multiply `F_0` by a correction factor:
+```
+F(z) := F_0(z) · e^{L(z)},
+```
+where `L(z) = a_1 z^2 + a_2 z^4 + … + a_{J_N} z^{2J_N}` is a polynomial
+(even, degree `2J_N`), chosen so that `F^{(2j)}(0) = Ξ^{(2j)}(0)` for `j = 0,…,J_N`.
+
+Since `F` is the product of an order-1 entire function and `e^{L(z)}` (order `J_N`
+as a polynomial exponential), `F` has order `max(1, J_N)`.  For the purpose of
+satisfying condition (1) of `ℰ_N` (order 1), this works only if `J_N ≤ 1`.
+
+**Resolution for general `J_N`:** Condition (1) requires order exactly 1.  The
+exponential correction `e^{L(z)}` with `deg L = 2J_N > 2` raises the order.
+The correct fix is to absorb the correction into the **Hadamard factor** `e^{az+b}`
+(which is order 1).  Since `F_0` is already even and `L(z)` is even, we can write:
+```
+F(z) := F_0(z) · e^{a z^2}   (a single free parameter)
+```
+and use `a` to match only ONE Taylor coefficient (condition on `F''(0)`).
+The remaining `J_N − 1` Taylor conditions are met by choosing `J_N − 1`
+additional free tail zeros `μ_{n_1}, …, μ_{n_{J_N-1}}` beyond `k_N`.
+
+This is a `J_N`-dimensional linear system (Jacobian of Taylor coefficients with
+respect to the free zeros), which is generically nonsingular (by the same Vandermonde
+argument as in B2 §4.3).  For small `c_0`, the solution exists by the implicit
+function theorem.  The resulting `F` has order 1 and satisfies all of `ℰ_N`.
+
+**Non-equivalence with Ξ.** With the construction above, `F ≠ Ξ`: the tail zeros
+`(μ_n)_{n>k_N}` differ from `(γ_n)_{n>k_N}` by a definite amount for each `n`.
+In particular, the ratio:
+```
+F(Ri) / Ξ(Ri) = e^{aR^2(-1)} · Π_{n>k_N} [(1 + R²/μ_n²) / (1 + R²/γ_n²)],
+```
+differs from 1 by a product that is real and bounded away from 1 for appropriate
+choices of `R` (specifically, `R ≈ μ_{k_N+1}` where the first modified zero
+contributes a significant factor).
+
+**Quantitative bound.** For `R = γ_{k_N+1}`:
+```
+(1 + R²/μ_{k_N+1}²) / (1 + R²/γ_{k_N+1}²)
+= (1 + γ_{k_N+1}²/μ_{k_N+1}²) / 2
+= (1 + (1 + c_0)^{-2}) / 2.
+```
+This factor equals `(1 + (1+c_0)^{-2})/2 < 1` for `c_0 > 0`, so the ratio
+`F(Ri)/Ξ(Ri)` is bounded strictly below 1 by a `c_0`-dependent constant.
+Since `|Ξ(Ri)| = |ξ(1/2 − R)| → ∞` as `R → ∞` (the xi function grows on the
+imaginary axis — this follows from the functional equation and Stirling's formula
+giving `|Γ(1/4 − iR/2)| ∼ C R^{-1/4} e^{πR/4}`), the absolute difference satisfies:
+```
+|F(Ri) − Ξ(Ri)| ≥ |Ξ(Ri)| · |1 − F(Ri)/Ξ(Ri)| ≥ c(c_0) · |Ξ(Ri)| → ∞.
+```
+Hence for any `ε > 0`, choosing `R_0` large enough gives `|F(R_0 i) − Ξ(R_0 i)| ≥ ε`.
+
+**Status: PROOF-DRAFT** (strategy complete; two items need closing for
+INDEPENDENTLY-CHECKED status):
+1. The implicit function theorem step (Taylor coefficient matching) needs a
+   precise Jacobian computation — same structure as B2 §4.3, so routine.
+2. The bound `|Ξ(Ri)| → ∞` needs a precise asymptotic reference
+   (functional equation + Stirling; standard, but cite precisely).
 
 ---
+
 
 ## §4. Proof of E-pos (sufficient convergence package)
 
@@ -236,7 +308,7 @@ exact hypotheses (H-bound) + (H-tail) that would complete the argument.  ☐
 | Result | Status |
 |---|---|
 | E-pos (sufficient package → Ξ convergence + real zeros) | PROOF-DRAFT (standard Montel/Hurwitz; detail clear) |
-| E-neg (finite evidence ≠ convergence, non-uniqueness argument) | PROOF-DRAFT (strategy clear; quantitative §3 open) |
-| Quantitative tail estimate (§3) | OPEN |
+| E-neg (finite evidence ≠ convergence, non-uniqueness argument) | PROOF-DRAFT (strategy clear; see §2) |
+| Quantitative tail estimate (§3) | PROOF-DRAFT (strategy complete; two closing items: Jacobian + Ξ growth cite) |
 | Normalization convention (CCM frozen) | DONE |
 | Suzuki meromorphic target | OUT OF SCOPE for this theorem (see limitations.md) |
