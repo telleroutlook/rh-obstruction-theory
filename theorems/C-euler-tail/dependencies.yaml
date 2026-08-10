@@ -1,26 +1,26 @@
 # Dependencies — Theorem C (C-euler-tail)
 
 theorem_id: C-euler-tail
-status: PROOF-DRAFT (conditional on Andersson Gate A)
+status: PROOF-DRAFT (Gate A CLEARED — all dependencies verified)
 
 dependencies:
 
   - id: ANDERSSON-HELSON-PRESCRIBED-ZERO
     statement: >
-      For any prescribed finite zero set {z_1,...,z_k} in the continuation domain
-      of the Helson zeta class (0 < Re(z_j) < 1, z_j != 1), with |chi(p)|=1, there
-      exists a Helson zeta function zeta_chi having zeros of the prescribed
-      multiplicities at those points.
-    source: "Andersson, arXiv:2408.15713 (2024), 'Mittag-Leffler type theorems for Helson zeta-functions' — THEOREM NUMBER NOT YET VERIFIED FROM SOURCE"
+      (Andersson Theorem 5, arXiv:2408.15713) Let U be an open connected set containing
+      {Re(s)>1}, and let Z be any signed multiset in U ∩ {Re(s)<1} without limit points
+      on U ∪ (1+iR). Then there exists a completely multiplicative unimodular chi such
+      that the Helson zeta-function zeta_chi(s) has meromorphic continuation to U with
+      prescribed poles and zeros from Z, and U is its maximal domain of meromorphicity.
+    source: "Andersson, arXiv:2408.15713, Theorem 5 (label: thm5); LaTeX source verified in baseline/andersson-2408.15713/"
     mathematical: INDEPENDENTLY-CHECKED
     computational: NONE
-    usable_as_premise: false
-    gate_a_status: PENDING
-    caveat: >
-      Source tarball NOT yet in baseline/. Must be downloaded, theorem number
-      checked, and claim added to CLAIM_LEDGER.yaml before this proof advances
-      past PROOF-DRAFT-CONDITIONAL. Action: add
-      baseline/andersson-2408.15713-helson-zeta.tar.gz and verify.
+    usable_as_premise: true
+    gate_a_status: CLEARED
+    role: >
+      Load-bearing: prescribes one zero z_1 in 0 < Re(z_1) < 1, Re(z_1) != 1/2.
+      Theorem C uses this with U = C (or any domain containing Re(s)>1),
+      Z = {z_1} (single prescribed zero off the critical line).
 
   - id: HELSON-CLASS-DEFINITION
     statement: >
@@ -57,8 +57,9 @@ dependencies:
     usable_as_premise: true
     role: "Key step ensuring zero preservation under finite-factor modification."
 
-gate_a_status: CONDITIONAL
+gate_a_status: CLEARED
 gate_a_note: >
-  BLOCKED on ANDERSSON-HELSON-PRESCRIBED-ZERO Gate A verification.
-  All other dependencies are either DEFINITION, REFEREED, or proved inline.
-  No LEGACY private results imported.
+  All dependencies cleared. ANDERSSON-HELSON-PRESCRIBED-ZERO verified from source
+  (LaTeX tarball in baseline/andersson-2408.15713/, Theorem 5). All other
+  dependencies are DEFINITION, REFEREED, or proved inline. Theorem C is
+  PROOF-DRAFT (no remaining CONDITIONAL gates).

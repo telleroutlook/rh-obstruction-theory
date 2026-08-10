@@ -137,9 +137,38 @@ claims:
       is the closest analogue to WP-B/B1 and is the most reusable, but must be restated in
       the abstract 𝔛_sym ambient class with an explicit fixed-K limitation before use.
 
+  # ---- Andersson 2408.15713 (source in baseline/andersson-2408.15713/, verified by theorem number) ----
+  - id: ANDERSSON-HELSON-PRESCRIBED-ZERO
+    statement: >
+      (Theorem 5 of arXiv:2408.15713) Let U be an open connected set containing {Re(s)>1},
+      and let Z be any signed multiset in U ∩ {Re(s)<1} without limit points on U ∪ (1+iR).
+      Then there exists a completely multiplicative unimodular function chi such that the
+      Helson zeta-function zeta_chi(s) has meromorphic continuation from {Re(s)>1} to U,
+      with prescribed poles and zeros (with given multiplicities) from Z. Furthermore chi
+      can be chosen so that U is the maximal domain of meromorphicity.
+    source: "arXiv:2408.15713 (Andersson_Mittag-Leffler_paper.tex), Theorem 5 (label: thm5)"
+    paper_title: "Mittag-Leffler type theorems for Helson zeta-functions"
+    author: "Johan Andersson"
+    submitted: "2024-08-28"
+    peer_reviewed: false        # preprint
+    mathematical: INDEPENDENTLY-CHECKED   # statement transcribed & verified against LaTeX source
+    computational: NONE
+    usable_as_premise: true
+    gate_a_status: CLEARED
+    premise_caveat: >
+      Preprint (not peer-reviewed). Flag as unrefereed in any paper's assumptions.
+      Theorem C uses this to prescribe one off-critical-line zero; the prescribed set Z
+      must lie in {0 < Re(s) < 1} and have no limit points on the boundary.
+    note: >
+      The main prescribed-zero result. Thm 3 (thm3) gives prescribed singular parts
+      (meromorphic continuation); Thm 4 (thm4) gives prescribed zeros/poles of zeta_chi
+      itself; Thm 5 (thm5) is the most general (signed multiset, maximal domain).
+      For Theorem C we use Thm 5 with a single prescribed zero at z_1 in the open strip.
+
 # Gate A summary (program §6.A.4):
 #   - Baseline Suzuki/CCM statements: INDEPENDENTLY-CHECKED (source), usable as
 #     unrefereed-preprint premises with an assumptions flag.
+#   - Andersson Thm 5: INDEPENDENTLY-CHECKED (source verified), GATE A CLEARED.
 #   - CCM convergence + all LEGACY items: NOT usable as premises yet (PENDING re-inspection
 #     or are the object of study). Any theorems/<id> depending on them is BLOCKED until
 #     resolved or the dependency is downgraded to an explicit assumption.

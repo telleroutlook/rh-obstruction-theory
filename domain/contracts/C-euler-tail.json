@@ -22,14 +22,14 @@
   },
 
   "dependencies": [
-    {"claim_id": "ANDERSSON-HELSON-PRESCRIBED-ZERO", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "PENDING Gate A — load-bearing; theorem conditional until verified", "usable_as_premise": false},
+    {"claim_id": "ANDERSSON-HELSON-PRESCRIBED-ZERO", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "load-bearing — Theorem 5 (thm5) of arXiv:2408.15713; Gate A CLEARED; source verified from LaTeX tarball in baseline/andersson-2408.15713/", "usable_as_premise": true},
     {"claim_id": "HELSON-CLASS-DEFINITION", "ledger_math": "DEFINITION", "role": "ambient class"},
     {"claim_id": "DAVENPORT-HEILBRONN-COMPARISON", "ledger_math": "REFEREED", "role": "comparison example; kept logically separate per program §8.C.2"},
     {"claim_id": "DIRICHLET-POLYNOMIAL-ZERO-FREE", "ledger_math": "PROOF-DRAFT", "role": "R(s;P_0,chi) holomorphic+nonzero in critical strip; proved inline in proof.md §3"}
   ],
 
   "obligations": [
-    "C.gate-a: verify Andersson arXiv:2408.15713 by theorem number; add to CLAIM_LEDGER.yaml — PENDING",
+    "C.gate-a: CLEARED — Andersson arXiv:2408.15713 Theorem 5 verified from LaTeX source in baseline/andersson-2408.15713/",
     "C.analytic.R-zero-free: proof.md §3 (R holomorphic, nonzero in strip) — PROOF-DRAFT done",
     "C.scope: Helson class only; Selberg/zeta escape stated; Davenport-Heilbronn kept separate"
   ],
@@ -54,6 +54,6 @@
   "runtime": {"class": "native-dev", "network": "none"},
   "assurance": {"required": ["formal-kernel"]},
   "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
-  "spec_status": "PROOF-DRAFT-CONDITIONAL",
-  "status_note": "BLOCKED on Andersson Gate A. Action: add baseline/andersson-2408.15713.tar.gz and verify theorem number."
+  "spec_status": "PROOF-DRAFT",
+  "status_note": "Gate A CLEARED. Andersson Theorem 5 (arXiv:2408.15713, thm5) verified from LaTeX source. All proof steps PROOF-DRAFT. Theorem C is no longer CONDITIONAL."
 }

@@ -65,21 +65,27 @@ Work is **stopped or narrowed** at each hard gate. A clean negative novelty resu
 failed exact-collision construction, or a proof that a proposed class is vacuous is
 **recorded, not relabeled as success.**
 
-**Current phase: P6 complete / entering P7.**
+**Current phase: P6 complete / P7 preparation.**
 
 P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅ P5 ✅ P6 ✅
 
-**Day-30 decision (recorded 2026-08-10):**  
-- B2 rank step promoted to PROOF-DRAFT (Chebyshev T-system argument); integer-sign
-  step still open → Paper A proceeds conditionally.
-- E-compactness E-pos is PROOF-DRAFT-CLEAR; E-neg quantitative tail (§3) is OPEN →
-  Paper C proceeds unconditionally at the non-uniqueness level; quantitative bound
-  strengthens it.
-- Both Paper A and Paper C tracks are live.  P5 complete (WP-C, WP-D scaffolds done).
+**P7 gate (program §17): requires ≥2 theorem papers to close.**  
+Current status toward P7:
+- B1: PROOF-DRAFT-CLEAR (unconditional) — **Paper A baseline ready**
+- B2: PROOF-DRAFT complete (self-contained rank proof + integer-sign resolved)
+- E-compactness: PROOF-DRAFT (§3 strategy complete; two closing cites needed)
+- C-euler-tail: PROOF-DRAFT-CONDITIONAL — **BLOCKED** on Andersson Gate A
+  - Blocker: arXiv:2408.15713 tarball not in baseline/; network fetch unavailable
+  - Action required (manual): `baseline/andersson-2408.15713/` tarball + theorem number
+- D-spectral: PROOF-DRAFT — novelty gate OPEN (Endres-Steiner comparison needed)
+- F-schur: PROOF-DRAFT-CONDITIONAL — non-vacuity + invariance gates OPEN
 
-**P6 decision (recorded 2026-08-10):**  
-- Theorem F scaffold complete: statement, proof, dependencies, limitations, novelty,
-  witness/README, checker/README, domain contract, 8 new tests (44 total, all passing).
+**Day-31 progress (2026-08-11):**
+- B2 integer-sign step resolved; rank proof made self-contained (no Karlin-Studden needed)
+- E-neg §3 quantitative strategy written: PROOF-DRAFT
+- Two E-neg closing items: (1) Jacobian regularity (same structure as B2), (2) |Ξ(Ri)|→∞ cite
+
+
 - Both gates OPEN: non-vacuity (no confirmed `P_{r,N}` example) and representation-
   invariance (five conditions stated but not yet verified for any specific `c_a` use).
 - No `−c_a I` claim promoted past frozen-system diagnostic; Paper D conditional.

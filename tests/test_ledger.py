@@ -19,7 +19,7 @@ from checker.validate_ledger import load_claims, validate  # noqa: E402
 
 def test_all_claims_parse_and_validate():
     claims = load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")
-    assert len(claims) == 10, f"expected 10 claims, parsed {len(claims)}"
+    assert len(claims) == 11, f"expected 11 claims, parsed {len(claims)}"
     for c in claims:
         assert not validate(c), f"{c.get('id')}: {validate(c)}"
 
@@ -310,16 +310,27 @@ def test_c_contract_required_metadata_keys():
     assert not missing, f"C contract missing metadata keys: {missing}"
 
 
-def test_c_andersson_gate_a_pending():
-    """Andersson dependency must be marked PENDING (Gate A not yet cleared)."""
+def test_c_andersson_gate_a_cleared():
+    """Andersson Gate A must now be CLEARED — usable_as_premise=true."""
     with C_CONTRACT.open() as f:
         data = json.load(f)
     andersson_deps = [d for d in data.get("dependencies", [])
                       if "ANDERSSON" in d["claim_id"]]
     assert andersson_deps, "C contract must list Andersson as a dependency"
     dep = andersson_deps[0]
-    assert dep.get("usable_as_premise") is not True, \
-        "Andersson dep must not be usable_as_premise=true until Gate A clears"
+    assert dep.get("usable_as_premise") is True, \
+        "Andersson dep must be usable_as_premise=true after Gate A is cleared"
+    # Also verify in ledger
+    ledger = {c["id"]: c for c in load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")}
+    assert "ANDERSSON-HELSON-PRESCRIBED-ZERO" in ledger, \
+        "ANDERSSON-HELSON-PRESCRIBED-ZERO must be in CLAIM_LEDGER"
+    claim = ledger["ANDERSSON-HELSON-PRESCRIBED-ZERO"]
+    assert claim.get("mathematical") == "INDEPENDENTLY-CHECKED", \
+        "Andersson claim must be INDEPENDENTLY-CHECKED in ledger"
+    assert claim.get("usable_as_premise") is True, \
+        "Andersson claim must be usable_as_premise=true in ledger"
+    assert claim.get("gate_a_status") == "CLEARED", \
+        "Andersson gate_a_status must be CLEARED"
 
 
 def test_c_davenport_heilbronn_kept_separate():
@@ -504,7 +515,7 @@ if __name__ == "__main__":
     test_c_required_files_exist()
     test_c_contract_exists_and_parses()
     test_c_contract_required_metadata_keys()
-    test_c_andersson_gate_a_pending()
+    test_c_andersson_gate_a_cleared()
     test_c_davenport_heilbronn_kept_separate()
     test_d_required_files_exist()
     test_d_contract_exists_and_parses()

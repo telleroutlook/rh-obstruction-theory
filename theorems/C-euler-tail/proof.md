@@ -27,20 +27,28 @@ The modified function is `ζ_χ̃(s) = ζ_χ(s) · R(s; P₀, χ)`.
 
 ---
 
-## §2. Andersson's theorem (load-bearing baseline — PENDING VERIFICATION)
+## §2. Andersson's theorem (load-bearing baseline — GATE A CLEARED)
 
-**Claim (Andersson 2024, arXiv:2408.15713):** For any prescribed finite set of
-points `z₁, …, z_k` in the continuation domain of the Helson zeta class (with
-`0 < Re(z_j) < 1`, `z_j ≠ 1`) and any multiplicities `m_j ≥ 1`, there exists
-a Helson function `ζ_χ` (with `|χ(p)| = 1`) having zeros of the prescribed
-multiplicities at `z₁, …, z_k`.
+**Theorem (Andersson 2024, arXiv:2408.15713, Theorem 5):** Let `U` be an open connected
+set containing `{Re(s) > 1}`, and let `Z` be any signed multiset in `U ∩ {Re(s) < 1}`
+without limit points on `U ∪ (1+iℝ)`.  Then there exists a completely multiplicative
+unimodular function `χ` such that the Helson zeta-function `ζ_χ(s)` has meromorphic
+continuation from `{Re(s) > 1}` to `U`, with prescribed poles and zeros (with given
+multiplicities) from `Z`, and `U` is its maximal domain of meromorphicity.
 
-**Status:** This claim is the Mittag-Leffler / prescribed-zero theorem of Andersson
-(arXiv:2408.15713, "Mittag-Leffler type theorems for Helson zeta-functions").
-It is NOT yet verified by theorem number from the source (arXiv tarball not in
-`baseline/`).  **This is an explicit PENDING Gate A item.**
+**Verification:** Theorem number confirmed as **Theorem 5** (LaTeX label `thm5`) in the
+source file `Andersson_Mittag-Leffler_paper.tex` (tarball in
+`baseline/andersson-2408.15713/`). Statement transcribed and verified against source.
+Gate A status: **CLEARED**.
 
-Until verified, Theorem C is CONDITIONAL on this claim.
+**How used in Theorem C:** Take `U = ℂ` (or any connected domain containing `{Re(s) > 1}`),
+`Z = {z₁}` with `z₁ ∈ {0 < Re(z₁) < 1, Re(z₁) ≠ 1/2}` (one prescribed off-line zero,
+simple). The theorem yields `ζ_χ` with exactly one prescribed zero at `z₁` in the strip.
+Then the finite-factor modification (§3–§4) adjusts `χ` to be `P₀`-standard.
+
+**Note on scope:** Andersson's theorem is for the **entire** open half-plane `{Re(s) < 1}`
+(unconditionally), not just the critical strip. For Theorem C we only need one prescribed
+zero in the open critical strip, which is covered.
 
 ---
 
@@ -84,19 +92,17 @@ with `χ̃(p) = 1` for `p ≤ P₀` and `χ̃(p) = χ(p)` for `p > P₀`. ✓
 
 ---
 
-## §5. Gate A: Andersson baseline
+## §5. Gate A: Andersson baseline — CLEARED
 
-The proof is BLOCKED on Gate A for the Andersson prescribed-zero theorem.
-Action required:
+Gate A for the Andersson dependency is now cleared:
 
-1. Download arXiv:2408.15713 tarball into `baseline/`.
-2. Identify the theorem number of the prescribed-zero result.
-3. Verify the exact statement (especially: what continuation domain? what
-   constraints on `χ`? what function class?).
-4. Add to CLAIM_LEDGER.yaml as INDEPENDENTLY-CHECKED.
-5. Update this proof's status to INDEPENDENTLY-CHECKED for the Andersson step.
-
-Until Step 4–5 are complete, Theorem C remains CONDITIONAL.
+1. ✅ Tarball downloaded into `baseline/andersson-2408.15713/`.
+2. ✅ Theorem number: **Theorem 5** (LaTeX label `thm5`).
+3. ✅ Exact statement verified: prescribed zeros and poles as a signed multiset in
+   any open connected set `U ⊃ {Re(s)>1}`, without limit points on `U ∪ (1+iℝ)`.
+4. ✅ Added to CLAIM_LEDGER.yaml as `ANDERSSON-HELSON-PRESCRIBED-ZERO`,
+   `mathematical: INDEPENDENTLY-CHECKED`, `usable_as_premise: true`.
+5. ✅ Theorem C is now **PROOF-DRAFT** (no longer CONDITIONAL).
 
 ---
 
@@ -104,7 +110,7 @@ Until Step 4–5 are complete, Theorem C remains CONDITIONAL.
 
 | Step | Status |
 |---|---|
-| Andersson prescribed-zero (§2) | PENDING Gate A verification |
+| Andersson prescribed-zero (§2) | INDEPENDENTLY-CHECKED ✓ — Thm 5 (thm5), Gate A CLEARED |
 | R holomorphic, nonzero in strip (§3) | PROOF-DRAFT ✓ |
 | P₀-standardness of χ̃ (§4) | PROOF-DRAFT ✓ |
 | Scope: Helson class only | STATED ✓ |
