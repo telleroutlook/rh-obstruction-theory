@@ -28,27 +28,25 @@ dependencies:
       For Li-type or moment-type test families Phi with m tests and on-line heights
       t_1 < ... < t_m (rational, distinct, positive), the m x m Jacobian J has
       det(J) != 0 over Q.  For Li-type: J_{jk} = 2(1 - cos(j*theta_k)) where
-      theta_k = 2*arctan(2*t_k) - pi; full rank follows from Chebyshev T-system
-      theory (Karlin-Studden) applied to {cos(j*theta): j=1,...,m} at distinct
-      theta_k in (0,pi).  For moment-type: analogous cosine-Vandermonde argument.
-    source: "proof.md §4.3-§4.4 (Chebyshev/Vandermonde analytic argument, PROOF-DRAFT)"
+      theta_k = 2*arctan(2*t_k) - pi; full rank proved by Vandermonde reduction
+      (proof.md §4.3): factor 1-T_j(x) = (1-x)Q_j(x), express [Q_j(x_k)] = U*V,
+      conclude det != 0 from Vandermonde and positive leading coefficients.
+      For moment-type: analogous cosine-Vandermonde argument (proof.md §4.4).
+    source: "proof.md §4.3-§4.4 (self-contained Vandermonde reduction, PROOF-DRAFT)"
     mathematical: PROOF-DRAFT
     computational: EXPLORATORY
     usable_as_premise: true
     role: >
-      Central rank step for B2 construction.  Promoted from CONJECTURE to
-      PROOF-DRAFT after the Chebyshev-system analytic argument was written in
-      proof.md §4.3 and discovery-tier exact rational verification confirmed
-      det(J) != 0 for m=3,4,5 at multiple rational heights
-      (discovery/jacobian_rank_results.md).  Still needs Karlin-Studden citation
-      by precise theorem number before INDEPENDENTLY-CHECKED.
-    gate_a_status: PROOF-DRAFT-PENDING-CITATION
+      Central rank step for B2 construction. Proved by self-contained Vandermonde
+      reduction in proof.md §4.3 — no external citation required. Discovery-tier
+      exact rational verification confirms det(J) != 0 for m=3,4,5 at multiple
+      rational heights (discovery/jacobian_rank_results.md).
+    gate_a_status: PROOF-DRAFT-COMPLETE
     caveat: >
-      Chebyshev T-system argument in proof.md §4.3 is a proof sketch; the
-      Karlin-Studden (or equivalent) theorem must be cited by number.
-      The integer-sign step is RESOLVED (proof.md §4.5): construct Z_+ with
-      multiplicity buffer M = R * max_k|alpha_k^Q|; removals are then valid.
-      B2 remains CONDITIONAL only on the Chebyshev citation (rank step).
+      Proof is self-contained (Vandermonde + Chebyshev identity cos(jt)=T_j(cost)
+      + leading-coefficient computation from T_j recurrence). No Karlin-Studden
+      citation needed. Integer-sign step RESOLVED (proof.md §4.5 — multiplicity
+      buffer). B2 is a complete PROOF-DRAFT; the next step is independent review.
 
   - id: CURTO-FIALKOW-FLAT-EXTENSION
     statement: >

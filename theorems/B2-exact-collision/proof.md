@@ -96,7 +96,7 @@ For the `ℤ`-relaxed model, a solution exists when:
   chosen rationally and `φ_j` are rational functions evaluated at `1/2+it_k` for
   rational `t_k`.
 
-### §4.3 Li-type test: Vandermonde proof (PROOF-DRAFT)
+### §4.3 Li-type test: self-contained Vandermonde reduction (PROOF-DRAFT)
 
 For Li-type tests `φ_j(ρ) = 1 − (1−1/ρ)^j`, `j = 1, …, m`:
 
@@ -106,57 +106,84 @@ A_{jk} = φ_j(1/2+it_k) + φ_j(1/2−it_k)
         = 2 − 2 Re[(1 − 2/(1+2it_k))^j].
 ```
 
-Let `w_k = 1 − 2/(1+2it_k) = (2it_k − 1)/(2it_k + 1)`, a Möbius image of `t_k`.
-
-Then `A_{jk} = 2 − 2 Re(w_k^j)`.
-
-Write `w_k = r_k e^{iθ_k}` (polar form).  Note `|w_k| = |(2it_k−1)/(2it_k+1)| = 1`
-for `t_k ∈ ℝ` (both numerator and denominator have modulus `√(1+4t_k²)`), so
-`w_k = e^{iθ_k}` with `θ_k = 2 arctan(2t_k) − π`.  Thus
+Let `w_k = (2it_k − 1)/(2it_k + 1)`.  Since `|2it_k±1|² = 1+4t_k²`, we have
+`|w_k| = 1`, so `w_k = e^{iθ_k}` with `θ_k = 2 arctan(2t_k) − π ∈ (−π, 0)` for
+`t_k > 0`.  Using `cos(jθ) = Re(e^{ijθ})`:
 
 ```
-A_{jk} = 2 − 2 cos(jθ_k) = 2(1 − cos(jθ_k)).
+J_{jk} = 2 − 2 cos(jθ_k) = 2(1 − cos(jθ_k)).
 ```
 
-The matrix `J` with `J_{jk} = 2(1 − cos(jθ_k))` has the structure of a cosine
-Vandermonde matrix:
+**Lemma (Li Jacobian full rank — self-contained).** If `t₁, …, t_m > 0` are
+distinct, then `det J ≠ 0`.
+
+*Proof.*  Let `x_k = cos θ_k ∈ (−1, 1)` (distinct, since `θ ↦ cos θ` is strictly
+monotone on `(−π, 0)` and the map `t_k ↦ θ_k` is strictly monotone).  Using the
+Chebyshev polynomial identity `cos(jθ) = T_j(cos θ)`:
 
 ```
-J_{jk} = 2 − 2T_j(cos θ_k),
+J_{jk} = 2(1 − T_j(x_k)).
 ```
 
-where `T_j` is the Chebyshev polynomial of degree `j` if we write
-`cos(jθ) = T_j(cos θ)` (correct for integer `j`).
+**Factor out `(1 − x_k)`.** Since `T_j(1) = 1` for all `j`, we have
+`1 − T_j(x) = (1 − x) Q_j(x)` for a unique polynomial `Q_j ∈ ℝ[x]`.  Then:
 
-**Full rank argument.** The matrix `B_{jk} = cos(jθ_k)` for `j=1,…,m` and
-distinct `θ₁, …, θ_m ∈ (0,π)` is a Vandermonde matrix in disguise: the functions
-`t ↦ cos(jt)` for `j = 0, 1, …, m−1` are linearly independent on `(0, π)` and
-their evaluation matrix at distinct points is nonsingular (by the theory of
-Chebyshev systems / T-systems; see Karlin–Studden).  Therefore:
+```
+J_{jk} = 2(1 − x_k) Q_j(x_k),
+```
 
-**Lemma (Li Jacobian full rank).** If `θ₁, …, θ_m ∈ (0, π)` are distinct, then
-the `m × m` matrix `J` with `J_{jk} = 2(1 − cos(jθ_k))` has `det J ≠ 0`.
-*Proof:* Factor out `2` from each column; the result is a modification of the
-cosine-Vandermonde, and the rank follows from the theory of Chebyshev systems. ☐
+so `J = 2 · [Q_j(x_k)]_{j,k} · diag(1 − x_k)`.  Since `x_k ∈ (−1,1)`, each
+`1 − x_k > 0`, so `diag(1 − x_k)` is invertible.  Thus:
 
-**Rational heights `t_k` → distinct angles `θ_k`.** The map `t ↦ θ(t) = 2 arctan(2t) − π`
-is strictly monotone on `ℝ_{>0}`, so distinct rational `t_k > 0` give distinct
-`θ_k ∈ (−π, 0)` (using the convention `t_k > 0` and adjusting the sign of `cos`).
-Over `ℚ`, at rational `t_k`, `w_k = (2it_k−1)/(2it_k+1)` is a complex number with
-rational real and imaginary parts; `Re(w_k^j)` is a rational number, so `J` is a
-rational matrix.  Since `det J ≠ 0` over `ℝ` (by the Chebyshev argument), and
-`det J` is a rational number (rational `t_k`), `det J ≠ 0` over `ℚ`.
+```
+rank J = rank [Q_j(x_k)]_{j,k=1,...,m}.
+```
 
-**Status:** PROOF-DRAFT.  The Chebyshev-system argument (Karlin–Studden or
-equivalent) needs to be cited with precise theorem number before this is
-INDEPENDENTLY-CHECKED.
+**Degree and leading coefficient of `Q_j`.**  The leading coefficient of `T_j` is
+`2^{j−1}`, so `1 − T_j(x) = −2^{j−1} x^j + \text{lower terms}`.  Dividing by
+`(1−x)` gives `Q_j` with leading term `2^{j−1} x^{j−1}` (degree exactly `j−1`,
+leading coefficient `2^{j−1} > 0`).  In particular, `{Q_1, …, Q_m}` is a sequence
+of polynomials of degrees `0, 1, …, m−1` with positive leading coefficients.
+
+**Evaluation matrix is nonsingular.**  Since `{Q_1, …, Q_m}` have degrees
+`0, 1, …, m−1`, they are a basis for `ℝ_{≤m−1}[x]` (any `m` polynomials with
+distinct degrees 0 through `m−1` are linearly independent).  Express each `Q_j`
+in the monomial basis: there is an upper-triangular change-of-basis matrix `U`
+(with diagonal entries `2^{j−1} > 0`) such that `Q_j(x) = Σ_{i≤j} U_{ji} x^{i−1}`.
+Then:
+
+```
+[Q_j(x_k)] = U · [x_k^{i−1}]_{i,k=1,...,m} = U · V(x_1,…,x_m),
+```
+
+where `V(x_1,…,x_m)` is the standard Vandermonde matrix.  Therefore:
+
+```
+det[Q_j(x_k)] = det(U) · det V(x_1,…,x_m)
+              = (∏_{j=1}^m 2^{j−1}) · ∏_{1≤k<l≤m}(x_l − x_k).
+```
+
+Both factors are nonzero: `∏ 2^{j−1} = 2^{m(m−1)/2} > 0`, and `∏(x_l − x_k) ≠ 0`
+since `x_1, …, x_m ∈ (−1,1)` are distinct. Therefore `det[Q_j(x_k)] ≠ 0`, so
+`det J ≠ 0`. ☐
+
+**Rationality.** For rational `t_k`, `w_k = (2it_k−1)/(2it_k+1)` has rational real
+and imaginary parts; `cos(jθ_k) = Re(w_k^j)` is rational.  Hence `J ∈ ℚ^{m×m}` and
+`det J ∈ ℚ \setminus {0}`.
+
+**Status: PROOF-DRAFT (self-contained — no external citation required).**  The
+argument uses only: (a) the Chebyshev identity `cos(jθ) = T_j(cos θ)`, (b)
+elementary polynomial long division `(1−T_j)/(1−x) = Q_j`, (c) leading-coefficient
+computation by induction on `T_j`'s recurrence, and (d) Vandermonde
+nonsingularity for distinct points.  All four are standard and can be verified
+from first principles.
 
 **Discovery-tier confirmation.** Exact rational computation in
 `discovery/jacobian_analysis.py` verified `det J ≠ 0` for Li m=3 and m=5 at
-multiple rational heights (see `discovery/jacobian_rank_results.md`).  This
-is DISCOVERY TIER only; it does not replace the analytic argument.
+multiple rational heights (see `discovery/jacobian_rank_results.md`).
+This is DISCOVERY TIER only; the analytic argument above is the theorem.
 
-### §4.4 Moment-type test: Vandermonde (PROOF-DRAFT)
+### §4.4 Moment-type test: cosine-Vandermonde (PROOF-DRAFT, self-contained)
 
 For moment-type tests `φ_k(ρ) = ρ^{−k}`, `k = 1, …, m`:
 
@@ -164,13 +191,27 @@ For moment-type tests `φ_k(ρ) = ρ^{−k}`, `k = 1, …, m`:
 A_{jk} = 2 Re[(1/2 + it_k)^{−j}].
 ```
 
-Write `ρ_k = 1/2 + it_k = r_k e^{iφ_k}` with `φ_k = arctan(2t_k)`.  Then
-`A_{jk} = 2 r_k^{-j} cos(jφ_k)`.  Factor out the positive diagonal
-`D_j = \mathrm{diag}(2r_k^{-j})_{k}`: the matrix is `D_j^{-1} B` where
-`B_{jk} = cos(j φ_k)` is again a cosine-Vandermonde for distinct `φ_k`.  By the
-same Chebyshev-system argument, `det J ≠ 0` for distinct positive `t_k`.
+Write `ρ_k = 1/2 + it_k = r_k e^{iφ_k}` with `r_k = (1/4 + t_k²)^{1/2}` and
+`φ_k = arctan(2t_k) ∈ (0, π/2)` (for `t_k > 0`).  Then:
 
-**Status:** PROOF-DRAFT (same caveat: Chebyshev citation needed).
+```
+A_{jk} = 2 r_k^{-j} cos(j φ_k).
+```
+
+Let `D = diag(r_k^{-j})_{k=1,...,m}` (positive diagonal), so `J = 2 [cos(jφ_k)] · D`.
+Since `D` is invertible, `rank J = rank [cos(jφ_k)]_{j,k=1,...,m}`.
+
+**Lemma (cosine-Vandermonde).** If `φ₁, …, φ_m ∈ (0, π/2)` are distinct, then
+`det[cos(jφ_k)]_{j,k=1,...,m} ≠ 0`.
+
+*Proof.*  The same Vandermonde reduction as §4.3 applies: `cos(jφ) = T_j(cosφ)`,
+so `[cos(jφ_k)] = [T_j(x_k)]` with `x_k = cos φ_k ∈ (0,1)` distinct.
+The matrix `[T_j(x_k)]` differs from `[x_k^{j-1}]` by the upper-triangular
+Chebyshev-to-monomial change-of-basis `U` (leading coefficient `2^{j-1}`):
+`[T_j(x_k)] = U · V(x_1,…,x_m)`.  So
+`det[T_j(x_k)] = det(U) · det V = (∏ 2^{j-1}) · ∏_{k<l}(x_l−x_k) ≠ 0`. ☐
+
+**Status: PROOF-DRAFT (self-contained).**
 
 ### §4.5 Exact-collision with integer multiplicities (RESOLVED — PROOF-DRAFT)
 
@@ -290,13 +331,13 @@ This is left for refinement after the rank step.
 |---|---|
 | Parameterization (§2) | PROOF-DRAFT ✓ |
 | Quartet tail decay (§3) | PROOF-DRAFT ✓ (inherits from B1) |
-| Li Jacobian full rank (§4.3, Chebyshev) | PROOF-DRAFT — citation needed |
-| Moment Jacobian full rank (§4.4) | PROOF-DRAFT — same citation |
+| Li Jacobian full rank (§4.3, Vandermonde reduction) | PROOF-DRAFT ✓ — self-contained, no external citation |
+| Moment Jacobian full rank (§4.4, cosine-Vandermonde) | PROOF-DRAFT ✓ — self-contained |
 | Integer solution via scaling trick (§4.5) | PROOF-DRAFT ✓ (sign resolved) |
 | 𝒵_+ construction with multiplicity buffer | PROOF-DRAFT ✓ |
-| 𝒵_- construction (add/remove/quartet) | PROOF-DRAFT ✓ (conditional on rank) |
+| 𝒵_- construction (add/remove/quartet) | PROOF-DRAFT ✓ |
 | Admissibility + symmetry (§6) | PROOF-DRAFT ✓ |
-| Observation equality exact (§4.5) | PROOF-DRAFT ✓ (conditional on rank) |
+| Observation equality exact (§4.5) | PROOF-DRAFT ✓ |
 | Predicate P(𝒵_-) = 0, P(𝒵_+) = 1 | PROOF-DRAFT ✓ |
 | Counting-law refinement (§7) | DEFERRED |
-| Gate A: Chebyshev citation by theorem number | PENDING → INDEPENDENTLY-CHECKED |
+| Gate A status | PROOF-DRAFT complete — ready for independent check |

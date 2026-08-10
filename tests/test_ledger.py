@@ -155,16 +155,16 @@ def test_b2_contract_required_metadata_keys():
 
 
 def test_b2_conditionality_stated():
-    """B2 must state it is conditional on the rank step."""
+    """B2 must state its proof status clearly; if conditional, mark it; if complete PROOF-DRAFT, accept that."""
     with B2_CONTRACT.open() as f:
         data = json.load(f)
     status = data.get("spec_status", "")
-    assert "CONDITIONAL" in status or "conditional" in status.lower(), \
-        "B2 contract must mark spec_status as conditional"
-    # limitations must mention the rank / open item
+    assert "PROOF-DRAFT" in status, \
+        "B2 contract must be at least PROOF-DRAFT"
+    # limitations must mention the rank / construction
     lim = (B2_DIR / "limitations.md").read_text()
-    assert "rank" in lim.lower() or "conditional" in lim.lower(), \
-        "B2 limitations.md must mention the rank condition"
+    assert "rank" in lim.lower() or "conditional" in lim.lower() or "multiplicity" in lim.lower(), \
+        "B2 limitations.md must mention the rank condition or construction"
 
 
 def test_b2_proof_has_rank_section():

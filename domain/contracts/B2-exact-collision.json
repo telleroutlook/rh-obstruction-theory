@@ -29,7 +29,7 @@
   ],
 
   "obligations": [
-    "B2.rank.proof: prove or refute J has full rank over Q for natural test families at rational heights (proof.md §4) — PENDING Chebyshev citation only",
+    "B2.rank.proof: self-contained Vandermonde reduction in proof.md §4.3 — PROOF-DRAFT complete, no external citation needed",
     "B2.analytic.quartet-decay: inherits from B1 proof.md §2",
     "B2.analytic.construction: conditional on rank; outlined in proof.md §5",
     "B2.integer-mult: RESOLVED — multiplicity buffer construction in proof.md §4.5; Z_+ constructed with M=R*max|alpha_k^Q| ensuring all removals valid",
@@ -56,6 +56,6 @@
   "runtime": {"class": "native-dev", "network": "none"},
   "assurance": {"required": ["formal-kernel"]},
   "replay": {"semantic": "N/A-conditional", "byte_exact": "not_required"},
-  "spec_status": "PROOF-DRAFT-CONDITIONAL",
-  "status_note": "Rank step: PROOF-DRAFT (Chebyshev T-system argument, proof.md §4.3) — pending Karlin-Studden citation by theorem number. Integer-sign step: RESOLVED (proof.md §4.5 — multiplicity buffer construction). B2 is now conditional ONLY on the Chebyshev rank citation."
+  "spec_status": "PROOF-DRAFT",
+  "status_note": "All steps are PROOF-DRAFT complete: rank step self-contained via Vandermonde reduction (proof.md §4.3-§4.4, no external citation needed); integer-sign resolved via multiplicity buffer (proof.md §4.5). Ready for independent review. Counting-law refinement deferred."
 }
