@@ -1,0 +1,100 @@
+# Dependencies — Theorem E (E-compactness)
+
+theorem_id: E-compactness
+status: PROOF-DRAFT
+
+dependencies:
+
+  # ---- Baseline (source-verified in baseline/) ----
+
+  - id: CCM-DETREG-IDENTITY
+    statement: >
+      det_reg(D_{lambda,N} - z) = -i * lambda^{-iz} * xihat(z); xihat entire;
+      all zeros real and equal to the spectrum of D_{lambda,N}.
+    source: "arXiv:2511.22755; CLAIM_LEDGER.yaml CCM-DETREG-IDENTITY"
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    role: "Establishes the CCM finite evidence record items 1-4 for the det_reg sequence."
+
+  - id: SUZUKI-THM-1.5
+    statement: >
+      W(a,theta;z) is entire with all zeros real (eigenvalues of the
+      self-adjoint D-bar_{a,theta}).
+    source: "arXiv:2606.09096 Thm 1.5; CLAIM_LEDGER.yaml SUZUKI-THM-1.5"
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    role: "Context: Suzuki characteristic functions satisfy items 1-4. Suzuki target is NOT used (meromorphic); CCM entire target is frozen for this theorem."
+
+  - id: CCM-CONVERGENCE-OPEN
+    statement: >
+      Suitably normalized det_reg -> Riemann Xi is the open step in CCM 2511.22755.
+    source: "arXiv:2511.22755; CLAIM_LEDGER.yaml CCM-CONVERGENCE-OPEN"
+    mathematical: CONJECTURE
+    computational: EXPLORATORY
+    usable_as_premise: false
+    role: "OBJECT OF STUDY — not a hypothesis. Theorem E explains WHY this step is hard."
+
+  # ---- Classical complex analysis (standard, no need for new source check) ----
+
+  - id: MONTEL-VITALI
+    statement: >
+      Montel's theorem: a locally uniformly bounded family of holomorphic
+      functions on a domain in C is a normal family (every sequence has a
+      locally uniformly convergent subsequence). Vitali's theorem: if a
+      normal family has a subsequence converging on a set with an accumulation
+      point, it converges locally uniformly.
+    source: "Standard: Ahlfors Complex Analysis §5.5; Conway Functions of One Complex Variable §VII.2"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: "Used in Theorem E-pos: (H-bound) gives normal family; Vitali identifies the limit."
+
+  - id: HURWITZ-THEOREM
+    statement: >
+      Hurwitz's theorem: if f_N -> f locally uniformly with f not identically
+      zero, then every zero of f is the limit of zeros of f_N.
+    source: "Standard: Ahlfors §5.1; Conway §VII.2.5"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: "Transfers real-zero location to the limit in Theorem E-pos (entire target). NOT applicable to the Suzuki meromorphic target."
+
+  - id: HADAMARD-FACTORIZATION
+    statement: >
+      An entire function of finite order rho has a Hadamard factorization
+      with canonical product over its zeros; for order-one entire functions
+      the product converges absolutely given sum 1/|z_n| < infty (or the
+      genus-1 product with convergence exponent bound).
+    source: "Standard: Levin 'Distribution of Zeros of Entire Functions' Ch. I-II; Ahlfors §5.3"
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: "Used in E-neg counterexample construction and E-pos tail-control argument."
+
+  # ---- Open items (not yet usable as premises) ----
+
+  - id: E-NEG-TAIL-PERTURBATION
+    statement: >
+      For the specific tail-perturbation construction in statement.md Step 3
+      (delta_n = c/n), the accumulated canonical-product perturbation does not
+      vanish uniformly on |z| <= R for R > gamma_{k_N}.
+    source: "proof.md §3 (to be written)"
+    mathematical: PROOF-DRAFT
+    computational: NONE
+    usable_as_premise: true
+    gate_a_status: PROOF-DRAFT-PENDING
+    caveat: >
+      The quantitative non-convergence argument needs the canonical-product
+      convergence-rate estimate (Levin Ch. II) applied to the specific
+      perturbation delta_n = c/n. Marked PROOF-DRAFT pending the detailed
+      calculation in proof.md §3.
+
+gate_a_status: CONDITIONAL
+gate_a_note: >
+  The positive escape theorem (E-pos) is fully supported by standard REFEREED
+  results (Montel, Vitali, Hurwitz, Hadamard). Gate A clear for E-pos.
+  The negative theorem (E-neg) is PROOF-DRAFT pending the quantitative tail
+  calculation in proof.md §3. No LEGACY imports; no PENDING premises except
+  the inline tail estimate which is the theorem's own new content.

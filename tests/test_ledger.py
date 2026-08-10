@@ -193,6 +193,93 @@ def test_discovery_jacobian_script_runnable():
     assert "FULL RANK" in r.stdout, "Jacobian analysis should report FULL RANK for test cases"
 
 
+# ---- E-compactness theorem scaffold tests ----
+
+E_DIR = ROOT / "theorems" / "E-compactness"
+E_CONTRACT = ROOT / "domain" / "contracts" / "E-compactness.json"
+
+
+def test_e_required_files_exist():
+    """Every §12.2 artifact must be present for E-compactness."""
+    for rel in REQUIRED_FILES:
+        p = E_DIR / rel
+        assert p.exists(), f"missing E file: {rel}"
+
+
+def test_e_contract_exists_and_parses():
+    assert E_CONTRACT.exists(), "missing E-compactness domain contract"
+    with E_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["theorem_id"] == "E-compactness"
+    assert data["metadata"]["is_barrier_claim"] is True
+    assert data["metadata"]["escape_route_present"] is True
+
+
+def test_e_contract_required_metadata_keys():
+    with (ROOT / "domain" / "policy-v2.json").open() as f:
+        policy = json.load(f)
+    required = set(policy["required_metadata_keys"])
+    with E_CONTRACT.open() as f:
+        contract = json.load(f)
+    meta = set(contract.get("metadata", {}).keys())
+    missing = required - meta
+    assert not missing, f"E contract missing metadata keys: {missing}"
+
+
+def test_e_normalization_frozen_to_ccm():
+    """Theorem E must freeze to CCM entire target, not Suzuki meromorphic."""
+    with E_CONTRACT.open() as f:
+        data = json.load(f)
+    norm = data.get("normalization_choice", {}).get("selected", "")
+    assert "ccm" in norm.lower(), \
+        "E-compactness must be frozen to CCM entire target"
+    # Suzuki target must NOT be selected
+    assert "suzuki" not in norm.lower(), \
+        "E-compactness must not select Suzuki meromorphic target"
+
+
+def test_e_ccm_convergence_open_not_a_premise():
+    """CCM-CONVERGENCE-OPEN is the object of study, never a usable premise."""
+    with E_CONTRACT.open() as f:
+        data = json.load(f)
+    for dep in data.get("dependencies", []):
+        if dep["claim_id"] == "CCM-CONVERGENCE-OPEN":
+            role = dep.get("role", "").lower()
+            assert "not a hypothesis" in role or "object of study" in role or \
+                   "not a premise" in role, \
+                "CCM-CONVERGENCE-OPEN must be labeled as object of study, not hypothesis"
+            assert dep.get("usable_as_premise") is not True, \
+                "CCM-CONVERGENCE-OPEN must not be usable_as_premise"
+
+
+def test_e_statement_has_two_parts():
+    """E-compactness statement must contain both negative and positive theorems."""
+    stmt = (E_DIR / "statement.md").read_text()
+    assert "E-neg" in stmt or "Negative" in stmt or "negative" in stmt, \
+        "E statement must contain negative (counterexample) theorem"
+    assert "E-pos" in stmt or "Positive" in stmt or "escape" in stmt.lower(), \
+        "E statement must contain positive (escape) theorem"
+
+
+def test_e_limitations_excludes_suzuki():
+    """Limitations must explicitly exclude the Suzuki meromorphic target."""
+    lim = (E_DIR / "limitations.md").read_text()
+    assert "Suzuki" in lim or "meromorphic" in lim.lower(), \
+        "E limitations.md must state Suzuki meromorphic target is excluded"
+    assert "pole" in lim.lower() or "meromorphic" in lim.lower(), \
+        "E limitations.md must mention the pole/residue issue"
+
+
+def test_e_no_rh_claim():
+    """Theorem E must not claim to prove RH."""
+    for fname in ["statement.md", "proof.md", "limitations.md"]:
+        content = (E_DIR / fname).read_text()
+        forbidden = ["proves rh", "disproves rh", "rh is proved", "therefore rh"]
+        for phrase in forbidden:
+            assert phrase not in content.lower(), \
+                f"E {fname} contains forbidden phrase: {phrase!r}"
+
+
 if __name__ == "__main__":
     test_all_claims_parse_and_validate()
     test_no_pending_gate_a_item_is_a_premise()
@@ -211,4 +298,12 @@ if __name__ == "__main__":
     test_b2_proof_has_rank_section()
     test_b2_discovery_not_in_witness()
     test_discovery_jacobian_script_runnable()
+    test_e_required_files_exist()
+    test_e_contract_exists_and_parses()
+    test_e_contract_required_metadata_keys()
+    test_e_normalization_frozen_to_ccm()
+    test_e_ccm_convergence_open_not_a_premise()
+    test_e_statement_has_two_parts()
+    test_e_limitations_excludes_suzuki()
+    test_e_no_rh_claim()
     print("ok")
