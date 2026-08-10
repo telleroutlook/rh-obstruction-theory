@@ -1,7 +1,7 @@
 # Dependencies — Theorem D (D-spectral-asymptotic)
 
 theorem_id: D-spectral-asymptotic
-status: PROOF-DRAFT (conditional on novelty gate)
+status: PROOF-DRAFT (novelty gate CLEARED; ready for independent review)
 
 dependencies:
 
@@ -26,18 +26,27 @@ dependencies:
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
-    role: "The T log T counting law; incompatible with any C T^{d/m} power law."
+    role: "The T log T counting law; used in heat-trace Abel-Plana computation (proof.md §4)."
 
   - id: SEELEY-DEWITT-EXPANSION
     statement: >
       The heat trace Z_H(t) = Tr(e^{-tH}) for H in C_ell has the polyhomogeneous
       expansion Z_H(t) ~ sum_{k>=0} a_k t^{(k-d)/m} as t -> 0+, with NO log(t)
       terms in the leading expansion.
-    source: "Seeley (1967) AMS Proc. Symp. Pure Math.; Berline-Getzler-Vergne 'Heat Kernels and Dirac Operators' Ch. 2; Gilkey 'Invariance Theory' Ch. 4."
+    source: >
+      Seeley (1967) AMS Proc. Symp. Pure Math. 10, pp. 288-307.
+      Berline-Getzler-Vergne 'Heat Kernels and Dirac Operators' (Springer, 1992),
+      Theorem 2.30 (heat kernel expansion for Dirac-type operators; generalizes to
+      elliptic operators via symbol calculus).
+      Gilkey 'Invariance Theory, the Heat Equation, and the Atiyah-Singer Index Theorem'
+      (CRC Press, 2nd ed. 1995), Theorem 1.8.1 (full asymptotic expansion, no log terms).
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
-    role: "Sharpened obstruction: Z_zeta(t) has a log(1/t) singularity absent from Seeley-DeWitt."
+    role: >
+      Key: no log(1/t) terms in Seeley-DeWitt expansion; while Z_zeta has log(1/t)/t.
+      Citations by theorem number: BGV Thm 2.30 and Gilkey Thm 1.8.1.
+      This is the load-bearing step making the heat-trace argument categorical.
 
   - id: COURANT-WEYL-PERTURBATION
     statement: >
@@ -51,20 +60,20 @@ dependencies:
 
   - id: ENDRES-STEINER-NO-GO
     statement: >
-      The Berry-Keating operator on compact quantum graphs cannot reproduce the
-      Riemann zeta counting law by Weyl asymptotics; no compact quantum graph
-      Hamiltonian has spectrum {gamma_n}.
+      No compact quantum graph Hamiltonian with local energy-independent vertex
+      conditions has spectrum {gamma_n} (the imaginary parts of Riemann zeros).
     source: "Endres-Steiner, J. Phys. A 43 (2010) 095204. doi:10.1088/1751-8113/43/9/095204"
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
     role: >
-      Prior art (closest existing no-go theorem). Theorem D must be compared against
-      this. If Theorem D is only a restatement, it is THIN and should be published
-      only as a reference note (program §9.D.5).
+      Prior art (closest existing no-go). Theorem D goes beyond this: full C_ell class
+      (not just compact quantum graphs) and heat-trace singularity type (not just Weyl
+      leading term). Novelty gate CLEARED — see novelty.md.
 
 gate_a_status: CLEAR
 gate_a_note: >
-  All dependencies are REFEREED standard results or Endres-Steiner (REFEREED).
-  No LEGACY imports; no PENDING items.
-  The novelty gate (proof.md §6, novelty.md) must be passed before Paper B proceeds.
+  All dependencies REFEREED. No LEGACY imports; no PENDING items.
+  Novelty gate CLEARED (heat-trace §4 argument goes beyond Endres-Steiner).
+  Remaining action for full INDEPENDENTLY-CHECKED: verify BGV Thm 2.30 and
+  Gilkey Thm 1.8.1 theorem numbers from physical books (citations recorded above).
