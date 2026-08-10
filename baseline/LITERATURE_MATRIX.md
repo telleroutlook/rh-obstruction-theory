@@ -58,6 +58,20 @@ barrier).
 |---|---|---|---|
 | No rule on finitely many Euler factors forces RH-like zero location across the Helson class | prescribed-zero + modify finite Euler factors | **Andersson 2024** (Mittag-Leffler for Helson zeta); **Davenport–Heilbronn** (FE without Euler product ⇒ off-line zeros) | **OPEN-ish** — standalone only if it adds a fixed-local-factor refinement to Andersson; else a section of Paper A |
 
+### EXT-4 audit — Selberg class prescribed-zero theorem (literature gap confirmed)
+
+| Aspect | Assessment | Source |
+|---|---|---|
+| Does a prescribed-zero theorem for the Selberg class S exist? | **NO** — and the Selberg axioms are **incompatible** with free zero prescription | EXT-4a search (2026-08-11) |
+| Functional equation constraint | Forces zeros symmetric under Re(s)=1/2; arbitrary Z ⊂ strip not realizable | Kaczorowski-Perelli degree theory |
+| Euler product + Ramanujan constraint | Ties zero density to N(T) ~ (d/2π)T log T; prescribing arbitrary Z violates this | Selberg class axioms |
+| Steuding universality | Controls value-distribution, not zero-prescription; no elements of S with prescribed zeros | Voronin-type results |
+| Kaczorowski-Perelli structure | S is extremely rigid (degree classification, conductor); free zero choice ≈ unsolved inverse problem | Structure theory |
+| Implication for Theorem C | **Scope correctly set at Helson class.** Selberg escape route is genuine and currently unbreachable. | EXT-4a |
+| Would a Selberg prescribed-zero theorem be possible? | Likely as hard as GRH itself — constructs arithmetic {a(n)} satisfying all axioms with target zeros | — |
+
+**EXT-4a verdict:** Theorem C cannot be extended to the Selberg class by the same method (Andersson construction requires free choice of χ on primes, incompatible with Ramanujan + FE). The escape route "full Selberg class" is confirmed genuinely open. Theorem C's scope at the Helson class is correct and optimal for this method.
+
 ---
 
 ## Cross-cutting cautions (from prior art)

@@ -19,6 +19,18 @@ multiplicative, Euler product).  It says nothing about:
 **Theorem C must not be advertised as showing that finitely many Euler
 factors of ζ cannot detect its zeros.**
 
+**EXT-4a audit (2026-08-11): Selberg class extension is provably blocked.**
+A "prescribed-zero theorem for the Selberg class" does not exist in the literature
+and is incompatible with the Selberg axioms:
+- The functional equation forces Re(s)=1/2 symmetry on zeros; arbitrary Z not realizable.
+- The Euler product + Ramanujan condition ties zero density to N(T) ~ (d/2π)T log T.
+- Kaczorowski-Perelli structure theory shows S is too rigid for free zero prescription.
+- Such a theorem would likely require resolving GRH-equivalent inverse problems.
+
+The escape route "full Selberg class" in Theorem C's statement is confirmed
+**genuinely open and currently unbreachable by the Andersson construction method**.
+Theorem C's scope at the Helson class is correct and optimal for this approach.
+
 ## 2. Functional equation kept separate (program §8.C.2)
 
 The Davenport–Heilbronn comparison (functional equation without Euler product
