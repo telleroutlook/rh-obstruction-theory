@@ -65,7 +65,17 @@ Work is **stopped or narrowed** at each hard gate. A clean negative novelty resu
 failed exact-collision construction, or a proof that a proposed class is vacuous is
 **recorded, not relabeled as success.**
 
-**Current phase: end of P0 / entering P1.**
+**Current phase: P4 complete / entering P5.**
+
+P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅
+
+**Day-30 decision (recorded 2026-08-10):**  
+- B2 rank step promoted to PROOF-DRAFT (Chebyshev T-system argument); integer-sign
+  step still open → Paper A proceeds conditionally.
+- E-compactness E-pos is PROOF-DRAFT-CLEAR; E-neg quantitative tail (§3) is OPEN →
+  Paper C proceeds unconditionally at the non-uniqueness level; quantitative bound
+  strengthens it.
+- Both Paper A and Paper C tracks are live.  Next: P5 (WP-C, WP-D spectral/Euler).
 
 ---
 
