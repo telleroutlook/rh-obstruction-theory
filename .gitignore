@@ -1,0 +1,16 @@
+*.aux
+*.log
+*.out
+*.toc
+*.pdf
+__pycache__/
+*.pyc
+.DS_Store
+coverage.out
+
+# one-off session handoff (local only, not versioned)
+docs/HANDOFF.md
+
+# proofctl runtime outputs (attestations, CAS blobs) — not source
+.proofctl/attestations/
+.proofctl/cas/
