@@ -1,0 +1,145 @@
+# CLAIM_LEDGER.yaml — two-axis evidence ledger
+#
+# Program §6.A.2. Every imported or produced premise carries BOTH a mathematical and a
+# computational status. Status is DERIVED (checker/governance), never self-declared.
+#
+# mathematical: DEFINITION | CONJECTURE | PROOF-DRAFT | INDEPENDENTLY-CHECKED | REFEREED
+# computational: NONE | EXPLORATORY | REPRODUCIBLE | INDEPENDENT-CHECKER | FORMALIZED
+#
+# Rules:
+#  - A DOI / arXiv deposit is REFEREED only if the venue is peer-reviewed. A preprint is
+#    archival, not refereed.
+#  - "checked against source by theorem number" = INDEPENDENTLY-CHECKED (we verified the
+#    STATEMENT, not the proof) — it does NOT mean we reproved it.
+#  - A finite Arb/interval certificate sets the COMPUTATIONAL axis only; it never lifts
+#    the mathematical axis of the analytic theorem that produced the finite object.
+#  - Gate A: no claim below "INDEPENDENTLY-CHECKED / —" may be used as an established
+#    premise in a theorems/<id> proof; it must instead be listed as an explicit assumption.
+
+version: 1
+domain: rh-obstruction-theory
+
+claims:
+
+  # ---- Baseline: Suzuki 2606.09096 (source in baseline/, verified by theorem number) ----
+  - id: SUZUKI-THM-1.3
+    statement: "The lowest eigenvalue lambda(a) of Q_W^a is continuous in a."
+    source: "arXiv:2606.09096 (screwzelf_7.tex), Theorem 1.3"
+    peer_reviewed: false        # preprint (2026-06-08)
+    mathematical: INDEPENDENTLY-CHECKED   # statement transcribed & verified; proof not re-derived here
+    computational: NONE
+    usable_as_premise: true
+    premise_caveat: "Use as an unrefereed-preprint theorem; flag in any paper's assumptions."
+
+  - id: SUZUKI-THM-1.4
+    statement: >
+      For sufficiently small a>0, lambda(a) is positive and simple with an even
+      eigenfunction, and lambda(a) = log(1/a) + mu_1 - log(2pi) + psi(2) - 1 + O(a),
+      mu_1>0, as a->0+.
+    source: "arXiv:2606.09096, Theorem 1.4"
+    peer_reviewed: false
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    role: "Basis of the representation-invariance correction: the log(1/a) scale is the POSITIVE leading term of the invariant margin (see REFERENCE_BASELINE §4)."
+
+  - id: SUZUKI-THM-1.5
+    statement: >
+      W(a,theta;z) is entire in z; the eigenvalues of the self-adjoint D-bar_{a,theta}
+      are exactly its zeros; all zeros of W(a,theta;z) are real.
+    source: "arXiv:2606.09096, Theorem 1.5"
+    peer_reviewed: false
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+
+  - id: SUZUKI-COR-6
+    statement: >
+      If exists theta(a) and finite phi(a,z) with
+      lim_{a->infty} e^{phi(a,z)} W(a,theta;z) = z^2 xi(1/2-iz)/xi'(1/2-iz)
+      uniformly on compacts, then RH holds.
+    source: "arXiv:2606.09096, Corollary 6"
+    peer_reviewed: false
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    note: "Target is MEROMORPHIC (poles at zeros). Hurwitz transfer needs pole/residue version. This is the Paper C (WP-E) target."
+
+  - id: SUZUKI-SCREW-EQUIV
+    statement: "The screw function g (EQ_103) is a Krein-Langer screw function iff RH holds."
+    source: "arXiv:2606.09096 EQ_103; Su23 Theorem 1.2"
+    peer_reviewed: true         # Su23 published; the equivalence is cited from it
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    note: "This is an RH-EQUIVALENCE, not a barrier (CLAUDE.md hard boundary). Use only as background."
+
+  # ---- Baseline: CCM 2511.22755 ----
+  - id: CCM-DETREG-IDENTITY
+    statement: >
+      det_reg(D_{lambda,N} - z) = -i * lambda^{-iz} * xihat(z), where xihat is the Fourier
+      transform of xi; xihat is entire, all zeros real and equal to the spectrum.
+    source: "arXiv:2511.22755 (mc2arXiv.tex), main finite theorem (i)-(iii)"
+    peer_reviewed: false
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+
+  - id: CCM-CONVERGENCE-OPEN
+    statement: >
+      The suitably normalized regularized determinants converge toward the Riemann Xi
+      function; a rigorous proof of this convergence would establish RH.
+    source: "arXiv:2511.22755, section 'missing steps'"
+    peer_reviewed: false
+    mathematical: CONJECTURE     # explicitly the open step
+    computational: EXPLORATORY   # numerical spectra -> zeros as N,lambda->infty
+    usable_as_premise: false
+    note: "The lambda^{-iz} phase preserves zeros but NOT the locally-uniform limit. 'Suitably normalized' is load-bearing. This is the OBJECT of study for Paper C, not a usable premise."
+
+  # ---- Legacy internal results (sibling repos) — HELD until re-inspected under Gate A ----
+  - id: LEGACY-FP-0.35
+    statement: "Local Weil quadratic form on L^2(-7/20,7/20) is strictly positive (margin +7.81e-4, Arb-certified)."
+    source: "weil-first-prime; Zenodo doi:10.5281/zenodo.21807498 (published archival)"
+    peer_reviewed: false        # Zenodo deposit is archival, not refereed
+    mathematical: PROOF-DRAFT   # human proof exists; not independently refereed
+    computational: INDEPENDENT-CHECKER  # Arb replay exists in sibling repo
+    usable_as_premise: false
+    gate_a_status: PENDING
+    caveat: >
+      Must be re-inspected under Gate A before use: translate to a/Q_W^a/lambda(a);
+      separate analytic reduction from the finite interval computation; verify the
+      finite certificate is a lambda(a) statement, not a basis-dependent pivot.
+
+  - id: LEGACY-SECOND-WINDOW-TERMINATION
+    statement: "A split-residual Schur method certifies Q_W>0 at L=7/20 and terminates (certify-negative) in the second prime window."
+    source: "weil-second-prime; range-termination-paper (UNPUBLISHED, no DOI)"
+    peer_reviewed: false
+    mathematical: PROOF-DRAFT
+    computational: INDEPENDENT-CHECKER
+    usable_as_premise: false
+    gate_a_status: PENDING
+    caveat: >
+      The 'termination' is a statement about a BASIS-DEPENDENT margin (Schur residual /
+      -c_L shift), NOT about the invariant lambda(a). Per REFERENCE_BASELINE §4 the
+      apparent c_L dominance may be a representation artifact. Do NOT import as evidence of
+      a barrier; at most a frozen-system case study for WP-F.
+
+  - id: LEGACY-P19-P22
+    statement: "Four constructions each shown RH-equivalent or finite-order non-discriminating (P19 spectral, P20 heat-trace, P21 Hausdorff, P22 Fredholm)."
+    source: "riemann-arithmetic-spectral (private, no DOI)"
+    peer_reviewed: false
+    mathematical: PROOF-DRAFT
+    computational: REPRODUCIBLE  # mpmath/numpy verifications, not interval-certified
+    usable_as_premise: false
+    gate_a_status: PENDING
+    caveat: >
+      P19/P20/P22 are RH-EQUIVALENCES (not barriers). P21 (finite-order non-discrimination)
+      is the closest analogue to WP-B/B1 and is the most reusable, but must be restated in
+      the abstract 𝔛_sym ambient class with an explicit fixed-K limitation before use.
+
+# Gate A summary (program §6.A.4):
+#   - Baseline Suzuki/CCM statements: INDEPENDENTLY-CHECKED (source), usable as
+#     unrefereed-preprint premises with an assumptions flag.
+#   - CCM convergence + all LEGACY items: NOT usable as premises yet (PENDING re-inspection
+#     or are the object of study). Any theorems/<id> depending on them is BLOCKED until
+#     resolved or the dependency is downgraded to an explicit assumption.
