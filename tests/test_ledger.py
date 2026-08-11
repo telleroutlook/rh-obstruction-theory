@@ -620,6 +620,34 @@ def test_g_prop_g3_no_longer_open():
         "G proof.md still has the old 'needs to exhibit' open-step marker"
 
 
+def test_g_diagonal_fredholm_checker_runnable():
+    """OB-17: G's certified interval-replay checker must run and pass (INDEPENDENT-CHECKER)."""
+    checker = G_DIR / "checker" / "diagonal_fredholm_interval_replay.py"
+    assert checker.exists(), "G diagonal-Fredholm interval checker missing"
+    r = subprocess.run(
+        [sys.executable, str(checker)], capture_output=True, text=True
+    )
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "ALL_CERTIFIED_CHECKS_PASSED" in r.stdout, \
+        "G interval checker did not emit ALL_CERTIFIED_CHECKS_PASSED"
+    # the certified three-way separation must be present in the output
+    assert "separation" in r.stdout and "gamma_to_d_gap" in r.stdout, \
+        "G interval checker output missing the certified separation table"
+
+
+def test_g_diagonal_fredholm_checker_no_float_in_certificate():
+    """OB-17: the certified checker must not use floating-point in its certificate path.
+
+    Guard: the checker is pure fractions.Fraction + integers. Reject if it imports
+    a float-producing numerics library into the certificate (a non-certified SciPy
+    cross-check may be described in prose but must not be imported by this file).
+    """
+    src = (G_DIR / "checker" / "diagonal_fredholm_interval_replay.py").read_text()
+    for banned in ("import numpy", "import scipy", "import mpmath", "float("):
+        assert banned not in src, \
+            f"G certified checker must not use {banned!r} in the certificate path"
+
+
 def test_e_prime_ift_jacobian_written():
     """IX-A2: E'-neg must have an explicit meromorphic IFT Jacobian (Vandermonde in poles)."""
     stmt = (E_PRIME_DIR / "statement.md").read_text()

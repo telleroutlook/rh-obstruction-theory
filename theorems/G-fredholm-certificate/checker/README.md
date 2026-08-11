@@ -2,8 +2,35 @@
 
 ## Independent replay path
 
-This directory will contain the independent verification of Theorem G's
-computational claims.
+### C-G-0: Diagonal Fredholm obstruction — CERTIFIED INTERVAL REPLAY (INDEPENDENT-CHECKER)
+
+**File:** `diagonal_fredholm_interval_replay.py`  
+**Provenance:** OB-17 external referee (2026-08-11); source-verified and re-run in-repo.  
+**SHA-256:** `e197f2bb091a3ea805815b3d1fbe4e5d07209891ee27f946e10fcba6c8f4058b`  
+**Run:** `python3 diagonal_fredholm_interval_replay.py` → prints `ALL_CERTIFIED_CHECKS_PASSED`.
+
+Pure-stdlib (`fractions.Fraction` + integers) certified-interval checker. **No
+floating-point value enters any certificate**; transcendentals (`π`, `log`, `arctan`,
+`log Γ`) are enclosed by convergent rational series with explicit remainder bounds
+(Machin `π`; `atanh`-series `log`; Binet/Stirling `log Γ` with proved complex remainder
+`|R_8| < 4.68e-22`). It independently:
+- bisects the first five Gram-type levels `d_n` (solving `θ(d_n)=(n−1)π` on the certified
+  monotone branch `[10,40]`), each to interval width `< 6.83e-12 < 10^{-8}`;
+- propagates to `κ_n = 1/(1/4+d_n²)` and determinant zeros `λ_n = √(1/4+d_n²)`;
+- certifies the three-way strict separation `γ_n < d_n < λ_n` (n=1,2,3), using ONLY
+  Odlyzko's printed first-three ζ ordinates with their stated `±3e-9` accuracy as the
+  external comparison input — no `γ_n` enters the construction of `d_n, κ_n, λ_n`, or the
+  tail bound;
+- runs two adversarial mutations (drop the `1/4` shift → zero collapses to `d_1`; replace
+  `d_1` by `γ_1` → left separation fails), both correctly rejected;
+- certifies the tail `Σ_{n>2048} κ_n ∈ [0.000932724311548, 0.000932724311549] < 10^{-3}`,
+  hence local-uniform convergence `det(I−z²D_N) → G_d`.
+
+**Scope (what this certifies):** the finite three-way separation `γ_n < d_n < √(1/4+d_n²)`
+and the diagonal-product convergence — i.e. the finite core of `G_d ≠ Ξ̂` (via a direct
+value comparison `G_d(γ_1) ≠ 0 = Ξ̂(γ_1)`, NOT an invalid transitivity of `≠`). It does
+NOT certify RH, any zero-table re-verification, OB-08's other analytic content, or any
+thermodynamic/continuum limit.
 
 ### C-G-1: S(T) gap formula verification
 
@@ -12,7 +39,7 @@ Implement the formula:
 # theta_level(n): solve theta(T)/pi + 1 = n
 # gamma_n: known zero ordinates (from LMFDB or odlyzko tables)
 # S(gamma_n): (1/pi) * arg(zeta(1/2 + i*gamma_n))
-# expected: gamma_n - d_n ~ S(gamma_n) / N'(gamma_n)
+# expected: gamma_n - d_n ~ S(gamma_n) / A'(gamma_n),  A'(t) = theta'(t)/pi
 ```
 
 Requirements:
@@ -21,7 +48,7 @@ Requirements:
 - Output a comparison table for n = 1..30.
 - Must be runnable offline.
 
-Status: NOT YET.
+Status: NOT YET (C-G-0 above already certifies the d_n side to 1e-8 without needing S(T)).
 
 ### C-G-2: Hadamard uniqueness check (formal)
 

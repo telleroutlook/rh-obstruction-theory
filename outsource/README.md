@@ -33,7 +33,7 @@ problem.
 | OB-14 | `OB-14-E-pos-uniform-order-transfer.md` | E §4 | E-pos: is uniform Nevanlinna bound (H-order) necessary+sufficient for order transfer? | RESOLVED — integrated 2026-08-11 |
 | OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | RESOLVED — integrated 2026-08-11 |
 | OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
-| OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | OPEN — send for review |
+| OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | RESOLVED — integrated 2026-08-11 (checker deposited) |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -191,6 +191,23 @@ rejected).
   explicit `|E(u)|≤A log(u+2)` (e.g. Trudgian 2014) — a stronger added premise, not an
   algebraic expansion of the `O`. V5(b) domain repair: `c≥0, α>0`; excluding `α=1`
   unnecessary. Z_ζ side → INDEPENDENT-CHECKER. Integrated into D proof.md §4 + statement.md.
+
+## Resolved OB-17 outcome (integrated 2026-08-11 — first referee-supplied runnable checker)
+
+- **OB-17 (G diagonal Fredholm interval replay):** literal DISCREPANCY → CONFIRMED after
+  the referee's precise restatement. The referee supplied an actual **certified-interval
+  checker** (pure `fractions.Fraction`, no float in any certificate; Machin π, Binet/
+  Stirling log Γ with proved remainder `|R_8|<4.68e-22`). I **verified SHA-256 match and
+  re-ran it in-repo** — prints `ALL_CERTIFIED_CHECKS_PASSED`. It encloses `d_1..d_5` to
+  width `<6.83e-12`, certifies `γ_n<d_n<√(1/4+d_n²)` (n=1,2,3; γ_n from Odlyzko's table
+  ±3e-9, comparison-only), passes both mutation guards, and certifies
+  `Σ_{n>2048}κ_n<10⁻³`. Three corrections integrated: (1) V3 needs error-radius zero
+  intervals (formalized as Odlyzko's printed values ±3e-9); (2) **my anchor was wrong** —
+  `1/4+d_1²≈318.7154` and `√≈17.85260`, not the `318.706 / 17.8523` I wrote; (3) `G_d≠Ξ̂`
+  must use the direct value argument `G_d(γ_1)≠0=Ξ̂(γ_1)`, NOT transitivity of `≠`.
+  **Checker deposited at `theorems/G-fredholm-certificate/checker/diagonal_fredholm_interval_replay.py`;
+  2 regression tests added (runs + no-float-in-certificate guard); G computational status
+  REPRODUCIBLE → INDEPENDENT-CHECKER.**
 
 ## What a returned verification should contain
 

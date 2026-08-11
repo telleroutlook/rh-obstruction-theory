@@ -218,17 +218,35 @@ By the Fredholm determinant stability inequality
 `|det(I+A) − det(I+B)| ≤ ‖A−B‖_1 exp(1+‖A‖_1+‖B‖_1)`,
 we get `det(I−z²D_N) → G_d(z) = ∏_{n≥1}(1−z²/(1/4+d_n²))` locally uniformly.
 
-**G_d ≠ Ξ̂ unconditionally.**
-- Zeros of G_d: `{±√(1/4+d_n²)}` — all real, positive, `> d_n`.
-- Under RH: Ξ̂ has zeros `{±γ_n}`; `√(1/4+d_n²) ≠ γ_n` for two independent reasons:
-  (a) `d_1 ≈ 17.846` gives `√(1/4+d_1²) ≈ 17.854 ≠ γ_1 ≈ 14.134`;
-  (b) `d_n ≠ γ_n` for infinitely many n (Prop. G.3* Item 2).
-- Under ¬RH: Ξ̂ has a non-real zero; G_d has only real zeros. Still `G_d ≠ Ξ̂`. ✓
+**G_d ≠ Ξ̂ unconditionally (direct zero-value argument; INDEPENDENT-CHECKER, OB-17).**
+The zeros of `G_d` are exactly `{±√(1/4+d_n²)}` (all real; the convergent product is
+nonzero off these points — OB-17 §8.3). In particular the least positive zero is
+`λ_1 = √(1/4+d_1²) > 17.8526`, and `G_d(z) ≠ 0` for `0 < z < λ_1`.
+- **Under RH:** `Ξ̂(γ_1) = 0` with `γ_1 < 14.1348 < λ_1`, so `G_d(γ_1) ≠ 0 = Ξ̂(γ_1)`,
+  hence `G_d ≠ Ξ̂`. (This uses a single certified on-line ordinate `γ_1`, not RH.)
+- **Under ¬RH:** `Ξ̂` has a non-real zero while all zeros of `G_d` are real; still
+  `G_d ≠ Ξ̂`.
+
+**Caution (OB-17 §0.3):** `G_d ≠ Ξ̂` is NOT deduced by transitivity from `G_d ≠ F_d` and
+`F_d ≠ Ξ̂` (that inference is invalid). The direct value comparison `G_d(γ_1) ≠ Ξ̂(γ_1)`
+above is the closed argument. The "spectral shift" and "S(T) gap" are two *descriptions*
+of why the divisors differ, not two inequalities chained together.
+
+**Certified interval replay (OB-17, INDEPENDENT-CHECKER 2026-08-11).** The finite core —
+`γ_n < d_n < √(1/4+d_n²)` for n=1,2,3, plus the tail bound giving convergence to `G_d` —
+is independently certified in exact-rational interval arithmetic by
+`checker/diagonal_fredholm_interval_replay.py` (SHA-256
+`e197f2bb…c8f4058b`; prints `ALL_CERTIFIED_CHECKS_PASSED`; source-verified and re-run
+in-repo). It encloses `d_1,…,d_5` to width `< 6.83e-12`, certifies the three-way
+separation (`γ_n` from Odlyzko's table with ±3e-9, used only for comparison), passes both
+adversarial mutations, and certifies `Σ_{n>2048} κ_n < 10^{-3}`. Validates only the finite
+separation + convergence, not RH.
 
 **Theorem G (diagonal obstruction — PROOF-DRAFT — corrected).**  
 For any `(K_N) ∈ 𝔐_d^{tr}`:
-1. `det(I − z² K_N) → G_d` locally uniformly (Theorem 6.1, using trace-norm stability).
-2. `G_d ≠ Ξ̂` unconditionally (two independent obstructions: spectral shift + S(T) gap).
+1. `det(I − z² K_N) → G_d` locally uniformly (Theorem 6.1, using trace-norm stability;
+   tail bound certified by OB-17 checker).
+2. `G_d ≠ Ξ̂` unconditionally (direct zero-value argument above — NOT transitivity).
 
 *The earlier statement "eigenvalues κ_n ≈ 1/(1/4+d_n²) → determinant zeros near d_n" was
 incorrect: zeros are at `±κ_n^{-1/2} = ±√(1/4+d_n²)`, not at `±d_n`.*
