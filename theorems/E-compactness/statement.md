@@ -161,13 +161,14 @@ or Hadamard-product uniqueness).  Hurwitz then transfers real-zero location. ☐
 | (6) normalization at 0 | PARTIAL (λ^{−iz} phase is the obstacle) |
 | (H-norm) F_N(z₀) → Ξ(z₀) | OPEN (the "suitably normalized" step) |
 | (H-bound) local uniform bound M_R | OPEN (no tail envelope in CCM 2511.22755) |
-| (H-order) uniform Nevanlinna bound T(r,F_N) ≤ Cr+C₀, C independent of N | OPEN — REQUIRED for the order of the limit; (H-bound) alone is insufficient (PROMPT_LINT L14; counterexample F_N≡Ξ·e^{z²−z₀²}) |
-| (H-tail) summable tail control + no-intrusion (T) | OPEN (the decisive missing estimate) |
+| (H-uorder) uniform conventional-order envelope T(r,F_N) ≤ C_ε r^{1+ε}+C_{0,ε}, constants independent of N | OPEN — REQUIRED for the order of the limit; (H-bound) alone insufficient (PROMPT_LINT L14; counterexample F_N≡Ξ·e^{z²−z₀²} has order 2). Must use the r^{1+ε} envelope, NOT a linear Cr+C₀: a uniform *linear* bound forces finite exponential type, incompatible with the real Ξ (infinite type) — OB-14 §4.3, PROMPT_LINT L1 |
+| (H-div) multiplicity-complete divisor convergence | OPEN — two-sided disk condition (zeros of F_N in \|z\|<R converge to those of Ξ with multiplicity, no others); the one-sided no-intrusion clause alone is vacuous for zero-free approximants (OB-14 §1.2, §4.1) |
 
-**The theorem identifies (H-bound), (H-order), and (H-tail) as the exact missing
-ingredients.** Note (H-order) is distinct from (H-bound): local uniform boundedness does
-not transfer an order bound to the limit — a *uniform-in-N* characteristic bound is
-required (corrected 2026-08-11 by PROMPT_LINT re-scan from OB-11).
+**The theorem identifies (H-bound), (H-uorder), and (H-div) as the exact missing
+ingredients.** (H-uorder) is distinct from (H-bound): local uniform boundedness does not
+transfer an order bound to the limit — a *uniform-in-N conventional-order* envelope
+(`r^{1+ε}`, not linear) is required (corrected 2026-08-11: PROMPT_LINT re-scan from OB-11,
+then OB-14 fixed the finite-type/conventional-order confusion per L1).
 
 **For Suzuki W(a, θ; z):**
 

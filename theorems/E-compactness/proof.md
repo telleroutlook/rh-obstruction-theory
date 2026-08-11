@@ -292,37 +292,46 @@ converging locally uniformly to some entire function `G`.
 **Step 2 (Identification).** We claim `G = Ξ`.
 
 - `G(z_0) = lim F_{N_j}(z_0) = Ξ(z_0) ≠ 0` by (H-norm).
-- **Order — REQUIRES A UNIFORM BOUND (corrected; PROMPT_LINT L14, re-scan from OB-11).**
+- **Order — REQUIRES A UNIFORM ORDER ENVELOPE (corrected twice; PROMPT_LINT L1+L14).**
   Local uniform boundedness (H-bound) alone does **NOT** bound the order of the limit `G`.
-  Counterexample: `F_N ≡ Ξ·e^{z²−z_0²}` is a constant sequence, locally uniformly bounded
-  on every disk, has the same zero divisor as Ξ, and `F_N(z_0)=Ξ(z_0)` — yet its limit has
-  conventional order 2 and is ≠ Ξ. The order of `G` therefore does not follow from
-  (H-bound); it must be supplied by a **uniform Nevanlinna bound**:
+  Counterexample: `F_N ≡ Ξ·e^{z²−z₀²}` is a constant sequence, locally uniformly bounded
+  on every disk, has the same zero divisor as Ξ, and `F_N(z₀)=Ξ(z₀)` — yet its limit has
+  conventional order exactly 2 (`T(r, e^{z²−z₀²}) = r²/π + O(1)`, so `T(r,G) ≥ r²/π −
+  o(r²)`) and is ≠ Ξ (OB-14 §3). The order of `G` therefore does not follow from (H-bound);
+  it must be supplied by a **uniform order envelope**:
   ```
-  (H-order):  T(r, F_N) ≤ C·r + C_0    with C, C_0 independent of N.
+  (H-uorder):  ∀ε>0 ∃ C_ε, C_{0,ε}, r_ε (independent of N):
+               T(r, F_N) ≤ C_ε · r^{1+ε} + C_{0,ε}   for all N, r ≥ r_ε.
   ```
-  Under (H-order), the Ahlfors–Shimizu characteristic is lower-semicontinuous under
-  locally uniform convergence, giving `T(r,G) = O(r)` (conventional order ≤ 1). A per-N
-  bound `T(r,F_N)=O(r)` with N-dependent constant is **insufficient**. (This is the same
-  growth-transfer gap OB-11 identified for E'-pos; the re-scan found it here too.)
-- **Zero divisor:** Ξ has a zero divisor `{ω_n}_{n≥1}` ⊂ ℂ (its nontrivial zeros,
+  **WARNING (OB-14 §1.1, §4.3 — L1 error corrected).** The envelope must be
+  `r^{1+ε}` (uniform conventional order ≤ 1), NOT the finite-type bound `T(r,F_N) ≤ Cr+C_0`.
+  A uniform *linear* bound would transfer to `T(r,Ξ) ≤ Cr+C_0`, forcing Ξ to have finite
+  exponential type — but the real Ξ has **infinite** exponential type (`log|Ξ(iy)| ∼
+  (y/2)log(y/2)`). So a linear (H-order) is INCOMPATIBLE with the actual target and would
+  make the theorem vacuous (no approximating family could exist). `(H-uorder)` with the
+  `r^{1+ε}` exponent permits order-1 infinite-type functions, including Ξ.
+  Under (H-uorder), `T(r,·)` is continuous under locally uniform convergence
+  (`T(r,F_{N_j}) → T(r,G)`, OB-14 Lemma 2.2 — a direct `log⁺` uniform-continuity argument,
+  no Ahlfors–Shimizu needed), so `T(r,G) ≤ C_ε r^{1+ε}+C_{0,ε}` and `ρ(G) ≤ 1`. A per-N
+  bound `T(r,F_N)=O_N(r^{1+ε})` with N-dependent constant is **insufficient** (OB-14 §5:
+  even Taylor polynomials of `G`, each order 0, converge to the order-2 `G`).
+- **Zero divisor:** Ξ has a zero divisor `{±ω_n}_{n≥1}` ⊂ ℂ (its nontrivial zeros,
   unconditionally complex — their reality is the content of RH, not a hypothesis here).
-  Write `Ξ(z) = Ξ(0) · ∏_{n≥1}(1 − z²/ω_n²)` if all zeros come in pairs ±ω_n
-  (which follows from the functional equation `Ξ(z) = Ξ(−z)` — Ξ is even — and
-  `Ξ(z̄) = \overline{Ξ(z)}`). The product converges locally uniformly since
-  `Σ |ω_n|^{-2} < ∞`.
-- **Tail no-intrusion condition (T):** (H-tail) must include condition (T):
-  for every `R > 0` there exist `M, N_0` such that for all `N ≥ N_0` and all
-  `n > M`, the n-th zero `α_n^{(N)}` of `F_N` satisfies `|α_n^{(N)}| > R`.
-  This prevents a "wandering" zero from introducing a spurious accumulation point
-  as `N → ∞` (see OB-05 referee Theorem B').
-- By (H-tail) + condition (T), the zero multiset of each subsequential limit `G`
-  equals the zero multiset `{ω_n}` of Ξ exactly (Hurwitz + tail no-intrusion).
-- **Identity — needs the order bound (H-order), not just the divisor.** The complete
+  Write `Ξ(z) = Ξ(0) · ∏_{n≥1}(1 − z²/ω_n²)` (genus-1 paired product, no exponential
+  factor: `E_1(z/ω)E_1(−z/ω) = 1−z²/ω²`), convergent since `Σ |ω_n|^{-2} < ∞`.
+- **Divisor convergence (H-div), multiplicity-complete (OB-14 §1.2).** (H-tail) must be
+  the two-sided disk condition: for every `R>0` with no zero of Ξ on `|z|=R`, the zeros of
+  `F_N` in `|z|<R` (with multiplicity) can be listed `a_{N,1},…,a_{N,m(R)}` with
+  `a_{N,k} → a_k` (the zeros of Ξ in the disk) and no others, for all large N. This is
+  both no-intrusion AND full approximation with multiplicity (the literal one-sided
+  no-intrusion clause is vacuous for zero-free approximants — OB-14 §4.1). By Rouché,
+  the subsequential limit `G` then has exactly the complete zero divisor of Ξ.
+- **Identity — needs the order envelope (H-uorder), not just the divisor.** The complete
   divisor + one-point normalization only give `G = Ξ·H` for a zero-free even entire `H`
-  with `H(z_0)=1`; they do NOT force `H≡1` without (H-order) (else `H=e^{z²−z_0²}` is a
-  counterexample). Given (H-order): `H` is zero-free of conventional order ≤ 1, so
-  `H=e^{az+b}`; evenness forces `a=0`; `H(z_0)=1` forces `e^b=1`; hence `H≡1` and `G=Ξ`.
+  with `H(z₀)=1`; they do NOT force `H≡1` without (H-uorder) (else `H=e^{z²−z₀²}` is a
+  counterexample). Given (H-uorder): `H=G/Ξ` is zero-free (First Main Theorem:
+  `T(r,H) ≤ T(r,G)+T(r,Ξ)+O(1)`, order ≤ 1), so `H=e^{az+b}`; evenness forces `a=0`;
+  `H(z₀)=1` forces `e^b=1`; hence `H≡1` and `G=Ξ`.
 - `G` is even (locally uniform limit of even functions).
 - By the corrected Lemma A* (OB-05): an entire function of Nevanlinna order ≤ 1
   with the same complete zero divisor as Ξ, which is even and shares one nonzero

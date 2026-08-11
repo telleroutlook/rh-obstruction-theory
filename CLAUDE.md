@@ -193,9 +193,11 @@ script, not from memory.
    canonical-product genus, RH-imported-via-divisor, vacuous real atoms, counting-law
    factors, global observation map, growth-derived-not-assumed, power-sum ≠ jet, dropped
    frozen terms, discrepancy-degree parity, Fredholm zero locations, per-n ≠ uniform
-   bound, zeros-in-Ω ≠ zeros-in-ℂ, representation-invariance/measure-collapse, cited
-   black-box exact-number-and-scope, script-verified anchors, honest inconclusive
-   verdict. Each item is a check you actually RUN (script/grep/derivation). When a
+   bound (+ envelope must match the target's type: conventional-order r^{1+ε}, not linear
+   finite-type), zeros-in-Ω ≠ zeros-in-ℂ, representation-invariance/measure-collapse,
+   Fourier-multiplier-on-ℝ has continuous spectrum (discrete/trace-class needs a compact
+   manifold or ℓ² model), cited black-box exact-number-and-scope, script-verified anchors,
+   honest inconclusive verdict. Each item is a check you actually RUN (script/grep/derivation). When a
    referee surfaces a new defect class, add it to the lint and **re-scan every active
    prompt AND every `theorems/*/statement.md|proof.md`** — the defect is never assumed
    independent.

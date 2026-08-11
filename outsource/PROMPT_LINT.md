@@ -107,17 +107,39 @@ CHECK: `det(I−z²K) = ∏(1−z²λ_j)` has zeros at `z=±λ_j^{-1/2}`, NOT `�
 forces the local-uniform-limit target to satisfy `f(0)=1`: normalize to `Ξ̂=ξ(1/2+iz)/ξ(1/2)`,
 never unnormalized `ξ`. Verify the zero locations and `f(0)` by a 1-term example.
 
-## L14 — Per-n bound ≠ uniform bound; divisor+normalization ≠ identity (hit OB-11; re-scan hit E-pos)
+## L14 — Per-n bound ≠ uniform bound; divisor+normalization ≠ identity; envelope must match the target's type (hit OB-11; re-scan hit E-pos; OB-14 refined)
 CHECK two distinct things before claiming a limit `G` equals the target:
 (a) **Growth transfer.** Local uniform boundedness (even uniform in n on each compact) does
 NOT bound the order of `G`. Counterexample: `F_n ≡ Target·e^{z²−w₀²}` is a constant sequence,
 bounded on every disk, same divisor, `F_n(w₀)=Target(w₀)` — but its limit has order 2 ≠
-target. A **uniform** bound `T(r,F_n) ≤ Cr+C₀` (constants independent of n) is required; a
-per-n bound `T(r,F_n)=O(r)` with n-dependent constant is insufficient.
-(b) **Identity.** Same complete divisor + one-point normalization only give `G = Target·H`
-with `H` zero-free (`H(w₀)=1`); they do NOT force `H≡1` without the order control in (a).
-Run: does `Target·e^{z²−w₀²}` satisfy every stated hypothesis? If yes, the hypotheses are
-insufficient.
+target. A **uniform** order envelope is required; a per-n bound with n-dependent constant is
+insufficient (OB-14 §5: even Taylor polynomials of the order-2 `G`, each order 0, converge
+to `G`).
+(b) **The envelope must match the target's type (L1 again!).** Use `T(r,F_n) ≤ C_ε r^{1+ε}
++ C_{0,ε}` (uniform *conventional order* ≤ 1), NOT `T(r,F_n) ≤ Cr+C_0` (uniform *finite
+exponential type*). A uniform *linear* bound transfers to `T(r,Target) ≤ Cr+C_0`, forcing
+finite exponential type — **incompatible with Ξ**, which has infinite type
+(`log|Ξ(iy)| ∼ (y/2)log(y/2)`), making the theorem vacuous (OB-14 §4.3). This is the L1
+error wearing a "uniform bound" disguise; it bit the E-pos fix and had to be re-corrected.
+(c) **Identity.** Same complete divisor + one-point normalization only give `G = Target·H`
+with `H` zero-free (`H(w₀)=1`); they do NOT force `H≡1` without the order envelope in (a)/(b).
+(d) **Divisor convergence must be two-sided + multiplicity-complete.** A one-sided
+"no-intrusion" clause is vacuous for zero-free approximants (OB-14 §4.1: `F_n ≡ Target(w₀)`
+satisfies it). Require the disk form: zeros of `F_n` in `|z|<R` converge to those of the
+target *with multiplicity, and no others* (Rouché). Run: does `Target·e^{z²−w₀²}` (and the
+constant `Target(w₀)`) satisfy every stated hypothesis? If yes, the hypotheses are insufficient.
+
+## L20 — Fourier multiplier on ℝ has continuous spectrum; discrete/trace-class needs a compact manifold or ℓ² model (hit OB-16)
+NEVER attach a discrete eigenvalue count or trace-class heat kernel to a Fourier multiplier
+`h(D)` on `L²(ℝ)`. CHECK the Hilbert space: on `L²(ℝ)`, `h(D)` is unitarily multiplication
+by `h(ξ)`, spectrum = essential range, **purely continuous** (every level set has measure
+zero), and `e^{-tH}` is a nonzero multiplication operator on a nonatomic space — **not
+compact, not trace class**. Discrete `λ_n`, `N_H(T)`, `Tr(e^{-tH})` are undefined there.
+For a discrete spectrum use a **closed manifold** (e.g. `S¹`: frequencies `n ∈ ℤ`) or a
+diagonal `ℓ²(ℕ)` model. Only the closed-manifold realization is relevant to membership in a
+ΨDO class `𝒞_ell`/`𝒞_logpoly`. Also: classify the symbol correctly — `|ξ|/log|ξ| ∈ S¹_{1,0}`
+(Hörmander), a log-weighted `S^{1,-1}` class; "outside all standard calculi" is usually too
+strong (it is outside `𝒞_ell` and finite-log-degree `𝒞_logpoly`, but inside `S^m_{1,0}`).
 
 ## L15 — Zeros-in-Ω vs zeros-in-ℂ; pole non-cancellation (hit OB-11)
 CHECK that tail/zero-control covers the target's **poles**, not just `Ω=ℂ∖poles`. A zero of

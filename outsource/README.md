@@ -30,7 +30,7 @@ problem.
 | OB-11 | `OB-11-E-prime-pos-convergence-identification.md` | E' §5 | E'-pos: Montel-on-Ω convergence + identification G=W | RESOLVED — integrated 2026-08-11 |
 | OB-12 | `OB-12-F-complexity-measure-welldefined.md` | F | Is the Schur-certificate complexity κ well-defined / non-collapsing? | RESOLVED — integrated 2026-08-11 |
 | OB-13 | `OB-13-B2-independent-exact-reconstruction.md` | B2 | Independent exact-rational reconstruction of the collision | RESOLVED — integrated 2026-08-11 |
-| OB-14 | `OB-14-E-pos-uniform-order-transfer.md` | E §4 | E-pos: is uniform Nevanlinna bound (H-order) necessary+sufficient for order transfer? | OPEN — send for review |
+| OB-14 | `OB-14-E-pos-uniform-order-transfer.md` | E §4 | E-pos: is uniform Nevanlinna bound (H-order) necessary+sufficient for order transfer? | RESOLVED — integrated 2026-08-11 |
 | OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | RESOLVED — integrated 2026-08-11 |
 | OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
 
@@ -102,6 +102,23 @@ includes INCONCLUSIVE + localization). Load-bearing anchors verified by script.
   RvM shape up to constant), leading heat-trace `t^{-1}log(1/t)`, and lies outside
   𝒞_ell/𝒞_logpoly — establishing the escape class is real — then honestly localizes the
   Hilbert–Pólya realization as open. Does NOT attempt RH or a Hilbert–Pólya construction.
+
+## Resolved OB-14 outcome (integrated 2026-08-11)
+
+- **OB-14 (E-pos uniform order transfer):** CONFIRMED after two corrections; necessity of
+  (H-order) REFUTED. Claim A (witness `F_N ≡ Ξ·e^{z²−z₀²}` has order exactly 2,
+  `T(r,e^{z²−z₀²})=r²/π+O(1)`) confirmed. Claim B: the literal one-sided (H-tail) is
+  vacuous (constant `F_N ≡ Ξ(z₀)` satisfies it) → replaced by multiplicity-complete
+  divisor convergence (H-div, disk/Rouché form). Claim C decided negatively: even Taylor
+  polynomials of the order-2 `G` (each order 0) converge to `G` with divisor → Ξ, so a
+  per-N order/type bound does NOT transfer. **Key correction (PROMPT_LINT L1 error I
+  re-introduced):** my (H-order) `T(r,F_N)≤Cr+C₀` is a *finite-type* bound, incompatible
+  with the real Ξ (infinite exponential type) — it makes the theorem vacuous. Fixed to
+  **(H-uorder)** `T(r,F_N)≤C_ε r^{1+ε}+C_{0,ε}` (uniform *conventional* order ≤ 1), which
+  admits Ξ. (H-order) sufficient but NOT necessary (`F_N=Ξ·e^{(z²−z₀²)/N}` → Ξ with each
+  F_N order 2). Integrated into E-compactness proof.md §4 + statement.md table. PROMPT_LINT
+  L14 refined (envelope-type caveat) and **L20 added** (Fourier multiplier on ℝ has
+  continuous spectrum — from the OB-16 model error); re-scan clean.
 
 ## Resolved OB-15 / OB-16 outcomes (integrated 2026-08-11)
 
