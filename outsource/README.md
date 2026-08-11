@@ -17,29 +17,37 @@ problem.
 
 | # | File | Theorem | Content | Status |
 |---|---|---|---|---|
-| OB-01 | `OB-01-D-heat-trace-log-singularity.md` | D | BGV/Gilkey no-log citation + log-poly exception | OPEN — send for review |
-| OB-02 | `OB-02-B2-integer-collision.md` | B2 | Vandermonde rank + integer scaling construction | OPEN — send for review |
-| OB-03 | `OB-03-E-tail-estimate.md` | E §3 | Hadamard growth + Vandermonde IFT non-uniqueness | OPEN — send for review |
-| OB-04 | `OB-04-G-prop-G3-adversary.md` | G Prop. G.3 | `𝒵_smooth` adversary, O_θ indistinguishability | OPEN — send for review |
+| OB-01 | `OB-01-D-heat-trace-log-singularity.md` | D | BGV/Gilkey no-log citation + log-poly exception | RESOLVED — integrated 2026-08-11 |
+| OB-02 | `OB-02-B2-integer-collision.md` | B2 | Vandermonde rank + integer scaling construction | RESOLVED — integrated 2026-08-11 |
+| OB-03 | `OB-03-E-tail-estimate.md` | E §3 | Hadamard growth + Vandermonde IFT non-uniqueness | RESOLVED — integrated 2026-08-11 |
+| OB-04 | `OB-04-G-prop-G3-adversary.md` | G Prop. G.3 | `𝒵_smooth` adversary, O_θ indistinguishability | RESOLVED — integrated 2026-08-11 |
+| OB-05 | `OB-05-E-pos-identification.md` | E §4 | Evenness pins G = Ξ (Hadamard + Hurwitz) | OPEN — send for review |
+| OB-06 | `OB-06-E-prime-meromorphic-uniqueness.md` | E' | Meromorphic Hadamard uniqueness + Marty theorem | OPEN — send for review |
+| OB-07 | `OB-07-B2-ambient-class-counting-law.md` | B2 / Paper A | Ambient class 𝔛_sym: counting-law requirement? | OPEN — send for review |
+| OB-08 | `OB-08-G-factorization-condition.md` | G | Factorization condition (2.7) for 𝔐_FC | OPEN — send for review |
 
 ## Difficulty
 
-- **OB-01:** Pure spectral theory / PDE citation check. **Low difficulty.** The result
-  is classical; what is needed is exact theorem numbers from BGV and Gilkey, and
-  confirmation of the log-polyhomogeneous exception. A PDE / heat-kernel specialist can
-  answer in one pass.
+- **OB-01–04:** RESOLVED (referee reports integrated 2026-08-11).
 
-- **OB-02:** Algebraic combinatorics (Vandermonde + integer programming). **Low–medium
-  difficulty.** All steps are explicit and elementary; the hardest part is verifying that
-  the scaling trick produces a valid multiset (Step 4).
+- **OB-05:** Complex analysis (Hadamard factorization for even entire functions,
+  Hurwitz theorem for zero convergence). **Low–medium difficulty.** Claim A (evenness
+  pins G=Ξ) is elementary; Claim B (Hurwitz zero-set convergence) requires careful
+  attention to hypotheses.
 
-- **OB-03:** Classical complex analysis (Hadamard factorization + IFT). **Medium
-  difficulty.** The Vandermonde Jacobian structure requires careful verification, but
-  involves no analytic number theory.
+- **OB-06:** Complex analysis (meromorphic Hadamard uniqueness, normal families).
+  **Medium difficulty.** Three separate claims: meromorphic factorization citation,
+  Marty vs Montel decision, and simplicity-of-zeros scope.
 
-- **OB-04:** Analytic number theory. **Medium difficulty.** Requires knowledge of S(T),
-  Backlund's theorem, and the Hadamard factorization for Ξ. The quantitative Step 4 is
-  optional (discovery-tier) and can be deferred.
+- **OB-07:** Analytic number theory / design question (ambient class definition).
+  **Low–medium difficulty.** Primarily a conceptual question: does the ambient class
+  𝔛_sym need the Riemann–von Mangoldt counting law for the obstruction to be
+  non-trivial? Requires checking whether finite multisets make the theorem vacuous.
+
+- **OB-08:** Operator theory / spectral theory (Fredholm determinants, method class
+  verification). **Medium difficulty.** Requires understanding of Fredholm determinants
+  and the factorization condition; the normalization sanity check (numerical anchor) is
+  elementary and decisive.
 
 ## What a returned verification should contain
 

@@ -1,7 +1,7 @@
 # Theorem B2 — Exact Finite-Observation Collision
 
-**Mathematical status:** PROOF-DRAFT (conditional — see §Rank condition below)  
-**Computational status:** NONE (analytic; no certified witness yet)  
+**Mathematical status:** PROOF-DRAFT (CONFIRMED by OB-02 external review 2026-08-11 — integer-sign step resolved; four notation corrections applied; see proof.md)  
+**Computational status:** REPRODUCIBLE (rational m=2 sanity check in proof.md §4.5: t₁=1, t₂=2, T=1, exact rational arithmetic ✓)  
 **Theorem ID:** B2-exact-collision  
 **Program ref:** §7.B.2.B2, §7.B.3  
 **Paper target:** Paper A (primary, if rank condition holds)
@@ -80,18 +80,17 @@ hierarchy (escape routes identical to B1).
 
 ---
 
-## Rank condition status
+## Rank and integer-sign status (RESOLVED, OB-02 2026-08-11)
 
-The rank condition (H-rank) is the central open item of P3 (Days 15–21).  Three
-outcomes are possible:
+The rank condition and integer-sign condition are both resolved in proof.md §4:
 
-| Outcome | Status | Consequence |
+| Step | Status | Result |
 |---|---|---|
-| `rank J = n` proved for some `n`, heights `t₁,…,t_n` | OPEN | B2 holds; Paper A proceeds |
-| `rank J < n` for all natural choices | OPEN | B2 fails; keep B1 only |
-| `rank J = n` requires signed/noninteger `α` | OPEN | B2 fails; H-real-mult violated; keep B1 |
-
-The rank analysis occupies `proof.md §3` (to be completed).
+| Rank of Li Jacobian C (§4.3) | PROOF-DRAFT ✓ | det C ≠ 0 by Chebyshev + lower-triangular + Vandermonde |
+| Rank of moment Jacobian (§4.4) | PROOF-DRAFT ✓ | cosine-Vandermonde argument |
+| Integer solution via scaling (§4.5) | PROOF-DRAFT ✓ | β = −C⁻¹d(T) ∈ ℚᵐ; scale by lcm-denominator R → n ∈ ℤᵐ |
+| Nonneg multiplicity via buffer M | PROOF-DRAFT ✓ | M = max_k|n_k|, then M+n_k ≥ 0 |
+| m=2 rational sanity check | CONFIRMED ✓ | t₁=1, t₂=2, T=1: exact rational arithmetic |
 
 ---
 
@@ -101,15 +100,19 @@ Same five escape routes as B1, plus:
 
 6. **Multiplicity constraint:** if exact collision requires signed or nonintegral
    multiplicities (fractional zero counts), the theorem is retracted; B1 remains.
+   (This is resolved: the integer-sign step in proof.md §4.5 gives nonneg integer
+   multiplicities via the scaling and buffer construction.)
 
 ---
 
-## Conditional on B2 closing: Paper A upgrading
+## Paper A theorem (B2 confirmed — PROOF-DRAFT)
 
-If B2 closes with real, positive-multiplicity zeros, then the paper-A theorem is:
+B2 is confirmed with nonneg integer multiplicities (proof.md §4.5, OB-02 2026-08-11).
+The Paper A theorem is:
 
-> For any fixed finite test family `Φ`, there exist `𝒵_+ ∈ 𝔛_sym` with `P=1`
-> and `𝒵_− ∈ 𝔛_sym` with `P=0` such that `O_Φ(𝒵_−) = O_Φ(𝒵_+)` exactly.
+> For any fixed finite test family `Φ` of Li-type or moment-type tests, there exist
+> `𝒵_+ ∈ 𝔛_sym` with `P=1` and `𝒵_− ∈ 𝔛_sym` with `P=0` such that
+> `O_Φ(𝒵_−) = O_Φ(𝒵_+)` exactly (not just approximately).
 
-Otherwise Paper A reduces to B1 (strict inequality, not exact equality), and the
-convergence track (Paper C) becomes the primary.
+Open refinement question: whether the ambient class 𝔛_sym should additionally
+require the Riemann–von Mangoldt counting law (see outsource OB-07).
