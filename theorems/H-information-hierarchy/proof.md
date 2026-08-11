@@ -43,9 +43,11 @@ real zero ordinates and complex-conjugate symmetry. **Status: PROOF-DRAFT (B2 §
 ## §3. Instantiation for O_theta (inherits from G)
 
 **Collision (Step A).** For the theta-level observation O_theta: n → d_n = θ_level(n),
-the S(T) gap (Lemma G.2, REFEREED) gives γ_n − d_n = S(γ_n)/N'(γ_n) + lower order.
+the S(T) gap (Lemma G.2, REFEREED) gives d_n − γ_n = (S(γ_n)+1/2)/A'(ξ_n) + lower order
+(corrected sign/term and denominator A'=θ'/π per OB-04; see G proof.md §3).
 A perturbed multiset 𝒵_ε with ordinates d_n + ε̃_n (where ε̃_n ≈ γ_n − d_n) maps to
-the same (d_n) sequence under O_theta. **Status: PROOF-DRAFT (G Prop. G.3 open step).**
+the same (d_n) sequence under O_theta. **Status: PROOF-DRAFT (Prop. G.3* Items 2–4
+proved unconditionally, OB-04 2026-08-11).**
 
 **Separation (Step B).** Same as §2 — Hadamard uniqueness. **Status: REFEREED.**
 
@@ -75,7 +77,7 @@ Li values coincide. **Status: PROOF-DRAFT** (explicit d_n computation open).
 *Proof of O_theta ⊊ O_oracle.* By Lemma G.2, two multisets related by an S(T)
 perturbation γ_n → γ_n + ε̃_n (where ε̃_n is in the kernel of O_theta) have the
 same theta-level sequence but different oracle outputs {γ_n}. **Status: PROOF-DRAFT
-(Prop. G.3 open step).**
+(rests on Prop. G.3* Items 2–4, proved unconditionally in OB-04).**
 
 ---
 

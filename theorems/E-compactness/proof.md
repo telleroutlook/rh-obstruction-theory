@@ -292,11 +292,19 @@ converging locally uniformly to some entire function `G`.
 **Step 2 (Identification).** We claim `G = Ξ`.
 
 - `G(z_0) = lim F_{N_j}(z_0) = Ξ(z_0) ≠ 0` by (H-norm).
-- **Order:** By (H-bound), `{F_N}` is locally uniformly bounded, so `G` satisfies
-  `T(r,G) = O(r)` (Nevanlinna characteristic, classical from locally uniform limit);
-  hence `G` has **conventional order ≤ 1** in the sense of Nevanlinna.
-  (Note: "conventional order" means `ρ(G) = limsup_{r→∞} log log M_G(r)/log r ≤ 1`;
-  this is NOT the same as finite exponential type `|G(z)| = O(e^{C|z|})`.)
+- **Order — REQUIRES A UNIFORM BOUND (corrected; PROMPT_LINT L14, re-scan from OB-11).**
+  Local uniform boundedness (H-bound) alone does **NOT** bound the order of the limit `G`.
+  Counterexample: `F_N ≡ Ξ·e^{z²−z_0²}` is a constant sequence, locally uniformly bounded
+  on every disk, has the same zero divisor as Ξ, and `F_N(z_0)=Ξ(z_0)` — yet its limit has
+  conventional order 2 and is ≠ Ξ. The order of `G` therefore does not follow from
+  (H-bound); it must be supplied by a **uniform Nevanlinna bound**:
+  ```
+  (H-order):  T(r, F_N) ≤ C·r + C_0    with C, C_0 independent of N.
+  ```
+  Under (H-order), the Ahlfors–Shimizu characteristic is lower-semicontinuous under
+  locally uniform convergence, giving `T(r,G) = O(r)` (conventional order ≤ 1). A per-N
+  bound `T(r,F_N)=O(r)` with N-dependent constant is **insufficient**. (This is the same
+  growth-transfer gap OB-11 identified for E'-pos; the re-scan found it here too.)
 - **Zero divisor:** Ξ has a zero divisor `{ω_n}_{n≥1}` ⊂ ℂ (its nontrivial zeros,
   unconditionally complex — their reality is the content of RH, not a hypothesis here).
   Write `Ξ(z) = Ξ(0) · ∏_{n≥1}(1 − z²/ω_n²)` if all zeros come in pairs ±ω_n
@@ -310,6 +318,11 @@ converging locally uniformly to some entire function `G`.
   as `N → ∞` (see OB-05 referee Theorem B').
 - By (H-tail) + condition (T), the zero multiset of each subsequential limit `G`
   equals the zero multiset `{ω_n}` of Ξ exactly (Hurwitz + tail no-intrusion).
+- **Identity — needs the order bound (H-order), not just the divisor.** The complete
+  divisor + one-point normalization only give `G = Ξ·H` for a zero-free even entire `H`
+  with `H(z_0)=1`; they do NOT force `H≡1` without (H-order) (else `H=e^{z²−z_0²}` is a
+  counterexample). Given (H-order): `H` is zero-free of conventional order ≤ 1, so
+  `H=e^{az+b}`; evenness forces `a=0`; `H(z_0)=1` forces `e^b=1`; hence `H≡1` and `G=Ξ`.
 - `G` is even (locally uniform limit of even functions).
 - By the corrected Lemma A* (OB-05): an entire function of Nevanlinna order ≤ 1
   with the same complete zero divisor as Ξ, which is even and shares one nonzero

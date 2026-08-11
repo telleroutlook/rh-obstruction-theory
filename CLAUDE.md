@@ -183,9 +183,22 @@ any premise is above its inspected evidence level.
 
 ## Outsource-prompt pre-send checklist (mandatory)
 
-Before sending any `outsource/` problem, self-check these five failure modes (each has
+Before sending any `outsource/` problem, self-check these failure modes (each has
 already caused a rejected/rewritten prompt). Verify load-bearing claims with a quick
 script, not from memory.
+
+0. **Run `outsource/PROMPT_LINT.md` on every new or edited prompt before it ships** —
+   the standing adversarial checklist built from every past audit (OB-01..13): order ≠
+   exponential type, target parity from the functional equation, zero-vs-pole role,
+   canonical-product genus, RH-imported-via-divisor, vacuous real atoms, counting-law
+   factors, global observation map, growth-derived-not-assumed, power-sum ≠ jet, dropped
+   frozen terms, discrepancy-degree parity, Fredholm zero locations, per-n ≠ uniform
+   bound, zeros-in-Ω ≠ zeros-in-ℂ, representation-invariance/measure-collapse, cited
+   black-box exact-number-and-scope, script-verified anchors, honest inconclusive
+   verdict. Each item is a check you actually RUN (script/grep/derivation). When a
+   referee surfaces a new defect class, add it to the lint and **re-scan every active
+   prompt AND every `theorems/*/statement.md|proof.md`** — the defect is never assumed
+   independent.
 
 1. **No vacuous target.** The goal must not be satisfiable by inflating a free
    parameter. Pin comparison scales to a fixed arithmetic quantity (e.g. `o(log λ)`,

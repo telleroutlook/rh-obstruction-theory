@@ -161,9 +161,13 @@ or Hadamard-product uniqueness).  Hurwitz then transfers real-zero location. ☐
 | (6) normalization at 0 | PARTIAL (λ^{−iz} phase is the obstacle) |
 | (H-norm) F_N(z₀) → Ξ(z₀) | OPEN (the "suitably normalized" step) |
 | (H-bound) local uniform bound M_R | OPEN (no tail envelope in CCM 2511.22755) |
-| (H-tail) summable tail control | OPEN (the decisive missing estimate) |
+| (H-order) uniform Nevanlinna bound T(r,F_N) ≤ Cr+C₀, C independent of N | OPEN — REQUIRED for the order of the limit; (H-bound) alone is insufficient (PROMPT_LINT L14; counterexample F_N≡Ξ·e^{z²−z₀²}) |
+| (H-tail) summable tail control + no-intrusion (T) | OPEN (the decisive missing estimate) |
 
-**The theorem identifies (H-bound) and (H-tail) as the exact missing ingredients.**
+**The theorem identifies (H-bound), (H-order), and (H-tail) as the exact missing
+ingredients.** Note (H-order) is distinct from (H-bound): local uniform boundedness does
+not transfer an order bound to the limit — a *uniform-in-N* characteristic bound is
+required (corrected 2026-08-11 by PROMPT_LINT re-scan from OB-11).
 
 **For Suzuki W(a, θ; z):**
 

@@ -59,8 +59,9 @@ explicit information obstruction pair `(𝒵_L^+, 𝒵_L^-)` such that:
 - For `L = O_finite`: the adversary pair is the B2 quartet construction `Q(σ₀,T)`.
   The observation collision is the Jacobian rank theorem (B2 §4.3). **Status: PROOF-DRAFT (B2).**
 - For `L = O_theta`: the adversary pair is the S(T)-perturbed multiset of Theorem G
-  (Prop. G.3). The observation collision is the S(T) gap identity (Theorem G Lemma G.2).
-  **Status: PROOF-DRAFT (G-info).**
+  (Prop. G.3*, Items 2–4 proved unconditionally, OB-04 2026-08-11). The observation
+  collision is the S(T) gap identity (Theorem G Lemma G.2).
+  **Status: PROOF-DRAFT (G-info); Item 1 conditional on factorization (2.7).**
 
 **Common structure.** Both cases use:
 1. **Hadamard uniqueness** (Lemma G.1 / Lemma E'.1): two distinct zero multisets give
@@ -88,8 +89,9 @@ critical line, whose `d_n` sequence differs from the Riemann `d_n` by a computab
 **Status: PROOF-DRAFT** (explicit computation needed).
 
 *Proof of second separation.* Follows from Lemma G.2: any two multisets related by an
-S(T) perturbation `γ_n → γ_n + ε_n` with `ε_n` bounded by `S(γ_n)/N'(γ_n)` have
-the same `O_theta` image by construction. **Status: PROOF-DRAFT (Prop. G.3 open step).**
+S(T) perturbation `γ_n → γ_n + ε_n` with `ε_n` bounded by `S(γ_n)/A'(γ_n)` have
+the same `O_theta` image by construction. **Status: PROOF-DRAFT (rests on Prop. G.3*
+Items 2–4, proved unconditionally in OB-04; the denominator is A'(t)=θ'(t)/π, not N'(t)).**
 
 ---
 
