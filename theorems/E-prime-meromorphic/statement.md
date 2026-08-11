@@ -2,7 +2,53 @@
 
 **Theorem ID:** E-prime-meromorphic  
 **Program ref:** EXT-3 (extension of Theorem E to Suzuki meromorphic target)  
-**Status:** PROOF-DRAFT (E'-neg CONFIRMED-after-correction OB-09; E'-pos corrected PROOF-DRAFT OB-11; Lemma E'.1 CONFIRMED OB-06. Suzuki-family ingredients (LB)/(ZT_ℂ)/(PL⁺)/(UG) OPEN. Gate-A package OB-30)
+**Status:** PROOF-DRAFT — **Gate-A BLOCKED (OB-30, 2026-08-12)** for the Suzuki-target
+claim. Three independent errors (see §0): (i) the E'-neg separation degree `z^{2J+3}` is
+**wrong** (a `J=1` counterexample gives leading `z³`); (ii) assumption (A2) `Z(B)∩ℝ={0}` is
+**false** for the actual `B=iA'=iξ'(1/2−iz)` (Rolle between real `A`-zeros forces real
+`B`-zeros); (iii) Suzuki's `W(a,θ;z)` is **entire** (Thm 1.5), incompatible with the
+moving-pole (PL⁺) approximation. Survives only as an **abstract odd-meromorphic lemma** with
+a corrected "some nonzero Taylor coefficient" separation (not a fixed degree). See §0.
+
+---
+
+## §0. Reframing after OB-30 (Gate-A BLOCKED) — READ FIRST
+
+The submitted E' claimed a Suzuki-target (`W=z²ξ/ξ'`) non-identifiability + sufficiency
+pair. OB-30 **BLOCKED** it. Three genuine errors, each fatal on its own:
+
+- **(1) E'-neg separation degree is wrong.** Matching the `J`-jet at `w₀ = iτ ≠ 0` makes
+  `L(t) = O((t−t₀)^J)` at `t₀ = w₀²`; it does **NOT** force the first `J` log-power-sums
+  `Δ_1,…,Δ_J` at `t=0` to vanish. So the leading discrepancy of `F^{(c)}−W` at the origin is
+  generically `z³` (odd, `=z^{2·1+1}` for `J=1`), **not** `z^{2J+3}`. Explicit counterexample
+  (OB-30 §2.2): `A(z)=sin πz/(πz)=∏(1−z²/n²)`, `B(z)=sinh z`, `w₀=i`, `k=J=1` satisfy
+  (A1)–(A3), yet `F^{(c)}(z)−W(z) = −Δ₁(c)z³+O(z⁵)` with `Δ₁'(0) = Σ_{n≥3}
+  (n²−4)/(2n²(n²+1)(n−1)) > 0`. The `z^{2J+3}` Cauchy bound is therefore unproven; the honest
+  statement is only "**some** nonzero Taylor coefficient of order ≥ 3 exists", giving a
+  Cauchy bound at that (unspecified) degree.
+- **(2) (A2) is false for the actual target.** `A(z)=ξ(1/2−iz)` gives `B(z)=ξ'(1/2−iz)=iA'(z)`.
+  By Hardy there are infinitely many real zeros of `A`; Rolle gives a real zero of `A'`, hence
+  of `B`, between consecutive ones — so `Z(B)∩ℝ ≠ {0}`. Thus (A1)–(A3) **cannot** hold for the
+  real `ξ/ξ'`; they describe an *abstract* pair of independent functions only. And (A1)'s "all
+  `A`-zeros simple and real" for the actual `A` **is** RH + simplicity.
+- **(3) Suzuki approximants are entire; moving poles are incompatible.** Suzuki Thm 1.5:
+  `W(a,θ;z)` is **entire**; `e^{φ(a,z)}W(a,θ;z)` stays entire for holomorphic finite `φ`. A
+  sequence of entire functions cannot converge locally uniformly, on compacts encircling a
+  target pole, to the meromorphic `W` (contour integral `∮(z−p)^{m−1}·entire = 0` passes to
+  the limit, contradicting a pole). So (PL⁺) is **not** a "still-open Suzuki property" — it is
+  *incompatible* with Suzuki's entire family under the stated normalization.
+
+**Withdrawn:** the Suzuki-target E'-neg/E'-pos claims; the `z^{2J+3}` degree; the "(LB)/(ZT_ℂ)/
+(PL⁺)/(UG) are OPEN Suzuki ingredients" framing (PL⁺ is incompatible, not open). Also: the
+Suzuki citation is **Corollary 1.6**, not "Cor 6".
+
+**What survives (as an abstract lemma, PARTIAL):** over an abstract odd meromorphic target
+`W = z²A/B` with `A,B` *independent* order-≤1 functions satisfying (A1)–(A3) as **abstract
+hypotheses** (not the real `ξ/ξ'`), the `w₀`-jet IFT / Cauchy–Vandermonde Jacobian gives a
+record-respecting `F^{(c)}≠W` (Link A/B core, CONFIRMED given the abstract hypotheses), with a
+**nonzero-Taylor-coefficient** separation (degree not fixed). The meromorphic uniqueness Lemma
+E'.1 is correct. Neither specializes to the real Suzuki target. Do not read this as a Suzuki
+companion.
 
 ---
 
@@ -39,7 +85,7 @@ zeros at γ_n, poles at zeros of ξ').  The current E'-pos identification step
 (which attempts to show even F_N → even W) is REFUTED: even F_N cannot converge
 to the odd function W (OB-06).
 
-Suzuki Cor. 6 (baseline, INDEPENDENTLY-CHECKED): RH follows if
+Suzuki Cor. 1.6 (baseline, INDEPENDENTLY-CHECKED): RH follows if
 `e^{φ(a,z)} W(a,θ;z) → z²ξ(1/2−iz)/ξ'(1/2−iz)` uniformly on compacts.
 The target `z²ξ(1/2−iz)/ξ'(1/2−iz)` is meromorphic with the correct zero/pole
 structure as above.
@@ -212,7 +258,7 @@ specific Suzuki family — these are the concrete missing ingredients (§6).
 
 ## §6. Application to Suzuki framework
 
-Suzuki Cor. 6 (baseline, INDEPENDENTLY-CHECKED): RH follows if
+Suzuki Cor. 1.6 (baseline, INDEPENDENTLY-CHECKED): RH follows if
 `e^{φ(a,z)} W(a,θ;z) → z²ξ(1/2−iz)/ξ'(1/2−iz)` uniformly on compacts.
 
 The E'-neg result (once written out) will say: finite evidence alone (first `k_N` zeros of

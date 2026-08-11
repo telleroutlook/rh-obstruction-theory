@@ -1,7 +1,7 @@
 # Dependencies — Theorem E' (E-prime-meromorphic)
 
 theorem_id: E-prime-meromorphic
-status: PROOF-DRAFT (E'-neg CONFIRMED-after-correction OB-09; E'-pos corrected PROOF-DRAFT OB-11)
+status: PROOF-DRAFT — Gate-A BLOCKED (OB-30 2026-08-12) for the Suzuki-target claim (degree z^{2J+3} wrong; (A2) false for real B=iA'; Suzuki entire, PL+ incompatible). Survives as an abstract odd-meromorphic lemma only.
 
 dependencies:
 
@@ -45,10 +45,10 @@ dependencies:
 
   - id: SUZUKI-COR6
     statement: >
-      (Suzuki arXiv:2606.09096, Corollary 6) RH follows if
+      (Suzuki arXiv:2606.09096, Corollary 1.6) RH follows if
       e^{phi(a,z)} W(a,theta;z) -> z^2 xi(1/2-iz)/xi'(1/2-iz) uniformly on compacts.
       The target W is meromorphic with poles at Riemann zero ordinates.
-    source: "arXiv:2606.09096, Cor 6; source-checked, baseline/suzuki-2606.09096/."
+    source: "arXiv:2606.09096, Cor 1.6; source-checked, baseline/suzuki-2606.09096/."
     mathematical: INDEPENDENTLY-CHECKED
     computational: NONE
     usable_as_premise: true
@@ -81,8 +81,18 @@ dependencies:
       unnecessary. The genuine simple pole at each p in the polar set is recovered by a
       contour/residue argument on 1/F_{n_j} (E'-pos proof step 3), not by Marty normality.
 
-gate_a_status: OPEN
+gate_a_status: BLOCKED
 gate_a_note: >
-  WEIERSTRASS-PRODUCT-ORDER-1 and MARTY-NORMAL-FAMILIES: standard results,
-  citation by theorem number not yet verified from physical books.
-  HADAMARD-PRODUCT-XI and SUZUKI-COR6: already CLEAR from Theorem E baseline.
+  Gate-A BLOCKED (OB-30 2026-08-12). Three independent fatal errors: (1) E'-neg separation
+  degree z^{2J+3} is WRONG — matching the J-jet at w0!=0 gives L=O((t-t0)^J) but does NOT
+  kill the first J log-power-sums at t=0; explicit J=1 counterexample (A=sin(pi z)/(pi z),
+  B=sinh z, w0=i) gives leading z^3, not z^5. (2) Assumption (A2) Z(B) cap R = {0} is FALSE
+  for the actual B=i*xi'(1/2-iz): Rolle between consecutive real xi-zeros forces a real
+  B-zero. So (A1)-(A3) hold only for an ABSTRACT independent pair, not the real xi/xi'; and
+  (A1)'s all-simple-real-A-zeros is RH+simplicity. (3) Suzuki W(a,theta;z) is ENTIRE (Thm 1.5);
+  the moving-pole (PL+) approximation is INCOMPATIBLE with entire approximants (contour
+  argument), not a still-open Suzuki ingredient. Suzuki cite corrected to Corollary 1.6.
+  SURVIVES only as an abstract odd-meromorphic jet lemma (Link A/B core given abstract
+  (A1)-(A3)) with a nonzero-Taylor-coefficient separation (degree not fixed), plus the correct
+  meromorphic uniqueness Lemma E'.1. Does NOT specialize to the Suzuki target. WEIERSTRASS /
+  MARTY citation-formality notes unchanged. HADAMARD-PRODUCT-XI / SUZUKI-COR6 baseline CLEAR.
