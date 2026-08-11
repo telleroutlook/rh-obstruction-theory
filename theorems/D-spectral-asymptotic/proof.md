@@ -188,11 +188,16 @@ No term `C·t^{-d/m}·log(1/t)` with `C ≠ 0` appears as the **leading singular
    `d,m>0`. Stating only "Γ's pole doesn't coincide" is insufficient — the simple-pole
    fact (i) is the load-bearing half.
 
-**Exact citation (OB-15 §3, scope-checked).** The full-classical-ΨDO statement rests on
-**Lesch 1999** (Ann. Global Anal. Geom. 17, 151–187) **Theorem 3.7** and eqs (3.18)–(3.22)
-with `A=I` (so `a=0, k=0`), whose parametric-ellipticity hypothesis is met since `h_m>0`;
-`j=0` gives exponent `−d/m < 0` (not a non-negative integer), so `c̃_0` is a constant — no
-leading log. This extends **Grubb–Seeley 1995** (Invent. Math. 121) Thm 2.7. NOTE
+**Exact citation (OB-15 §3, scope-checked; SOURCE-VERIFIED in-repo 2026-08-11).** The
+full-classical-ΨDO statement rests on **Lesch 1999** (Ann. Global Anal. Geom. 17, 151–187)
+**Theorem 3.7**, i.e. the heat expansion `Tr(A e^{-tP}) ∼ Σ_j t^{(j−n−a)/m} c̃_j(log t) +
+Σ_j d̃_j t^j` with `deg c̃_j ≤ k` if `(j−a−n)/m ∉ ℤ₊` (else `≤ k+1`). Verified against the
+arXiv source dg-ga/9708010 v4 (deposited in `baseline/lesch-dg-ga-9708010/`, see
+PROVENANCE.md): the expansion is eq. (3.9) / preprint Theorem S1-3.5 (custom preprint
+labels; published numbering = Thm 3.7). With `A=I` (so `a=0, k=0`) and `j=0`, the exponent
+`−d/m < 0` is not a non-negative integer, so `c̃_0` is a constant — **no leading log**,
+exactly as needed. The proof follows **Grubb–Seeley 1995** (Invent. Math. 121) Thm 2.7
+(cited within Lesch's proof). NOTE
 (PROMPT_LINT L17): **BGV Thm 2.30** covers only Laplace-type; **Gilkey Lemma 1.8.2** covers
 only differential operators — neither suffices for the general ΨDO claim and neither is
 used as the load-bearing citation. Independent cross-check: Hörmander 1968 (Acta Math. 121)
@@ -220,9 +225,9 @@ is now correctly scoped:
 quantum graphs. The leading-singularity approach is a finer invariant than counting-function
 comparison alone.
 
-**Status: PROOF-DRAFT (leading-singularity obstruction; citation pinned to Lesch 1999
-Thm 3.7 + Grubb–Seeley 1995 Thm 2.7 by OB-15 external review 2026-08-11; three coefficient/
-pole corrections applied).**
+**Status: PROOF-DRAFT (leading-singularity obstruction; citation SOURCE-VERIFIED in-repo
+to Lesch 1999 heat expansion eq. (3.9) / Thm 3.7, baseline/lesch-dg-ga-9708010/; three
+coefficient/pole corrections applied per OB-15).**
 
 ---
 
@@ -250,7 +255,7 @@ the "exact determinant obstruction (order/type)" mentioned in the PLAN.
 | Extensions: sums, graphs, polynomials, perturbations (§3) | PROOF-DRAFT |
 | Heat-trace Z_ζ log-singularity lemma (§4) | PROOF-DRAFT ✓ + **INDEPENDENT-CHECKER** (OB-19 2026-08-11): exact closed form (1/2πt)(log(1/t)−γ_E−log2π), leading coeff exactly 1/2π; symbolic V1 + 110-digit replay. Fixed constant Γ'(2)=1−γ_E (earlier draft had −γ_E−1). V4 numerical remainder C=2A is conditional on an explicit \|E(u)\|≤A log(u+2) (e.g. Trudgian 2014), NOT derivable from bare O(log T). |
 | All-orders no-log for 𝒞_ell (§4 previous claim) | **REFUTED** by external review (OB-01, 2026-08-11): counterexample He_n=(|n|+a/|n|)e_n on S¹ has t·log(1/t) term. Gilkey Thm 1.8.1 citation WRONG (should be Lemma 1.8.2, covers differential operators only). BGV Thm 2.30 covers Laplace-type only. |
-| Leading-singularity obstruction (§4 corrected) | PROOF-DRAFT ✓ — no t^{-d/m}·log(1/t) is possible. Citation pinned by OB-15 (2026-08-11) to Lesch 1999 Thm 3.7 + eqs (3.18)–(3.22) with A=I, extending Grubb–Seeley 1995 Thm 2.7. |
+| Leading-singularity obstruction (§4 corrected) | PROOF-DRAFT ✓ — no t^{-d/m}·log(1/t) is possible. Citation SOURCE-VERIFIED in-repo (2026-08-11) to Lesch 1999 heat expansion eq. (3.9)/Thm 3.7 (baseline/lesch-dg-ga-9708010/, exact content match), extending Grubb–Seeley 1995 Thm 2.7. |
 | Coefficient/pole corrections (OB-15 2026-08-11) | PROOF-DRAFT ✓ — (a) ellipticity mandatory (𝕋² counterexample 1+D_x²+D_y⁴ gives exponent 3/4≠1/2); (b) ζ_H NOT regular at all negative integers (Res_{s=−k}=m⁻¹Wres(H^k); only s=0 regular; subleading t^k log t possible, k≥1); (c) a_0=Γ(d/m)·Res, not a_0·m/Γ(d/m); (d) no-log needs BOTH simple-pole (Lesch) AND Γ regular at d/m. |
 | Scope: applies to full 𝒞_ell (not just differential operators) | PROOF-DRAFT ✓ — Lesch Thm 3.7 covers all classical elliptic ΨDO (parametric ellipticity from h_m>0); BGV/Gilkey (differential/Laplace-type only) NOT relied upon (L17). |
 | Spectral zeta pole obstruction (§5) | SKETCH (future work) |

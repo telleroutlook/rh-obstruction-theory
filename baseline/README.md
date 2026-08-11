@@ -54,10 +54,33 @@ locally uniform limit — "suitably normalized" is doing real work. This is a no
 trap distinct from the Suzuki `ξ/ξ'` target. Suzuki (meromorphic) and CCM (entire `ξ̂`/`Ξ`)
 must never be conflated.
 
+### Andersson 2408.15713 — `andersson-2408.15713/arXiv-2408.15713v1.gz`
+*J.-F. Andersson (Helson zeta prescribed zeros), arXiv:2408.15713.*
+Single LaTeX doc. Checked statement (Theorem C dependency, Gate A CLEARED):
+- **Theorem 5** (`\label{thm5}`, line 203; 5th `\begin{thm}`): for any open connected
+  `U ⊇ {Re s>1}` and any signed multiset `Z ⊂ U∩{Re s<1}` without limit points on
+  `U∪(1+iℝ)`, there is a completely multiplicative unimodular `χ` whose Helson zeta
+  `ζ_χ` continues meromorphically to `U` with prescribed poles/zeros (with multiplicity)
+  from `Z`, and `U` is the maximal domain. Exact match to C's cited premise.
+
+### Lesch 1999 (dg-ga/9708010) — `lesch-dg-ga-9708010/arXiv-dg-ga9708010v4.tar.gz`
+*M. Lesch, "On the noncommutative residue for pseudodifferential operators with
+log-polyhomogeneous symbols", Ann. Global Anal. Geom. 17 (1999), 151–187.*
+Multi-file LaTeX (`sec2.tex`). Checked statement (Theorem D load-bearing citation,
+SOURCE-VERIFIED; see `lesch-dg-ga-9708010/PROVENANCE.md`):
+- Heat expansion **eq. (3.9)** [preprint `G1-3.9`, published **Thm 3.7**]:
+  `Tr(A e^{-tP}) ∼ Σ_j t^{(j-n-a)/m} c_j(log t) + Σ_j d_j t^j`, `deg c_j ≤ k` if
+  `(j-a-n)/m ∉ ℤ₊` (else `k+1`). With `A=I` (`a=0,k=0`), `j=0`: exponent `-n/m<0 ∉ ℤ₊`,
+  so `c_0` constant → **leading term `t^{-n/m}` carries no log** (exactly D's need).
+- Proof follows Grubb–Seeley 1995 (Invent. Math. 121) Thm 2.7 (cited in-proof).
+
 ## To re-verify
 ```bash
 mkdir -p /tmp/v && tar xzf suzuki-2606.09096-weil-screw-function.tar.gz -C /tmp/v
 grep -n "lowest eigenvalue\|is continuous in\|all zeros of\|z^2\|xi(1/2" /tmp/v/screwzelf_7.tex
+# Lesch heat expansion:
+mkdir -p /tmp/vl && tar xzf lesch-dg-ga-9708010/arXiv-dg-ga9708010v4.tar.gz -C /tmp/vl
+grep -n "Tr(A e^{-tP})\|deg .*c\|G1-3.9\|S1-3.5" /tmp/vl/sec2.tex
 ```
 
 ## Pending (Gate A, program §6.A.3)

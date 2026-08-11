@@ -39,9 +39,13 @@ dependencies:
     source: >
       General classical elliptic PsiDO (load-bearing): Lesch (1999),
       'On the noncommutative residue for pseudodifferential operators with
-      log-polyhomogeneous symbols', Ann. Global Anal. Geom. 17, 151-187, Theorem 3.7 +
-      eqs (3.18)-(3.22) with A=I; extends Grubb-Seeley (1995) Invent. Math. 121, Thm 2.7.
-      Complex powers: Seeley (1967) AMS Proc. Symp. Pure Math. 10, 288-307.
+      log-polyhomogeneous symbols', Ann. Global Anal. Geom. 17, 151-187. SOURCE-VERIFIED
+      in-repo against arXiv dg-ga/9708010 v4 (baseline/lesch-dg-ga-9708010/): the heat
+      expansion is eq. (3.9) [preprint label G1-3.9], Tr(A e^{-tP}) ~ sum_j t^{(j-n-a)/m}
+      c_j(log t) + sum_j d_j t^j, with deg c_j <= k if (j-a-n)/m not in Z+, else k+1
+      (preprint Theorem S1-3.5 / published Thm 3.7). With A=I (a=0,k=0), j=0: exponent
+      -n/m<0 not in Z+, so c_0 is constant => leading term t^{-n/m} carries NO log.
+      Proof follows Grubb-Seeley (1995) Invent. Math. 121, Thm 2.7 (cited in the proof).
       SCOPE-LIMITED references (do NOT cover general PsiDO): Berline-Getzler-Vergne (1992)
       Thm 2.30 (Laplace-type / order-2 differential only); Gilkey 'Invariance Theory...'
       2nd ed. 1995, Lemma 1.8.2 (NOT 'Thm 1.8.1'; differential operators only).
@@ -77,16 +81,15 @@ dependencies:
       (not just compact quantum graphs) and heat-trace singularity type (not just Weyl
       leading term). Novelty gate CLEARED — see novelty.md.
 
-gate_a_status: CLEAR-PENDING-LESCH-SOURCE
+gate_a_status: CLEARED
 gate_a_note: >
   All dependencies REFEREED; no LEGACY imports; no PENDING items. Novelty gate CLEARED
-  (heat-trace §4 leading-singularity argument goes beyond Endres-Steiner). Citation
-  numbers corrected (OB-15, re-scan 2026-08-11): the general classical-elliptic-PsiDO
-  leading-log result is Lesch 1999 Thm 3.7 (+ Grubb-Seeley 1995 Thm 2.7), NOT BGV/Gilkey
-  (those are Laplace-type/differential only; Gilkey is Lemma 1.8.2, not 'Thm 1.8.1').
-  Remaining action for full INDEPENDENTLY-CHECKED: source-verify Lesch 1999 Thm 3.7 and
-  Grubb-Seeley 1995 Thm 2.7 against the actual papers (arXiv dg-ga/9708010 for Lesch;
-  Invent. Math. 121 for Grubb-Seeley). WebFetch is blocked in this environment; awaiting a
-  local copy of the source to close this the way C's Andersson citation was closed (tarball
-  in baseline/, exact theorem match). Until then D's status is PROOF-DRAFT with the
-  citation numbers pinned but not yet source-matched in-repo.
+  (heat-trace §4 leading-singularity argument goes beyond Endres-Steiner). The load-bearing
+  leading-log citation is now SOURCE-VERIFIED in-repo: Lesch 1999 heat expansion eq. (3.9)
+  (preprint Theorem S1-3.5 / published Thm 3.7), verified against arXiv dg-ga/9708010 v4
+  deposited in baseline/lesch-dg-ga-9708010/ (see PROVENANCE.md) — exact content match,
+  the A=I,j=0 case gives a log-free leading term as D requires. Citation numbers corrected
+  (Gilkey is Lemma 1.8.2 not 'Thm 1.8.1'; BGV/Gilkey are Laplace-type/differential only and
+  NOT load-bearing, PROMPT_LINT L17). Grubb-Seeley 1995 Thm 2.7 is cited within Lesch's own
+  proof (secondary; not separately deposited). This closes the citation Gate the same way
+  C's Andersson Theorem 5 was closed (arXiv source in baseline/, exact theorem match).
