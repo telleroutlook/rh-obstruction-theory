@@ -27,10 +27,9 @@ problem.
 | OB-08 | `OB-08-G-factorization-condition.md` | G | Factorization condition (2.7) for 𝔐_FC | RESOLVED — integrated 2026-08-11 |
 | OB-09 | `OB-09-E-prime-neg-IFT-odd-meromorphic.md` | E' §4 | IFT for odd meromorphic target: zero-perturbation Jacobian | RESOLVED — integrated 2026-08-11 |
 | OB-10 | `OB-10-G-Hurwitz-real-zeros.md` | G §7 | Hurwitz: PSD Fredholm limit has all-real zeros | RESOLVED — integrated 2026-08-11 |
-
-## Difficulty
-
-- **OB-01–10:** RESOLVED (referee reports integrated 2026-08-11).
+| OB-11 | `OB-11-E-prime-pos-convergence-identification.md` | E' §5 | E'-pos: Montel-on-Ω convergence + identification G=W | OPEN — send for review |
+| OB-12 | `OB-12-F-complexity-measure-welldefined.md` | F | Is the Schur-certificate complexity κ well-defined / non-collapsing? | OPEN — send for review |
+| OB-13 | `OB-13-B2-independent-exact-reconstruction.md` | B2 | Independent exact-rational reconstruction of the collision | OPEN — send for review |
 
 Notes on the OB-09 / OB-10 outcomes:
 
@@ -47,6 +46,28 @@ Notes on the OB-09 / OB-10 outcomes:
   corollary (Conway VII.§2 Cor. 2.6) plus the identity theorem to exclude f≡0. Yields
   Corollary G.5: convergence to Ξ̂ ⟹ RH, so 𝔐_FC membership condition 3 is unverifiable
   without proving RH. Integrated into G-fredholm-certificate proof.md §5b.
+
+## Difficulty (open tasks OB-11..OB-13)
+
+- **OB-11 (E'-pos convergence + identification):** Complex analysis (Montel normal
+  families on Ω, Hurwitz zero-transfer, meromorphic extension across poles). **Medium
+  difficulty.** The one genuinely nontrivial step is the Nevanlinna-order bound on the
+  extended limit (Step 4a); everything else is a careful assembly of standard theorems.
+  Allows an honest "hypotheses insufficient for Step 4a + minimal fix" outcome.
+
+- **OB-12 (F complexity measure well-defined):** Linear algebra / proof complexity.
+  **Medium difficulty but decisive.** Resolves an internal contradiction in Theorem F's
+  proof draft (Passage A says κ∈{1,+∞}; Passage B says κ=N). The task explicitly permits
+  a REFUTED outcome: if every orthogonally-invariant Schur/congruence measure collapses
+  to a spectral condition, Theorem F is not a genuine complexity lower bound and must be
+  downgraded. This is the most consequential of the three.
+
+- **OB-13 (B2 independent exact reconstruction):** Computational verification (exact
+  rational arithmetic). **Low difficulty, high value.** Fills the currently-empty
+  INDEPENDENT-CHECKER computational axis for the B2 finite certificate. The m=2 anchor
+  table and a second m=3 instance were both verified by the producer's own script before
+  sending (exact zero residual; mutation guard breaks it); the task is a genuinely
+  independent cross-implementation replay.
 
 ## What a returned verification should contain
 
