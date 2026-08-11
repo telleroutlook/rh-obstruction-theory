@@ -30,23 +30,29 @@ dependencies:
 
   - id: SEELEY-DEWITT-EXPANSION
     statement: >
-      The heat trace Z_H(t) = Tr(e^{-tH}) for H in C_ell has the polyhomogeneous
-      expansion Z_H(t) ~ sum_{k>=0} a_k t^{(k-d)/m} as t -> 0+, with NO log(t)
-      terms in the leading expansion.
+      LEADING heat-trace singularity of a positive classical ELLIPTIC pseudodifferential
+      H of order m>0 on a closed d-manifold is a PURE POWER: Z_H(t) = a_0 t^{-d/m} +
+      O(t^{-d/m+eps}), a_0>0, with NO t^{-d/m} log(1/t) leading term. (Subleading
+      t^k log t terms, k>=1, CAN occur when Wres(H^k) != 0 — the earlier 'no log at any
+      order' claim was REFUTED, OB-01/OB-15; only the leading term is log-free, which is
+      all Theorem D needs.)
     source: >
-      Seeley (1967) AMS Proc. Symp. Pure Math. 10, pp. 288-307.
-      Berline-Getzler-Vergne 'Heat Kernels and Dirac Operators' (Springer, 1992),
-      Theorem 2.30 (heat kernel expansion for Dirac-type operators; generalizes to
-      elliptic operators via symbol calculus).
-      Gilkey 'Invariance Theory, the Heat Equation, and the Atiyah-Singer Index Theorem'
-      (CRC Press, 2nd ed. 1995), Theorem 1.8.1 (full asymptotic expansion, no log terms).
+      General classical elliptic PsiDO (load-bearing): Lesch (1999),
+      'On the noncommutative residue for pseudodifferential operators with
+      log-polyhomogeneous symbols', Ann. Global Anal. Geom. 17, 151-187, Theorem 3.7 +
+      eqs (3.18)-(3.22) with A=I; extends Grubb-Seeley (1995) Invent. Math. 121, Thm 2.7.
+      Complex powers: Seeley (1967) AMS Proc. Symp. Pure Math. 10, 288-307.
+      SCOPE-LIMITED references (do NOT cover general PsiDO): Berline-Getzler-Vergne (1992)
+      Thm 2.30 (Laplace-type / order-2 differential only); Gilkey 'Invariance Theory...'
+      2nd ed. 1995, Lemma 1.8.2 (NOT 'Thm 1.8.1'; differential operators only).
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
     role: >
-      Key: no log(1/t) terms in Seeley-DeWitt expansion; while Z_zeta has log(1/t)/t.
-      Citations by theorem number: BGV Thm 2.30 and Gilkey Thm 1.8.1.
-      This is the load-bearing step making the heat-trace argument categorical.
+      Key: no t^{-d/m} log(1/t) LEADING term for H in C_ell, while Z_zeta has
+      (1/2pi) log(1/t)/t leading. Citation pinned by OB-15 to Lesch 1999 Thm 3.7
+      (general classical elliptic PsiDO); BGV Thm 2.30 and Gilkey Lemma 1.8.2 are
+      differential/Laplace-type only and are NOT the load-bearing citation (PROMPT_LINT L17).
 
   - id: COURANT-WEYL-PERTURBATION
     statement: >
@@ -71,9 +77,16 @@ dependencies:
       (not just compact quantum graphs) and heat-trace singularity type (not just Weyl
       leading term). Novelty gate CLEARED — see novelty.md.
 
-gate_a_status: CLEAR
+gate_a_status: CLEAR-PENDING-LESCH-SOURCE
 gate_a_note: >
-  All dependencies REFEREED. No LEGACY imports; no PENDING items.
-  Novelty gate CLEARED (heat-trace §4 argument goes beyond Endres-Steiner).
-  Remaining action for full INDEPENDENTLY-CHECKED: verify BGV Thm 2.30 and
-  Gilkey Thm 1.8.1 theorem numbers from physical books (citations recorded above).
+  All dependencies REFEREED; no LEGACY imports; no PENDING items. Novelty gate CLEARED
+  (heat-trace §4 leading-singularity argument goes beyond Endres-Steiner). Citation
+  numbers corrected (OB-15, re-scan 2026-08-11): the general classical-elliptic-PsiDO
+  leading-log result is Lesch 1999 Thm 3.7 (+ Grubb-Seeley 1995 Thm 2.7), NOT BGV/Gilkey
+  (those are Laplace-type/differential only; Gilkey is Lemma 1.8.2, not 'Thm 1.8.1').
+  Remaining action for full INDEPENDENTLY-CHECKED: source-verify Lesch 1999 Thm 3.7 and
+  Grubb-Seeley 1995 Thm 2.7 against the actual papers (arXiv dg-ga/9708010 for Lesch;
+  Invent. Math. 121 for Grubb-Seeley). WebFetch is blocked in this environment; awaiting a
+  local copy of the source to close this the way C's Andersson citation was closed (tarball
+  in baseline/, exact theorem match). Until then D's status is PROOF-DRAFT with the
+  citation numbers pinned but not yet source-matched in-repo.
