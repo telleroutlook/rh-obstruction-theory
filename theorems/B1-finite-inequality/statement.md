@@ -1,6 +1,6 @@
 # Theorem B1 — Strict Finite-Inequality Non-Discrimination
 
-**Mathematical status:** PROOF-DRAFT (Gate-A CONDITIONAL, OB-23 2026-08-11: qualitative core CONFIRMED after local repairs — Σ′ convention corrected to R-atom, anchors fixed, RH-example removed; advances to INDEPENDENTLY-CHECKED once §7 mods integrated + corrected checker returns)  
+**Mathematical status:** INDEPENDENTLY-CHECKED (Gate-A: OB-23 review PASS after its §7 textual mods were all integrated 2026-08-11 — RH-example made conditional (§7.1), W1/W2 real-valued typing + complex-point exclusion (§7.2), Link-A conjugate-pairing convergence (§7.3), no-uniform-margin wording (§7.4), corrected R-atom anchors (§7.5), Rudin Thm 9.6 citation (§7.6); no gap / circularity / RH-import)  
 **Computational status:** INDEPENDENT-CHECKER (OB-24 external review 2026-08-11: corrected R-atom checker deposited at `checker/b1_ratom_certified_checker.py`, SHA-256 199c7dad…7fe4bc8, re-run in-repo; δ_1(1)=608/425, δ_j·T²→2j², T*=90, all exact-rational, no float; supersedes OB-18's wrong-convention checker)  
 **Theorem ID:** B1-finite-inequality  
 **Program ref:** §7, §7.B.2.B1  
@@ -46,19 +46,25 @@ multiplicity) satisfies `𝒵 ∈ 𝔛_sym` if:
 P(𝒵) = 1  ⟺  Re(ρ) = 1/2  for every  ρ ∈ 𝒵.
 ```
 
-**Finite test family.**  Fix `m ≥ 1` and a family
-`Φ = (φ₁, …, φ_m)` of test functions.  Each `φ_j` belongs to one of the
-following classes:
+**Finite test family (real-valued; conventions fixed — OB-23 §7.2).**  Fix `m ≥ 1` and a
+family `Φ = (φ₁, …, φ_m)`.  Each `φ_j` belongs to one of:
 
-- **Li-type:** `φ_j(ρ) = 1 − (1−1/ρ)^j` (Li coefficient index `j ∈ {1,…,K}`);
-- **Weil-type:** `φ_j = ĥ_j` the Fourier transform of a compactly-supported
-  even `h_j ∈ C_c^∞(ℝ)`, with `Q_W(h_j) = Σ'_{ρ ∈ 𝒵} h_j(ρ)` (Weil-sum convention);
-- **Hausdorff–Stieltjes:** fixed-order differences of the moment sequence
-  `(μ_k)_{k=0}^{K}` with `μ_k = Σ'_{ρ} ρ^{-k}`;
+- **W1 (Li-type):** for each coordinate fix `n_j ∈ ℕ_{≥1}` and set
+  `φ_j(ρ) = 1 − (1−1/ρ)^{n_j}` (with `n_j = j` for the first `m` Li coordinates); or
+  **W1 (moment):** fix `k_j ∈ ℕ_{≥1}` and set `φ_j(ρ) = ρ^{−k_j}`. These are meromorphic
+  in `ρ` and `→ 0` as `|ρ| → ∞` in the strip.
+- **W2 (Weil-type):** fix real-valued even `h_j ∈ C_c^∞(ℝ; ℝ)` and the normalization
+  `ĥ_j(t) = ∫_ℝ h_j(x) e^{−ixt} dx`; set `φ_j(ρ) = ĥ_j(Im ρ)`. Thus `O_j, c_j ∈ ℝ`.
+  **Complex-point evaluation is excluded:** `ĥ_j(σ+iT)` has only exponential-type control
+  (`≤ e^{R_j|T|}‖h_j‖_1`) and need not decay, whereas the stated W2 convention evaluates at
+  the real argument `Im ρ` (where Riemann–Lebesgue / integration by parts gives decay).
 
-where `Σ'` denotes the symmetric regularization (pair `ρ` with `1−ρ`) as in
-Weil's formula.  The summation convention and test-function decay are part of
-the theorem statement.
+`Σ'` denotes the symmetric regularization (pairing `ρ` with `1−ρ` for convergence of the
+conditionally-convergent sum on infinite `𝒵`), NOT a doubling — on a finite multiset
+`O_j(𝒵) = Σ'_{ρ∈𝒵} φ_j(ρ)` is the sum of `φ_j` over the atoms, each counted once (this is
+B1's R-atom convention; contrast B2's R-symm, see the cross-theorem convention note above).
+An unrestricted "any test function" is NOT admitted — e.g. a constant test gives a nonzero
+constant quartet contribution that does not decay.
 
 **Observation map:**
 ```
@@ -70,8 +76,7 @@ O_Φ : 𝔛_sym → ℝ^m,   O_Φ(𝒵) = (Σ'_{ρ ∈ 𝒵} φ_j(ρ))_{j=1}^{m}
 ## Theorem B1 (strict finite-inequality non-discrimination)
 
 **Theorem B1.**  Fix any `m ≥ 1`, any admissible test family `Φ` as above, and
-any `𝒵_+ ∈ 𝔛_sym` with `P(𝒵_+) = 1` (i.e. a "good" reference multiset — e.g.
-the formal zero multiset of `ζ`) such that `O_Φ(𝒵_+) ∈ ℝ^m` is well-defined
+any `𝒵_+ ∈ 𝔛_sym` with `P(𝒵_+) = 1` such that `O_Φ(𝒵_+) ∈ ℝ^m` is well-defined
 and every component satisfies a *strict* inequality `(O_Φ(𝒵_+))_j > c_j` for
 constants `c_j ∈ ℝ`.  Then there exists `𝒵_− ∈ 𝔛_sym` with `P(𝒵_−) = 0`
 (at least one off-line zero) and
@@ -83,6 +88,12 @@ constants `c_j ∈ ℝ`.  Then there exists `𝒵_− ∈ 𝔛_sym` with `P(𝒵
 for any prescribed tolerances `ε_j > 0`.  In particular, if `c_j > 0` and
 `ε_j < (O_Φ(𝒵_+))_j − c_j`, then `𝒵_−` still passes every strict inequality
 `(O_Φ(𝒵_−))_j > c_j`.
+
+**Non-circularity of `𝒵_+` (OB-23 §7.1).** RH is not assumed. `𝒵_+` ranges over abstract
+members of `𝔛_sym` satisfying `P(𝒵_+)=1` — for example, any explicitly constructed finite
+multiset supported on `Re ρ=1/2`. The actual multiset of nontrivial ζ-zeros is **not**
+used; instantiating `𝒵_+` with that actual multiset while asserting `P(𝒵_+)=1` would be
+conditional on RH, so it is excluded from the hypothesis.
 
 **Scope / limitation (mandatory).**  This theorem holds for a **fixed** `m` and
 **fixed** `Φ`.  It does not exclude a method that uses an unbounded hierarchy

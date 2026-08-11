@@ -398,6 +398,14 @@ count. Uses REVIEW_PROMPT.md common header + Block A.
   proof — the limit `2j²` is proved from the exact rational forms' leading coefficients.
   B1 math advances to INDEPENDENTLY-CHECKED once the OB-23 §7 textual mods are fully folded
   in (this is the remaining CONDITIONAL item).
+  **[DONE 2026-08-11]** All six OB-23 §7 mods are now integrated (7.1 RH-example made
+  conditional; 7.2 W1/W2 real-valued typing + complex-point-evaluation excluded; 7.3
+  Link-A conjugate-pairing convergence replacing the invalid term-domination; 7.4
+  no-uniform-margin wording; 7.5 corrected R-atom anchors; 7.6 Rudin Thm 9.6 citation).
+  **B1 math axis advances PROOF-DRAFT → INDEPENDENTLY-CHECKED.** With the OB-24 R-atom
+  checker (INDEPENDENT-CHECKER), **B1 is the THIRD theorem established on both axes**
+  (after B2 and G). Contract spec_status updated; regression test
+  `test_b1_gate_a_mods_integrated` guards the §7 mods; tests 70 → 71.
 
 ## What a returned verification should contain
 

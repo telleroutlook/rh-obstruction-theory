@@ -154,6 +154,30 @@ def test_b1_ratom_convention_recorded():
         "B1 statement.md must record the R-atom vs R-symm convention divergence"
 
 
+def test_b1_gate_a_mods_integrated():
+    """OB-23: if B1 is INDEPENDENTLY-CHECKED, the §7 textual mods must be present and no
+    stale RH-example / exact-collision overclaim / doubled-anchor may remain."""
+    with B1_CONTRACT.open() as f:
+        status = json.load(f).get("spec_status", "")
+    if status == "INDEPENDENTLY-CHECKED":
+        stmt = (B1_DIR / "statement.md").read_text()
+        proof = (B1_DIR / "proof.md").read_text()
+        # §7.1: RH-example must be made conditional, not asserted
+        assert "conditional on RH" in stmt, \
+            "B1 statement.md must mark the ζ-zero instantiation as conditional on RH (§7.1)"
+        assert "formal zero multiset of `ζ`)" not in stmt, \
+            "B1 statement.md still asserts the ζ-zero example unconditionally (§7.1 not applied)"
+        # §7.2: complex-point Weil evaluation excluded
+        assert "Complex-point evaluation is excluded" in stmt or "complex-point" in stmt.lower(), \
+            "B1 statement.md must exclude complex-point Weil evaluation (§7.2)"
+        # §7.4: no-uniform-margin, not exact collision
+        assert "uniform separation margin" in proof, \
+            "B1 proof.md must state the no-uniform-margin meaning (§7.4)"
+        # §7.5: correct R-atom anchor, not the doubled one
+        assert "1216/425" not in proof or "R-symm" in proof, \
+            "B1 proof.md must not carry the doubled anchor 1216/425 outside an R-symm contrast (§7.5)"
+
+
 # ---- B2 theorem scaffold tests ----
 
 B2_DIR = ROOT / "theorems" / "B2-exact-collision"

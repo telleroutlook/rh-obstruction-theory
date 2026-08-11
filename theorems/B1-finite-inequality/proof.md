@@ -1,8 +1,8 @@
 # Proof — Theorem B1 (strict finite-inequality non-discrimination)
 
-**Status:** PROOF-DRAFT  
-**Analytic / finite separation:** this proof is entirely analytic; no finite
-certificate is generated or claimed.
+**Status:** INDEPENDENTLY-CHECKED (Gate-A PASS after OB-23 §7 mods integrated 2026-08-11) + INDEPENDENT-CHECKER (OB-24 R-atom checker, computational axis).  
+**Analytic / finite separation:** the obstruction is entirely analytic; the finite decay
+certificate (δ_j(T), R-atom) is independently machine-checked (checker/, OB-24).
 
 ---
 
@@ -32,8 +32,25 @@ where the symmetric sum `Σ'` pairs `ρ` with `1−ρ`:
 Σ'_{ρ ∈ 𝒵} f(ρ)  :=  lim_{T→∞} Σ_{ρ ∈ 𝒵, |Im ρ| ≤ T} f(ρ),
 ```
 
-the limit existing by the admissibility exponent and standard Dirichlet-series
-absolute-convergence arguments (see e.g. the regularisation in Weil's formula).
+the limit existing by admissibility, via the following **conjugate-pairing** argument
+(OB-23 §7.3 — the naive term-by-term bound is invalid and is replaced here).
+
+**Σ′ convergence (W1), by conjugate pairing.** The individual W1 terms are only
+`φ_j(ρ) = O(|ρ|^{−1})` (Li) or `O(|ρ|^{−k_j})`, and `O(|ρ|^{−1})` is NOT dominated by the
+admissibility series `Σ|ρ|^{−(1+η)}` (wrong direction, since `1 < 1+η`). Instead group each
+`ρ = σ+it` with its conjugate `ρ̄` (the symmetric height cutoff `|Im ρ| ≤ T` always
+includes both). For real-coefficient `φ_j` the pair contributes `2 Re φ_j(σ+it)`, and the
+leading `ρ^{−1}` term gives `2 Re(1/ρ) = 2σ/(σ²+t²) = O(|Im ρ|^{−2})`; every higher inverse
+power `ρ^{−r}` (`r ≥ 2`) is also `O(|Im ρ|^{−2})`. Since the admissibility exponent
+`1+η < 2`, the grouped contributions are dominated by `Σ |Im ρ|^{−2} ≤ Σ |ρ|^{−(1+η)} < ∞`
+(finitely many atoms have `|Im ρ| < 1`). So `Σ'` converges absolutely for W1.
+
+**Σ′ convergence (W2).** For `h_j ∈ C_c^∞(ℝ)`, integration by parts `N` times gives
+`|ĥ_j(t)| ≤ C_N (1+|t|)^{−N}`; take `N=2` and dominate by the same admissibility comparison
+(`1+η < 2`). (Continuity and vanishing-at-∞ of `ĥ_j` also follow from Riemann–Lebesgue:
+**Rudin (1987), *Real and Complex Analysis*, 3rd ed., Theorem 9.6** — `L¹(ℝ)` Fourier
+transforms lie in `C₀`; applicable since `h_j ∈ C_c^∞(ℝ) ⊂ L¹(ℝ)`. The integration-by-parts
+bound is self-contained and does not require the external citation.)
 
 ---
 
@@ -197,7 +214,7 @@ the category without a mandatory counting law (condition 3 is optional, as state
 | Independence from Euler product / full L-function axioms | ESCAPE ROUTE — stated in statement.md |
 | Quantitative decay `δ_j(T) → 0` (exact-rational replay) | INDEPENDENT-CHECKER (OB-24: R-atom checker deposited `checker/b1_ratom_certified_checker.py`, SHA 199c7dad…7fe4bc8; δ_1(1)=608/425, T*=90, 2j²; supersedes OB-18's wrong convention) |
 | Σ′ convention (R-atom, vs B2's R-symm) | CORRECTED (OB-23) — see statement.md cross-theorem convention note |
-| Gate-A status | CONDITIONAL (OB-23) → checker returned (OB-24, INDEPENDENT-CHECKER restored); math advances to INDEPENDENTLY-CHECKED once OB-23 §7 textual mods are fully integrated |
+| Gate-A status | PASS (OB-23): all §7 textual mods integrated (7.1 RH-example conditional, 7.2 W1/W2 typing + complex-point exclusion, 7.3 conjugate-pairing convergence, 7.4 no-uniform-margin, 7.5 R-atom anchors, 7.6 Rudin cite). Math axis → INDEPENDENTLY-CHECKED. |
 
 ### §5.1 Precise meaning of the B1 obstruction (OB-18 clarification, 2026-08-11)
 
