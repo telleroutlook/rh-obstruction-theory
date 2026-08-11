@@ -1,7 +1,7 @@
 # Dependencies — Theorem H (H-information-hierarchy)
 
 theorem_id: H-information-hierarchy
-status: PROOF-DRAFT (inherits from B2 and G; H' separation open steps)
+status: PROOF-DRAFT (inherits B2+G; H' is INCOMPARABILITY not linear separation — corrected OB-27)
 
 dependencies:
 
@@ -23,7 +23,7 @@ dependencies:
     usable_as_premise: true
     peer_reviewed: true
     gate_a_status: CLEAR
-    role: "O_theta/O_oracle separation (Theorem H' second part); S(T) is the kernel of O_theta."
+    role: "O_theta/O_oracle coarsening (Theorem H' part ii, second half); S(T) is the kernel of O_theta."
 
   - id: B2-RANK-RESULT
     statement: "B2 Jacobian rank theorem (self-contained Vandermonde); exact Li-value collision."

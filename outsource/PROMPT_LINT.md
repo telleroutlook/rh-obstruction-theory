@@ -216,7 +216,24 @@ author-year of secondary citations against the actual publication (OB-25: "Seele
 should be **Seeley 1967**, Proc. Sympos. Pure Math. 10; delete any un-numbered
 "Ivrii 1980"-type entry that is not the theorem actually used).
 
+## L23 — Ordering claim on observation maps: verify chain vs incomparable projections (hit OB-27; H)
+NEVER assert a strict total chain `O_1 ⊂ O_2 ⊂ …` among observation maps without checking
+each refinement BOTH directions. CHECK, for every claimed `O_a ≼ O_b` ("b refines a"): does
+`O_b(𝒵)=O_b(𝒵')` imply `O_a(𝒵)=O_a(𝒵')`? Exhibit an explicit pair (script it). Two maps
+that read *different coordinates* of the multiset are typically **incomparable**, not nested:
+`O_finite` (Li moments `Σ1/ρ`) sees real parts, while an Im-part/θ-count map is blind to real
+parts — a same-imaginary-part pair separates under one and collides under the other, and an
+S(T) ordinate move does the reverse. Also CHECK a map that is a **fixed, argument-independent
+sequence** (e.g. `d_n=θ_level(n)`, the Riemann–Siegel levels, independent of 𝒵) is *constant*
+as a functional of 𝒵, hence separates NO pair and cannot dominate anything — do not treat it
+as an information layer of 𝒵. (OB-27 caught H claiming `O_finite ⊊ O_theta ⊊ O_vM ⊊ O_oracle`
+as a strict chain; truth is a partial order — `O_finite ⋈ O_theta` incomparable, both
+coarsenings of `O_oracle`.) The correct object is a **partial order / lattice**; each covered
+relation needs its own witness.
+
 ---
+
+### Self-containment gate (CLAUDE.md checklist #5, always)
 Every symbol/formula/premise defined in-file; proved results inlined as premises; full
 formulas written out (not point values); no "see other file" for load-bearing content
 (`grep -n "see .*\.md"` must return only provenance references). Run:

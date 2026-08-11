@@ -56,28 +56,37 @@ method operating via O_theta. **Status: PROOF-DRAFT (Bochner positivity).**
 
 ---
 
-## §4. Proof of strict separation (Theorem H')
+## §4. Incomparability + coarsening (Theorem H', corrected OB-27)
 
-**Claim.** O_finite ⊊ O_theta as information classes: every O_theta-collision is an
-O_finite-collision, but not vice versa.
+**Claim (corrected).** `O_finite` and `O_theta` are **incomparable** (neither refines the
+other); both are strict coarsenings of `O_oracle`. The earlier claim "O_finite ⊊ O_theta,
+every finite collision is a theta collision" was **false** and is withdrawn.
 
-*Proof of O_finite ⊆ O_theta (every finite collision is a theta-level collision).*
-Any collision pair (𝒵₊, 𝒵₋) with the same finite Li values in particular has the same
-first K Li values for every K. Whether they also have the same theta-levels d_n depends
-on the construction. The B2 quartet has 𝒵₋ with an off-critical-line zero at σ₀ ≠ 1/2;
-its n-th theta level is d_n^{(𝒵₋)} = θ⁻¹(πn) evaluated in the multiset metric, which
-differs from d_n^{(𝒵_RH)} because the zero counts disagree.
+*Why the old inclusion fails.* `O_theta` in the sense of Theorem G is the fixed, zero-free
+archimedean sequence `d_n = θ_level(n)` (Riemann–Siegel θ, independent of the multiset 𝒵);
+as a map on multisets it is constant, so it separates no pair and cannot dominate anything.
+Even read charitably as a functional of 𝒵 (the θ-unfolded count of the imaginary parts), it
+is blind to real parts.
 
-Specifically: if 𝒵₋ has a zero at ρ₁ = σ₀ + iγ₁ with σ₀ > 1/2, then the counting
-function N_{𝒵₋}(T) has a different shape near T = γ₁ than N_{𝒵_RH}(T), so their
-theta-level sequences {d_n^{(𝒵₋)}} differ from {d_n^{(𝒵_RH)}} at the n-th level
-near n = θ(γ₁)/π + 1. Thus O_theta(𝒵₋) ≠ O_theta(𝒵_RH) even though the B2 finite
-Li values coincide. **Status: PROOF-DRAFT** (explicit d_n computation open).
+*Incomparability, direction 1 (`O_theta` does not refine `O_finite`).* Two symmetric
+quartets at the same height `T` but different real offset — `𝒵_a` at `σ=3/4`
+(atoms `{3/4±iT, 1/4±iT}`) and `𝒵_b` at `σ=9/10` (atoms `{9/10±iT, 1/10±iT}`) — have the
+identical imaginary-part multiset `{±T,±T}`, hence identical `O_theta`, but different
+`O_finite`: `Li₁(𝒵) = Σ_ρ 1/ρ` gives `0.0199129…` vs `0.0198551…` (script-verified,
+`T=10`). So `O_theta(𝒵_a)=O_theta(𝒵_b)` while `O_finite(𝒵_a)≠O_finite(𝒵_b)`.
 
-*Proof of O_theta ⊊ O_oracle.* By Lemma G.2, two multisets related by an S(T)
-perturbation γ_n → γ_n + ε̃_n (where ε̃_n is in the kernel of O_theta) have the
-same theta-level sequence but different oracle outputs {γ_n}. **Status: PROOF-DRAFT
-(rests on Prop. G.3* Items 2–4, proved unconditionally in OB-04).**
+*Incomparability, direction 2 (`O_finite` does not refine `O_theta`).* An S(T)-type
+perturbation `γ_n → γ_n + ε_n` chosen in the kernel of the first K Li functionals (finite
+matching, B1/B2 IFT) still moves the unfolded count, so `O_finite` collides while `O_theta`
+separates. (Explicit finite matching: the B1 quartet decay + Vandermonde kernel of
+§2/§3.)
+
+*Coarsening (`O_finite ≺ O_oracle` and `O_theta ≺ O_oracle`).* The B2 quartet pair has
+`O_finite(𝒵₊)=O_finite(𝒵₋)` (exact Li collision, B2 §4.3 — Gate-A PASS OB-20) but distinct
+ordinates, so `O_finite ≺ O_oracle`. By Lemma G.2, an S(T) perturbation with
+`ε_n` bounded by `S(γ_n)/A'(γ_n)` (`A'(t)=θ'(t)/π`) preserves `O_theta` but changes the
+ordinates, so `O_theta ≺ O_oracle`. **Status: part (ii) inherits the exact B2/G collisions
+(firm); part (i)'s two witnesses are explicit but not yet independently checked.**
 
 ---
 
@@ -89,4 +98,8 @@ The key insight is that all three theorems (B2, G, and the abstract H) share:
 - **Same growth argument:** |Ξ(Ri)| → ∞ from Hadamard product.
 - **Different kernels:** B2 uses the Li/Weil finite kernel; G uses the S(T) archimedean kernel.
 
-Theorem H unifies these by naming the layers and making the inclusion structure explicit.
+Theorem H unifies these by naming the maps and making the **partial-order** structure
+explicit: `O_finite` (B2) and `O_theta` (G) are **incomparable** obstruction layers, both
+strict coarsenings of `O_oracle` (§4, corrected OB-27). The unification value is the common
+template + the precise placement of each obstruction; the earlier "strict linear hierarchy"
+was withdrawn.

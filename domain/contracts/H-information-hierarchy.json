@@ -9,8 +9,8 @@
 
   "metadata": {
     "theorem_id": "H-information-hierarchy",
-    "ambient_class": "Observation layers O_finite ⊂ O_theta ⊂ O_vM ⊂ O_oracle over admissible zero multisets X_sym",
-    "resource_bound": "Each layer's obstruction is exact (not asymptotic); separation is strict",
+    "ambient_class": "Observation maps over admissible zero multisets X_sym, PARTIALLY ordered by refinement: O_finite and O_theta are INCOMPARABLE, both strict coarsenings of O_oracle; O_theta <= O_vM <= O_oracle (corrected OB-27; NOT a total chain)",
+    "resource_bound": "Each obstruction is exact (not asymptotic); O_finite and O_theta are incomparable, each strictly coarser than O_oracle",
     "is_barrier_claim": true,
     "escape_route_present": true,
     "escape_route": "O_oracle layer: a method with access to all zero ordinates trivially resolves all obstructions. O_vM layer: conditionally an escape if G-hard is false."
@@ -31,21 +31,22 @@
   "obligations": [
     "H.finite-instantiation: inherits B2 Jacobian rank proof — PROOF-DRAFT",
     "H.theta-instantiation: inherits G Prop. G.3 — PROOF-DRAFT (open step)",
-    "H.separation-finite-theta: B2 quartet has different d_n from Z_RH — OPEN (explicit computation)",
-    "H.separation-theta-oracle: S(T) perturbation gives same d_n — PROOF-DRAFT (G Prop. G.3)",
+    "H.incomparability-finite-theta: O_finite and O_theta are INCOMPARABLE (same-Im pair separates under Li but not theta; S(T) move separates under theta but not Li) — PROOF-DRAFT (witnesses explicit, script-verified, not independently checked); supersedes the withdrawn 'O_finite subset O_theta' claim (OB-27)",
+    "H.coarsening-finite-oracle: B2 quartet gives O_finite collision with distinct ordinates — inherits B2 (Gate-A PASS OB-20)",
+    "H.coarsening-theta-oracle: S(T) perturbation preserves theta-levels, changes ordinates — inherits G (Gate-A PASS OB-22)",
     "H.vM-layer: controlled by G-hard CONJECTURE — not a proof step"
   ],
 
   "acceptance_test_results": {
     "note": "PROOF-DRAFT. Inherits from B2 and G. H' separation has open explicit computations.",
-    "class": "PASS — four named observation layers; membership checkable",
+    "class": "PASS — four named observation maps (partial order); membership checkable",
     "non_vacuity": "PASS — B2 quartet (O_finite) and kappa_toeplitz (O_theta) are witnesses",
     "target": "PASS — Hadamard uniqueness ensures distinct zero multisets give distinct entire functions",
-    "observation": "INHERITED — B2 collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-20); G-info collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-22, Prop. G.3* Items 2-4 proved). H's own cross-layer separation (H' §4) remains PROOF-DRAFT.",
-    "invariant": "PASS — observation layers are basis-independent (counting function invariant)",
+    "observation": "INHERITED — B2 collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-20); G-info collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-22, Prop. G.3* Items 2-4 proved). H's own incomparability theorem H'(i) remains PROOF-DRAFT.",
+    "invariant": "PASS — observation maps are basis-independent (counting function invariant)",
     "no_rh": "PASS — no RH in hypotheses",
     "escape": "PASS — O_oracle explicit; O_vM conditional",
-    "scope": "PASS — four named layers; resource bounds inherited from B2/G"
+    "scope": "PASS — four named maps (partial order); resource bounds inherited from B2/G"
   },
 
   "checker": {
@@ -58,5 +59,5 @@
   "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
   "obstruction_type": "information",
   "spec_status": "PROOF-DRAFT",
-  "spec_status_note": "Unification of B2 and G. No new mathematics; adds explicit observation-lattice structure and strict separation theorem (H'). H' separation has two open explicit computation steps."
+  "spec_status_note": "Unification of B2 and G. No new mathematics beyond the partial-order framing. OB-27 self-audit (2026-08-11): the observation structure is a PARTIAL order — O_finite (B2) and O_theta (G) are INCOMPARABLE, both strict coarsenings of O_oracle — NOT the earlier strict linear chain O_finite subset O_theta subset O_vM subset O_oracle (that claim was false and is withdrawn; script-verified same-Im-pair counterexample). Inherited B2/G obstructions are Gate-A established; H's own incomparability theorem H'(i) is PROOF-DRAFT."
 }

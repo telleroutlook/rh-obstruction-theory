@@ -872,6 +872,51 @@ def test_e_prime_ift_no_longer_open():
         not in stmt, "E'-meromorphic IFT step is still marked as needing to be made explicit"
 
 
+# ---- H-information-hierarchy theorem scaffold tests ----
+
+H_DIR = ROOT / "theorems" / "H-information-hierarchy"
+H_CONTRACT = ROOT / "domain" / "contracts" / "H-information-hierarchy.json"
+
+
+def test_h_partial_order_not_total_chain():
+    """OB-27: H's observation structure is a PARTIAL order (O_finite and O_theta
+    incomparable), NOT the withdrawn strict linear chain."""
+    stmt = (H_DIR / "statement.md").read_text()
+    # The strict-chain string may appear ONLY inside the correction note that repudiates it.
+    for line in stmt.splitlines():
+        if "O_finite ⊂ O_theta ⊂ O_vM ⊂ O_oracle" in line:
+            assert ("earlier draft" in line or "false" in line.lower()
+                    or "withdrawn" in line.lower() or "not" in line.lower()), \
+                f"strict total-chain asserted without repudiation: {line!r}"
+    # The correction must be present.
+    assert "incomparable" in stmt.lower(), \
+        "H statement.md must state O_finite and O_theta are incomparable"
+    assert "partial" in stmt.lower(), \
+        "H statement.md must describe the observation structure as a partial order"
+
+
+def test_h_contract_reflects_partial_order():
+    """OB-27: H contract must not assert the strict chain and must record incomparability."""
+    assert H_CONTRACT.exists()
+    with H_CONTRACT.open() as f:
+        data = json.load(f)
+    ambient = data["metadata"]["ambient_class"]
+    assert "⊂ O_theta ⊂ O_vM ⊂ O_oracle" not in ambient, \
+        "H contract ambient_class must not assert the withdrawn strict chain"
+    assert "INCOMPARABLE" in ambient.upper() or "incomparable" in ambient, \
+        "H contract ambient_class must record the incomparability"
+
+
+def test_h_no_rh_claim():
+    for fname in ["statement.md", "proof.md", "limitations.md"]:
+        p = H_DIR / fname
+        if not p.exists():
+            continue
+        content = p.read_text().lower()
+        for phrase in ["proves rh", "disproves rh", "rh is proved", "implies rh"]:
+            assert phrase not in content, f"H {fname} contains forbidden phrase: {phrase!r}"
+
+
 def test_outsource_files_exist():
     """Part IX Track B: all four outsource files must exist."""
     for name in [
