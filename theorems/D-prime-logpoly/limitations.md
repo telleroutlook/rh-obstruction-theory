@@ -1,9 +1,13 @@
 # Limitations — Theorem D' (D-prime-logpoly)
 
 **Theorem ID:** D-prime-logpoly  
-**Finding:** ESCAPE-ROUTE-REFINED (OB-01 + OB-16, 2026-08-11): `𝒞_logpoly` is NOT the
-escape class; the escape class is a log-weighted `S^{1,-1}` symbol class, and the naive
-exact model is refuted.
+**Finding:** ESCAPE-ROUTE-REFINED — **Gate-A BLOCKED (OB-31, 2026-08-12) for Claim A's
+universal form.** The claim "the obstruction covers the full finite-log-degree `𝒞_logpoly`"
+is FALSE (the class omits ellipticity; `H=(I−Δ_x)(I−Δ_y)` on `𝕋⁴` is a non-elliptic classical
+counterexample with a leading `t⁻¹log(1/t)`). It survives only for the narrowed class
+`𝒞_logpoly^{sub,ell}` (positive elliptic classical principal symbol + strictly-lower-order
+finite log). Claims B/C/D-analytic/E confirmed; the escape class is the log-weighted
+`S^{1,-1}` class; the naive exact model is refuted. See statement.md §0.
 
 ---
 
@@ -14,10 +18,15 @@ exact model is refuted.
    operator to have spectrum `{γ_n}`. Infinitely many distinct spectra share a counting
    asymptotic.
 
-2. **Does not refute Theorem D.** Theorem D correctly excludes `𝒞_ell`, and — after the
-   OB-01/OB-16 correction — the leading-singularity obstruction **also covers**
-   `𝒞_logpoly` (finite log-degree): its leading heat-trace term is a pure power
-   `t^{-d/m}`, logs appear only subleading. So `𝒞_logpoly` is NOT an escape.
+2. **Does not refute Theorem D — and does NOT cover the full `𝒞_logpoly` (OB-31 correction).**
+   Theorem D correctly excludes `𝒞_ell`. The leading-singularity obstruction extends **only to
+   the narrowed `𝒞_logpoly^{sub,ell}`** (positive **elliptic** classical principal symbol,
+   log terms strictly below principal order) — there the leading heat-trace term is a pure
+   power `t^{-d/m}`, logs only subleading. It does **NOT** cover the full finite-log-degree
+   `𝒞_logpoly`: without ellipticity, `H=(I−Δ_x)(I−Δ_y)` on `𝕋⁴` (positive, self-adjoint,
+   classical, log-degree 0, non-elliptic) has `N_H~π²Λ log Λ` and a **leading** `t⁻¹log(1/t)`.
+   So "`𝒞_logpoly` is NOT an escape" is **withdrawn**; only "`𝒞_logpoly^{sub,ell}` is not an
+   escape" is (conditionally) claimed, PENDING re-review.
 
 3. **`𝒞_logpoly` is NOT the escape class (corrected).** The earlier claim that
    `𝒞_logpoly` escapes Theorem D because `c_{0,1}` is "freely tunable to `(2π)^{-1}`" at

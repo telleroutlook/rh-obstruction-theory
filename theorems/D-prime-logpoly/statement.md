@@ -2,10 +2,50 @@
 
 **Theorem ID:** D-prime-logpoly  
 **Program ref:** EXT-1 (extension of Theorem D; audit of log-polyhomogeneous escape route)  
-**Status:** ESCAPE-ROUTE-REFINED (OB-16 external review 2026-08-11): escape mechanism is
-real at the symbol-growth + leading-heat-singularity level; the naive exact model
-`2πn/log(n+e)` is REFUTED (differs from N_ζ by ≍ T log log T); the broader `W`-corrected
-`|ξ|/log|ξ|` class is the open Hilbert–Pólya frontier. `𝒞_logpoly` is not the escape class.
+**Status:** ESCAPE-ROUTE-REFINED — **Gate-A BLOCKED (OB-31, 2026-08-12) for Claim A's
+universal form.** Claim A ("finite-log-degree `𝒞_logpoly` always has a pure-power leading
+heat trace, so it is covered by D / is not an escape") is **FALSE as stated**: the class as
+defined omits **ellipticity**. Counterexample (OB-31 §3.2): `H=(I−Δ_x)(I−Δ_y)` on `𝕋⁴` is
+positive, self-adjoint, classical (log-degree 0), non-elliptic, with `N_H(Λ)~π²Λ log Λ` and
+`Z_H(t)~π²t⁻¹log(1/t)` — a **leading log**. The `S¹` witness is correct but does not prove
+the universal claim. Survives (narrowed): `𝒞_logpoly^{sub,ell}` (positive **elliptic**
+classical principal symbol + strictly-lower-order finite log) — see §0. Claims B/C/D-analytic/E
+CONFIRMED (D's numerical anchors corrected). `LEADING-SINGULARITY-COVERS-LOGPOLY` stays PENDING.
+
+---
+
+## §0. Reframing after OB-31 (Gate-A BLOCKED for Claim A) — READ FIRST
+
+D' is an escape-route audit, not a barrier. OB-31 confirmed most of it but **BLOCKED Claim A's
+universal form**:
+
+- **Claim A is false as stated (missing ellipticity).** `𝒞_logpoly` as defined requires only
+  "order-`m` ΨDO, finite log-degree symbol" — no ellipticity, positivity of the *principal*
+  symbol, or compact-resolvent guarantee. Counterexample: `H=(I−Δ_x)(I−Δ_y)` on `𝕋⁴`
+  (`−Δ≥0`), a positive self-adjoint classical 4th-order **differential** operator (log-degree
+  0) that is **not** 4th-order elliptic (principal symbol `|ξ_x|²|ξ_y|²` vanishes off the
+  axes). Its spectrum `(1+|p|²)(1+|q|²)` gives `N_H(Λ)=π²Λ log Λ+O(Λ)` and (Karamata)
+  `Z_H(t)~π²t⁻¹log(1/t)` — a leading log, contradicting the predicted pure power `t^{-d/m}=t⁻¹`.
+  So finite log-degree does **not** force a pure-power leading term, and `𝒞_logpoly` (as
+  defined) is **not** shown to be covered by D. Also refuted: "logs only at `t^k`, `k≥0`"
+  (a `𝕋³` sub-principal-log example gives a subleading `t⁻¹log(1/t)`); and Lesch `CL^{m,k}`
+  explicitly permits a *top-order* log.
+- **Withdrawn:** the universal Claim A over the full finite-log-degree `𝒞_logpoly`, and the
+  status "`LEADING-SINGULARITY-COVERS-LOGPOLY` may advance". It stays **PENDING** and is
+  renamed `LEADING-SINGULARITY-COVERS-SUBPRINCIPAL-LOGPOLY`.
+- **Survives (narrowed class `𝒞_logpoly^{sub,ell}`):** `H=H*≥−C`, closed manifold, compact
+  resolvent, `σ(H)~h_m+Σ_{j≥1}Σ_{ℓ≤K}h_{m−j,ℓ}(log|ξ|)^ℓ` with `h_m` a **uniformly positive
+  definite classical elliptic principal symbol** (log terms strictly below the principal
+  order). Then the Weyl principal term is fixed by `h_m` alone, so the leading heat trace is a
+  positive-coefficient pure power `t^{-d/m}` (Karamata); subleading logs may still occur (the
+  earlier "only `t^k`, `k≥0`" is dropped). This is the honest lemma; it does not cover the full
+  `𝒞_logpoly`.
+- **Confirmed (unchanged):** Claim B (Karamata `N~CΛ log Λ ⇒ Z~Ct⁻¹log(1/t)`), Claim C
+  (`S¹`/`ℓ²` not `L²(ℝ)`; `h_0∈S¹_{1,0}`), Claim D **analytic** result (exact `2πn/log(n+e)`
+  refuted by `≍T log log T`), Claim E (Lambert-`W`, open-frontier modality). **Claim D's
+  numerical table was wrong** (my `1.8→1.14` had a counting-script bug); the correct
+  `gap/((T/2π)log log(T/2π))` is `1.81, 1.63, 1.54, 1.48` at `T=10³…10⁶` (re-verified) — the
+  `T log log T` conclusion is unchanged.
 
 ---
 

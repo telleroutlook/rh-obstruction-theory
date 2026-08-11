@@ -33,22 +33,26 @@ dependencies:
       CORRECTION (OB-01/OB-16): this REFUTES the earlier claim that c_{0,1}=(2pi)^{-1}
       could be achieved as a LEADING term in C_logpoly. C_logpoly is NOT the escape class.
 
-  - id: LEADING-SINGULARITY-COVERS-LOGPOLY
+  - id: LEADING-SINGULARITY-COVERS-SUBPRINCIPAL-LOGPOLY
     statement: >
-      The leading-singularity obstruction of Theorem D extends to C_logpoly: no
-      finite-log-degree log-polyhomogeneous H has leading heat-trace singularity
-      t^{-d/m} log(1/t). The genuine escape class is the log-WEIGHTED symbol class
-      S^{1,-1} (|xi|/log|xi|-type), which gives N_H(T) ~ c T log T and a genuine leading
-      t^{-1} log(1/t); it is outside C_ell and C_logpoly but inside Hormander S^1_{1,0}.
-    source: "OB-16 external review 2026-08-11 (statement.md §4, proof.md §2)."
+      For H in the NARROWED class C_logpoly^{sub,ell} (H=H*>=-C on a closed manifold, compact
+      resolvent, uniformly positive-definite CLASSICAL ELLIPTIC principal symbol h_m, with
+      finite log terms only at strictly LOWER order j>=1), the Weyl principal term is fixed by
+      h_m alone, so the leading heat-trace singularity is a positive-coefficient pure power
+      t^{-d/m} (Karamata); subleading logs may occur. The genuine escape class (leading
+      t^{-1}log(1/t)) is the log-WEIGHTED S^{1,-1} (|xi|/log|xi|-type) class, N_H~cT log T,
+      inside Hormander S^1_{1,0} but outside C_ell and C_logpoly^{sub,ell}.
+    source: "OB-16 + OB-31 external review (statement.md §0/§4)."
     mathematical: PROOF-DRAFT
     computational: NONE
     usable_as_premise: false
     gate_a_status: PENDING
     role: >
-      Corrected escape-class identification. The naive exact model 2pi*n/log(n+e) is
-      REFUTED (count differs from N_zeta by ~ T log log T); only the broader W-corrected
-      class stays open (open Hilbert-Polya frontier, not a theorem).
+      NARROWED escape-class identification (renamed from LEADING-SINGULARITY-COVERS-LOGPOLY
+      after OB-31 BLOCKED its universal C_logpoly form). Claim A over the FULL finite-log-degree
+      C_logpoly is FALSE (non-elliptic counterexample H=(I-Delta_x)(I-Delta_y) on T^4 has
+      leading log). Stays PENDING; may advance only for the sub,ell narrowed class after
+      re-review. The exact 2pi*n/log(n+e) model is REFUTED (count-N_zeta ~ T log log T).
 
   - id: SEELEY-DEWITT-EXPANSION
     statement: >
