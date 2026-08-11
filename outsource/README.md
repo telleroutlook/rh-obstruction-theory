@@ -33,6 +33,9 @@ problem.
 | OB-14 | `OB-14-E-pos-uniform-order-transfer.md` | E §4 | E-pos: is uniform Nevanlinna bound (H-order) necessary+sufficient for order transfer? | RESOLVED — integrated 2026-08-11 |
 | OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | RESOLVED — integrated 2026-08-11 |
 | OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
+| OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | OPEN — send for review |
+| OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | OPEN — send for review |
+| OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | OPEN — send for review |
 
 Notes on the OB-09 / OB-10 outcomes:
 
@@ -140,6 +143,34 @@ includes INCONCLUSIVE + localization). Load-bearing anchors verified by script.
   open) — its normalized count differs from `N_ζ` by `≍ T log log T`. Only the broader
   Lambert-`W`-corrected `|ξ|/log|ξ|` class stays open (it matches the two-term smooth law;
   zero-independent spectral realization unknown). Integrated into D-prime-logpoly §4–§7.
+
+## Open computational-replay batch OB-17..OB-19 (drafted 2026-08-11; lint-checked)
+
+Goal: move more theorems' finite content to the **INDEPENDENT-CHECKER** computational
+axis (as OB-13 did for B2 — currently the only theorem there). Each is a verification/
+program task with script-verified exact/certified anchors, an independent-reconstruction
+requirement, and an adversarial-mutation guard (V5). All pass PROMPT_LINT (self-contained;
+non-circular; anchors labeled "sanity only, this IS the reconstruction target";
+DISCREPANCY/INCONCLUSIVE verdicts admitted; exact/interval/≥25-digit required, floats-only
+rejected).
+
+- **OB-17 (G diagonal Fredholm):** certified **interval** replay (Arb/`python-flint` or
+  rigorous `mpmath`). Enclose Gram levels `d_n` from `θ(d_n)=(n−1)π`, propagate to
+  `κ_n=1/(1/4+d_n²)` and determinant zeros `√(1/4+d_n²)`, and certify the three-way
+  disjoint separation `γ_n < d_n < √(1/4+d_n²)` — the finite core of `G_d ≠ Ξ̂`. `d_n`
+  transcendental ⇒ interval arithmetic mandatory. Anchors verified by script: `d_1 ≈
+  17.8456`, `√(1/4+d_1²) ≈ 17.8526`, `γ_1 ≈ 14.1347`.
+
+- **OB-18 (B1 approximate collision):** exact-**rational** replay of the quartet-decay
+  certificate `δ_j(T) = 4Re[φ_j(σ_0+iT)+φ_j(1−σ_0+iT)] → 0`. Anchors verified: `δ_1(1) =
+  1216/425`, decay constant `δ_1(T)·T² → 4`. Moves B1 computational axis NONE →
+  INDEPENDENT-CHECKER (analogue of OB-13 for B2).
+
+- **OB-19 (D Z_ζ leading singularity):** symbolic/≥25-digit replay of the Riemann-side
+  leading coefficient. Exact closed form verified to 25 digits: `Z_ζ,main(t) =
+  (1/2πt)(log(1/t) − γ_E − log2π)`, leading coeff exactly `1/2π`; explains OB-15's
+  slow-ratio remark (subleading constant only log-suppressed). Uses only RvM counting, no
+  zero locations.
 
 ## What a returned verification should contain
 
