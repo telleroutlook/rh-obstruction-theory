@@ -201,9 +201,22 @@ B2's doubled `δ_1(1)=1216/425`, `T*=127`, `4j²`; correct R-atom values are `60
 `β=−C⁻¹d` and its collision `Cn+Rd=0` are scale-invariant, so a uniform factor there is
 harmless; a raw displayed `δ`/threshold is NOT.
 
----
+## L22 — Preprint vs published equation/theorem numbers; anchor on the theorem, cross-map equations (hit OB-25; Lesch)
+The SAME result can carry DIFFERENT equation numbers in the arXiv preprint vs the published
+journal version, and a bare "(x.y)" then points a reader with the other version at the WRONG
+equation. CHECK, for every cited equation number: does the number match the version the
+reader is likely to hold? Prefer to anchor on the **theorem number** (usually stable across
+versions) and cross-map the equation numbers explicitly. (OB-25 caught D citing Lesch 1999
+heat expansion as "eq. (3.9)" — correct for the arXiv v4 **preprint** (label `G1-3.9`), but
+in the **published** Ann. Global Anal. Geom. version the heat expansion is **(3.18)**,
+degree bound **(3.19)**, Mellin **(3.20)**, and (3.9) is a *different* equation. Fix: cite
+"Theorem 3.7 + published (3.18)/(3.19)/(3.20) = preprint (3.9)/(3.10)".) When a baseline
+tarball is a preprint, record BOTH numbering schemes in its PROVENANCE.md. Also re-verify
+author-year of secondary citations against the actual publication (OB-25: "Seeley 1969"
+should be **Seeley 1967**, Proc. Sympos. Pure Math. 10; delete any un-numbered
+"Ivrii 1980"-type entry that is not the theorem actually used).
 
-### Self-containment gate (CLAUDE.md checklist #5, always)
+---
 Every symbol/formula/premise defined in-file; proved results inlined as premises; full
 formulas written out (not point values); no "see other file" for load-bearing content
 (`grep -n "see .*\.md"` must return only provenance references). Run:

@@ -520,12 +520,56 @@ def test_d_contract_required_metadata_keys():
 
 
 def test_d_novelty_gate_stated():
-    """D must state novelty gate is OPEN and not overclaim Paper B."""
+    """D novelty.md must reference the prior art and honestly position D as a
+    scope-extension/corollary (OB-25 Q5), not a standalone novelty."""
     nov = (D_DIR / "novelty.md").read_text()
     assert "Endres" in nov or "Steiner" in nov, \
         "D novelty.md must reference Endres-Steiner prior art"
-    assert "THIN" in nov or "thin" in nov.lower() or "not yet cleared" in nov.lower(), \
-        "D novelty.md must state THIN / novelty gate not cleared"
+    assert "Watson" in nov or "Valentinuzzi" in nov or "2604.00052" in nov, \
+        "D novelty.md must disclose the Watson-Valentinuzzi 2026 precedent (OB-25 Q5)"
+    assert "scope-extension" in nov.lower() or "corollary" in nov.lower(), \
+        "D novelty.md must position D as a scope-extension/corollary (not standalone novelty)"
+    assert "NOVELTY GATE CLEARED" not in nov, \
+        "the refuted 'NOVELTY GATE CLEARED / strictly stronger' claim must be gone (OB-25)"
+
+
+def test_d_gate_a_mods_integrated():
+    """OB-25 Gate-A CONDITIONAL->PASS: all 8 textual mods must be integrated."""
+    stmt = (D_DIR / "statement.md").read_text()
+    proof = (D_DIR / "proof.md").read_text()
+    deps = (D_DIR / "dependencies.yaml").read_text()
+    # mod 1: closed manifold + d>=1
+    assert "closed" in stmt and "d ≥ 1" in stmt, "mod1: closed manifold + d>=1"
+    # mod 2: Gamma_zeta^+ multiset + RH sentence
+    assert "Γ_ζ^+" in stmt and "RH is not" in stmt, "mod2: Gamma_zeta^+ + RH sentence"
+    # mod 3: Lesch cite corrected — Thm 3.7 + published (3.18); no bare 'eq. (3.9)/Thm'
+    assert "3.7" in proof and "(3.18)" in proof, "mod3: Lesch Thm 3.7 + (3.18)"
+    assert "eq. (3.9)/Thm" not in proof and "eq. (3.9) / Thm" not in proof, \
+        "mod3: bare preprint 'eq. (3.9)/Thm' must be replaced/cross-mapped"
+    # mod 4: Weyl cite — Seeley 1967 not 1969; Hormander Thm 4.4
+    assert "Seeley (1967)" in proof or "Seeley 1967" in proof, "mod4: Seeley 1967"
+    assert "Theorem 4.4" in proof or "Thm 4.4" in proof, "mod4: Hormander Thm 4.4"
+    # mod 5: 'mutually reinforcing' framing
+    assert "mutually reinforcing" in proof, "mod5: mutually reinforcing formulations"
+    # mod 6: order-four principal symbol (tolerate line-wrap between the two words)
+    import re as _re
+    assert _re.search(r"order-four\s+principal symbol", proof), "mod6: order-four principal symbol"
+    # mod 7: scope-extension positioning + WV precedent in deps
+    assert "WATSON-VALENTINUZZI-PRECEDENT" in deps, "mod7: WV precedent dependency"
+    assert "scope-extension" in stmt.lower() or "scope-extension" in deps.lower(), \
+        "mod7: scope-extension positioning"
+    # mod 8: explicit escape/scope statement
+    assert "does **not** exclude" in stmt or "does not exclude" in stmt, "mod8: escape scope"
+
+
+def test_d_status_independently_checked():
+    """After OB-25 mods, D math axis is INDEPENDENTLY-CHECKED (contract + statement)."""
+    with D_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["spec_status"] == "INDEPENDENTLY-CHECKED", \
+        "D contract spec_status must be INDEPENDENTLY-CHECKED after OB-25"
+    stmt = (D_DIR / "statement.md").read_text()
+    assert "INDEPENDENTLY-CHECKED" in stmt, "D statement.md must record INDEPENDENTLY-CHECKED"
 
 
 def test_d_escape_example_present():

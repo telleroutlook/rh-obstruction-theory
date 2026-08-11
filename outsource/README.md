@@ -39,7 +39,7 @@ problem.
 | OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | RESOLVED — GATE-A CONDITIONAL, 7 mods integrated 2026-08-11 |
 | OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | RESOLVED — GATE-A CONDITIONAL, Σ′ convention + anchors corrected 2026-08-11 |
 | OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | RESOLVED — CONFIRMED (Gate-A CONDITIONAL), checker deposited 2026-08-11 |
-| OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | OPEN — send for review |
+| OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | RESOLVED — GATE-A CONDITIONAL→PASS, 8 mods integrated 2026-08-11 (D → INDEPENDENTLY-CHECKED, scope-extension positioning) |
 | OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
@@ -456,6 +456,38 @@ tests added (`test_c_finite_factor_orientation_correct`,
   checker (INDEPENDENT-CHECKER), **B1 is the THIRD theorem established on both axes**
   (after B2 and G). Contract spec_status updated; regression test
   `test_b1_gate_a_mods_integrated` guards the §7 mods; tests 70 → 71.
+
+## Resolved OB-25 outcome (integrated 2026-08-11) — D advances to INDEPENDENTLY-CHECKED
+
+- **OB-25 (D Gate-A review):** **GATE-A CONDITIONAL → PASS.** The referee independently
+  re-derived the whole chain: Links A–E CONFIRMED (both the Weyl-mismatch and heat-trace
+  branches close, with the exact case-split `p≤1 → 0`, `p>1 → ∞` making the asymptotics
+  rigorous), RH-non-circularity CONFIRMED (only the RvM *count* is used; no `Re ρ = 1/2`),
+  Lesch scope CONFIRMED (covers the full classical elliptic ΨDO class, `A=I`). Verdict was
+  CONDITIONAL pending **8 textual mods**, all now integrated:
+  1. operator class + `d≥1`, **closed** manifold, `L²(M)` (scalar audited);
+  2. target multiset `Γ_ζ^+ = ⨆{Im ρ}^{m(ρ)}` + RH-sentence fix (`Im ρ∈ℝ` by definition,
+     no condition on `Re ρ`);
+  3. **Lesch citation** → **Theorem 3.7 + published (3.18)/(3.19)/(3.20)** (= preprint
+     `(3.9)`/`(3.10)`). The referee caught that "eq. (3.9)" is the *preprint* number; the
+     *published* (3.9) is a different equation. Both numbering schemes now recorded in
+     `baseline/lesch-dg-ga-9708010/PROVENANCE.md`; **new lint L22** added for this defect
+     class (preprint-vs-published numbering) and the corpus re-scanned;
+  4. **Weyl citation** → Hörmander 1968 **Theorem 4.4** applied to `H^{1/m}` via **Seeley
+     1967** (not "Seeley 1969"); un-numbered "Ivrii 1980" removed;
+  5. "**stronger**" → "**two mutually reinforcing formulations of the same obstruction**"
+     (heat trace = Laplace–Stieltjes transform of the counting measure; Abel/Tauber — the
+     heat-trace argument excludes nothing the Weyl mismatch misses within `𝒞_ell`);
+  6. `H₀` "**order-four principal symbol** `ξ_y⁴`" (full symbol `1+ξ_x²+ξ_y⁴`);
+  7. **novelty repositioned** as scope-extension/corollary; **Watson–Valentinuzzi 2026**
+     (Bull. Sci. Math. 211, arXiv:2604.00052) disclosed as a near-direct precedent
+     (existence/DOI/authors verified 2026-08-11), **not** imported (its v1 has a two-sided
+     vs one-sided counting factor-2 mismatch and RH-style phrasing);
+  8. explicit escape-route/scope statement.
+  **D math axis PROOF-DRAFT → INDEPENDENTLY-CHECKED**, positioned as a classical-ΨDO
+  **scope-extension/corollary** (NOT standalone novelty). With the Z_ζ-side INDEPENDENT-CHECKER
+  (OB-19), **D is the FOURTH double-axis theorem** (after B2, G, B1). Regression test
+  `test_d_gate_a_mods_integrated` added; new lint L22. Tests 75 → 76.
 
 ## What a returned verification should contain
 

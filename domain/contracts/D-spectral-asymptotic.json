@@ -1,19 +1,19 @@
 {
   "contract_version": "2",
   "claim_id": "D-spectral-asymptotic-theorem",
-  "note": "Theorem D (WP-D). Spectral-asymptotic exclusion for compact elliptic class. PROOF-DRAFT. Novelty gate NOT yet cleared — heat-trace log argument is the candidate new content.",
+  "note": "Theorem D (WP-D). Spectral-asymptotic exclusion for the classical elliptic class C_ell. Gate-A reviewed (OB-25): math chain + RH-non-circularity + Lesch scope CONFIRMED; advanced to INDEPENDENTLY-CHECKED after 8 textual mods. Positioned as a scope-extension/corollary, NOT standalone novelty.",
 
   "theorem_id": "D-spectral-asymptotic",
-  "paper": "B (conditional on novelty gate) or reference note",
+  "paper": "B (as a scope-extension/corollary: classical-PsiDO extension of the ES/WV leading-log obstruction)",
   "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
 
   "metadata": {
     "theorem_id": "D-spectral-asymptotic",
-    "ambient_class": "C_ell: positive elliptic pseudodifferential operators of order m>0 on compact d-dimensional smooth manifolds; extensions C_ell^+ include finite sums, compact perturbations preserving Weyl law, compact quantum graphs, polynomial transforms",
+    "ambient_class": "C_ell: strictly positive self-adjoint classical elliptic pseudodifferential operators of order m>0 on CLOSED d-dimensional smooth manifolds (d>=1); extensions C_ell^+ include finite sums, compact perturbations preserving Weyl law, compact quantum graphs, polynomial transforms",
     "resource_bound": "all T: N_H(T) ~ C_H T^{d/m}; incompatible with T log T Riemann-von Mangoldt",
     "is_barrier_claim": true,
     "escape_route_present": true,
-    "escape_route": "noncompact/infinite-volume systems; infinite quantum graphs; nonlocal/log-polyhomogeneous symbols; energy-dependent boundary conditions; arithmetic/NCG geometries; explicit T log T escape example: hyperbolic surface (Selberg trace formula)"
+    "escape_route": "nonelliptic/hypoelliptic/anisotropic; nonclassical/log-polyhomogeneous symbols; noncompact/boundary/singular/graph models; abstract self-adjoint (any positive lambda_n->inf realizable on l^2); nonclassical functional calculus giving N(T)~T log T; explicit escape example: hyperbolic surface (Selberg trace formula)"
   },
 
   "normalization_choice": {
@@ -22,30 +22,31 @@
   },
 
   "dependencies": [
-    {"claim_id": "WEYL-LAW-CLASSICAL", "ledger_math": "REFEREED", "role": "main Weyl law used in §1 contradiction"},
-    {"claim_id": "RIEMANN-VON-MANGOLDT", "ledger_math": "REFEREED", "role": "T log T counting law"},
-    {"claim_id": "SEELEY-DEWITT-EXPANSION", "ledger_math": "REFEREED", "role": "no log term in heat trace; sharpened obstruction proof.md §4"},
+    {"claim_id": "WEYL-LAW-CLASSICAL", "ledger_math": "REFEREED", "role": "main Weyl law (Hormander 1968 Thm 4.4 on H^{1/m} via Seeley 1967) used in §1 contradiction"},
+    {"claim_id": "RIEMANN-VON-MANGOLDT", "ledger_math": "REFEREED", "role": "T log T counting law (Titchmarsh-Heath-Brown Thm 9.4)"},
+    {"claim_id": "SEELEY-DEWITT-EXPANSION", "ledger_math": "REFEREED", "role": "leading heat-trace singularity is a pure power (no leading log); Lesch 1999 Thm 3.7 + published (3.18)/(3.19)/(3.20)"},
     {"claim_id": "COURANT-WEYL-PERTURBATION", "ledger_math": "REFEREED", "role": "extension to perturbations (Theorem D')"},
-    {"claim_id": "ENDRES-STEINER-NO-GO", "ledger_math": "REFEREED", "role": "closest prior art — novelty gate requires beating this"}
+    {"claim_id": "ENDRES-STEINER-NO-GO", "ledger_math": "REFEREED", "role": "prior art (graphs); D is a scope-extension over it"},
+    {"claim_id": "WATSON-VALENTINUZZI-PRECEDENT", "ledger_math": "REFEREED", "role": "near-direct precedent (elliptic differential operators); disclosed, NOT imported (usable_as_premise=false)"}
   ],
 
   "obligations": [
-    "D.weyl-mismatch: T^{d/m} != T log T proved by direct comparison — PROOF-DRAFT done",
-    "D.heat-trace-log: Z_zeta has log(1/t) singularity; Seeley-DeWitt class does not — PROOF-DRAFT done (proof.md §4 quantitative version complete)",
-    "D.novelty-gate: heat-trace argument goes beyond Endres-Steiner — NOVELTY GATE CLEARED (novelty.md)",
+    "D.weyl-mismatch: T^{d/m} != T log T proved by direct comparison (case split p<=1 -> 0, p>1 -> inf) — PROOF-DRAFT done",
+    "D.heat-trace-log: Z_zeta has leading log(1/t) singularity; classical elliptic PsiDO leading term is log-free — PROOF-DRAFT done (proof.md §4)",
+    "D.positioning: scope-extension/corollary over Endres-Steiner (graphs) + Watson-Valentinuzzi 2026 (differential); NOT standalone novelty (OB-25 Q5, novelty.md)",
     "D.escape-example: explicit T log T example outside C_ell (hyperbolic surface) — STATED, needs precision"
   ],
 
   "acceptance_test_results": {
-    "note": "PROOF-DRAFT. Novelty gate OPEN — Paper B conditional.",
-    "class": "PASS — C_ell membership checkable (order m, dimension d, compact manifold)",
+    "note": "Gate-A CONDITIONAL->PASS (OB-25); math axis INDEPENDENTLY-CHECKED.",
+    "class": "PASS — C_ell membership checkable (order m, dimension d>=1, closed manifold, classical elliptic)",
     "non_vacuity": "PASS — Laplace-Beltrami on S^d is a serious member; Dirac operator on compact spin manifold is a member",
-    "target": "PASS — spectrum of H in C_ell is {lambda_n} with N_H ~ C T^{d/m}; zeta ordinates have N_zeta ~ T log T",
+    "target": "PASS — spectrum of H in C_ell has N_H ~ C T^{d/m}; Gamma_zeta^+ (positive ordinates, multiplicity) has N_zeta ~ T log T",
     "observation": "PASS — the Weyl law is an exact asymptotic, not a numerical coincidence",
     "invariant": "PASS — the leading Weyl term C_H T^{d/m} is invariant under the declared perturbation class (Courant-Weyl)",
-    "no_rh": "PASS — no RH in hypotheses; uses Riemann-von Mangoldt (unconditional)",
-    "escape": "PASS — 6 escape routes named including explicit T log T example",
-    "scope": "PASS — C_ell named; T -> infty resource bound; all-T conclusion stated"
+    "no_rh": "PASS — no RH in hypotheses; uses Riemann-von Mangoldt count only (unconditional); no condition on Re(rho) (OB-25 Q1 CONFIRMED RH-free)",
+    "escape": "PASS — escape routes named including explicit T log T example",
+    "scope": "PASS — C_ell (closed manifold, classical elliptic) named; T -> infty resource bound; all-T conclusion stated"
   },
 
   "checker": {
@@ -56,6 +57,6 @@
   "runtime": {"class": "native-dev", "network": "none"},
   "assurance": {"required": ["formal-kernel"]},
   "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
-  "spec_status": "PROOF-DRAFT",
-  "status_note": "Weyl-mismatch argument is PROOF-DRAFT-CLEAR (standard). Heat-trace log argument (proof.md §4) is PROOF-DRAFT and the novelty candidate. Paper B conditional on novelty gate decision."
+  "spec_status": "INDEPENDENTLY-CHECKED",
+  "status_note": "Gate-A CONDITIONAL->PASS (OB-25 2026-08-11): math chain (Links A-E), RH-non-circularity, and Lesch scope CONFIRMED; advanced to INDEPENDENTLY-CHECKED after 8 textual mods integrated (operator class+d>=1; Gamma_zeta^+ target+RH sentence; Lesch cite -> Thm 3.7 + published (3.18)/(3.19)/(3.20) [= preprint (3.9)/(3.10)]; Weyl cite -> Hormander 1968 Thm 4.4 on H^{1/m} via Seeley 1967, Ivrii removed; 'stronger' -> two mutually reinforcing formulations; H_0 order-four principal symbol; novelty repositioned as scope-extension/corollary + Watson-Valentinuzzi 2026 disclosed; explicit escape statement). Positioning: scope-extension/corollary (NOT standalone novelty). Computational axis: Z_zeta side INDEPENDENT-CHECKER (OB-19); operator side analytic-only."
 }

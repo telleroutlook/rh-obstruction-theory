@@ -38,11 +38,20 @@ This is a contradiction.  No choice of `d, m, C_H` reconciles (W) and (VM).  ☐
 
 ## §2. Weyl law source
 
-The Weyl law `N_H(T) ~ C_H T^{d/m}` is a classical theorem:
+The Weyl law `N_H(T) ~ C_H T^{d/m}` is a classical theorem. The load-bearing route (used
+by Theorem D, closed manifold, no boundary):
 
-- **Smooth compact manifold without boundary:** Hörmander (1968) Acta Math. 121.
-- **Manifold with boundary, standard elliptic BCs:** Seeley (1969); Ivrii (1980)
-  for the two-term expansion.
+- **Order-one scalar elliptic ΨDO on a closed manifold:** Hörmander (1968) *Acta Math.*
+  121, **Theorem 4.4** (local spectral function; integrate the diagonal for
+  `N_A(λ) ~ C λ^d`).
+- **Reduction of `H` (order `m`) to order one:** `H^{1/m}` is a classical order-one
+  elliptic ΨDO by Seeley's complex-power calculus — **Seeley (1967)**, *Complex powers of
+  an elliptic operator*, Proc. Sympos. Pure Math. **10**, AMS, pp. 288–307 — and
+  `N_{H^{1/m}}(λ) = N_H(λ^m)`, so `N_H(T) ~ C_H T^{d/m}`.
+
+(Boundary-value / two-term refinements exist but are **not** used by D, which lives on a
+closed manifold; no unspecified "Ivrii 1980" entry is relied upon.)
+
 - **Perturbations:** Courant–Weyl min-max principle gives `N_{H+V}(T) = N_H(T) + O(T^{(d-1)/m})`.
 
 These are REFEREED; not restated here.
@@ -163,8 +172,9 @@ No term `C·t^{-d/m}·log(1/t)` with `C ≠ 0` appears as the **leading singular
 
 1. **Ellipticity is mandatory in the hypothesis.** Without it (T1) is FALSE. Explicit
    counterexample (OB-15 §2): on `𝕋²`, `H₀ = 1 + D_x² + D_y⁴` is a positive self-adjoint
-   classical order-4 *differential* operator with discrete spectrum, but its order-4
-   symbol `ξ_y⁴` vanishes at `ξ_y=0, ξ_x≠0` — **not elliptic**. Its heat trace is
+   classical order-4 *differential* operator with discrete spectrum, but its **order-four
+   principal symbol** `ξ_y⁴` (the full symbol is `1 + ξ_x² + ξ_y⁴`) vanishes on the nonzero
+   covector `(ξ_x, 0)` — **not elliptic**. Its heat trace is
    `Z_{H₀}(t) ∼ (√π Γ(1/4)/2) t^{-3/4}`, exponent `3/4`, NOT `d/m = 2/4 = 1/2`. So the
    pure-power *exponent* claim requires ellipticity, which `𝒞_ell` (statement.md) has.
 
@@ -193,8 +203,13 @@ full-classical-ΨDO statement rests on **Lesch 1999** (Ann. Global Anal. Geom. 1
 **Theorem 3.7**, i.e. the heat expansion `Tr(A e^{-tP}) ∼ Σ_j t^{(j−n−a)/m} c̃_j(log t) +
 Σ_j d̃_j t^j` with `deg c̃_j ≤ k` if `(j−a−n)/m ∉ ℤ₊` (else `≤ k+1`). Verified against the
 arXiv source dg-ga/9708010 v4 (deposited in `baseline/lesch-dg-ga-9708010/`, see
-PROVENANCE.md): the expansion is eq. (3.9) / preprint Theorem S1-3.5 (custom preprint
-labels; published numbering = Thm 3.7). With `A=I` (so `a=0, k=0`) and `j=0`, the exponent
+PROVENANCE.md): the expansion is **published eq. (3.18)** (= preprint eq. `(3.9)`, label
+`G1-3.9`), the degree bound is **published (3.19)**, and the Mellin/pole statement is
+**published (3.20)** (= preprint `(3.10)`); all are consequences of **Theorem 3.7**
+(= preprint Theorem `S1-3.5`). Cite **Theorem 3.7 + (3.18)/(3.19)/(3.20)** (the
+version-independent anchor is the theorem number; in the *published* text a bare "(3.9)"
+denotes a different equation — a preprint-vs-published renumbering, see PROVENANCE.md).
+With `A=I` (so `a=0, k=0`) and `j=0`, the exponent
 `−d/m < 0` is not a non-negative integer, so `c̃_0` is a constant — **no leading log**,
 exactly as needed. The proof follows **Grubb–Seeley 1995** (Invent. Math. 121) Thm 2.7
 (cited within Lesch's proof). NOTE
@@ -211,8 +226,9 @@ But `Z_H(t) = a_0 t^{-1} + o(t^{-1})` (pure power leading term, no log factor at
 These are incompatible: the leading term of `Z_ζ` is `t^{-1}·log(1/t)`, not a pure power.
 **Contradiction.** ☐
 
-This is **strictly stronger** than the leading-term Weyl mismatch (§1), and the argument
-is now correctly scoped:
+This is a **refinement** of the leading-term Weyl mismatch (§1) — not a logically stronger
+exclusion within `𝒞_ell`, but a sharper description of the *same* spectral-asymptotic
+obstruction (see the note below), and the argument is now correctly scoped:
 - It applies to the **full** `𝒞_ell` class (all positive classical elliptic pseudodifferential
   operators on compact manifolds).
 - It uses only the leading singularity (which is robustly a pure power by the Mellin argument)
@@ -220,14 +236,32 @@ is now correctly scoped:
 - Logarithms at subleading orders (e.g., `t·log t` as in the counterexample above) do not
   affect the argument, since `Z_ζ`'s `log(1/t)/t` is the **leading** singularity.
 
-**Comparison with Endres–Steiner.** This argument applies to the **full** `𝒞_ell` class
-(all compact elliptic operators, any order/dimension); Endres–Steiner covers only compact
-quantum graphs. The leading-singularity approach is a finer invariant than counting-function
-comparison alone.
+**Two mutually reinforcing formulations, not two independent obstructions (OB-25 Q5).**
+The heat trace is the Laplace–Stieltjes transform of the counting measure,
+`Z(t) = ∫ e^{-tT} dN(T)`, so by Abel/Tauber theory for regularly varying `N` the
+Weyl-counting leading term (`T^{d/m}` vs `(2π)^{-1}T log T`) and the heat-trace leading
+singularity (`t^{-d/m}` vs `(2π)^{-1}t^{-1}log(1/t)`) are **the same** leading-order fact
+in two languages. Within `𝒞_ell` the heat-trace formulation does **not** exclude any
+operator the Weyl formulation misses; its value is a cleaner "leading-singularity *type*"
+statement and the explicit separation of the impossible **leading** log from permissible
+**subleading** logs. So D should be read as one obstruction with two formulations, not a
+weaker + a stronger theorem.
+
+**Comparison with prior art (Endres–Steiner; Watson–Valentinuzzi).** The `𝒞_ell` scope
+here (all positive classical elliptic ΨDOs on a closed manifold, any order/dimension) is
+broader than Endres–Steiner (2010), who obtain a Weyl-law no-go only for the two
+Berry–Keating families `H_BK`, `H_BK²` on compact metric graphs (Thms 15.4–15.6) — graphs
+are not closed smooth manifolds. Watson–Valentinuzzi (2026) state a closely related
+leading-log obstruction for elliptic **differential** operators on compact manifolds. D's
+identifiable increment is (a) extending from differential to the full classical elliptic
+**ΨDO** class via Lesch's `Tr(Ae^{-tP})` expansion, and (b) the leading-vs-subleading log
+distinction. Accordingly D is positioned as a **scope-extension / corollary**, not an
+unprecedented standalone obstruction (see novelty.md).
 
 **Status: PROOF-DRAFT (leading-singularity obstruction; citation SOURCE-VERIFIED in-repo
-to Lesch 1999 heat expansion eq. (3.9) / Thm 3.7, baseline/lesch-dg-ga-9708010/; three
-coefficient/pole corrections applied per OB-15).**
+to Lesch 1999 Theorem 3.7 + heat expansion (3.18)/(3.19)/(3.20) [published] = preprint
+`(3.9)`/`(3.10)`, baseline/lesch-dg-ga-9708010/; three coefficient/pole corrections applied
+per OB-15; citation/positioning corrected per OB-25).**
 
 ---
 
@@ -251,12 +285,12 @@ the "exact determinant obstruction (order/type)" mentioned in the PLAN.
 
 | Argument | Status |
 |---|---|
-| Weyl leading-term mismatch (§1) | PROOF-DRAFT (standard corollary; close to Endres-Steiner) |
+| Weyl leading-term mismatch (§1) | PROOF-DRAFT (standard corollary; close to Endres–Steiner 2010, and to Watson–Valentinuzzi 2026 for differential operators) |
 | Extensions: sums, graphs, polynomials, perturbations (§3) | PROOF-DRAFT |
 | Heat-trace Z_ζ log-singularity lemma (§4) | PROOF-DRAFT ✓ + **INDEPENDENT-CHECKER** (OB-19 2026-08-11): exact closed form (1/2πt)(log(1/t)−γ_E−log2π), leading coeff exactly 1/2π; symbolic V1 + 110-digit replay. Fixed constant Γ'(2)=1−γ_E (earlier draft had −γ_E−1). V4 numerical remainder C=2A is conditional on an explicit \|E(u)\|≤A log(u+2) (e.g. Trudgian 2014), NOT derivable from bare O(log T). |
 | All-orders no-log for 𝒞_ell (§4 previous claim) | **REFUTED** by external review (OB-01, 2026-08-11): counterexample He_n=(|n|+a/|n|)e_n on S¹ has t·log(1/t) term. Gilkey Thm 1.8.1 citation WRONG (should be Lemma 1.8.2, covers differential operators only). BGV Thm 2.30 covers Laplace-type only. |
-| Leading-singularity obstruction (§4 corrected) | PROOF-DRAFT ✓ — no t^{-d/m}·log(1/t) is possible. Citation SOURCE-VERIFIED in-repo (2026-08-11) to Lesch 1999 heat expansion eq. (3.9)/Thm 3.7 (baseline/lesch-dg-ga-9708010/, exact content match), extending Grubb–Seeley 1995 Thm 2.7. |
+| Leading-singularity obstruction (§4 corrected) | PROOF-DRAFT ✓ — no t^{-d/m}·log(1/t) is possible. Citation SOURCE-VERIFIED in-repo (2026-08-11; OB-25-checked) to Lesch 1999 **Theorem 3.7 + published (3.18)/(3.19)/(3.20)** (= preprint (3.9)/(3.10); baseline/lesch-dg-ga-9708010/, exact content match), extending Grubb–Seeley 1995 Thm 2.7. |
 | Coefficient/pole corrections (OB-15 2026-08-11) | PROOF-DRAFT ✓ — (a) ellipticity mandatory (𝕋² counterexample 1+D_x²+D_y⁴ gives exponent 3/4≠1/2); (b) ζ_H NOT regular at all negative integers (Res_{s=−k}=m⁻¹Wres(H^k); only s=0 regular; subleading t^k log t possible, k≥1); (c) a_0=Γ(d/m)·Res, not a_0·m/Γ(d/m); (d) no-log needs BOTH simple-pole (Lesch) AND Γ regular at d/m. |
 | Scope: applies to full 𝒞_ell (not just differential operators) | PROOF-DRAFT ✓ — Lesch Thm 3.7 covers all classical elliptic ΨDO (parametric ellipticity from h_m>0); BGV/Gilkey (differential/Laplace-type only) NOT relied upon (L17). |
 | Spectral zeta pole obstruction (§5) | SKETCH (future work) |
-| Novelty gate decision | NOVELTY GATE CLEARED — leading-singularity §4 (corrected) is the new content |
+| Positioning (OB-25 Q5) | SCOPE-EXTENSION / COROLLARY — the ΨDO-class extension + leading-vs-subleading-log distinction is the identifiable increment over Endres–Steiner (graphs) and Watson–Valentinuzzi (differential operators); NOT marketed as standalone novelty. |

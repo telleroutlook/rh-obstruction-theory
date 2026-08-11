@@ -1,19 +1,24 @@
 # Dependencies — Theorem D (D-spectral-asymptotic)
 
 theorem_id: D-spectral-asymptotic
-status: PROOF-DRAFT (novelty gate CLEARED; ready for independent review)
+status: PROOF-DRAFT (Gate-A CONDITIONAL->PASS after OB-25 mods; positioned as scope-extension/corollary)
 
 dependencies:
 
   - id: WEYL-LAW-CLASSICAL
     statement: >
-      For H a positive elliptic pseudodifferential operator of order m > 0 on a
-      compact d-dimensional smooth manifold (with or without boundary, standard
-      elliptic BCs), N_H(T) ~ C_H T^{d/m} as T -> infinity, C_H > 0 is the
-      Weyl constant determined by the principal symbol.
+      For H a positive self-adjoint classical elliptic pseudodifferential operator of
+      order m > 0 on a CLOSED d-dimensional smooth manifold, N_H(T) ~ C_H T^{d/m} as
+      T -> infinity, C_H > 0 the Weyl constant determined by the principal symbol.
     source: >
-      Hormander (1968) Acta Math. 121; Seeley (1969); Ivrii (1980).
-      Standard: see also Shubin 'Pseudodifferential Operators and Spectral Theory' Ch. 4.
+      Hormander (1968) Acta Math. 121, Theorem 4.4 (local spectral function of an
+      order-one scalar elliptic PsiDO on a closed manifold), applied to the order-one
+      operator H^{1/m} obtained from Seeley's complex-power calculus (Seeley 1967,
+      'Complex powers of an elliptic operator', Proc. Sympos. Pure Math. 10, AMS,
+      pp. 288-307), using N_{H^{1/m}}(lambda) = N_H(lambda^m). Textbook: Shubin
+      'Pseudodifferential Operators and Spectral Theory' Ch. 4. (Boundary-value /
+      two-term refinements are NOT used by D, which lives on a closed manifold; the
+      earlier unspecified 'Seeley 1969 / Ivrii 1980' entries are removed.)
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
@@ -40,11 +45,16 @@ dependencies:
       General classical elliptic PsiDO (load-bearing): Lesch (1999),
       'On the noncommutative residue for pseudodifferential operators with
       log-polyhomogeneous symbols', Ann. Global Anal. Geom. 17, 151-187. SOURCE-VERIFIED
-      in-repo against arXiv dg-ga/9708010 v4 (baseline/lesch-dg-ga-9708010/): the heat
-      expansion is eq. (3.9) [preprint label G1-3.9], Tr(A e^{-tP}) ~ sum_j t^{(j-n-a)/m}
-      c_j(log t) + sum_j d_j t^j, with deg c_j <= k if (j-a-n)/m not in Z+, else k+1
-      (preprint Theorem S1-3.5 / published Thm 3.7). With A=I (a=0,k=0), j=0: exponent
-      -n/m<0 not in Z+, so c_0 is constant => leading term t^{-n/m} carries NO log.
+      in-repo against arXiv dg-ga/9708010 v4 (baseline/lesch-dg-ga-9708010/): the
+      load-bearing result is Theorem 3.7 (version-independent anchor; preprint label
+      S1-3.5). The heat expansion Tr(A e^{-tP}) ~ sum_j t^{(j-n-a)/m} c_j(log t) +
+      sum_j d_j t^j is published eq. (3.18) (= preprint (3.9), label G1-3.9); the degree
+      bound deg c_j <= k if (j-a-n)/m not in Z+, else k+1, is published eq. (3.19); the
+      Mellin/pole statement is published eq. (3.20) (= preprint (3.10)). Cite Theorem 3.7
+      + (3.18)/(3.19)/(3.20); a bare '(3.9)' denotes a DIFFERENT equation in the published
+      version (preprint-vs-published renumbering, see PROVENANCE.md). With A=I (a=0,k=0),
+      j=0: exponent -n/m<0 not in Z+, so c_0 is constant => leading term t^{-n/m} carries
+      NO log.
       Proof follows Grubb-Seeley (1995) Invent. Math. 121, Thm 2.7 (cited in the proof).
       SCOPE-LIMITED references (do NOT cover general PsiDO): Berline-Getzler-Vergne (1992)
       Thm 2.30 (Laplace-type / order-2 differential only); Gilkey 'Invariance Theory...'
@@ -77,19 +87,49 @@ dependencies:
     computational: NONE
     usable_as_premise: true
     role: >
-      Prior art (closest existing no-go). Theorem D goes beyond this: full C_ell class
-      (not just compact quantum graphs) and heat-trace singularity type (not just Weyl
-      leading term). Novelty gate CLEARED — see novelty.md.
+      Prior art (closest existing no-go). Endres-Steiner covers only the two Berry-Keating
+      families H_BK, H_BK^2 on compact metric graphs (Thms 15.4-15.6), NOT all compact
+      quantum-graph operators, and graphs are not closed smooth manifolds. Theorem D's
+      identifiable increment: full C_ell (classical elliptic PsiDO on a closed manifold)
+      + leading-vs-subleading log distinction. D is positioned as a SCOPE-EXTENSION/
+      COROLLARY, not standalone novelty (OB-25 Q5; see novelty.md).
 
-gate_a_status: CLEARED
+  - id: WATSON-VALENTINUZZI-PRECEDENT
+    statement: >
+      Any self-adjoint operator with superlinear eigenvalue counting N(lambda) ~
+      lambda*L(lambda) (L slowly varying) satisfies heat trace Theta(t) ~ t^{-1} L(1/t)
+      by Tauberian analysis; a fourth-order single-valuation kernel limit has Theta(t) ~
+      t^{-1/4}. The incompatible spectral dimensions give a structural obstruction. States
+      a closely related leading-log obstruction for elliptic DIFFERENTIAL operators on
+      compact manifolds.
+    source: >
+      Douglas F. Watson and Tiziano Valentinuzzi, 'Spectral-Dimension Obstructions for
+      Operators with Superlinear Counting Laws', Bull. Sci. Math. 211 (2026), 103824,
+      doi:10.1016/j.bulsci.2026.103824; arXiv:2604.00052 (Theorem 1.4, Prop 6.2, Thm 7.2).
+      Existence + title + DOI + authors verified 2026-08-11 (arXiv metadata).
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: false
+    role: >
+      NEAR-DIRECT PRECEDENT that MUST be disclosed (OB-25 Q5). NOT imported as a premise:
+      the accessible arXiv v1 uses two-sided |gamma|<=T counting with the one-sided 1/(2pi)
+      coefficient (a factor-2 mismatch) and RH-style '1/2+i*gamma_n runs over the nontrivial
+      zeros' phrasing in Sec 7.2, so it cannot be pasted in as a clean RH-free proof. Its
+      existence establishes that a leading-log obstruction for (differential) elliptic
+      operators is already in the literature; D's contribution is the PsiDO-class extension.
+
+gate_a_status: CONDITIONAL-PASS (OB-25 2026-08-11)
 gate_a_note: >
-  All dependencies REFEREED; no LEGACY imports; no PENDING items. Novelty gate CLEARED
-  (heat-trace §4 leading-singularity argument goes beyond Endres-Steiner). The load-bearing
-  leading-log citation is now SOURCE-VERIFIED in-repo: Lesch 1999 heat expansion eq. (3.9)
-  (preprint Theorem S1-3.5 / published Thm 3.7), verified against arXiv dg-ga/9708010 v4
-  deposited in baseline/lesch-dg-ga-9708010/ (see PROVENANCE.md) — exact content match,
-  the A=I,j=0 case gives a log-free leading term as D requires. Citation numbers corrected
-  (Gilkey is Lemma 1.8.2 not 'Thm 1.8.1'; BGV/Gilkey are Laplace-type/differential only and
-  NOT load-bearing, PROMPT_LINT L17). Grubb-Seeley 1995 Thm 2.7 is cited within Lesch's own
-  proof (secondary; not separately deposited). This closes the citation Gate the same way
-  C's Andersson Theorem 5 was closed (arXiv source in baseline/, exact theorem match).
+  OB-25 whole-theorem review: math chain CONFIRMED (Links A-E), RH-non-circularity
+  CONFIRMED, Lesch scope CONFIRMED. Verdict GATE-A CONDITIONAL, upgrading to PASS after the
+  8 textual mods are integrated (all done 2026-08-11): (1) operator class + d>=1; (2) target
+  multiset Gamma_zeta^+ + RH-sentence fix; (3) Lesch cite -> Theorem 3.7 + published
+  (3.18)/(3.19)/(3.20) [= preprint (3.9)/(3.10); a bare '(3.9)' is a DIFFERENT eq in the
+  published version -- preprint-vs-published renumbering, PROMPT_LINT L22]; (4) Weyl cite ->
+  Hormander 1968 Thm 4.4 on H^{1/m} via Seeley 1967 (NOT 'Seeley 1969'), Ivrii entry removed;
+  (5) 'stronger' -> 'two mutually reinforcing formulations of the same obstruction'; (6) H_0
+  order-four principal symbol wording; (7) novelty repositioned as scope-extension/corollary
+  + Watson-Valentinuzzi 2026 precedent disclosed; (8) explicit escape-route statement.
+  Load-bearing leading-log citation SOURCE-VERIFIED in-repo against arXiv dg-ga/9708010 v4
+  (baseline/lesch-dg-ga-9708010/, PROVENANCE.md). Positioning: scope-extension/corollary,
+  NOT standalone novelty. Math axis advances to INDEPENDENTLY-CHECKED.

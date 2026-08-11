@@ -7,17 +7,23 @@
 
 ## Prior art landscape
 
-### Endres–Steiner (2010), J. Phys. A 43, 095204
+### Endres–Steiner (2010), J. Phys. A 43, 095204 — Theorems 15.4–15.6
 
-Proves that no compact quantum graph Hamiltonian with local energy-independent
-vertex conditions can have spectrum `{γ_n}`, by comparing `N_H(T) ~ (L/π) T`
-(linear) with `N_ζ(T) ~ T log T / 2π`.  This is exactly the Weyl-mismatch
-argument for compact quantum graphs.
+Prove a Weyl-law no-go for the **two Berry–Keating families** `H_BK` and `H_BK²` on
+**compact metric graphs** (comparing `N_H(T) ~ (L/π) T` with `N_ζ(T) ~ T log T / 2π`).
+This is NOT a statement about all compact quantum-graph operators, and metric graphs are
+not closed smooth manifolds.
 
-**Delta from Theorem D (main):** Theorem D covers the broader `𝒞_ell` class
-(all compact elliptic operators of order `m` on compact `d`-manifolds) and the
-extensions including compact quantum graphs as a special case.  The argument is
-the same, the class is broader.
+### Watson–Valentinuzzi (2026), Bull. Sci. Math. 211, 103824 (arXiv:2604.00052) — Thm 1.4, Prop 6.2, Thm 7.2
+
+State a **closely related leading-log obstruction for elliptic differential operators on
+compact manifolds**, via a Tauberian argument: superlinear counting `N(λ) ~ λ L(λ)` forces
+heat trace `Θ(t) ~ t⁻¹ L(1/t)`, incompatible with a `t^{-1/4}` fourth-order kernel limit
+(spectral-dimension separation). **Existence/title/DOI/authors verified 2026-08-11.** This
+is a **near-direct precedent** to D and MUST be disclosed (OB-25 Q5). It is **not imported**
+as a premise: the accessible arXiv v1 uses two-sided `|γ|≤T` counting alongside the
+one-sided `1/2π` coefficient (a factor-2 mismatch) and RH-style `1/2+iγ_n` phrasing in
+§7.2, so it is not a clean RH-free source.
 
 ### Program §9.D.5 judgment
 
@@ -33,38 +39,45 @@ the same, the class is broader.
 | Weyl leading term for C_ell | NO | Standard corollary of classical Weyl theorem |
 | Extensions: sums, polynomials, perturbations | THIN | Routine from Courant-Weyl |
 | Compact quantum graphs | NO | Endres-Steiner already proved this |
-| Heat-trace log singularity (proof.md §4) | POSSIBLY YES | Seeley-DeWitt no-log vs. Z_zeta log term — needs quantitative statement |
-| Spectral zeta pole obstruction (proof.md §5) | POSSIBLY YES | Pole structure of Z_H(s) vs. Riemann zeta; need careful formulation |
+| Leading-log obstruction, elliptic differential operators | NO | Watson–Valentinuzzi 2026 (near-direct precedent) |
+| Heat-trace vs Weyl "stronger" claim | NO | Same leading-order fact via Abel/Tauber transform of the counting measure (OB-25 Q5) |
+| Extension to full classical elliptic ΨDO class | YES (increment) | via Lesch Thm 3.7 `Tr(Ae^{-tP})`; beyond differential (WV) and graphs (ES) |
+| Leading-vs-subleading-log distinction | YES (increment) | impossible leading `t^{-d/m}log(1/t)` vs permissible subleading `t^k log t` (`Wres(H^k)≠0`) |
+| Spectral zeta pole obstruction (proof.md §5) | DEFERRED | future work |
 
-## Verdict and publication strategy
+## Verdict and publication strategy (OB-25 Q5)
 
-**NOVELTY GATE CLEARED** for Paper B (short note).
+**SCOPE-EXTENSION / COROLLARY — not standalone novelty.** OB-25 refuted the earlier
+"strictly stronger than Endres–Steiner / novelty gate CLEARED" claim on two grounds:
 
-The heat-trace `log(1/t)/t` singularity argument (proof.md §4) is:
+1. **The heat-trace argument is not stronger within `𝒞_ell`.** Given a positive spectrum,
+   `Z(t) = ∫ e^{-tT} dN(T)`, so the Weyl-counting leading term and the heat-trace leading
+   singularity are the **same** leading-order fact in two languages (Abel/Tauber for
+   regularly varying `N`; see proof.md §4). The heat trace gives cleaner "leading-type"
+   language and exposes subleading logs, but excludes no operator the Weyl mismatch misses.
+2. **A near-direct precedent exists (Watson–Valentinuzzi 2026)** for the leading-log
+   obstruction on elliptic **differential** operators — so D's leading-log idea is not new
+   in itself.
 
-1. **Strictly stronger than Endres–Steiner:** they prove Weyl mismatch for compact
-   quantum graphs (one special case of `𝒞_ell`). The heat-trace argument:
-   - applies to the **full `𝒞_ell` class** (all compact elliptic operators, any order/dimension);
-   - is a **finer invariant**: `log(1/t)/t` singularity type cannot arise from
-     polyhomogeneous Seeley–DeWitt expansion — this excludes all `(d,m)` simultaneously;
-   - does NOT follow from Endres–Steiner + standard Weyl by a simple application.
+**D's honest, identifiable increment:**
+- extends the exclusion from elliptic **differential** operators (WV 2026) and quantum
+  graphs (ES 2010) to the **full classical elliptic ΨDO class** on a closed manifold, via
+  Lesch's `Tr(A e^{-tP})` expansion (Thm 3.7); and
+- cleanly separates the **impossible leading** `t^{-d/m}log(1/t)` from **permissible
+  subleading** `t^k log t` (`k≥1`).
 
-2. **Self-contained computation:** The `Z_ζ(t) ~ log(1/t)/t` lemma follows from
-   Abel–Plana / partial summation applied to the Riemann–von Mangoldt formula — no
-   explicit formula or zero-sum needed.
+**Citation status (Lesch, OB-15 + OB-25).** The leading-log fact for the full classical
+elliptic ΨDO class is pinned to **Lesch 1999 Theorem 3.7** (Ann. Global Anal. Geom. 17,
+151–187), heat expansion **published (3.18)** / degree bound **(3.19)** / Mellin **(3.20)**
+(= preprint `(3.9)`/`(3.10)`; a bare "(3.9)" is a *different* equation in the published
+version — see baseline PROVENANCE.md), with `A=I`, extending **Grubb–Seeley 1995 Theorem
+2.7**. Scope caveat (PROMPT_LINT L17): **BGV Thm 2.30** (Laplace-type only) and **Gilkey
+Lemma 1.8.2** (differential only; NOT "Thm 1.8.1") do not suffice and are not load-bearing.
+This is a standard result at the pinned references, not a new mathematical claim.
 
-**Novelty-gate citation status (RESOLVED by OB-15, 2026-08-11).** The leading-log
-obstruction for the **full classical elliptic ΨDO class** is pinned to **Lesch 1999
-Theorem 3.7** (Ann. Global Anal. Geom. 17, 151–187) + eqs (3.18)–(3.22) with `A=I`,
-extending **Grubb–Seeley 1995 Theorem 2.7**. Scope caveat (PROMPT_LINT L17): **BGV
-Thm 2.30** covers only Laplace-type (order-2 differential) operators and **Gilkey Lemma
-1.8.2** (NOT "Thm 1.8.1") covers only differential operators — neither suffices for the
-general ΨDO claim, and neither is the load-bearing citation. This is a standard result at
-the pinned references, not a new mathematical claim; the citation is for Gate A compliance.
-
-**Paper B strategy:** Short note (~10 pages). Primary contribution: the heat-trace
-`log` singularity obstruction for the full `𝒞_ell` class. Secondary: Weyl-mismatch
-corollary as context. The spectral zeta pole obstruction (proof.md §5) is deferred
-to future work.
-
-**Current action: novelty gate CLEARED (pending Seeley–DeWitt cite); proceed with Paper B outline.**
+**Publication strategy:** a **proposition / appendix / short note inside a larger paper**,
+positioned as a classical-ΨDO scope-extension of the ES/WV leading-log obstruction, with
+the Weyl mismatch as context and both precedents cited. NOT a standalone "new barrier."
+(Global novelty cannot be proved by a finite literature search; this records the honest
+positive claim and the disclosed precedents.) The spectral-zeta pole obstruction (proof.md
+§5) is deferred.
