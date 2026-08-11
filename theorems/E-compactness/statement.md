@@ -1,6 +1,6 @@
 # Theorem E — Real-Rooted Approximants and the Missing Compactness Theorem
 
-**Mathematical status:** PROOF-DRAFT (E-neg = per-`N` non-identifiability, quantitative §3 CONFIRMED by OB-03; E-pos = sufficiency package, standard Montel/Vitali/Hurwitz. Self-audit OB-28 2026-08-11: E-neg restated as per-`N`, not sequence non-convergence)  
+**Mathematical status:** PROOF-DRAFT (E-neg = per-`N` non-identifiability, quantitative §3 CONFIRMED by OB-03; E-pos = sufficiency package, standard Montel/Vitali/Hurwitz. Self-audit OB-28: E-neg restated per-`N`; OB-29 pre-send: record fixed to target `Ξ`, not `ξ̂`. Gate-A package OB-29)  
 **Computational status:** NONE  
 **Theorem ID:** E-compactness  
 **Program ref:** §10 (WP-E), §10.E.1–E.5  
@@ -12,39 +12,37 @@
 
 ### Setting
 
-**Normalization (CCM entire-target, frozen for this theorem).**  
-Following Connes–Consani–Moscovici (arXiv:2511.22755), the target is:
-
+**Normalization (CCM entire target — `Ξ`, frozen for this theorem).**  
+The convergence target is the shifted completed zeta
 ```
-Ξ(z) = ξ(1/2 + iz)         (entire, even, all zeros real by RH)
+Ξ(z) = ξ(1/2 + iz)         (entire, even, order 1; zeros ±γ_n, the ζ-ordinates).
 ```
-
-with the CCM determinant identity:
-
+The **CCM determinant identity** (Connes–Consani–Moscovici, arXiv:2511.22755) is
 ```
 det_reg(𝔇_{λ,N} − z) = −i · λ^{−iz} · ξ̂(z),
 ```
-
-where `ξ̂` is the Fourier transform of `ξ` (entire, all zeros real = spectrum
-of `𝔇_{λ,N}`).  The **open CCM step** is:
-`suitably normalized det_reg → Ξ` as `N, λ → ∞`.
-
-**This theorem works with the CCM entire target.**  The Suzuki meromorphic
-target `z² ξ/ξ'` is kept separate (REFERENCE_BASELINE §5).
+where `ξ̂` is the Fourier transform of `ξ` (entire, zeros real = spectrum of `𝔇_{λ,N}`).
+**`ξ̂` and `Ξ` are DISTINCT normalizations** (REFERENCE_BASELINE §5): the CCM **open step**
+is precisely that a *suitably normalized* `det_reg` (equivalently, a suitable normalization
+of `ξ̂`) converges to `Ξ` — the phase `λ^{−iz}` preserves zeros but not the locally uniform
+limit. **Theorem E studies exactly this open step**, so its finite-evidence record and its
+convergence target are both stated relative to the **target `Ξ`** (not `ξ̂`); the CCM
+identity above is the motivation, not the record. The Suzuki meromorphic target `z²ξ/ξ'` is
+kept separate (REFERENCE_BASELINE §5) — never conflated.
 
 **Finite evidence record.**  An approximating entire function sequence `(F_N)_{N≥1}`
-satisfies the **CCM finite evidence record** `ℰ_N` if:
+satisfies the **finite evidence record** `ℰ_N` (relative to the target `Ξ`) if:
 
 1. `F_N` is an entire function of order one.
 2. `F_N` is even: `F_N(−z) = F_N(z)`.
 3. `F_N` is real on the real axis: `F_N(z̄) = F_N(z)̄`.
 4. All zeros of `F_N` are **real** (real-rootedness).
 5. The first `k_N → ∞` zeros of `F_N` (ordered by size) agree with
-   the verified ordinates `γ₁ ≤ γ₂ ≤ …` of `ζ`.
-6. A finite-dimensional determinant identity holds:
-   `F_N(0) = ξ̂(0) · c_N` for a normalization constant `c_N > 0`.
+   the ordinates `γ₁ ≤ γ₂ ≤ …` (the zeros of `Ξ`).
+6. Base-point normalization: `F_N(0) = Ξ(0) · c_N` for a constant `c_N > 0`
+   (`Ξ(0) = ξ(1/2) > 0`).
 7. Finitely many Taylor coefficients agree:
-   `F_N^{(2j)}(0) = ξ̂^{(2j)}(0)` for `j = 0, 1, …, J_N`.
+   `F_N^{(2j)}(0) = Ξ^{(2j)}(0)` for `j = 0, 1, …, J_N`.
 
 The record `ℰ_N` contains **no proved tail envelope**: the behavior of `F_N(z)`
 for `|z|` large is uncontrolled.

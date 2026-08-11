@@ -41,6 +41,7 @@ problem.
 | OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | RESOLVED — CONFIRMED (Gate-A CONDITIONAL), checker deposited 2026-08-11 |
 | OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | RESOLVED — GATE-A CONDITIONAL→PASS, 8 mods integrated 2026-08-11 (D → INDEPENDENTLY-CHECKED, scope-extension positioning) |
 | OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | RESOLVED — GATE-A CONDITIONAL→PASS, mod1–mod6 integrated 2026-08-11 (C → INDEPENDENTLY-CHECKED, one-sided corollary of Andersson Thm 5) |
+| OB-29 | `OB-29-E-gate-a-review-package.md` | E | **GATE-A**: independent review of the compactness (finite-evidence) theorem (Links A–D + Q1–Q7; E-neg per-`N` non-identifiability via fixed-`N` IFT + E-pos sufficiency package; Ξ-not-ξ̂ normalization; per-`N`-not-sequence framing; H-uorder/H-div honesty) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -516,6 +517,26 @@ tests added (`test_c_finite_factor_orientation_correct`,
   corollary of Andersson Theorem 5**. Computational axis stays NONE (analytic existence
   result). Added `ANDERSSON-COROLLARY-3` to the ledger (15 claims); 3 C regression tests;
   tests 82 → 85.
+
+## Sixth Gate-A push OB-29 (drafted 2026-08-11) — E compactness / finite-evidence theorem
+
+Applies the Gate-A template to E-compactness (Paper C primary). Two parts: E-neg (per-`N`
+non-identifiability, fixed-`N` IFT — its §3 core already CONFIRMED by OB-03) + E-pos
+(sufficiency package). Before shipping, two pre-send self-audits (same discipline as C's
+R-inversion, H's total-chain, E's own OB-28 restatement):
+- **OB-28 (done earlier):** E-neg restated as **per-`N` non-identifiability** (bad radius
+  `R_N ≥ 2γ_{k_N+1} → ∞`), NOT "sequence `(F_N)` fails to converge" (PROMPT_LINT L24).
+- **OB-29 pre-send fix:** the finite-evidence record's Taylor conditions were written against
+  **`ξ̂`** (Fourier transform of ξ, what `det_reg` gives) while the target and the whole §3
+  construction are about **`Ξ(z)=ξ(1/2+iz)`** (zeros `γ_n`). Baseline REFERENCE_BASELINE §5:
+  `ξ̂` and `Ξ` are DISTINCT normalizations, "never conflate" — the suitably-normalized
+  `det_reg → Ξ` is precisely the CCM open step E studies. Fixed: record + target both stated
+  relative to `Ξ`; the `det_reg = −iλ^{−iz}ξ̂` identity kept as motivation only.
+Four links + seven Gate-A questions, with E-specific delicate points built in: Q1
+non-circularity (`γ_n` reality is motivation, never used); Q2 the `Ξ`/`ξ̂`/`z²ξ/ξ'`
+normalization discipline; Q3 per-`N`-vs-sequence framing (L24); Q4 E-pos honesty
+((H-uorder) must be `r^{1+ε}` not linear finite-type per L1/L14, (H-div) two-sided, both
+unproved-for-CCM). Passed PROMPT_LINT (L1/L14/L17/L18/L19/L21/L24 + self-containment).
 
 ## What a returned verification should contain
 
