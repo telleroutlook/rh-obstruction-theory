@@ -12,7 +12,8 @@
 The observation that finite real-zero matching does not imply global convergence
 is folklore.  What is **new** in E-compactness is:
 
-- the **quantified** counterexample sequence in the exact CCM normalization;
+- the **quantified per-`N` witness** in the exact CCM normalization (a record-respecting
+  `F` with `sup_{|z|≤R_N}|F−Ξ| ≥ ε_N`, `R_N ≥ 2γ_{k_N+1}`);
 - the **identified degree of freedom** (tail of the Hadamard product beyond `k_N`);
 - the **positive sufficient package** (H-bound + H-tail + H-modulus) as a
   referee-grade checklist translating finite evidence into a rigorous convergence
@@ -59,7 +60,7 @@ for the current theorem (meromorphic; separate pole/residue argument needed).
 
 E-compactness has genuine new content:
 - a precise **checklist** for the CCM convergence step (paper-quality);
-- the **counterexample existence** (non-uniqueness, Paper C main negative result);
+- the **per-`N` non-identifiability** witness (Paper C main negative result);
 - the **sufficient package** as the positive direction.
 
 The negative theorem needs the quantitative §3 estimate before it is stronger

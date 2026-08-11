@@ -376,6 +376,34 @@ def test_e_no_rh_claim():
                 f"E {fname} contains forbidden phrase: {phrase!r}"
 
 
+def test_e_neg_is_per_n_not_sequence():
+    """OB-28: E-neg must be stated as per-N non-identifiability, NOT sequence
+    non-convergence, matching what proof.md §3 (OB-03-confirmed, no N->infty) proves."""
+    stmt = (E_DIR / "statement.md").read_text()
+    # The overclaim must be gone as an assertion...
+    assert "does **not** converge locally uniformly to `Ξ`" not in stmt, \
+        "E-neg must not assert a sequence fails to converge locally uniformly"
+    # ...and the per-N framing + growing witness radius must be present.
+    assert "per-`N`" in stmt or "per-N" in stmt, \
+        "E-neg must be framed as a per-N non-identifiability result"
+    assert "2γ_{k_N+1}" in stmt or "R_N" in stmt, \
+        "E-neg must state the witness radius R_N (>= 2 gamma_{k_N+1})"
+
+
+def test_e_neg_construction_uses_ift_not_stale_sketch():
+    """OB-28: the E-neg construction must use the fixed-N IFT / log-power-sum route
+    (proof.md §3), not the abandoned delta_n=c/n sketch presented as the live method."""
+    stmt = (E_DIR / "statement.md").read_text()
+    assert "implicit function theorem" in stmt or "IFT" in stmt or "Φ_r" in stmt, \
+        "E-neg construction must reference the IFT / log-power-sum system"
+    # dependency must no longer carry the abandoned name / 'to be written'
+    deps = (E_DIR / "dependencies.yaml").read_text()
+    assert "E-NEG-TAIL-PERTURBATION" not in deps, \
+        "abandoned E-NEG-TAIL-PERTURBATION dependency must be renamed/removed"
+    assert "proof.md §3 (to be written)" not in deps, \
+        "dependency must not say proof.md §3 is 'to be written' (it exists)"
+
+
 # ---- C-euler-tail theorem scaffold tests ----
 
 C_DIR = ROOT / "theorems" / "C-euler-tail"

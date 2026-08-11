@@ -231,6 +231,20 @@ as a strict chain; truth is a partial order — `O_finite ⋈ O_theta` incompara
 coarsenings of `O_oracle`.) The correct object is a **partial order / lattice**; each covered
 relation needs its own witness.
 
+## L24 — Per-`N` non-identifiability ≠ sequence non-convergence; match the theorem to what the proof yields (hit OB-28; E-neg)
+NEVER state a "sequence `(F_N)` fails to converge" theorem when the proof only produces, for
+each fixed `N`, a record-respecting witness far from the target. CHECK where the witnessed
+discrepancy sits: if the bad radius `R_N` **grows with `N`** (here `R_N ≥ 2γ_{k_N+1} → ∞`),
+the result is **per-`N` non-identifiability** (the fiber `ℰ_N` is not pinned to the target on
+a large disk), NOT a statement about any fixed compact, and it does **not** contradict
+locally-uniform convergence of a sequence. Restate the theorem as per-`N` (analogous to B1's
+"no uniform separation margin"), and add the non-barrier self-check (it is a fiber
+non-identifiability, not a shrinking positive margin). Symptom to grep for: a proof that
+"uses no `N→∞`" (or an IFT/fixed-`N` construction) under a theorem head that quantifies over
+a sequence or a subsequence. (OB-28 caught E-neg claiming "`(F_N)` does not converge locally
+uniformly" while proof.md §3, OB-03-confirmed, proved a fixed-`N` witness at radius
+`≥2γ_{k_N+1}`.)
+
 ---
 
 ### Self-containment gate (CLAUDE.md checklist #5, always)

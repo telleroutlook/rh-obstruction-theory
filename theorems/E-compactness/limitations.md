@@ -19,28 +19,33 @@ genuine technical obligation NOT covered by E-compactness as stated.
 **Consequence:** The escape theorem (E-pos) applies to CCM-like entire-function
 sequences only.  Claiming E-pos for the Suzuki target requires a separate proof.
 
-## 2. Condition (7) weakened in the basic E-neg
+## 2. Condition (7) is enforced by the IFT construction (not weakened)
 
-The basic E-neg construction (proof.md §2) does not enforce Taylor-coefficient
-agreement beyond `j = 0` (normalization).  Enforcing finitely many Taylor
-coefficients requires additional free parameters (proof.md §2 "Refinement").
-The full E-neg with conditions 1–7 is a stronger result and is marked OPEN in
-proof.md §3.
+The fixed-`N` witness (proof.md §3) matches the first `J_N` even Taylor coefficients
+**exactly**, via the log-power-sum system `Φ_r(u,c)=0` (`r=1,…,J_N`) solved by the implicit
+function theorem — so conditions 1–7 of `ℰ_N` all hold. (An earlier draft used a
+hand-picked `δ_n=c/n` tail that only handled `j=0`; that sketch was abandoned — see
+proof.md §2 for why summable hand-picked perturbations self-defeat.)
 
-## 3. Quantitative non-convergence estimate open
+## 3. E-neg is a per-`N` statement, quantitatively CONFIRMED (not open)
 
-The proof-draft E-neg establishes non-uniqueness (two sequences converging to
-different limits) but does not yet give a quantitative lower bound
-`|F_N − Ξ|_{|z|≤R} ≥ ε > 0` for a single sequence.  This is the goal of
-proof.md §3 and is still OPEN.
+The quantitative lower bound `sup_{|z|≤R_N}|F − Ξ| ≥ ε_N` for a record-respecting `F`
+(fixed `N`, `R_N ≥ 2γ_{k_N+1}`) is **CONFIRMED** (OB-03 external review, 2026-08-11), via
+the exact Vandermonde Jacobian and a Cauchy coefficient estimate on the first unmatched
+log-power-sum. It is a **per-`N` non-identifiability** result and uses **no** `N→∞` passage.
 
-## 4. Not a proof that no sequence can converge
+## 4. Not a claim that a sequence fails to converge (per-`N`, like B1's "no uniform margin")
 
-E-neg shows that the finite evidence record **alone** is insufficient.
-It does NOT show that **no** sequence satisfying `ℰ_N` converges to `Ξ`.
-In fact, the CCM sequence `det_reg(𝔇_{λ,N} − z)` is conjectured (and
-numerically supported) to converge after suitable normalization.  The theorem
-says the normalization step is load-bearing — not that convergence is impossible.
+E-neg shows the finite record `ℰ_N` **alone** does not identify `Ξ` within its fiber, for
+each `N`. It does **NOT** assert that some particular sequence `(F_N)` fails to converge
+locally uniformly — the witness discrepancy sits at radius `R_N ≥ 2γ_{k_N+1} → ∞`, so it is
+consistent with locally-uniform convergence on every fixed compact (this is exactly why the
+positive package E-pos is not in conflict). Nor does it show that **no** sequence converges:
+the CCM sequence `det_reg(𝔇_{λ,N} − z)` is conjectured (numerically supported) to converge
+after suitable normalization. The theorem says the normalization/tail-control step is
+load-bearing — not that convergence is impossible. (This mirrors B1's "no uniform separation
+margin," and keeps E-neg clear of the "margin → 0" non-barrier label: the claim is a
+per-`N` fiber non-identifiability, not a shrinking positive margin.)
 
 ## 5. Not about RH
 

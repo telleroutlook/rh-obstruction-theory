@@ -1,6 +1,6 @@
 # Theorem E — Real-Rooted Approximants and the Missing Compactness Theorem
 
-**Mathematical status:** PROOF-DRAFT  
+**Mathematical status:** PROOF-DRAFT (E-neg = per-`N` non-identifiability, quantitative §3 CONFIRMED by OB-03; E-pos = sufficiency package, standard Montel/Vitali/Hurwitz. Self-audit OB-28 2026-08-11: E-neg restated as per-`N`, not sequence non-convergence)  
 **Computational status:** NONE  
 **Theorem ID:** E-compactness  
 **Program ref:** §10 (WP-E), §10.E.1–E.5  
@@ -58,63 +58,67 @@ F_N(z) → Ξ(z)   as  N → ∞,   uniformly on every compact  K ⊂ ℂ.
 
 ### Theorem E-neg (finite evidence ⇏ compact convergence)
 
-**Theorem E-neg.** There exists a sequence `(F_N)_{N≥1}` of entire functions,
-each satisfying the CCM finite evidence record `ℰ_N` for every `N`, such that
-`(F_N)` does **not** converge locally uniformly to `Ξ`.
-
-More precisely: there exists `R > 0`, `ε > 0`, and a subsequence `(F_{N_j})`
-such that
+**Theorem E-neg (finite record does not identify Ξ — per-`N` non-identifiability).**
+For every `N ≥ 1` (pinning the first `k_N` zeros and matching the first `J_N` even Taylor
+coefficients, i.e. the full record `ℰ_N`) there exist `ε_N > 0`, `R_N ≥ 2γ_{k_N+1}`, and an
+entire function `F` **satisfying `ℰ_N`** with
 
 ```
-sup_{|z| ≤ R} |F_{N_j}(z) − Ξ(z)| ≥ ε   for all  j.
+sup_{|z| ≤ R_N} |F(z) − Ξ(z)| ≥ ε_N .
 ```
 
-The counterexample sequence exposes a specific **invisible degree of freedom**:
-the canonical-product tail (growth of the infinite-product factor beyond `z_{k_N}`).
+Equivalently: the fiber `{F : F satisfies ℰ_N}` is **not** contained in any
+`ε`-neighborhood of `Ξ` on the disk `|z| ≤ R_N` — the finite record does not pin the
+function down, even on a large disk that already contains all `k_N` matched zeros.
+
+**Scope of the claim (what E-neg does and does NOT say — OB-28 correction).**
+This is a **per-`N` non-identifiability** statement, exactly analogous to B1's "no uniform
+separation margin." It does **not** assert that a *particular sequence* `(F_N)` fails to
+converge locally uniformly: the witness discrepancy sits at radius `R_N ≥ 2γ_{k_N+1} → ∞`,
+so it does not contradict locally-uniform convergence on any fixed compact (that is why the
+positive package E-pos, with its extra hypotheses, is not in conflict). The content is that
+`ℰ_N` **alone** leaves an uncontrolled tail degree of freedom; the escape (E-pos) is exactly
+the extra data that removes it.
 
 ---
 
-### Construction of the counterexample sequence (proof sketch)
+### Construction of the witness (matches proof.md §3 — fixed `N`, OB-03-confirmed)
 
-**Step 1: Hadamard factorization.**  Write
+Fix `N`; write `k := k_N`, `J := J_N`. Work in reciprocal-square variables
+`a_m := γ_{k+m}^{-2}` (`m ≥ 1`, so `a_1 > a_2 > … > 0`, `Σ a_m < ∞`).
+
+**Step 1 (freeze a one-parameter tail).** For `m > J` set
+`b_m(c) := a_m (1 + c/m)^{-2}` — i.e. push the tail zero to `μ_{k+m}(c) = γ_{k+m}(1+c/m)`.
+
+**Step 2 (match the record by IFT, not by a hand-picked `δ_n`).** Let `u = (u_1,…,u_J)` be
+the first `J` free reciprocal squares. Impose the **log-power-sum** matching system
 ```
-Ξ(z) = e^{A + Bz²} · Π_{n≥1} (1 − z²/γ_n²)
+Φ_r(u,c) := Σ_{ℓ=1}^{J} u_ℓ^r + Σ_{m>J} b_m(c)^r − Σ_{m≥1} a_m^r = 0,   r = 1,…,J,
 ```
-(using real zeros `±γ_n`, even function; `A, B` are explicit constants from
-the rank and genus of `Ξ`).
-
-For each `N`, define `F_N` by keeping the first `k_N` zeros in place and
-inserting a **compensating tail** via a modified Hadamard factor:
-
+which is exactly `P_r(F_c) = P_r(Ξ)`, hence `F_c^{(2j)}(0) = Ξ^{(2j)}(0)` for `j = 0,…,J`
+(record conditions 6–7). At `(u^0,0) = ((a_1,…,a_J),0)` we have `Φ = 0`, and the Jacobian
+`∂Φ_r/∂u_ℓ = r·a_ℓ^{r-1}` is an exact scaled Vandermonde, `det ≠ 0`. The implicit function
+theorem gives `δ > 0` and a `C¹` branch `u(c)`, `Φ(u(c),c)=0`, for `0 < c < δ`. Define
 ```
-F_N(z) = c_N · e^{A + B_N z²} · Π_{n=1}^{k_N} (1 − z²/γ_n²)
-          · Π_{n=k_N+1}^{∞} (1 − z²/μ_{n,N}²),
+F_c(z) := C · Π_{n=1}^{k}(1 − z²/γ_n²) · Π_{ℓ=1}^{J}(1 − u_ℓ(c) z²) · Π_{m>J}(1 − b_m(c) z²).
 ```
+Then `F_c` is entire of order 1, even, real on `ℝ`, all zeros real, first `k` positive zeros
+`= γ_1,…,γ_k`, `F_c(0)=C`, and the first `J` even Taylor coefficients match — so `F_c`
+satisfies `ℰ_N` (conditions 1–7).
 
-where `μ_{n,N}` are **modified tail zeros** chosen so that:
+**Step 3 (`F_c ≠ Ξ`, quantified by a Cauchy estimate — no `N→∞`).** The first unmatched
+log-power-sum `Δ_{J+1}(c)` has `Δ_{J+1}'(0) = −(J+1)Σ_{m>J} d_m q(a_m) ≠ 0`
+(`d_m = 2a_m/m`, `q(x) = Π_{ℓ}(x−a_ℓ)`, every `q(a_m)` of sign `(−1)^J`), so shrinking `δ`
+gives `Δ_{J+1}(c) ≠ 0` and
+`F_c(z) − Ξ(z) = −C·Δ_{J+1}(c)/(J+1)·z^{2J+2} + O(z^{2J+4})`. Cauchy's coefficient estimate
+then yields, with `A_c := C|Δ_{J+1}(c)|/(J+1) > 0`,
+`sup_{|z|≤R}|F_c − Ξ| ≥ A_c R^{2J+2}` for every `R`; taking
+`R_N := max{2γ_{k+1}, (ε_N/A_c)^{1/(2J+2)}}` gives the theorem. (Full detail: proof.md §3.)
 
-- `|μ_{n,N} − γ_n| = δ_n > 0` for `n > k_N` (off-line perturbation);
-- `Σ_{n>k_N} δ_n / γ_n^2 < ∞` (admissibility for order-one entire function);
-- the normalization `c_N` and `B_N` are adjusted to enforce conditions 6–7.
-
-**Step 2: Finite-record verification.**  
-- Conditions 1–5: `F_N` is entire order-one, even, real on `ℝ_real`, and all
-  zeros `±γ_1, …, ±γ_{k_N}, ±μ_{k_N+1,N}, …` are real (choose `μ_{n,N} ∈ ℝ`).
-- Conditions 6–7: the normalization constants are adjusted accordingly (see §2).
-
-**Step 3: Non-convergence.**  
-Choose `δ_n = c / n` for `n > k_N` with `c > 0` fixed.  Then the tail product
-```
-Π_{n>k_N}(1 − z²/μ_{n,N}²) / (1 − z²/γ_n²)
-```
-does not converge to 1 uniformly on `|z| ≤ R` for any `R > γ_{k_N}`, because
-the perturbation `Σ_n z²(γ_n^{-2} − μ_{n,N}^{-2})` accumulates for `|z| \sim γ_{k_N}`.
-
-**Open item in this sketch:** making the non-convergence rigorous requires an
-estimate showing that the accumulated tail perturbation does not vanish.  This
-is a standard canonical-product convergence-rate argument (see e.g.
-Levin, *Distribution of Zeros of Entire Functions*, Ch. II).  The details are
-left for `proof.md §3` (to be completed with a quantitative version).
+**Why the earlier `δ_n = c/n` sketch was dropped.** A hand-picked summable perturbation
+makes the tail difference *converge* to 0 (so it fails to witness anything); the IFT route
+above matches the record *exactly* for a fixed `N` and separates via the first unmatched
+coefficient. See proof.md §2 for why the naive perturbations fail.
 
 ---
 

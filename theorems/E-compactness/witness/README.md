@@ -2,12 +2,12 @@
 
 # Theorem E-pos is purely analytic (Montel/Vitali/Hurwitz). No witness needed.
 #
-# Theorem E-neg currently relies on the non-uniqueness argument (proof.md §2).
-# When the quantitative tail estimate (proof.md §3) is completed, witnesses may
-# include:
+# Theorem E-neg is the fixed-N non-identifiability result (proof.md §3, OB-03-confirmed):
+# for each N, a record-respecting F with sup_{|z|<=R_N}|F-Xi|>=eps_N (analytic, no witness
+# data needed). Should an interval-certified instance ever be produced, it may include:
 #
-#   - an explicit pair (F_N^(1), F_N^(2)) satisfying E_N with sup-norm separation
-#     on |z| <= R (analytic construction, not numerical)
+#   - an explicit F satisfying E_N with a certified sup-norm lower bound on |z| <= R_N
+#     (analytic construction, not numerical)
 #   - if interval-certified bounds on the tail canonical product are used,
 #     place the raw zero-data and bounds here (NOT in discovery/)
 #

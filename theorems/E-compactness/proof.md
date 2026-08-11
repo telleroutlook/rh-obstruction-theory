@@ -8,9 +8,13 @@
 ## Overview
 
 Two separate proofs:
-- **E-neg (§1–§3):** construct a sequence `(F_N)` satisfying `ℰ_N` but failing
-  locally uniform convergence.  The key is a Hadamard tail perturbation.
-- **E-pos (§4):** given the extra package (H-norm, H-bound, H-tail, H-modulus),
+- **E-neg (§1–§3):** for each fixed `N`, exhibit an entire function `F` satisfying `ℰ_N`
+  that stays `≥ ε_N` away from `Ξ` on a disk `|z| ≤ R_N` (`R_N ≥ 2γ_{k_N+1}`) — the finite
+  record does not identify `Ξ`. The key is a fixed-`N` Hadamard tail matched to the record
+  by the implicit function theorem, then separated by the first unmatched coefficient. (This
+  is **per-`N` non-identifiability**, not a claim that some sequence `(F_N)` fails to
+  converge — see statement.md and §2.)
+- **E-pos (§4):** given the extra package (H-norm, H-bound, H-uorder, H-div),
   prove locally uniform convergence via Montel/Vitali + Hurwitz.
 
 ---
@@ -32,152 +36,36 @@ The product converges since `Σ_n γ_n^{-2} < ∞` (Hadamard genus 1).
 
 ---
 
-## §2. Construction of the counterexample sequence (E-neg)
+## §2. Why naive tail perturbations fail — motivation for the §3 IFT route
 
-**Choose parameters.**  Fix `c > 0` (say `c = 1`).  For each `N ≥ 1`:
+Before the correct construction (§3), it is worth recording why the obvious "hand-pick a
+tail perturbation `δ_n` and read off non-convergence" approach does **not** work — this is
+what motivates the implicit-function-theorem route.
 
-- `k_N = N` (use first `N` zeta zeros in place; `k_N → ∞`).
-- For `n > N`, define the modified zero:
-  `μ_{n,N} := γ_n + c / n   ∈ ℝ,  μ_{n,N} > 0`.
-- Define
-  ```
-  G_N(z) := Π_{n=1}^{N} (1 − z²/γ_n²) · Π_{n=N+1}^{∞} (1 − z²/μ_{n,N}²).
-  ```
-- Set `F_N(z) := Ξ(0) · G_N(z) / G_N(0)`.
+**The naive attempts all self-defeat.** Take `μ_{n,N} := γ_n + δ_n` for `n > k_N` and
+compare `F_N` with `Ξ` through the tail log-difference
+`Δ_N(z) = Σ_{n>k_N} log[(1−z²/μ_{n,N}²)/(1−z²/γ_n²)]`, whose leading term is
+`z² Σ_{n>k_N}(γ_n^{-2} − μ_{n,N}^{-2})`. For the perturbation to keep `F_N` entire of order 1
+one needs `Σ (γ_n^{-2}−μ_{n,N}^{-2})` to converge — but then, being the tail of a convergent
+series, it **tends to 0** as `k_N → ∞`. Concretely:
 
-**Convergence of the tail product.**  We need `G_N` to be an entire function of
-order 1.  The modified zeros satisfy:
-```
-Σ_{n>N} μ_{n,N}^{-2} ≤ Σ_{n>N} (γ_n − c/n)^{-2}
-```
-which converges since `γ_n ∼ (n / 2π) log(n / 2π)` (Riemann–von Mangoldt),
-so `γ_n → ∞` and `c/n = o(γ_n)`.  For large `n`, `μ_{n,N} > γ_n/2 > 0`.
-The modified tail product converges absolutely, and `G_N` is entire of order 1.
+| perturbation `δ_n` | leading tail term | tail sum behavior |
+|---|---|---|
+| `c/n` | `≈ 2c/(nγ_n^3)` | converges → 0 |
+| `c·γ_n/n` | `≈ 2c/(nγ_n^2)` | converges → 0 |
+| `c·γ_n` (fixed ratio) | — | `N`-independent global rescaling; all `F_N` share it |
 
-**Finite evidence record verification.**
+So any *summable* hand-picked perturbation makes the sequence converge (defeating the
+witness), and a *non-summable* one either breaks order 1 or is an `N`-independent rescaling.
+The naive approach cannot produce a record-respecting witness.
 
-- (1) Entire order 1: Yes (Hadamard product with `Σ μ_{n,N}^{-2} < ∞`).
-- (2) Even: Yes (`G_N(−z) = G_N(z)` since all zeros come in pairs `±μ_{n,N}`).
-- (3) Real on `ℝ`: Yes (all zeros and `Ξ(0)` are real).
-- (4) Real-rootedness: Yes (zeros are `±γ_n` for `n ≤ N` and `±μ_{n,N}` for `n > N`,
-  all real by construction).
-- (5) First `N` zeros agree with `γ_1, …, γ_N`: Yes by construction.
-- (6) Normalization `F_N(0) = Ξ(0)`: Yes by the definition `F_N(0) = Ξ(0) · G_N(0)/G_N(0) = Ξ(0)`.
-- (7) Taylor coefficients: The coefficients `F_N^{(2j)}(0)` involve `Σ_n μ_{n,N}^{-2j}`
-  for `j ≥ 1`.  For `j = 0` (normalization), (6) holds.  For `j ≥ 1`, the
-  coefficients differ from `Ξ^{(2j)}(0)` by the tail sum
-  `Σ_{n>N} (μ_{n,N}^{-2j} − γ_n^{-2j})`, which is nonzero for finite `N`.
-  
-  **Refinement for condition (7):** To enforce agreement of the first `J_N`
-  Taylor coefficients, we can add `J_N` additional free on-line parameters
-  (e.g., multiply by a degree-`2J_N` polynomial factor near 0 or adjust `B_N`).
-  For the purpose of the basic counterexample (E-neg without condition 7), we
-  proceed without enforcing (7) — this is a weaker version of the record.
-  
-  **For the full E-neg with (7):** adjust the normalization constant `B_N` in
-  a factor `e^{B_N z²}` to match the first `J_N` even-power Taylor coefficients.
-  This introduces `J_N` free parameters, absorbed into `B_N, B_{2,N}, …`.
-  The construction still works since condition (7) is finitely many constraints
-  and the modification is a finite-order perturbation preserving (1–6).
-
-**Non-convergence.**  We claim `F_N ↛ Ξ` locally uniformly.
-
-Consider the logarithmic derivative ratio:
-```
-log F_N(z) − log Ξ(z)
-  = Σ_{n=1}^{N} [log(1−z²/γ_n²) − log(1−z²/γ_n²)]  (first N terms cancel)
-  + Σ_{n>N} [log(1−z²/μ_{n,N}²) − log(1−z²/γ_n²)]
-  + (normalization constant from G_N(0)).
-```
-The first `N` terms cancel identically.  The tail contribution is:
-```
-Δ_N(z) := Σ_{n>N} log[(1−z²/μ_{n,N}²)/(1−z²/γ_n²)].
-```
-For `|z| ≤ R` with `R < γ_{N+1}`, the factors are close to 1 and we can write:
-```
-log[(1−z²/μ_{n,N}²)/(1−z²/γ_n²)] ≈ z²(γ_n^{-2} − μ_{n,N}^{-2}) + O(z^4 ···)
-```
-The leading term:
-```
-γ_n^{-2} − μ_{n,N}^{-2} = γ_n^{-2} − (γ_n + c/n)^{-2}
-  ≈ 2c/(n γ_n^3)   for large n.
-```
-So
-```
-Δ_N(z) ≈ z² · Σ_{n>N} 2c/(n γ_n^3).
-```
-Since `γ_n ∼ (n/2π) log n` (von Mangoldt), the sum
-`Σ_{n>N} 1/(n γ_n^3) ∼ Σ_{n>N} 1/(n^4 (log n)^3)` converges, so the tail
-contribution `Δ_N(z)` is a **nonzero constant** (for `z ≠ 0`) that **does not
-tend to 0 as `N → ∞`** — in fact it tends to 0 as `N → ∞` since the tail of a
-convergent series goes to 0.
-
-**Critical issue:** With `δ_n = c/n` and `γ_n ∼ n \log n`, the sum
-`Σ_{n>N} 1/(n γ_n^3)` is the tail of a series that converges, so it **does**
-go to 0 as `N → ∞`.  This means `Δ_N(z) → 0` for fixed `z` — the sequence
-**converges pointwise** to `Ξ` for this perturbation.  We need a **stronger**
-perturbation to force non-convergence.
-
-**Corrected construction.**  Use `δ_n = c · γ_n / n` (perturbation proportional
-to `γ_n`):
-```
-μ_{n,N} := γ_n · (1 + c/n).
-```
-Then:
-```
-γ_n^{-2} − μ_{n,N}^{-2} = γ_n^{-2}[1 − (1+c/n)^{-2}] ≈ 2c/(n γ_n^2).
-```
-The tail sum becomes `Σ_{n>N} 2c/(n γ_n^2)`.  With `γ_n ∼ n \log n/2π`,
-this is `Σ_{n>N} c'/n^3 \log^2 n` which still tends to 0.
-
-**The root issue:** for a perturbation `δ_n = c · γ_n^α / n^β`, the tail
-converges iff `β > 1 + 2α` (rough bound from `Σ n^{-β} γ_n^{-2(1-α)}`).
-To get non-convergence of the tail, we need a **non-summable** perturbation.
-
-**Non-summable perturbation (correct construction).**  
-
-Take `δ_n = c · γ_n` (relative perturbation of order 1):
-```
-μ_{n,N} := γ_n \cdot (1 + c).
-```
-But then `μ_{n,N}` is a fixed scalar multiple of `γ_n` and the resulting
-function `F_N` has zeros at `γ_n(1+c)` for `n > N` — this is a global rescaling
-of the upper tail and does NOT depend on `N`; so all `F_N` (for large `N`) have
-the same tail and the sequence converges.
-
-**The correct approach: tail freedom via non-uniqueness.**
-
-The key point is NOT the perturbation size for a fixed sequence, but the
-**existence of multiple entire functions satisfying `ℰ_N`** that converge to
-**different limits**.  
-
-**Theorem E-neg (revised statement).** There exist two sequences `(F_N^{(1)})`,
-`(F_N^{(2)})`, each satisfying `ℰ_N`, such that for every subsequence
-`(F_{N_j}^{(1)})`, the locally uniform limit (if it exists) is **different from**
-the locally uniform limit of `(F_{N_{j'}}^{(2)})` (if it exists).
-
-**Proof sketch of revised version.** 
-
-This follows from the **non-uniqueness of entire functions of order 1 with a
-prescribed finite set of zeros and finitely many Taylor coefficients.**
-
-Specifically: given any `L > 0` and any `ε > 0`, there exist entire functions
-`F, G` of order 1 satisfying `ℰ_N` for the same record, with
-```
-F(z) ≠ G(z)   for  |z| = L.
-```
-This is a consequence of the infinite freedom in the tail of the Hadamard
-product: the constraint `ℰ_N` fixes only `k_N` zeros and `J_N` Taylor
-coefficients, leaving infinitely many zeros in the tail unconstrained.
-
-**Quantification (proof.md §3 goal).** For `R > γ_{k_N}`, the space of
-entire functions satisfying `ℰ_N` and bounded on `|z| ≤ R` by `M_R` is
-**infinite-dimensional**: distinct choices of tail zeros `(μ_{n,N})_{n>k_N}`
-satisfying `Σ μ_{n,N}^{-2} < ∞` and `|F_N(z)| ≤ M_R` give distinct `F_N`.
-The difference `F_N^{(1)} − F_N^{(2)}` is nonzero and not controlled by `ℰ_N`.
-
-This shows that `ℰ_N` does not identify the limit: **any limit point `G` of a
-normal-family accumulation point need not equal `Ξ`.**
+**The correct route (§3).** Do not hand-pick `δ_n`. For a **fixed** `N`, use the
+implicit-function theorem to *match the finite record exactly* — the log-power-sum system
+`Φ_r(u,c)=0` (`r=1,…,J`) with the exact Vandermonde Jacobian — leaving one tail parameter
+`c` free, and then separate `F_c` from `Ξ` through the **first unmatched** log-power-sum via
+a Cauchy coefficient estimate. This gives a per-`N` witness with no `N→∞` passage. The
+resulting statement is **per-`N` non-identifiability** (statement.md Theorem E-neg), not
+sequence non-convergence.
 
 ---
 
@@ -361,7 +249,7 @@ exact hypotheses (H-bound) + (H-tail) that would complete the argument.  ☐
 | Result | Status |
 |---|---|
 | E-pos (sufficient package → Ξ convergence + real zeros) | PROOF-DRAFT (standard Montel/Hurwitz; detail clear) |
-| E-neg (finite evidence ≠ convergence, non-uniqueness argument) | PROOF-DRAFT (strategy clear; see §2) |
+| E-neg (finite record does not identify Ξ — per-`N` non-identifiability, §3) | PROOF-DRAFT ✓ CONFIRMED (OB-03, 2026-08-11); restated per-`N` not sequence (OB-28) |
 | Quantitative tail estimate §3: matching via log power sums | PROOF-DRAFT ✓ CONFIRMED (OB-03, 2026-08-11) — corrected IFT via Φ_r system |
 | Quantitative tail estimate §3: exact Vandermonde Jacobian (no bounded factor) | PROOF-DRAFT ✓ CONFIRMED — ∂Φ_r/∂u_ℓ = r·a_ℓ^{r-1} exactly |
 | Quantitative tail estimate §3: separation via Cauchy coefficient estimate | PROOF-DRAFT ✓ CONFIRMED — replaces invalid ratio argument at R=γ_{k+1} |

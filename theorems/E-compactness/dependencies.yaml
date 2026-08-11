@@ -75,26 +75,33 @@ dependencies:
 
   # ---- Open items (not yet usable as premises) ----
 
-  - id: E-NEG-TAIL-PERTURBATION
+  - id: E-NEG-NONIDENTIFIABILITY
     statement: >
-      For the specific tail-perturbation construction in statement.md Step 3
-      (delta_n = c/n), the accumulated canonical-product perturbation does not
-      vanish uniformly on |z| <= R for R > gamma_{k_N}.
-    source: "proof.md §3 (to be written)"
+      For each fixed N (record E_N: first k_N zeros pinned, first J_N even Taylor
+      coefficients matched) there exist eps_N>0, R_N >= 2*gamma_{k_N+1}, and an entire
+      function F satisfying E_N with sup_{|z|<=R_N} |F - Xi| >= eps_N. I.e. the finite
+      record does not identify Xi within its fiber (per-N non-identifiability).
+    source: "proof.md §3 (fixed-N IFT via log-power-sum system Phi_r; exact Vandermonde Jacobian; Cauchy-coefficient separation)"
     mathematical: PROOF-DRAFT
     computational: NONE
     usable_as_premise: true
-    gate_a_status: PROOF-DRAFT-PENDING
+    gate_a_status: CONFIRMED-OB03
     caveat: >
-      The quantitative non-convergence argument needs the canonical-product
-      convergence-rate estimate (Levin Ch. II) applied to the specific
-      perturbation delta_n = c/n. Marked PROOF-DRAFT pending the detailed
-      calculation in proof.md §3.
+      CONFIRMED by OB-03 external review (2026-08-11) with corrections applied: matching is
+      via log-power-sums P_r (not individual coefficients), Jacobian is exact Vandermonde
+      (partial Phi_r / partial u_l = r*a_l^{r-1}), separation via Cauchy coefficient estimate,
+      c_0 < delta(k,J) from IFT, and NO N->infty passage is used. Supersedes the abandoned
+      delta_n=c/n hand-picked-perturbation sketch (which self-defeats: a summable perturbation
+      makes the tail difference converge to 0 — see proof.md §2). E-neg is a PER-N statement,
+      NOT sequence non-convergence (OB-28 self-audit 2026-08-11).
 
 gate_a_status: CONDITIONAL
 gate_a_note: >
   The positive escape theorem (E-pos) is fully supported by standard REFEREED
   results (Montel, Vitali, Hurwitz, Hadamard). Gate A clear for E-pos.
-  The negative theorem (E-neg) is PROOF-DRAFT pending the quantitative tail
-  calculation in proof.md §3. No LEGACY imports; no PENDING premises except
-  the inline tail estimate which is the theorem's own new content.
+  The negative theorem (E-neg) is a PER-N non-identifiability statement, quantitatively
+  CONFIRMED by OB-03 (fixed-N IFT via log-power-sums; exact Vandermonde Jacobian; Cauchy
+  separation; no N->infty). OB-28 self-audit (2026-08-11) restated E-neg as per-N (matching
+  what §3 proves), NOT sequence non-convergence, and replaced the abandoned delta_n=c/n
+  sketch. No LEGACY imports; no PENDING premises. The whole-theorem Gate-A math review has
+  not yet been done (candidate outsource task); this note records the internal self-audit only.
