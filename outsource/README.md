@@ -30,6 +30,9 @@ problem.
 | OB-11 | `OB-11-E-prime-pos-convergence-identification.md` | E' §5 | E'-pos: Montel-on-Ω convergence + identification G=W | RESOLVED — integrated 2026-08-11 |
 | OB-12 | `OB-12-F-complexity-measure-welldefined.md` | F | Is the Schur-certificate complexity κ well-defined / non-collapsing? | RESOLVED — integrated 2026-08-11 |
 | OB-13 | `OB-13-B2-independent-exact-reconstruction.md` | B2 | Independent exact-rational reconstruction of the collision | RESOLVED — integrated 2026-08-11 |
+| OB-14 | `OB-14-E-pos-uniform-order-transfer.md` | E §4 | E-pos: is uniform Nevanlinna bound (H-order) necessary+sufficient for order transfer? | OPEN — send for review |
+| OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | OPEN — send for review |
+| OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | OPEN — send for review |
 
 Notes on the OB-09 / OB-10 outcomes:
 
@@ -74,6 +77,31 @@ Notes on the OB-09 / OB-10 outcomes:
   INDEPENDENT-CHECKER computational axis for the B2 finite certificate.** Two definitions
   (global `O_j`, predicate `P`) made explicit. Validates only the finite identity, not any
   analytic statement. Integrated into B2-exact-collision (computational status upgraded).
+
+## Open tasks OB-14..OB-16 (drafted 2026-08-11; lint-checked against PROMPT_LINT.md)
+
+All three passed `outsource/PROMPT_LINT.md` before shipping (self-containment grep clean;
+non-circularity stated; anchors script-verified and labeled "sanity only"; verdict space
+includes INCONCLUSIVE + localization). Load-bearing anchors verified by script.
+
+- **OB-14 (E-pos uniform order transfer):** the entire-target analogue of the OB-11
+  finding. Claim A: `F_N ≡ Ξ·e^{z²−z₀²}` (constant sequence) is locally uniformly bounded,
+  same divisor, `F_N(z₀)=Ξ(z₀)`, but order 2 ≠ Ξ — so (H-bound) alone cannot identify the
+  limit. Claim B: a **uniform** Nevanlinna bound (H-order) closes it. Claim C: is (H-order)
+  necessary? Surfaced by the PROMPT_LINT re-scan (L14) that already fixed E-compactness §4.
+
+- **OB-15 (D leading-log Mellin):** verifies Theorem D's load-bearing citation (currently
+  "modulo Grubb–Seeley/Lesch reference"). A positive classical elliptic ΨDO has pure-power
+  leading heat-trace singularity `t^{-d/m}` (simple pole of `Γζ_H` at `d/m>0`, no double
+  pole → no log), incompatible with `Z_ζ ~ (1/2π)log(1/t)/t`. Explicit scope caveat
+  (L17): BGV/Gilkey cover only differential/Laplace-type; general ΨDO needs
+  Seeley/Grubb–Seeley/Lesch.
+
+- **OB-16 (D' escape-class Weyl law):** exploratory (INCONCLUSIVE is the expected outcome
+  for its Claim D). Verifies the `|ξ|/log|ξ|` symbol gives `T·log T` counting (matching the
+  RvM shape up to constant), leading heat-trace `t^{-1}log(1/t)`, and lies outside
+  𝒞_ell/𝒞_logpoly — establishing the escape class is real — then honestly localizes the
+  Hilbert–Pólya realization as open. Does NOT attempt RH or a Hilbert–Pólya construction.
 
 ## What a returned verification should contain
 
