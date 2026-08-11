@@ -133,22 +133,58 @@ with log coefficients `b_k = (-1)^k/(m·k!) · Wres(H^k)`. Logs can appear at
 
 **Corrected obstruction (PROOF-DRAFT — valid).**
 
-The key structural fact (Theorem 3.1 from external review, proved via Mellin inversion
-from Grubb–Seeley/Lesch) is:
+The key structural fact (proved via Mellin inversion from Grubb–Seeley/Lesch) is:
 
-**Theorem (leading-log obstruction).** For any positive classical elliptic
-pseudodifferential `H` of order `m` on a closed `d`-manifold, the leading singularity
-of `Z_H(t)` as `t → 0⁺` is a **pure power**:
+**Theorem (leading-log obstruction).** For any **positive, self-adjoint, classical
+elliptic** pseudodifferential `H` of order `m > 0` on a closed `d`-manifold, the leading
+singularity of `Z_H(t)` as `t → 0⁺` is a **pure power**:
 ```
-Z_H(t) = a_0 t^{-d/m} + o(t^{-d/m}),   a_0 > 0.
+Z_H(t) = a_0 t^{-d/m} + O(t^{-d/m + ε}),   a_0 > 0,
 ```
-No term `C·t^{-d/m}·log(1/t)` with `C ≠ 0` can appear as the **leading singularity**.
+with (corrected coefficient, OB-15 2026-08-11)
+```
+a_0 = Γ(d/m) · Res_{s=d/m} ζ_H(s) = (Γ(d/m)/(m(2π)^d)) ∫_{S*M} h_m(x,ξ)^{-d/m} dS dx > 0.
+```
+No term `C·t^{-d/m}·log(1/t)` with `C ≠ 0` appears as the **leading singularity**.
 
-*Proof sketch.* The leading pole of `ζ_H(s) = Tr(H^{-s})` at `s = d/m > 0` does not
-coincide with any pole of `Γ(s)` (which occur only at non-positive integers). Therefore
-the Mellin contour at `s = d/m` produces only a simple pole, giving a pure power `t^{-d/m}`.
-A double pole (which produces `t^{-d/m}·log t`) would require `d/m ∈ -ℤ≥0`, impossible
-for `d, m > 0`. ☐ (Source: external review §3, Theorem 3.1, Corollary 3.2)
+**[CORRECTIONS from OB-15 external review, 2026-08-11 — three fixes to the earlier sketch]**
+
+1. **Ellipticity is mandatory in the hypothesis.** Without it (T1) is FALSE. Explicit
+   counterexample (OB-15 §2): on `𝕋²`, `H₀ = 1 + D_x² + D_y⁴` is a positive self-adjoint
+   classical order-4 *differential* operator with discrete spectrum, but its order-4
+   symbol `ξ_y⁴` vanishes at `ξ_y=0, ξ_x≠0` — **not elliptic**. Its heat trace is
+   `Z_{H₀}(t) ∼ (√π Γ(1/4)/2) t^{-3/4}`, exponent `3/4`, NOT `d/m = 2/4 = 1/2`. So the
+   pure-power *exponent* claim requires ellipticity, which `𝒞_ell` (statement.md) has.
+
+2. **`ζ_H` is NOT regular at all negative integers.** The earlier claim "ζ_H(0), ζ_H(−1),
+   … all finite" is false for general classical ΨDO. By the Wodzicki-residue identity
+   `Res_{s=−k} ζ_H(s) = m^{-1} Wres(H^k)` (k ≥ 0). Only `s=0` is automatically regular
+   (`Wres(I)=0`). For `k ≥ 1`, `Wres(H^k)` can be nonzero, producing **subleading**
+   `t^k log(1/t)` terms (k ≥ 1). Explicit witness: on `S¹`, `H₁=(1+D_x²)^{1/2}` has
+   `Wres(H₁)=1`, so `Res_{s=−1} ζ_{H₁}=1` and `Tr(e^{-tH₁})` has a nonzero `t log t` term.
+   These subleading logs do NOT affect the leading `t^{-d/m}` singularity — but the earlier
+   "no logs at any negative integer" over-claim is withdrawn. (This is why the refuted
+   "no logs at any order" claim must not be reinstated; only the LEADING term is log-free.)
+
+3. **Residue coefficient corrected.** `Res_{s=d/m} ζ_H(s) = a_0/Γ(d/m)`, hence
+   `a_0 = Γ(d/m)·Res` — NOT the earlier `a_0·m/Γ(d/m)`.
+
+4. **No-log logic needs BOTH facts.** At `s=d/m>0`: (i) Lesch Thm 3.7 gives `ζ_H` at most
+   a **simple** pole there (no double pole), AND (ii) `Γ` is regular at `d/m>0`. Therefore
+   `Γζ_H` has only a simple pole → pure power `t^{-d/m}`. A leading `t^{-d/m}log(1/t)`
+   would need a *double* pole of `Γζ_H`, i.e. `d/m ∈ {0,−1,−2,…}`, impossible for
+   `d,m>0`. Stating only "Γ's pole doesn't coincide" is insufficient — the simple-pole
+   fact (i) is the load-bearing half.
+
+**Exact citation (OB-15 §3, scope-checked).** The full-classical-ΨDO statement rests on
+**Lesch 1999** (Ann. Global Anal. Geom. 17, 151–187) **Theorem 3.7** and eqs (3.18)–(3.22)
+with `A=I` (so `a=0, k=0`), whose parametric-ellipticity hypothesis is met since `h_m>0`;
+`j=0` gives exponent `−d/m < 0` (not a non-negative integer), so `c̃_0` is a constant — no
+leading log. This extends **Grubb–Seeley 1995** (Invent. Math. 121) Thm 2.7. NOTE
+(PROMPT_LINT L17): **BGV Thm 2.30** covers only Laplace-type; **Gilkey Lemma 1.8.2** covers
+only differential operators — neither suffices for the general ΨDO claim and neither is
+used as the load-bearing citation. Independent cross-check: Hörmander 1968 (Acta Math. 121)
+Thm 4.4 applied to `H^{1/m}` confirms the pure-power exponent and positivity of `a_0`.
 
 **The obstruction.** Suppose `H ∈ 𝒞_ell` has spectrum `{γ_n}`.  Then:
 ```
@@ -172,11 +208,9 @@ is now correctly scoped:
 quantum graphs. The leading-singularity approach is a finer invariant than counting-function
 comparison alone.
 
-**Status: PROOF-DRAFT (self-contained modulo Grubb–Seeley/Lesch leading-singularity reference).**
-
-The leading-singularity claim (pure power, no `t^{-d/m}·log t`) needs a precise theorem
-citation from Grubb–Seeley 1995 Thm 2.7 or Lesch 1999 Theorem 3.7 (Corollary 3.2 in the
-external review). The Abel–Plana computation for `Z_ζ` is self-contained.
+**Status: PROOF-DRAFT (leading-singularity obstruction; citation pinned to Lesch 1999
+Thm 3.7 + Grubb–Seeley 1995 Thm 2.7 by OB-15 external review 2026-08-11; three coefficient/
+pole corrections applied).**
 
 ---
 
@@ -204,7 +238,8 @@ the "exact determinant obstruction (order/type)" mentioned in the PLAN.
 | Extensions: sums, graphs, polynomials, perturbations (§3) | PROOF-DRAFT |
 | Heat-trace Z_ζ log-singularity lemma (§4) | PROOF-DRAFT ✓ (self-contained: Abel-Plana from von Mangoldt) |
 | All-orders no-log for 𝒞_ell (§4 previous claim) | **REFUTED** by external review (OB-01, 2026-08-11): counterexample He_n=(|n|+a/|n|)e_n on S¹ has t·log(1/t) term. Gilkey Thm 1.8.1 citation WRONG (should be Lemma 1.8.2, covers differential operators only). BGV Thm 2.30 covers Laplace-type only. |
-| Leading-singularity obstruction (§4 corrected) | PROOF-DRAFT ✓ — no t^{-d/m}·log(1/t) is possible (Mellin argument; Grubb-Seeley 1995 Thm 2.7 / Lesch 1999 Thm 3.7 Cor 3.2). Sufficient for the exclusion. |
-| Scope: applies to full 𝒞_ell (not just differential operators) | PROOF-DRAFT ✓ — leading-singularity argument works for all classical elliptic pseudodifferential |
+| Leading-singularity obstruction (§4 corrected) | PROOF-DRAFT ✓ — no t^{-d/m}·log(1/t) is possible. Citation pinned by OB-15 (2026-08-11) to Lesch 1999 Thm 3.7 + eqs (3.18)–(3.22) with A=I, extending Grubb–Seeley 1995 Thm 2.7. |
+| Coefficient/pole corrections (OB-15 2026-08-11) | PROOF-DRAFT ✓ — (a) ellipticity mandatory (𝕋² counterexample 1+D_x²+D_y⁴ gives exponent 3/4≠1/2); (b) ζ_H NOT regular at all negative integers (Res_{s=−k}=m⁻¹Wres(H^k); only s=0 regular; subleading t^k log t possible, k≥1); (c) a_0=Γ(d/m)·Res, not a_0·m/Γ(d/m); (d) no-log needs BOTH simple-pole (Lesch) AND Γ regular at d/m. |
+| Scope: applies to full 𝒞_ell (not just differential operators) | PROOF-DRAFT ✓ — Lesch Thm 3.7 covers all classical elliptic ΨDO (parametric ellipticity from h_m>0); BGV/Gilkey (differential/Laplace-type only) NOT relied upon (L17). |
 | Spectral zeta pole obstruction (§5) | SKETCH (future work) |
 | Novelty gate decision | NOVELTY GATE CLEARED — leading-singularity §4 (corrected) is the new content |

@@ -2,7 +2,10 @@
 
 **Theorem ID:** D-prime-logpoly  
 **Program ref:** EXT-1 (extension of Theorem D; audit of log-polyhomogeneous escape route)  
-**Status:** ESCAPE-ROUTE-REVISED (2026-08-11; see §3–§4: 𝒞_logpoly is not the correct escape class)
+**Status:** ESCAPE-ROUTE-REFINED (OB-16 external review 2026-08-11): escape mechanism is
+real at the symbol-growth + leading-heat-singularity level; the naive exact model
+`2πn/log(n+e)` is REFUTED (differs from N_ζ by ≍ T log log T); the broader `W`-corrected
+`|ξ|/log|ξ|` class is the open Hilbert–Pólya frontier. `𝒞_logpoly` is not the escape class.
 
 ---
 
@@ -86,29 +89,50 @@ It is a genuinely different (larger) escape class.
 
 ---
 
-## §4. Escape-route verdict — REVISED (2026-08-11)
+## §4. Escape-route verdict — REVISED (2026-08-11; refined by OB-16 external review)
 
-**Revised verdict: `𝒞_logpoly` is NOT the correct escape class.**
+**Revised verdict: `𝒞_logpoly` is NOT the correct escape class; the escape class is a
+logarithmically-weighted symbol class, and the naive exact model is itself refuted.**
 
 The escape class from Theorem D (corrected leading-singularity version) requires
-operators with eigenvalue counting `N_H(T) ~ C·T·log T`, which corresponds to
-symbols of type `|ξ|/log|ξ|`. This is outside `𝒞_logpoly` (which has finite-degree
-log-symbol expansions and retains pure-power leading singularities).
+operators with eigenvalue counting `N_H(T) ~ C·T·log T`, corresponding to symbols of
+type `|ξ|/log|ξ|`.
 
-**The genuine escape route** from the corrected Theorem D is:
-operators whose symbol grows like `|ξ|/log|ξ|` (or any symbol giving `T log T`
-eigenvalue counting). This class has no standard name in the pseudodifferential
-literature and is not covered by any of Schrohe, Lesch, or Grubb–Seeley.
+**Corrections from OB-16 external review (2026-08-11):**
 
-**What `𝒞_logpoly` escapes:**
-The **previously stated (and now refuted) all-orders-no-log** version of Theorem D.
-Since that version of Theorem D is false (explicit counterexample exists), the escape
-route through `𝒞_logpoly` addresses a false claim.
+1. **Hilbert space must be `S¹` or `ℓ²(ℕ)`, not `L²(ℝ)`.** On `L²(ℝ)` a Fourier
+   multiplier `h(ξ)=|ξ|/log|ξ|` has purely continuous spectrum (essential range), and
+   `e^{-tH}` is a multiplication operator on a nonatomic space — **not trace class**, no
+   discrete eigenvalue count. The valid ΨDO model is the multiplier on the **closed
+   manifold `S¹`** (eigenvalues `a|n|/log(|n|+e)`, `n∈ℤ`); a diagonal `ℓ²(ℕ)` model works
+   for counting.
 
-**What `𝒞_logpoly` does NOT escape:**
-The **corrected leading-singularity** version of Theorem D (Corollary 3.2 of OB-01
-review): no classical elliptic pseudodifferential operator (including `𝒞_logpoly`)
-can have `t^{-d/m}·log(1/t)` as its leading heat-trace singularity.
+2. **The symbol IS in a standard calculus — NOT "outside all standard calculi".** By
+   `|∂_ξ^k h_0(ξ)| ≤ C_k⟨ξ⟩^{1-k}/log(e+⟨ξ⟩) ≤ C_k⟨ξ⟩^{1-k}`, `h_0 ∈ S¹_{1,0}`
+   (ordinary Hörmander class), more precisely a logarithmically-weighted `S^{1,-1}`-type
+   class, elliptic with respect to the weight `w(ξ)=⟨ξ⟩/log(e+⟨ξ⟩)`. It is NOT classical
+   polyhomogeneous of any order (so `∉ 𝒞_ell`) and NOT finite-nonnegative-log-degree
+   polyhomogeneous (so outside `𝒞_logpoly` under that convention) — but the earlier
+   "outside all standard calculi" was too strong.
+
+3. **The EXACT model `λ_n = 2πn/log(n+e)` is REFUTED, not merely open.** After
+   normalizing the leading constant (`a=2π` one-sided, `a=4π` on `S¹`), its counting
+   differs from `N_ζ` at the next scale:
+   ```
+   N_{2π}^+(T) − N_ζ(T) = (T/2π)[log log(T/2π) + 1 + o(1)] ≍ T·log log T.
+   ```
+   Equality of two discrete spectra (with multiplicity) forces equality of counting
+   functions; the `T log log T` discrepancy rules out the exact model. So the naive
+   `n/log(n+e)` sequence is NOT a Hilbert–Pólya candidate beyond leading order.
+
+**What remains genuinely open (OB-16 §4).** A *subleadingly corrected* `|ξ|/log|ξ|`-type
+symbol CAN match even the smooth two-term law: with `g(r)=2πr/W(r/e)` (`W` = Lambert),
+`g(r) ~ 2πr/log r` and the continuous inverse reproduces
+`x = (T/2π)(log(T/2π) − 1)` exactly (both the `T log T` and `T` terms). It does NOT
+reproduce the `O(log T)` remainder, individual spacings, multiplicities, or zero
+locations. Whether an unconditional, zero-independent self-adjoint operator in this
+broader class has spectrum exactly `{γ_n}` is the open Hilbert–Pólya frontier — a
+literature-status statement, not an impossibility theorem.
 
 ---
 
@@ -121,30 +145,44 @@ can have `t^{-d/m}·log(1/t)` as its leading heat-trace singularity.
    and `𝒞_logpoly` from having a `t^{-1}·log(1/t)` leading heat-trace singularity.
 
 3. **Does not assert any known class contains a Hilbert–Pólya operator.** The
-   corrected escape class (`|ξ|/log|ξ|`-type) is outside standard calculi.
+   corrected escape class (`|ξ|/log|ξ|`-type) lies in `S¹_{1,0}` / a log-weighted
+   `S^{1,-1}` class (NOT outside standard calculi — OB-16 correction); it is outside
+   `𝒞_ell` and finite-log-degree `𝒞_logpoly`, but no operator in it is known to have
+   spectrum `{γ_n}`.
 
 ---
 
 ## §6. New research question (opened by this audit — revised)
 
-**Can a symbol of type `|ξ|/log|ξ|` (or equivalent) produce a compact operator
-with spectrum `{γ_n}` in a controlled Hilbert space?**
+**Can a subleadingly-corrected symbol of type `|ξ|/log|ξ|` (elliptic w.r.t. the weight
+`w(ξ)=⟨ξ⟩/log(e+⟨ξ⟩)`) produce a self-adjoint operator with spectrum `{γ_n}` in a
+controlled Hilbert space, without reading zero locations?**
 
-This is an open question. The `|ξ|/log|ξ|` growth is not elliptic in the classical
-sense, and constructing a self-adjoint operator with `T log T` counting from first
-principles (without reading zero locations) is a genuine open problem.
+The naive exact model `λ_n = 2πn/log(n+e)` is **refuted** (OB-16: counting differs from
+`N_ζ` by `≍ T log log T`). But a Lambert-`W`-corrected symbol `g(r)=2πr/W(r/e)` matches
+both smooth terms `(T/2π)(log(T/2π) − 1)` exactly at the continuous-inverse level. The
+open question is whether the broader corrected class contains a genuine, zero-independent
+Hilbert–Pólya operator.
 
-**This is recorded as a CONJECTURE and future research direction, not a theorem.**
+**This is recorded as a CONJECTURE / open frontier, not a theorem.** Matching the
+counting law (even the two-term law) is necessary but far from sufficient: infinitely
+many distinct spectra share a counting asymptotic (e.g. `{λ_n}` and `{λ_n+1}`). A
+tautological `diag(γ_n)` violates the zero-independence requirement and has no
+explanatory content.
 
 ---
 
-## §7. Status summary — REVISED
+## §7. Status summary — REVISED (OB-16 external review 2026-08-11)
 
 | Component | Status |
 |---|---|
 | Log-polyhomogeneous heat-trace expansion (§3, Lesch 1999) | The theorem is about `Tr(A·e^{-tP})`, not `Tr(e^{-tH})`; citation scope corrected |
-| `𝒞_logpoly` produces `t^{-1}·log(1/t)` leading term | **FALSE** — refuted by OB-01 review |
+| `𝒞_logpoly` produces `t^{-1}·log(1/t)` leading term | **FALSE** — leading term is always a pure power (OB-01 review) |
 | `𝒞_logpoly` produces subleading log terms | TRUE — but irrelevant to Theorem D's corrected claim |
-| Escape route from corrected Theorem D | Requires `|ξ|/log|ξ|`-type symbols; outside standard calculi |
-| Status of D-prime theorem | **ESCAPE-ROUTE-REVISED**: `𝒞_logpoly` is not the right escape class; the correct escape class is larger and unnamed |
-| Weyl law for the correct escape class | OPEN — not yet analyzed |
+| Hilbert space for the escape model | CORRECTED: `S¹`/`ℓ²(ℕ)`, NOT `L²(ℝ)` (continuous spectrum, not trace class) — OB-16 §1.1 |
+| Symbol class of `|ξ|/log|ξ|` | CORRECTED: `∈ S¹_{1,0}` (Hörmander), log-weighted `S^{1,-1}`, elliptic w.r.t. `w=⟨ξ⟩/log⟨ξ⟩`; NOT "outside all calculi" — OB-16 §2/§6 |
+| Escape model gives `N_H(T) ~ T log T` | CONFIRMED (leading order); heat trace `~ c t^{-1}log(1/t)` (OB-16 Claims A, B) |
+| Outside `𝒞_ell` and finite-log-degree `𝒞_logpoly` | CONFIRMED (OB-16 Claim C, Steps 5–6) |
+| Exact model `2πn/log(n+e)` as HP candidate | **REFUTED** — differs from `N_ζ` by `≍ T log log T` (OB-16 Claim D, §2.6–2.7) |
+| Broader `W`-corrected `|ξ|/log|ξ|` class | OPEN / localized — matches two-term law; zero-independent spectral realization unknown (OB-16 §4) |
+| Status of D-prime theorem | **ESCAPE-ROUTE-REFINED**: escape mechanism real at symbol-growth + leading-heat-singularity level; naive exact model refuted; genuine HP realization open |

@@ -31,8 +31,8 @@ problem.
 | OB-12 | `OB-12-F-complexity-measure-welldefined.md` | F | Is the Schur-certificate complexity κ well-defined / non-collapsing? | RESOLVED — integrated 2026-08-11 |
 | OB-13 | `OB-13-B2-independent-exact-reconstruction.md` | B2 | Independent exact-rational reconstruction of the collision | RESOLVED — integrated 2026-08-11 |
 | OB-14 | `OB-14-E-pos-uniform-order-transfer.md` | E §4 | E-pos: is uniform Nevanlinna bound (H-order) necessary+sufficient for order transfer? | OPEN — send for review |
-| OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | OPEN — send for review |
-| OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | OPEN — send for review |
+| OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | RESOLVED — integrated 2026-08-11 |
+| OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
 
 Notes on the OB-09 / OB-10 outcomes:
 
@@ -102,6 +102,27 @@ includes INCONCLUSIVE + localization). Load-bearing anchors verified by script.
   RvM shape up to constant), leading heat-trace `t^{-1}log(1/t)`, and lies outside
   𝒞_ell/𝒞_logpoly — establishing the escape class is real — then honestly localizes the
   Hilbert–Pólya realization as open. Does NOT attempt RH or a Hilbert–Pólya construction.
+
+## Resolved OB-15 / OB-16 outcomes (integrated 2026-08-11)
+
+- **OB-15 (D leading-log Mellin):** REFUTED literally / CONFIRMED with ellipticity. The
+  outsource task's restatement of `𝒞_ell` dropped "elliptic" (the theorem file
+  `D-spectral-asymptotic/statement.md` keeps it, so the theorem itself is fine). Torus
+  counterexample `1+D_x²+D_y⁴` (non-elliptic) gives exponent 3/4 ≠ d/m=1/2. Three
+  substantive corrections integrated into D proof.md §4: (a) `ζ_H` NOT regular at all
+  negative integers — `Res_{s=−k}=m⁻¹Wres(H^k)`, only s=0 regular, subleading `t^k log t`
+  possible for k≥1 (witness `(1+D_x²)^{1/2}` on S¹, Wres=1); (b) `a_0=Γ(d/m)·Res`, not
+  `a_0·m/Γ(d/m)`; (c) no-log needs BOTH Lesch simple-pole AND Γ regular at d/m>0. Citation
+  pinned: Lesch 1999 Thm 3.7 + (3.18)–(3.22), extending Grubb–Seeley 1995 Thm 2.7; BGV/Gilkey
+  (differential/Laplace-type only) explicitly NOT relied upon (L17).
+
+- **OB-16 (D' escape class):** REFINED/PARTIAL. Claims A/B/C confirmed after moving the model
+  to `S¹`/`ℓ²(ℕ)` (on `L²(ℝ)` the multiplier has continuous spectrum, not trace class — L-fix).
+  Symbol `h_0 ∈ S¹_{1,0}` (Hörmander), precisely log-weighted `S^{1,-1}` — NOT "outside all
+  calculi" as drafted. **Claim D: the exact `2πn/log(n+e)` model is REFUTED** (not merely
+  open) — its normalized count differs from `N_ζ` by `≍ T log log T`. Only the broader
+  Lambert-`W`-corrected `|ξ|/log|ξ|` class stays open (it matches the two-term smooth law;
+  zero-independent spectral realization unknown). Integrated into D-prime-logpoly §4–§7.
 
 ## What a returned verification should contain
 
