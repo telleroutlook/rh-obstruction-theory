@@ -43,6 +43,7 @@ problem.
 | OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | RESOLVED — GATE-A CONDITIONAL→PASS, mod1–mod6 integrated 2026-08-11 (C → INDEPENDENTLY-CHECKED, one-sided corollary of Andersson Thm 5) |
 | OB-29 | `OB-29-E-gate-a-review-package.md` | E | **GATE-A**: independent review of the compactness (finite-evidence) theorem (Links A–D + Q1–Q7; E-neg per-`N` non-identifiability via fixed-`N` IFT + E-pos sufficiency package; Ξ-not-ξ̂ normalization; per-`N`-not-sequence framing; H-uorder/H-div honesty) | OPEN — send for review |
 | OB-30 | `OB-30-Eprime-gate-a-review-package.md` | E' | **GATE-A**: independent review of the meromorphic (Suzuki-target) compactness theorem (Links A–D + Q1–Q7; E'-neg per-`(k,J)` non-identifiability via `w₀`-jet IFT + E'-pos corrected sufficiency; W-odd parity + γ_n-are-zeros; Montel-not-Marty; T(r,W)≍r log r conventional-order envelope) | OPEN — send for review |
+| OB-31 | `OB-31-Dprime-gate-a-review-package.md` | D' | **GATE-A**: independent review of the log-polyhomogeneous escape-route audit (Claims A–E + Q1–Q7; 𝒞_logpoly is covered by D not an escape; escape class is log-weighted S^{1,-1}; exact 2πn/log(n+e) refuted by T log log T; open HP frontier honesty) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -563,6 +564,26 @@ Four links + seven Gate-A questions: Q1 non-circularity, Q2 parity (W odd, γ_n 
 Q3 `W`/`Ξ`/`ξ̂` normalization, Q4 per-`(k,J)` framing, Q5 E'-pos honesty (conventional-order
 (UG), Suzuki ingredients OPEN), Q6 citations, Q7 verdict. Passed PROMPT_LINT
 (L1/L2/L3/L9/L14/L17/L18/L19/L21/L24 + self-containment).
+
+## Eighth Gate-A push OB-31 (drafted 2026-08-11) — D' log-polyhomogeneous escape-route audit
+
+Applies the Gate-A template to D-prime-logpoly. **Unlike the others, D' is not a barrier or
+a positive theorem — it is an escape-route audit** of Theorem D, reaching a *negative
+refinement* (a hardening of D): (A) the leading-singularity obstruction of D **extends to
+finite-log-degree `𝒞_logpoly`** (pure-power leading term; logs only subleading, witnessed on
+`S¹` by `H_c e_n=(|n|+c log|n|)e_n` ⇒ `Z=2/t−2c log(1/t)+O(1)`), so `𝒞_logpoly` is **not** an
+escape; (B) the genuine escape class is the log-weighted `S^{1,-1}` (`|ξ|/log|ξ|`) class,
+inside Hörmander `S¹_{1,0}`, giving `N_H~cT log T`; (C) the Hilbert space must be `S¹`/`ℓ²`,
+not `L²(ℝ)` (L20: continuous spectrum, not trace class); (D) the exact model
+`2πn/log(n+e)` is **REFUTED** (count differs from `N_ζ` by `≍ T log log T` — script-verified:
+gap grows, `gap/(T log log T)` bounded ≈ 1.8→1.14 at `T=10³…10⁶`); (E) the broader
+Lambert-`W`-corrected class is an **honest open Hilbert–Pólya frontier**, not a theorem, with
+matching-law-is-not-sufficient and tautological `diag(γ_n)` explicitly excluded. Load-bearing
+Claim D re-verified by script before shipping. The Gate-A ask: confirm the audit is correct
+and non-circular, and that the `LEADING-SINGULARITY-COVERS-LOGPOLY` lemma (currently PENDING)
+may advance to INDEPENDENTLY-CHECKED while the document stays ESCAPE-ROUTE-REFINED with
+Claim E an open frontier. Passed PROMPT_LINT (L17/L18/L19/L20/L21/L24 + self-containment; no
+linear-characteristic issue — D' is a counting/heat-trace audit, not an approximant theorem).
 
 ## What a returned verification should contain
 
