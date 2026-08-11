@@ -592,13 +592,23 @@ OUTSOURCE_DIR = ROOT / "outsource"
 
 
 def test_g_prop_g3_has_explicit_adversary():
-    """IX-A1: Prop G.3 must name the explicit 𝒵_smooth adversary (not just a sketch)."""
+    """IX-A1: Prop G.3* must name the explicit smooth adversary (𝒵_d or F_d or 𝒵_smooth)."""
     proof = G_PROOF.read_text()
-    assert "𝒵_smooth" in proof or "Z_smooth" in proof, \
-        "G proof.md must define the smooth adversary multiset"
+    # OB-04 renamed 𝒵_smooth → 𝒵_d / F_d; accept any of the three notations
+    has_adversary = (
+        "𝒵_smooth" in proof or "Z_smooth" in proof
+        or "F_d" in proof or "𝒵_d" in proof or "Z_d" in proof
+    )
+    assert has_adversary, \
+        "G proof.md must define the smooth adversary multiset (𝒵_d / F_d / 𝒵_smooth)"
     assert "d_n" in proof, "G proof.md must reference archimedean levels d_n"
-    assert "Hadamard uniqueness" in proof or "Lemma G.1" in proof, \
-        "G proof.md must invoke Hadamard uniqueness for 𝒵_smooth ≠ 𝒵_RH"
+    # After OB-04 correction: canonical-product argument replaces Hadamard uniqueness lemma
+    has_distinctness_argument = (
+        "Hadamard uniqueness" in proof or "Lemma G.1" in proof
+        or "canonical product" in proof or "zero multiset" in proof
+    )
+    assert has_distinctness_argument, \
+        "G proof.md must have a distinctness argument for the two entire functions"
 
 
 def test_g_prop_g3_no_longer_open():

@@ -167,25 +167,29 @@ claims:
 
   - id: RIEMANN-ARGUMENT-COUNTING-IDENTITY
     statement: >
-      The exact identity N(T) = theta(T)/pi + 1 + S(T), where N(T) is the count of
-      nontrivial zeros of zeta with 0 < Im(s) < T (counted with multiplicity),
-      theta(T) = Im(log Gamma(1/4 + iT/2)) - T*log(pi)/2 is the Riemann-Siegel theta
-      function, and S(T) = (1/pi) * arg zeta(1/2 + iT) is the argument function.
-      Consequence: the archimedean level d_n = theta_level(n) (solution to theta(T)/pi+1=n)
-      differs from the n-th zero ordinate gamma_n by the S(T) discrepancy:
-        gamma_n - d_n ~ S(gamma_n) / N'(gamma_n),  N'(T) ~ log(T/2pi)/(2pi).
+      The exact identity N(t) = A(t) + S(t) where A(t) = theta(t)/pi + 1,
+      theta(t) = Im(log Gamma(1/4 + it/2)) - t*log(pi)/2, S(t) = (1/pi)*arg zeta(1/2+it).
+      For a simple zero ordinate gamma_n (midpoint convention): A(gamma_n) + S(gamma_n) = n - 1/2,
+      hence A(d_n) - A(gamma_n) = S(gamma_n) + 1/2, giving
+        d_n - gamma_n = (S(gamma_n) + 1/2) / A'(xi_n)  for some xi_n between d_n and gamma_n.
+      Unconditional bounds: S(t) = O(log t); S_1(T) := int_0^T S(t)dt = O(log T) (Littlewood).
     source: >
-      Titchmarsh 'Theory of the Riemann Zeta Function' §9.4 (exact identity);
-      Davenport 'Multiplicative Number Theory' Ch. 15 (counting formula derivation).
+      Titchmarsh 'Theory of the Riemann Zeta Function' §9.4 (exact identity + S bounds);
+      Davenport 'Multiplicative Number Theory' Ch. 15 (counting formula);
+      Bondarenko-Seip, Math. Annalen 372 (2018) (Littlewood S_1 bound reference).
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
     peer_reviewed: true
     gate_a_status: CLEAR
     role: >
-      Load-bearing for Theorem G: the S(T) gap between theta-levels and true zero
-      ordinates is the core information-obstruction in the Fredholm certificate method
-      class M_FC. This identity is exact (not asymptotic) for the main N(T) formula.
+      Load-bearing for Theorem G corrected proof: Littlewood S_1(T)=O(log T) is the key
+      input proving that {d_n} and {gamma_n} differ in infinitely many entries (Item 2 of
+      Prop. G.3*). The discrepancy formula has sign d_n - gamma_n (not gamma_n - d_n)
+      and requires the 1/2 endpoint term; A'(t) = theta'(t)/pi is the correct derivative
+      (N is a step function with no ordinary derivative at zero ordinates).
+      Tsang omega-theorem (Acta Arith. 46, 1986 -- not J. Number Theory 23) proves
+      S(t) != 0 for arbitrarily large t, but this is NOT needed in Prop. G.3* proof.
 
   - id: GRUBB-SEELEY-1995-THM-2.7
     statement: >

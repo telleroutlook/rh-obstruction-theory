@@ -1,6 +1,6 @@
 # Proof — Theorem G (G-fredholm-certificate)
 
-**Status:** PROOF-DRAFT (G-info); G-hard step is CONJECTURE  
+**Status:** PROOF-DRAFT (Prop. G.3* CONFIRMED with corrections by OB-04 external review 2026-08-11; original G.3 REFUTED as written)  
 **Analytic / finite separation:** purely analytic (no finite certificates).
 
 ---
@@ -24,139 +24,197 @@ Step 4 (G-hard, CONJECTURE): S(T) is not recoverable within 𝔐_FC.
 
 ---
 
-## §2. Hadamard uniqueness (analytic input)
+## §2. Hadamard uniqueness (analytic input) — CORRECTED
 
-**Lemma G.1.** Let F, G be entire functions of order at most 1 with the same multiset
-of zeros `{z_n}` (counted with multiplicity) and with `F(0) = G(0) ≠ 0`. Then `F = G`.
+**[CORRECTION from OB-04 review]** The original Lemma G.1 stated: "two order-≤1
+entire functions with the same zeros and same value at 0 are equal." This is **false**.
+Counterexample: `F(z) = 1` and `G(z) = e^z` both have order ≤ 1, the same empty zero
+multiset, and agree at `z = 0`, but `F ≠ G`.
 
-*Proof.* By the Hadamard factorization theorem for entire functions of order ≤ 1:
+The correct statement is that two such functions can differ by `e^{az+b}`, and
+additional constraints (evenness + normalization) remove that freedom **in the present
+setting**. But the general Lemma G.1 as stated cannot be cited for the current proof.
+
+**Corrected approach (used in Prop. G.3*).** Item 3 of Prop. G.3* does NOT require
+a general Hadamard uniqueness theorem. The argument is direct:
+
+A locally uniformly convergent canonical product
 ```
-F(z) = e^{az+b} ∏_n (1 − z/z_n) e^{z/z_n}
+F_a(z) = C · ∏_{n≥1} (1 − z²/a_n²)
 ```
-The product is determined by the zeros `{z_n}` up to the exponential prefactor.
-The constraint `F(0) = e^b ∏_n (−1/z_n) e^{1/z_n}` pins `b`; similarly for `G`.
-If the zeros are the same and `F(0) = G(0)`, then both exponential prefactors are equal,
-so `F = G`. ☐
+has **precisely the zeros** supplied by its factors (with multiplicities). If `F_d = F_γ`,
+then their zero multisets are equal, contradicting Item 2. Hence `F_d ≠ F_γ` follows
+directly from the canonical product structure — no Hadamard uniqueness invocation needed.
 
-*Note.* `Ξ` is even, order 1, and has infinitely many zeros (all real under RH). The
-normalization `Ξ(0) = ξ(1/2)` is a fixed nonzero constant. Lemma G.1 applies.
+*Note on notation (OB-04).* The canonical product `F_γ(z) = C · ∏(1 − z²/γ_n²)` equals
+the actual Riemann ξ-function `Ξ_R(z) = ξ(1/2 + iz)` if and only if RH holds (all zeros
+on the critical line). Unconditionally `F_γ` and `Ξ_R` need not be the same. The theorem
+applies to `F_γ` as defined, not to `Ξ_R` unconditionally.
 
 ---
 
-## §3. The S(T) gap identity
+## §3. The S(T) gap identity — CORRECTED
 
-**Lemma G.2.** Let `N(T)` be the zero-counting function of ζ in `{0 < Im(s) < T}`. By the
-argument principle:
+**Lemma G.2 (corrected).** With `A(t) := θ(t)/π + 1` and `S(t) = (1/π) arg ζ(1/2 + it)`,
+the Riemann–von Mangoldt identity away from zero ordinates is:
 ```
-N(T) = θ(T)/π + 1 + S(T)
+N(t) = A(t) + S(t).
 ```
-where `S(T) = (1/π) arg ζ(1/2 + iT)` and `θ(T) = Im(log Γ(1/4 + iT/2)) − T log(π)/2`.
+The smooth level `d_n` satisfies `A(d_n) = n`. For a **simple** zero ordinate `γ_n`,
+assigning `S(γ_n)` its midpoint value gives:
+```
+A(γ_n) + S(γ_n) = n − 1/2.
+```
+Therefore:
+```
+A(d_n) − A(γ_n) = S(γ_n) + 1/2.
+```
+By the mean-value theorem, for some `ξ_n` between `d_n` and `γ_n`:
+```
+d_n − γ_n = (S(γ_n) + 1/2) / A'(ξ_n).
+```
 
-The archimedean level `d_n` is defined by `θ(d_n)/π + 1 = n`, i.e. the n-th solution to
-the smooth part equaling n. This gives `d_n ≈ γ_n` but with discrepancy:
-```
-γ_n − d_n = S(γ_n)/N'(γ_n) + O(1/γ_n),    N'(T) ~ log(T/2π)/(2π).
-```
+**[CORRECTION from OB-04 review]** The original proof.md had three errors in the
+discrepancy formula:
+1. **Sign reversed**: the correct formula gives `d_n − γ_n` (not `γ_n − d_n`).
+2. **Missing 1/2 term**: the endpoint half-jump is mandatory under the midpoint convention.
+3. **Notation**: `N'(T)` is a step function with no ordinary derivative at zero ordinates;
+   the correct denominator is `A'(t) = θ'(t)/π ∼ log(t/2π)/(2π)`.
+4. **Tsang citation**: the correct journal is *Acta Arithmetica* **46** (1986), not
+   J. Number Theory 23 (1986).
 
-*Proof.* Standard: Titchmarsh 'Theory of the Riemann Zeta Function' §9.4;
-Davenport 'Multiplicative Number Theory' Ch. 15. Status: REFEREED. ☐
+**[CORRECTION from OB-04 review]** The argument "S(t) ≠ 0 for infinitely many t"
+does **not** imply `d_n ≠ γ_n` for any specific n. The correct proof of Item 2
+(multiset distinctness) does not use the discrepancy formula at all — see §4 below.
 
-**Corollary.** The eigenvalue error for any `P ∈ 𝔐_FC` is:
+*Source for corrected formula:* Titchmarsh §9.4 (exact identity); OB-04 referee
+report §5 (convention/sign correction). Status: REFEREED.
+
+**Unconditional bounds used in §4:**
 ```
-|κ_n^smooth − 1/(1/4 + γ_n²)| / |1/(1/4 + γ_n²)|
-  = |1/(1/4 + d_n²) − 1/(1/4 + γ_n²)| / |1/(1/4 + γ_n²)|
-  ≈ 2γ_n |γ_n − d_n| / (1/4 + γ_n²)
-  ~ S(γ_n) · 2π / (γ_n log(γ_n/2π))
+S(t) = O(log t),      S_1(T) := ∫_0^T S(t) dt = O(log T)    (Littlewood).
 ```
-This is not `o(1)` in general — `S(T)` is bounded (O(log T), assuming RH: O(log T / log log T))
-but is not identically zero.
+The Littlewood bound `S_1(T) = O(log T)` is the critical new input (not listed in the
+original outsource file) used to prove Items 2 and 4 of the corrected proposition.
 
 ---
 
-## §4. Observation indistinguishability (the core obstruction)
+## §4. Corrected Proposition G.3* (OB-04 external review, 2026-08-11)
 
-**Proposition G.3** (PROOF-DRAFT — explicit adversary constructed below)**.**
+**[ORIGINAL Prop. G.3 REFUTED as written — see OB-04 referee §1 and §§5–6]**
 
-Define the **smooth adversary** multiset:
-```
-𝒵_smooth := {d_n : n ≥ 1}   (archimedean levels, all on the real axis)
-```
-where `d_n` is the n-th solution to `θ(d_n)/π + 1 = n`, with `θ(T) = Im log Γ(1/4+iT/2) − T log(π)/2`.
+The original proof had four defects: (1) Item 1 requires the factorization condition (2.7)
+from the program definition of 𝔐_FC, which was not included in the outsource file;
+(2) the discrepancy formula was wrong (sign, 1/2 term, N' notation); (3) the Hadamard
+uniqueness lemma was cited incorrectly (see §2); (4) the Step 4 ratio argument was
+invalid — one factor ≠ 1 does not prevent all other factors from compensating it.
 
-**Claim.** `𝒵_smooth ≠ 𝒵_RH` as multisets, but `O_θ(𝒵_smooth) = O_θ(𝒵_RH)`.
+**Corrected Proposition G.3*.**
 
-*Step 1 — `O_θ` is the same for both.*  
-The observation map `O_θ` returns the sequence `(d_n)_{n≥1}` — the archimedean levels
-defined from the smooth part `θ(T)` only. By definition, both `𝒵_RH` and `𝒵_smooth`
-yield this same sequence: for `𝒵_RH = {γ_n}`, the levels `d_n` approximate the
-ordinates but differ by the S(T) term; for `𝒵_smooth = {d_n}`, the observation map
-returns `(d_n)` exactly. **Either way, `O_θ` outputs `(d_n)`.**
-
-*Step 2 — `𝒵_smooth ≠ 𝒵_RH`.*  
-S(T) is not identically zero (Backlund 1914; `S(T)` has infinitely many sign changes,
-Tsang 1986). Therefore `γ_n ≠ d_n` for infinitely many `n`. So the two multisets
-`{γ_n}` and `{d_n}` differ.
-
-*Step 3 — Entire functions are distinct.*  
 Define:
 ```
-Ξ_smooth(z) := Ξ(0) · ∏_{n≥1} (1 − z²/d_n²).
+F_γ(z) := C · ∏_{n≥1} (1 − z²/γ_n²),
+F_d(z) := C · ∏_{n≥1} (1 − z²/d_n²),     C = ξ(1/2) > 0.
 ```
-This is entire of order 1 (since `Σ d_n^{-2} < ∞`; same proof as for `Ξ`, by
-von Mangoldt `d_n ∼ n/2π · log(n/2π)`). By Lemma G.1 (Hadamard uniqueness), since
-`{d_n}` and `{γ_n}` are distinct multisets and both products share the same
-normalization `Ξ(0)` at `z=0`, we conclude `Ξ_smooth ≠ Ξ`.
+Both products converge locally uniformly (since Σ γ_n^{-2} < ∞ and d_n ∼ γ_n ∼ 2πn/log n
+by OB-04 Lemma 3.2; note the correct inversion is γ_n ∼ 2πn/log n, not (n/2π)log(n/2π)).
 
-*Step 4 — Quantitative separation.*  
-For `z = i R` with `R > d_{k_0}` for some `k_0` where `d_{k_0} ≠ γ_{k_0}`:
-```
-Ξ_smooth(iR) / Ξ(iR) = ∏_{n≥1} [(1 + R²/d_n²) / (1 + R²/γ_n²)].
-```
-Every factor is `> 0`. For `n = k_0` where `d_{k_0} < γ_{k_0}` (which occurs whenever
-`S(γ_{k_0}) < 0`, so `γ_{k_0} > d_{k_0}`):
-```
-(1 + R²/d_{k_0}²) / (1 + R²/γ_{k_0}²) > 1
-```
-with a definite positive gap bounded away from 1 for `R ∼ d_{k_0}`. Since
-`|Ξ(iR)| → ∞` as `R → ∞` (Hadamard product lower bound; same as E-neg §3):
-```
-|Ξ_smooth(iR) − Ξ(iR)| ≥ |Ξ(iR)| · |Ξ_smooth(iR)/Ξ(iR) − 1|
-                        ≥ c · |Ξ(iR)| → ∞.
-```
-So `Ξ_smooth ≠ Ξ` as entire functions, with explicit separation on `iℝ`. ✓
+**Item 1 (formal/conditional).** If `O_θ` is defined as the constant map
+`O_θ(𝒵) := (d_n)_{n≥1}` for all `𝒵 ∈ 𝒳`, then both multisets yield the same output.
+This is immediate from the definition. The program-level obstruction for `𝔐_FC` additionally
+requires the factorization condition (2.7): every admissible output of every `P ∈ 𝔐_FC`
+factors through `O_θ`. This must be verified from the program's definition of `𝔐_FC`.
 
-*Step 5 — `det(I − z² K_N) → Ξ_smooth ≠ Ξ`.*  
-A method `P ∈ 𝔐_FC` reads only `O_θ` and produces eigenvalues `κ_n ≈ 1/(1/4 + d_n²)`.
-By Hadamard uniqueness, the resulting determinant product converges (if it converges at
-all) to an entire function determined by the eigenvalue sequence `{d_n}`. That function
-is `Ξ_smooth`, not `Ξ`. The gap is exactly the S(T) discrepancy; it does not
-vanish as `N → ∞` because S(T) is not zero almost everywhere. ☐
+**Item 2 (multiset distinctness — corrected proof, unconditional).**
 
-**Consequence.** No method `P ∈ 𝔐_FC` can guarantee `det(I − z² K_N) → Ξ` from `O_θ`
-data alone. The adversary `𝒵_smooth` is O_θ-indistinguishable from `𝒵_RH` and produces
-a distinct limit.
+Suppose for contradiction that the symmetric difference of `{γ_n}` and `{d_n}` were finite.
+Then `D(t) − N(t) = m` (constant integer) for all sufficiently large `t`. By the
+Riemann–von Mangoldt identity and (2.5):
+```
+m = ⌊A(t)⌋ − A(t) − S(t) = −{A(t)} − S(t),
+```
+so `S(t) = −{A(t)} − m`. Integrating and applying Lemma 3.3 (fractional-part averaging,
+OB-04 §3): `S_1(T) = −(m + 1/2)T + O(1)`. Since m is an integer, `m + 1/2 ≠ 0`, so
+`S_1(T) = Ω(T)`. This contradicts Littlewood's unconditional bound `S_1(T) = O(log T)`.
+Therefore the symmetric difference is **infinite** — infinitely many `d_n ≠ γ_n`. ✓
 
-*Status: PROOF-DRAFT.* Steps 1–4 are self-contained. Step 5 relies on the
-`O_θ`-definition of `𝔐_FC` and Lemma G.1 (REFEREED). The S(T) sign-change fact
-(Step 2) is REFEREED (Backlund 1914, Tsang 1986; Titchmarsh §9.4 records the
-sign-change property). Needs independent verification of the quantitative bound in
-Step 4.
+*Note:* The original proof claimed "S(t) ≠ 0 for infinitely many t implies d_n ≠ γ_n for
+some n." This does NOT follow — S(t) nonvanishing at arbitrary t does not imply mismatch
+at a zero ordinate. The Littlewood bound argument above is the correct proof.
+
+**Item 3 (distinct entire functions — corrected proof).**
+
+Since `F_γ` and `F_d` are locally uniformly convergent canonical products, each has
+precisely the zeros from its factors. If `F_d = F_γ`, their zero multisets would be equal,
+contradicting Item 2. Hence `F_d ≠ F_γ`. No Hadamard uniqueness theorem is invoked. ✓
+
+**Item 4 (quantitative separation — corrected, unconditional).**
+
+**[CORRECTION]** The original argument evaluated the ratio at `R = γ_n` and concluded
+from one factor ≠ 1. This is **invalid**: the remaining factors can compensate exactly.
+
+The correct argument uses the counting-function integral representation (OB-04 Lemma 3.4):
+```
+log(F_d(iR) / F_γ(iR)) = ∫_0^∞ K_R(t) (D(t) − N(t)) dt,
+    K_R(t) = 2R²/[t(t² + R²)].
+```
+Using `D(t) − N(t) = −{A(t)} − S(t) + O(1)` and splitting into fractional-part and
+S-terms:
+
+- **Fractional-part term**: By Lemma 3.3 (OB-04) the primitive of `{A(t)} − 1/2` is
+  O(1). Since `K_R(t)` is positive and decreasing with bounded total variation, and
+  `∫_{T_0}^∞ K_R(t) dt = log(1 + R²/T_0²)`, one gets:
+  ```
+  ∫ K_R(t) {A(t)} dt = (1/2) log(1 + R²/T_0²) + O(1) = log R + O(1).
+  ```
+
+- **S-term**: Let `G(t) = ∫_0^t S(u) du = O(log t)` (Littlewood). Integration by parts:
+  `∫ K_R(t) S(t) dt = −∫ K_R'(t) G(t) dt`. Using `−K_R'(t) ≪ t^{-2}` for `t ≤ R` and
+  `R²t^{-4}` for `t > R`, and `G(t) = O(log t)`, the integral is O(1) uniformly in R.
+
+Combining:
+```
+log(F_d(iR) / F_γ(iR)) = −log R + O(1),
+```
+hence `F_d(iR)/F_γ(iR) = e^{O(1)}/R`, giving:
+```
+c/R ≤ F_d(iR)/F_γ(iR) ≤ C₁/R    for R ≥ R_0.
+```
+In particular, `|F_d(iR)/F_γ(iR) − 1| → 1` as R → ∞. ✓
+
+**Corollary.** Since `F_γ(iR) → ∞` (Hadamard product lower bound), we get
+`|F_d(iR) − F_γ(iR)| ∼ F_γ(iR) → ∞`. The absolute separation is explicit and
+holds for all sufficiently large R, not merely along a subsequence.
+
+**Numerical anchor correction (OB-04 §7).**
+
+The original outsource file stated `d_1 ≈ γ_1 ≈ 14.1347`. This is **incorrect** for the
+normalization `A(d_n) = n` (i.e. `θ(d_n) = (n-1)π`). The correct values:
+```
+θ(14) ≈ −1.783,    γ_1 ≈ 14.1347,    θ(γ_1) ≈ −1.729,
+d_1 = g_0 ≈ 17.846    (first Gram point, where θ(d_1) = 0).
+```
+So `d_1 ≈ 17.846 ≠ γ_1 ≈ 14.135`. The smooth adversary `{d_n}` is NOT close to `{γ_n}`
+at small n. (The indexing convention d_n = g_{n-1} shifts d_1 substantially above γ_1.)
+
+*Status: PROOF-DRAFT ✓ (corrected).* Items 2–4 proved unconditionally.
+Item 1 is formal/conditional on the program-level factorization condition (2.7).
+The corrected proof uses Littlewood's S_1(T) = O(log T) as the critical classical input.
 
 ---
 
 ## §5. The CORE-4 barrier in 𝔐_FC
 
-**Theorem G (information obstruction, PROOF-DRAFT).**  
-For any `P ∈ 𝔐_FC` and any `N`:
-1. The operator `K_N` constructed by P has `κ_n^smooth ≈ 1/(1/4 + d_n²)`.
-2. By Lemma G.2, `1/(1/4 + d_n²) ≠ 1/(1/4 + γ_n²)` whenever `S(γ_n) ≠ 0`.
-3. By Hadamard uniqueness (Lemma G.1), `det(I − z² K) ≠ Ξ` as entire functions if the
-   eigenvalues of K are `{1/(1/4 + d_n²)}` rather than `{1/(1/4 + γ_n²)}`.
+**Theorem G (information obstruction, PROOF-DRAFT — corrected).**  
+For any `P ∈ 𝔐_FC` (assuming the factorization condition (2.7) holds) and any `N`:
+1. The operator `K_N` constructed by P has eigenvalues `κ_n ≈ 1/(1/4 + d_n²)`.
+2. By Prop. G.3* Item 2, `{d_n} ≠ {γ_n}` as multisets (infinitely many differ).
+3. By Prop. G.3* Item 3, `F_d ≠ F_γ` as entire functions (canonical product argument).
 4. Closing the gap requires the S(T) data, which is not available in `O_θ`.
 
 *Conclusion.* CORE-4 is `[OBL]` for every `P ∈ 𝔐_FC` operating with observation `O_θ`.
-The obstruction is not a finite-N artifact: it persists for all N (the S(T) fluctuation
-does not vanish as N → ∞).
+The obstruction is not a finite-N artifact: the counting-function integral (Item 4 of
+Prop. G.3*) shows the separation `|F_d(iR) − F_γ(iR)| → ∞` as R → ∞.
 
 ---
 
@@ -198,11 +256,16 @@ perturbed-tail construction replaced by the S(T) discrepancy. The underlying too
 
 | Step | Status |
 |---|---|
-| Hadamard uniqueness (Lemma G.1) | REFEREED (classical; cited) |
-| S(T) gap identity (Lemma G.2) | REFEREED (Titchmarsh §9.4) |
-| O_θ indistinguishability (Prop. G.3) | PROOF-DRAFT (explicit 𝒵_smooth adversary constructed; S(T) sign-change REFEREED) |
-| CORE-4 obstruction (Theorem G) | PROOF-DRAFT (follows from G.1 + G.2 + G.3) |
+| Lemma G.1 (Hadamard uniqueness, general) | **REFUTED as stated** (OB-04: 1 and e^z are a counterexample). Not used in corrected proof. |
+| Canonical product distinctness (Item 3) | PROOF-DRAFT ✓ — direct argument: F_d = F_γ ⟹ same zero multiset, contradicts Item 2 |
+| S(T) gap identity — corrected (§3) | REFEREED (Titchmarsh §9.4) with corrections: sign reversed, 1/2 term added, N'→A' |
+| Tsang citation corrected | *Acta Arithmetica* **46** (1986) — not J. Number Theory 23 |
+| Item 2 multiset distinctness — corrected proof | PROOF-DRAFT ✓ — Littlewood S_1(T)=O(log T) + fractional-part averaging (unconditional) |
+| Item 4 quantitative separation — corrected proof | PROOF-DRAFT ✓ — counting-function integral + Littlewood; log(F_d/F_γ)(iR) = −log R + O(1) |
+| Numerical anchor d_1 corrected | d_1 = g_0 ≈ 17.846 (NOT ≈ 14.134); original anchor was wrong |
+| O_θ indistinguishability (Item 1) | PROOF-DRAFT (formal/conditional on factorization condition (2.7) from program's 𝔐_FC definition) |
+| CORE-4 obstruction (Theorem G) | PROOF-DRAFT (conditional on factorization condition; Items 2–4 unconditional) |
 | G-hard conjecture | CONJECTURE (not a premise) |
 | Non-vacuity | PROOF-DRAFT (kappa_toeplitz; Bochner positivity) |
 | No-RH | ✓ (obstruction is independent of truth of RH) |
-| Escape route | Explicit (§4; step outside 𝔐_FC via full S(T) data or non-spectral identity) |
+| Escape route | Explicit (step outside 𝔐_FC via full S(T) data or non-spectral identity) |
