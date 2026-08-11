@@ -34,6 +34,8 @@ problem.
 | OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | RESOLVED — integrated 2026-08-11 |
 | OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
 | OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | RESOLVED — integrated 2026-08-11 (checker deposited) |
+| OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | OPEN — send for review |
+| OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -208,6 +210,35 @@ rejected).
   **Checker deposited at `theorems/G-fredholm-certificate/checker/diagonal_fredholm_interval_replay.py`;
   2 regression tests added (runs + no-float-in-certificate guard); G computational status
   REPRODUCIBLE → INDEPENDENT-CHECKER.**
+
+## Gate-A push batch OB-20 / OB-21 (drafted 2026-08-11) — first "advance to established" attempt
+
+Goal: move a theorem from PROOF-DRAFT toward INDEPENDENTLY-CHECKED on the **mathematical**
+axis (Gate A) — the biggest remaining gap. B2 is the pilot (most mature: rank + integer
+steps proved, finite core already INDEPENDENT-CHECKER via OB-13). Per the repository rule
+"status is derived by the checker, never self-declared," this step is **necessarily
+external** — the generator/editor cannot self-certify. Two complementary deliverables:
+
+- **OB-20 (B2 Gate-A review package):** a *whole-theorem* independent inspection (not a
+  fragment). Confirms the six links (quartet-decay/well-definedness, rank lemma,
+  rationality, integer scaling, membership+predicate, exact collision) AND answers five
+  Gate-A questions (hidden gap/circularity, non-vacuity incl. whether (NR) must be an
+  explicit class condition, analytic/finite separation, scope honesty, and the verdict:
+  advance toward INDEPENDENTLY-CHECKED or blocked). Verdict space: PASS / CONDITIONAL
+  (with the exact required edit) / BLOCKED.
+
+- **OB-21 (B2 certified-checker request):** asks for an **independently-written**,
+  deposit-ready stdlib checker (exact `fractions`, no float in certificate) reconstructing
+  the full pipeline `C→β→R,n,M→collision`, computing `O_j` per-definition and
+  cross-checking Chebyshev, with two instances (m=2, m=3) and an adversarial mutation guard
+  (K7). On CONFIRMED it will be deposited at `theorems/B2-exact-collision/checker/` and
+  pinned in the test suite (like the G checker from OB-17) — turning B2's replay path from
+  a one-off reconstruction into a permanent machine-re-verified checker.
+
+Prerequisite cleanup done first: B2's `limitations.md` and `novelty.md` were **stale**
+(still called the rank step "CONJECTURE tier / conditional" — contradicting proof.md,
+statement.md, dependencies.yaml which have it PROVED since OB-02/OB-13). Both rewritten to
+be internally consistent before the Gate-A package ships.
 
 ## What a returned verification should contain
 
