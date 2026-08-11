@@ -155,16 +155,34 @@ def test_b2_contract_required_metadata_keys():
 
 
 def test_b2_conditionality_stated():
-    """B2 must state its proof status clearly; if conditional, mark it; if complete PROOF-DRAFT, accept that."""
+    """B2 status must be at least PROOF-DRAFT (Gate-A PASS raised it to INDEPENDENTLY-CHECKED)."""
     with B2_CONTRACT.open() as f:
         data = json.load(f)
     status = data.get("spec_status", "")
-    assert "PROOF-DRAFT" in status, \
-        "B2 contract must be at least PROOF-DRAFT"
+    assert status in ("PROOF-DRAFT", "INDEPENDENTLY-CHECKED", "REFEREED"), \
+        f"B2 contract must be at least PROOF-DRAFT, got {status!r}"
     # limitations must mention the rank / construction
     lim = (B2_DIR / "limitations.md").read_text()
     assert "rank" in lim.lower() or "conditional" in lim.lower() or "multiplicity" in lim.lower(), \
         "B2 limitations.md must mention the rank condition or construction"
+
+
+def test_b2_gate_a_consistency():
+    """OB-20: if B2 is INDEPENDENTLY-CHECKED, no file may still ASSERT the rank step is conjectural.
+
+    (A sentence explicitly withdrawing the old caveat is fine; an assertive
+    'conditional on rank' theorem statement or 'CONJECTURE tier' label is not.)
+    """
+    with B2_CONTRACT.open() as f:
+        status = json.load(f).get("spec_status", "")
+    if status == "INDEPENDENTLY-CHECKED":
+        for fname in ("limitations.md", "novelty.md", "statement.md"):
+            txt = (B2_DIR / fname).read_text()
+            assert "CONJECTURE tier" not in txt, \
+                f"B2 {fname} still calls the rank step 'CONJECTURE tier' after Gate-A PASS"
+            # assertive conditional theorem phrasing (not a 'withdrawn'/'earlier' mention)
+            assert "(conditional on rank)" not in txt, \
+                f"B2 {fname} still states the theorem as '(conditional on rank)' after Gate-A PASS"
 
 
 def test_b2_proof_has_rank_section():

@@ -55,7 +55,7 @@
   },
   "runtime": {"class": "native-dev", "network": "none"},
   "assurance": {"required": ["formal-kernel"]},
-  "replay": {"semantic": "N/A-conditional", "byte_exact": "not_required"},
-  "spec_status": "PROOF-DRAFT",
-  "status_note": "All steps are PROOF-DRAFT complete: rank step self-contained via Vandermonde reduction (proof.md §4.3-§4.4, no external citation needed); integer-sign resolved via multiplicity buffer (proof.md §4.5). Ready for independent review. Counting-law refinement deferred."
+  "replay": {"semantic": "exact-rational", "byte_exact": "not_required"},
+  "spec_status": "INDEPENDENTLY-CHECKED",
+  "status_note": "Gate-A PASS (OB-20 external review 2026-08-11): whole-theorem independent inspection of all six links + Q1-Q5, no blocking gap / circularity / RH-import; every load-bearing fact re-derived from phi_j. Rank step self-contained (Vandermonde, proof.md §4.3-§4.4); integer-sign resolved (§4.5); finite core INDEPENDENT-CHECKER (OB-13). Structural non-vacuity: d_1(T)>0 for all real T forces beta!=0, M>=1, R>=1; (NR) automatic from t_k>0,T>0. Counting-law refinement handled by OB-07 lift. Mathematical axis: PROOF-DRAFT -> INDEPENDENTLY-CHECKED."
 }

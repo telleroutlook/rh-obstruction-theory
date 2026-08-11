@@ -1,7 +1,7 @@
 # Proof — Theorem B2 (exact finite-observation collision)
 
-**Status:** PROOF-DRAFT (CONFIRMED by OB-02 external review, 2026-08-11 — four notation corrections applied)  
-**Analytic / finite separation:** purely analytic; no finite certificate used.
+**Status:** INDEPENDENTLY-CHECKED — Gate-A PASS (OB-20 external review 2026-08-11); OB-02 confirmed; finite core INDEPENDENT-CHECKER (OB-13).  
+**Analytic / finite separation:** purely finite algebra; no analytic step, no finite certificate assumed as a premise.
 
 ---
 
@@ -370,5 +370,7 @@ This is left for refinement after the rank step.
 | Independent exact reconstruction (OB-13, m=2 + m=3 + mutation) | CONFIRMED ✓ INDEPENDENT-CHECKER (Python stdlib fractions, SHA-256-pinned, two routes agree) |
 | det C ≠ 0 closed form (OB-13 Lemma 2.3, scaled Vandermonde) | CONFIRMED ✓ |
 | Global O_j definition + predicate P made explicit (OB-13) | DONE (see statement.md) |
-| Counting-law refinement (§7) | DEFERRED |
-| Overall theorem B2 | **CONFIRMED by OB-02 external review (2026-08-11); finite certificate INDEPENDENT-CHECKER by OB-13 (2026-08-11)** |
+| Counting-law refinement (§7) | DEFERRED (handled on augmented class by OB-07 lift) |
+| Structural non-vacuity: d_1(T)>0 ∀T ⟹ β≠0, M≥1, R≥1; (NR) automatic | INDEPENDENTLY-VERIFIED (OB-20; d_1(T)=64(16T²+3)/(256T⁴+160T²+9)) |
+| Full six-link assembly (Gate-A) | INDEPENDENTLY-CHECKED ✓ — GATE-A PASS (OB-20 2026-08-11) |
+| Overall theorem B2 | **INDEPENDENTLY-CHECKED — Gate-A PASS (OB-20 2026-08-11); OB-02 confirmed; finite core INDEPENDENT-CHECKER (OB-13)** |

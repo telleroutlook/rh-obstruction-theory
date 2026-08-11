@@ -1,10 +1,10 @@
 # Theorem B2 — Exact Finite-Observation Collision
 
-**Mathematical status:** PROOF-DRAFT (CONFIRMED by OB-02 external review 2026-08-11 — integer-sign step resolved; four notation corrections applied; see proof.md)  
+**Mathematical status:** INDEPENDENTLY-CHECKED (Gate-A PASS by OB-20 external review 2026-08-11: whole-theorem inspection of all six links + Q1–Q5, no blocking gap / circularity / RH-import; every load-bearing fact independently re-derived from φ_j and cross-computed. Earlier: PROOF-DRAFT confirmed by OB-02.)  
 **Computational status:** INDEPENDENT-CHECKER (OB-13 external review 2026-08-11: the exact-rational collision was reconstructed from φ_j in an independent implementation — Python stdlib `fractions`, SHA-256-pinned source, two routes agree, adversarial mutation breaks it; m=2 and m=3 instances both give exact zero residual)  
 **Theorem ID:** B2-exact-collision  
 **Program ref:** §7.B.2.B2, §7.B.3  
-**Paper target:** Paper A (primary, if rank condition holds)
+**Paper target:** Paper A (primary — Gate-A PASS 2026-08-11)
 
 ---
 
@@ -88,39 +88,59 @@ J · α = −δ^{off}(T),      α ∈ {±1}^n  or  α ∈ ℤ^n  (depending on m
 
 ## Theorem B2 (exact finite-observation collision)
 
-**Theorem B2 (conditional on rank).** Assume:
+**Theorem B2 (unconditional; Gate-A PASS OB-20).** For any fixed finite Li-type or
+moment-type test family `Φ = (φ_1,…,φ_m)`, there exist distinct rational heights
+`t_1 < … < t_m`, a rational `T > 0`, and nonneg integer multiplicities such that the
+multisets `𝒵_+, 𝒵_−` constructed above satisfy:
 
-(H-rank) The Jacobian `J` has full column rank over `ℝ` (i.e. `rank J = n`),
-which requires `m ≥ n`. More precisely, there exist heights `t₁, …, t_n` such that
-`J_{jk}` is non-singular in the appropriate sense for the solution step.
-
-(H-real-mult) The compensating adjustments `α_k` can be taken as positive integers
-(multiplicity additions), not just signs.
-
-Then there exist heights `t₁ < … < t_n`, a choice of `n`, and `T_* > t_n` such
-that the multiset `𝒵_−` defined above satisfies:
-
-1. `𝒵_− ∈ 𝔛_sym`.
-2. `P(𝒵_−) = 0` (off-line zeros `σ₀ ± iT_*`).
+1. `𝒵_+, 𝒵_− ∈ 𝔛_sym`;
+2. `P(𝒵_+) = 1` and `P(𝒵_−) = 0` (the off-line quartet `Q(3/4,T)` puts atoms at
+   `Re = 3/4 ≠ 1/2`);
 3. `O_Φ(𝒵_−) = O_Φ(𝒵_+)` (exact collision, no tolerance).
+
+The two former hypotheses are now **proved**, not assumed:
+- **(H-rank) — PROVED.** The Jacobian `C` (Li) / moment matrix has full rank: `det C ≠ 0`
+  for distinct positive rational `t_k`, by the self-contained Chebyshev + lower-triangular
+  + Vandermonde argument (proof.md §4.3–§4.4; Gate-A re-verified, OB-20).
+- **(H-real-mult) — PROVED.** The adjustments are nonneg integers: `β = −C⁻¹d(T) ∈ ℚᵐ`,
+  scaled by `R = lcm(denominators)` to `n ∈ ℤᵐ`, with buffer `M = max_k|n_k|` giving
+  `M + n_k ≥ 0` (proof.md §4.5).
 
 **Scope.**  The conclusion applies to `𝔛_sym` with the stated finite `Φ`.  It does
 not apply to methods using the full Euler product, gamma factor, or infinite test
 hierarchy (escape routes identical to B1).
 
+**Structural non-vacuity (OB-20 Gate-A review, 2026-08-11 — independently verified).**
+The predicate separation `P(𝒵_+)=1 ≠ 0=P(𝒵_−)` is not a coincidence of a particular
+`(m, t_k, T)`; it holds for **every** admissible input. Reason:
+```
+d_1(T) = 4 Re[φ_1(3/4+iT) + φ_1(1/4+iT)] = 64(16T²+3)/(256T⁴+160T²+9) > 0  for all real T
+```
+(numerator and denominator are sums of positive terms; no real zero — verified symbolically).
+Hence `β = −C⁻¹d(T) ≠ 0` always, so `n = Rβ` has a nonzero component, `M = max_k|n_k| ≥ 1`,
+and `R = lcm(denominators) ≥ 1` always. Therefore `𝒵_+` is never empty and `𝒵_−` always
+contains at least one copy of the off-line quartet `Q(3/4,T)`. Moreover, since `t_k > 0`
+and `T > 0`, every atom of `L(t_k)` and `Q(3/4,T)` is **non-real** (imaginary part ≠ 0),
+so the no-real-atom condition (NR) is **automatically satisfied** by the construction — it
+is not an assumption that must be added (the earlier concern that invisible real atoms
+`{1/4, 3/4}` could trivialize the obstruction does not arise, since `T = 0` is excluded by
+definition).
+
 ---
 
-## Rank and integer-sign status (RESOLVED, OB-02 2026-08-11)
+## Rank and integer-sign status (PROVED; Gate-A PASS OB-20 2026-08-11)
 
-The rank condition and integer-sign condition are both resolved in proof.md §4:
+The rank condition and integer-sign condition are both resolved in proof.md §4, and the
+full assembly passed independent Gate-A review (OB-20):
 
 | Step | Status | Result |
 |---|---|---|
-| Rank of Li Jacobian C (§4.3) | PROOF-DRAFT ✓ | det C ≠ 0 by Chebyshev + lower-triangular + Vandermonde |
-| Rank of moment Jacobian (§4.4) | PROOF-DRAFT ✓ | cosine-Vandermonde argument |
-| Integer solution via scaling (§4.5) | PROOF-DRAFT ✓ | β = −C⁻¹d(T) ∈ ℚᵐ; scale by lcm-denominator R → n ∈ ℤᵐ |
-| Nonneg multiplicity via buffer M | PROOF-DRAFT ✓ | M = max_k|n_k|, then M+n_k ≥ 0 |
+| Rank of Li Jacobian C (§4.3) | PROVED ✓ (Gate-A checked) | det C ≠ 0 by Chebyshev + lower-triangular + Vandermonde |
+| Rank of moment Jacobian (§4.4) | PROVED ✓ (Gate-A checked) | cosine-Vandermonde argument |
+| Integer solution via scaling (§4.5) | PROVED ✓ (Gate-A checked) | β = −C⁻¹d(T) ∈ ℚᵐ; scale by lcm-denominator R → n ∈ ℤᵐ |
+| Nonneg multiplicity via buffer M | PROVED ✓ (Gate-A checked) | M = max_k|n_k|, then M+n_k ≥ 0 |
 | m=2 rational sanity check | CONFIRMED ✓ | t₁=1, t₂=2, T=1: exact rational arithmetic |
+| Full six-link assembly | INDEPENDENTLY-CHECKED ✓ | OB-20 whole-theorem Gate-A review: no gap / circularity / RH-import |
 
 ---
 
@@ -135,7 +155,7 @@ Same five escape routes as B1, plus:
 
 ---
 
-## Paper A theorem (B2 confirmed — PROOF-DRAFT)
+## Paper A theorem (B2 — INDEPENDENTLY-CHECKED, Gate-A PASS)
 
 B2 is confirmed with nonneg integer multiplicities (proof.md §4.5, OB-02 2026-08-11).
 The Paper A theorem is:

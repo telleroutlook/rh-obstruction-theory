@@ -1,7 +1,7 @@
 # Dependencies — Theorem B2
 
 theorem_id: B2-exact-collision
-status: PROOF-DRAFT (rank step PROVED §4.3–§4.4; OB-02 confirmed; OB-13 independent-checker)
+status: INDEPENDENTLY-CHECKED (Gate-A PASS OB-20 2026-08-11; rank+integer steps PROVED §4.3–§4.5; finite core INDEPENDENT-CHECKER OB-13)
 
 dependencies:
 
@@ -32,21 +32,27 @@ dependencies:
       (proof.md §4.3): factor 1-T_j(x) = (1-x)Q_j(x), express [Q_j(x_k)] = U*V,
       conclude det != 0 from Vandermonde and positive leading coefficients.
       For moment-type: analogous cosine-Vandermonde argument (proof.md §4.4).
-    source: "proof.md §4.3-§4.4 (self-contained Vandermonde reduction, PROOF-DRAFT)"
-    mathematical: PROOF-DRAFT
-    computational: EXPLORATORY
+    source: "proof.md §4.3-§4.4 (self-contained Vandermonde reduction); OB-20 Gate-A review"
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: INDEPENDENT-CHECKER
     usable_as_premise: true
     role: >
       Central rank step for B2 construction. Proved by self-contained Vandermonde
-      reduction in proof.md §4.3 — no external citation required. Discovery-tier
-      exact rational verification confirms det(J) != 0 for m=3,4,5 at multiple
-      rational heights (discovery/jacobian_rank_results.md).
-    gate_a_status: PROOF-DRAFT-COMPLETE
+      reduction in proof.md §4.3 — no external citation required. OB-20 Gate-A review
+      independently re-derived and confirmed det C != 0 (closed form
+      4^m 2^{m(m-1)/2} prod(1-x_k) prod(x_l-x_k)) for m up to 6 in exact rational
+      arithmetic (noting a sympy.nsimplify false-negative at m=5, excluded by pure
+      Fraction det). Finite core also INDEPENDENT-CHECKER via OB-13.
+    gate_a_status: CLOSED
     caveat: >
+      Gate A CLOSED by OB-20 (2026-08-11): whole-theorem independent review passed.
+      A sympy.nsimplify false-"det=0" at m=5 was found and excluded during review —
+      recorded as a verification-tool caveat (do not trust a simplifier's zero result;
+      use exact Fraction determinant).
       Proof is self-contained (Vandermonde + Chebyshev identity cos(jt)=T_j(cost)
       + leading-coefficient computation from T_j recurrence). No Karlin-Studden
       citation needed. Integer-sign step RESOLVED (proof.md §4.5 — multiplicity
-      buffer). B2 is a complete PROOF-DRAFT; the next step is independent review.
+      buffer). Independent review complete (OB-20): status INDEPENDENTLY-CHECKED.
 
   - id: CURTO-FIALKOW-FLAT-EXTENSION
     statement: >
@@ -60,13 +66,15 @@ dependencies:
       Background: B3 (truncated moment support) will build on this. Not needed
       for B2 rank step but provides the moment-theoretic context.
 
-gate_a_status: PROOF-DRAFT-COMPLETE
+gate_a_status: CLOSED
 gate_a_note: >
-  B2-RANK-CONJECTURE is PROVED (self-contained Vandermonde reduction, proof.md §4.3–§4.4;
-  no external citation). Integer-sign step RESOLVED (§4.5, multiplicity buffer). Confirmed
-  by OB-02 external review (2026-08-11); the finite collision was independently
-  reconstructed in exact rational arithmetic by OB-13 (2026-08-11, INDEPENDENT-CHECKER).
-  The remaining non-conclusions are (i) the counting-law refinement (§7, DEFERRED —
-  addressed by the OB-07 lift on 𝔛_sym^{(*),nr}) and (ii) that this is a finite algebraic
-  certificate only, asserting nothing analytic. The "B2-RANK-CONJECTURE" id below is
-  retained for provenance; its mathematical status is PROOF-DRAFT (proved), not open.
+  Gate A CLOSED by OB-20 external review (2026-08-11): whole-theorem inspection of all six
+  links (quartet-decay, rank lemma, rationality, integer scaling, membership+predicate,
+  exact collision) plus Q1–Q5 (no hidden gap / circularity / RH-import; non-vacuity is
+  structural — d_1(T)>0 for all real T forces β≠0, M≥1, R≥1, and (NR) is automatic from
+  t_k>0,T>0; analytic/finite separation clean; scope honest). Verdict: GATE-A PASS →
+  mathematical status INDEPENDENTLY-CHECKED. B2-RANK-CONJECTURE is PROVED (self-contained
+  Vandermonde, proof.md §4.3–§4.4); integer-sign RESOLVED (§4.5); finite core
+  INDEPENDENT-CHECKER (OB-13). Remaining non-conclusions: (i) counting-law refinement
+  handled by the OB-07 lift on 𝔛_sym^{(*),nr}; (ii) this is a finite algebraic certificate,
+  asserting nothing analytic and nothing about RH.

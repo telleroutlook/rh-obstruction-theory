@@ -34,7 +34,7 @@ problem.
 | OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | RESOLVED — integrated 2026-08-11 |
 | OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
 | OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | RESOLVED — integrated 2026-08-11 (checker deposited) |
-| OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | OPEN — send for review |
+| OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | RESOLVED — GATE-A PASS, integrated 2026-08-11 |
 | OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
@@ -239,6 +239,27 @@ Prerequisite cleanup done first: B2's `limitations.md` and `novelty.md` were **s
 (still called the rank step "CONJECTURE tier / conditional" — contradicting proof.md,
 statement.md, dependencies.yaml which have it PROVED since OB-02/OB-13). Both rewritten to
 be internally consistent before the Gate-A package ships.
+
+## Resolved OB-20 outcome (integrated 2026-08-11 — FIRST GATE-A PASS)
+
+- **OB-20 (B2 Gate-A review):** **GATE-A PASS.** The referee independently re-derived every
+  load-bearing fact from `φ_j` (SymPy exact rational/symbolic), confirmed all six links and
+  their coherent composition, and answered Q1–Q5 with no blocking gap, no circularity, no
+  RH-import. **B2 mathematical axis advances PROOF-DRAFT → INDEPENDENTLY-CHECKED** (first
+  theorem to do so). Notable findings, all independently re-verified in-repo before
+  integration:
+  - **Stronger non-vacuity than stated:** `d_1(T) = 64(16T²+3)/(256T⁴+160T²+9) > 0` for all
+    real T (no real zero — confirmed symbolically), so `β ≠ 0`, `M ≥ 1`, `R ≥ 1` always;
+    predicate separation is structural, not a coincidence of a chosen instance. Integrated
+    into statement.md as "Structural non-vacuity."
+  - **(NR) is automatic:** since `t_k>0, T>0`, every atom is non-real, so the no-real-atom
+    condition holds by construction (not an assumption to add).
+  - **A verification-tool caveat worth recording:** `sympy.nsimplify` gave a false
+    "det C = 0" at m=5 on large-denominator rationals; excluded by pure `Fraction` det.
+    Recorded in dependencies.yaml (don't trust a simplifier's zero result).
+  Integrated across B2 statement/proof/limitations/novelty/dependencies + contract; theorem
+  restated **unconditional** (H-rank/H-real-mult now proved, not hypotheses); 2 new
+  regression tests (status ≥ PROOF-DRAFT; Gate-A consistency guard). Tests 63 → 64.
 
 ## What a returned verification should contain
 
