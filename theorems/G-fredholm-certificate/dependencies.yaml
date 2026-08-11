@@ -1,7 +1,10 @@
 # Dependencies — Theorem G (G-fredholm-certificate)
 
 theorem_id: G-fredholm-certificate
-status: PROOF-DRAFT (G-info; G-hard is CONJECTURE — not a premise)
+status: >
+  G-info diagonal obstruction (M_d^tr) INDEPENDENTLY-CHECKED — Gate-A PASS (OB-22 2026-08-11)
+  after integrating 7 conditional textual/premise mods (proof.md §1a); finite core
+  INDEPENDENT-CHECKER (OB-17 deposited checker). G-hard remains CONJECTURE, never a premise.
 
 dependencies:
 

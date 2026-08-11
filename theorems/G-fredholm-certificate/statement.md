@@ -2,7 +2,7 @@
 
 **Theorem ID:** G-fredholm-certificate  
 **Program ref:** §9.G (information obstruction; method class 𝔐_FC)  
-**Status:** PROOF-DRAFT (information-obstruction core; see §3 for open steps)
+**Status:** G-info diagonal obstruction (𝔐_d^{tr}) INDEPENDENTLY-CHECKED — Gate-A PASS after OB-22's 7 conditional mods integrated (proof.md §1a); G-hard remains `[CONJECTURE]`. Finite core INDEPENDENT-CHECKER (OB-17 deposited checker).
 
 ---
 
@@ -174,7 +174,7 @@ by a route other than the archimedean theta-level. Explicit escape routes:
 
 | Axis | Status |
 |---|---|
-| Mathematical | PROOF-DRAFT (G-info); CONJECTURE (G-hard) |
+| Mathematical | G-info diagonal obstruction (𝔐_d^{tr}): INDEPENDENTLY-CHECKED (Gate-A PASS, OB-22 2026-08-11, 7 mods integrated proof.md §1a); G-hard: CONJECTURE |
 | Computational | INDEPENDENT-CHECKER (OB-17 2026-08-11: certified exact-rational interval replay of the diagonal-Fredholm finite core — `checker/diagonal_fredholm_interval_replay.py`, SHA-256 e197f2bb…c8f4058b; d_n enclosed to <6.83e-12, three-way separation γ_n<d_n<√(1/4+d_n²) certified, tail Σ_{n>2048}κ_n<10⁻³, both mutation guards pass) |
 
 **What is proved here (G-info, PROOF-DRAFT):**

@@ -687,6 +687,24 @@ def test_g_diagonal_fredholm_checker_no_float_in_certificate():
             f"G certified checker must not use {banned!r} in the certificate path"
 
 
+def test_g_gate_a_conditions_integrated():
+    """OB-22: if G-info is INDEPENDENTLY-CHECKED, the 7 Gate-A conditional mods must be present
+    and G-hard must still be quarantined as CONJECTURE."""
+    with G_CONTRACT.open() as f:
+        status = json.load(f).get("spec_status", "")
+    if status == "INDEPENDENTLY-CHECKED":
+        proof = (G_DIR / "proof.md").read_text()
+        # the OB-22 conditional-mods block must be integrated
+        assert "Gate-A conditions integrated" in proof, \
+            "G proof.md must integrate the OB-22 Gate-A conditional mods (§1a)"
+        # the exact RvM identity (M2) must be present as a premise, not just the asymptotic
+        assert "N(T) = 1 + θ(T)/π + S(T)" in proof or "N(T) = 1 + θ(T)/π + S(T)".replace(" ", "") in proof.replace(" ", ""), \
+            "G proof.md must state the exact RvM identity N(T)=1+theta/pi+S(T) as an allowed premise (M2)"
+        # G-hard must remain a CONJECTURE even at INDEPENDENTLY-CHECKED
+        assert "G-hard" in proof and "CONJECTURE" in proof, \
+            "G-hard must remain labeled CONJECTURE after the diagonal obstruction advances"
+
+
 def test_e_prime_ift_jacobian_written():
     """IX-A2: E'-neg must have an explicit meromorphic IFT Jacobian (Vandermonde in poles)."""
     stmt = (E_PRIME_DIR / "statement.md").read_text()

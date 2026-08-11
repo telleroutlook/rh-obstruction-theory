@@ -1,7 +1,7 @@
 # Proof — Theorem G (G-fredholm-certificate)
 
-**Status:** PROOF-DRAFT (Prop. G.3* CONFIRMED with corrections by OB-04 external review 2026-08-11; original G.3 REFUTED as written)  
-**Analytic / finite separation:** purely analytic (no finite certificates).
+**Status:** G-info diagonal obstruction (𝔐_d^{tr}) INDEPENDENTLY-CHECKED — GATE-A PASS after integrating OB-22's 7 conditional mods (§1a); G-hard remains CONJECTURE. Prop. G.3* CONFIRMED with corrections by OB-04; finite core INDEPENDENT-CHECKER (OB-17 deposited checker).  
+**Analytic / finite separation:** analytic assembly (§1a–§5b) + deposited exact-interval checker for the finite core.
 
 ---
 
@@ -23,6 +23,80 @@ The obstruction has three components:
 Step 4 (G-hard, CONJECTURE): S(T) is not recoverable within 𝔐_FC.
 
 ---
+
+## §1a. Gate-A conditions integrated (OB-22 external review, 2026-08-11)
+
+OB-22 returned **GATE-A CONDITIONAL** for the diagonal G-info obstruction (no reproof
+needed — no gap, no circularity, no RH-import, G-hard cleanly quarantined), requiring
+seven textual/premise fixes before the status advances. All are integrated here; none
+changes the mathematics.
+
+**(M1) Common Hilbert space + xi + counting conventions.** Work on `H = ℓ²(ℕ)`;
+`D_N = diag(κ_1,…,κ_N,0,0,…)` and all `K_N` are operators on `H` (so `‖K_N − D_N‖_1` is
+well-defined). `ξ(s) = ½ s(s−1) π^{−s/2} Γ(s/2) ζ(s)`. `(γ_n)` = the multiset of positive
+imaginary parts of ALL nontrivial zeros `β+iγ`, in nondecreasing order with multiplicity
+(NOT only critical-line zeros). `N(T)` counts `0 < γ ≤ T`, with the left/right midpoint
+value at a zero height; `S(T) = (1/π) arg ζ(1/2+iT)` by continuous variation along
+`2 → 2+iT → ½+iT`, midpoint value at zero heights. `A(T) = θ(T)/π + 1`,
+`D(T) = #{n : d_n ≤ T}`.
+
+**(M2) Exact Riemann–von Mangoldt as an allowed premise (REFEREED).** Under (M1),
+Titchmarsh–Heath-Brown (1986) *The Theory of the Riemann Zeta-function*, 2nd ed.,
+**Theorem 9.3** gives the **pointwise** identity
+```
+N(T) = 1 + θ(T)/π + S(T)      (= A(T) + S(T)),
+```
+valid off zero heights, extended by the midpoint convention. This exact identity — NOT the
+`O(log T)` asymptotic alone — is what Link D (Prop G.3* Item 2) requires. (`S(T) = O(log T)`
+is Thm 9.4; `S_1(T) = ∫_0^T S = O(log T)` is Littlewood 1924 / Thm 9.9(A) — both used in
+Link D, both unconditional, no zero location.)
+
+**(M3) Weak factorization only (corrected).** The diagonal subclass is
+```
+𝔐_d^{tr} = { (K_N) : K_N ≥ 0 finite-rank on H,  ∃ allowed auxiliary data a_N and Φ_N with
+             K_N = Φ_N((d_n)_{n≤N}, a_N),  and  ‖K_N − D_N‖_1 → 0 }.
+```
+The theorem does NOT claim `a_N` is determined by `(d_n)`, nor that a `Ψ_N` depending on
+`(d_n)` alone exists (that strong reading is a separate, unestablished hypothesis).
+**The diagonal proof uses ONLY `K_N ≥ 0` and the trace-norm condition — the factorization
+is not an analytic step.** "Zero-free input" does not imply "zero-blind output" (zero-free
+arithmetic data can analytically determine zeros), so the strong reading is not established.
+
+**(M4) Link D averaging lemma (explicit).** In Prop G.3* Item 2, replace the one-line
+"fractional-part averaging" by: with `h(x) = {x} − ½`, `H(x) = ∫_0^x h`, `H` bounded
+1-periodic; substituting `x = A(t)` and `w(x) = 1/A'(A^{-1}(x))` (positive, decreasing
+since `A'' ≥ 0` eventually, so bounded variation), integration by parts gives
+`∫_{T_0}^T h(A(t)) dt = ∫ h(x)w(x) dx = O(1)`, hence `∫_{T_0}^T {A(t)} dt = T/2 + O(1)`.
+Integrating `S(t) = −{A(t)} − m` then gives `S_1(T) = −(m+½)T + O(1) = Ω(T)`, contradicting
+Littlewood. Conclusion stated precisely: **the multiset symmetric difference of `{d_n}` and
+`{γ_n}` is infinite** (stronger than "≠").
+
+**(M5) Link C notation + no RH split.** Write the first positive zero of `G_d` as `r_1 =
+√(1/4+d_1²)` (avoid clash with the eigenvalue symbol `λ_j`). Drop the "if RH / if ¬RH"
+split: a rigorously verified critical-line zero `γ_* ∈ [14.134725139, 14.134725145]` has
+`Ξ̂(γ_*) = 0` (Platt–Trudgian 2021, Thm 1: RH true up to height 3·10¹²; Odlyzko table
+±3·10⁻⁹); since `γ_* < r_1` and `G_d` has no zero in `(0, r_1)`, `G_d(γ_*) ≠ 0 = Ξ̂(γ_*)`,
+so `G_d ≠ Ξ̂` — unconditional, using one proven finite-height fact, not RH.
+
+**(M6) Lemma G.5 wording.** Replace "cannot be verified without proving RH" by the formal
+implication: *for any PSD family satisfying Lemma G.4's hypotheses, a proof that its
+locally uniform limit equals `Ξ̂` would, together with Lemma G.4, constitute a proof of RH.*
+Any universal `∀P ∈ 𝔐_FC` statement requires `𝔐_FC`, `O_θ`, condition 3 to be fully
+defined in-package; where they are not, only the general PSD-family Lemma G.5 is asserted.
+
+**(M7) Theta-level existence/uniqueness (exact quantifier).** For each `n ≥ 1`, `d_n` is
+the unique solution of `θ(d_n) = (n−1)π` in `[7, ∞)`; existence/uniqueness from `θ'(t) > 0`
+for `t ≥ 7`, `θ(7) < 0`, and `θ(t) → ∞` (Brent–Platt–Trudgian 2021 eqs (9)–(11) give θ's
+expansion with explicit remainder, from which `θ' > 0` on `[7,∞)` follows).
+
+**Scope reminder (OB-22 §7).** What is established is a **diagonal / trace-norm** continuity
+obstruction: a family with `‖K_N − D_N‖_1 → 0` cannot have determinant limit `Ξ̂` (it is
+forced to `G_d ≠ Ξ̂`). Titles/abstracts must keep the `𝔐_d^{tr}` / "diagonal" qualifier;
+the broader "no zero-free construction recovers the zeros" claim is exactly G-hard, which
+remains an isolated `[CONJECTURE]`.
+
+---
+
 
 ## §2. Hadamard uniqueness (analytic input) — CORRECTED
 

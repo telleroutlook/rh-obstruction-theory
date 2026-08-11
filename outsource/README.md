@@ -36,7 +36,7 @@ problem.
 | OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | RESOLVED — integrated 2026-08-11 (checker deposited) |
 | OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | RESOLVED — GATE-A PASS, integrated 2026-08-11 |
 | OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | RESOLVED — CONFIRMED, checker deposited 2026-08-11 |
-| OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | OPEN — send for review |
+| OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | RESOLVED — GATE-A CONDITIONAL, 7 mods integrated 2026-08-11 |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -289,6 +289,28 @@ carefully because G is more delicate than B2:
 Uses REVIEW_PROMPT.md common header + Block A. Load-bearing facts (Σκ_n<∞, the three-way
 separation, Prop G.3* Item 2) were already script/checker-verified (OB-17); the deliverable
 is the whole-theorem judgment.
+
+## Resolved OB-22 outcome (integrated 2026-08-11) — SECOND theorem toward double-axis established
+
+- **OB-22 (G Gate-A review):** **GATE-A CONDITIONAL → integrated.** The referee found no
+  reproof needed for the diagonal G-info obstruction (no gap, no circularity, no RH-import,
+  G-hard cleanly quarantined, factorization (2.7) confirmed weak-reading-only), but required
+  **7 textual/premise fixes** before advancing. All integrated into proof.md **§1a** (none
+  changes the mathematics):
+  (M1) common Hilbert space `H=ℓ²(ℕ)` + `ξ`/`γ_n`/`N`/`S`/`A` definitions;
+  (M2) the **exact** RvM identity `N(T)=1+θ(T)/π+S(T)` as an allowed premise (Titchmarsh–
+  Heath-Brown Thm 9.3) — stronger than the `O(log T)` asymptotic, which Link D genuinely
+  needs; (M3) weak-factorization-only definition of `𝔐_d^{tr}` (proof uses only `K_N≥0` +
+  trace-norm; "zero-free input ≠ zero-blind output"); (M4) explicit Link-D averaging lemma
+  + "symmetric difference infinite"; (M5) Link-C `r_1` notation, drop the RH split, use a
+  verified critical-line zero `γ_*` (Platt–Trudgian 2021); (M6) Lemma G.5 as a formal
+  implication (not an epistemic "cannot verify"); (M7) exact θ-level existence/uniqueness on
+  `[7,∞)`. **G-info diagonal obstruction (`𝔐_d^{tr}`) advances PROOF-DRAFT →
+  INDEPENDENTLY-CHECKED; G-hard stays `[CONJECTURE]`.** Since G already has a deposited
+  interval checker (OB-17), **G is now the second theorem established on both axes**
+  (math INDEPENDENTLY-CHECKED + computational INDEPENDENT-CHECKER). Tail bound cross-checked
+  (referee's `0.000932773` vs OB-17's `0.000932724`, both `<10⁻³`, different majorants).
+  New regression test `test_g_gate_a_conditions_integrated`; tests 66 → 67.
 
 ## What a returned verification should contain
 

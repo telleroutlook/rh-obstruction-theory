@@ -57,8 +57,8 @@
   },
   "runtime": {"class": "native-dev", "network": "none"},
   "assurance": {"required": ["formal-kernel"]},
-  "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
-  "spec_status": "PROOF-DRAFT",
+  "replay": {"semantic": "exact-interval (diagonal Fredholm checker, OB-17)", "byte_exact": "not_required"},
+  "spec_status": "INDEPENDENTLY-CHECKED",
   "obstruction_type": "information",
-  "spec_status_note": "G-info (information obstruction) PROOF-DRAFT. G-hard is CONJECTURE, not a premise. Non-vacuity witness PROOF-DRAFT. Gate A OPEN (Prop. G.3 open step)."
+  "spec_status_note": "G-info diagonal obstruction (M_d^tr): INDEPENDENTLY-CHECKED -- Gate-A PASS (OB-22 2026-08-11) after integrating 7 conditional textual/premise mods (proof.md §1a: common Hilbert space, exact RvM premise N(T)=1+theta/pi+S(T), weak-factorization-only, Link-D averaging lemma, Link-C r_1 notation + no-RH-split, G.5 formal implication, theta-level exact quantifier). Finite core INDEPENDENT-CHECKER (OB-17 deposited interval checker). G-hard remains CONJECTURE, never a premise. Non-vacuity witness kappa_toeplitz still separately unverified; M_d^tr non-empty via K_N=D_N."
 }
