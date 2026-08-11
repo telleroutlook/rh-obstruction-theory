@@ -195,6 +195,38 @@ the category without a mandatory counting law (condition 3 is optional, as state
 | Weil-type test: W2 convention chosen | DEFINITIONAL CHOICE — must be frozen in statement |
 | Counting-law variant (B2) | OPEN — addressed in B2-exact-collision |
 | Independence from Euler product / full L-function axioms | ESCAPE ROUTE — stated in statement.md |
+| Quantitative decay `δ_j(T) → 0` (exact-rational replay) | **INDEPENDENT-CHECKER** ✓ (OB-18 2026-08-11) |
+
+### §5.1 Precise meaning of the B1 obstruction (OB-18 clarification, 2026-08-11)
+
+**B1 establishes "no positive uniform separation margin," NOT "no exact discriminator."**
+The quartet contribution is strictly positive for every finite `T`:
+```
+δ_1(T) = 4[σ/(σ²+T²) + (1−σ)/((1−σ)²+T²)] > 0   (0 < σ < 1, T finite),
+```
+so B1 does **not** produce an exact observation collision (that is B2's job). What B1
+proves is: the infimum over `T` of the observation gap between the `P=1` class and the
+`P=0` class is **zero** — no fixed positive coordinate margin robustly separates them, so
+any measurement model with a positive error radius can be defeated by taking `T` large.
+Distinguishing the two classes by an exact, discontinuous discriminator on precise real
+inputs is not excluded by B1. (This keeps B1 clear of the "margin → 0" non-barrier label:
+the claim is about the *observation* separation infimum, not a shrinking positivity margin
+of a sufficient inequality.)
+
+### §5.2 Exact decay certificate (OB-18, INDEPENDENT-CHECKER)
+
+Independently reconstructed in exact rational arithmetic (OB-18 2026-08-11; Python stdlib
+`fractions`, per-definition traversal of the quartet, no closed form hard-coded):
+- `δ_1(1) = 1216/425`, `δ_2(1) = 1763072/180625` (exact);
+- decay `δ_j(T) · T² → 4j²` (so `δ_1·T²→4`, `δ_2·T²→16`; the earlier draft stated only
+  the `j=1` case), with the explicit bound `|δ_j(T)| ≤ 4(2^{j+1}−2−j)/T²` for `T ≥ 1`;
+- for `σ=3/4, m=2, ε=10⁻³` the least joint integer threshold is `T* = 127` (certified by
+  exact integer cross-multiplication: `δ_2(126) > 10⁻³ > δ_2(127)`, both `δ_j` strictly
+  decreasing in `T`);
+- mutation guards: `σ=1/2` flips the predicate to `P=1` (off-line requirement is
+  load-bearing); the constant test `φ≡1` gives `δ≡8 ↛ 0` (decay needs `φ_j` vanishing at ∞).
+
+This validates only the finite decay statement, not any analytic limit or RH.
 
 ---
 

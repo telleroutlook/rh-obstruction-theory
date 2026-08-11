@@ -71,37 +71,49 @@ with the power-law leading term.
 
 ---
 
-## §4. Heat-trace reformulation — quantitative (PROOF-DRAFT)
+## §4. Heat-trace reformulation — quantitative (PROOF-DRAFT; Z_ζ side INDEPENDENT-CHECKER)
 
-**Setup.** For a sequence `(γ_n)` with `N(T) = #{γ_n ≤ T} = T log T / (2π) + O(log T)`
-(Riemann–von Mangoldt), define the zeta heat sum:
+**Setup.** For a sequence `(γ_n)` with `N(T) = #{γ_n ≤ T} = (T/2π)log(T/2π) − T/2π +
+O(log T)` (Riemann–von Mangoldt, unconditional — a count only, no zero location), define
+the zeta heat sum:
 ```
 Z_ζ(t) := Σ_{n≥1} e^{−t γ_n},   t > 0.
 ```
 
-**Lemma (log singularity of Z_ζ).** As `t → 0⁺`:
+**Lemma (log singularity of Z_ζ — exact closed form, OB-19-confirmed).** As `t → 0⁺`:
 ```
-Z_ζ(t) = (1/(2π)) · (log(1/t)) / t + O(1/t).
+Z_ζ(t) = (1/(2π t)) ( log(1/t) − γ_E − log(2π) ) + O(log(1/t)),
 ```
+so the leading singularity is `(1/2π) · log(1/t)/t`, coefficient **exactly 1/2π**.
 
-*Proof.* By partial summation / Abel–Plana with `N(T) ~ T log T / (2π)`:
+*Proof (OB-19 external review, 2026-08-11).* Stieltjes/Abel: `Z_ζ(t) = t ∫_0^∞ e^{−tu}N(u)du`
+(boundary term vanishes since `N(u)=O(u log u)`). Write `N = N_main + E`,
+`N_main(u) = (u/2π)(log u − log2π − 1)`. Two exact Laplace identities (substitute `v=tu`):
 ```
-Z_ζ(t) = ∫_0^∞ e^{−tu} dN(u)
-        = t ∫_0^∞ e^{−tu} N(u) du     (integration by parts)
-        ~ t ∫_0^∞ e^{−tu} (u log u / (2π)) du.
+t ∫_0^∞ e^{−tu} u du = 1/t,
+t ∫_0^∞ e^{−tu} u log u du = (1/t)(1 − γ_E − log t)   [since Γ'(2) = 1 − γ_E].
 ```
-Split: `u log u = u log(1/t) + u log(tu)`.  Then:
+(**Correction:** the earlier draft wrote `∫_0^∞ e^{−v} v log v dv = −γ_E − 1`; the correct
+value is `Γ'(2) = 1 − γ_E ≈ 0.42278433510`.) Combining gives the **exact** main-term
+identity, valid for every `t > 0`:
 ```
-t ∫_0^∞ e^{−tu} u log(1/t) du = log(1/t) · t ∫_0^∞ e^{−tu} u du
-                                = log(1/t) · t · t^{−2} = log(1/t) / t.
+t ∫_0^∞ e^{−tu} N_main(u) du = (1/(2π t))( log(1/t) − γ_E − log(2π) ).
 ```
-And `t ∫_0^∞ e^{−tu} u log(tu) du = t^{−1} ∫_0^∞ e^{−v} v log(v) dv/t = O(1/t)`.
-(The integral `∫_0^∞ e^{-v} v log v dv = -γ_E − 1` is a finite constant.)
-Combining with the `O(log T)` error in `N(T)` (which contributes `O(log(1/t))` to
-the heat trace, absorbed in the `O(1/t)` term):
-```
-Z_ζ(t) = (1/(2π)) log(1/t) / t + O(1/t).   ☐
-```
+The remainder `t ∫ e^{−tu} E(u) du = O(log(1/t)) = o(1/t)` (see remainder note below), so
+it does not affect the leading `t^{-1}log(1/t)` term. ☐
+
+**Remainder-constant caveat (OB-19 V4 discrepancy).** The *qualitative* remainder
+`O(log(1/t))` follows from `E(u) = O(log u)`. But an **explicit numerical** constant
+`C` in `|t∫e^{−tu}E(u)du| ≤ C log(1/t)` does NOT follow from the bare `O(log T)` in RvM
+(that symbol carries no numerical constant). Given an explicit global bound
+`|E(u)| ≤ A log(u+2)`, OB-19 proves `C = 2A` for `0 < t ≤ e^{−2}`. A numerical `A`
+requires an added premise — e.g. Trudgian (2014, arXiv:1208.5846) explicit `S(T)`/counting
+bounds — which is a *stronger* input than the `O(log T)` used here. This does not affect
+the leading coefficient `1/2π` (which is exact), only a quantitative remainder certificate.
+
+*Status: leading singularity + coefficient INDEPENDENT-CHECKER (OB-19: symbolic V1 +
+110-digit replay at t=10⁻³,10⁻⁶,10⁻⁹; exact ratio `(L−a)/L`, `a=γ_E+log2π`; validates only
+the Riemann-side finite/asymptotic identity, not the operator side or RH).*
 
 **[CORRECTION from external review — 2026-08-11]**
 
@@ -236,7 +248,7 @@ the "exact determinant obstruction (order/type)" mentioned in the PLAN.
 |---|---|
 | Weyl leading-term mismatch (§1) | PROOF-DRAFT (standard corollary; close to Endres-Steiner) |
 | Extensions: sums, graphs, polynomials, perturbations (§3) | PROOF-DRAFT |
-| Heat-trace Z_ζ log-singularity lemma (§4) | PROOF-DRAFT ✓ (self-contained: Abel-Plana from von Mangoldt) |
+| Heat-trace Z_ζ log-singularity lemma (§4) | PROOF-DRAFT ✓ + **INDEPENDENT-CHECKER** (OB-19 2026-08-11): exact closed form (1/2πt)(log(1/t)−γ_E−log2π), leading coeff exactly 1/2π; symbolic V1 + 110-digit replay. Fixed constant Γ'(2)=1−γ_E (earlier draft had −γ_E−1). V4 numerical remainder C=2A is conditional on an explicit \|E(u)\|≤A log(u+2) (e.g. Trudgian 2014), NOT derivable from bare O(log T). |
 | All-orders no-log for 𝒞_ell (§4 previous claim) | **REFUTED** by external review (OB-01, 2026-08-11): counterexample He_n=(|n|+a/|n|)e_n on S¹ has t·log(1/t) term. Gilkey Thm 1.8.1 citation WRONG (should be Lemma 1.8.2, covers differential operators only). BGV Thm 2.30 covers Laplace-type only. |
 | Leading-singularity obstruction (§4 corrected) | PROOF-DRAFT ✓ — no t^{-d/m}·log(1/t) is possible. Citation pinned by OB-15 (2026-08-11) to Lesch 1999 Thm 3.7 + eqs (3.18)–(3.22) with A=I, extending Grubb–Seeley 1995 Thm 2.7. |
 | Coefficient/pole corrections (OB-15 2026-08-11) | PROOF-DRAFT ✓ — (a) ellipticity mandatory (𝕋² counterexample 1+D_x²+D_y⁴ gives exponent 3/4≠1/2); (b) ζ_H NOT regular at all negative integers (Res_{s=−k}=m⁻¹Wres(H^k); only s=0 regular; subleading t^k log t possible, k≥1); (c) a_0=Γ(d/m)·Res, not a_0·m/Γ(d/m); (d) no-log needs BOTH simple-pole (Lesch) AND Γ regular at d/m. |

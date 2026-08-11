@@ -34,8 +34,8 @@ problem.
 | OB-15 | `OB-15-D-leading-log-mellin.md` | D §4 | Leading heat-trace singularity of positive elliptic ΨDO is pure power (Mellin/no-log) | RESOLVED — integrated 2026-08-11 |
 | OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
 | OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | OPEN — send for review |
-| OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | OPEN — send for review |
-| OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | OPEN — send for review |
+| OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
+| OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
 Notes on the OB-09 / OB-10 outcomes:
 
@@ -171,6 +171,26 @@ rejected).
   (1/2πt)(log(1/t) − γ_E − log2π)`, leading coeff exactly `1/2π`; explains OB-15's
   slow-ratio remark (subleading constant only log-suppressed). Uses only RvM counting, no
   zero locations.
+
+## Resolved OB-18 / OB-19 outcomes (integrated 2026-08-11)
+
+- **OB-18 (B1 exact-rational replay):** CONFIRMED after two repairs. (V4) membership needs
+  the added assumption `𝒵_+ ∈ 𝔛_sym` (not just `P(𝒵_+)=1` — that alone doesn't give
+  conjugation/`1−ρ` closure). B1's precise meaning is **"no positive uniform separation
+  margin," NOT "no exact discriminator"** (`δ_1(T)>0` for every finite T, so B1 is not an
+  exact collision — that's B2). Bonus exact results: joint threshold `T*=127` (I'd
+  estimated ~130; referee's exact integer cross-multiplication is right); decay generalizes
+  to `δ_j(T)·T² → 4j²` (my task stated only `j=1`). B1 computational axis NONE →
+  INDEPENDENT-CHECKER. Integrated into B1 proof.md §5.1–5.2 + statement.md.
+
+- **OB-19 (D Z_ζ leading coefficient):** main theorem CONFIRMED; V4 numerical certificate
+  is a **DISCREPANCY**. Exact closed form `Z_ζ,main(t)=(1/2πt)(log(1/t)−γ_E−log2π)` verified
+  to 110 digits; leading coeff exactly `1/2π`. Corrected a pre-existing constant error in
+  D proof.md (`∫e^{−v}v log v dv = 1−γ_E = Γ'(2)`, not the `−γ_E−1` the draft had). V4's
+  explicit `A,C` do NOT follow from bare `O(log T)`; only conditional `C=2A` given an
+  explicit `|E(u)|≤A log(u+2)` (e.g. Trudgian 2014) — a stronger added premise, not an
+  algebraic expansion of the `O`. V5(b) domain repair: `c≥0, α>0`; excluding `α=1`
+  unnecessary. Z_ζ side → INDEPENDENT-CHECKER. Integrated into D proof.md §4 + statement.md.
 
 ## What a returned verification should contain
 

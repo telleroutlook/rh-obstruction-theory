@@ -1,7 +1,7 @@
 # Theorem B1 — Strict Finite-Inequality Non-Discrimination
 
 **Mathematical status:** PROOF-DRAFT  
-**Computational status:** NONE  
+**Computational status:** INDEPENDENT-CHECKER (OB-18 external review 2026-08-11: exact-rational replay of the quartet-decay certificate δ_j(T)→0 — δ_1(1)=1216/425, δ_j·T²→4j², joint threshold T*=127 for ε=10⁻³, mutation guards; Python stdlib fractions, per-definition, no floats)  
 **Theorem ID:** B1-finite-inequality  
 **Program ref:** §7, §7.B.2.B1  
 **Paper target:** Paper A (conditional on B2; else lemma of Paper C)

@@ -1,7 +1,7 @@
 # Theorem D — Spectral-Asymptotic Exclusions for Classical Hilbert–Pólya Candidates
 
 **Mathematical status:** PROOF-DRAFT (conditional on novelty gate)  
-**Computational status:** NONE  
+**Computational status:** INDEPENDENT-CHECKER (Z_ζ side: OB-19 external review 2026-08-11 — exact closed form Z_ζ,main(t)=(1/2πt)(log(1/t)−γ_E−log2π), leading coeff exactly 1/2π, symbolic + 110-digit replay; operator side remains analytic-only)  
 **Theorem ID:** D-spectral-asymptotic  
 **Program ref:** §9 (WP-D), §9.D.1–D.5  
 **Paper target:** Paper B (conditional on novelty beyond Endres–Steiner)
