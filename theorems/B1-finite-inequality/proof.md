@@ -195,9 +195,9 @@ the category without a mandatory counting law (condition 3 is optional, as state
 | Weil-type test: W2 convention chosen | DEFINITIONAL CHOICE — must be frozen in statement |
 | Counting-law variant (B2) | OPEN — addressed in B2-exact-collision |
 | Independence from Euler product / full L-function axioms | ESCAPE ROUTE — stated in statement.md |
-| Quantitative decay `δ_j(T) → 0` (exact-rational replay) | REPRODUCIBLE (OB-18 used B2's doubled convention; corrected R-atom values δ_1(1)=608/425, T*=90, 2j² per OB-23; independent R-atom checker requested OB-24) |
+| Quantitative decay `δ_j(T) → 0` (exact-rational replay) | INDEPENDENT-CHECKER (OB-24: R-atom checker deposited `checker/b1_ratom_certified_checker.py`, SHA 199c7dad…7fe4bc8; δ_1(1)=608/425, T*=90, 2j²; supersedes OB-18's wrong convention) |
 | Σ′ convention (R-atom, vs B2's R-symm) | CORRECTED (OB-23) — see statement.md cross-theorem convention note |
-| Gate-A status | CONDITIONAL (OB-23): qualitative core CONFIRMED after local repairs; advance to INDEPENDENTLY-CHECKED once corrected checker (OB-24) returns |
+| Gate-A status | CONDITIONAL (OB-23) → checker returned (OB-24, INDEPENDENT-CHECKER restored); math advances to INDEPENDENTLY-CHECKED once OB-23 §7 textual mods are fully integrated |
 
 ### §5.1 Precise meaning of the B1 obstruction (OB-18 clarification, 2026-08-11)
 
@@ -234,21 +234,32 @@ of 2 from B2's global convention `O_j = Σ_ρ[φ_j(ρ)+φ_j(1−ρ)]` (see the c
 convention note in statement.md). The earlier B1 anchors were mistakenly computed in B2's
 doubled convention and are corrected here.
 
-Exact rational values under B1's own (R-atom) convention (independently recomputed, OB-23):
+Exact rational values under B1's own (R-atom) convention (independently recomputed, OB-23;
+checker-certified OB-24):
 - `δ_1(1) = 608/425`, and (Li first coordinate) `δ_1(T) = 2[σ_0/(σ_0²+T²) +
-  (1−σ_0)/((1−σ_0)²+T²)]`;
-- decay `δ_j(T) · T² → 2j²` (so `δ_1·T²→2`, `δ_2·T²→8`);
+  (1−σ_0)/((1−σ_0)²+T²)]`; exact rational forms (`y=16T²`, `σ_0=3/4`):
+  `δ_1(T) = 32(y+3)/((y+9)(y+1))`, `δ_2(T) = 128(y³+9y²+31y−9)/((y+9)²(y+1)²)`;
+- decay `δ_j(T) · T² → 2j²` (so `δ_1·T²→2`, `δ_2·T²→8`), proved from the leading
+  coefficients of these rational forms (the sample heights `T=100,1000,10000` are
+  regression anchors, not the limit proof);
 - for `σ_0=3/4, m=2, ε=10⁻³` the least joint integer threshold is `T* = 90` (certified by
   exact integer arithmetic: at `T=89` the `j=2` coordinate is `≈1.0099·10⁻³ > 10⁻³`, at
-  `T=90` it is `≈9.876·10⁻⁴ < 10⁻³`; both `δ_j` decreasing in `T`);
+  `T=90` it is `≈9.876·10⁻⁴ < 10⁻³`);
+- **Monotonicity (OB-24 correction):** `δ_j(n)` is strictly decreasing on **positive
+  integers** `n ≥ 1` (this is all `T*` minimality uses, and the checker also exhaustively
+  searches `1 ≤ T ≤ 90`). It is NOT monotone over all real `T>0`: e.g.
+  `δ_2(1/10) = −190275200/44102881 < δ_2(1/4) = 256/25` despite `1/10 < 1/4`. Do not state
+  an unrestricted "`δ_j` decreasing in `T`".
 - mutation guards: `σ_0=1/2` flips the predicate to `P=1` (off-line requirement is
-  load-bearing); the constant test `φ≡1` gives `δ≡4 ↛ 0` (decay needs `φ_j` vanishing at ∞).
+  load-bearing); the constant test `φ≡1` gives `δ≡4 ↛ 0` (decay needs `φ_j` vanishing at ∞;
+  the value is 4 in R-atom, not 8).
 
 This validates only the finite decay statement, not any analytic limit or RH.
-**Computational status:** the OB-18 checker used B2's doubled convention; a corrected
-R-atom checker is requested (OB-24) before B1's computational axis is restored to
-INDEPENDENT-CHECKER. Until then B1's finite decay is REPRODUCIBLE (values above), not yet
-independently re-certified under the correct convention.
+**Computational status:** INDEPENDENT-CHECKER — the corrected R-atom checker (OB-24) is
+deposited at `checker/b1_ratom_certified_checker.py` (SHA-256 199c7dad…7fe4bc8), re-run
+in-repo, pinned in the test suite. It supersedes the OB-18 checker, which was in B2's
+doubled (R-symm) convention. B1's finite decay is now independently re-certified under the
+correct R-atom convention.
 
 ---
 

@@ -1,7 +1,7 @@
 # Theorem B1 — Strict Finite-Inequality Non-Discrimination
 
 **Mathematical status:** PROOF-DRAFT (Gate-A CONDITIONAL, OB-23 2026-08-11: qualitative core CONFIRMED after local repairs — Σ′ convention corrected to R-atom, anchors fixed, RH-example removed; advances to INDEPENDENTLY-CHECKED once §7 mods integrated + corrected checker returns)  
-**Computational status:** REPRODUCIBLE (OB-18 checker used B2's doubled convention; corrected R-atom checker requested as OB-24 before restoring INDEPENDENT-CHECKER)  
+**Computational status:** INDEPENDENT-CHECKER (OB-24 external review 2026-08-11: corrected R-atom checker deposited at `checker/b1_ratom_certified_checker.py`, SHA-256 199c7dad…7fe4bc8, re-run in-repo; δ_1(1)=608/425, δ_j·T²→2j², T*=90, all exact-rational, no float; supersedes OB-18's wrong-convention checker)  
 **Theorem ID:** B1-finite-inequality  
 **Program ref:** §7, §7.B.2.B1  
 **Paper target:** Paper A (conditional on B2; else lemma of Paper C)

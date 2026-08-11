@@ -38,7 +38,7 @@ problem.
 | OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | RESOLVED — CONFIRMED, checker deposited 2026-08-11 |
 | OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | RESOLVED — GATE-A CONDITIONAL, 7 mods integrated 2026-08-11 |
 | OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | RESOLVED — GATE-A CONDITIONAL, Σ′ convention + anchors corrected 2026-08-11 |
-| OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | OPEN — send for review |
+| OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | RESOLVED — CONFIRMED (Gate-A CONDITIONAL), checker deposited 2026-08-11 |
 | OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
@@ -380,6 +380,24 @@ E incompatibility) + six Gate-A questions. D-specific delicate points built in:
   verdict.
 Non-circularity: operator side is pure spectral geometry; Riemann side uses only the RvM
 count. Uses REVIEW_PROMPT.md common header + Block A.
+
+## Resolved OB-24 outcome (integrated 2026-08-11) — B1 computational axis restored (R-atom)
+
+- **OB-24 (B1 corrected checker):** **CONFIRMED (Gate-A CONDITIONAL) — checker deposited.**
+  The referee supplied an independently-written R-atom checker; **SHA-256 verified
+  (`199c7dad…7fe4bc8`) and re-run in-repo** → `ALL_CERTIFIED_CHECKS_PASSED`. It reproduces
+  `δ_1(1)=608/425`, `T*=90`, `δ_j·T²→2j²` exactly, cross-checks four-atom traversal vs
+  conjugate-pair form, and includes the K6 ×2 R-symm guard. Deposited at
+  `theorems/B1-finite-inequality/checker/b1_ratom_certified_checker.py`; B1 computational
+  axis REPRODUCIBLE → **INDEPENDENT-CHECKER** (under the correct R-atom convention). 3
+  regression tests added; tests 67 → 70. The review also caught two issues in the OB-24
+  task text itself, now fixed in B1 proof.md: (a) `δ_2` is NOT monotone over all real
+  `T>0` (counterexample `δ_2(1/10) < δ_2(1/4)` — independently verified); the load-bearing
+  monotonicity is on **positive integers `T≥1`** only, and the checker exhaustively
+  searches `1≤T≤90`; (b) K3's three sample heights are regression anchors, not a limit
+  proof — the limit `2j²` is proved from the exact rational forms' leading coefficients.
+  B1 math advances to INDEPENDENTLY-CHECKED once the OB-23 §7 textual mods are fully folded
+  in (this is the remaining CONDITIONAL item).
 
 ## What a returned verification should contain
 

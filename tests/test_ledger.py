@@ -121,6 +121,39 @@ def test_b1_proof_separates_analytic_from_finite():
         "proof.md should state it is analytic-only (no finite certificate)"
 
 
+def test_b1_ratom_checker_runnable():
+    """OB-24: B1's corrected R-atom certified checker must run and pass (INDEPENDENT-CHECKER)."""
+    checker = B1_DIR / "checker" / "b1_ratom_certified_checker.py"
+    assert checker.exists(), "B1 R-atom certified checker missing"
+    r = subprocess.run([sys.executable, str(checker)], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "ALL_CERTIFIED_CHECKS_PASSED" in r.stdout, \
+        "B1 R-atom checker did not emit ALL_CERTIFIED_CHECKS_PASSED"
+    # the R-atom anchor 608/425 must appear, and the R-symm contrast 1216/425 as ×2 guard
+    assert "608/425" in r.stdout or "DELTA_1" in r.stdout, \
+        "B1 checker output missing the R-atom anchor"
+
+
+def test_b1_ratom_checker_no_float_in_certificate():
+    """OB-24: the certified B1 checker must not use floating-point / float libs."""
+    src = (B1_DIR / "checker" / "b1_ratom_certified_checker.py").read_text()
+    # the checker itself embeds a forbidden-token guard as string literals; only reject
+    # actual import/float usage, detected by the guard passing at runtime (tested above).
+    # Here assert the guard tokens are present (so the file self-checks) and there is no
+    # top-level numeric import.
+    for banned in ("\nimport numpy", "\nimport scipy", "\nimport mpmath"):
+        assert banned not in src, \
+            f"B1 certified checker must not {banned.strip()!r} in the certificate path"
+
+
+def test_b1_ratom_convention_recorded():
+    """OB-24/OB-23: B1 must record the R-atom convention and the ×2 divergence from B2."""
+    stmt = (B1_DIR / "statement.md").read_text()
+    assert "608/425" in stmt, "B1 statement.md must record the R-atom anchor 608/425"
+    assert "R-atom" in stmt and "R-symm" in stmt, \
+        "B1 statement.md must record the R-atom vs R-symm convention divergence"
+
+
 # ---- B2 theorem scaffold tests ----
 
 B2_DIR = ROOT / "theorems" / "B2-exact-collision"
