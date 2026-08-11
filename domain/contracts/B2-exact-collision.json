@@ -1,10 +1,10 @@
 {
   "contract_version": "2",
   "claim_id": "B2-exact-collision-theorem",
-  "note": "Theorem B2 (WP-B, B2). Exact finite-observation collision in 𝔛_sym. CONDITIONAL on rank conjecture. PROOF-DRAFT. No computational witness yet.",
+  "note": "Theorem B2 (WP-B, B2). Exact finite-observation collision in 𝔛_sym. Rank + integer steps PROVED (proof.md §4.3-§4.5). INDEPENDENTLY-CHECKED (Gate-A PASS OB-20) + INDEPENDENT-CHECKER (OB-13/OB-21 deposited checker). Uses B2's R-symm Σ' convention (collision Cn+Rd=0 is scale-invariant).",
 
   "theorem_id": "B2-exact-collision",
-  "paper": "A (primary if rank closes; else lemma of C)",
+  "paper": "A (primary — Gate-A PASS)",
   "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
 
   "metadata": {
@@ -24,14 +24,14 @@
   "dependencies": [
     {"claim_id": "B1-OFF-LINE-QUARTET-LEMMA", "ledger_math": "PROOF-DRAFT", "role": "quartet tail decay; inherited from B1 proof.md §2"},
     {"claim_id": "SYMMETRIC-ZERO-CLASS-DEF", "ledger_math": "DEFINITION", "role": "ambient class"},
-    {"claim_id": "B2-RANK-CONJECTURE", "ledger_math": "PROOF-DRAFT", "role": "central rank step; Chebyshev T-system argument in proof.md §4.3; integer-sign step RESOLVED (proof.md §4.5 — multiplicity buffer construction)"},
+    {"claim_id": "B2-RANK-CONJECTURE", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "central rank step, PROVED: Chebyshev T-system + Vandermonde in proof.md §4.3, Gate-A re-verified (OB-20); integer-sign RESOLVED (proof.md §4.5, multiplicity buffer). Id retained for provenance; not open."},
     {"claim_id": "CURTO-FIALKOW-FLAT-EXTENSION", "ledger_math": "REFEREED", "role": "background moment theory context for B3"}
   ],
 
   "obligations": [
-    "B2.rank.proof: self-contained Vandermonde reduction in proof.md §4.3 — PROOF-DRAFT complete, no external citation needed",
+    "B2.rank.proof: self-contained Vandermonde reduction in proof.md §4.3 — PROVED, Gate-A re-verified (OB-20), no external citation needed",
     "B2.analytic.quartet-decay: inherits from B1 proof.md §2",
-    "B2.analytic.construction: conditional on rank; outlined in proof.md §5",
+    "B2.analytic.construction: rank PROVED (§4.3-§4.4); full assembly Gate-A PASS (OB-20); construction in proof.md §5",
     "B2.integer-mult: RESOLVED — multiplicity buffer construction in proof.md §4.5; Z_+ constructed with M=R*max|alpha_k^Q| ensuring all removals valid",
     "B2.scope: conditionality stated; fixed-K limitation stated; no K->infty overclaim"
   ],

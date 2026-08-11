@@ -41,7 +41,7 @@
     "class": "PASS — four named observation layers; membership checkable",
     "non_vacuity": "PASS — B2 quartet (O_finite) and kappa_toeplitz (O_theta) are witnesses",
     "target": "PASS — Hadamard uniqueness ensures distinct zero multisets give distinct entire functions",
-    "observation": "PROOF-DRAFT — B2 collision PROOF-DRAFT; G collision PROOF-DRAFT (Prop. G.3 open)",
+    "observation": "INHERITED — B2 collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-20); G-info collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-22, Prop. G.3* Items 2-4 proved). H's own cross-layer separation (H' §4) remains PROOF-DRAFT.",
     "invariant": "PASS — observation layers are basis-independent (counting function invariant)",
     "no_rh": "PASS — no RH in hypotheses",
     "escape": "PASS — O_oracle explicit; O_vM conditional",

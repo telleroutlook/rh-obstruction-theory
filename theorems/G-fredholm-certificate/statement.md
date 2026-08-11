@@ -116,7 +116,7 @@ determinant stability inequality).  Moreover, `G_d ≠ Ξ̂` unconditionally:
    then `F_d ≠ Ξ̂` by Prop. G.3* (even if the 1/4 shift is corrected).
 2. **S(T) gap:** `{d_n} ≠ {γ_n}` as multisets (Prop. G.3* Item 2); `F_d ≠ F_γ`.
 
-**Part G-info (information obstruction — PROOF-DRAFT):**  
+**Part G-info (information obstruction — INDEPENDENTLY-CHECKED, Gate-A PASS OB-22):**  
 For any `P ∈ 𝔐_d^{tr}`, the locally uniform limit of `det(I − z² K_N)` is `G_d ≠ Ξ̂`.
 The arithmetic fluctuation `S(T)` is not in `O_θ`, and the spectral parameter shift
 further separates `G_d` from `Ξ̂`.
@@ -177,7 +177,7 @@ by a route other than the archimedean theta-level. Explicit escape routes:
 | Mathematical | G-info diagonal obstruction (𝔐_d^{tr}): INDEPENDENTLY-CHECKED (Gate-A PASS, OB-22 2026-08-11, 7 mods integrated proof.md §1a); G-hard: CONJECTURE |
 | Computational | INDEPENDENT-CHECKER (OB-17 2026-08-11: certified exact-rational interval replay of the diagonal-Fredholm finite core — `checker/diagonal_fredholm_interval_replay.py`, SHA-256 e197f2bb…c8f4058b; d_n enclosed to <6.83e-12, three-way separation γ_n<d_n<√(1/4+d_n²) certified, tail Σ_{n>2048}κ_n<10⁻³, both mutation guards pass) |
 
-**What is proved here (G-info, PROOF-DRAFT):**
+**What is proved here (G-info, INDEPENDENTLY-CHECKED — Gate-A PASS OB-22):**
 1. The Hadamard uniqueness lemma: an order-1 entire function is determined by its zeros
    + normalization (classical, REFEREED).
 2. The S(T) gap: `γ_n − d_n = S(γ_n)/density + lower order`, where S(T) is the

@@ -36,6 +36,15 @@ O_finite ⊂ O_theta ⊂ O_vM ⊂ O_oracle
 | `O_vM` | full von Mangoldt explicit formula data (Λ(n) for all n) | Partially (via explicit formula) | — |
 | `O_oracle` | all zero ordinates {γ_n} | Yes, by definition | trivially resolves |
 
+**Convention note (OB-23, cross-theorem).** H uses the `O_finite` layer only through the
+*structural* B1/B2 facts (the quartet construction and the Jacobian-rank collision), never
+through a raw numeric observation anchor. B1 and B2 use different Σ′ normalizations (B1
+R-atom `Σ'_ρ φ_j(ρ)`; B2 R-symm `Σ_ρ[φ_j(ρ)+φ_j(1−ρ)]`, ×2 larger — see their statement.md
+convention notes and PROMPT_LINT L21). H's information-lattice conclusions are
+convention-independent (they concern which *coordinates* a layer can/can't see, not their
+scale), so the divergence does not affect any H claim; H must not cite a δ/C/d value in
+either convention as if it were canonical.
+
 **Key fact (REFEREED, Titchmarsh §9.4).** The gap between `O_theta` and `O_oracle` is
 precisely the arithmetic fluctuation:
 ```
@@ -57,11 +66,16 @@ explicit information obstruction pair `(𝒵_L^+, 𝒵_L^-)` such that:
 
 **Explicitly:**
 - For `L = O_finite`: the adversary pair is the B2 quartet construction `Q(σ₀,T)`.
-  The observation collision is the Jacobian rank theorem (B2 §4.3). **Status: PROOF-DRAFT (B2).**
+  The observation collision is the Jacobian rank theorem (B2 §4.3).
+  **Status: inherits B2 = INDEPENDENTLY-CHECKED (Gate-A PASS OB-20) + INDEPENDENT-CHECKER (OB-21).**
 - For `L = O_theta`: the adversary pair is the S(T)-perturbed multiset of Theorem G
   (Prop. G.3*, Items 2–4 proved unconditionally, OB-04 2026-08-11). The observation
   collision is the S(T) gap identity (Theorem G Lemma G.2).
-  **Status: PROOF-DRAFT (G-info); Item 1 conditional on factorization (2.7).**
+  **Status: inherits G-info = INDEPENDENTLY-CHECKED (Gate-A PASS OB-22) + INDEPENDENT-CHECKER (OB-17); G-hard remains CONJECTURE, not used here.**
+
+(H's own contribution — the *unified lattice* framing and the §4 strict-separation
+computations — remains PROOF-DRAFT; what is inherited from B2 and G is now established, but
+H's cross-layer separation theorem H′ is not independently reviewed.)
 
 **Common structure.** Both cases use:
 1. **Hadamard uniqueness** (Lemma G.1 / Lemma E'.1): two distinct zero multisets give
