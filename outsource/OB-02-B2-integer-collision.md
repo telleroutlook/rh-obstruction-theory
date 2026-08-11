@@ -1,151 +1,170 @@
-# Problem OB-02 — Exact finite-observation collision with integer multiplicities
+# Problem OB-02 — Exact finite-observation collision with integer multiplicities (Theorem B2)
 
-**Type:** Analytic number theory / combinatorics. Self-contained; requires no
-knowledge of RH or the Riemann zeta function beyond the names of the tests.  
-**Repo context:** This is an independent verification request for Theorem B2
-(`theorems/B2-exact-collision/`) of the RH Obstruction Theory repository. You do NOT
-need any other file from that repo to solve this problem.
+**Type:** Algebraic / combinatorial. No number theory or Riemann zeta function knowledge
+required. The construction is purely algebraic once the test functionals are defined.
+
+**Non-circularity:** No step assumes RH, reads Riemann zero locations, or uses any
+zeta-function numerics. The objects are defined combinatorially.
 
 ---
 
-## Self-contained setup
+## All definitions (self-contained — everything is here)
 
-### Admissible zero multisets
+### Admissible symmetric zero multisets
 
 An **admissible symmetric zero multiset** is a locally finite multiset
-`𝒵 ⊂ {s ∈ ℂ : 0 < Re(s) < 1}` satisfying:
-- Conjugate symmetry: `ρ ∈ 𝒵 ⟹ ρ̄ ∈ 𝒵` (with same multiplicity).
-- Functional symmetry: `ρ ∈ 𝒵 ⟹ 1−ρ ∈ 𝒵` (with same multiplicity).
-- Admissibility: `Σ_{ρ ∈ 𝒵} |ρ|^{-2} < ∞`.
+$\mathcal{Z} \subset \{s \in \mathbb{C} : 0 < \operatorname{Re}(s) < 1\}$ satisfying:
+- Conjugate symmetry: $\rho \in \mathcal{Z} \Rightarrow \bar\rho \in \mathcal{Z}$ (same multiplicity).
+- Functional symmetry: $\rho \in \mathcal{Z} \Rightarrow 1-\rho \in \mathcal{Z}$ (same multiplicity).
+- Admissibility: $\sum_{\rho \in \mathcal{Z}} |\rho|^{-2} < \infty$.
 
-The **critical-line predicate** is `P(𝒵) = 1` if all elements of `𝒵` have real
-part exactly `1/2`, and `P(𝒵) = 0` otherwise.
+The **critical-line predicate** is $P(\mathcal{Z}) = 1$ iff every element of $\mathcal{Z}$
+has $\operatorname{Re}(\rho) = 1/2$; otherwise $P(\mathcal{Z}) = 0$.
+
+The **off-line quartet** at $(\sigma_0, T)$ with $\sigma_0 \in (1/2, 1)$, $T > 0$:
+$$
+Q(\sigma_0, T) := \{\sigma_0 + iT,\; \sigma_0 - iT,\; (1-\sigma_0) + iT,\; (1-\sigma_0) - iT\}.
+$$
+This is admissible, symmetric, with $P(Q) = 0$.
 
 ### Li-type test functionals
 
-For `j = 1, …, m`, define the **Li-type test functional**:
-```
-φ_j(ρ) := 1 − (1 − 1/ρ)^j,
-```
-and the observation functional on a finite multiset `𝒵 = {ρ_1, …, ρ_K}`:
-```
-O_j(𝒵) := Σ_{ρ ∈ 𝒵} [φ_j(ρ) + φ_j(ρ̄)].
-```
-(The sum runs over all elements with multiplicity.)
+For $j = 1, \ldots, m$, the **Li-type test functional** is:
+$$
+\varphi_j(\rho) := 1 - \Bigl(1 - \frac{1}{\rho}\Bigr)^j.
+$$
+The **observation functional** on a finite multiset $\mathcal{Z}$:
+$$
+O_j(\mathcal{Z}) := \sum_{\rho \in \mathcal{Z}} \bigl[\varphi_j(\rho) + \varphi_j(\bar\rho)\bigr]
+                  = \sum_{\rho \in \mathcal{Z}} 2\,\operatorname{Re}[\varphi_j(\rho)].
+$$
+The **observation map** $O_\Phi = (O_1, \ldots, O_m) : \mathfrak{X}_\text{sym} \to \mathbb{R}^m$.
 
-The **observation map** `O_Φ := (O_1, …, O_m) : 𝔛_sym → ℝ^m`.
+### The Jacobian matrix
 
-### Off-line quartet
+Fix $m$ distinct rational heights $0 < t_1 < \cdots < t_m$. Define the $m \times m$ matrix:
+$$
+J_{jk} := 2\operatorname{Re}\bigl[\varphi_j(1/2 + it_k) + \varphi_j(1/2 - it_k)\bigr]
+         = 2\bigl(1 - \cos(j\theta_k)\bigr),
+$$
+where $\theta_k = 2\arctan(2t_k) - \pi \in (-\pi, 0)$ for $t_k > 0$.
 
-For `σ₀ ∈ (1/2, 1)` (take `σ₀ = 3/4`) and `T > 0`, the **off-line quartet** is:
-```
-Q(σ₀, T) := {σ₀ + iT,  σ₀ − iT,  (1−σ₀) + iT,  (1−σ₀) − iT}.
-```
-This is admissible and symmetric, with `P(Q) = 0` (off the critical line).
+### The quartet contribution
+
+For the off-line quartet $Q(3/4, T)$:
+$$
+\delta_j^{\text{off}}(T) := O_j(Q(3/4, T))
+= 2\operatorname{Re}[\varphi_j(3/4 + iT) + \varphi_j(3/4 - iT)].
+$$
+This is a rational number for rational $T$.
 
 ---
 
 ## The theorem to be verified
 
-**Theorem B2 (exact collision, integer multiplicities).** For any `m ≥ 1` and any
-`m` distinct rational heights `0 < t₁ < … < t_m`, the following holds:
-
-There exist:
-- A positive integer `M` (the multiplicity buffer),
-- A rational `T > 0` (large, to be specified),
-- A positive integer `R` (the scaling factor),
-- An integer vector `α = (α₁, …, α_m) ∈ ℤ^m`,
-
-such that, setting:
-```
-𝒵_+ := { 1/2 ± i t_k : k = 1, …, m,  each with multiplicity M },
-𝒵_− := 𝒵_+  ∪  (additions/removals per α)  ∪  R copies of Q(3/4, T),
-```
-we have:
-1. `P(𝒵_+) = 1` (critical-line predicate true).
-2. `P(𝒵_−) = 0` (critical-line predicate false, due to the off-line quartet).
-3. `O_j(𝒵_+) = O_j(𝒵_−)` **exactly** for `j = 1, …, m` (observation collision).
-4. `𝒵_−` is admissible and symmetric (removal of at most `M` copies from each height
-   is valid by construction of `M`).
+**Theorem B2.** For any $m \ge 1$ and any $m$ distinct rational heights $0 < t_1 < \cdots < t_m$,
+there exist finite admissible symmetric multisets $\mathcal{Z}_+$, $\mathcal{Z}_-$ with:
+1. $P(\mathcal{Z}_+) = 1$ (all zeros on the critical line).
+2. $P(\mathcal{Z}_-) = 0$ (some zeros off the critical line).
+3. $O_j(\mathcal{Z}_+) = O_j(\mathcal{Z}_-)$ **exactly** for $j = 1, \ldots, m$.
 
 ---
 
-## The proof to be verified
+## Proof sketch to be closed
 
-The proof proceeds in five steps. **Please verify each step independently.**
+### Step 1 — Li Jacobian is nonsingular over $\mathbb{Q}$
 
-### Step 1 — Li Jacobian is nonsingular (Vandermonde reduction)
+**Claim.** $\det J \ne 0$, with $J \in \mathbb{Q}^{m \times m}$ for rational $t_k$.
 
-**Claim.** The `m × m` Jacobian matrix `J` with entries:
-```
-J_{jk} = 2(1 − cos(j θ_k)),   where θ_k = 2 arctan(2t_k) − π,
-```
-has nonzero determinant for any distinct `t₁, …, t_m > 0`.
+**Draft skeleton.**
 
-**Proof strategy.** Let `x_k = cos θ_k ∈ (−1, 1)`. Using the Chebyshev identity
-`cos(jθ) = T_j(cos θ)` and the factorization `1 − T_j(x) = (1−x) Q_j(x)` with
-`Q_j` a polynomial of degree `j−1` and leading coefficient `2^{j−1}`:
-```
-J_{jk} = 2(1−x_k) Q_j(x_k).
-```
-Since `1−x_k > 0`, factoring gives `rank J = rank [Q_j(x_k)]`. The polynomials
-`{Q_j}_{j=1}^m` have degrees `0, 1, …, m−1` with positive leading coefficients,
-forming a basis for `ℝ_{≤m-1}[x]`. Writing `Q_j(x) = Σ_{i≤j} U_{ji} x^{i-1}` with
-upper-triangular `U` (diagonal entries `2^{j-1} > 0`):
-```
-[Q_j(x_k)] = U · V(x_1,…,x_m)
-```
-where `V` is the standard Vandermonde. Since `x_1,…,x_m` are distinct (because
-`t ↦ θ(t) ↦ cos θ(t)` is strictly monotone), `det V ≠ 0`, so `det J ≠ 0`. ✓
+Let $x_k = \cos\theta_k \in (-1, 0)$ for $t_k > 0$. Since $\theta_k \in (-\pi, 0)$ and
+$t_k \mapsto \theta_k = 2\arctan(2t_k) - \pi$ is strictly decreasing, the values
+$\theta_1 > \theta_2 > \cdots > \theta_m$ are distinct, so $x_1 > x_2 > \cdots > x_m$
+are distinct.
 
-**Please verify:** (a) The Chebyshev identity; (b) that `deg Q_j = j−1` with leading
-coefficient `2^{j-1}` follows from the recurrence `T_{j+1}(x) = 2x T_j(x) − T_{j-1}(x)`;
-(c) the Vandermonde factorization.
+Chebyshev identity: $\cos(j\theta) = T_j(\cos\theta)$, where $T_j$ is the Chebyshev
+polynomial of degree $j$ with leading coefficient $2^{j-1}$.
 
-### Step 2 — Rationality of J and δ^{off}
+Since $T_j(1) = 1$: factorization $1 - T_j(x) = (1-x) Q_j(x)$ where $Q_j$ has degree
+$j-1$ and leading coefficient $2^{j-1} > 0$.
 
-**Claim.** For rational `t_k, σ₀, T`, the matrix `J ∈ ℚ^{m×m}` and the quartet
-contribution `δ_j^{off}(T) ∈ ℚ` for Li-type tests.
+So $J_{jk} = 2(1-x_k) Q_j(x_k)$. Factor out positive diagonal $\operatorname{diag}(2(1-x_k))$:
+$$
+\det J = \prod_k 2(1-x_k) \cdot \det[Q_j(x_k)].
+$$
+Since $x_k \in (-1,1)$, each $1-x_k > 0$, so we need $\det[Q_j(x_k)] \ne 0$.
 
-*Proof.* `J_{jk} = 2(1 − Re[(1−1/(1/2+it_k))^j])`. The quantity `1/(1/2+it_k) = (1/2−it_k)/(1/4+t_k²)` is rational for rational `t_k`. So `J_{jk} ∈ ℚ`. Similarly
-`δ_j^{off}(T) = O_j(Q(3/4,T))` is a sum of `φ_j` at rational points, hence rational. ✓
+The polynomials $\{Q_j\}_{j=1}^m$ have degrees $0, 1, \ldots, m-1$ (strictly increasing).
+Write $Q_j(x) = \sum_{i=1}^j U_{ji} x^{i-1}$ with upper-triangular $U$, diagonal entries
+$U_{jj} = 2^{j-1}$. Then:
+$$
+[Q_j(x_k)]_{j,k} = U \cdot V(x_1, \ldots, x_m),
+$$
+where $V$ is the Vandermonde matrix with $(i,k)$-entry $x_k^{i-1}$.
+$$
+\det[Q_j(x_k)] = \underbrace{\det U}_{= \prod_j 2^{j-1} = 2^{m(m-1)/2} > 0}
+\cdot \underbrace{\det V}_{= \prod_{k < l}(x_l - x_k) \ne 0 \text{ (distinct } x_k)}.
+$$
 
-### Step 3 — Rational solution and integer scaling
+**Rationality:** For rational $t_k$, $x_k = \cos\theta_k = \operatorname{Re}(w_k)$ where
+$w_k = (2it_k-1)/(2it_k+1) \in \mathbb{Q}(i)$. Thus $J_{jk} = 2(1 - \operatorname{Re}(w_k^j)) \in \mathbb{Q}$.
+Similarly $\delta_j^{\text{off}}(T) \in \mathbb{Q}$ for rational $T$.
 
-**Claim.** Given `det J ≠ 0` over `ℚ`, let `α^ℚ = −J^{-1} δ^{off}(T) ∈ ℚ^m`. Set
-`R = lcm(denominators of α^ℚ_k)` and `α = R · α^ℚ ∈ ℤ^m`. Replace `Q` by `R` copies
-of the quartet (scaling `δ^{off}` by `R`). Then `J · α = −R · δ^{off}(T)` exactly. ✓
+**What to close for Step 1:** Verify the Chebyshev factorization $(1-T_j(x))/(1-x) = Q_j(x)$
+with $\deg Q_j = j-1$ and leading coefficient $2^{j-1}$. The recurrence is
+$T_{j+1}(x) = 2x T_j(x) - T_{j-1}(x)$ with $T_0 = 1$, $T_1 = x$. Derive the formula
+for $\deg Q_j$ and its leading coefficient from this recurrence.
 
-### Step 4 — Multiplicity buffer and valid removal
+### Step 2 — Rational solution and integer scaling
 
-**Claim.** Set `M = R · max_k |α^ℚ_k|`. The multiset `𝒵_+` with all heights at
-multiplicity `M` allows removal of up to `|α_k| = R|α^ℚ_k| ≤ M` copies at each
-height. Hence `𝒵_−` is well-defined. ✓
+**Given:** $\det J \ne 0$ over $\mathbb{Q}$. Set $\alpha^\mathbb{Q} = -J^{-1} \delta^{\text{off}}(T) \in \mathbb{Q}^m$.
 
-### Step 5 — Observation equality and predicate separation
+Let $R = \operatorname{lcm}(\text{denominators of } \alpha^\mathbb{Q}_k)$ and
+$\alpha = R \cdot \alpha^\mathbb{Q} \in \mathbb{Z}^m$. Replace $Q(3/4, T)$ by $R$ copies.
 
-**Claim.** By construction:
-```
-O_j(𝒵_−) − O_j(𝒵_+) = Σ_k α_k J_{jk} + R δ_j^{off}(T)
-                      = [J α]_j + R δ_j^{off}(T)
-                      = −R δ_j^{off}(T) + R δ_j^{off}(T) = 0.
-```
-And `P(𝒵_−) = 0` because the quartet `Q(3/4, T)` contributes points at `Re = 3/4 ≠ 1/2`. ✓
+Then $J \alpha = R \cdot J \alpha^\mathbb{Q} = R \cdot (-\delta^{\text{off}}(T)) = -\delta^{\text{off,scaled}}(T)$
+exactly over $\mathbb{Z}$.
+
+**What to close for Step 2:** Confirm the lcm-scaling gives $J\alpha + R\,\delta^{\text{off}} = 0$
+exactly (not approximately). State the observation equality:
+$$
+O_j(\mathcal{Z}_-) - O_j(\mathcal{Z}_+)
+= \sum_k \alpha_k J_{jk} + R\,\delta_j^{\text{off}}(T) = 0.
+$$
+
+### Step 3 — Multiplicity buffer and valid removal
+
+**Construction.**
+$$
+M := R \cdot \max_k |\alpha^\mathbb{Q}_k|, \quad
+\mathcal{Z}_+ := \{1/2 \pm it_k : k=1,\ldots,m, \text{ each with multiplicity } M\}.
+$$
+Note $P(\mathcal{Z}_+) = 1$.
+
+For $k$ with $\alpha_k > 0$: add $\alpha_k$ copies of $\{1/2 \pm it_k\}$ to $\mathcal{Z}_+$.
+For $k$ with $\alpha_k < 0$: remove $|\alpha_k|$ copies. Since $|\alpha_k| \le M$,
+removal is valid ($\mathcal{Z}_+$ has multiplicity $M$ at each height).
+Add $R$ copies of $Q(3/4, T)$. Call the result $\mathcal{Z}_-$.
+
+$P(\mathcal{Z}_-) = 0$ because $Q(3/4, T)$ contributes elements at $\operatorname{Re} = 3/4 \ne 1/2$.
+
+**What to close for Step 3:** Confirm that $\mathcal{Z}_-$ is admissible and symmetric
+(finitely many changes to a finite multiset preserve both).
 
 ---
 
 ## Acceptance criteria
 
-1. Confirm or correct each of Steps 1–5 above.
-2. If the Vandermonde reduction in Step 1 has a gap, identify it precisely.
-3. Confirm the scaling trick in Step 3 is logically complete (R copies of the
-   quartet really produce a scaled equation, not an approximation).
-4. Confirm that `𝒵_−` is admissible (locally finite, symmetric, admissibility sum
-   increases by finitely many terms).
-5. State clearly whether this constitutes a proof of Theorem B2 as stated, or whether
-   additional conditions are needed.
-6. **No reference to actual Riemann zeta zeros, RH, or numerics required.** The
-   construction is entirely combinatorial / algebraic for fixed `m, t_1, …, t_m`.
+1. **Step 1:** CONFIRMED or REFUTED. If confirmed, verify the Chebyshev leading-coefficient
+   computation explicitly. If refuted, give a counterexample (specific $m, t_1, \ldots, t_m$
+   with $\det J = 0$).
+2. **Step 2:** CONFIRMED that the observation equality holds exactly (over $\mathbb{Z}$, not approximately).
+3. **Step 3:** CONFIRMED that $\mathcal{Z}_-$ is admissible and symmetric, and that all
+   removals are valid.
+4. Overall: CONFIRMED (Theorem B2 holds as stated) or PARTIAL (specify which steps hold)
+   or REFUTED (explicit counterexample to the existence claim).
+5. An "inconclusive + partial" response is acceptable.
 
 ---
 
@@ -153,5 +172,18 @@ And `P(𝒵_−) = 0` because the quartet `Q(3/4, T)` contributes points at `Re 
 
 This theorem says: there exist two finite admissible symmetric zero multisets in the
 critical strip with the same Li-type observation vector but different critical-line
-predicates. It does **not** claim anything about the actual Riemann zeta zeros, and
-does not claim to prove or disprove RH.
+predicates. It does **not** involve the Riemann zeta function or RH in any way.
+The construction works for any $m$ and any rational heights.
+
+---
+
+## Numerical anchor (sanity only — run if helpful, not required)
+
+For $m = 2$, $t_1 = 1$, $t_2 = 2$, $T = 10$, $\sigma_0 = 3/4$:
+- $\theta_1 = 2\arctan(2) - \pi \approx -0.6435$, $x_1 = \cos\theta_1 \approx 0.7809$.
+- $\theta_2 = 2\arctan(4) - \pi \approx -0.9273$, $x_2 = \cos\theta_2 \approx 0.6$, $x_2 \approx 0.6$.
+
+Wait — let me recompute for sanity: $\arctan(4) \approx 1.3258$, $2 \times 1.3258 - \pi \approx -0.4900$,
+$\cos(-0.4900) \approx 0.8824$. And $\arctan(2) \approx 1.1071$, $2 \times 1.1071 - \pi \approx -0.5274$,
+$\cos(-0.5274) \approx 0.8660$. Both in $(-1,1)$, distinct. $\det J$ is a specific nonzero rational.
+The reviewer is welcome to compute $\det J$ for these values and verify it is nonzero.

@@ -181,6 +181,67 @@ any premise is above its inspected evidence level.
 - **Privacy:** no personal absolute paths, company names, or internal hosts in any file
   (proxy/host may appear only in a shell command, never written to a file).
 
+## Outsource-prompt pre-send checklist (mandatory)
+
+Before sending any `outsource/` problem for external review, self-check these five failure
+modes (each has caused rejected or rewritten prompts in the sibling repo). Verify
+load-bearing claims with a quick script, not from memory.
+
+1. **No vacuous target.** The goal must not be satisfiable by a trivial free-parameter
+   choice. Pin every comparison scale to a fixed object (e.g., a specific theorem number,
+   a specific multiset, a specific polynomial identity). If the problem says "prove X or
+   find an obstruction," both routes must lead to a decisive outcome.
+
+2. **No dropped term.** Any identity you state in the problem must be numerically or
+   symbolically verified end-to-end before sending. Watch for: boundary contributions in
+   integration-by-parts, off-diagonal coupling in block matrices, sub-leading terms in
+   asymptotic expansions that change the conclusion.
+
+3. **Cite only what is proved.** Label every "black box" with its exact source (theorem
+   number, edition, author). Do not write "by a standard theorem" — write "Titchmarsh §9.4
+   Theorem X". Use `baseline/` source-verified literature only. If the theorem number is
+   uncertain, make that uncertainty the explicit task for the reviewer (as in OB-01).
+
+4. **No false dichotomy.** If offering "prove X / prove obstruction," also allow an honest
+   "inconclusive + precise partial localization" outcome. A reviewer who can close only
+   two of three steps is providing real value; the problem statement must not force a
+   pass/fail binary.
+
+5. **Self-contained.** Every symbol must be defined in the problem file itself. No "see
+   proof.md," "see statement.md," or "see baseline/." The reviewer has access only to the
+   outsource file and standard references. Inline all formulas, all constants, all
+   domain restrictions. Numerical anchors (clearly labeled "sanity only, not an input")
+   help reviewers detect errors without constituting proof inputs.
+
+### Minimum outsource file structure
+
+```
+# Problem OB-NN — Short title
+
+**Type:** [pure analysis / combinatorics / PDE / etc.]
+**Non-circularity:** [explicit statement that RH, zero locations, fitted ordinates are
+  not assumed — or explanation of why this problem does not touch RH at all]
+
+## All definitions (self-contained — everything is here)
+[Every symbol defined, every formula written out in full]
+
+## The theorem / claim to be verified
+[Complete statement]
+
+## Proof skeleton to be closed
+### Step 1 — [name]
+[Draft with "What to close for Step 1:" subsection]
+### Step 2 — ...
+
+## Acceptance criteria
+[Numbered list; allow CONFIRMED / PARTIAL / REFUTED / inconclusive outcomes]
+
+## Numerical anchor (sanity only)
+[One concrete computable example the reviewer can sanity-check]
+```
+
+---
+
 ## What this repository does NOT do
 
 - Does not prove, disprove, or claim progress toward RH. Titles/abstracts must not imply it.
