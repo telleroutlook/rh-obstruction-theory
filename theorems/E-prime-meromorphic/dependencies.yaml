@@ -1,7 +1,7 @@
 # Dependencies — Theorem E' (E-prime-meromorphic)
 
 theorem_id: E-prime-meromorphic
-status: PROOF-DRAFT (E'-neg); OPEN (E'-pos)
+status: PROOF-DRAFT (E'-neg CONFIRMED-after-correction OB-09; E'-pos corrected PROOF-DRAFT OB-11)
 
 dependencies:
 
@@ -37,7 +37,11 @@ dependencies:
     peer_reviewed: true
     gate_a_status: CLEAR
     role: >
-      |W(iR)| -> infty computation; same Hadamard lower bound as E-neg §3.
+      Genus-1 paired canonical product for the even factor A(z)=prod(1-z^2/gamma_n^2)
+      in the W=z^2 A/B structure (E'-neg §2/§3). NOTE: the earlier "|W(iR)|->infty
+      computation" role is WITHDRAWN -- OB-09 REFUTED the |W(iR)|->infty claim (false in
+      general; separation now uses a Cauchy coefficient estimate, not a growth-to-infinity
+      argument).
 
   - id: SUZUKI-COR6
     statement: >
@@ -70,7 +74,12 @@ dependencies:
     gate_a_status: OPEN
     gate_a_note: "Citation by theorem number not verified; standard result."
     role: >
-      E'-pos: normal family theorem for meromorphic setting (replaces Montel in E-pos).
+      Context only -- NOT load-bearing. OB-11 established that on the holomorphy domain
+      Omega, hypothesis (LB) gives local uniform boundedness on an open neighborhood of
+      each compact, so **Montel suffices (Conway VII.2.9); Marty is NOT needed**. Kept
+      here only to record that the spherical/Marty route was considered and found
+      unnecessary. The genuine simple pole at each p in the polar set is recovered by a
+      contour/residue argument on 1/F_{n_j} (E'-pos proof step 3), not by Marty normality.
 
 gate_a_status: OPEN
 gate_a_note: >

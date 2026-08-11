@@ -2,7 +2,7 @@
 
 **Theorem ID:** E-prime-meromorphic  
 **Program ref:** EXT-3 (extension of Theorem E to Suzuki meromorphic target)  
-**Status:** PROOF-DRAFT (E'-neg PROOF-DRAFT; E'-pos open; meromorphic Hadamard lemma needed)
+**Status:** PROOF-DRAFT (E'-neg CONFIRMED-after-correction OB-09; E'-pos corrected PROOF-DRAFT OB-11; Lemma E'.1 CONFIRMED OB-06. Suzuki-family ingredients (LB)/(ZT_ℂ)/(PL⁺)/(UG) OPEN. Gate-A package OB-30)
 
 ---
 
