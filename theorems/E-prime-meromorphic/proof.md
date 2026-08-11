@@ -10,14 +10,16 @@
 
 ## §1. Meromorphic Hadamard uniqueness — CONFIRMED AFTER CORRECTION
 
-**Lemma E'.1.** Let `F`, `G` be meromorphic functions with `T(r,F) = O(r)`,
-`T(r,G) = O(r)`, with identical complete zero divisors (`ord_a F = ord_a G` for
-all a), with `F/G` even (both F,G odd suffices), and `F(w₀) = G(w₀) ≠ 0` at some
-non-pole `w₀`. Then `F = G`.
+**Lemma E'.1.** Let `F`, `G` be meromorphic functions of **conventional order ≤ 1**
+(for every `ε>0`, `T(r,·) ≤ C_ε r^{1+ε}+C_{0,ε}`; this includes the maximal-type case
+`T ≍ r log r`, i.e. `W` itself — NOT the linear `O(r)` bound), with identical complete zero
+divisors (`ord_a F = ord_a G` for all a), with `F/G` even (both F,G odd suffices), and
+`F(w₀) = G(w₀) ≠ 0` at some non-pole `w₀`. Then `F = G`.
 
-*Proof (OB-06 referee §3).* H := F/G is entire, zero-free, `T(r,H) = O(r)`, even.
-By Hadamard: `H = e^{az+b}`. Evenness forces `a = 0`. Normalization forces `e^b = 1`.
-Hence `H ≡ 1`. ☐ (Conway, *Functions of One Complex Variable I*, 2nd ed., Thm XI.3.4.)
+*Proof (OB-06 referee §3).* H := F/G is entire, zero-free, of conventional order ≤ 1
+(`T(r,H) ≤ T(r,F)+T(r,1/G)+O(1)`, First Main Theorem), even. A zero-free entire function of
+order ≤ 1 is `H = e^{az+b}` (Hadamard, Conway XI.3.4). Evenness forces `a = 0`. Normalization
+forces `e^b = 1`. Hence `H ≡ 1`. ☐
 
 *Correct canonical product.* For paired zeros `±z_j` with `Σ|z_j|^{-2} < ∞`:
 ```
@@ -109,10 +111,11 @@ from Σ y_m < ∞ and the dominated-derivative bound `|d/dc·b_m(c)^r| ≤ C·y_
 `A_{u(c),c}(z) − A(z) = O((z−w₀)^J)`. Multiplying by `z²/B(z)` (holomorphic, nonzero
 at w₀) gives the J-jet matching `(F^{(c)})^{(j)}(w₀) = W^{(j)}(w₀)`, j = 0,…,J−1. ✓
 
-**Membership + distinctness.** For small `c < 0`: `F^{(c)}` is odd, meromorphic with
-`T(r,F^{(c)}) = O(r)` (via `N_μ(r) = O(r)` from Jensen + `μ_n ≍ γ_n`), keeps the
-frozen simple zeros ±γ_1,…,±γ_k, has exactly the poles of W (assumption (A2) prevents
-collisions), and satisfies the J-jet condition. And `F^{(c)} ≠ W`: equality would
+**Membership + distinctness.** For small `c < 0`: `F^{(c)}` is odd, meromorphic of
+conventional order ≤ 1 (`T(r,F^{(c)}) ≍ r log r`, matching `W`: the poles of `B` give
+`N(r,∞) ≍ (1/2π)r log r`; the perturbed zeros `μ_n ≍ γ_n` add the same order — NOT `O(r)`),
+keeps the frozen simple zeros ±γ_1,…,±γ_k, has exactly the poles of W (assumption (A2)
+prevents collisions), and satisfies the J-jet condition. And `F^{(c)} ≠ W`: equality would
 force `A_{u(c),c} ≡ A`, but `μ_n(c) = γ_n(1+c/(n−k)) < γ_n` for `c < 0`, n > k+J.
 Hence `F^{(c)} ∈ 𝔐_Suz` and `F^{(c)} ≠ W`. ✓ (OB-09 referee §7.2)
 
@@ -153,7 +156,9 @@ REFUTED. Two independent counterexamples; corrected hypotheses below.]**
   `𝒫`, is a matched zero) — closes pole cancellation;
 - **(PL⁺)** each `p ∈ 𝒫` has a disk with exactly one simple pole `p_n → p` and no zeros;
 - **(N)** normalization;
-- **(UG)** uniform `T(r,F_n) ≤ Cr + C₀`, constants independent of n — closes the growth gap.
+- **(UG)** uniform conventional-order bound: `∀ε>0`, `T(r,F_n) ≤ C_ε r^{1+ε}+C_{0,ε}`,
+  constants independent of n — closes the growth gap. (Exponent `r^{1+ε}`, NOT linear
+  `Cr+C₀`: `T(r,W) ≍ r log r`, so a linear bound would exclude `W` — L1/L14, OB-30 re-scan.)
 
 **Corrected proof (OB-11 §6, PROOF-DRAFT):**
 1. **Montel + diagonal (Ω).** (LB) ⟹ subsequence `F_{n_j} → G` locally uniformly on Ω,
@@ -164,8 +169,10 @@ REFUTED. Two independent counterexamples; corrected hypotheses below.]**
    a simple pole at `p` (not removable — the log-derivative contour integral equals −1,
    impossible for a removable point). (PL⁺) supplies the needed no-zero-in-disk. Also
    gives spherical local uniform convergence across `p`.
-4. **Order transfer.** Ahlfors–Shimizu characteristic + (UG) ⟹ `T(r,G) = O(r)` for the
-   meromorphic extension. (This is the step that fails without a *uniform* bound.)
+4. **Order transfer.** Ahlfors–Shimizu characteristic + (UG) ⟹ `T(r,G) ≤ C_ε r^{1+ε}+C_{0,ε}`
+   (conventional order ≤ 1) for the meromorphic extension. (This is the step that fails
+   without a *uniform* bound; and the envelope must be `r^{1+ε}`, not linear, else it
+   excludes `W`.)
 5. **Identify.** `G, W` share the complete divisor, `G/W` even, `G(w₀)=W(w₀)≠0` ⟹
    by Lemma E'.1, `G ≡ W`. Subsequence principle upgrades to full-sequence convergence.
 

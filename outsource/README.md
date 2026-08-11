@@ -42,6 +42,7 @@ problem.
 | OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | RESOLVED — GATE-A CONDITIONAL→PASS, 8 mods integrated 2026-08-11 (D → INDEPENDENTLY-CHECKED, scope-extension positioning) |
 | OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | RESOLVED — GATE-A CONDITIONAL→PASS, mod1–mod6 integrated 2026-08-11 (C → INDEPENDENTLY-CHECKED, one-sided corollary of Andersson Thm 5) |
 | OB-29 | `OB-29-E-gate-a-review-package.md` | E | **GATE-A**: independent review of the compactness (finite-evidence) theorem (Links A–D + Q1–Q7; E-neg per-`N` non-identifiability via fixed-`N` IFT + E-pos sufficiency package; Ξ-not-ξ̂ normalization; per-`N`-not-sequence framing; H-uorder/H-div honesty) | OPEN — send for review |
+| OB-30 | `OB-30-Eprime-gate-a-review-package.md` | E' | **GATE-A**: independent review of the meromorphic (Suzuki-target) compactness theorem (Links A–D + Q1–Q7; E'-neg per-`(k,J)` non-identifiability via `w₀`-jet IFT + E'-pos corrected sufficiency; W-odd parity + γ_n-are-zeros; Montel-not-Marty; T(r,W)≍r log r conventional-order envelope) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -537,6 +538,31 @@ non-circularity (`γ_n` reality is motivation, never used); Q2 the `Ξ`/`ξ̂`/`
 normalization discipline; Q3 per-`N`-vs-sequence framing (L24); Q4 E-pos honesty
 ((H-uorder) must be `r^{1+ε}` not linear finite-type per L1/L14, (H-div) two-sided, both
 unproved-for-CCM). Passed PROMPT_LINT (L1/L14/L17/L18/L19/L21/L24 + self-containment).
+
+## Seventh Gate-A push OB-30 (drafted 2026-08-11) — E' meromorphic (Suzuki-target) companion
+
+Applies the Gate-A template to E-prime-meromorphic (the Suzuki `W=z²ξ/ξ'` companion of E).
+E' had already survived three targeted rounds (OB-06 parity/structure, OB-09 E'-neg, OB-11
+E'-pos); this is the whole-chain verdict. Two pre-send self-audits before shipping:
+- **Metadata cleanup:** reconciled stale status/dependency lines with the OB-06/09/11
+  corrections — statement top status ("E'-pos open" → corrected PROOF-DRAFT); dependency
+  roles for MARTY ("replaces Montel" → **Montel suffices, Marty not needed**, OB-11) and
+  HADAMARD-PRODUCT-XI ("|W(iR)|→∞" → **REFUTED**, OB-09); limitations/novelty/checker-README
+  all rewritten to the post-correction reality.
+- **LOAD-BEARING fix (L1/L14, THIRD occurrence):** E' used a *linear* `T(r,F)=O(r)` /
+  `Cr+C₀` characteristic for the meromorphic target `W`. But `W`'s poles are the zeros of
+  `ξ'`, density `~(r/2π)log r`, so `T(r,W) ≍ r log r` — order 1 but **maximal type**, NOT
+  `O(r)`; the linear bound excludes `W` itself and makes the class vacuous (the meromorphic
+  analogue of the entire-`Ξ` error OB-14 fixed). Script-verified `N(r,∞)/r → ∞`
+  (`0.65→1.01→1.38`). Fixed every occurrence to the conventional-order envelope
+  `T(r,·) ≤ C_ε r^{1+ε}+C_{0,ε}` (method class, Lemma E'.1, (UG), order-transfer step,
+  membership). **This was a re-scan miss** — the L14 fix from OB-14 (E) was never propagated
+  to E'; PROMPT_LINT L14 now carries an explicit RE-SCAN OBLIGATION and the whole
+  `theorems/*/` corpus was re-grepped (clean: only the corrective notes remain).
+Four links + seven Gate-A questions: Q1 non-circularity, Q2 parity (W odd, γ_n are zeros),
+Q3 `W`/`Ξ`/`ξ̂` normalization, Q4 per-`(k,J)` framing, Q5 E'-pos honesty (conventional-order
+(UG), Suzuki ingredients OPEN), Q6 citations, Q7 verdict. Passed PROMPT_LINT
+(L1/L2/L3/L9/L14/L17/L18/L19/L21/L24 + self-containment).
 
 ## What a returned verification should contain
 

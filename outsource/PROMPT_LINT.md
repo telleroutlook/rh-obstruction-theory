@@ -121,6 +121,15 @@ exponential type*). A uniform *linear* bound transfers to `T(r,Target) ≤ Cr+C_
 finite exponential type — **incompatible with Ξ**, which has infinite type
 (`log|Ξ(iy)| ∼ (y/2)log(y/2)`), making the theorem vacuous (OB-14 §4.3). This is the L1
 error wearing a "uniform bound" disguise; it bit the E-pos fix and had to be re-corrected.
+**RE-SCAN OBLIGATION (hit again OB-30, E'):** this error was found a THIRD time in
+E-prime-meromorphic, which used a *linear* `T(r,F)=O(r)` for the **meromorphic** Suzuki
+target `W=z²ξ/ξ'`. `W`'s poles are the zeros of `ξ'`, density `~(r/2π)log r`, so
+`T(r,W) ≍ r log r` — order 1 but **maximal type**, NOT `O(r)`; the linear bound excludes `W`
+itself. When you fix this in one theorem, GREP EVERY `theorems/*/` file for `T(r`, `O(r)`,
+`Cr+C_0`, "order 1", "Nevanlinna" and check each target's actual type: entire `Ξ` (infinite
+exp type) AND meromorphic `W` (`r log r`) both violate a linear characteristic. A target
+with poles of density `d(r)` has `T(r) ≳ ∫ d(t)/t dt`; verify by script before writing any
+linear bound.
 (c) **Identity.** Same complete divisor + one-point normalization only give `G = Target·H`
 with `H` zero-free (`H(w₀)=1`); they do NOT force `H≡1` without the order envelope in (a)/(b).
 (d) **Divisor convergence must be two-sided + multiplicity-complete.** A one-sided

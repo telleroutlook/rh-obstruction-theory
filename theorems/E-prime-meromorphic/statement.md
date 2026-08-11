@@ -53,7 +53,13 @@ meromorphic target W.
 
 **Method class 𝔐_Suz.** A method `P ∈ 𝔐_Suz` constructs a sequence of meromorphic
 functions `(F_n)` satisfying finite evidence `ℰ_N^{mer}`:
-- meromorphic of order 1 (Nevanlinna characteristic T(r,F) = O(r));
+- meromorphic of **(conventional/Nevanlinna) order ≤ 1** — i.e. for every `ε>0`,
+  `T(r,F) ≤ C_ε r^{1+ε} + C_{0,ε}`. **NOT** the linear/finite-type bound `T(r,F)=O(r)`:
+  the target `W = z²ξ/ξ'` has poles at the zeros of `ξ'(1/2−iz)`, whose counting density is
+  `~(r/2π)log r`, so `N(r,∞) ≍ (1/2π) r log r` and hence `T(r,W) ≍ r log r` — order 1 but
+  **maximal type**, exactly as `Ξ` has order 1 but infinite exponential type. A linear
+  `O(r)` characteristic would exclude `W` itself and make the class vacuous
+  (L1/L14 discipline; the analogue of OB-14's E fix, re-scanned into E' by OB-30);
 - poles at the zeros of `ξ'(1/2−iz)` (not at γ_n — see §1 parity correction);
 - **ODD**: `F_n(−z) = −F_n(z)` (matching W's true parity);
 - normalization condition matching `W` at one non-pole, non-zero base point `w₀`;
@@ -70,7 +76,8 @@ functions cannot converge locally uniformly to W.
 ## §3. Meromorphic Hadamard uniqueness (the key lemma — CONFIRMED AFTER CORRECTION)
 
 **Lemma E'.1 (meromorphic Hadamard uniqueness — corrected, OB-06).** Let `F`, `G` be
-meromorphic functions with `T(r,F) = O(r)` and `T(r,G) = O(r)` (Nevanlinna order ≤ 1),
+meromorphic functions of **conventional order ≤ 1** (for every `ε>0`,
+`T(r,·) ≤ C_ε r^{1+ε}+C_{0,ε}`; this includes the maximal-type case `T ≍ r log r`, i.e. `W`),
 with:
 - identical complete zero divisors: `ord_a F = ord_a G` for every `a ∈ ℂ`;
 - `F/G` is an even function (in particular, F and G both even suffices);
@@ -79,10 +86,11 @@ with:
 Then `F = G`.
 
 *Proof (OB-06 referee §3).* The quotient `H := F/G` is an entire function (all
-poles and zeros cancel) with `T(r,H) = O(r)`.  Since H is a zero-free entire
-function of Nevanlinna order ≤ 1, Hadamard's theorem (Conway, XI.3.4) gives
-`H(z) = e^{az+b}`.  By evenness of H: `H(−z)/H(z) = e^{−2az} = 1` for all z,
-hence `a = 0`.  The normalization `H(w₀) = 1` gives `e^b = 1`, so `H ≡ 1`. ☐
+poles and zeros cancel) of **conventional order ≤ 1** (`T(r,H) ≤ T(r,F)+T(r,1/G)+O(1) ≤
+2C_ε r^{1+ε}+O(1)`, First Main Theorem).  A zero-free entire function of order ≤ 1 is
+`H(z) = e^{az+b}` (Hadamard, Conway XI.3.4: genus ≤ 1, no zeros ⟹ the product is empty and
+the exponential polynomial has degree ≤ 1).  By evenness of H: `H(−z)/H(z) = e^{−2az} = 1`
+for all z, hence `a = 0`.  The normalization `H(w₀) = 1` gives `e^b = 1`, so `H ≡ 1`. ☐
 
 *Correct canonical product (OB-06 referee §3.3).* For paired symmetric zeros `±z_j`
 with `Σ|z_j|^{-2} < ∞`, the correct convergent paired product is:
@@ -159,8 +167,9 @@ insufficient. Two independent gaps, each with an explicit counterexample:
    Counterexample: a rational-multiplier family `F_n = W·H·Q_n` whose factors put a
    double zero at `±p` (killing W's simple pole there) while moving the pole to `±p_n`;
    it satisfies every stated hypothesis but its limit `W·H` has p removed from its polar
-   divisor. This gap is independent of the growth gap (the multipliers here keep
-   `T(r,F_n) = O(r)` uniformly).
+   divisor. This gap is independent of the growth gap (the rational multipliers `Q_n` are
+   `O(1)`-degree, so they keep the same conventional order as `W`, `T(r,F_n) ≍ r log r`
+   uniformly — well within any `r^{1+ε}` envelope).
 
 **Corrected hypotheses (OB-11 §5).** Replace (H'-bound)/(H'-tail) etc. by:
 
@@ -176,9 +185,13 @@ insufficient. Two independent gaps, each with an explicit counterexample:
   `ρ_p > 0` with `D̄(p,ρ_p)` free of other W-zeros/poles, such that for large n, `F_n`
   has exactly one simple pole `p_n → p` in the disk and **no zeros** there.
 - **(N) Normalization** at a non-pole, non-zero `w₀` with `F_n(w₀) → W(w₀) ≠ 0`.
-- **(UG) Uniform Nevanlinna bound.** Constants `C, C₀, r₀` independent of n with
-  `T(r, F_n) ≤ Cr + C₀` for all n, `r ≥ r₀`. (Closes the growth gap — a per-n order
-  bound with n-dependent constant does NOT transfer to the limit.)
+- **(UG) Uniform conventional-order bound.** For every `ε>0` there are constants
+  `C_ε, C_{0,ε}, r_ε` **independent of n** with `T(r, F_n) ≤ C_ε r^{1+ε} + C_{0,ε}` for all
+  n, `r ≥ r_ε`. (Closes the growth gap — a per-n bound with n-dependent constant does NOT
+  transfer to the limit.) **The exponent must be `r^{1+ε}`, NOT linear `Cr+C₀`**: the target
+  `W` has `T(r,W) ≍ r log r` (poles = zeros of `ξ'`, density `~(r/2π)log r`), so a uniform
+  *linear* bound would exclude `W` itself and make the hypothesis vacuous — the meromorphic
+  analogue of the L1/L14 finite-type error OB-14 fixed for the entire target `Ξ`.
 
 **Corrected Theorem E'-pos.** Under (P), (LB), (ZT.1), (ZT_ℂ), (PL⁺), (N), (UG): there
 is a subsequence `F_{n_j} → W` locally uniformly on Ω; if every subsequence has a
