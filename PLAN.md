@@ -184,7 +184,7 @@ Two tracks run in parallel:
 |---|---|---|---|
 | `outsource/OB-01-D-heat-trace-log-singularity.md` | D | Abel-Plana `Z_ζ` lemma + Seeley-DeWitt no-log | **WRITTEN** (2026-08-11) |
 | `outsource/OB-02-B2-integer-collision.md` | B2 | Vandermonde rank + integer-sign construction | **CONFIRMED** (2026-08-11; four notation corrections applied — see solutions/OB-02) |
-| `outsource/OB-03-E-tail-estimate.md` | E §3 | Hadamard growth + Vandermonde IFT for non-uniqueness | **WRITTEN** (2026-08-11) |
+| `outsource/OB-03-E-tail-estimate.md` | E §3 | Hadamard growth + Vandermonde IFT for non-uniqueness | **CONFIRMED** (2026-08-11; 5 corrections applied — see solutions/OB-03) |
 | `outsource/OB-04-G-prop-G3-adversary.md` | G Prop. G.3 | `𝒵_smooth` adversary + O_θ indistinguishability | **WRITTEN** (2026-08-11) |
 
 ### Target evidence levels after closure

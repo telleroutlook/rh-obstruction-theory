@@ -1,6 +1,6 @@
 # Proof — Theorem E (finite evidence ⇏ compact convergence; sufficient package)
 
-**Status:** PROOF-DRAFT  
+**Status:** PROOF-DRAFT (E-neg quantitative §3 CONFIRMED by OB-03 external review 2026-08-11, with corrections applied)  
 **Analytic / finite separation:** purely analytic; no finite certificate used.
 
 ---
@@ -181,111 +181,101 @@ normal-family accumulation point need not equal `Ξ`.**
 
 ---
 
-## §3. Quantitative tail estimate — PROOF-DRAFT (strategy complete)
+## §3. Quantitative tail estimate — CORRECTED (OB-03 external review, 2026-08-11)
 
-**Goal.** For any `ε > 0` and any fixed `N`, there exists an entire function `F`
-satisfying all conditions (1)–(7) of `ℰ_N` such that:
-```
-sup_{|z| ≤ R_0} |F(z) − Ξ(z)| ≥ ε,
-```
-for some `R_0 = R_0(N, ε)` (which may depend on `N` and `ε`).
+**[CORRECTIONS from OB-03 referee report]**
 
-**Construction (tail product with prescribed Taylor coefficients).**
+The original §3 had five errors; the theorem is still CONFIRMED but only under
+the corrected proof:
 
-Fix any `c_0 > 0`.  For `n > k_N`, define:
-```
-μ_n := γ_n (1 + c_0/(n − k_N)),   n > k_N.
-```
-Summing: `Σ_{n>k_N} μ_n^{-2} ≤ Σ γ_n^{-2} < ∞` (order-1 convergence). ✓
+1. **c_0 must be sufficiently small** — IFT provides δ(k,J,{γ_n}) > 0; the result holds for 0 < c_0 < δ.
+2. **Taylor formula was wrong** — Taylor coefficients of a product are elementary symmetric functions,
+   not individual power sums. Matching conditions must be stated via the **logarithmic power sums** P_r.
+3. **Jacobian is exact Vandermonde** in (a_1,...,a_J) = (γ_{k+1}^{-2},...,γ_{k+J}^{-2}) — no
+   unspecified "bounded factor." The (r,ℓ)-entry is r·a_ℓ^{r-1} exactly (from differentiating P_r).
+4. **Step C separation argument was wrong** — the ratio at R = γ_{k_N+1} is invalid because the
+   free zeros are adjusted by the IFT step. The valid separation uses the **Cauchy coefficient estimate**.
+5. **No N→∞ passage is needed or available** — the result holds for one fixed N.
 
-The modified product:
-```
-H(z) := Π_{n>k_N} (1 − z²/μ_n²)
-```
-is entire of order 1.  Define (before normalizing Taylor coefficients):
-```
-F_0(z) := Ξ(0) · Π_{n=1}^{k_N}(1−z²/γ_n²) · H(z).
-```
-`F_0` satisfies conditions (1)–(6) of `ℰ_N`.  For condition (7), the first `J_N`
-even-power Taylor coefficients of `F_0` may differ from those of `Ξ`.
+**Corrected proof (for one fixed N; abbreviate k := k_N, J := J_N).**
 
-**Matching the Taylor coefficients.** Multiply `F_0` by a correction factor:
+**Reciprocal-square variables.** Set a_m := γ_{k+m}^{-2} for m ≥ 1. Then a_1 > a_2 > ... > 0
+with Σ a_m < ∞. Freeze the tail:
 ```
-F(z) := F_0(z) · e^{L(z)},
+b_m(c) := a_m · (1 + c/m)^{-2},    m > J,
 ```
-where `L(z) = a_1 z^2 + a_2 z^4 + … + a_{J_N} z^{2J_N}` is a polynomial
-(even, degree `2J_N`), chosen so that `F^{(2j)}(0) = Ξ^{(2j)}(0)` for `j = 0,…,J_N`.
+corresponding to zero μ_{k+m}(c) = γ_{k+m}(1 + c/m) > γ_{k+m}.
 
-Since `F` is the product of an order-1 entire function and `e^{L(z)}` (order `J_N`
-as a polynomial exponential), `F` has order `max(1, J_N)`.  For the purpose of
-satisfying condition (1) of `ℰ_N` (order 1), this works only if `J_N ≤ 1`.
+**The matching system.** Let u = (u_1,...,u_J) be the first J free reciprocal squares
+(u_ℓ ≈ a_ℓ). The log-power-sum matching conditions are:
+```
+Φ_r(u, c) := Σ_{ℓ=1}^{J} u_ℓ^r  +  Σ_{m>J} b_m(c)^r  −  Σ_{m≥1} a_m^r  =  0,    r = 1,...,J.
+```
+These are exactly the conditions P_r(F_c) = P_r(Ξ), ensuring F_c^{(2j)}(0) = Ξ^{(2j)}(0)
+for j = 0,...,J (by the logarithmic series log(F_c/C) = −Σ_{r≥1} z^{2r}/r · P_r(F_c)).
 
-**Resolution for general `J_N`:** Condition (1) requires order exactly 1.  The
-exponential correction `e^{L(z)}` with `deg L = 2J_N > 2` raises the order.
-The correct fix is to absorb the correction into the **Hadamard factor** `e^{az+b}`
-(which is order 1).  Since `F_0` is already even and `L(z)` is even, we can write:
+**IFT application.** At u = u^0 = (a_1,...,a_J), c = 0 we have Φ(u^0, 0) = 0. The Jacobian:
 ```
-F(z) := F_0(z) · e^{a z^2}   (a single free parameter)
+∂Φ_r/∂u_ℓ (u^0, 0)  =  r · a_ℓ^{r-1}.
 ```
-and use `a` to match only ONE Taylor coefficient (condition on `F''(0)`).
-The remaining `J_N − 1` Taylor conditions are met by choosing `J_N − 1`
-additional free tail zeros `μ_{n_1}, …, μ_{n_{J_N-1}}` beyond `k_N`.
+This gives det(D_u Φ) = (∏_{r=1}^{J} r) · ∏_{1≤p<q≤J}(a_q − a_p) ≠ 0 (exact scaled Vandermonde;
+no "bounded factor"). The map Φ is C^1 (real-analytic) on a neighborhood: the series
+Σ_{m>J} b_m(c)^r and all c-derivatives converge uniformly since |K_{r,q}| a_m^r m^{-q}
+is dominated by Σ a_m^r < ∞.
 
-This is a `J_N`-dimensional linear system (Jacobian of Taylor coefficients with
-respect to the free zeros), which is generically nonsingular (by the same Vandermonde
-argument as in B2 §4.3).  For small `c_0`, the solution exists by the implicit
-function theorem.  The resulting `F` has order 1 and satisfies all of `ℰ_N`.
+IFT gives δ > 0 and a unique C^1 map u(c) for |c| < δ with u(0) = u^0, Φ(u(c), c) = 0.
 
-**Non-equivalence with Ξ.** With the construction above, `F ≠ Ξ`: the tail zeros
-`(μ_n)_{n>k_N}` differ from `(γ_n)_{n>k_N}` by a definite amount for each `n`.
-In particular, the ratio:
+**Definition of F_c.** For 0 < c < δ:
 ```
-F(Ri) / Ξ(Ri) = e^{aR^2(-1)} · Π_{n>k_N} [(1 + R²/μ_n²) / (1 + R²/γ_n²)],
+F_c(z) := C · ∏_{n=1}^{k}(1 − z²/γ_n²) · ∏_{ℓ=1}^{J}(1 − u_ℓ(c)z²) · ∏_{m>J}(1 − b_m(c)z²).
 ```
-differs from 1 by a product that is real and bounded away from 1 for appropriate
-choices of `R` (specifically, `R ≈ μ_{k_N+1}` where the first modified zero
-contributes a significant factor).
+Entire (Σ b_m(c) ≤ Σ a_m < ∞), even, real on ℝ, all zeros real, first k positive zeros = γ_1,...,γ_k,
+F_c(0) = C, and Taylor matching holds by construction. ✓
 
-**Quantitative bound.** For `R = γ_{k_N+1}`:
-```
-(1 + R²/μ_{k_N+1}²) / (1 + R²/γ_{k_N+1}²)
-= (1 + γ_{k_N+1}²/μ_{k_N+1}²) / 2
-= (1 + (1 + c_0)^{-2}) / 2.
-```
-This factor equals `(1 + (1+c_0)^{-2})/2 < 1` for `c_0 > 0`, so the ratio
-`F(Ri)/Ξ(Ri)` is bounded strictly below 1 by a `c_0`-dependent constant.
+**Order exactly 1.** Upper bound: using μ_n(c) > γ_n ≥ dn for n ≥ n_0, the log max modulus is O(r)
+by comparison with ∫ log(1+(r/(dx))²) dx. Lower bound: γ_n ≤ r/(1+c) implies μ_n(c) ≤ r, so
+|F_c(ir)| ≥ C · 2^{N_γ(r/(1+c))} and N_γ(r/(1+c)) → ∞ by (1.1). Hence order exactly 1. ✓
 
-**Self-contained proof that `|Ξ(Ri)| → ∞`.**
-By the Hadamard factorization `Ξ(z) = Ξ(0) · ∏_{n≥1}(1 − z²/γ_n²)`, at `z = Ri`:
-```
-|Ξ(Ri)| = Ξ(0) · ∏_{n≥1}(1 + R²/γ_n²).
-```
-Every factor `(1 + R²/γ_n²) ≥ 1`, with equality only at `R = 0`.  For any fixed
-`M`, choose `N` such that `γ_1, …, γ_N ≤ R` (i.e. `N ∼ R log R / 2π` by
-von Mangoldt); then:
-```
-∏_{n=1}^{N}(1 + R²/γ_n²) ≥ 2^N → ∞   as R → ∞.
-```
-Hence `|Ξ(Ri)| → ∞` as `R → ∞`, with no external reference needed.
+**NOTE on growth law (nomenclature correction from OB-03):** The hypothesis stated in the outsource
+file was γ_n ~ (n/2π)log(n/2π). The referee notes this is NOT the Riemann–von Mangoldt inversion
+(which gives γ_n ~ 2πn/log n); it is treated as an abstract hypothesis. The counting function
+under this hypothesis is N_γ(r) ~ 2πr/log r, not r·log r/(2π). This is corrected in the
+outsource file's §1.1 note; it does not affect the E-neg theorem since γ_n is treated axiomatically.
 
-The absolute difference therefore satisfies:
+**F_c ≠ Ξ (via nonzero leading unmatched coefficient).** Define:
 ```
-|F(Ri) − Ξ(Ri)| ≥ |Ξ(Ri)| · |1 − F(Ri)/Ξ(Ri)| ≥ c(c_0) · |Ξ(Ri)| → ∞.
+Δ_{J+1}(c) := Σ_{ℓ=1}^{J} u_ℓ(c)^{J+1}  +  Σ_{m>J} b_m(c)^{J+1}  −  Σ_{m≥1} a_m^{J+1}.
 ```
-For any `ε > 0`, choose `R_0` large enough; then `|F(R_0 i) − Ξ(R_0 i)| ≥ ε`. ✓
+At c = 0: Δ_{J+1}(0) = 0. Differentiate using v_ℓ = u_ℓ'(0), b_m'(0) = −2a_m/m:
+```
+Δ_{J+1}'(0) = (J+1)[Σ_ℓ v_ℓ a_ℓ^J − Σ_{m>J} d_m a_m^J],    d_m = 2a_m/m > 0.
+```
+Let q(x) = ∏_{ℓ=1}^{J}(x − a_ℓ). The moment equations (from differentiating Φ_r = 0) give:
+```
+Σ_ℓ v_ℓ a_ℓ^J − Σ_{m>J} d_m a_m^J  =  −Σ_{m>J} d_m · q(a_m).
+```
+For m > J: 0 < a_m < a_J < ... < a_1, so every q(a_m) has sign (−1)^J (all a_m lie below all
+roots a_1,...,a_J). The series Σ d_m · q(a_m) converges (|q(a_m)| bounded, Σ d_m < ∞) and is
+nonzero. Hence Δ_{J+1}'(0) ≠ 0, and shrinking δ ensures Δ_{J+1}(c) ≠ 0 for 0 < c < δ.
 
-**Taylor Jacobian (closing the IFT step).**  The Taylor coefficient matching
-system has the same Vandermonde structure as B2 §4.3: the Jacobian of `{F^{(2j)}(0)}`
-with respect to `{μ_n}_{n=k_N+1}^{k_N+J_N}` at `μ_n = γ_n` is:
+From the logarithmic series comparison:
 ```
-∂F^{(2j)}(0)/∂μ_n = −2Ξ(0)/μ_n^{2j+1}    (leading term from the Hadamard product).
+F_c(z) − Ξ(z)  =  −C · Δ_{J+1}(c)/(J+1) · z^{2J+2}  +  O(z^{2J+4}).
 ```
-The `J_N × J_N` Jacobian matrix has entries `C_{jn}/μ_n^{2j+1}` with `C_{jn}` bounded
-away from zero (from the product formula).  This is a generalized Vandermonde in
-`μ_n^{-2}`, hence nonsingular for distinct `μ_n > 0`.  The implicit function theorem
-applies for small `c_0`. ✓
 
-**Status: PROOF-DRAFT — all steps complete (self-contained, no external references).**
+**Quantitative separation (Cauchy estimate).** Set A_c = C|Δ_{J+1}(c)|/(J+1) > 0.
+Cauchy's coefficient estimate gives, for every R > 0:
+```
+sup_{|z| ≤ R} |F_c(z) − Ξ(z)|  ≥  A_c · R^{2J+2}.
+```
+Choose R_0 = max{2γ_{k+1}, (ε/A_c)^{1/(2J+2)}}. Then R_0 > γ_{k+1} and
+sup_{|z| ≤ R_0} |F_c − Ξ| ≥ ε. ✓
+
+No limit N → ∞ is needed or used.
+
+**Status: PROOF-DRAFT ✓ — all steps correct under corrections from OB-03 (2026-08-11).**
+The original Steps B and C of the outsource file must not be cited as written;
+the corrected proof above is the valid version.
 
 ---
 
@@ -327,6 +317,10 @@ exact hypotheses (H-bound) + (H-tail) that would complete the argument.  ☐
 |---|---|
 | E-pos (sufficient package → Ξ convergence + real zeros) | PROOF-DRAFT (standard Montel/Hurwitz; detail clear) |
 | E-neg (finite evidence ≠ convergence, non-uniqueness argument) | PROOF-DRAFT (strategy clear; see §2) |
-| Quantitative tail estimate (§3) | PROOF-DRAFT ✓ — self-contained (Hadamard growth + Vandermonde Jacobian) |
+| Quantitative tail estimate §3: matching via log power sums | PROOF-DRAFT ✓ CONFIRMED (OB-03, 2026-08-11) — corrected IFT via Φ_r system |
+| Quantitative tail estimate §3: exact Vandermonde Jacobian (no bounded factor) | PROOF-DRAFT ✓ CONFIRMED — ∂Φ_r/∂u_ℓ = r·a_ℓ^{r-1} exactly |
+| Quantitative tail estimate §3: separation via Cauchy coefficient estimate | PROOF-DRAFT ✓ CONFIRMED — replaces invalid ratio argument at R=γ_{k+1} |
+| Quantitative tail estimate §3: c_0 must be < δ(k,J,{γ_n}) | PROOF-DRAFT ✓ CONFIRMED — IFT gives explicit δ |
+| Original Steps B and C of outsource OB-03 | REFUTED as written — must use corrected §3 above |
 | Normalization convention (CCM frozen) | DONE |
 | Suzuki meromorphic target | OUT OF SCOPE for this theorem (see limitations.md) |
