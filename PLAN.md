@@ -175,7 +175,7 @@ Two tracks run in parallel:
 |---|---|---|---|
 | **IX-A1** | `theorems/G-fredholm-certificate/proof.md` §4 | Explicit adversary: `𝒵_smooth = {d_n}` is O_θ-indistinguishable from `𝒵_RH` | **CLOSED** (2026-08-11) |
 | **IX-A2** | `theorems/E-prime-meromorphic/statement.md` §4 | Meromorphic partial-fraction IFT Jacobian for E'-neg pole-matching | **CLOSED** (2026-08-11) |
-| **IX-A3** | `theorems/D-spectral-asymptotic/proof.md` §4 | Seeley-DeWitt no-log: BGV Thm 2.30 / Gilkey Thm 1.8.1 citation verified | OPEN — outsource OB-01 |
+| **IX-A3** | `theorems/D-spectral-asymptotic/proof.md` §4 | Seeley-DeWitt no-log: BGV Thm 2.30 / Gilkey Thm 1.8.1 citation verified | **CLOSED** (2026-08-11): all-orders no-log REFUTED by OB-01 review; corrected to leading-singularity obstruction (Grubb-Seeley 1995 Thm 2.7 / Lesch 1999 Thm 3.7); proof.md §4 rewritten; D-prime-logpoly §3-§7 corrected |
 | **IX-A4** | `theorems/H-information-hierarchy/statement.md` | H' separation: B2 quartet has θ-levels distinct from `𝒵_RH` (explicit d_n gap) | OPEN |
 
 ### Track B — outsource files for external verification

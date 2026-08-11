@@ -2,7 +2,7 @@
 
 **Theorem ID:** D-prime-logpoly  
 **Program ref:** EXT-1 (extension of Theorem D; audit of log-polyhomogeneous escape route)  
-**Status:** ESCAPE-ROUTE-OPEN (confirmed; see §3)
+**Status:** ESCAPE-ROUTE-REVISED (2026-08-11; see §3–§4: 𝒞_logpoly is not the correct escape class)
 
 ---
 
@@ -44,91 +44,107 @@ This class strictly contains 𝒞_ell (when all `τ_k = 0`).
 
 ---
 
-## §3. Heat-trace expansion (REFEREED result)
+## §3. Heat-trace expansion — CORRECTED (external review OB-01, 2026-08-11)
 
-**Theorem (Schrohe 1992; Lesch 1995; Grubb–Seeley 1995).** For `H ∈ 𝒞_logpoly` of
-order `m > 0` on a compact `d`-manifold:
+**[CORRECTION]** The previous §3 stated that for `H ∈ 𝒞_logpoly`, the leading
+heat-trace term is `c_{0,1}·t^{-d/m}·log(1/t)`. This is **incorrect as stated**.
+
+The Grubb–Seeley / Lesch theorem (Lesch 1999, Theorem 3.7) gives an expansion for
+the **weighted** heat trace `Tr(A·e^{-tP})` where `A` is log-polyhomogeneous and
+`P` is a **classical** (non-log) elliptic generator. It does NOT directly give the
+expansion of `Tr(e^{-tH})` when `H` itself is log-polyhomogeneous.
+
+**What the external review established (OB-01 §6):**
+
+For `H ∈ 𝒞_logpoly`, log terms in `Z_H(t)` appear at **subleading** orders, not
+at the leading singularity. The explicit example: on `S¹`, the Fourier multiplier
 ```
-Z_H(t) ~ Σ_{j≥0} Σ_{k=0}^{K_j} c_{j,k} · t^{(j−d)/m} · (log(1/t))^k   as t → 0+,
+H_c e_n = (|n| + c·log|n|) e_n
 ```
-where `c_{j,0}` are the classical Seeley–DeWitt coefficients and `c_{j,k}` for `k ≥ 1`
-are determined by the log-symbol components `τ_{m-j}`. In particular, the leading
-log-term is:
+(log-polyhomogeneous order 1 with lower-order `c·log|ξ|` term) has:
 ```
-c_{0,1} = (1/(m·(2π)^d)) · ∫_M ∫_{S^{d−1}} τ_m(x,ω) dω dx,
+Z_{H_c}(t) = 2/t − 2c·log(1/t) + O(1)   as t → 0⁺.
 ```
-and the leading singularity of the heat trace is:
-```
-Z_H(t) ~ c_{0,0} · t^{−d/m} + c_{0,1} · t^{−d/m} · log(1/t) + lower order.
-```
+The log term appears at order `t⁰`, not `t^{-1}`. The leading singularity is still
+`2/t` (a pure power).
+
+**What produces `t^{-1}·log(1/t)` as a leading term:**
+
+A counting law `N_H(Λ) ~ C·Λ·log Λ` yields `Z_H(t) ~ C·t^{-1}·log(1/t)` by Karamata.
+This requires eigenvalues `λ_n ~ n/(C·log n)`, corresponding to a symbol growing like
+`|ξ|/log|ξ|`. This is NOT in `𝒞_ell` nor in the finite-log-degree class `CL^{m,k}`.
+It is a genuinely different (larger) escape class.
+
+**Revised status of the escape route:**
+
+| Claim | Status after correction |
+|---|---|
+| `𝒞_logpoly` can have `t^{-1}·log(1/t)` leading term | **FALSE** — leading term is always a pure power (Theorem 3.1 of OB-01 review) |
+| `𝒞_logpoly` can have `t^k·log(1/t)` for `k ≥ 0` (subleading) | **TRUE** — Wres formula gives these |
+| Escape from Theorem D: the escape class is LARGER than `𝒞_logpoly` | **TRUE** — requires `|ξ|/log|ξ|`-type symbols |
+| `𝒞_logpoly` is still an escape from the **all-orders-no-log** version of Theorem D | **TRUE** (but that version of Theorem D was itself refuted) |
 
 ---
 
-## §4. Escape-route verdict: CONFIRMED OPEN
+## §4. Escape-route verdict — REVISED (2026-08-11)
 
-**Claim.** The log-polyhomogeneous class 𝒞_logpoly is a **genuinely open escape route**
-from Theorem D. The obstacle to Theorem D's extension to 𝒞_logpoly is:
+**Revised verdict: `𝒞_logpoly` is NOT the correct escape class.**
 
-1. **Singularity type matches:** For `d = 1, m = 1`, the leading term is
-   `c_{0,1} · t^{-1} · log(1/t)`, which is exactly the same type as
-   `Z_ζ(t) ∼ (1/2π) · log(1/t)/t`.
+The escape class from Theorem D (corrected leading-singularity version) requires
+operators with eigenvalue counting `N_H(T) ~ C·T·log T`, which corresponds to
+symbols of type `|ξ|/log|ξ|`. This is outside `𝒞_logpoly` (which has finite-degree
+log-symbol expansions and retains pure-power leading singularities).
 
-2. **Coefficient is freely tunable:** The coefficient `c_{0,1}` is determined by the
-   log-symbol `τ_1(x,ω)` via a cosphere integral. In particular, on the circle `S^1`
-   (d = 1, m = 1), choosing `τ_1(x,ω) = 1` gives `c_{0,1} = (2π)^{-1}`.
+**The genuine escape route** from the corrected Theorem D is:
+operators whose symbol grows like `|ξ|/log|ξ|` (or any symbol giving `T log T`
+eigenvalue counting). This class has no standard name in the pseudodifferential
+literature and is not covered by any of Schrohe, Lesch, or Grubb–Seeley.
 
-3. **No further constraint from compactness:** The log-polyhomogeneous calculus does not
-   impose a sign or rationality constraint on `c_{0,1}` that would prevent it from
-   equaling `(2π)^{-1}`.
+**What `𝒞_logpoly` escapes:**
+The **previously stated (and now refuted) all-orders-no-log** version of Theorem D.
+Since that version of Theorem D is false (explicit counterexample exists), the escape
+route through `𝒞_logpoly` addresses a false claim.
 
-**Consequence.** The heat-trace singularity method of Theorem D **cannot** be extended to
-exclude all of 𝒞_logpoly. The coefficient `c_{0,1} = (2π)^{-1}` is achievable by
-choosing `τ_1 ≡ 1` on `S^1`, and Theorem D's argument breaks down at this point.
+**What `𝒞_logpoly` does NOT escape:**
+The **corrected leading-singularity** version of Theorem D (Corollary 3.2 of OB-01
+review): no classical elliptic pseudodifferential operator (including `𝒞_logpoly`)
+can have `t^{-d/m}·log(1/t)` as its leading heat-trace singularity.
 
 ---
 
 ## §5. What this does NOT say
 
-1. **Does not produce a Hilbert–Pólya operator:** Having the right heat-trace singularity
-   type is necessary but far from sufficient. The spectrum of any `H ∈ 𝒞_logpoly` is
-   not known to equal `{γ_n}` — that would require additionally:
-   - the Weyl law matching `N_H(T) ~ T log T / (2π)` (the leading counting function),
-   - the individual eigenvalues matching the Riemann zeros,
-   - positive self-adjointness in a compatible Hilbert space.
+1. **Does not produce a Hilbert–Pólya operator:** The corrected escape class
+   (`|ξ|/log|ξ|` symbols) is not known to contain any operator with spectrum `{γ_n}`.
 
-2. **Does not refute Theorem D:** Theorem D correctly excludes 𝒞_ell. The escape route
-   is real and was always declared in Theorem D's statement; this document confirms it.
+2. **Does not refute Theorem D:** Theorem D (corrected) correctly excludes `𝒞_ell`
+   and `𝒞_logpoly` from having a `t^{-1}·log(1/t)` leading heat-trace singularity.
 
-3. **Does not assert any log-polyhomogeneous operator has spectrum {γ_n}:** This is an
-   open question. The escape route is open; the question of whether it is traversable
-   is a different (and harder) problem.
+3. **Does not assert any known class contains a Hilbert–Pólya operator.** The
+   corrected escape class (`|ξ|/log|ξ|`-type) is outside standard calculi.
 
 ---
 
-## §6. New research question (opened by this audit)
+## §6. New research question (opened by this audit — revised)
 
-**Can a log-polyhomogeneous operator be constructed from zero-free arithmetic data
-such that its spectrum is {γ_n}?**
+**Can a symbol of type `|ξ|/log|ξ|` (or equivalent) produce a compact operator
+with spectrum `{γ_n}` in a controlled Hilbert space?**
 
-Sub-questions:
-- Is there any structural obstruction to log-polyhomogeneous operators having
-  spectrum with `T log T` counting beyond the singularity-type match?
-  (E.g., is the Weyl law for 𝒞_logpoly still polynomial `T^{d/m}`, just with the
-  log factor coming from the symbol rather than the counting function?)
-- If the Weyl law for 𝒞_logpoly can be `T log T` (not just `T^{d/m}·log T`), then
-  this class is a live Hilbert–Pólya candidate and warrants dedicated investigation.
+This is an open question. The `|ξ|/log|ξ|` growth is not elliptic in the classical
+sense, and constructing a self-adjoint operator with `T log T` counting from first
+principles (without reading zero locations) is a genuine open problem.
 
-**This is recorded as a CONJECTURE and a future research direction, not a theorem.**
+**This is recorded as a CONJECTURE and future research direction, not a theorem.**
 
 ---
 
-## §7. Status summary
+## §7. Status summary — REVISED
 
 | Component | Status |
 |---|---|
-| Log-polyhomogeneous heat-trace expansion (§3) | REFEREED (Schrohe 1992, Lesch 1995, Grubb–Seeley 1995) |
-| Singularity-type match for d=1, m=1 (§4) | PROOF-DRAFT (computation from §3 formula) |
-| Coefficient tunability to (2π)^{-1} (§4) | PROOF-DRAFT (immediate from §3 formula) |
-| Escape route verdict: OPEN | CONFIRMED (see §4) |
-| Weyl law for 𝒞_logpoly (§6 open question) | OPEN — not yet analyzed |
-| Spectrum = {γ_n} for some H ∈ 𝒞_logpoly | OPEN CONJECTURE |
+| Log-polyhomogeneous heat-trace expansion (§3, Lesch 1999) | The theorem is about `Tr(A·e^{-tP})`, not `Tr(e^{-tH})`; citation scope corrected |
+| `𝒞_logpoly` produces `t^{-1}·log(1/t)` leading term | **FALSE** — refuted by OB-01 review |
+| `𝒞_logpoly` produces subleading log terms | TRUE — but irrelevant to Theorem D's corrected claim |
+| Escape route from corrected Theorem D | Requires `|ξ|/log|ξ|`-type symbols; outside standard calculi |
+| Status of D-prime theorem | **ESCAPE-ROUTE-REVISED**: `𝒞_logpoly` is not the right escape class; the correct escape class is larger and unnamed |
+| Weyl law for the correct escape class | OPEN — not yet analyzed |

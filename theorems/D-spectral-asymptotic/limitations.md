@@ -17,13 +17,33 @@ The raw Weyl-mismatch argument is extremely close to Endres–Steiner (2010) for
 compact quantum graphs, and to a standard corollary of the Weyl law for
 pseudodifferential operators.  Theorem D is not a new result at this level.
 
-**What might be genuinely new:**
-- The heat-trace `log(1/t)` singularity obstruction (proof.md §4) — a sharper
-  invariant class.
-- The spectral zeta pole obstruction (proof.md §5, sketch only).
+**What is genuinely new (corrected 2026-08-11):**
 
-Until these are completed, Theorem D is a **reference note** or a **supporting
-section**, not a standalone paper.
+The **corrected** §4 argument (leading-singularity obstruction via Mellin inversion)
+is the new content.  Specifically:
+
+- The leading pole of `ζ_H(s) = Tr(H^{-s})` at `s = d/m > 0` cannot coincide with
+  a pole of `Γ(s)` (since `d, m > 0` implies `d/m > 0`, while `Γ` poles are at
+  non-positive integers).  Therefore Mellin inversion gives a *simple* pole at `s = d/m`,
+  producing a pure power `t^{-d/m}`, never `t^{-d/m}·log(1/t)`.
+- This argument applies to the **full** `𝒞_ell` class (all positive classical elliptic
+  pseudodifferential operators, any order/dimension), using Grubb–Seeley 1995 Thm 2.7 /
+  Lesch 1999 Theorem 3.7 — not limited to differential operators.
+
+**What is NOT new (retracted 2026-08-11):**
+
+The *all-orders no-log* claim (previous §4) was refuted by external review (OB-01).
+The reviewer provided an explicit counterexample: on `S¹`, the classical elliptic
+multiplier `He_n = (|n| + a/|n|)e_n` has `Z_H(t) = 2/t − 2a·t·log(1/t) + O(t)`,
+violating the all-orders no-log claim.  The BGV Thm 2.30 and Gilkey Lemma 1.8.2
+citations were scope-limited to differential operators only and did not support the
+wider pseudodifferential claim.
+
+The heat-trace `log(1/t)/t` obstruction is present but relies only on the *leading*
+singularity (the corrected argument), not on absence of logs at all orders.
+
+Until proof.md §5 (spectral zeta pole obstruction) is completed, Theorem D is a
+**reference note** or a **supporting section**, not a standalone paper.
 
 ## 3. Not about RH — no RH hypothesis
 

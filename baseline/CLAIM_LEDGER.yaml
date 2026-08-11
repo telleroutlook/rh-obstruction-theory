@@ -187,11 +187,70 @@ claims:
       ordinates is the core information-obstruction in the Fredholm certificate method
       class M_FC. This identity is exact (not asymptotic) for the main N(T) formula.
 
+  - id: GRUBB-SEELEY-1995-THM-2.7
+    statement: >
+      (Grubb–Seeley 1995, Theorem 2.7) For a positive classical elliptic pseudodifferential
+      operator H of order m > 0 on a closed d-dimensional manifold, the heat trace Tr(e^{-tH})
+      has a complete asymptotic expansion as t→0+ of the form:
+        Tr(e^{-tH}) ~ Σ_{j≥0} c_j t^{(j-d)/m}  +  Σ_{k≥0} (b_k log t + d_k) t^k,
+      where b_k = (-1)^k/(m·k!) · Wres(H^k) (Wodzicki residues). For differential operators
+      Wres=0 for all powers, so no log terms. For classical pseudodifferential operators logs
+      appear at subleading t^k orders only (k≥0), never at the leading singularity t^{-d/m}.
+    source: >
+      G. Grubb and R.T. Seeley, 'Weakly parametric pseudodifferential operators and
+      Atiyah-Patodi-Singer boundary problems', Inventiones Mathematicae 121 (1995), 481–529.
+      Theorem 2.7.
+    peer_reviewed: true
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    gate_a_status: CLEARED
+    premise_caveat: >
+      Refereed (Inventiones 1995). Statement transcribed from OB-01 referee report
+      (2026-08-11) and checked against content. Source tarball not yet in baseline/;
+      add before paper freeze.
+    note: >
+      REPLACES incorrect citations BGV Thm 2.30 (Laplace-type only) and Gilkey Lemma 1.8.2
+      (differential operators only) for the pseudodifferential heat-trace expansion.
+      Key corollary (Corollary 3.2 of OB-01 review): the leading singularity at t^{-d/m}
+      is always a pure power (simple pole in ζ_H(s) at s=d/m; d/m>0 never coincides with
+      Γ poles at non-positive integers). This is the load-bearing fact for Theorem D §4.
+
+  - id: LESCH-1999-THM-3.7
+    statement: >
+      (Lesch 1999, Theorem 3.7) For a log-polyhomogeneous pseudodifferential operator A
+      and a classical positive elliptic P of order m on a closed manifold, the weighted
+      heat trace Tr(A·e^{-tP}) has a complete asymptotic expansion including log terms
+      with coefficients determined by Wodzicki residues Wres(A·P^k). In particular:
+        [t^k log(1/t)] Tr(A·e^{-tP}) = (-1)^k/(m·k!) · Wres(A·P^k).
+      This covers Tr(A·e^{-tP}) NOT Tr(e^{-tH}) for log-polyhomogeneous H.
+    source: >
+      M. Lesch, 'On the noncommutative residue for pseudodifferential operators with
+      log-polyhomogeneous symbols', Annals of Global Analysis and Geometry 17 (1999),
+      151–187. Theorem 3.7.
+    peer_reviewed: true
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    gate_a_status: CLEARED
+    premise_caveat: >
+      Refereed (Annals of Global Analysis and Geometry 1999). Statement transcribed from
+      OB-01 referee report (2026-08-11). Source not yet in baseline/; add before paper freeze.
+    note: >
+      Scope: Tr(A·e^{-tP}) with A log-polyhomogeneous, P classical. Does NOT cover
+      Tr(e^{-tH}) for log-polyhomogeneous H — that is a category error corrected in
+      D-prime-logpoly statement.md §3 (2026-08-11). For Theorem D purposes, the relevant
+      result is GRUBB-SEELEY-1995-THM-2.7 (full expansion for Tr(e^{-tH}) with classical H).
+
 # Gate A summary (program §6.A.4):
 #   - Baseline Suzuki/CCM statements: INDEPENDENTLY-CHECKED (source), usable as
 #     unrefereed-preprint premises with an assumptions flag.
 #   - Andersson Thm 5: INDEPENDENTLY-CHECKED (source verified), GATE A CLEARED.
 #   - RIEMANN-ARGUMENT-COUNTING-IDENTITY: REFEREED (Titchmarsh §9.4), GATE A CLEAR.
+#   - GRUBB-SEELEY-1995-THM-2.7: REFEREED (Inventiones 1995), GATE A CLEARED.
+#     Load-bearing for Theorem D §4 corrected leading-singularity obstruction.
+#   - LESCH-1999-THM-3.7: REFEREED (AGAG 1999), GATE A CLEARED.
+#     Covers Tr(A·e^{-tP}) only; scope correction noted in D-prime-logpoly §3.
 #   - CCM convergence + all LEGACY items: NOT usable as premises yet (PENDING re-inspection
 #     or are the object of study). Any theorems/<id> depending on them is BLOCKED until
 #     resolved or the dependency is downgraded to an explicit assumption.
