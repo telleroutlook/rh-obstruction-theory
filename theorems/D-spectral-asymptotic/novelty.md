@@ -53,10 +53,14 @@ The heat-trace `log(1/t)/t` singularity argument (proof.md §4) is:
    Abel–Plana / partial summation applied to the Riemann–von Mangoldt formula — no
    explicit formula or zero-sum needed.
 
-**One remaining item for full novelty gate closure:** cite Berline–Getzler–Vergne
-Thm 2.30 (or Gilkey Thm 1.8.1) by precise theorem number for the Seeley–DeWitt
-no-log claim. This is a standard textbook result, not a new mathematical claim;
-the citation is for Gate A compliance only.
+**Novelty-gate citation status (RESOLVED by OB-15, 2026-08-11).** The leading-log
+obstruction for the **full classical elliptic ΨDO class** is pinned to **Lesch 1999
+Theorem 3.7** (Ann. Global Anal. Geom. 17, 151–187) + eqs (3.18)–(3.22) with `A=I`,
+extending **Grubb–Seeley 1995 Theorem 2.7**. Scope caveat (PROMPT_LINT L17): **BGV
+Thm 2.30** covers only Laplace-type (order-2 differential) operators and **Gilkey Lemma
+1.8.2** (NOT "Thm 1.8.1") covers only differential operators — neither suffices for the
+general ΨDO claim, and neither is the load-bearing citation. This is a standard result at
+the pinned references, not a new mathematical claim; the citation is for Gate A compliance.
 
 **Paper B strategy:** Short note (~10 pages). Primary contribution: the heat-trace
 `log` singularity obstruction for the full `𝒞_ell` class. Secondary: Weyl-mismatch

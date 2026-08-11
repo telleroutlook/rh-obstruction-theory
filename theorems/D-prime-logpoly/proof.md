@@ -1,84 +1,75 @@
 # Proof — Theorem D' (D-prime-logpoly)
 
-**Status:** ESCAPE-ROUTE-OPEN (confirmed by computation from REFEREED heat-kernel formula)  
+**Status:** ESCAPE-ROUTE-REFINED (OB-01 + OB-16 external reviews, 2026-08-11): the
+`𝒞_logpoly` escape computation below was REFUTED; the escape class is a
+log-*weighted* symbol class, and the exact model is itself refuted. See statement.md
+§3–§7 for the current verdict.  
 **Analytic / finite separation:** purely analytic.
 
 ---
 
-## §1. The key computation
+## §0. Correction notice (supersedes the earlier §1–§2)
 
-We need to check whether `c_{0,1} = (2π)^{-1}` is achievable for some `H ∈ 𝒞_logpoly`.
+The earlier version of this file attempted to show `𝒞_logpoly` is the escape class from
+Theorem D by making the heat-trace log-coefficient `c_{0,1}` equal `(2π)^{-1}` at a
+**leading** `t^{-1}log(1/t)` order. This is **REFUTED**:
 
-**Setup.** Take `d = 1` (circle `M = S^1`), `m = 1` (order 1). The log-polyhomogeneous
-principal symbol has a component `τ_1(x, ω)` on the cosphere bundle `S^*S^1 ≅ S^1 × {±1}`.
+- For `H ∈ 𝒞_logpoly` (finite nonnegative log-degree), the **leading** heat-trace
+  singularity is always a **pure power** `t^{-d/m}`; log terms appear only at
+  **subleading** orders `t^k log(1/t)`, `k ≥ 1` (OB-01 review; the Lesch 1999 Thm 3.7
+  structure `Z_H(t) ~ Σ c_j t^{(j-d)/m} + Σ (b_k log t + d_k)t^k`, with `b_k` controlled
+  by `Wres(H^k)`). So `𝒞_logpoly` cannot produce a leading `t^{-1}log(1/t)`.
+- The earlier §1 "computation" of `c_{0,1}` contained draft remnants and an incorrect
+  identification of the log-coefficient with a leading term; it is withdrawn in full.
 
-**Formula (Schrohe/Lesch/Grubb–Seeley).**
-```
-c_{0,1} = (1/(m·(2π)^d)) · ∫_M ∫_{S^{d−1}} τ_m(x,ω) dω dx
-         = (1/(1·(2π)^1)) · ∫_{S^1} ∫_{S^0} τ_1(x,ω) dω dx.
-```
-The cosphere integral `∫_{S^0} dω = 2` (two points `±1`). Length of `S^1 = 2π`.
-
-**Choosing `τ_1 ≡ c` (constant).** Then:
-```
-c_{0,1} = (1/2π) · ∫_{S^1} (c · 2) dx = (1/2π) · c · 2 · 2π = 2c.
-```
-Wait — rechecking: `∫_{S^1} dx = 2π`, `∫_{S^0} τ_1(x,ω) dω = c · 2`.
-```
-c_{0,1} = (1/2π) · (c · 2 · 2π) / (2π) ...
-```
-Let me be more careful. The standard formula from Grubb–Seeley (1995) for the
-log-coefficient is (using the convention from Lesch 1995, Proposition 1.9):
-```
-c_{0,1} = (−1) · Res_{s=d/m}(Z_H(s))_log,
-```
-where `Z_H(s) = Tr(H^{-s})` is the spectral zeta function and `Res_log` is the
-coefficient of the `log`-pole (as opposed to the simple pole). Alternatively,
-by the full heat-kernel parametrix, the coefficient is:
-```
-c_{0,1} = (1/Γ(d/m)) · ∫_M tr(a_{d,1}(x, H)) dx,
-```
-where `a_{d,1}(x, H)` is the `t^{-d/m}·log(1/t)` coefficient of the local heat kernel,
-expressible in terms of `τ_m` by the same symbol calculus that gives Seeley–DeWitt.
-
-**The key point (independent of exact formula):** The coefficient `c_{0,1}` is a
-continuous linear functional of the log-symbol component `τ_m`. Since `τ_m` is
-a free function on the cosphere bundle, `c_{0,1}` takes all real values as `τ_m`
-varies. In particular, `c_{0,1} = (2π)^{-1}` is achievable.
+The corrected escape analysis lives in statement.md §3–§7 (OB-16). This proof file now
+records only the corrected structural facts.
 
 ---
 
-## §2. Why this breaks Theorem D's argument for 𝒞_logpoly
+## §1. Leading heat-trace singularity in 𝒞_logpoly is a pure power
 
-**Theorem D's argument.** If `H ∈ 𝒞_ell`, then `Z_H(t)` has no `log(1/t)` term.
-But `Z_ζ(t) ∼ (1/2π)·log(1/t)/t` does. Contradiction.
+**Fact (Lesch 1999 Thm 3.7, scope-checked — OB-15/OB-16).** For a positive self-adjoint
+classical elliptic ΨDO `P` of order `m>0` on a closed `d`-manifold, and `A ∈ CL^{a,k}`
+log-polyhomogeneous of finite log-degree `k`,
+```
+Tr(A e^{-tP}) ~ Σ_{j≥0} t^{(j-d-a)/m} c̃_j(log t) + Σ_{r≥0} d̃_r t^r,
+```
+where `deg c̃_j ≤ k` if `(j-d-a)/m ∉ ℤ≥0`, and `≤ k+1` if it is a non-negative integer.
+With `A = I` (so `a=0, k=0`) and `j=0`: the exponent is `−d/m < 0`, not a non-negative
+integer, so `c̃_0` is a **constant** — the leading term `t^{-d/m}` carries **no log**.
 
-**Where it breaks for 𝒞_logpoly.** For `H ∈ 𝒞_logpoly` with `d = 1, m = 1` and
-`c_{0,1} = (2π)^{-1}`, the heat trace has:
-```
-Z_H(t) ~ c_{0,0} · t^{-1} + (1/2π) · log(1/t)/t + lower order.
-```
-If additionally `c_{0,0} = 0` (or can be arranged to vanish), then:
-```
-Z_H(t) ~ (1/2π) · log(1/t)/t + lower order,
-```
-which matches `Z_ζ(t)` to leading order. Theorem D's singularity-type argument no longer
-produces a contradiction.
+Hence no `H ∈ 𝒞_ell` and no finite-log-degree `H ∈ 𝒞_logpoly` has a leading
+`t^{-d/m}log(1/t)` singularity. Subleading logs (`t^k log t`, `k≥1`, from `Wres(H^k)≠0`)
+are allowed and irrelevant to the leading-order comparison with `Z_ζ`.
 
-**Open sub-question:** Can `c_{0,0}` vanish or be negligible? In the classical case,
-`c_{0,0} = (1/(m·(2π)^d)) ∫ σ_m^{-d/m} dω dx > 0` since `σ_m > 0`. For
-log-polyhomogeneous operators, `c_{0,0}` still comes from the principal symbol (the
-`τ_m = 0` component) and may still be positive. If `c_{0,0} > 0`, then:
-```
-Z_H(t) ~ c_{0,0}·t^{-1} + (1/2π)·log(1/t)·t^{-1} = t^{-1}·(c_{0,0} + (1/2π)·log(1/t)),
-```
-which diverges as `t^{-1}·log(1/t)` to leading order (matches Z_ζ) — the `c_{0,0}·t^{-1}`
-term is lower order than `(1/2π)·log(1/t)·t^{-1}` as `t → 0+`. So even with
-`c_{0,0} > 0`, the leading-order behavior of `Z_H` matches `Z_ζ`.
+---
 
-**Conclusion of proof:** For `H ∈ 𝒞_logpoly` with `d = 1, m = 1`, `c_{0,1} = (2π)^{-1}`,
-the heat trace `Z_H(t) ∼ (1/2π)·log(1/t)/t` to leading order. The Seeley–DeWitt
-no-log step of Theorem D does not apply. The escape route is genuine. ☐
+## §2. The genuine escape class (from OB-16) and why the exact model fails
+
+**What produces a leading `t^{-1}log(1/t)`.** By the Abelian/Karamata correspondence, a
+leading heat singularity `Z_H(t) ~ c·t^{-1}log(1/t)` is equivalent to a counting law
+`N_H(T) ~ c·T·log T`. This requires eigenvalues `λ_n ~ n/log n`, i.e. a symbol growing
+like `|ξ|/log|ξ|` — a **log-weighted** class `S^{1,-1}` (elliptic w.r.t. the weight
+`w(ξ)=⟨ξ⟩/log(e+⟨ξ⟩)`), **outside** `𝒞_ell` and outside finite-log-degree `𝒞_logpoly`,
+but **inside** the ordinary Hörmander class `S¹_{1,0}` (OB-16 §2, §6). So `𝒞_logpoly` is
+NOT the escape class; the log-weighted class is.
+
+**The exact model `λ_n = 2πn/log(n+e)` is refuted (OB-16 §2.6).** On `S¹`/`ℓ²(ℕ)`
+(NOT `L²(ℝ)`, where the multiplier has continuous spectrum and is not trace class), the
+count differs from Riemann–von Mangoldt at the next scale:
+```
+N_{2π}^+(T) − N_ζ(T) = (T/2π)[log log(T/2π) + 1 + o(1)] ≍ T·log log T.
+```
+Equal discrete spectra (with multiplicity) force equal counting functions; the
+`T log log T` discrepancy excludes the exact model as a Hilbert–Pólya candidate.
+
+**What stays open (OB-16 §4).** A Lambert-`W`-corrected symbol `g(r)=2πr/W(r/e)` matches
+even the two-term smooth law `(T/2π)(log(T/2π)−1)` exactly at the continuous-inverse
+level (it does not reproduce the `O(log T)` remainder, spacings, multiplicities, or zero
+locations). Whether an unconditional, zero-independent self-adjoint operator in this
+broader log-weighted class has spectrum exactly `{γ_n}` is the open Hilbert–Pólya
+frontier — a literature-status statement, not an impossibility theorem.
 
 ---
 
@@ -86,9 +77,9 @@ no-log step of Theorem D does not apply. The escape route is genuine. ☐
 
 | Step | Status |
 |---|---|
-| Log-poly heat-trace formula (Schrohe/Lesch/Grubb–Seeley) | REFEREED (cited by theorem) |
-| c_{0,1} is a linear functional of τ_m | REFEREED (parametrix construction) |
-| Achievability of c_{0,1} = (2π)^{-1} by choosing τ_m | PROOF-DRAFT (immediate from linearity) |
-| Leading-order Z_H ~ (1/2π)·log(1/t)/t for d=1,m=1 | PROOF-DRAFT (computation in §2) |
-| c_{0,0} analysis (§2 sub-question) | PROOF-DRAFT (open: can c_{0,0} be controlled?) |
-| Escape route confirmed open | PROOF-DRAFT ✓ |
+| Earlier §1 c_{0,1}=(2π)^{-1} "escape via 𝒞_logpoly" | **REFUTED / WITHDRAWN** (OB-01, OB-16): 𝒞_logpoly leading term is a pure power; logs are subleading only |
+| Leading singularity of 𝒞_ell / 𝒞_logpoly is pure power `t^{-d/m}` | PROOF-DRAFT ✓ (Lesch 1999 Thm 3.7, A=I, j=0 exponent −d/m ∉ ℤ≥0) |
+| Escape class = log-weighted `S^{1,-1}` (`|ξ|/log|ξ|`), outside 𝒞_ell/𝒞_logpoly, inside `S¹_{1,0}` | PROOF-DRAFT ✓ (OB-16 §2, §6) |
+| Exact model `2πn/log(n+e)` as HP candidate | **REFUTED** — differs from N_ζ by ≍ T log log T (OB-16 §2.6) |
+| Broader `W`-corrected `\|ξ\|/log\|ξ\|` class | OPEN / localized — matches two-term law; zero-independent spectral realization unknown (OB-16 §4) |
+| Hilbert space for the model | `S¹`/`ℓ²(ℕ)`, NOT `L²(ℝ)` (continuous spectrum, not trace class) — OB-16 §1.1 |

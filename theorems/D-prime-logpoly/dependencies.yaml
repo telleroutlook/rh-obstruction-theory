@@ -1,57 +1,77 @@
 # Dependencies — Theorem D' (D-prime-logpoly)
 
 theorem_id: D-prime-logpoly
-status: ESCAPE-ROUTE-OPEN (PROOF-DRAFT for the key computation)
+status: ESCAPE-ROUTE-REFINED (OB-01 + OB-16, 2026-08-11 — 𝒞_logpoly is NOT the escape class)
 
 dependencies:
 
   - id: LOG-POLYHOMOGENEOUS-HEAT-KERNEL
     statement: >
-      For H a log-polyhomogeneous pseudodifferential operator of order m > 0 on a
-      compact d-manifold (symbol ~ sum_j (sigma_{m-j} + tau_{m-j}·log|xi|)),
-      the heat trace Z_H(t) = Tr(e^{-tH}) has the expansion
-        Z_H(t) ~ sum_{j,k} c_{j,k} · t^{(j-d)/m} · (log(1/t))^k   as t -> 0+,
-      where c_{0,1} = (1/(m·(2pi)^d)) · integral_{cosphere bundle} tau_m dS,
-      and all coefficients c_{j,k} are determined by the symbol components.
+      For P a positive classical elliptic PsiDO of order m > 0 on a compact d-manifold,
+      and A in CL^{a,k} log-polyhomogeneous of finite log-degree k, the weighted heat
+      trace Tr(A e^{-tP}) ~ sum_{j>=0} t^{(j-d-a)/m} c_j(log t) + sum_{r>=0} d_r t^r,
+      with deg c_j <= k if (j-d-a)/m is not a non-negative integer, else <= k+1.
+      With A = I (a=0, k=0) and j=0, the exponent -d/m is negative (not a non-negative
+      integer), so c_0 is a CONSTANT: the LEADING term t^{-d/m} carries NO log.
     source: >
-      Schrohe, E. (1992) "Spectral invariance, ellipticity and the Fredholm property
-      for pseudodifferential operators on weighted Sobolev spaces" Ann. Global Anal. Geom.
-      Lesch, M. (1995) "Operators of Fuchs type, conical singularities, and asymptotic
-      methods" Teubner-Texte Math., B.G. Teubner, Stuttgart. ISBN 3-8154-2118-X.
-      Grubb, G. and Seeley, R.T. (1995) "Weakly parametric pseudodifferential operators
-      and Atiyah-Patodi-Singer boundary problems" Invent. Math. 121(3):481-529.
+      Lesch, M. (1999) "On the noncommutative residue for pseudodifferential operators
+      with log-polyhomogeneous symbols" Ann. Global Anal. Geom. 17:151-187, Theorem 3.7,
+      eqs (3.18)-(3.22). Extends Grubb, G. and Seeley, R.T. (1995) Invent. Math.
+      121(3):481-529, Theorem 2.7.
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
     peer_reviewed: true
     gate_a_status: OPEN
     gate_a_note: >
-      Theorem numbers not yet verified against physical copies. The result is a
-      well-known part of the pseudodifferential calculus literature; the statement
-      is used here at REFEREED level pending theorem-number verification from source.
+      Theorem numbers pinned by OB-15 external review (2026-08-11): Lesch 1999 Thm 3.7 +
+      (3.18)-(3.22), Grubb-Seeley 1995 Thm 2.7. Physical-copy verification still tracked
+      as open, but the exact numbers and scope are now confirmed by the referee.
     role: >
-      Key: establishes that the log-coefficient c_{0,1} in the heat-trace expansion
-      for log-polyhomogeneous operators is (1/(m*(2pi)^d)) * integral of tau_m.
-      This is the critical fact that lets c_{0,1} = (2pi)^{-1} be achieved.
+      Establishes that finite-log-degree C_logpoly has a PURE-POWER leading heat-trace
+      singularity; logs appear only at subleading orders t^k log t (k>=1, from Wres(H^k)).
+      CORRECTION (OB-01/OB-16): this REFUTES the earlier claim that c_{0,1}=(2pi)^{-1}
+      could be achieved as a LEADING term in C_logpoly. C_logpoly is NOT the escape class.
+
+  - id: LEADING-SINGULARITY-COVERS-LOGPOLY
+    statement: >
+      The leading-singularity obstruction of Theorem D extends to C_logpoly: no
+      finite-log-degree log-polyhomogeneous H has leading heat-trace singularity
+      t^{-d/m} log(1/t). The genuine escape class is the log-WEIGHTED symbol class
+      S^{1,-1} (|xi|/log|xi|-type), which gives N_H(T) ~ c T log T and a genuine leading
+      t^{-1} log(1/t); it is outside C_ell and C_logpoly but inside Hormander S^1_{1,0}.
+    source: "OB-16 external review 2026-08-11 (statement.md §4, proof.md §2)."
+    mathematical: PROOF-DRAFT
+    computational: NONE
+    usable_as_premise: false
+    gate_a_status: PENDING
+    role: >
+      Corrected escape-class identification. The naive exact model 2pi*n/log(n+e) is
+      REFUTED (count differs from N_zeta by ~ T log log T); only the broader W-corrected
+      class stays open (open Hilbert-Polya frontier, not a theorem).
 
   - id: SEELEY-DEWITT-EXPANSION
     statement: >
-      The heat trace of H in C_ell has the polyhomogeneous expansion with NO log terms.
-      (Same as Theorem D dependency.)
-    source: "Berline-Getzler-Vergne Thm 2.30; Gilkey Thm 1.8.1."
+      The heat trace of H in C_ell (classical elliptic; differential or Laplace-type
+      sub-cases) has a polyhomogeneous expansion with no LEADING log term.
+    source: >
+      For Laplace-type: Berline-Getzler-Vergne Thm 2.30. For differential operators:
+      Gilkey Lemma 1.8.2 (NOT "Thm 1.8.1"). For general classical elliptic PsiDO the
+      correct reference is Lesch 1999 Thm 3.7 (see LOG-POLYHOMOGENEOUS-HEAT-KERNEL);
+      BGV/Gilkey do NOT cover the general PsiDO case (PROMPT_LINT L17).
     mathematical: REFEREED
     computational: NONE
     usable_as_premise: true
     peer_reviewed: true
     gate_a_status: OPEN
     role: >
-      Comparison reference: shows C_ell (subset of C_logpoly with tau_k=0) has no
-      log terms, confirming C_logpoly is a strict extension and the escape is genuine.
+      Comparison reference: C_ell (subset of C_logpoly with tau_k=0) has pure-power
+      leading term. Scope corrected: BGV/Gilkey are differential/Laplace-type only.
 
 gate_a_status: OPEN
 gate_a_note: >
-  LOG-POLYHOMOGENEOUS-HEAT-KERNEL: theorem numbers not verified against physical books.
-  Conceptual content is standard and well-known; tracking verification as open item.
-  This does not block the escape-route conclusion (which follows from the formula
-  structure regardless of exact theorem number), but must be resolved before this
-  analysis is used as a premise in another theorem.
+  Citation numbers pinned by OB-15 (Lesch 1999 Thm 3.7 + Grubb-Seeley 1995 Thm 2.7);
+  scope corrected (BGV/Gilkey differential/Laplace-type only; Gilkey is Lemma 1.8.2 not
+  Thm 1.8.1). The corrected conclusion (C_logpoly is NOT the escape; the log-weighted
+  S^{1,-1} class is, with the exact model refuted) is PROOF-DRAFT and must not be used as
+  a premise in another theorem until independently reviewed.

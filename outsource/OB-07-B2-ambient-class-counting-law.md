@@ -40,7 +40,9 @@ where:
 - L(t_k) = {1/2+it_k, 1/2−it_k} is an on-line conjugate pair at height t_k;
 - Q(3/4, T) = {3/4+iT, 3/4−iT, 1/4+iT, 1/4−iT} is the symmetric quartet;
 - M, n_k ∈ ℤ, M ≥ max_k |n_k| (buffer to keep all multiplicities ≥ 0);
-- R ∈ ℤ_{>0} (a positive integer scaling factor, see §4.5 of proof.md).
+- R ∈ ℤ_{>0} (a positive integer scaling factor: the number of copies of the off-line
+  quartet, chosen as the lcm of the denominators of the rational solution β = −C⁻¹d(T) so
+  that n = Rβ ∈ ℤᵐ; self-contained here, no external reference needed).
 
 The counting functions are:
 ```

@@ -77,19 +77,16 @@ increases by `O(T^{−(1+ε)})`.
   `|1/ρ| = |ρ|^{−1} ≤ (T² + σ₀²)^{−1/2} → 0`, so `φ_j(ρ) → 0`.  
   Similarly for `1−σ₀ ± iT`.  Hence `δ_j(T) → 0`.
 
-- **Weil-type:** `φ_j(ρ) = ĥ_j(ρ)` where `h_j ∈ C_c^∞(ℝ)` with support in
-  `[−R_j, R_j]`.  By the Paley–Wiener theorem, `|ĥ_j(σ + iT)| ≤ C_N e^{R_j |T|} (1+|T|)^{−N}`
-  for any `N ≥ 0` (with `σ` bounded, the exponential-type constant is `e^{R_j σ}`
-  up to a bounded factor).  Wait — for `h_j ∈ C_c^∞([−R_j, R_j])`,
-  `ĥ_j(s) = ∫_{−R_j}^{R_j} h_j(x) e^{isx} dx`.  For real `s = T`, `|ĥ_j(T)| → 0`
-  (Riemann–Lebesgue).  For complex `s = σ + iT` with `σ ∈ [0,1]` (bounded),
-  `|ĥ_j(σ + iT)| = |∫ h_j(x) e^{i(σ+iT)x} dx| ≤ ‖h_j‖_1 · e^{R_j |σ|} → 0`
-  as `T → ∞` by Riemann–Lebesgue applied to `x ↦ h_j(x) e^{−Tx}` when `T` is large
-  
-  **Correction (important):** For `s = σ + iT` the factor is
-  `e^{isxT} = e^{iσx − Tx}` — this grows or decays in `x` depending on the sign
-  of `T`.  We must use the correct Weil-sum convention.
-  
+- **Weil-type (Convention W2 — evaluation at imaginary parts):** `φ_j(ρ) = ĥ_j(Im ρ)`
+  where `h_j ∈ C_c^∞(ℝ)` with support in `[−R_j, R_j]` and `ĥ_j(ξ) = ∫ h_j(x)e^{iξx}dx`.
+  For the off-line quartet contribution the relevant argument is the real imaginary-part
+  `T` (Convention W2, fixed in statement.md; see limitations.md §7 for why W1 is
+  excluded). By the Riemann–Lebesgue lemma, `ĥ_j` is continuous and `ĥ_j(T) → 0` as
+  `T → ∞`; more quantitatively, integration by parts `N` times gives
+  `|ĥ_j(T)| ≤ C_N (1+|T|)^{−N}` for every `N ≥ 0` (since `h_j ∈ C_c^∞`). Each of the four
+  quartet points `σ₀ ± iT`, `1−σ₀ ± iT` contributes `ĥ_j(±T)`, so
+  `δ_j(T) = O((1+T)^{−N}) → 0` as `T → ∞`. This is the decay used in §3 and inherited by
+  B2; it holds for the fixed finite Weil-W2 family.
   **Standard regularization for Weil-type tests.**  The Weil observation is
   `Q_W(h) = Σ'_{ρ ∈ 𝒵} ĥ(ρ)` where the regularization makes the sum converge
   absolutely for the entire class `𝒵 ∈ 𝔛_sym` (admissibility exponent `1+ε`).
