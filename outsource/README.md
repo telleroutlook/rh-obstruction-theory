@@ -36,6 +36,7 @@ problem.
 | OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | RESOLVED — integrated 2026-08-11 (checker deposited) |
 | OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | RESOLVED — GATE-A PASS, integrated 2026-08-11 |
 | OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | RESOLVED — CONFIRMED, checker deposited 2026-08-11 |
+| OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -271,6 +272,23 @@ be internally consistent before the Gate-A package ships.
   guard). Tests 64 → 66. **B2 now has BOTH a Gate-A math review (OB-20) AND a permanent,
   machine-re-verified computational checker (OB-21)** — the "draft → established" loop is
   fully closed for B2, and the checker is exercised on every `pytest`.
+
+## Second Gate-A push OB-22 (drafted 2026-08-11) — G-info diagonal obstruction
+
+Applies the B2 template to G (which already has a deposited certified checker from OB-17,
+so a Gate-A math PASS would make it the second double-axis-established theorem). Scoped
+carefully because G is more delicate than B2:
+- **IN scope (review):** the diagonal obstruction `G_d ≠ Ξ̂` for `𝔐_d^{tr}`, Lemmas
+  G.4/G.5, Prop G.3* Item 2. Five links (A convergence, B zeros of G_d, C direct
+  value-argument `G_d(γ_1)≠0=Ξ̂(γ_1)` — NOT transitivity, D multiset distinctness via
+  Littlewood, E Lemma G.4 Hurwitz) + Q1–Q5.
+- **OUT of scope (must NOT be sent for proof):** the conjecture **G-hard** — the reviewer
+  only confirms it is cleanly quarantined (no IN-scope step depends on it), never attempts
+  to prove it. Also asks to confirm the factorization-condition (2.7) uses only the
+  weak/definitional reading.
+Uses REVIEW_PROMPT.md common header + Block A. Load-bearing facts (Σκ_n<∞, the three-way
+separation, Prop G.3* Item 2) were already script/checker-verified (OB-17); the deliverable
+is the whole-theorem judgment.
 
 ## What a returned verification should contain
 
