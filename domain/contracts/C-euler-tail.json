@@ -1,19 +1,19 @@
 {
   "contract_version": "2",
   "claim_id": "C-euler-tail-theorem",
-  "note": "Theorem C (WP-C). Finite Euler factors do not force critical-line zeros in the Helson class. PROOF-DRAFT: Andersson Thm 5 dependency source-verified (Gate A CLEARED); whole-theorem Gate-A review pending (OB-26).",
+  "note": "Theorem C (WP-C). Finite Euler factors do not force critical-line zeros in the Helson class. INDEPENDENTLY-CHECKED (Gate-A PASS OB-26, after mod1-mod6). Scope: one-sided non-forcing corollary of Andersson Thm 5 (Paper A remark).",
 
   "theorem_id": "C-euler-tail",
-  "paper": "A (supporting section) or standalone short note",
+  "paper": "A — named corollary/remark ('Finite-Euler-factor non-forcing corollary to Andersson, Theorem 5')",
   "statement_digest": "sha256:PLACEHOLDER-fill-on-freeze",
 
   "metadata": {
     "theorem_id": "C-euler-tail",
-    "ambient_class": "Helson zeta functions zeta_chi with |chi(p)|=1, completely multiplicative, Euler product, meromorphic continuation; chi P_0-standard means chi(p)=1 for p <= P_0",
-    "resource_bound": "fixed finite prime cutoff P_0; prescribed zero in a bounded region Omega",
+    "ambient_class": "Helson zeta functions zeta_chi = sum chi(n) n^-s, chi completely multiplicative unimodular; H_S = those meromorphic on S={0<Re(s)<1}; chi P_0-standard means chi(p)=1 for p <= P_0 (observation O=(chi(p))_{p<=P_0})",
+    "resource_bound": "fixed finite prime cutoff P_0; a single prescribed zero z_1 in the open strip",
     "is_barrier_claim": true,
     "escape_route_present": true,
-    "escape_route": "Selberg class (functional equation + Ramanujan + full Euler product axioms); zeta itself (gamma factor, coefficient arithmetic, analytic continuation); combined axioms not jointly covered"
+    "escape_route": "Selberg class / zeta / combined 'Euler product + gamma factor + functional equation' axiom classes — C neither constructs nor claims members there (finite ratio R_a preserves no functional equation; unimodular coefficients supply no gamma factor)"
   },
 
   "normalization_choice": {
@@ -22,28 +22,31 @@
   },
 
   "dependencies": [
-    {"claim_id": "ANDERSSON-HELSON-PRESCRIBED-ZERO", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "load-bearing — Theorem 5 (thm5) of arXiv:2408.15713; Gate A CLEARED; source verified from LaTeX tarball in baseline/andersson-2408.15713/", "usable_as_premise": true},
-    {"claim_id": "HELSON-CLASS-DEFINITION", "ledger_math": "DEFINITION", "role": "ambient class"},
+    {"claim_id": "ANDERSSON-HELSON-PRESCRIBED-ZERO", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "load-bearing — Andersson arXiv:2408.15713v1 Theorem 5 (label thm5); source-verified; used with U=C, signed multiset m(z_1)=+1", "usable_as_premise": true},
+    {"claim_id": "ANDERSSON-COROLLARY-3", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "OPTIONAL (proof.md §4.5) — entire zero-free Helson zeta (label cor3, source line 196) for a same-fiber P_S=1 companion; not needed for the one-sided claim", "usable_as_premise": true},
+    {"claim_id": "HELSON-CLASS-DEFINITION", "ledger_math": "DEFINITION", "role": "ambient class (Helson 1969 Ark. Mat. 8; Seip 2020; Bochkov-Romanov 2022)"},
     {"claim_id": "DAVENPORT-HEILBRONN-COMPARISON", "ledger_math": "REFEREED", "role": "comparison example; kept logically separate per program §8.C.2"},
-    {"claim_id": "DIRICHLET-POLYNOMIAL-ZERO-FREE", "ledger_math": "PROOF-DRAFT", "role": "R(s;P_0,chi) holomorphic+nonzero in critical strip; proved inline in proof.md §3"}
+    {"claim_id": "DIRICHLET-POLYNOMIAL-ZERO-FREE", "ledger_math": "INDEPENDENTLY-CHECKED", "role": "R(s;P_0,chi) and R_a holomorphic+nonzero on Re(s)>0; OB-26 Link C"}
   ],
 
   "obligations": [
-    "C.gate-a: CLEARED — Andersson arXiv:2408.15713 Theorem 5 verified from LaTeX source in baseline/andersson-2408.15713/",
-    "C.analytic.R-zero-free: proof.md §3 (R holomorphic, nonzero in strip) — PROOF-DRAFT done",
-    "C.scope: Helson class only; Selberg/zeta escape stated; Davenport-Heilbronn kept separate"
+    "C.gate-a: PASS (OB-26) — Andersson arXiv:2408.15713v1 Theorem 5 (thm5) source-verified; whole-theorem review CONDITIONAL->PASS after mod1-mod6",
+    "C.analytic.R-zero-free: R (and R_a) holomorphic, nonzero on Re(s)>0 — INDEPENDENTLY-CHECKED (OB-26 Link C)",
+    "C.target: P_S defined on S={0<Re<1} (OB-26 mod1); consequence one-sided + R_a all-fiber (mod3)",
+    "C.novelty: corollary of Andersson Thm 5 (OB-26 Q5 = option a); Paper A remark, not standalone",
+    "C.scope: Helson class only; C does NOT construct/claim Selberg or zeta members (OB-26 mod6); Davenport-Heilbronn kept separate"
   ],
 
   "acceptance_test_results": {
-    "note": "CONDITIONAL on Andersson Gate A.",
-    "class": "PASS — Helson class membership checkable",
-    "non_vacuity": "PASS — chi=1 (zeta itself) is a member; chi=Dirichlet characters are members",
-    "target": "ONE-SIDED — zeta_chi_tilde is a P_0-standard member with an off-line zero (P=0), constructed unconditionally. The 'P=1 companion' is NOT settled: using chi=1 (zeta itself) as the on-line adversary is RH-conditional and FORBIDDEN as a premise. OB-26 Q3 asks whether the one-sided non-forcing statement suffices, or whether a P=1 fiber-mate must be prescribed via Andersson Thm 5 with Z in {Re(s)=1/2}. Do not read as a clean two-sided PASS until OB-26 returns.",
-    "observation": "N/A — this is an existence result, not an observation-collision theorem",
+    "note": "Gate-A PASS (OB-26, after mod1-mod6). Scope: one-sided non-forcing corollary of Andersson Thm 5.",
+    "class": "PASS — Helson class membership checkable (completely multiplicative unimodular chi)",
+    "non_vacuity": "PASS — the Helson class is a published research class (Helson 1969; Seip 2020; Bochkov-Romanov 2022); zeta_chi_tilde is a bona fide member",
+    "target": "PASS (one-sided) — P_S defined on S={0<Re<1}. zeta_chi_tilde is P_0-standard (O=(1..1)) with P_S=0. This refutes O=(1..1) => P_S=1. The R_a all-fiber version (proof.md §4.5) gives, for every observation a, a member with O=a and P_S=0, so no O-only condition true on some fiber is sufficient for P_S=1. Optional same-fiber P_S=1 companion via Andersson Cor 3 (not needed, not RH).",
+    "observation": "PASS — observation map O(zeta_chi)=(chi(p))_{p<=P_0}; the P_0-standard fiber is O=(1..1); this is a genuine information-obstruction framing (one-sided)",
     "invariant": "PASS — the Helson class axioms are algebraic; conclusion is independent of representation",
-    "no_rh": "PASS — no RH in hypotheses",
-    "escape": "PASS — Selberg class / zeta escape stated",
-    "scope": "PASS — Helson class and P_0 resource bound named"
+    "no_rh": "PASS — no RH in hypotheses (OB-26 Q1 CONFIRMED); Andersson Thm 5 used unconditionally; chi=1 only on finitely many primes, NOT zeta itself",
+    "escape": "PASS — Helson-only; C does NOT construct/claim Selberg or zeta members (OB-26 mod6); Selberg impossibility only motivational, not proved here",
+    "scope": "PASS — Helson class + P_0 resource bound named; one-sided non-forcing corollary scope stated"
   },
 
   "checker": {
@@ -54,6 +57,6 @@
   "runtime": {"class": "native-dev", "network": "none"},
   "assurance": {"required": ["formal-kernel"]},
   "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
-  "spec_status": "PROOF-DRAFT",
-  "status_note": "Andersson Thm 5 (arXiv:2408.15713, thm5) source-verified (Gate A CLEARED; PROVENANCE.md deposited). OB-26 fix (2026-08-11): finite-factor multiplier orientation corrected in statement.md (R = prod(1-chi(p)p^-s)/(1-p^-s), chi in numerator; script-verified) and the 'push Im large' pseudo-issue removed (R zero-free on the whole open strip). OPEN: whole-theorem Gate-A review OB-26 -- decides (Q3) one-sided vs two-sided target framing and (Q5) standalone-vs-corollary novelty. Status stays PROOF-DRAFT until OB-26 returns."
+  "spec_status": "INDEPENDENTLY-CHECKED",
+  "status_note": "Gate-A PASS (OB-26 2026-08-11, CONDITIONAL->PASS after mod1-mod6). Links A-D + RH-non-circularity CONFIRMED; reviewer independently re-derived the R orientation (8.6e-20 agreement) and strip zero-freeness. Mods integrated: (1) target predicate P_S on S={0<Re<1}; (2) explicit meromorphic continuation to C + simple zero at z1, notation fixed; (3) consequence narrowed to one-sided + R_a all-fiber strengthening; (4) novelty downgraded to corollary of Andersson Thm 5 (Paper A remark); (5) citations fixed (Helson 1969 Ark. Mat.; Andersson arXiv:2408.15713v1 Thm 5; 'faithfully transcribed with f->zeta_chi typo corrected'; Bayart background only); (6) numerical anchor marked sample-min (continuous min 1-2^-0.01=0.006907...), EXT-4a narrowed. Scope: one-sided non-forcing corollary. Computational axis: NONE (analytic existence result)."
 }

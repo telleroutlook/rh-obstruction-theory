@@ -19,7 +19,7 @@ from checker.validate_ledger import load_claims, validate  # noqa: E402
 
 def test_all_claims_parse_and_validate():
     claims = load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")
-    assert len(claims) == 14, f"expected 14 claims, parsed {len(claims)}"
+    assert len(claims) == 15, f"expected 15 claims, parsed {len(claims)}"
     for c in claims:
         assert not validate(c), f"{c.get('id')}: {validate(c)}"
 
@@ -515,6 +515,45 @@ def test_c_no_stale_blocked_status():
     assert "BLOCKED until arXiv:2408.15713 is source-verified" not in lim, \
         "stale 'BLOCKED until Andersson source-verified' must be gone"
     assert "CLEARED" in lim, "limitations.md must reflect Andersson Gate-A CLEARED"
+
+
+def test_c_gate_a_pass_mods_integrated():
+    """OB-26 Gate-A CONDITIONAL->PASS: mod1-mod6 must be integrated and C advanced."""
+    stmt = (C_DIR / "statement.md").read_text()
+    # mod1: target predicate P_S on the strip S (no undefined 'nontrivial zeros ... continuation region')
+    assert "P_S" in stmt and "S = {s ∈ ℂ : 0 < Re(s) < 1}" in stmt, \
+        "mod1: target predicate P_S on S must be defined"
+    assert "all nontrivial zeros of ζ_χ in the continuation region" not in stmt, \
+        "the old undefined 'nontrivial zeros in the continuation region' predicate must be gone"
+    # mod3: consequence is one-sided (does NOT imply), plus R_a all-fiber
+    assert "does **not** imply" in stmt and "R_a" in stmt, \
+        "mod3: one-sided consequence + R_a all-fiber strengthening"
+    # mod4: novelty downgraded to corollary; status INDEPENDENTLY-CHECKED
+    assert "corollary of Andersson Theorem 5" in stmt, \
+        "mod4: novelty must be stated as a corollary of Andersson Theorem 5"
+    assert "INDEPENDENTLY-CHECKED" in stmt, "C statement must record INDEPENDENTLY-CHECKED"
+
+
+def test_c_status_independently_checked():
+    """OB-26: C contract spec_status is INDEPENDENTLY-CHECKED (corollary scope)."""
+    with C_CONTRACT.open() as f:
+        data = json.load(f)
+    assert data["spec_status"] == "INDEPENDENTLY-CHECKED", \
+        "C contract spec_status must be INDEPENDENTLY-CHECKED after OB-26"
+    # citations fixed: Helson 1969 (Ark. Mat.), correcting the wrong 'Helson 1954'
+    prov = (ROOT / "baseline" / "andersson-2408.15713" / "PROVENANCE.md").read_text()
+    assert "Ark. Mat. 8 (1969)" in prov, \
+        "PROVENANCE must cite Helson, Ark. Mat. 8 (1969)"
+
+
+def test_c_ext4a_claim_narrowed():
+    """OB-26 mod6: the unsupported 'EXT-4a provably blocked/incompatible' strong claim
+    must be narrowed to an honest 'not constructed/claimed here'."""
+    lim = (C_DIR / "limitations.md").read_text()
+    assert "provably blocked" not in lim.lower(), \
+        "the unsupported 'provably blocked' Selberg claim must be narrowed (OB-26 mod6)"
+    assert "neither constructs nor claims" in lim or "does not construct" in lim.lower(), \
+        "limitations must state C neither constructs nor claims Selberg members"
 
 
 # ---- D-spectral-asymptotic theorem scaffold tests ----

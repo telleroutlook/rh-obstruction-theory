@@ -1,50 +1,67 @@
 # Theorem C — Finite Euler Factors Do Not Force Critical-Line Zeros
 
-**Mathematical status:** PROOF-DRAFT (Andersson Thm 5 dependency source-verified /
-Gate-A CLEARED; whole-theorem Gate-A review pending: OB-26)  
-**Computational status:** NONE  
+**Mathematical status:** INDEPENDENTLY-CHECKED (Gate-A: OB-26 2026-08-11 — Links A–D +
+RH-non-circularity CONFIRMED; CONDITIONAL→PASS after mod1–mod6. Scope: **one-sided
+non-forcing corollary of Andersson Theorem 5**, NOT standalone novelty — see novelty.md)  
+**Computational status:** NONE (analytic existence result; no finite certificate)  
+**Paper target:** Paper A — named corollary / remark ("Finite-Euler-factor non-forcing corollary to Andersson, Theorem 5")
 **Theorem ID:** C-euler-tail  
-**Program ref:** §8 (WP-C), §8.C.1–C.4  
-**Paper target:** Paper A (supporting section) or standalone if materially new
+**Program ref:** §8 (WP-C), §8.C.1–C.4
 
 ---
 
 ## Setting
 
-**Helson zeta functions.**  For a completely multiplicative function `χ: ℕ → ℂ`
-with `|χ(p)| = 1` for all primes `p`, define:
-
-```
-ζ_χ(s) = Π_p (1 − χ(p) p^{-s})^{-1}   (formal Euler product),
-```
-
-with meromorphic continuation to some region (Helson class; see Andersson 2024).
+**Helson zeta functions.**  For a completely multiplicative function `χ: ℕ → 𝕋`
+(`𝕋` the unit circle, so `|χ(p)| = 1` for all primes `p`) define the Dirichlet series
+`ζ_χ(s) = Σ_{n≥1} χ(n) n^{-s} = Π_p (1 − χ(p) p^{-s})^{-1}` (absolutely convergent, Euler
+product, for `Re(s) > 1`). This is the **Helson class** (Helson 1969; Seip 2020;
+Bochkov–Romanov 2022; Andersson 2024 §1). Individual members may or may not continue past
+`Re(s) = 1`.
 
 **Finite prime cutoff.**  Fix `P₀ > 0`.  Say `χ` is **`P₀`-standard** if
 `χ(p) = 1` for all primes `p ≤ P₀` (agrees with the Riemann ζ on the first
-`π(P₀)` Euler factors).
+`π(P₀)` Euler factors). The **observation map** is `O(ζ_χ) = (χ(p))_{p ≤ P₀} ∈ 𝕋^{π(P₀)}`;
+`P₀`-standard means `O = (1,…,1)`.
 
-**Target predicate:**
+**Target predicate (OB-26 mod1 — defined on the open strip, no undefined "nontrivial").**
+Let `S = {s ∈ ℂ : 0 < Re(s) < 1}` and let `H_S` be the Helson zeta functions admitting
+meromorphic continuation to `S`. For `ζ_χ ∈ H_S`,
 ```
-P(ζ_χ) = 1  ⟺  all nontrivial zeros of ζ_χ in the continuation region
-                 lie on the critical line Re(s) = 1/2.
+P_S(ζ_χ) = 1  ⟺  every zero ρ ∈ S of ζ_χ satisfies Re(ρ) = 1/2.
 ```
+(This avoids an undefined "nontrivial zero" notion — the Helson class carries no gamma
+factor or canonical trivial-zero set — and pins the predicate to a fixed region `S` rather
+than a per-object continuation domain. The construction below produces members continued to
+all of `ℂ`, hence in `H_S`.)
 
 ---
 
 ## Theorem C (finite Euler factors ⇏ critical-line zeros)
 
-**Theorem C.** For every finite prime cutoff `P₀` and every bounded region
-`Ω ⊂ {0 < Re(s) < 1}` with suitable boundary, there exists a Helson zeta function
-`ζ_χ` with `χ` being `P₀`-standard such that `ζ_χ` has a prescribed off-critical-line
-zero in `Ω`.
+**Theorem C (finite Euler factors ⇏ critical-line zeros).** For every finite prime cutoff
+`P₀` and every `z₁` with `0 < Re(z₁) < 1`, `Re(z₁) ≠ 1/2`, there exists a completely
+multiplicative unimodular `χ̃ : ℕ → 𝕋` with `χ̃(p) = 1` for all `p ≤ P₀` (so `ζ_{χ̃}` is
+`P₀`-standard), such that `ζ_{χ̃}` admits meromorphic continuation to `ℂ` and has a **simple
+zero at `z₁`**. In particular `ζ_{χ̃} ∈ H_S` and `P_S(ζ_{χ̃}) = 0`.
 
-**Consequence:** No criterion depending only on the first `π(P₀)` Euler factors
-can force all zeros of a Helson zeta function to lie on the critical line.
+**Consequence (one-sided non-forcing).** For the Helson class `H_S`, the observation
+`O(ζ_χ) = (1,…,1)` does **not** imply `P_S(ζ_χ) = 1`. Hence any rule depending only on `O`
+and declaring `P_S = 1` at the standard observation `(1,…,1)` is unsound on `H_S`. **No
+`P_S = 1` companion is needed for this one-sided non-forcing claim.**
+
+**Consequence (all-fiber strengthening — OB-26 Q3).** The same argument with the modified
+ratio `R_a(s) = Π_{p≤P₀}(1 − χ(p)p^{-s})/(1 − a_p p^{-s})` (which is holomorphic and zero-free
+on `Re(s) > 0` by the identical modulus argument, and installs the target Euler data
+`a = (a_p)_{p≤P₀} ∈ 𝕋^{π(P₀)}`) produces, for **every** observation value `a`, a Helson
+`ζ ∈ H_S` with `O(ζ) = a` and `P_S(ζ) = 0`. Therefore **no** `O`-only condition that is
+satisfiable by at least one realizable observation can be a *sufficient* criterion for
+`P_S = 1`. (This is the honest form of the broad "no finite-Euler-factor criterion forces
+critical-line zeros" statement; the vacuous always-false criterion is excluded.)
 
 **Method.**  The proof reduces to Andersson's prescribed-zero theorem
-(arXiv:2408.15713) for Helson zeta functions, plus a finite-Euler-factor
-modification argument.
+(arXiv:2408.15713v1, Theorem 5), plus a finite-Euler-factor modification argument. No RH,
+no Riemann ζ, no functional equation is used.
 
 ---
 
@@ -89,10 +106,12 @@ equals `0`.
 
 | Item | Status |
 |---|---|
-| Andersson Thm verified by theorem number | CLEARED — Theorem 5 (LaTeX label `thm5`), source-verified in `baseline/andersson-2408.15713/` |
-| Finite-Euler-factor zero preservation (Step 3) | PROOF-DRAFT — `R` holomorphic and zero-free on the whole open strip (zeros/poles on `Re(s)=0`); no "critical issue" |
-| Scope: Helson class only | STATED — does not apply to Selberg class or ζ |
-| Novelty check (standalone vs. lemma of A) | OPEN — see novelty.md |
+| Andersson Thm verified by theorem number | CLEARED — Theorem 5 (label `thm5`), source-verified in `baseline/andersson-2408.15713/` |
+| Finite-Euler-factor zero preservation (Step 3) | INDEPENDENTLY-CHECKED (OB-26 Link C) — `R` holomorphic and zero-free on the whole open strip |
+| Target predicate | DEFINED as `P_S` on `S={0<Re<1}` (OB-26 mod1) |
+| Broad consequence | one-sided + `R_a` all-fiber (OB-26 Q3); optional Cor-3 `P_S=1` companion |
+| Scope: Helson class only | STATED — Selberg/ζ NOT claimed (OB-26 mod6); see limitations.md |
+| Novelty | corollary of Andersson Thm 5 (OB-26 Q5 = option a) — see novelty.md |
 
 ---
 

@@ -40,7 +40,7 @@ problem.
 | OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | RESOLVED — GATE-A CONDITIONAL, Σ′ convention + anchors corrected 2026-08-11 |
 | OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | RESOLVED — CONFIRMED (Gate-A CONDITIONAL), checker deposited 2026-08-11 |
 | OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | RESOLVED — GATE-A CONDITIONAL→PASS, 8 mods integrated 2026-08-11 (D → INDEPENDENTLY-CHECKED, scope-extension positioning) |
-| OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | OPEN — send for review |
+| OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | RESOLVED — GATE-A CONDITIONAL→PASS, mod1–mod6 integrated 2026-08-11 (C → INDEPENDENTLY-CHECKED, one-sided corollary of Andersson Thm 5) |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -488,6 +488,34 @@ tests added (`test_c_finite_factor_orientation_correct`,
   **scope-extension/corollary** (NOT standalone novelty). With the Z_ζ-side INDEPENDENT-CHECKER
   (OB-19), **D is the FOURTH double-axis theorem** (after B2, G, B1). Regression test
   `test_d_gate_a_mods_integrated` added; new lint L22. Tests 75 → 76.
+
+## Resolved OB-26 outcome (integrated 2026-08-11) — C advances to INDEPENDENTLY-CHECKED
+
+- **OB-26 (C Gate-A review):** **GATE-A CONDITIONAL → PASS.** The referee independently
+  confirmed the existence core, Links A–D, and RH-non-circularity — including re-deriving the
+  finite-factor multiplier orientation (`8.6×10⁻²⁰` agreement) and the strip zero-freeness
+  (correct continuous minimum `1−2^{-0.01}=0.006907…`, not the sample `≈0.0088`). Verdict was
+  CONDITIONAL pending **6 textual mods**, all now integrated:
+  1. **target predicate** redefined as `P_S` on `S={0<Re(s)<1}` (the old "nontrivial zeros in
+     the continuation region" was undefined for a general Helson function — no gamma factor);
+  2. Theorem C now states explicit meromorphic continuation to `ℂ` + a simple zero at `z₁`;
+     homoglyph notation `ζ_χ̃=ζ_χ̃` fixed; analytic-continuation-uniqueness noted;
+  3. **consequence narrowed to one-sided** (`O=(1,…,1) ⇏ P_S=1`), plus the reviewer's `R_a`
+     **all-fiber strengthening** (every observation fiber has a `P_S=0` member ⇒ no `O`-only
+     condition true on some fiber is sufficient for `P_S=1`); optional same-fiber `P_S=1`
+     companion via **Andersson Corollary 3** (`cor3`, source-verified) recorded but not needed;
+  4. **novelty downgraded** to a corollary of Andersson Theorem 5 (Q5 = option a): Paper A
+     named remark, not a standalone barrier;
+  5. **citations fixed**: Helson 1969 (Ark. Mat. 8, not "Helson 1954"); Andersson
+     arXiv:2408.15713v1 Thm 5 label `thm5`; "faithfully transcribed with the source's `f→ζ_χ`
+     typo corrected" (not "verbatim"); Bayart 2002 marked background;
+  6. **numerical anchor** marked a grid sample-minimum (continuous exact min recorded);
+     unsupported "EXT-4a provably blocked" Selberg claim **narrowed** to "C neither constructs
+     nor claims Selberg members" (the impossibility is motivational, not proved here).
+  **C math axis PROOF-DRAFT → INDEPENDENTLY-CHECKED**, scope = **one-sided non-forcing
+  corollary of Andersson Theorem 5**. Computational axis stays NONE (analytic existence
+  result). Added `ANDERSSON-COROLLARY-3` to the ledger (15 claims); 3 C regression tests;
+  tests 82 → 85.
 
 ## What a returned verification should contain
 

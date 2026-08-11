@@ -1,7 +1,7 @@
 # Proof — Theorem C (finite Euler factors ⇏ critical-line zeros)
 
-**Status:** PROOF-DRAFT (Andersson Thm 5 dependency Gate-A CLEARED, source-verified in
-`baseline/andersson-2408.15713/`; whole-theorem Gate-A review pending: OB-26)  
+**Status:** INDEPENDENTLY-CHECKED (Gate-A PASS, OB-26 2026-08-11, after mod1–mod6; scope:
+one-sided non-forcing corollary of Andersson Theorem 5)  
 **Analytic / finite separation:** purely analytic; no finite certificate.
 
 ---
@@ -45,9 +45,12 @@ source file `Andersson_Mittag-Leffler_paper.tex` (tarball in
 Gate A status: **CLEARED**.
 
 **How used in Theorem C:** Take `U = ℂ` (or any connected domain containing `{Re(s) > 1}`),
-`Z = {z₁}` with `z₁ ∈ {0 < Re(z₁) < 1, Re(z₁) ≠ 1/2}` (one prescribed off-line zero,
-simple). The theorem yields `ζ_χ` with exactly one prescribed zero at `z₁` in the strip.
-Then the finite-factor modification (§3–§4) adjusts `χ` to be `P₀`-standard.
+and the **signed multiset** `𝒵` with `m_𝒵(z₁) = +1` (the `+` sign denoting a zero, multiplicity
+1) and `m_𝒵 = 0` elsewhere, where `z₁ ∈ {0 < Re(z₁) < 1, Re(z₁) ≠ 1/2}`. The single point
+has no limit point in `ℂ`, so Theorem 5's hypotheses hold; it yields a completely
+multiplicative unimodular `χ` with `ζ_χ` meromorphic on `ℂ` and a simple zero at `z₁`.
+Then the finite-factor modification (§3–§4) adjusts `χ` to be `P₀`-standard while preserving
+this zero (§3).
 
 **Note on scope:** Andersson's theorem is for the **entire** open half-plane `{Re(s) < 1}`
 (unconditionally), not just the critical strip. For Theorem C we only need one prescribed
@@ -93,6 +96,38 @@ By construction, `χ̃(p) = 1` for `p ≤ P₀`:
 ```
 with `χ̃(p) = 1` for `p ≤ P₀` and `χ̃(p) = χ(p)` for `p > P₀`. ✓
 
+The identity `ζ_χ · R = ζ_{χ̃}` first holds on `Re(s) > 1` (absolute convergence of both
+Euler products); since `ζ_χ` is meromorphic on `ℂ` (Theorem 5) and `R` is meromorphic on
+`ℂ`, the product `ζ_χ · R` is the meromorphic continuation of `ζ_{χ̃}`, and the identity
+extends to `ℂ` by uniqueness of analytic continuation. (This is why the formal Euler product
+is not treated as a full-plane identity directly — only the continued functions are.)
+
+---
+
+## §4.5. All-fiber strengthening and optional `P_S = 1` companion (OB-26 Q3)
+
+**All observation fibers (broad consequence).** Fix any target Euler data
+`a = (a_p)_{p ≤ P₀} ∈ 𝕋^{π(P₀)}`. Replace `R` by
+```
+R_a(s) := Π_{p ≤ P₀} L_p(s, a_p) / L_p(s, χ) = Π_{p ≤ P₀} (1 − χ(p) p^{-s}) / (1 − a_p p^{-s}).
+```
+Each factor's numerator vanishes only where `χ(p)p^{-s} = 1` and denominator only where
+`a_p p^{-s} = 1`; since `|χ(p)| = |a_p| = 1`, taking absolute values forces `p^{-Re(s)} = 1`,
+i.e. `Re(s) = 0`. So `R_a` is holomorphic and zero-free on `Re(s) > 0` (a fortiori on `S`),
+and `ζ_{χ_a} := ζ_χ · R_a` installs the Euler data `χ_a(p) = a_p` for `p ≤ P₀` while keeping
+the simple zero at `z₁`. Hence for **every** realizable observation `a` there is a Helson
+`ζ_{χ_a} ∈ H_S` with `O(ζ_{χ_a}) = a` and `P_S(ζ_{χ_a}) = 0`. Consequently no `O`-only
+condition satisfiable by at least one realizable `a` can be a *sufficient* criterion for
+`P_S = 1` (the vacuous always-false criterion is excluded). This is the honest broad form.
+
+**Optional same-fiber `P_S = 1` companion (not required for the non-forcing claim).** If a
+two-sided information obstruction is wanted (same observation, both `P_S = 0` and `P_S = 1`
+present), Andersson's **Corollary 3** (`\label{cor3}`, source line 196: "there exists an
+entire zero-free Helson zeta function") supplies, unconditionally, a Helson `ζ_0` with **no**
+zeros in `ℂ`; then `ζ_0 · R_a ∈ H_S` has observation `a`, is zero-free on `S`, so
+`P_S = 1`. This uses Corollary 3 (source-verified) — still no RH and no Riemann ζ. It is
+recorded as an option; Theorem C's stated one-sided non-forcing result does not need it.
+
 ---
 
 ## §5. Gate A: Andersson baseline — CLEARED
@@ -113,9 +148,11 @@ Gate A for the Andersson dependency is now cleared:
 
 | Step | Status |
 |---|---|
-| Andersson prescribed-zero (§2) | INDEPENDENTLY-CHECKED ✓ — Thm 5 (thm5), Gate A CLEARED |
-| R holomorphic, nonzero in strip (§3) | PROOF-DRAFT ✓ |
-| P₀-standardness of χ̃ (§4) | PROOF-DRAFT ✓ |
-| Scope: Helson class only | STATED ✓ |
-| Novelty (standalone vs. section of A) | OPEN — see novelty.md |
-| Davenport-Heilbronn separation (program §8.C.2) | STATED: DH lacks Euler product; Theorem C lacks functional equation; the two obstruction types are kept separate and NOT combined into a single example |
+| Andersson prescribed-zero (§2) | INDEPENDENTLY-CHECKED ✓ — Thm 5 (thm5), signed multiset m(z₁)=+1 |
+| R holomorphic, nonzero in strip (§3) | INDEPENDENTLY-CHECKED ✓ (OB-26 Link C) |
+| P₀-standardness of χ̃ + analytic-continuation identity (§4) | INDEPENDENTLY-CHECKED ✓ (OB-26 Link B, D) |
+| All-fiber R_a + optional Cor 3 companion (§4.5) | PROOF-DRAFT ✓ (OB-26 Q3; same modulus argument) |
+| Target predicate P_S on strip S | DEFINED (OB-26 mod1) |
+| Novelty: corollary of Andersson Thm 5 | DECIDED (OB-26 Q5 = option a) — see novelty.md |
+| Scope: Helson class only; Selberg/ζ NOT claimed | STATED (OB-26 mod6) — see limitations.md |
+| Davenport-Heilbronn separation (program §8.C.2) | STATED: kept logically separate, NOT combined with C |

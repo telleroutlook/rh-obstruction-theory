@@ -30,3 +30,12 @@ the critical strip.
 publication requires Gate A verification of Andersson + a more refined claim
 (e.g., zero at a specifically bounded height depending on P₀, or in the
 Selberg class).
+
+**VERDICT (OB-26 Gate-A review, 2026-08-11): option (a) — corollary.** The independent
+review determined C's mathematical increment is Andersson Theorem 5 plus a standard finite
+Euler-factor ratio and its one-line modulus argument. It is **not** a materially broader
+zero-construction theorem (no `P₀`-dependent height bound, no extension beyond Helson).
+Publish as a **named corollary / remark in Paper A**, "Finite-Euler-factor non-forcing
+corollary to Andersson, Theorem 5", explicitly attributed — not as a standalone note or
+standalone barrier. C advanced to **INDEPENDENTLY-CHECKED** at this (corollary) scope after
+the OB-26 mod1–mod6 textual fixes.

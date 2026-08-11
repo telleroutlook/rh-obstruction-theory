@@ -165,6 +165,26 @@ claims:
       itself; Thm 5 (thm5) is the most general (signed multiset, maximal domain).
       For Theorem C we use Thm 5 with a single prescribed zero at z_1 in the open strip.
 
+  - id: ANDERSSON-COROLLARY-3
+    statement: >
+      (Corollary 3 of arXiv:2408.15713v1, label cor3) There exists an entire zero-free
+      Helson zeta-function zeta_chi (completely multiplicative unimodular chi; no zeros in C).
+    source: "arXiv:2408.15713v1 (Andersson_Mittag-Leffler_paper.tex), Corollary 3 (label: cor3, source line 196)"
+    paper_title: "Mittag-Leffler type theorems for Helson zeta-functions"
+    author: "Johan Andersson"
+    submitted: "2024-08-28"
+    peer_reviewed: false        # preprint
+    mathematical: INDEPENDENTLY-CHECKED   # statement verified against LaTeX source (OB-26)
+    computational: NONE
+    usable_as_premise: true
+    gate_a_status: CLEARED
+    premise_caveat: >
+      Preprint (not peer-reviewed). OPTIONAL for Theorem C: supplies a same-observation
+      P_S=1 companion (zero-free on the strip) for a two-sided information obstruction;
+      NOT needed for C's one-sided non-forcing claim. Uses no RH, no Riemann zeta.
+    note: >
+      Verified in-source during OB-26 (2026-08-11). Used only in C proof.md §4.5 as an option.
+
   - id: RIEMANN-ARGUMENT-COUNTING-IDENTITY
     statement: >
       The exact identity N(t) = A(t) + S(t) where A(t) = theta(t)/pi + 1,
