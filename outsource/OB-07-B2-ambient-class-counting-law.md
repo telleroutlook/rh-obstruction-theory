@@ -59,6 +59,21 @@ This is typically a large positive integer, so:
 N_{𝒵_-}(T) ≠ N_{𝒵_+}(T)   for T near T_*.
 ```
 
+**Observation map and Σ' convention.** For a test function φ_j and 𝒵 ∈ 𝔛_sym, define
+the Weil symmetric summation over each orbit {ρ, ρ̄, 1−ρ, 1−ρ̄}:
+```
+O_j(𝒵) := Σ_{ρ ∈ 𝒵, Im(ρ)>0} [φ_j(ρ) + φ_j(ρ̄) + φ_j(1−ρ) + φ_j(1−ρ̄)].
+```
+For an on-line pair L(t) = {1/2+it, 1/2−it} with t > 0: since 1−ρ = 1/2−it = ρ̄, the
+four terms reduce to 4 Re φ_j(1/2+it). For the off-line quartet Q = {3/4+iT, 3/4−iT,
+1/4+iT, 1/4−iT}, the four orbit elements are all already in Q, so O_j(Q) = sum of φ_j
+over all four elements = 4 Re[φ_j(3/4+iT) + φ_j(1/4+iT)].
+
+**The observation map:**
+```
+O_Φ : 𝔛_sym → ℝ^m,   O_Φ(𝒵) = (O_j(𝒵))_{j=1}^{m}.
+```
+
 **The paper-A theorem statement.** Paper A claims: for any FIXED finite test family Φ
 (m tests), there exist 𝒵_+ ∈ 𝔛_sym (P = 1) and 𝒵_- ∈ 𝔛_sym (P = 0) with
 O_Φ(𝒵_-) = O_Φ(𝒵_+) exactly.
@@ -204,32 +219,25 @@ All outcomes are decisive. "The current definition might be ok" is not CONFIRMED
 
 ## Numerical anchor (sanity only — not an input)
 
-For m = 1, φ_1(ρ) = 1 − (1−1/ρ) = 1/ρ (Li coefficient λ_1):
-```
-O_1(𝒵) = Σ'_{ρ ∈ 𝒵} 1/ρ = Σ_{Im(ρ)>0} [1/ρ + 1/ρ̄ + 1/(1−ρ) + 1/(1−ρ̄)]
-        = Σ_{Im(ρ)>0} [2 Re(1/ρ) + 2 Re(1/(1−ρ))].
-```
+For m = 1, φ_1(ρ) = 1/ρ (Li coefficient λ_1). Using the Σ' convention defined above:
 
-For 𝒵_+ = {1/2+i, 1/2−i, 1/2+2i, 1/2−2i} (4 on-line zeros):
+For 𝒵_+ = {1/2+i, 1/2−i, 1/2+2i, 1/2−2i} (two on-line pairs at t=1, t=2):
 ```
-O_1(𝒵_+) = 2 · [Re(1/(1/2+i)) + Re(1/(1/2+2i))]
-              + 2 · [Re(1/(1/2+i)) + Re(1/(1/2+2i))] (from 1-ρ = 1/2−i·Im(ρ) = same)
-          = 4 · [1/2 / (1/4+1) + 1/2 / (1/4+4)]
-          = 4 · [2/5 + 2/17] = 4 · (34+10)/85 = 4 · 44/85 = 176/85.
+O_1(𝒵_+) = 4 Re(1/(1/2+i)) + 4 Re(1/(1/2+2i))
+           = 4 · [1/2/(1/4+1)] + 4 · [1/2/(1/4+4)]
+           = 4 · [2/5] + 4 · [2/17]
+           = 8/5 + 8/17 = (136 + 40)/85 = 176/85.
 ```
 
 For a quartet Q(3/4, T=1) = {3/4+i, 3/4−i, 1/4+i, 1/4−i}:
 ```
-O_1(Q) = 2[Re(1/(3/4+i)) + Re(1/(1/4+i))]
-          + 2[Re(1/(1/4−i)) + Re(1/(3/4−i))]   (from symmetry ρ↦1-ρ)
-        = 4 · [Re(1/(3/4+i)) + Re(1/(1/4+i))]
+O_1(Q) = 4 · [Re(1/(3/4+i)) + Re(1/(1/4+i))]
         = 4 · [3/4/(9/16+1) + 1/4/(1/16+1)]
         = 4 · [3/4 · 16/25 + 1/4 · 16/17]
-        = 4 · [12/25 + 4/17] = 4 · (204+100)/425 = 4 · 304/425 = 1216/425.
+        = 4 · [12/25 + 4/17] = 4 · (204+100)/425 = 1216/425.
 ```
 
-This matches the sanity check in proof.md §4.5 (d_1(T=1) = 1216/425 ✓).
-For m=1, solving C · n + R · d = 0: C_{11} = 4(1−T_1(x_1)) with one on-line pair
-gives a scalar equation; R and n are determined. The counting law check:
-N_{𝒵_-}(1+ε) = 2(M+n_1) + R (for T_* = 1). This is finite for finite M, n_1, R.
+Both values match the sanity check in the B2 proof (proof.md §4.5): d_1(T=1) = 1216/425.
+For m=1 with C_{11} = 4(1−T_1(x_1)) and one on-line pair, the counting-law check is:
+N_{𝒵_-}(1+ε) = 2(M+n_1) + 2 (the two Q-elements with Im > 0), a finite integer.
 If (*) requires growth T log T, these finite multisets do not satisfy it.

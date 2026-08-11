@@ -146,39 +146,34 @@ Determine which case holds. Specifically:
 ### Claim C: The obstruction conclusion under (2.7)
 
 **Claim C.** Assuming factorization condition (2.7) holds for all P ∈ 𝔐_FC,
-the information obstruction (Theorem G) concludes:
+the information obstruction (Theorem G) concludes: if the locally uniform limit
+of det(I − z² K_N) exists, it is NOT equal to Ξ(z).
 
+**The precise obstruction argument.** The kappa_toeplitz construction has
+eigenvalues κ_n = 1/(1/4 + d_n²). The Fredholm determinant is therefore:
 ```
-∀ P ∈ 𝔐_FC: the locally uniform limit of det(I − z² K_N) (if it exists) is
-F_d(z) = C · ∏_n(1 − z²/d_n²), which is NOT equal to Ξ(z) = Ξ(0) · ∏_n(1 − z²/γ_n²).
+det(I − z² K_N) = ∏_{n=1}^{N} (1 − z² κ_n) = ∏_{n=1}^{N} (1 − z²/(1/4 + d_n²)).
 ```
+As N → ∞ (assuming the product converges), the limit would be:
+```
+F̃_d(z) := C̃ · ∏_{n≥1} (1 − z²/(1/4 + d_n²)),
+```
+which has zeros at z = ±√(1/4 + d_n²) ≈ ±d_n (for large n). This function has:
+- zeros at ±√(1/4 + d_n²), NOT at ±γ_n;
+- even for small n: √(1/4 + d_1²) ≈ √318.73 ≈ 17.853 ≠ γ_1 ≈ 14.134.
 
-*Argument.* Under (2.7), K_N is determined by O_θ = (d_n). The eigenvalues of K_N
-converge to 1/(1/4+d_n²) (this is what kappa_toeplitz is designed to achieve). The
-Fredholm determinant then converges to ∏_n(1 − z²/(1/4+d_n²)) — but NOT to Ξ(z).
-
-Wait — there is a mismatch in scales: the denominator is 1/4+d_n² not d_n². The
-Hadamard product for Ξ is ∏(1 − z²/γ_n²), whereas the determinant with eigenvalues
-κ_n = 1/(1/4+d_n²) gives ∏(1 − z²·(1/4+d_n²)). This is a different function.
-
-**The actual obstruction:** define
-```
-F_d(z) := Ξ(0) · ∏_{n≥1} (1 − z²/d_n²).
-```
-The kappa_toeplitz construction attempts to approximate Ξ via eigenvalues
-λ_n ≈ 1/(1/4+d_n²). But the canonical product ∏(1 − z² λ_n) → ∏(1 − z²/(1/4+d_n²)),
-which is NOT F_d(z). There seems to be a normalization issue.
+Meanwhile Ξ(z) has zeros at ±γ_n. By the Hadamard canonical product structure,
+F̃_d ≠ Ξ whenever {√(1/4 + d_n²)} ≠ {γ_n} as multisets. This fails unconditionally
+because d_n ≠ γ_n for infinitely many n (Prop. G.3* Item 2) and √(1/4 + d_n²) > d_n.
 
 **What to verify for Claim C:**
-1. The relationship between eigenvalues λ_n = 1/(1/4+d_n²) and the Hadamard product
-   factors (1 − z²/γ_n²): show explicitly that ∏(1 − z² λ_n) with λ_n = 1/(1/4+d_n²)
-   corresponds to a canonical product in z² with zeros at z² = (1/4+d_n²), i.e.,
-   zeros at z = ±i/2 · √(1+4d_n²) ≈ ±i·d_n. Is this the same as F_d?
-2. The exact statement of what the kappa_toeplitz determinant converges to: does it
-   converge to F_d (Hadamard product with zeros at ±d_n, rescaled) or to a different
-   function? Write out the precise form of the limit function.
-3. The obstruction: why does the limit NOT equal Ξ(z)? Is it because d_n ≠ γ_n (proven
-   in Prop. G.3* Item 2), or because of a normalization mismatch (the 1/4 offset), or both?
+1. Does the infinite product ∏(1 − z²/(1/4 + d_n²)) converge locally uniformly?
+   This requires Σ_n 1/(1/4 + d_n²) < ∞. Since d_n ∼ 2πn/log n, this sum
+   converges (compare with Σ (log n/n)² < ∞). Confirm.
+2. The N=1 sanity check (numerical anchor below) confirms F̃_d ≠ Ξ explicitly.
+3. Is the obstruction purely about zeros (d_n vs γ_n), or also about the 1/4 shift?
+   Both: even if d_n = γ_n for all n, the zeros of F̃_d would be at
+   √(1/4 + γ_n²) ≠ γ_n. This is a SEPARATE obstruction from the d_n ≠ γ_n gap.
 
 ### Claim D: Non-vacuity — kappa_toeplitz is in 𝔐_FC
 

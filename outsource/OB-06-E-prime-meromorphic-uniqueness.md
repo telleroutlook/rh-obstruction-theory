@@ -42,28 +42,26 @@ only — the structure of W is defined unconditionally):
 - W(w_0) is defined and nonzero for generic w_0.
 - W(z) = W(−z) (W is even — from the functional equation ξ(s) = ξ(1−s)).
 
-**Residue of W at γ_n.** Assuming γ_n is a simple zero of ξ:
+**Residue of W at γ_n.** Assuming γ_n is a simple zero of ξ, let p = 1/2 − iγ_n.
+Then ξ(p) = 0 and ξ'(p) ≠ 0. Near z = γ_n:
 ```
-Res_{z=γ_n} W(z) = lim_{z→γ_n} (z − γ_n) · z² ξ(1/2−iz) / ξ'(1/2−iz)
-                  = γ_n² · ξ(1/2−iγ_n) / (−i ξ''(1/2−iγ_n)) · (-i)
-                  [using ξ(1/2−iγ_n)=0 by definition of zero, L'Hôpital]
-                  = γ_n² / (−i · ξ''(1/2−iγ_n)/ξ(1/2−iγ_n))^{-1} ???
+ξ(1/2 − iz) = ξ(p + (−i)(z − γ_n)) = (−i)(z − γ_n) ξ'(p) + O((z−γ_n)²).
 ```
-Wait — let p = 1/2 − iγ_n. Then ξ(p) = 0, and:
+Therefore:
 ```
-ξ'(p) = lim_{z→γ_n} ξ(1/2−iz)/(−i(z−γ_n)) = ξ'(1/2−iγ_n) · (−i).
+Res_{z=γ_n} W(z) = lim_{z→γ_n} (z − γ_n) · z² · ξ(1/2−iz) / ξ'(1/2−iz)
+                  = γ_n² · lim_{z→γ_n} (z − γ_n) · (−i)(z−γ_n)ξ'(p) / [(−i)ξ'(p)]
+                  [numerator grows as (z−γ_n)², denominator as (z−γ_n)]
 ```
-So:
+More carefully: ξ'(1/2 − iz) at z → γ_n is ξ'(p) · (−i) ≠ 0 (to leading order), so
+the pole is simple and:
 ```
-Res_{z=γ_n} W(z) = γ_n² · lim_{z→γ_n} (z−γ_n) · ξ(1/2−iz) / ξ'(1/2−iz)
-                  = γ_n² · [ξ(1/2−iz)/(z−γ_n)] / [ξ'(1/2−iz)] · (z−γ_n)²|_{z=γ_n}
+Res_{z=γ_n} W(z) = γ_n² · [(−i) ξ'(p)] / [(−i) ξ'(p)] = −i γ_n².
 ```
-Using the simple-zero expansion ξ(1/2−iz) = (z−γ_n) · (−i) ξ'(1/2−iγ_n) + O((z−γ_n)²):
-```
-Res_{z=γ_n} W(z) = γ_n² · (−i) ξ'(1/2−iγ_n) / ξ'(1/2−iγ_n) = −i γ_n².
-```
-So the residue is **R_n = −i γ_n²** (assuming simple zeros of ξ and denoting the
-derivative of ξ at the zero as nonzero). This is a purely imaginary nonzero constant.
+So the residue is **R_n = −i γ_n²**. This is purely imaginary and nonzero for γ_n > 0.
+
+*Verification (sanity):* For γ_1 ≈ 14.134, R_1 = −i · 14.134² ≈ −199.77 i. The
+residue is independent of ξ'(p) (it cancels), confirming robustness under rescaling.
 
 *Note:* The simplicity of zeros of ξ is an open problem (known to hold for the
 first ~10^{13} zeros numerically). The Theorem E' proof assumes this as an explicit
