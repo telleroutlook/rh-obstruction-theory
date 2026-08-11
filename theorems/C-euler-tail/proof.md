@@ -1,6 +1,7 @@
 # Proof — Theorem C (finite Euler factors ⇏ critical-line zeros)
 
-**Status:** PROOF-DRAFT (conditional on Andersson baseline verification)  
+**Status:** PROOF-DRAFT (Andersson Thm 5 dependency Gate-A CLEARED, source-verified in
+`baseline/andersson-2408.15713/`; whole-theorem Gate-A review pending: OB-26)  
 **Analytic / finite separation:** purely analytic; no finite certificate.
 
 ---
@@ -20,8 +21,10 @@ R(s; P₀, χ) := Π_{p ≤ P₀} L_p(s, 1) / L_p(s, χ)
              = Π_{p ≤ P₀} (1 − χ(p) p^{-s}) / (1 − p^{-s}).
 ```
 
-This is a finite product of rational functions in `p^{-s}`, hence a finite
-exponential polynomial (Dirichlet-type) in `s`, meromorphic on all of `ℂ`.
+This is a **ratio of two finite Euler products** (a finite product of rational
+functions in `p^{-s}`), meromorphic on all of `ℂ`. It is **not** a Dirichlet
+polynomial: the denominator factors `(1 − p^{-s})` are inverted, so `R` has poles
+(at the zeros of the denominator). Its zeros and poles are located in §3.
 
 The modified function is `ζ_χ̃(s) = ζ_χ(s) · R(s; P₀, χ)`.
 

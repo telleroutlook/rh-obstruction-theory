@@ -14,3 +14,6 @@ docs/HANDOFF.md
 # proofctl runtime outputs (attestations, CAS blobs) — not source
 .proofctl/attestations/
 .proofctl/cas/
+
+# Extracted arXiv sources (keep only the .gz tarball + PROVENANCE.md)
+baseline/**/src/

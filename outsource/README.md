@@ -40,6 +40,7 @@ problem.
 | OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | RESOLVED — GATE-A CONDITIONAL, Σ′ convention + anchors corrected 2026-08-11 |
 | OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | RESOLVED — CONFIRMED (Gate-A CONDITIONAL), checker deposited 2026-08-11 |
 | OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | OPEN — send for review |
+| OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -380,6 +381,55 @@ E incompatibility) + six Gate-A questions. D-specific delicate points built in:
   verdict.
 Non-circularity: operator side is pure spectral geometry; Riemann side uses only the RvM
 count. Uses REVIEW_PROMPT.md common header + Block A.
+
+## Fifth Gate-A push OB-26 (drafted 2026-08-11) — C finite-Euler-factor non-forcing
+
+Applies the Gate-A template to C. C is structurally unlike B1/B2/D/G: it is **not
+self-contained analysis** but an *import* of one external theorem (Andersson 2024, Thm 5)
+plus a short finite-factor modification, so the review targets (a) whether the citation
+covers the object used and (b) the honest novelty increment. Prerequisites done first:
+- **Andersson Thm 5 source-verified** and a **PROVENANCE.md deposited** in
+  `baseline/andersson-2408.15713/` (label `thm5`, line 203; `.gz` SHA
+  `511fa800…f98a67c0`; statement transcribed verbatim; noted **unconditional**).
+- **Load-bearing bug fixed before shipping (script-verified):** `statement.md` Step 2/§3
+  had the finite-factor multiplier **inverted** — it defined `R = Π(1−p^{-s})/(1−χ(p)p^{-s})`
+  whereas the correct `ζ_χ̃/ζ_χ = Π(1−χ(p)p^{-s})/(1−p^{-s})` (numerator carries `χ`;
+  verified at `s=0.7+3i`, `P₀=3`: correct form matches to machine precision, inverted form
+  gives a different value). `proof.md` §1 was already correct; only `statement.md` carried
+  the inversion (a paste-orientation slip).
+- **Pseudo-problem removed:** the old Step 3 "critical issue — `R` may vanish near `z_j`,
+  push `Im(z_j)` large" is deleted; `R` is holomorphic and **nowhere zero on the whole
+  open strip** (all zeros/poles on `Re(s)=0` since `|χ(p)|=1`), so `R(z₁)≠0` automatically.
+  Also fixed the mischaracterization "Dirichlet polynomial of degree ≤ P₀^{1/2}" (`R` is a
+  **ratio of finite Euler products**, not a polynomial).
+- **Stale status fixed:** `limitations.md` §3 said C is "BLOCKED until Andersson
+  source-verified" — reconciled to Gate-A CLEARED.
+
+Four links (A citation-covers-object, B multiplier-orientation+telescoping, C
+zero-freeness-no-cancellation, D `ζ_χ̃` stays Helson) + seven Gate-A questions. C-specific
+delicate points built in:
+- **Q3 (target framing — the subtle one):** C exhibits a `P₀`-standard object with `P=0`.
+  A `P=1` fiber-mate produced *unconditionally* is not obviously available, and the tempting
+  "`ζ` itself" has `P=1 ⟺ RH` (**forbidden**). Asks the reviewer to decide whether the
+  **one-sided** non-forcing statement is logically sufficient, or whether a `P=1` companion
+  is needed (and if so, whether Andersson Thm 5 with `𝒵 ⊂ {Re(s)=1/2}` supplies one
+  without RH). This is the non-circularity crux for C.
+- **Q5 (novelty honesty — the decisive question):** C = Andersson + a one-line zero-free
+  ratio. Explicitly offers (a) one-paragraph corollary, (b) modest genuine increment, (c)
+  materially broader — and asks for the honest publication verdict. An honest "corollary of
+  Andersson Thm 5, publish as a remark in Paper A, not a standalone barrier" is a valid,
+  first-class outcome.
+- **Q4 (Andersson's own finite-set remark):** asks whether Andersson's construction already
+  permits fixing finitely many `χ(p)=1` directly (which would make even Step 2 redundant).
+- **Q6 (scope/escape, EXT-4a):** Helson-only; Selberg extension provably blocked; DH
+  comparison kept logically separate.
+Non-circularity: Andersson Thm 5 is unconditional; the obstruction is one-sided (a `P=0`
+witness), no `P=1`-via-RH companion. Uses REVIEW_PROMPT.md common header + Block A. Passed
+PROMPT_LINT (L5/L6/L18/L19/L21 + self-containment grep clean; the "critical line" hits are
+all target-definition or RH-trap-warning context, none assert ζ-zero reality). 4 regression
+tests added (`test_c_finite_factor_orientation_correct`,
+`test_c_r_zero_free_pseudo_issue_removed`, `test_c_andersson_provenance_deposited`,
+`test_c_no_stale_blocked_status`); tests 71 → 75.
 
 ## Resolved OB-24 outcome (integrated 2026-08-11) — B1 computational axis restored (R-atom)
 

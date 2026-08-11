@@ -39,10 +39,14 @@ The Davenport–Heilbronn comparison (functional equation without Euler product
 axioms together still permit off-line zeros" — this would require a single
 function violating both, which is NOT constructed here.
 
-## 3. Conditional on Andersson Gate A
+## 3. Andersson Gate A — CLEARED
 
-Theorem C is BLOCKED until arXiv:2408.15713 is source-verified and added to
-CLAIM_LEDGER.yaml.  See proof.md §5.
+The load-bearing Andersson dependency is **source-verified**: arXiv:2408.15713,
+**Theorem 5** (LaTeX label `thm5`), transcribed and checked against the source tarball
+in `baseline/andersson-2408.15713/` (see `PROVENANCE.md` there and dependencies.yaml).
+Theorem C is therefore **PROOF-DRAFT** (no longer CONDITIONAL on the citation). The
+remaining gate is a whole-theorem Gate-A mathematical review (OB-26), which also decides
+the novelty question in §5.
 
 ## 4. Prescribed zeros in a bounded region only
 

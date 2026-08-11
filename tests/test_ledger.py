@@ -440,6 +440,55 @@ def test_c_davenport_heilbronn_kept_separate():
         "C proof.md must keep Davenport-Heilbronn logically separate"
 
 
+def test_c_finite_factor_orientation_correct():
+    """OB-26 fix: the finite-factor multiplier R must carry chi(p) in the NUMERATOR
+    (R = prod (1 - chi(p) p^-s)/(1 - p^-s)). The inverted orientation is a load-bearing
+    bug (script-verified: only this orientation equals zeta_chi-tilde / zeta_chi)."""
+    stmt = (C_DIR / "statement.md").read_text()
+    proof = (C_DIR / "proof.md").read_text()
+    # Correct orientation string must be present in both.
+    correct = "(1 − χ(p) p^{-s}) / (1 − p^{-s})"
+    assert correct in stmt, "statement.md must use the correct R orientation (chi in numerator)"
+    assert correct in proof, "proof.md must use the correct R orientation (chi in numerator)"
+    # The inverted orientation must NOT appear as the DEFINITION of R (Step 2 bug).
+    inverted = "R(s) = Π_{p ≤ P₀} (1 − p^{-s}) / (1 − χ(p) p^{-s})"
+    assert inverted not in stmt, "statement.md still defines R with the inverted orientation"
+
+
+def test_c_r_zero_free_pseudo_issue_removed():
+    """OB-26 fix: R is holomorphic and nowhere zero on the whole open strip, so the old
+    'critical issue -- R may vanish, push Im(z_j) large' resolution is a pseudo-problem
+    and must be removed."""
+    stmt = (C_DIR / "statement.md").read_text()
+    assert "Dirichlet polynomial of degree" not in stmt, \
+        "R is a ratio of Euler factors, not a Dirichlet polynomial of degree <= P0^{1/2}"
+    assert "For `Im(z_j)` sufficiently large" not in stmt, \
+        "the 'push Im(z_j) large' pseudo-resolution must be removed"
+    # positive assertion: zero-freeness on the whole open strip stated
+    assert "nowhere zero on the" in stmt and "open strip" in stmt, \
+        "statement.md must assert R is zero-free on the whole open strip"
+
+
+def test_c_andersson_provenance_deposited():
+    """OB-26: Andersson baseline must have a PROVENANCE.md recording Theorem 5 + SHA."""
+    prov = ROOT / "baseline" / "andersson-2408.15713" / "PROVENANCE.md"
+    assert prov.exists(), "Andersson PROVENANCE.md must be deposited"
+    text = prov.read_text()
+    assert "Theorem 5" in text and "thm5" in text, "PROVENANCE must record Theorem 5 / thm5"
+    assert "511fa8002fe7224763760225ff58f5f34ea5292499a21449d0810760f98a67c0" in text, \
+        "PROVENANCE must pin the .gz SHA-256"
+    assert "unconditional" in text.lower(), \
+        "PROVENANCE must note Andersson Thm 5 is unconditional (RH-trap guard)"
+
+
+def test_c_no_stale_blocked_status():
+    """OB-26: limitations.md §3 must no longer say C is BLOCKED (Andersson is cleared)."""
+    lim = (C_DIR / "limitations.md").read_text()
+    assert "BLOCKED until arXiv:2408.15713 is source-verified" not in lim, \
+        "stale 'BLOCKED until Andersson source-verified' must be gone"
+    assert "CLEARED" in lim, "limitations.md must reflect Andersson Gate-A CLEARED"
+
+
 # ---- D-spectral-asymptotic theorem scaffold tests ----
 
 D_DIR = ROOT / "theorems" / "D-spectral-asymptotic"

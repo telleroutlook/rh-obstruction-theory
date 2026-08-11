@@ -1,6 +1,7 @@
 # Theorem C — Finite Euler Factors Do Not Force Critical-Line Zeros
 
-**Mathematical status:** PROOF-DRAFT (conditional on Andersson + finite-Euler modification)  
+**Mathematical status:** PROOF-DRAFT (Andersson Thm 5 dependency source-verified /
+Gate-A CLEARED; whole-theorem Gate-A review pending: OB-26)  
 **Computational status:** NONE  
 **Theorem ID:** C-euler-tail  
 **Program ref:** §8 (WP-C), §8.C.1–C.4  
@@ -55,31 +56,32 @@ region, there exists a Helson zeta function `ζ_χ` (with `|χ(p)| = 1`) that ha
 zeros at `z₁, …, z_k`.
 
 **Step 2 (Finite-factor modification).** Given such `ζ_χ`, define
-`ζ_χ̃ := ζ_χ · Π_{p ≤ P₀} (1 − χ̃(p) p^{-s}) / (1 − χ(p) p^{-s})`
-where `χ̃(p) = 1` for `p ≤ P₀`.  This replaces the first `π(P₀)` Euler factors
-with the standard ones.
+`ζ_χ̃ := ζ_χ · R(s)` with the finite-factor **ratio of Euler factors**
+```
+R(s) := Π_{p ≤ P₀} (1 − χ(p) p^{-s}) / (1 − p^{-s})       (χ̃(p) = 1 for p ≤ P₀),
+```
+which replaces the first `π(P₀)` Euler factors of `ζ_χ` by the standard ones
+`(1 − p^{-s})^{-1}` (see proof.md §1 for the telescoping; verify by cancelling
+`ζ_χ`'s own `p ≤ P₀` factors). Note the orientation: `R = Π L_p(s,1)/L_p(s,χ) =
+Π (1 − χ(p)p^{-s})/(1 − p^{-s})` — the numerator carries `χ(p)`. `R` is a **ratio
+of two finite Euler products**, meromorphic on `ℂ`; it is NOT a Dirichlet
+polynomial (the denominator `(1 − p^{-s})` is inverted), so no "degree `≤ P₀^{1/2}`"
+statement applies.
 
-The finite-factor ratio `R(s) = Π_{p ≤ P₀} (1 − p^{-s}) / (1 − χ(p) p^{-s})`
-is a Dirichlet polynomial (finite product, holomorphic and nonzero on a region
-that excludes the zeros and poles of the factors).
-
-**Step 3 (Zero preservation).** The zeros of `ζ_χ̃ = ζ_χ · R` include:
-- The zeros of `ζ_χ` that are not zeros of `1/R` (the original prescribed zeros,
-  if `R(z_j) ≠ 0`).
-- The zeros of `R` (known, bounded, from the Dirichlet polynomial part).
-
-**Critical issue:** The factor `R(s)` may vanish at or near the prescribed zeros
-`z_j`, canceling them.  This requires showing `R(z_j) ≠ 0` for the chosen `z_j`.
-
-**Resolution:** Choose `z_j` in a region where the Dirichlet polynomial
-`R(s) = Π_{p ≤ P₀} [(1 − p^{-s}) / (1 − χ(p) p^{-s})]` is bounded away from zero.
-Since `R` is an explicit finite Dirichlet polynomial of degree `≤ P₀^{1/2}`, its
-zeros are finitely many and explicitly bounded.  For `Im(z_j)` sufficiently large
-(or in a suitable region), `|R(z_j)| ≥ c > 0` is guaranteed by standard Dirichlet
-polynomial bounds.
+**Step 3 (Zero preservation — no cancellation possible).** Every factor of `R` has
+its zeros (from `1 − χ(p)p^{-s} = 0`) and poles (from `1 − p^{-s} = 0`) on the line
+`Re(s) = 0`, since `|χ(p)| = 1` forces `p^{-s} = χ(p)` or `p^{-s} = 1` to have
+`Re(s) = 0` (see proof.md §3). Hence **`R` is holomorphic and nowhere zero on the
+entire open strip `0 < Re(s) < 1`**. Therefore, for the prescribed `z_j` in the open
+strip, `R(z_j) ≠ 0` **automatically** — there is no "critical issue" and no need to
+push `Im(z_j)` large. The zero `z_j` of `ζ_χ` is preserved exactly in `ζ_χ̃`.
 
 **Step 4 (P₀-standardness).** By construction, `χ̃(p) = 1` for `p ≤ P₀`, so
-`ζ_χ̃` is `P₀`-standard.  It has the prescribed off-line zeros (with the caveat of Step 3).
+`ζ_χ̃` is `P₀`-standard, and it retains the prescribed off-line zero(s) `z_j`
+(Step 3, unconditionally in the open strip). Moreover `ζ_χ̃` is itself a Helson
+zeta function (its coefficient `χ̃` is completely multiplicative and unimodular:
+`χ̃(p) = 1` for `p ≤ P₀`, `= χ(p)` for `p > P₀`), so `P(ζ_χ̃)` is well-defined and
+equals `0`.
 
 ---
 
@@ -87,8 +89,8 @@ polynomial bounds.
 
 | Item | Status |
 |---|---|
-| Andersson Thm verified by theorem number | PENDING (source not in baseline/) |
-| Finite-Euler-factor zero preservation (Step 3) | PROOF-DRAFT — standard Dirichlet polynomial zero-free region argument |
+| Andersson Thm verified by theorem number | CLEARED — Theorem 5 (LaTeX label `thm5`), source-verified in `baseline/andersson-2408.15713/` |
+| Finite-Euler-factor zero preservation (Step 3) | PROOF-DRAFT — `R` holomorphic and zero-free on the whole open strip (zeros/poles on `Re(s)=0`); no "critical issue" |
 | Scope: Helson class only | STATED — does not apply to Selberg class or ζ |
 | Novelty check (standalone vs. lemma of A) | OPEN — see novelty.md |
 

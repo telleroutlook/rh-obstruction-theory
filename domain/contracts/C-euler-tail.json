@@ -1,7 +1,7 @@
 {
   "contract_version": "2",
   "claim_id": "C-euler-tail-theorem",
-  "note": "Theorem C (WP-C). Finite Euler factors do not force critical-line zeros in the Helson class. PROOF-DRAFT conditional on Andersson Gate A verification.",
+  "note": "Theorem C (WP-C). Finite Euler factors do not force critical-line zeros in the Helson class. PROOF-DRAFT: Andersson Thm 5 dependency source-verified (Gate A CLEARED); whole-theorem Gate-A review pending (OB-26).",
 
   "theorem_id": "C-euler-tail",
   "paper": "A (supporting section) or standalone short note",
@@ -38,7 +38,7 @@
     "note": "CONDITIONAL on Andersson Gate A.",
     "class": "PASS — Helson class membership checkable",
     "non_vacuity": "PASS — chi=1 (zeta itself) is a member; chi=Dirichlet characters are members",
-    "target": "PASS — zeta_chi_tilde has off-line zero; reference chi=1 has (conjectured) on-line zeros",
+    "target": "ONE-SIDED — zeta_chi_tilde is a P_0-standard member with an off-line zero (P=0), constructed unconditionally. The 'P=1 companion' is NOT settled: using chi=1 (zeta itself) as the on-line adversary is RH-conditional and FORBIDDEN as a premise. OB-26 Q3 asks whether the one-sided non-forcing statement suffices, or whether a P=1 fiber-mate must be prescribed via Andersson Thm 5 with Z in {Re(s)=1/2}. Do not read as a clean two-sided PASS until OB-26 returns.",
     "observation": "N/A — this is an existence result, not an observation-collision theorem",
     "invariant": "PASS — the Helson class axioms are algebraic; conclusion is independent of representation",
     "no_rh": "PASS — no RH in hypotheses",
@@ -55,5 +55,5 @@
   "assurance": {"required": ["formal-kernel"]},
   "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
   "spec_status": "PROOF-DRAFT",
-  "status_note": "Gate A CLEARED. Andersson Theorem 5 (arXiv:2408.15713, thm5) verified from LaTeX source. All proof steps PROOF-DRAFT. Theorem C is no longer CONDITIONAL."
+  "status_note": "Andersson Thm 5 (arXiv:2408.15713, thm5) source-verified (Gate A CLEARED; PROVENANCE.md deposited). OB-26 fix (2026-08-11): finite-factor multiplier orientation corrected in statement.md (R = prod(1-chi(p)p^-s)/(1-p^-s), chi in numerator; script-verified) and the 'push Im large' pseudo-issue removed (R zero-free on the whole open strip). OPEN: whole-theorem Gate-A review OB-26 -- decides (Q3) one-sided vs two-sided target framing and (Q5) standalone-vs-corollary novelty. Status stays PROOF-DRAFT until OB-26 returns."
 }
