@@ -1,7 +1,7 @@
 {
   "contract_version": "2",
   "claim_id": "H-information-hierarchy-theorem",
-  "note": "Theorem H. Unified information-obstruction PARTIAL order over O_finite/O_theta/O_vM/O_oracle. Inherited B2/G obstructions INDEPENDENTLY-CHECKED; H's own partial-order/incomparability increment PROOF-DRAFT (Gate-A package OB-32).",
+  "note": "Theorem H. Unification framework: a refinement PREORDER over O_finite/O_theta/O_vM/O_oracle. GATE-A BLOCKED (OB-32): O_oracle must be the full multiset Z; under literal O_theta the incomparability H'(i) is NOT established (O_theta is constant => O_theta < O_finite). Inherited B2/G obstructions INDEPENDENTLY-CHECKED.",
 
   "theorem_id": "H-information-hierarchy",
   "paper": "A or E (as unifying framework section)",
@@ -9,8 +9,8 @@
 
   "metadata": {
     "theorem_id": "H-information-hierarchy",
-    "ambient_class": "Observation maps over admissible zero multisets X_sym, PARTIALLY ordered by refinement: O_finite and O_theta are INCOMPARABLE, both strict coarsenings of O_oracle; O_theta <= O_vM <= O_oracle (corrected OB-27; NOT a total chain)",
-    "resource_bound": "Each obstruction is exact (not asymptotic); O_finite and O_theta are incomparable, each strictly coarser than O_oracle",
+    "ambient_class": "Observation maps over admissible zero multisets X_sym, related by a refinement PREORDER (partial order only on info-equivalence classes; NOT a lattice). O_oracle = the full multiset Z (all (beta,gamma), with multiplicity) -- NOT ordinates-only. Established: O_finite <= O_oracle, O_theta <= O_oracle. Under Theorem G's literal O_theta (fixed Z-independent sequence, constant map), O_theta < O_finite; incomparability is NOT established (OB-32).",
+    "resource_bound": "Each inherited obstruction (B2 for O_finite, G for O_theta) is exact; both are coarsenings of O_oracle=Z",
     "is_barrier_claim": true,
     "escape_route_present": true,
     "escape_route": "O_oracle layer: a method with access to all zero ordinates trivially resolves all obstructions. O_vM layer: conditionally an escape if G-hard is false."
@@ -31,22 +31,22 @@
   "obligations": [
     "H.finite-instantiation: inherits B2 Jacobian rank proof — INDEPENDENTLY-CHECKED (Gate-A PASS OB-20 + checker OB-21)",
     "H.theta-instantiation: inherits G Prop. G.3* — INDEPENDENTLY-CHECKED (Gate-A PASS OB-22 + checker OB-17)",
-    "H.incomparability-finite-theta: O_finite and O_theta are INCOMPARABLE (same-Im pair separates under Li but not theta; S(T) move separates under theta but not Li) — PROOF-DRAFT (witnesses explicit, script-verified, not independently checked); supersedes the withdrawn 'O_finite subset O_theta' claim (OB-27)",
+    "H.incomparability-finite-theta: NOT ESTABLISHED (OB-32) — only O_finite !<= O_theta holds (same-Im pair separates under Li_1 but not theta, CONFIRMED); the reverse O_theta !<= O_finite is FALSE under the literal constant O_theta (constant map refines everything => O_theta < O_finite). Needs a nonconstant O_theta + an exact reverse witness (the 'ker DF' sketch is only first-order).",
     "H.coarsening-finite-oracle: B2 quartet gives O_finite collision with distinct ordinates — inherits B2 (Gate-A PASS OB-20)",
     "H.coarsening-theta-oracle: S(T) perturbation preserves theta-levels, changes ordinates — inherits G (Gate-A PASS OB-22)",
     "H.vM-layer: controlled by G-hard CONJECTURE — not a proof step"
   ],
 
   "acceptance_test_results": {
-    "note": "Inherited B2/G obstructions are INDEPENDENTLY-CHECKED (Gate-A PASS OB-20/OB-22 + checkers OB-21/OB-17). H's own increment (partial-order framing + incomparability theorem H'(i)) is PROOF-DRAFT with script-verified witnesses — the OB-32 Gate-A target.",
-    "class": "PASS — four named observation maps (partial order); membership checkable",
+    "note": "GATE-A BLOCKED (OB-32). Inherited B2/G obstructions are INDEPENDENTLY-CHECKED (Gate-A PASS OB-20/OB-22 + checkers OB-21/OB-17). H's own increment (incomparability H'(i)) is NOT established: only O_finite !<= O_theta holds; the reverse is false under the literal constant O_theta. Needs redefinition (O_oracle=Z, nonconstant O_theta) + an exact reverse witness.",
+    "class": "PASS — the maps are named; refinement is a PREORDER (partial order only on info-equivalence classes; 'lattice' withdrawn)",
     "non_vacuity": "PASS — B2 quartet (O_finite) and kappa_toeplitz (O_theta) are witnesses",
     "target": "PASS — Hadamard uniqueness ensures distinct zero multisets give distinct entire functions",
-    "observation": "INHERITED — B2 collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-20); G-info collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-22, Prop. G.3* Items 2-4 proved). H's own incomparability theorem H'(i) remains PROOF-DRAFT.",
+    "observation": "INHERITED — B2 collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-20); G-info collision INDEPENDENTLY-CHECKED (Gate-A PASS OB-22, Prop. G.3* Items 2-4 proved). H's own incomparability theorem H'(i) is NOT ESTABLISHED (OB-32).",
     "invariant": "PASS — observation maps are basis-independent (counting function invariant)",
     "no_rh": "PASS — no RH in hypotheses",
     "escape": "PASS — O_oracle explicit; O_vM conditional",
-    "scope": "PASS — four named maps (partial order); resource bounds inherited from B2/G"
+    "scope": "PASS — named maps in a refinement preorder; O_oracle=Z; resource bounds inherited from B2/G"
   },
 
   "checker": {
@@ -59,5 +59,5 @@
   "replay": {"semantic": "N/A-analytic-only", "byte_exact": "not_required"},
   "obstruction_type": "information",
   "spec_status": "PROOF-DRAFT",
-  "spec_status_note": "Unification of B2 and G. No new mathematics beyond the partial-order framing. OB-27 self-audit (2026-08-11): the observation structure is a PARTIAL order — O_finite (B2) and O_theta (G) are INCOMPARABLE, both strict coarsenings of O_oracle — NOT the earlier strict linear chain O_finite subset O_theta subset O_vM subset O_oracle (that claim was false and is withdrawn; script-verified same-Im-pair counterexample). Inherited B2/G obstructions are Gate-A established; H's own incomparability theorem H'(i) is PROOF-DRAFT."
+  "spec_status_note": "GATE-A BLOCKED (OB-32 2026-08-12). No RH input, but definitional errors: (1) O_oracle was ordinates-only, so the same-Im quartet witness refuted the needed O_finite<=O_oracle; fixed by defining O_oracle=Z (full multiset). (2) Under Theorem G's literal O_theta = d_n = theta_level(n) (a fixed Z-independent sequence, hence CONSTANT), O_theta refines every map, so O_theta < O_finite -- the two are COMPARABLE, and the incomparability theorem H'(i) is NOT ESTABLISHED (only O_finite !<= O_theta holds; the reverse needs a nonconstant O_theta + an exact witness, both absent; the 'ker DF' sketch is only first-order). (3) 'lattice' -> 'refinement preorder' (antisymmetry only on info-equivalence classes; no meet/join proof). (4) O_vM is not a well-defined map on X_sym, and for actual zeta full Lambda(n) determines the zeros, so the G-hard dichotomy is not well-posed as stated. Inherited B2/G obstructions remain INDEPENDENTLY-CHECKED (Gate-A PASS OB-20/OB-22 + checkers OB-21/OB-17); H's own increment does not advance. First Li_1 witness (0.019913 vs 0.019855) CONFIRMED. H stays PROOF-DRAFT; needs redefinition + an exact reverse witness before re-review."
 }

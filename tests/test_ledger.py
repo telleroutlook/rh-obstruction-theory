@@ -966,32 +966,41 @@ H_CONTRACT = ROOT / "domain" / "contracts" / "H-information-hierarchy.json"
 
 
 def test_h_partial_order_not_total_chain():
-    """OB-27: H's observation structure is a PARTIAL order (O_finite and O_theta
-    incomparable), NOT the withdrawn strict linear chain."""
+    """OB-32: H's observation structure is a refinement PREORDER, not a total chain;
+    the incomparability H'(i) is NOT established (only one direction holds); O_oracle=Z."""
     stmt = (H_DIR / "statement.md").read_text()
-    # The strict-chain string may appear ONLY inside the correction note that repudiates it.
+    # The strict-chain string may appear ONLY inside a note that repudiates it.
     for line in stmt.splitlines():
         if "O_finite ⊂ O_theta ⊂ O_vM ⊂ O_oracle" in line:
             assert ("earlier draft" in line or "false" in line.lower()
                     or "withdrawn" in line.lower() or "not" in line.lower()), \
                 f"strict total-chain asserted without repudiation: {line!r}"
-    # The correction must be present.
-    assert "incomparable" in stmt.lower(), \
-        "H statement.md must state O_finite and O_theta are incomparable"
-    assert "partial" in stmt.lower(), \
-        "H statement.md must describe the observation structure as a partial order"
+    # OB-32: incomparability must be recorded as NOT established, and the preorder / full-multiset
+    # oracle fixes must be present.
+    assert "NOT established" in stmt or "NOT ESTABLISHED" in stmt or "not established" in stmt, \
+        "H must record that the incomparability H'(i) is NOT established (OB-32)"
+    assert "preorder" in stmt.lower(), \
+        "H must describe the structure as a refinement preorder (lattice withdrawn)"
+    assert "O_oracle = 𝒵" in stmt or "O_oracle=𝒵" in stmt or "full multiset" in stmt, \
+        "H must define O_oracle as the full multiset 𝒵 (OB-32 fix)"
 
 
-def test_h_contract_reflects_partial_order():
-    """OB-27: H contract must not assert the strict chain and must record incomparability."""
+def test_h_contract_reflects_ob32_block():
+    """OB-32: H contract must record the BLOCK — preorder (not lattice), O_oracle=Z,
+    incomparability NOT established — and must NOT assert the withdrawn strict chain."""
     assert H_CONTRACT.exists()
     with H_CONTRACT.open() as f:
         data = json.load(f)
     ambient = data["metadata"]["ambient_class"]
     assert "⊂ O_theta ⊂ O_vM ⊂ O_oracle" not in ambient, \
         "H contract ambient_class must not assert the withdrawn strict chain"
-    assert "INCOMPARABLE" in ambient.upper() or "incomparable" in ambient, \
-        "H contract ambient_class must record the incomparability"
+    assert "PREORDER" in ambient.upper(), \
+        "H contract ambient_class must describe a refinement preorder (not a lattice)"
+    assert "NOT established" in ambient or "NOT ESTABLISHED" in ambient.upper(), \
+        "H contract ambient_class must record incomparability is NOT established"
+    note = data["spec_status_note"]
+    assert "BLOCKED" in note and "OB-32" in note, \
+        "H contract spec_status_note must record the OB-32 BLOCK"
 
 
 def test_h_no_rh_claim():

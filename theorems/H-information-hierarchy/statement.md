@@ -2,10 +2,15 @@
 
 **Theorem ID:** H-information-hierarchy  
 **Program ref:** EXT-2a (unification of B1, B2, G under a common information-obstruction framework)  
-**Status:** PROOF-DRAFT (OB-27 self-audit 2026-08-11: the observation structure is a
-PARTIAL order — `O_finite` and `O_theta` are incomparable — NOT the earlier strict linear
-chain; inherited B2/G obstructions are Gate-A established, H's own partial-order/H′ increment
-is PROOF-DRAFT)
+**Status:** PROOF-DRAFT — **Gate-A BLOCKED (OB-32, 2026-08-12).** No RH input, but the
+framework had definitional errors: (a) `O_oracle` was ordinates-only, so the same-Im witness
+refuted the needed `O_finite ≼ O_oracle` — fixed by defining `O_oracle = 𝒵` (full multiset);
+(b) under Theorem G's literal `O_theta` (a fixed 𝒵-independent sequence, hence *constant*),
+`O_theta ≺ O_finite` — so the two are **comparable**, and the incomparability claim H'(i) is
+**NOT established** (only `O_finite ⋠ O_theta` holds; the reverse needs a nonconstant
+`O_theta` + an exact witness, both absent); (c) "lattice" → "refinement preorder". Inherited
+B2/G obstructions remain established; H's own increment (incomparability H'(i)) does not. See
+§2, §4.
 
 ---
 
@@ -24,49 +29,52 @@ is a pair `(𝒵₊, 𝒵₋) ∈ 𝔛_sym²` such that:
 
 ---
 
-## §2. The observation lattice
+## §2. The observation refinement preorder
 
-Four natural observation maps, **partially** ordered by information content (refinement):
+**OB-32 correction (2026-08-12).** Two fixes forced by the Gate-A review, before any of the
+diagram below is legitimate:
+- **`O_oracle` must be the FULL zero multiset `𝒵` (all `(β,γ)` with multiplicity), NOT the
+  ordinates `{γ_n}` alone.** An ordinates-only oracle does *not* refine `O_finite`: the
+  same-imaginary-part quartet pair (`σ=3/4` vs `σ=9/10` at height `T`) has identical
+  ordinates but different `Li_1` (§4), so under the ordinates-only definition
+  `O_oracle` collides while `O_finite` separates — i.e. `O_finite ⋠ O_oracle`, refuting the
+  very arrow the framework needs. With `O_oracle(𝒵)=𝒵` (full multiset), `O_finite ≼ O_oracle`
+  and `O_theta ≼ O_oracle` hold (both are functions of `𝒵`).
+- **This is a `refinement PREORDER`, not a lattice.** `≼` is reflexive and transitive but not
+  antisymmetric on raw maps (`O(x)=x` and `O'(x)=(x,0)` mutually refine but differ); it
+  becomes a partial order only on information-equivalence classes (fibers). No meet/join
+  closure for the four maps is claimed. "Lattice" is withdrawn.
 
-Four natural observation maps. They are **NOT a single total chain** — `O_finite` and
-`O_theta` are *incomparable* (each sees coordinates the other cannot; see the correction
-note below and proof.md §4). The correct structure is a **partial order** in which both are
-coarsenings of `O_oracle`:
-
+Under the corrected `O_oracle = 𝒵`:
 ```
-        O_oracle          (all zero ordinates γ_n — finest)
-        /   |   \
-   O_vM   O_theta   … 
-     |       
-   O_finite            with  O_finite ⋈ O_theta  (incomparable)
+        O_oracle = 𝒵         (the full zero multiset — finest)
+        /    |    
+   O_vM   O_finite     O_theta
+     |
+   (O_theta ≼ O_vM only under a nonconstant reading — see below)
 ```
+Established relations: `O_finite ≼ O_oracle`, `O_theta ≼ O_oracle`, `O_vM ≼ O_oracle`.
 
-i.e. `O_finite ≼ O_oracle`, `O_theta ≼ O_oracle`, `O_vM ≼ O_oracle`, and `O_theta ≼ O_vM`
-(von Mangoldt data determines the archimedean/smooth count), but **`O_finite` and `O_theta`
-are incomparable** — neither refines the other.
-
-| Layer | What it computes | Sees Re ρ (off-line)? | Sees Im-count / S(T)? | Used in |
+| Map | What it computes | Sees Re ρ? | Sees Im-count? | Used in |
 |---|---|---|---|---|
-| `O_finite` | finite set {Li_k : k≤K} or {W(φ_j) : j≤K} | **Yes** (via 1/ρ) | No | Theorems B1, B2 |
-| `O_theta` | archimedean levels {d_n = θ_level(n) : n≤N} | **No** | No (fixed zero-free levels) | Theorem G |
-| `O_vM` | full von Mangoldt explicit formula data (Λ(n) for all n) | Yes | Partially (via explicit formula) | — |
-| `O_oracle` | all zero ordinates {γ_n} | Yes | Yes, by definition | trivially resolves |
+| `O_finite` | finite `{Li_k : k≤K}` (`K≥1`) | **Yes** (via 1/ρ) | No | B1, B2 |
+| `O_theta` | Theorem-G archimedean levels `d_n=θ_level(n)` — a **fixed, 𝒵-independent** sequence | No | No | G |
+| `O_vM` | full von Mangoldt data `Λ(n)` | — | — | — |
+| `O_oracle` | the full multiset `𝒵` (all `(β,γ)`, with multiplicity) | Yes | Yes | trivially resolves |
 
-**Correction note (OB-27 self-audit, 2026-08-11 — supersedes the earlier "total chain"
-claim).** An earlier draft wrote `O_finite ⊂ O_theta ⊂ O_vM ⊂ O_oracle` as a strict total
-chain. That is **false**: `O_finite` and `O_theta` are incomparable. Two ways to see it,
-both script-verified:
-- `O_theta` in the sense of Theorem G is the **fixed, zero-free** sequence `d_n = θ_level(n)`
-  (Riemann–Siegel θ; independent of the zero multiset 𝒵), so as a map on multisets it is
-  *constant* — it separates **no** pair, hence cannot dominate `O_finite`.
-- Even reading `O_theta` charitably as an Im-part/unfolded-count functional of 𝒵, it is
-  blind to real parts: a same-imaginary-multiset pair (e.g. the quartet at `σ=3/4` vs
-  `σ=9/10`, both with Im-multiset `{±T,±T}`) has identical `O_theta` image but **different**
-  `O_finite` (Li₁ = Σ1/ρ separates: `0.019913…` vs `0.019855…`). Conversely an S(T)-type
-  perturbation moves ordinates (changing `O_finite`) while preserving the θ-levels. So
-  neither map refines the other. H's genuine content is therefore the **two separate
-  obstructions** (O_finite via B2, O_theta via G) placed in a partial order under
-  `O_oracle`, **not** a strict linear hierarchy.
+**Status of the incomparability claim (OB-32 — HONEST DOWNGRADE).** The earlier "`O_finite`
+and `O_theta` are incomparable" is **NOT established**:
+- **Only one direction holds:** `O_finite ⋠ O_theta` (the same-Im pair separates under `Li_1`
+  but not under `O_theta`), CONFIRMED for the `Li` branch with `K≥1` (§4, script-verified).
+- **The other direction is FALSE under the literal `O_theta`.** Since Theorem G's
+  `O_theta(𝒵)=d_n=θ_level(n)` is a **fixed sequence independent of 𝒵**, it is a *constant*
+  map, so `O_theta ≼ O` for **every** map `O` — in particular `O_theta ≼ O_finite`. Combined
+  with the first bullet, the literal reading gives `O_theta ≺ O_finite` (strictly coarser),
+  **not incomparable**. ("Either reading gives incomparability" was a logic error, OB-32 §1.)
+- To *recover* genuine incomparability one must (a) redefine `O_theta` as a nonconstant
+  functional of `𝒵` (e.g. sampled counts `N_𝒵(d_m)` at fixed levels), and (b) supply an
+  exact same-`O_finite`/different-`O_theta` witness — the current draft has neither (the
+  "`ker DF`" sketch in §4 is only a first-order condition, not an exact collision).
 
 **Convention note (OB-23, cross-theorem).** H uses the `O_finite` layer only through the
 *structural* B1/B2 facts (the quartet construction and the Jacobian-rank collision), never
@@ -121,29 +129,35 @@ H's cross-layer separation theorem H′ is not independently reviewed.)
 
 ## §4. Boundary of the hierarchy
 
-**Theorem H' (incomparability + coarsening, PROOF-DRAFT; corrected OB-27).** The maps are
-**not** a strict total chain. Precisely:
+**Theorem H' (BLOCKED as stated, OB-32 — one direction only).** The maps are not a total
+chain, but the claimed **incomparability of `O_finite` and `O_theta` is NOT established**:
 
-(i) **`O_finite` and `O_theta` are incomparable.**
-- There exist pairs `(𝒵₊, 𝒵₋)` with `O_theta(𝒵₊) = O_theta(𝒵₋)` but
-  `O_finite(𝒵₊) ≠ O_finite(𝒵₋)`: take two symmetric quartets at the same height `T` but
-  different real offset (`σ=3/4` vs `σ=9/10`); identical imaginary-part data (so identical
-  `O_theta`), but `Li₁ = Σ1/ρ` differs (script-verified `0.019913…` vs `0.019855…`). Thus
-  `O_theta` does **not** refine `O_finite`.
-- Conversely there exist pairs with `O_finite(𝒵₊) = O_finite(𝒵₋)` but
-  `O_theta(𝒵₊) ≠ O_theta(𝒵₋)` (an S(T)-type ordinate move preserving the first K Li values
-  while changing the unfolded count). Thus `O_finite` does not refine `O_theta`.
+(i) **Incomparability — NOT established (OB-32).**
+- **`O_finite ⋠ O_theta` — CONFIRMED (`Li` branch, `K≥1`).** Two symmetric quartets at the
+  same height `T`, different real offset (`σ=3/4` vs `σ=9/10`), have identical imaginary-part
+  data (identical `O_theta`) but `Li₁ = Σ1/ρ` differs (script-verified `0.019913…` vs
+  `0.019855…`). So `O_theta` does not refine `O_finite`.
+- **`O_theta ⋠ O_finite` — FALSE under the literal `O_theta`.** Theorem G's
+  `O_theta(𝒵)=d_n=θ_level(n)` is a **fixed, 𝒵-independent** sequence, i.e. a *constant* map;
+  a constant map refines every map, so `O_theta ≼ O_finite`. Combined with the first bullet
+  this gives `O_theta ≺ O_finite` (strictly coarser) — the two are **comparable**, not
+  incomparable. The purported reverse witness ("`v ∈ ker DF`") is only a first-order
+  condition, not an exact `O_finite`-collision (OB-32 §4.4). So (i) is **unproven / false as
+  stated**; genuine incomparability would need a *nonconstant* `O_theta` (e.g. sampled counts
+  `N_𝒵(d_m)`) plus an exact same-`O_finite`/different-`O_theta` witness — neither is provided.
 
-(ii) **Both are strict coarsenings of `O_oracle`.**
-- `O_finite ≺ O_oracle`: the B2 quartet pair has `O_finite(𝒵₊) = O_finite(𝒵₋)` (exact Li
-  collision, B2 §4.3) but `O_oracle(𝒵₊) ≠ O_oracle(𝒵₋)` (different ordinates).
-- `O_theta ≺ O_oracle`: by Lemma G.2, an S(T) perturbation `γ_n → γ_n + ε_n` with `ε_n`
-  bounded by `S(γ_n)/A'(γ_n)` (`A'(t)=θ'(t)/π`) preserves `O_theta` but changes `O_oracle`.
+(ii) **Coarsenings of `O_oracle = 𝒵` (full multiset) — hold, inherited.**
+- `O_finite ≺ O_oracle`: the B2 quartet pair has `O_finite(𝒵₊)=O_finite(𝒵₋)` (exact Li
+  collision, B2 §4.3, Gate-A PASS OB-20) but `𝒵₊ ≠ 𝒵₋`. (Requires `O_oracle = 𝒵`; with the
+  old ordinates-only oracle this arrow FAILED — the same-Im witness refutes it, OB-32 §4.2.)
+- `O_theta ≺ O_oracle`: `O_theta` is constant (literal reading), so trivially a coarsening;
+  under a nonconstant reading it would need G Lemma G.2 — deferred with that reading.
 
-**Status: PROOF-DRAFT.** Part (ii) inherits the exact B2 (Gate-A PASS OB-20) and G (Gate-A
-PASS OB-22) collisions and is on firm ground; part (i)'s two witness computations are
-explicit but not yet independently checked. The earlier "`O_finite ⊊ O_theta` strict linear
-separation" claim was **withdrawn** (OB-27): it is false — the two maps are incomparable.
+**Status: BLOCKED (OB-32).** Only `O_finite ⋠ O_theta` and the two coarsenings (with
+`O_oracle=𝒵`) are established. The incomparability theorem H'(i) is **withdrawn** pending a
+nonconstant `O_theta` definition and an exact reverse witness. (This supersedes both the
+original "strict total chain" and the OB-27 "incomparable partial order" — the honest
+current status is `O_theta ≺ O_finite` under the literal definitions.)
 
 ---
 
@@ -182,10 +196,10 @@ their mutual incomparability (Theorem H′(i)) is independent of the G-hard ques
 | Component | Status |
 |---|---|
 | Abstract framework (§1) | DEFINITION |
-| Observation lattice (§2) | PROOF-DRAFT — PARTIAL order (corrected OB-27; not a total chain); S(T) gap identity REFEREED |
+| Observation structure (§2) | **BLOCKED as stated (OB-32)** — a refinement PREORDER (not a lattice); `O_oracle` must be the full multiset 𝒵; literal `O_theta` is constant ⇒ `O_theta ≺ O_finite` |
 | Theorem H for O_finite | INDEPENDENTLY-CHECKED via inheritance (B2 Gate-A PASS OB-20 + INDEPENDENT-CHECKER OB-21) |
 | Theorem H for O_theta | INDEPENDENTLY-CHECKED via inheritance (G-info Gate-A PASS OB-22 + INDEPENDENT-CHECKER OB-17) |
-| Theorem H' incomparability (§4(i)) | PROOF-DRAFT — witness computations explicit, not independently checked |
-| Theorem H' coarsening ≺ O_oracle (§4(ii)) | inherits exact B2/G collisions (firm) |
+| Theorem H' incomparability (§4(i)) | **NOT ESTABLISHED (OB-32)** — only `O_finite ⋠ O_theta` holds; reverse is false under literal `O_theta`; needs nonconstant `O_theta` + exact witness |
+| Theorem H' coarsening ≺ O_oracle=𝒵 (§4(ii)) | inherits exact B2/G collisions (firm, once `O_oracle=𝒵`) |
 | O_vM layer analysis (§5) | CONJECTURE (G-hard) |
 | H's own unification claim (partial-order framing) | PROOF-DRAFT — not independently reviewed |
