@@ -160,6 +160,45 @@ None of these is "RH proved." That phrase never appears as a conclusion of this 
 
 ---
 
+## Part IX · PROOF-DRAFT closure program (2026-08-11)
+
+Goal: advance the 5 strongest theorems from PROOF-DRAFT toward INDEPENDENTLY-CHECKED.
+Two tracks run in parallel:
+- **(A) Internal** — close every remaining open analytic step so each theorem has a
+  complete self-contained proof requiring no undischarged obligations.
+- **(B) External** — produce standalone outsource files for independent verification
+  (same format as sibling repo `riemann-arithmetic-spectral/outsource/`).
+
+### Track A — open analytic steps
+
+| ID | Location | Open item | Status |
+|---|---|---|---|
+| **IX-A1** | `theorems/G-fredholm-certificate/proof.md` §4 | Explicit adversary: `𝒵_smooth = {d_n}` is O_θ-indistinguishable from `𝒵_RH` | **CLOSED** (2026-08-11) |
+| **IX-A2** | `theorems/E-prime-meromorphic/statement.md` §4 | Meromorphic partial-fraction IFT Jacobian for E'-neg pole-matching | **CLOSED** (2026-08-11) |
+| **IX-A3** | `theorems/D-spectral-asymptotic/proof.md` §4 | Seeley-DeWitt no-log: BGV Thm 2.30 / Gilkey Thm 1.8.1 citation verified | OPEN — outsource OB-01 |
+| **IX-A4** | `theorems/H-information-hierarchy/statement.md` | H' separation: B2 quartet has θ-levels distinct from `𝒵_RH` (explicit d_n gap) | OPEN |
+
+### Track B — outsource files for external verification
+
+| File | Theorem | Content | Status |
+|---|---|---|---|
+| `outsource/OB-01-D-heat-trace-log-singularity.md` | D | Abel-Plana `Z_ζ` lemma + Seeley-DeWitt no-log | **WRITTEN** (2026-08-11) |
+| `outsource/OB-02-B2-integer-collision.md` | B2 | Vandermonde rank + integer-sign construction | **WRITTEN** (2026-08-11) |
+| `outsource/OB-03-E-tail-estimate.md` | E §3 | Hadamard growth + Vandermonde IFT for non-uniqueness | **WRITTEN** (2026-08-11) |
+| `outsource/OB-04-G-prop-G3-adversary.md` | G Prop. G.3 | `𝒵_smooth` adversary + O_θ indistinguishability | **WRITTEN** (2026-08-11) |
+
+### Target evidence levels after closure
+
+| Theorem | Current | After IX-A closed | After external review |
+|---|---|---|---|
+| D | PROOF-DRAFT | PROOF-DRAFT (all steps complete) | INDEPENDENTLY-CHECKED (pending OB-01) |
+| B2 | PROOF-DRAFT | PROOF-DRAFT (all steps complete) | INDEPENDENTLY-CHECKED (pending OB-02) |
+| E | PROOF-DRAFT | PROOF-DRAFT (all steps complete) | INDEPENDENTLY-CHECKED (pending OB-03) |
+| G (G-info) | PROOF-DRAFT | PROOF-DRAFT (Prop G.3 explicit) | INDEPENDENTLY-CHECKED (pending OB-04) |
+| E' | PROOF-DRAFT | PROOF-DRAFT (IFT Jacobian written) | future send |
+
+---
+
 ## Part VIII · Extension program — broader classes and escape-route audits
 
 Each existing theorem has a natural extension direction. The goal is not to exclude "all

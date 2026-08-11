@@ -584,6 +584,105 @@ def test_g_normalization_frozen_to_ccm_entire():
         "G normalization warning must mention Suzuki meromorphic distinction"
 
 
+# ---- Part IX closure tests ----
+
+G_PROOF = G_DIR / "proof.md"
+E_PRIME_DIR = ROOT / "theorems" / "E-prime-meromorphic"
+OUTSOURCE_DIR = ROOT / "outsource"
+
+
+def test_g_prop_g3_has_explicit_adversary():
+    """IX-A1: Prop G.3 must name the explicit 𝒵_smooth adversary (not just a sketch)."""
+    proof = G_PROOF.read_text()
+    assert "𝒵_smooth" in proof or "Z_smooth" in proof, \
+        "G proof.md must define the smooth adversary multiset"
+    assert "d_n" in proof, "G proof.md must reference archimedean levels d_n"
+    assert "Hadamard uniqueness" in proof or "Lemma G.1" in proof, \
+        "G proof.md must invoke Hadamard uniqueness for 𝒵_smooth ≠ 𝒵_RH"
+
+
+def test_g_prop_g3_no_longer_open():
+    """IX-A1: G proof.md must not describe Prop G.3 as having an unresolved open step."""
+    proof = G_PROOF.read_text()
+    # The old marker "Open step. A fully rigorous proof needs to exhibit a specific {ε̃_n}"
+    # should be gone; the adversary is now explicit.
+    assert "fully rigorous proof needs to exhibit" not in proof, \
+        "G proof.md still has the old 'needs to exhibit' open-step marker"
+
+
+def test_e_prime_ift_jacobian_written():
+    """IX-A2: E'-neg must have an explicit meromorphic IFT Jacobian (Vandermonde in poles)."""
+    stmt = (E_PRIME_DIR / "statement.md").read_text()
+    assert "Vandermonde" in stmt, \
+        "E'-meromorphic statement.md must contain the Vandermonde Jacobian for pole matching"
+    assert "Jacobian" in stmt, \
+        "E'-meromorphic statement.md must describe the IFT Jacobian"
+
+
+def test_e_prime_ift_no_longer_open():
+    """IX-A2: E'-neg IFT step must not still be marked 'open'."""
+    stmt = (E_PRIME_DIR / "statement.md").read_text()
+    # Old marker was: "Open step.  The pole-matching Vandermonde Jacobian ... needs to be made explicit."
+    assert "pole-matching Vandermonde Jacobian for the meromorphic case needs to\nbe made explicit" \
+        not in stmt, "E'-meromorphic IFT step is still marked as needing to be made explicit"
+
+
+def test_outsource_files_exist():
+    """Part IX Track B: all four outsource files must exist."""
+    for name in [
+        "OB-01-D-heat-trace-log-singularity.md",
+        "OB-02-B2-integer-collision.md",
+        "OB-03-E-tail-estimate.md",
+        "OB-04-G-prop-G3-adversary.md",
+        "README.md",
+    ]:
+        assert (OUTSOURCE_DIR / name).exists(), f"outsource/{name} missing"
+
+
+def test_outsource_files_self_contained():
+    """Each outsource file must have acceptance criteria and not require reading
+    other repo files to solve (intro attribution is allowed; hard deps are not)."""
+    forbidden_phrases = [
+        "see proof.md",
+        "see statement.md",
+        "read the baseline",
+        "from CLAIM_LEDGER",
+        "in dependencies.yaml",
+    ]
+    for name in [
+        "OB-01-D-heat-trace-log-singularity.md",
+        "OB-02-B2-integer-collision.md",
+        "OB-03-E-tail-estimate.md",
+        "OB-04-G-prop-G3-adversary.md",
+    ]:
+        text = (OUTSOURCE_DIR / name).read_text()
+        assert "Acceptance criteria" in text or "acceptance criteria" in text, \
+            f"outsource/{name} must have an acceptance criteria section"
+        for phrase in forbidden_phrases:
+            assert phrase not in text, \
+                f"outsource/{name} must not require reading internal files: found '{phrase}'"
+
+
+def test_outsource_ob01_mentions_bgv_gilkey():
+    """OB-01 must ask for the specific BGV/Gilkey theorem numbers."""
+    text = (OUTSOURCE_DIR / "OB-01-D-heat-trace-log-singularity.md").read_text()
+    assert "Berline" in text or "BGV" in text, "OB-01 must mention Berline-Getzler-Vergne"
+    assert "Gilkey" in text, "OB-01 must mention Gilkey"
+    assert "log-polyhomogeneous" in text or "logpoly" in text.lower(), \
+        "OB-01 must address the log-polyhomogeneous exception"
+
+
+def test_outsource_ob04_no_rh_assumption():
+    """OB-04 must not assume RH in its problem statement."""
+    text = (OUTSOURCE_DIR / "OB-04-G-prop-G3-adversary.md").read_text()
+    # Must explicitly say it does not prove RH
+    assert "does not" in text.lower() and "RH" in text, \
+        "OB-04 must state it does not prove RH"
+    # Must not say "assume RH" as a premise
+    assert "assume RH" not in text and "assuming RH" not in text, \
+        "OB-04 must not assume RH"
+
+
 if __name__ == "__main__":
     test_all_claims_parse_and_validate()
     test_no_pending_gate_a_item_is_a_premise()

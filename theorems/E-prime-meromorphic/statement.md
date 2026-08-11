@@ -85,9 +85,77 @@ for some `R₀ = R₀(N, ε)`.
 4. Conclude via `|W(Ri)| → ∞` as `R → ∞` (same Hadamard product lower bound
    `∏_n(1 + R²/γ_n²) ≥ 2^N` with `N ∼ R log R / (2π)`).
 
-*Open step.* The pole-matching Vandermonde Jacobian for the meromorphic case needs to
-be made explicit. The zero-matching version was done in E-neg §3; here the IFT is
-applied to partial-fraction residues rather than Taylor coefficients. Status: PROOF-DRAFT.
+*Meromorphic IFT Jacobian (explicit — PROOF-DRAFT).*
+
+Write `W` and the perturbed function `F^{(c₀)}` in partial-fraction form near a
+base point `w₀` not equal to any pole:
+
+```
+W(z)          = Σ_{n≥1} R_n / (z − γ_n) + Σ_{n≥1} R_n / (z + γ_n) + E(z)
+F^{(c₀)}(z)  = Σ_{n≥1} R_n^{(c₀)} / (z − p_n^{(c₀)}) + … + E^{(c₀)}(z)
+```
+where `E, E^{(c₀)}` are the entire parts (Weierstrass product for numerators `ξ, ξ^{(c₀)}`),
+`R_n` is the residue of `W` at `γ_n`, and `p_n^{(c₀)} = γ_n + c₀/(n − k_N)` for `n > k_N`.
+
+**Residue formula.** Since `W(z) = z²ξ(1/2−iz)/ξ'(1/2−iz)` has a simple pole at
+`γ_n` (assuming simple zeros of ξ):
+```
+R_n = lim_{z→γ_n} (z − γ_n) W(z) = γ_n² · ξ(1/2 − iγ_n) / ξ''(1/2 − iγ_n) · (−i)
+    = −i γ_n² / (−i ξ''(1/2−iγ_n)/ξ(1/2−iγ_n)).   (ξ simple zero)
+```
+This is a real nonzero constant for each `n` (by the simplicity assumption and the
+functional equation).
+
+**Matching the first `J_N` Taylor coefficients of the meromorphic function.**  
+The Taylor coefficients of `W` at `w₀` are determined by the partial-fraction
+expansion. The `j`-th coefficient is:
+```
+c_j := (1/j!) W^{(j)}(w₀) = Σ_n R_n · (−1)^j j! / (w₀ − γ_n)^{j+1} + [entire part contrib.]
+```
+For the perturbed function `F^{(c₀)}`, the same expansion holds with `p_n^{(c₀)}` in
+place of `γ_n` and `R_n^{(c₀)}` in place of `R_n` for `n > k_N`.
+
+**The IFT system.** Adjust the `J_N` tail pole positions `p_{k_N+1}^{(c₀)}, …, p_{k_N+J_N}^{(c₀)}`
+(or equivalently, their residues `R_n^{(c₀)}`) to enforce Taylor coefficient matching:
+
+```
+c_j(F^{(c₀)}) = c_j(W)    for  j = 0, 1, …, J_N − 1.
+```
+
+The Jacobian of `(c_0, …, c_{J_N-1})` with respect to the perturbed pole positions
+`(p_{k_N+1}, …, p_{k_N+J_N})` at the unperturbed values `p_n = γ_n` is:
+
+```
+∂c_j / ∂p_n = ∂/∂p_n [ R_n / (w₀ − p_n)^{j+1} ]
+             = (j+1) R_n / (w₀ − γ_n)^{j+2}       (leading term from n-th pole)
+```
+
+The `J_N × J_N` Jacobian matrix has entries:
+```
+M_{jn} = (j+1) R_n / (w₀ − γ_n)^{j+2},   j = 0, …, J_N−1,  n = k_N+1, …, k_N+J_N.
+```
+Factor out: `M = D_j · [R_n / (w₀ − γ_n)^{j+2}]` where `D_j = diag(j+1)` is invertible.
+Set `a_n = 1 / (w₀ − γ_n)` (distinct, nonzero for `w₀ ∉ {γ_n}`). Then:
+```
+[R_n / (w₀ − γ_n)^{j+2}] = diag(R_n) · [a_n^{j+2}].
+```
+The matrix `[a_n^{j+2}]_{j=0,…,J_N-1; n=k_N+1,…,k_N+J_N}` is a Vandermonde matrix in
+`(a_n)` with an overall factor `a_n^2`:
+```
+[a_n^{j+2}] = [a_n^j] · diag(a_n^2)
+```
+and `[a_n^j]_{j=0,…,J_N-1}` is exactly the standard Vandermonde in `a_n = 1/(w₀−γ_n)`.
+
+**Nonsingularity.** Since `γ_{k_N+1}, …, γ_{k_N+J_N}` are distinct, the values
+`a_n = 1/(w₀ − γ_n)` are distinct (and nonzero for `w₀` not a pole). Therefore the
+Vandermonde matrix is nonsingular, and `det M = det(D_j) · ∏R_n · ∏a_n^2 · ∏_{k<l}(a_l−a_k) ≠ 0`.
+
+The IFT applies for small `c₀`: a unique smooth branch of pole positions `p_n^{(c₀)}`
+satisfies the `J_N` matching conditions. The perturbed function `F^{(c₀)}` then satisfies
+all conditions of `ℰ_N^{mer}` and differs from `W` in its tail poles. ✓
+
+**Status: PROOF-DRAFT (self-contained Vandermonde argument; residue formula needs
+simplicity-of-zeros assumption; that assumption is explicit in the method class `𝔐_Suz`).**
 
 ---
 
@@ -134,7 +202,7 @@ These are the **precise missing ingredients** for the Suzuki track, analogous to
 | Component | Status |
 |---|---|
 | Meromorphic Hadamard uniqueness (Lemma E'.1) | PROOF-DRAFT (classical; citation by thm number open) |
-| E'-neg construction (§4) | PROOF-DRAFT (open: meromorphic IFT Jacobian) |
+| E'-neg construction (§4) | PROOF-DRAFT (meromorphic IFT Jacobian: explicit Vandermonde in pole reciprocals; simplicity assumed) |
 | E'-pos sufficient conditions (§5) | OPEN (structure clear; Marty/meromorphic Montel) |
 | Suzuki (H'-bound)/(H'-tail) | OPEN (missing ingredients, not shown here) |
 | Connection to Theorem E (same template) | ✓ explicit |
