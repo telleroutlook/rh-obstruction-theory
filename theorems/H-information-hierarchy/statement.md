@@ -153,11 +153,25 @@ chain, but the claimed **incomparability of `O_finite` and `O_theta` is NOT esta
 - `O_theta ≺ O_oracle`: `O_theta` is constant (literal reading), so trivially a coarsening;
   under a nonconstant reading it would need G Lemma G.2 — deferred with that reading.
 
-**Status: BLOCKED (OB-32).** Only `O_finite ⋠ O_theta` and the two coarsenings (with
-`O_oracle=𝒵`) are established. The incomparability theorem H'(i) is **withdrawn** pending a
-nonconstant `O_theta` definition and an exact reverse witness. (This supersedes both the
-original "strict total chain" and the OB-27 "incomparable partial order" — the honest
-current status is `O_theta ≺ O_finite` under the literal definitions.)
+**Status: BLOCKED as stated (OB-32); PARTIAL repair for `K=1` (OB-32-repair).** Only
+`O_finite ⋠ O_theta` and the two coarsenings (with `O_oracle=𝒵`) were established at review
+time. **Repair progress:** with a **nonconstant** `O_theta` — the sampled-count map
+`O_theta^{samp}(𝒵) := (N_𝒵(d_m))_{m≤M}`, `N_𝒵(u)=#{ρ∈𝒵 : |Im ρ| ≤ u}` at fixed θ-levels
+`d_m` — the reverse direction is now established **for the `K=1` observation** by an *exact*
+witness: the two symmetric quartets `Q(1/4, 2)` and `Q(1/3, T₂)` with `T₂ = 2.024521…`
+(the positive root of `Li₁(1/3,T₂)=Li₁(1/4,2)=2144/4745`) have **equal `Li₁`** (exact, by
+construction) but different heights, so any sampled level `d_m ∈ (2, T₂)` gives
+`N_{𝒵₊}(d_m)=2 ≠ 0=N_{𝒵₋}(d_m)` — i.e. `O_finite^{(K=1)}` collides while `O_theta^{samp}`
+separates. Combined with `O_finite ⋠ O_theta`, this gives genuine **incomparability of
+`O_finite^{(K=1)}` and `O_theta^{samp}`**.
+
+**What remains open.** (i) For the full `O_finite = (Li_1,…,Li_K)`, `K≥2`, an exact reverse
+witness needs `K` matched coordinates with `>K` free tail parameters — i.e. the B1/B2 IFT
+construction, **not** a closed-form 2-quartet pair; not delivered here. (ii) Under Theorem G's
+**literal** `O_theta = d_n = θ_level(n)` (a constant map), incomparability is still false
+(`O_theta ≺ O_finite`) — the repair requires adopting the nonconstant `O_theta^{samp}` as the
+definition. So H'(i) holds for `(K=1, O_theta^{samp})` and is open for `K≥2`; a resend should
+scope the claim to `O_theta^{samp}` and either restrict to `K=1` or supply the IFT witness.
 
 ---
 
