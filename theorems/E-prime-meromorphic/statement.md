@@ -106,49 +106,39 @@ argument is identical: F/G even follows from both F, G odd) gives G = W.
 
 ---
 
-## §4. Theorem E'-neg (non-uniqueness for meromorphic target, PROOF-DRAFT)
+## §4. Theorem E'-neg (non-uniqueness for meromorphic target, CONFIRMED AFTER CORRECTION)
 
-**Status note (OB-06 2026-08-11).** The E'-neg construction requires redesign:
-the old construction perturbed "poles at γ_n" — but γ_n are ZEROS of W, not poles
-(§1 correction).  A corrected construction must either:
-(a) perturb the zeros of W at γ_n (i.e., perturb the zeros of ξ that appear as
-    zeros of W), or
-(b) work with a different (correctly defined) odd meromorphic target W̃.
+**Status (OB-09 referee 2026-08-11).** The construction is CONFIRMED after correction.
+The original power-sum matching system Φ_r was REFUTED (it controls the expansion at
+z=0, not the Taylor jet at a nonzero base point w₀); the corrected construction uses
+a **direct w₀-jet system** with an explicit rational Wronskian–Vandermonde Jacobian
+(referee §7). See proof.md §3 for the full argument.
 
-The corrected E'-neg strategy is:
-
-**Statement.** For any `ε > 0` and any `N`, there exists an odd meromorphic function
-`F ≠ W` satisfying all conditions of `ℰ_N^{mer}` with:
+**Statement.** Fix k ≥ 1, J ≥ 1, and a base point `w₀ = iτ` (`τ ∈ ℝ\{0}`, `B(iτ) ≠ 0`).
+Under method-class assumptions (A1)–(A3) (see proof.md §3), for all sufficiently small
+`c < 0` there exists an odd meromorphic function `F^{(c)} ≠ W` satisfying all conditions
+of `ℰ_N^{mer}`, with quantitative separation:
 ```
-sup_{z ∈ K, z not near a pole of W} |F(z) − W(z)| ≥ ε
+sup_{|z| = R} |F^{(c)}(z) − W(z)| ≥ |A(0)/B̃(0) · Δ_{J+1}(c)/(J+1)| · R^{2J+3}
 ```
-for some compact K = K(N, ε).
+for `0 < R < R_B := dist(0, Z(B)\{0})`, and `Δ_{J+1}(c) ≠ 0`.
 
-*Proof strategy (corrected — PROOF-DRAFT).*
+**Key corrections (OB-09):**
+1. Frozen first-k terms belong in the matching system (the power-sum system omitted them).
+2. Tail perturbation denominator is `J+m`, not `m`.
+3. Matching is at nonzero `w₀`, via jet functionals `Ψ_j(u,c) = ∂_t^j L(t₀;u,c)`,
+   NOT via power sums.
+4. Leading separation degree is `2J+3` (odd), consistent with F−W being odd — NOT `2J+2`.
+5. Non-collision assumption `Z(B)∩ℝ={0}` (A2) is mandatory to prevent pole/zero
+   cancellation.
+6. The claim `|W(iR)|→∞` is FALSE in general and is not used; separation is via Cauchy
+   estimate.
 
-1. **Perturb tail zeros of W.** W has simple zeros at `γ_n` (zeros of ξ); the tail
-   zeros `γ_n` for `n > k_N` are free.  Perturb: `μ_n^{(c₀)} = γ_n(1 + c₀/(n−k_N))`
-   for `n > k_N`, keeping `γ_1, …, γ_{k_N}` fixed.  This gives a perturbed odd
-   meromorphic function (with the same pole set as W, matching W at zero positions
-   up to index k_N).
+**Jacobian (OB-09 §7).** `det D_u Ψ(u⁰,0) = (−t₀)^J (∏_{j<J} j!) ∏_{p<q}(x_q−x_p) /
+∏_ℓ(1−x_ℓ t₀)^J ≠ 0` — a rational Wronskian–Vandermonde determinant, nonzero by
+distinctness of `x_ℓ = γ_{k+ℓ}^{-2}`.
 
-2. **IFT for matching.** Adjust `J_N` of the free tail zero positions to enforce
-   Taylor coefficient matching at base point `w₀`.  The Jacobian is a Vandermonde
-   matrix in `{1/(w₀ − γ_n)}_{n=k_N+1}^{k_N+J_N}`, nonsingular by distinctness.
-   IFT gives a unique smooth branch of perturbed zero positions for `|c₀| < δ`.
-
-3. **Separation.** For `c₀ ≠ 0`, the perturbed function differs from W at the
-   (J_N+1)-th Taylor coefficient; Cauchy's estimate gives sup-norm separation on
-   any disk of radius `R_0`.
-
-*Residue note.* The perturbed function has the same poles as W (zeros of ξ'); the
-residues at those poles change because the numerator ξ is perturbed.  The IFT
-system uses Taylor data at `w₀`, not residues at poles.  Since W is odd, the
-Taylor expansion at `w₀ ≠ 0` involves both even and odd coefficients.
-
-**What remains open.** The IFT step for the odd meromorphic setting (step 2) needs
-to be written out fully, analogous to E-neg §3 for the entire case.  The Vandermonde
-structure is identical in principle; the execution is PROOF-DRAFT.
+**Status: PROOF-DRAFT ✓ CONFIRMED AFTER CORRECTION (OB-09 2026-08-11).**
 
 ---
 
@@ -215,8 +205,10 @@ These are the **precise missing ingredients** for the Suzuki track.
 | Meromorphic Hadamard uniqueness (Lemma E'.1) | CONFIRMED AFTER CORRECTION (OB-06 2026-08-11; F/G ratio route; correct paired product) |
 | W parity | CORRECTION: W is ODD, not even (OB-06 2026-08-11) |
 | W zero/pole structure | CORRECTION: γ_n are ZEROS of W (not poles); poles come from zeros of ξ' (OB-06 2026-08-11) |
-| E'-neg construction (§4) | PROOF-DRAFT — redesigned: perturb zeros of W (not poles); IFT write-out open |
+| E'-neg construction (§4) | PROOF-DRAFT ✓ CONFIRMED AFTER CORRECTION (OB-09 2026-08-11; direct w₀-jet system, Wronskian–Vandermonde Jacobian) |
 | Old E'-neg (perturbing "poles at γ_n") | REFUTED (γ_n are zeros, not poles of W) |
+| E'-neg power-sum system Φ_r | REFUTED (OB-09): controls z=0 expansion, not w₀-jet |
+| E'-neg separation degree | CORRECTED to z^{2J+3} (odd), not z^{2J+2} (OB-09 §5.1) |
 | Old E'-pos identification ("even F_N → even W") | REFUTED (W is odd; even functions cannot converge to W) |
 | E'-pos sufficient conditions (§5) | OPEN — structure correct; Montel (not Marty) suffices on Ω |
 | (LB*) replacing old (H'-bound) | CORRECTION: old form vacuously satisfiable; (LB*) is the correct assumption |

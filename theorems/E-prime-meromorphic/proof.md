@@ -31,7 +31,9 @@ of order 2 and is WRONG for this setting.
 
 ## §2. Analytic structure of W — CORRECTED (OB-06)
 
-`W(z) = z² ξ(1/2−iz) / ξ'(1/2−iz)`.
+`W(z) = z² A(z) / B(z)` in the abstract form, where A is even (zeros ±γ_n),
+B is odd with a simple zero at 0 (B(z) = z·B̃(z), B̃ even), both of Nevanlinna
+order ≤ 1.  Concretely `A(z) = ξ(1/2−iz)`, `B(z) = ξ'(1/2−iz)` (up to normalization).
 
 **Parity.** W is ODD: `W(−z) = −W(z)`.
 (Proof: X(z) := ξ(1/2−iz) is even; ξ'(s)=−ξ'(1−s) → ξ'(1/2−iz) is odd;
@@ -44,49 +46,89 @@ W(z) = −iγ²/m · (z − γ) + O((z−γ)²).
 γ is NOT a pole of W. There is no residue at γ.
 
 **Poles.** Zeros of ξ'(1/2−iz) not cancelled by zeros of ξ(1/2−iz).
-At z=0: ξ'(1/2)=0; local behavior determined by vanishing order of ξ' at 1/2.
+At z=0: ξ'(1/2)=0; the z² numerator and simple zero of B at 0 give W a simple
+zero at 0 (W odd, so vanishing order at 0 is odd).
+
+**Non-collision assumption (OB-09 referee §2.2, mandatory).** For "γ_n is a zero of
+W" one needs `Z(A) ∩ (Z(B)\{0}) = ∅` — the zeros of A (at ±γ_n) must not coincide
+with nonzero zeros of B, else pole/zero cancellation occurs. This is an explicit
+assumption of the method class, added below.
+
+**No |W(iR)| → ∞ claim (OB-09 referee §2.2).** The earlier assertion
+`|W(iR)| ≥ C|A(iR)| → ∞` is FALSE in general — counterexample `A(z)=sin(πz)/(πz)`,
+`B(z)=z cos(2πz)` gives `|W(iR)| → 0`. The separation argument must NOT rely on
+`|W(iR)| → ∞`; use the Cauchy-estimate route below instead.
 
 ---
 
-## §3. E'-neg: non-uniqueness construction — REDESIGNED
+## §3. E'-neg: non-uniqueness construction — CONFIRMED AFTER CORRECTION (OB-09 §7)
 
-**Strategy (corrected — PROOF-DRAFT).**
+**[OB-09 referee 2026-08-11: the power-sum matching system Φ_r was REFUTED — it
+matches the expansion at z=0, NOT the Taylor jet at a nonzero base point w₀. The
+correct construction uses the direct w₀-jet system below (referee §7), which closes
+with an explicit rational Wronskian–Vandermonde Jacobian.]**
 
-The old construction perturbed "poles at γ_n"; this was wrong since γ_n are zeros
-of W, not poles. The corrected construction perturbs the **zeros** of W.
+**Method-class assumptions (corrected).** Fix k ≥ 1, J ≥ 1. Assume:
+- (A1) A even, Nevanlinna order ≤ 1, simple zeros exactly at {±γ_n}, A(0) ≠ 0:
+  `A(z) = A(0) ∏_{n≥1}(1 − a_n z²)`, `a_n = γ_n^{-2}`, `a_1 > a_2 > … > 0`, Σ a_n < ∞.
+- (A2) B odd, Nevanlinna order ≤ 1, all zeros simple, `Z(B) ∩ ℝ = {0}` (so no
+  real zero of B collides with the real ±γ_n).
+- (A3) base point `w₀ = iτ`, `τ ∈ ℝ\{0}`, `B(iτ) ≠ 0`.
 
-**Step 1.** Fix `k = k_N` (first k zeros γ_1,…,γ_k of W are held fixed).
-For `n > k`, set `μ_n^{(c₀)} = γ_n(1 + c₀/(n−k))`. Define the perturbed odd
-meromorphic function:
+**Perturbation family.** Freeze γ_1,…,γ_k. For the tail `n = k+J+m` (m ≥ 1) set
 ```
-F^{(c₀)}(z) = z² · ξ^{(c₀)}(1/2−iz) / ξ'(1/2−iz)
+μ_{k+J+m}(c) = γ_{k+J+m}(1 + c/(J+m)),   so  b_m(c) = γ_{k+J+m}^{-2}(1+c/(J+m))^{-2},
 ```
-where `ξ^{(c₀)}` is the Hadamard product for ξ with zeros γ_n replaced by μ_n^{(c₀)}
-for `n > k`.  The poles of `F^{(c₀)}` are the same as those of W (zeros of ξ').
-`F^{(c₀)}` is odd (same parity argument as W).
+(note the denominator is **J+m**, not m — OB-09 §2.3 correction). The J positions
+`μ_{k+1},…,μ_{k+J}` are free variables `u_ℓ = μ_{k+ℓ}^{-2}`, adjusted by IFT.
+Define:
+```
+A_{u,c}(z) = A(0) ∏_{n=1}^k(1−a_n z²) ∏_{ℓ=1}^J(1−u_ℓ z²) ∏_{m≥1}(1−b_m(c) z²),
+F^{(c)}(z) = z² A_{u(c),c}(z) / B(z).
+```
 
-**Step 2 (IFT for Taylor matching).** Adjust J_N of the free tail zeros
-`μ_{k+1},…,μ_{k+J_N}` to enforce:
+**The correct jet system (OB-09 §7).** Let `t = z²`, `t₀ = w₀² = −τ² < 0`, and
 ```
-(1/j!) F^{(c₀)(j)}(w₀) = (1/j!) W^{(j)}(w₀),   j = 0,…,J_N−1.
+L(t; u, c) = log[A_{u,c}(z)/A(z)] = Σ_ℓ log((1−u_ℓ t)/(1−x_ℓ t)) + Σ_m log((1−b_m(c)t)/(1−y_m t)),
 ```
-The Jacobian matrix of the matching system at `c₀ = 0` with respect to
-`(μ_{k+1},…,μ_{k+J_N})` has the structure of a Vandermonde matrix in
-`{1/(w₀ − γ_n)}_{n=k+1}^{k+J_N}`, nonsingular since the γ_n are distinct and
-`w₀ ∉ {γ_n}`. IFT gives `δ > 0` and a unique `C^1` branch `μ_n(c₀)` for `|c₀| < δ`.
+with `x_ℓ = a_{k+ℓ}`, `y_m = a_{k+J+m}`. Define the matching functionals:
+```
+Ψ_j(u, c) := ∂_t^j L(t₀; u, c),   j = 0, 1, …, J−1.
+```
+Then `Ψ(u⁰, 0) = 0` where `u_ℓ⁰ = x_ℓ`. Since `∂_{u_ℓ} L = −t/(1−u_ℓ t)`, the
+Jacobian `D_u Ψ(u⁰,0)` is the Wronskian of `g_ℓ(t) = −t/(1−x_ℓ t)` at `t₀`:
+```
+det D_u Ψ(u⁰,0) = (−t₀)^J (∏_{j=0}^{J-1} j!) · ∏_{p<q}(x_q − x_p) / ∏_ℓ(1−x_ℓ t₀)^J ≠ 0.
+```
+This is an explicit rational Wronskian–Vandermonde determinant, nonzero since the
+x_ℓ are distinct and `w₀ = iτ` is not a zero of A. The C¹ regularity in c follows
+from Σ y_m < ∞ and the dominated-derivative bound `|d/dc·b_m(c)^r| ≤ C·y_m^r/(J+m)`.
 
-**Step 3 (separation).** For `c₀ ≠ 0`, the (J_N+1)-th Taylor coefficient of
-`F^{(c₀)}` differs from W's. Cauchy's estimate gives:
-```
-sup_{|z| ≤ R₀} |F^{(c₀)}(z) − W(z)| ≥ A_{c₀} · R₀^{2J_N+2}
-```
-for an explicit `A_{c₀} > 0` depending on the coefficient discrepancy (same argument
-as E-neg §3; see E-compactness/proof.md §3).
+**IFT conclusion.** For `−ε < c ≤ 0` there is a unique C¹ branch `u(c)` with
+`Ψ(u(c),c) = 0`, i.e. `L(t; u(c),c) = O((t−t₀)^J)`, hence
+`A_{u(c),c}(z) − A(z) = O((z−w₀)^J)`. Multiplying by `z²/B(z)` (holomorphic, nonzero
+at w₀) gives the J-jet matching `(F^{(c)})^{(j)}(w₀) = W^{(j)}(w₀)`, j = 0,…,J−1. ✓
 
-**What remains to write out.** The full meromorphic IFT argument in Step 2
-(analogous to E-neg §3's log-power-sum system Φ_r) needs to be made explicit
-for the odd meromorphic case. The Vandermonde structure is clear; execution is
-PROOF-DRAFT.
+**Membership + distinctness.** For small `c < 0`: `F^{(c)}` is odd, meromorphic with
+`T(r,F^{(c)}) = O(r)` (via `N_μ(r) = O(r)` from Jensen + `μ_n ≍ γ_n`), keeps the
+frozen simple zeros ±γ_1,…,±γ_k, has exactly the poles of W (assumption (A2) prevents
+collisions), and satisfies the J-jet condition. And `F^{(c)} ≠ W`: equality would
+force `A_{u(c),c} ≡ A`, but `μ_n(c) = γ_n(1+c/(n−k)) < γ_n` for `c < 0`, n > k+J.
+Hence `F^{(c)} ∈ 𝔐_Suz` and `F^{(c)} ≠ W`. ✓ (OB-09 referee §7.2)
+
+**Separation (corrected degree, OB-09 §5.1).** The leading discrepancy is ODD:
+```
+F^{(c)}(z) − W(z) = −(A(0)/B̃(0)) · Δ_{J+1}(c)/(J+1) · z^{2J+3} + O(z^{2J+5}),
+```
+degree **2J+3** (odd), not 2J+2 (the old even degree contradicted F−W being odd).
+For `0 < R < R_B := dist(0, Z(B)\{0})`, Cauchy's estimate gives
+`sup_{|z|=R} |F^{(c)}−W| ≥ |A(0)/B̃(0)·Δ_{J+1}(c)/(J+1)| R^{2J+3}`, with
+`Δ_{J+1}(c) ≠ 0` for small `c ≠ 0` (nondegeneracy via `q(y_m)` constant sign,
+OB-09 §5).
+
+**Status: PROOF-DRAFT ✓ CONFIRMED AFTER CORRECTION (OB-09 2026-08-11).** The
+construction closes via the direct w₀-jet system (§7 of the referee report), not
+the power-sum system. The power-sum system Φ_r is REFUTED for this purpose.
 
 ---
 
@@ -115,8 +157,12 @@ Under hypotheses (LB*) + (H'-pole-sep) + (H'-tail) + (H'-norm):
 | Lemma E'.1 (meromorphic Hadamard uniqueness) | CONFIRMED AFTER CORRECTION (OB-06; Conway XI.3.4; F/G route) |
 | W parity (ODD) | CONFIRMED: W(−z) = −W(z) (OB-06) |
 | W zero structure (γ_n are ZEROS) | CONFIRMED: simple zeros; W = −iγ²/m·(z−γ)+O(…) (OB-06) |
+| Non-collision Z(A)∩(Z(B)\{0})=∅ | Required assumption (OB-09 §2.2); added to method class (A2) |
+| \|W(iR)\|→∞ claim | REFUTED (OB-09 §2.2): false in general; separation uses Cauchy estimate instead |
 | Old E'-neg (perturbing "poles at γ_n") | REFUTED (γ_n are zeros not poles; residue argument entirely wrong) |
-| E'-neg redesigned (perturbing zeros of W) | PROOF-DRAFT (Vandermonde IFT; write-out open) |
+| E'-neg power-sum system Φ_r | REFUTED (OB-09): matches expansion at z=0, not jet at nonzero w₀ |
+| E'-neg via direct w₀-jet system (§3, OB-09 §7) | CONFIRMED AFTER CORRECTION — Wronskian–Vandermonde Jacobian, closed IFT |
+| E'-neg separation degree | CORRECTED: leading term is z^{2J+3} (odd), not z^{2J+2} (OB-09 §5.1) |
 | Old E'-pos ("even F_N → even W") | REFUTED (W is odd) |
 | E'-pos redesigned (odd F_N → W via Montel on Ω) | OPEN (structure complete; Montel suffices) |
 | Suzuki missing ingredients | ✓ identified (odd parity; H'-bound/(LB*); H'-tail) |

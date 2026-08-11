@@ -25,22 +25,28 @@ problem.
 | OB-06 | `OB-06-E-prime-meromorphic-uniqueness.md` | E' | Meromorphic Hadamard uniqueness + Marty theorem | RESOLVED — integrated 2026-08-11 |
 | OB-07 | `OB-07-B2-ambient-class-counting-law.md` | B2 / Paper A | Ambient class 𝔛_sym: counting-law requirement? | RESOLVED — integrated 2026-08-11 |
 | OB-08 | `OB-08-G-factorization-condition.md` | G | Factorization condition (2.7) for 𝔐_FC | RESOLVED — integrated 2026-08-11 |
-| OB-09 | `OB-09-E-prime-neg-IFT-odd-meromorphic.md` | E' §4 | IFT for odd meromorphic target: zero-perturbation Jacobian | OPEN — send for review |
-| OB-10 | `OB-10-G-Hurwitz-real-zeros.md` | G §7 | Hurwitz: PSD Fredholm limit has all-real zeros | OPEN — send for review |
+| OB-09 | `OB-09-E-prime-neg-IFT-odd-meromorphic.md` | E' §4 | IFT for odd meromorphic target: zero-perturbation Jacobian | RESOLVED — integrated 2026-08-11 |
+| OB-10 | `OB-10-G-Hurwitz-real-zeros.md` | G §7 | Hurwitz: PSD Fredholm limit has all-real zeros | RESOLVED — integrated 2026-08-11 |
 
 ## Difficulty
 
-- **OB-01–08:** RESOLVED (referee reports integrated 2026-08-11).
+- **OB-01–10:** RESOLVED (referee reports integrated 2026-08-11).
 
-- **OB-09:** Complex analysis (meromorphic IFT for odd target; Vandermonde in zero
-  reciprocals). **Medium difficulty.** The Vandermonde structure is identified; the
-  explicit write-out of the log-power-sum matching system for the odd meromorphic case
-  needs to be verified independently (analogous to OB-03 for the entire case).
+Notes on the OB-09 / OB-10 outcomes:
 
-- **OB-10:** Operator theory / complex analysis (Hurwitz theorem for Fredholm determinant
-  limits; PSD implies all-real zeros). **Low difficulty.** OB-08 referee Prop. 7.1 proves
-  this but the proof step (no zeros in upper/lower half-plane via Hurwitz + PSD) needs
-  independent confirmation and a precise citation.
+- **OB-09:** REFUTED as originally stated (the power-sum matching system Φ_r controls
+  the expansion at z=0, not the Taylor jet at a nonzero base point w₀; also: frozen
+  first-k terms omitted, wrong tail denominator, and an even leading separation degree
+  contradicting F−W odd). The referee supplied a complete corrected construction (§7):
+  a **direct w₀-jet IFT system** with an explicit rational Wronskian–Vandermonde
+  Jacobian, plus the mandatory non-collision assumption Z(B)∩ℝ={0} and the corrected
+  odd leading degree z^{2J+3}. Integrated into E-prime-meromorphic proof.md §3.
+
+- **OB-10:** CONFIRMED. PSD finite-rank Fredholm determinants have real zeros at
+  ±λ_j^{-1/2}; the locally uniform limit inherits all-real zeros via Hurwitz's zero-free
+  corollary (Conway VII.§2 Cor. 2.6) plus the identity theorem to exclude f≡0. Yields
+  Corollary G.5: convergence to Ξ̂ ⟹ RH, so 𝔐_FC membership condition 3 is unverifiable
+  without proving RH. Integrated into G-fredholm-certificate proof.md §5b.
 
 ## What a returned verification should contain
 

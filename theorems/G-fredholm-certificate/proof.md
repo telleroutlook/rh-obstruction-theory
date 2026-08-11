@@ -243,6 +243,44 @@ remains; the spectral-shift issue is a separate additional obstruction.
 
 ---
 
+## §5b. All-real-zeros of PSD Fredholm limits — CONFIRMED (OB-10 2026-08-11)
+
+**Lemma G.4 (PSD Fredholm limit has all-real zeros).** Let `K_N ∈ 𝓑(H)` be
+finite-rank, self-adjoint, positive semidefinite (`K_N = K_N* ≥ 0`), with nonzero
+eigenvalues `λ_1,…,λ_{r_N} > 0`, and
+```
+f_N(z) = det(I − z² K_N) = ∏_{j=1}^{r_N}(1 − z² λ_j).
+```
+If `f_N → f` locally uniformly on ℂ, then f is entire, `f(0) = 1` (so `f ≢ 0`),
+and every zero of f is real.
+
+*Proof (OB-10 referee, CONFIRMED).*
+1. Each `f_N` has zeros only at `z = ±λ_j^{-1/2} ∈ ℝ\{0}`; hence no zeros in the
+   open upper/lower half-planes 𝕌, 𝕃.
+2. f entire (Weierstrass convergence theorem); `f(0) = lim f_N(0) = 1`, so `f ≢ 0`.
+3. On the connected open set 𝕌: each `f_N|_𝕌` is zero-free, `f_N → f` locally
+   uniformly. By Hurwitz's zero-free corollary (Conway, *Functions of One Complex
+   Variable I*, 2nd ed., **Ch. VII §2, Corollary 2.6**, p. 152), either `f|_𝕌 ≡ 0`
+   or `f|_𝕌` is zero-free. The first is excluded: `f ≡ 0` on the nonempty open set
+   𝕌 would force `f ≡ 0` on ℂ (identity theorem), contradicting `f(0) = 1`. So `f`
+   is zero-free on 𝕌.
+4. Same for 𝕃. Since `ℂ \ (𝕌 ∪ 𝕃) = ℝ`, all zeros of f are real. ∎
+
+*Citation correction (OB-10 §3):* the precise reference is Conway VII.§2 **Cor. 2.6**
+(the zero-free-limit corollary); Theorem 2.5 is the zero-counting stability from which
+it follows. The identity-theorem step (excluding `f|_𝕌 ≡ 0`) is essential and is now
+explicit. (Ahlfors, *Complex Analysis*, 3rd ed., Ch. 5 §1.1, Thm 2, p. 178 is an
+alternative reference — note p. 178, not p. 176.)
+
+**Corollary G.5 (convergence to Ξ̂ ⟹ RH).** If some `P ∈ 𝔐_FC` had
+`det(I − z² K_N) → Ξ̂` locally uniformly with `K_N ≥ 0`, then by Lemma G.4 all zeros
+of Ξ̂ are real — i.e. RH holds. Therefore membership condition 3 of 𝔐_FC ("claims
+det → Ξ̂") cannot be *verified* (as a proved locally uniform limit) without proving
+RH. This is why 𝔐_FC membership is stated with condition 3 as a *claim*, and why the
+obstruction (Theorem G) targets what O_θ can determine, not whether any such P exists.
+
+---
+
 ## §6. G-hard (CONJECTURE — not a proof step)
 
 **Conjecture G-hard.** No method `P ∈ 𝔐_FC` can recover the S(T) data from zero-free
@@ -288,6 +326,8 @@ perturbed-tail construction replaced by the S(T) discrepancy. The underlying too
 | Item 2 multiset distinctness — corrected proof | PROOF-DRAFT ✓ — Littlewood S_1(T)=O(log T) + fractional-part averaging (unconditional) |
 | Item 4 quantitative separation — corrected proof | PROOF-DRAFT ✓ — counting-function integral + Littlewood; log(F_d/F_γ)(iR) = −log R + O(1) |
 | Numerical anchor d_1 corrected | d_1 = g_0 ≈ 17.846 (NOT ≈ 14.134); original anchor was wrong |
+| Lemma G.4 (PSD Fredholm limit all-real zeros) | CONFIRMED (OB-10 2026-08-11; Conway VII.§2 Cor. 2.6 + identity theorem) |
+| Corollary G.5 (det → Ξ̂ ⟹ RH) | CONFIRMED (OB-10; membership condition 3 unverifiable without RH) |
 | O_θ indistinguishability (Item 1) | PROOF-DRAFT (formal/conditional on factorization condition (2.7) from program's 𝔐_FC definition) |
 | CORE-4 obstruction (Theorem G) | PROOF-DRAFT (conditional on factorization condition; Items 2–4 unconditional) |
 | G-hard conjecture | CONJECTURE (not a premise) |

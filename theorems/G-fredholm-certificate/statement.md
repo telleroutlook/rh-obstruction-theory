@@ -131,9 +131,9 @@ cannot be confirmed as an unconditional member of `𝔐_FC` because:
 - The matrix `C_Toeplitz` and coefficient `α` are not explicitly defined in a form
   that can be independently verified.
 - If the convergence `det(I − z² K_N) → Ξ̂` were proved for any PSD K_N with finite-rank
-  limits, RH would follow (OB-08 Proposition 7.1 + Corollary 7.2: any locally uniform
-  limit of `det(I − z² K_N)` with K_N ≥ 0 has all-real zeros; if this limit equals Ξ̂,
-  then all zeros of Ξ̂ are real, which is RH).
+  limits, RH would follow (Lemma G.4 + Corollary G.5, proof.md §5b, CONFIRMED by OB-10
+  2026-08-11: any locally uniform limit of `det(I − z² K_N)` with K_N ≥ 0 has all-real
+  zeros via Hurwitz; if this limit equals Ξ̂, then all zeros of Ξ̂ are real, which is RH).
   Therefore membership condition 3 of 𝔐_FC ("claims det → Ξ̂") cannot be verified
   without proving RH.
 
