@@ -1,7 +1,7 @@
 # Dependencies — Theorem H (H-information-hierarchy)
 
 theorem_id: H-information-hierarchy
-status: PROOF-DRAFT (inherits B2+G; H' is INCOMPARABILITY not linear separation — corrected OB-27)
+status: PROOF-DRAFT (inherits B2+G, both now INDEPENDENTLY-CHECKED; H' own increment = INCOMPARABILITY, PROOF-DRAFT — OB-27; Gate-A package OB-32)
 
 dependencies:
 
@@ -28,24 +28,29 @@ dependencies:
   - id: B2-RANK-RESULT
     statement: "B2 Jacobian rank theorem (self-contained Vandermonde); exact Li-value collision."
     source: "theorems/B2-exact-collision/proof.md §4.3."
-    mathematical: PROOF-DRAFT
-    computational: NONE
-    usable_as_premise: false
-    gate_a_status: OPEN
-    role: "O_finite instantiation of Theorem H (Step A)."
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: INDEPENDENT-CHECKER
+    usable_as_premise: true
+    gate_a_status: CLEARED
+    gate_a_note: "B2 Gate-A PASS (OB-20) + INDEPENDENT-CHECKER (OB-21). Updated OB-32."
+    role: "O_finite instantiation of Theorem H (Step A); coarsening O_finite ≺ O_oracle (H' part ii)."
 
   - id: G-INFO-OBSTRUCTION
-    statement: "G-info: O_theta collision via S(T) gap; Prop. G.3 construction."
+    statement: "G-info: O_theta collision via S(T) gap; Prop. G.3* construction."
     source: "theorems/G-fredholm-certificate/proof.md §4."
-    mathematical: PROOF-DRAFT
-    computational: NONE
-    usable_as_premise: false
-    gate_a_status: OPEN
-    role: "O_theta instantiation of Theorem H (Step A)."
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: INDEPENDENT-CHECKER
+    usable_as_premise: true
+    gate_a_status: CLEARED
+    gate_a_note: "G-info Gate-A PASS (OB-22) + INDEPENDENT-CHECKER (OB-17). Updated OB-32."
+    role: "O_theta instantiation of Theorem H (Step A); coarsening O_theta ≺ O_oracle (H' part ii)."
 
 gate_a_status: OPEN
 gate_a_note: >
-  REFEREED items usable as premises. B2-RANK-RESULT and G-INFO-OBSTRUCTION are
-  internal PROOF-DRAFTs: not yet independently verified, so Theorem H inherits
-  their PROOF-DRAFT status. Theorem H does not introduce new mathematical content
-  beyond what B2 and G already contain; it is a unification framework.
+  REFEREED items usable as premises. B2-RANK-RESULT and G-INFO-OBSTRUCTION are now
+  INDEPENDENTLY-CHECKED (B2 Gate-A PASS OB-20 + OB-21 checker; G-info Gate-A PASS OB-22 +
+  OB-17 checker) — so H's two inherited obstructions (the coarsenings O_finite ≺ O_oracle
+  and O_theta ≺ O_oracle, H' part ii) rest on established results. H's OWN increment —
+  the partial-order framing and the incomparability theorem H'(i) (O_finite ⋈ O_theta,
+  with two script-verified witnesses) — is PROOF-DRAFT and is what the OB-32 Gate-A review
+  targets. H introduces no new analytic content beyond B2/G; it is a unification framework.

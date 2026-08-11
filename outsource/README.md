@@ -44,6 +44,7 @@ problem.
 | OB-29 | `OB-29-E-gate-a-review-package.md` | E | **GATE-A**: independent review of the compactness (finite-evidence) theorem (Links A–D + Q1–Q7; E-neg per-`N` non-identifiability via fixed-`N` IFT + E-pos sufficiency package; Ξ-not-ξ̂ normalization; per-`N`-not-sequence framing; H-uorder/H-div honesty) | OPEN — send for review |
 | OB-30 | `OB-30-Eprime-gate-a-review-package.md` | E' | **GATE-A**: independent review of the meromorphic (Suzuki-target) compactness theorem (Links A–D + Q1–Q7; E'-neg per-`(k,J)` non-identifiability via `w₀`-jet IFT + E'-pos corrected sufficiency; W-odd parity + γ_n-are-zeros; Montel-not-Marty; T(r,W)≍r log r conventional-order envelope) | OPEN — send for review |
 | OB-31 | `OB-31-Dprime-gate-a-review-package.md` | D' | **GATE-A**: independent review of the log-polyhomogeneous escape-route audit (Claims A–E + Q1–Q7; 𝒞_logpoly is covered by D not an escape; escape class is log-weighted S^{1,-1}; exact 2πn/log(n+e) refuted by T log log T; open HP frontier honesty) | OPEN — send for review |
+| OB-32 | `OB-32-H-gate-a-review-package.md` | H | **GATE-A**: independent review of the information-obstruction partial order (Claims 1–4 + Q1–Q6; partial-order-not-chain OB-27; incomparability H'(i) O_finite ⋈ O_theta with 2 witnesses; coarsening inherits B2/G; L23 fixed-sequence subtlety) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -584,6 +585,27 @@ and non-circular, and that the `LEADING-SINGULARITY-COVERS-LOGPOLY` lemma (curre
 may advance to INDEPENDENTLY-CHECKED while the document stays ESCAPE-ROUTE-REFINED with
 Claim E an open frontier. Passed PROMPT_LINT (L17/L18/L19/L20/L21/L24 + self-containment; no
 linear-characteristic issue — D' is a counting/heat-trace audit, not an approximant theorem).
+
+## Ninth Gate-A push OB-32 (drafted 2026-08-11) — H information-obstruction partial order
+
+Applies the Gate-A template to H-information-hierarchy. H is a **unification framework**; its
+two instantiations are already Gate-A established and inherited unchanged (`O_finite` = B2,
+PASS OB-20 + checker OB-21; `O_theta` = G-info, PASS OB-22 + checker OB-17), so OB-32 targets
+**only H's own increment**. Pre-send self-audit fixed stale dependency metadata: the H
+dependencies/contract still marked B2-RANK-RESULT and G-INFO-OBSTRUCTION as
+`PROOF-DRAFT`/`usable_as_premise:false`/`gate_a OPEN` — reconciled to INDEPENDENTLY-CHECKED
+(they are, since OB-20/OB-22). The Gate-A target is: (1) the observation structure is a
+**PARTIAL order, not a total chain** (OB-27 corrected the false `O_finite⊂O_theta⊂O_vM⊂O_oracle`);
+(2) **incomparability H'(i)**: `O_finite ⋈ O_theta`, two script-verified witnesses (same-Im
+quartet pair `σ=3/4` vs `9/10` separated by `Li_1=0.019913` vs `0.019855` but not by `θ`; an
+S(T) move separated by `θ` but not `Li`), with the L23 subtlety that G's `d_n=θ_level(n)` is
+a fixed zero-free sequence, constant on multisets; (3) **coarsening H'(ii)**:
+`O_finite,O_theta ≺ O_oracle` inherits the exact B2/G collisions. Non-circularity: H is about
+which coordinates each map sees; inherited obstructions are RH-free. Ask: confirm the
+incomparability increment may advance to INDEPENDENTLY-CHECKED and H is a correct unification
+framework (organizing section, not a standalone barrier), adding no new analytic content
+beyond B2/G. Passed PROMPT_LINT (L18/L19/L21/L23 + self-containment; witness values
+re-verified consistent with statement.md).
 
 ## What a returned verification should contain
 

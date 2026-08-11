@@ -1,7 +1,7 @@
 {
   "contract_version": "2",
   "claim_id": "H-information-hierarchy-theorem",
-  "note": "Theorem H. Unified information-obstruction framework for O_finite and O_theta layers. PROOF-DRAFT (inherits from B2 and G).",
+  "note": "Theorem H. Unified information-obstruction PARTIAL order over O_finite/O_theta/O_vM/O_oracle. Inherited B2/G obstructions INDEPENDENTLY-CHECKED; H's own partial-order/incomparability increment PROOF-DRAFT (Gate-A package OB-32).",
 
   "theorem_id": "H-information-hierarchy",
   "paper": "A or E (as unifying framework section)",
@@ -24,13 +24,13 @@
   "dependencies": [
     {"claim_id": "HADAMARD-FACTORIZATION-ORDER-1", "ledger_math": "REFEREED", "role": "Step B of all instantiations: distinct zero multisets give distinct entire functions"},
     {"claim_id": "RIEMANN-ARGUMENT-COUNTING-IDENTITY", "ledger_math": "REFEREED", "role": "S(T) gap; O_theta / O_oracle separation"},
-    {"claim_id": "B2-RANK-RESULT", "ledger_math": "PROOF-DRAFT", "usable_as_premise": false, "role": "O_finite instantiation (inherits B2)"},
-    {"claim_id": "G-INFO-OBSTRUCTION", "ledger_math": "PROOF-DRAFT", "usable_as_premise": false, "role": "O_theta instantiation (inherits G-info)"}
+    {"claim_id": "B2-RANK-RESULT", "ledger_math": "INDEPENDENTLY-CHECKED", "usable_as_premise": true, "role": "O_finite instantiation (inherits B2, Gate-A PASS OB-20 + checker OB-21)"},
+    {"claim_id": "G-INFO-OBSTRUCTION", "ledger_math": "INDEPENDENTLY-CHECKED", "usable_as_premise": true, "role": "O_theta instantiation (inherits G-info, Gate-A PASS OB-22 + checker OB-17)"}
   ],
 
   "obligations": [
-    "H.finite-instantiation: inherits B2 Jacobian rank proof — PROOF-DRAFT",
-    "H.theta-instantiation: inherits G Prop. G.3 — PROOF-DRAFT (open step)",
+    "H.finite-instantiation: inherits B2 Jacobian rank proof — INDEPENDENTLY-CHECKED (Gate-A PASS OB-20 + checker OB-21)",
+    "H.theta-instantiation: inherits G Prop. G.3* — INDEPENDENTLY-CHECKED (Gate-A PASS OB-22 + checker OB-17)",
     "H.incomparability-finite-theta: O_finite and O_theta are INCOMPARABLE (same-Im pair separates under Li but not theta; S(T) move separates under theta but not Li) — PROOF-DRAFT (witnesses explicit, script-verified, not independently checked); supersedes the withdrawn 'O_finite subset O_theta' claim (OB-27)",
     "H.coarsening-finite-oracle: B2 quartet gives O_finite collision with distinct ordinates — inherits B2 (Gate-A PASS OB-20)",
     "H.coarsening-theta-oracle: S(T) perturbation preserves theta-levels, changes ordinates — inherits G (Gate-A PASS OB-22)",
@@ -38,7 +38,7 @@
   ],
 
   "acceptance_test_results": {
-    "note": "PROOF-DRAFT. Inherits from B2 and G. H' separation has open explicit computations.",
+    "note": "Inherited B2/G obstructions are INDEPENDENTLY-CHECKED (Gate-A PASS OB-20/OB-22 + checkers OB-21/OB-17). H's own increment (partial-order framing + incomparability theorem H'(i)) is PROOF-DRAFT with script-verified witnesses — the OB-32 Gate-A target.",
     "class": "PASS — four named observation maps (partial order); membership checkable",
     "non_vacuity": "PASS — B2 quartet (O_finite) and kappa_toeplitz (O_theta) are witnesses",
     "target": "PASS — Hadamard uniqueness ensures distinct zero multisets give distinct entire functions",
