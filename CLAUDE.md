@@ -196,8 +196,10 @@ script, not from memory.
    bound (+ envelope must match the target's type: conventional-order r^{1+ε}, not linear
    finite-type), zeros-in-Ω ≠ zeros-in-ℂ, representation-invariance/measure-collapse,
    Fourier-multiplier-on-ℝ has continuous spectrum (discrete/trace-class needs a compact
-   manifold or ℓ² model), cited black-box exact-number-and-scope, script-verified anchors,
-   honest inconclusive verdict. Each item is a check you actually RUN (script/grep/derivation). When a
+   manifold or ℓ² model), cross-theorem Σ′/normalization convention (never paste a δ/C/d
+   numeric anchor between theorems — B1 R-atom vs B2 R-symm differ by ×2), cited
+   black-box exact-number-and-scope, script-verified anchors, honest inconclusive
+   verdict. Each item is a check you actually RUN (script/grep/derivation). When a
    referee surfaces a new defect class, add it to the lint and **re-scan every active
    prompt AND every `theorems/*/statement.md|proof.md`** — the defect is never assumed
    independent.

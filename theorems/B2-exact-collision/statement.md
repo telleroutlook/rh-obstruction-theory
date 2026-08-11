@@ -20,8 +20,14 @@ numerical claim depends on):
    ```
    O_j(𝒵) := Σ_{ρ ∈ 𝒵} [φ_j(ρ) + φ_j(1−ρ)].
    ```
-   This is the `Σ'` symmetric convention of B1, written globally. It is additive under
-   multiset union. On one on-line pair `L(t)` the reflection `ρ ↦ 1−ρ` swaps the two
+   **Convention note (OB-23 correction).** This is B2's OWN convention (call it R-symm);
+   it is NOT identical to B1's `Σ'` — B1 sums `φ_j` over atoms once (R-atom), whereas this
+   doubles on a multiset closed under `ρ↦1−ρ`. The two differ by a factor of 2 (see the
+   cross-theorem convention note below). B2's exact collision `Cn + Rd = 0` is
+   **scale-invariant** (C→2C, d→2d leaves β,R,n,M and the collision identity unchanged), so
+   B2's construction, Gate-A PASS (OB-20), and checker (OB-21) are all valid under this
+   convention; only the displayed `C, d, δ` values are a factor 2 larger than B1's. It is
+   additive under multiset union. On one on-line pair `L(t)` the reflection `ρ ↦ 1−ρ` swaps the two
    atoms, so `O_j(L(t)) = 4 Re φ_j(1/2+it)`; on the quartet `Q(3/4,T)`,
    `O_j(Q) = 4 Re[φ_j(3/4+iT) + φ_j(1/4+iT)]`. (The factor 4 in both proof.md formulas
    is forced by this global definition; the ordinary atomwise sum would halve C and d.)

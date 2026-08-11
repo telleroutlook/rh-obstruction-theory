@@ -195,14 +195,16 @@ the category without a mandatory counting law (condition 3 is optional, as state
 | Weil-type test: W2 convention chosen | DEFINITIONAL CHOICE — must be frozen in statement |
 | Counting-law variant (B2) | OPEN — addressed in B2-exact-collision |
 | Independence from Euler product / full L-function axioms | ESCAPE ROUTE — stated in statement.md |
-| Quantitative decay `δ_j(T) → 0` (exact-rational replay) | **INDEPENDENT-CHECKER** ✓ (OB-18 2026-08-11) |
+| Quantitative decay `δ_j(T) → 0` (exact-rational replay) | REPRODUCIBLE (OB-18 used B2's doubled convention; corrected R-atom values δ_1(1)=608/425, T*=90, 2j² per OB-23; independent R-atom checker requested OB-24) |
+| Σ′ convention (R-atom, vs B2's R-symm) | CORRECTED (OB-23) — see statement.md cross-theorem convention note |
+| Gate-A status | CONDITIONAL (OB-23): qualitative core CONFIRMED after local repairs; advance to INDEPENDENTLY-CHECKED once corrected checker (OB-24) returns |
 
 ### §5.1 Precise meaning of the B1 obstruction (OB-18 clarification, 2026-08-11)
 
 **B1 establishes "no positive uniform separation margin," NOT "no exact discriminator."**
 The quartet contribution is strictly positive for every finite `T`:
 ```
-δ_1(T) = 4[σ/(σ²+T²) + (1−σ)/((1−σ)²+T²)] > 0   (0 < σ < 1, T finite),
+δ_1(T) = 2[σ/(σ²+T²) + (1−σ)/((1−σ)²+T²)] > 0   (0 < σ < 1, T finite),
 ```
 so B1 does **not** produce an exact observation collision (that is B2's job). What B1
 proves is: the infimum over `T` of the observation gap between the `P=1` class and the
@@ -213,20 +215,40 @@ inputs is not excluded by B1. (This keeps B1 clear of the "margin → 0" non-bar
 the claim is about the *observation* separation infimum, not a shrinking positivity margin
 of a sufficient inequality.)
 
-### §5.2 Exact decay certificate (OB-18, INDEPENDENT-CHECKER)
+**Precise strength (OB-23 refinement):** B1's positivity `δ_1(T) > 0` holds for the Li
+first coordinate `φ_1(ρ)=1/ρ`, so with that coordinate present there is no exact collision
+at finite `T`. Under W2 or some moment families, a finite-height exact cancellation
+(`δ = 0`) can occur incidentally — B1 neither guarantees nor excludes exact collision. The
+guaranteed, convention-independent statement is: `A_+ ⊆ closure(A_−)` where
+`A_± = O_Φ({𝒵 : P(𝒵)=±})`, i.e. **zero uniform separation margin**.
 
-Independently reconstructed in exact rational arithmetic (OB-18 2026-08-11; Python stdlib
-`fractions`, per-definition traversal of the quartet, no closed form hard-coded):
-- `δ_1(1) = 1216/425`, `δ_2(1) = 1763072/180625` (exact);
-- decay `δ_j(T) · T² → 4j²` (so `δ_1·T²→4`, `δ_2·T²→16`; the earlier draft stated only
-  the `j=1` case), with the explicit bound `|δ_j(T)| ≤ 4(2^{j+1}−2−j)/T²` for `T ≥ 1`;
-- for `σ=3/4, m=2, ε=10⁻³` the least joint integer threshold is `T* = 127` (certified by
-  exact integer cross-multiplication: `δ_2(126) > 10⁻³ > δ_2(127)`, both `δ_j` strictly
-  decreasing in `T`);
-- mutation guards: `σ=1/2` flips the predicate to `P=1` (off-line requirement is
-  load-bearing); the constant test `φ≡1` gives `δ≡8 ↛ 0` (decay needs `φ_j` vanishing at ∞).
+### §5.2 Exact decay certificate (OB-18, corrected by OB-23)
+
+**Convention (critical — OB-23).** B1's observation is `O_j(𝒵) = Σ'_{ρ∈𝒵} φ_j(ρ)` — the
+sum of `φ_j` over the atoms (statement.md §Observation), where `Σ'` is the pairing used
+only for *convergence regularization*, NOT a doubling. Since the quartet `Q` is already
+closed under `ρ↦1−ρ`, its FE-partner atoms are counted once each. The contribution is the
+**four-term** `δ_j(T) = φ_j(σ_0+iT)+φ_j(1−σ_0+iT)+φ_j(σ_0−iT)+φ_j(1−σ_0−iT)`, which for
+real-coefficient `φ_j` equals `2 Re[φ_j(σ_0+iT)+φ_j(1−σ_0+iT)]`. This differs by a factor
+of 2 from B2's global convention `O_j = Σ_ρ[φ_j(ρ)+φ_j(1−ρ)]` (see the cross-theorem
+convention note in statement.md). The earlier B1 anchors were mistakenly computed in B2's
+doubled convention and are corrected here.
+
+Exact rational values under B1's own (R-atom) convention (independently recomputed, OB-23):
+- `δ_1(1) = 608/425`, and (Li first coordinate) `δ_1(T) = 2[σ_0/(σ_0²+T²) +
+  (1−σ_0)/((1−σ_0)²+T²)]`;
+- decay `δ_j(T) · T² → 2j²` (so `δ_1·T²→2`, `δ_2·T²→8`);
+- for `σ_0=3/4, m=2, ε=10⁻³` the least joint integer threshold is `T* = 90` (certified by
+  exact integer arithmetic: at `T=89` the `j=2` coordinate is `≈1.0099·10⁻³ > 10⁻³`, at
+  `T=90` it is `≈9.876·10⁻⁴ < 10⁻³`; both `δ_j` decreasing in `T`);
+- mutation guards: `σ_0=1/2` flips the predicate to `P=1` (off-line requirement is
+  load-bearing); the constant test `φ≡1` gives `δ≡4 ↛ 0` (decay needs `φ_j` vanishing at ∞).
 
 This validates only the finite decay statement, not any analytic limit or RH.
+**Computational status:** the OB-18 checker used B2's doubled convention; a corrected
+R-atom checker is requested (OB-24) before B1's computational axis is restored to
+INDEPENDENT-CHECKER. Until then B1's finite decay is REPRODUCIBLE (values above), not yet
+independently re-certified under the correct convention.
 
 ---
 

@@ -37,7 +37,8 @@ problem.
 | OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | RESOLVED — GATE-A PASS, integrated 2026-08-11 |
 | OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | RESOLVED — CONFIRMED, checker deposited 2026-08-11 |
 | OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | RESOLVED — GATE-A CONDITIONAL, 7 mods integrated 2026-08-11 |
-| OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | OPEN — send for review |
+| OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | RESOLVED — GATE-A CONDITIONAL, Σ′ convention + anchors corrected 2026-08-11 |
+| OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -186,6 +187,12 @@ rejected).
   estimated ~130; referee's exact integer cross-multiplication is right); decay generalizes
   to `δ_j(T)·T² → 4j²` (my task stated only `j=1`). B1 computational axis NONE →
   INDEPENDENT-CHECKER. Integrated into B1 proof.md §5.1–5.2 + statement.md.
+  **[SUPERSEDED by OB-23, 2026-08-11]** The values `δ_1(1)=1216/425`, `T*=127`, `4j²` above
+  were computed in **B2's doubled (R-symm) Σ′ convention**, but B1 uses R-atom (sum over
+  atoms once). Correct B1 values: `δ_1(1)=608/425`, `T*=90`, `δ_j·T²→2j²`. The OB-18
+  checker must be re-run under R-atom (requested as OB-24); B1's computational axis is
+  therefore REPRODUCIBLE (not INDEPENDENT-CHECKER) until then. See the cross-theorem
+  convention note in B1/B2 statement.md and PROMPT_LINT L21.
 
 - **OB-19 (D Z_ζ leading coefficient):** main theorem CONFIRMED; V4 numerical certificate
   is a **DISCREPANCY**. Exact closed form `Z_ζ,main(t)=(1/2πt)(log(1/t)−γ_E−log2π)` verified
@@ -329,6 +336,29 @@ delicate point built into the package:
 - Four links (A Σ' convergence, B quartet decay both conventions, C construction, D precise
   meaning) + Q1–Q5. Load-bearing anchors (`δ_1(1)=1216/425`, `δ_j·T²→4j²`, `T*=127`)
   already OB-18-certified. Uses REVIEW_PROMPT.md common header + Block A.
+
+## Resolved OB-23 outcome (integrated 2026-08-11) — GATE-A CONDITIONAL; caught a cross-theorem convention bug
+
+- **OB-23 (B1 Gate-A review):** **GATE-A CONDITIONAL.** Qualitative B1 core CONFIRMED
+  (RH-free, non-circular, correct uniform-margin obstruction), but the referee independently
+  recomputed the anchors and found a **cross-theorem Σ′ convention inconsistency (PROMPT_LINT
+  L21, newly added)**: B1 defines `O_j = Σ'_ρ φ_j(ρ)` (R-atom, sum over atoms once), but its
+  numeric anchors had been pasted from B2's `O_j = Σ_ρ[φ_j(ρ)+φ_j(1−ρ)]` (R-symm, doubles).
+  Correct B1 values (independently re-verified in-repo, twice): **`δ_1(1) = 608/425`
+  (not 1216/425), `T* = 90` (not 127), decay `δ_j·T² → 2j²` (not 4j²)**. Also: removed a
+  ζ-example that risked an RH-semantic leak; tightened W1/W2 typing; corrected the W1 Link-A
+  convergence argument (conjugate-pairing, not term domination); replaced "no exact collision"
+  with the precise "no positive uniform separation margin, and W2/moment families may
+  incidentally collide."
+  **B2 is UNAFFECTED:** its collision `Cn+Rd=0` is scale-invariant (C→2C, d→2d leaves
+  β,R,n,M,collision unchanged), so OB-20 Gate-A PASS and the OB-21 checker stay valid; only
+  B2's displayed C,d are a factor 2 larger by its own convention. Integrated: B1
+  statement.md (status → Gate-A CONDITIONAL; cross-theorem convention note) + proof.md
+  §5.1–5.2 (R-atom values); B2 statement.md (convention note, corrected the false "same as
+  B1" claim); PROMPT_LINT L21 + CLAUDE.md item-0; B1 computational axis
+  INDEPENDENT-CHECKER → REPRODUCIBLE pending the corrected checker (OB-24). This is exactly
+  the kind of latent cross-file inconsistency the lint re-scan exists to catch — surfaced
+  here by an external referee applying the theorem's own definition.
 
 ## What a returned verification should contain
 

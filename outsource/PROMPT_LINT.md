@@ -188,6 +188,19 @@ precise localization**. Never force a prove-X-or-prove-obstruction dichotomy. A 
 finding "hypotheses insufficient for step N + here is the minimal fix" must be a valid,
 first-class outcome.
 
+## L21 — Cross-theorem summation/normalization convention; never paste numeric anchors between theorems (hit OB-23; B1↔B2)
+DIFFERENT theorems may define the "same" observation with different conventions, off by a
+constant factor. CHECK, before reusing any δ/C/d/O_j numeric anchor from one theorem in
+another: does each theorem define `Σ'` / `O_j` the SAME way? B1 uses **R-atom**
+`O_j(𝒵)=Σ'_{ρ} φ_j(ρ)` (sum over atoms once; `Σ'` = convergence regularization, not
+doubling); B2 uses **R-symm** `O_j(𝒵)=Σ_ρ[φ_j(ρ)+φ_j(1−ρ)]` (doubles on a multiset closed
+under `ρ↦1−ρ`). They differ by ×2. Recompute every anchor **in the target theorem's own
+convention from `φ_j`** — do not copy a sibling theorem's number. (OB-23 caught B1 carrying
+B2's doubled `δ_1(1)=1216/425`, `T*=127`, `4j²`; correct R-atom values are `608/425`,
+`T*=90`, `2j²`.) Note which quantities are convention-INVARIANT: a solve like B2's
+`β=−C⁻¹d` and its collision `Cn+Rd=0` are scale-invariant, so a uniform factor there is
+harmless; a raw displayed `δ`/threshold is NOT.
+
 ---
 
 ### Self-containment gate (CLAUDE.md checklist #5, always)
