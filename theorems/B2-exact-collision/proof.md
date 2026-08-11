@@ -1,6 +1,6 @@
 # Proof — Theorem B2 (exact finite-observation collision)
 
-**Status:** PROOF-DRAFT (partial — rank condition open)  
+**Status:** PROOF-DRAFT (CONFIRMED by OB-02 external review, 2026-08-11 — four notation corrections applied)  
 **Analytic / finite separation:** purely analytic; no finite certificate used.
 
 ---
@@ -51,14 +51,23 @@ where `J ∈ ℝ^{m×n}` has entries `J_{jk} = A_{jk}`.
 
 ## §3. Quartet tail decay
 
-By B1 proof.md §2 (off-line quartet lemma), for each `j`:
+**Quartet tail decay (§3):** For each `j`, the quartet `Q(σ₀, T) = {3/4±iT, 1/4±iT}` contributes:
 
-- **Li-type tests:** `δ_j^{off}(T) → 0` as `T → ∞`.
-- **Weil W2-type tests:** `δ_j^{off}(T) = 4 ĥ_j(T) → 0` (Riemann–Lebesgue).
-- **Moment tests (`φ_j(ρ) = ρ^{−k}`):** `δ_j^{off}(T) = O(T^{−k}) → 0`.
+```
+δ_j^{off}(T) := O_j(Q(3/4, T))
+             = 2[φ_j(3/4+iT) + φ_j(3/4−iT) + φ_j(1/4+iT) + φ_j(1/4−iT)]
+             = 4 Re[φ_j(3/4+iT) + φ_j(1/4+iT)].
+```
 
-So the right-hand side `−δ^{off}(T)` of (*) can be made arbitrarily small in
-`ℝ^m` by choosing `T` large.
+**[CORRECTION from OB-02 review]** The draft's `δ^{off}` included only the `Re ρ = 3/4`
+conjugate pair and omitted the `Re ρ = 1/4` pair.  The full symmetric quartet `Q(3/4, T)`
+has four elements; by symmetry `ρ ↦ 1−ρ`, the `1/4±iT` pair is always present.  Using
+the corrected formula, `d_1(T) = 4[Re(1/(3/4+iT)) + Re(1/(1/4+iT))] > 0` (Lemma 4.1 of
+OB-02 review), confirming `d(T) ≠ 0`.
+
+For large `T`, `|φ_j(3/4+iT)| = O(T^{-1})` and `|φ_j(1/4+iT)| = O(T^{-1})`,
+so `δ_j^{off}(T) → 0` as `T → ∞`.  (This decay argument from B1 proof.md §2 is
+unaffected by the correction.)
 
 ---
 
@@ -111,61 +120,80 @@ Let `w_k = (2it_k − 1)/(2it_k + 1)`.  Since `|2it_k±1|² = 1+4t_k²`, we have
 `t_k > 0`.  Using `cos(jθ) = Re(e^{ijθ})`:
 
 ```
-J_{jk} = 2 − 2 cos(jθ_k) = 2(1 − cos(jθ_k)).
+J_{jk} = A_{jk} = 2(1 − cos(jθ_k)).
 ```
 
-**Lemma (Li Jacobian full rank — self-contained).** If `t₁, …, t_m > 0` are
-distinct, then `det J ≠ 0`.
-
-*Proof.*  Let `x_k = cos θ_k ∈ (−1, 1)` (distinct, since `θ ↦ cos θ` is strictly
-monotone on `(−π, 0)` and the map `t_k ↦ θ_k` is strictly monotone).  Using the
-Chebyshev polynomial identity `cos(jθ) = T_j(cos θ)`:
+**[CORRECTION from OB-02 review]** The observation map sums over *all* elements of
+the multiset.  The pair `L(t_k) = {1/2+it_k, 1/2−it_k}` contributes:
 
 ```
-J_{jk} = 2(1 − T_j(x_k)).
+O_j(L(t_k)) = (φ_j(ρ_t) + φ_j(ρ̄_t)) + (φ_j(ρ̄_t) + φ_j(ρ_t))
+             = 4 Re φ_j(ρ_t)
+             = 4(1 − cos(jθ_k)).
+```
+
+So the corrected contribution matrix entry is:
+
+```
+C_{jk} := O_j(L(t_k)) = 4(1 − cos(jθ_k)) = 4(1 − T_j(x_k)),
+```
+
+where `x_k = cos θ_k`.  The earlier `J_{jk} = 2(1 − cos(jθ_k))` was off by a factor of 2;
+the corrected matrix is `C = 2J` (nonsingularity is unchanged).
+
+**Lemma (Li Jacobian full rank — self-contained, corrected).** If `t₁, …, t_m > 0` are
+distinct, then `det C ≠ 0` where `C_{jk} = 4(1 − T_j(x_k))`, `x_k = cos θ_k`.
+
+*Proof.*  Let `x_k = cos θ_k ∈ (−1, 1)` (distinct, since `x(t) = (4t²−1)/(4t²+1)` is
+strictly increasing with `x'(t) = 16t/(4t²+1)² > 0`).  Using the Chebyshev identity:
+
+```
+C_{jk} = 4(1 − T_j(x_k)).
 ```
 
 **Factor out `(1 − x_k)`.** Since `T_j(1) = 1` for all `j`, we have
-`1 − T_j(x) = (1 − x) Q_j(x)` for a unique polynomial `Q_j ∈ ℝ[x]`.  Then:
+`1 − T_j(x) = (1 − x) q_j(x)` for a unique polynomial `q_j ∈ ℝ[x]`.  Then:
 
 ```
-J_{jk} = 2(1 − x_k) Q_j(x_k),
+C_{jk} = 4(1 − x_k) q_j(x_k),
 ```
 
-so `J = 2 · [Q_j(x_k)]_{j,k} · diag(1 − x_k)`.  Since `x_k ∈ (−1,1)`, each
+so `C = 4 · [q_j(x_k)]_{j,k} · diag(1 − x_k)`.  Since `x_k ∈ (−1,1)`, each
 `1 − x_k > 0`, so `diag(1 − x_k)` is invertible.  Thus:
 
 ```
-rank J = rank [Q_j(x_k)]_{j,k=1,...,m}.
+rank C = rank [q_j(x_k)]_{j,k=1,...,m}.
 ```
 
-**Degree and leading coefficient of `Q_j`.**  The leading coefficient of `T_j` is
-`2^{j−1}`, so `1 − T_j(x) = −2^{j−1} x^j + \text{lower terms}`.  Dividing by
-`(1−x)` gives `Q_j` with leading term `2^{j−1} x^{j−1}` (degree exactly `j−1`,
-leading coefficient `2^{j−1} > 0`).  In particular, `{Q_1, …, Q_m}` is a sequence
+**Degree and leading coefficient of `q_j`.**  The leading coefficient of `T_j` is
+`2^{j−1}`, so `1 − T_j(x) = −2^{j−1} x^j + lower terms`.  Dividing by
+`(1−x)` gives `q_j` with leading term `2^{j−1} x^{j−1}` (degree exactly `j−1`,
+leading coefficient `2^{j−1} > 0`).  In particular, `{q_1, …, q_m}` is a sequence
 of polynomials of degrees `0, 1, …, m−1` with positive leading coefficients.
 
-**Evaluation matrix is nonsingular.**  Since `{Q_1, …, Q_m}` have degrees
-`0, 1, …, m−1`, they are a basis for `ℝ_{≤m−1}[x]` (any `m` polynomials with
-distinct degrees 0 through `m−1` are linearly independent).  Express each `Q_j`
-in the monomial basis: there is an upper-triangular change-of-basis matrix `U`
-(with diagonal entries `2^{j−1} > 0`) such that `Q_j(x) = Σ_{i≤j} U_{ji} x^{i−1}`.
-Then:
+**Evaluation matrix is nonsingular.**  Express each `q_j` in the monomial basis: there
+is a **lower**-triangular change-of-basis matrix `A` (with diagonal entries `2^{j−1} > 0`)
+such that `q_j(x) = Σ_{i=1}^{j} a_{ji} x^{i−1}`.  Let `V_{ik} = x_k^{i−1}`.  Then:
 
 ```
-[Q_j(x_k)] = U · [x_k^{i−1}]_{i,k=1,...,m} = U · V(x_1,…,x_m),
+[q_j(x_k)] = A · V(x_1,…,x_m),
 ```
 
 where `V(x_1,…,x_m)` is the standard Vandermonde matrix.  Therefore:
 
 ```
-det[Q_j(x_k)] = det(U) · det V(x_1,…,x_m)
-              = (∏_{j=1}^m 2^{j−1}) · ∏_{1≤k<l≤m}(x_l − x_k).
+det C = 4^m · (∏_{k=1}^m (1−x_k)) · det A · det V
+      = 4^m · (∏_{k=1}^m (1−x_k)) · 2^{m(m−1)/2} · ∏_{1≤k<l≤m}(x_l − x_k).
 ```
 
-Both factors are nonzero: `∏ 2^{j−1} = 2^{m(m−1)/2} > 0`, and `∏(x_l − x_k) ≠ 0`
-since `x_1, …, x_m ∈ (−1,1)` are distinct. Therefore `det[Q_j(x_k)] ≠ 0`, so
-`det J ≠ 0`. ☐
+All factors positive: `1−x_k > 0`, `x_l−x_k > 0` for `k < l` (since `x` is
+increasing in `t`).  Therefore `det C ≠ 0`. ☐
+
+**Note on monotonicity (corrected from OB-02).** The draft stated `θ_1 > … > θ_m`
+(decreasing) and `x_1 > … > x_m`.  The correct direction: `t_1 < … < t_m` implies
+`θ_1 < … < θ_m` (since `θ'(t) = 4/(1+4t²) > 0`) and `x_1 < … < x_m` (since
+`x'(t) > 0`).  The *distinctness* of the `x_k` is what matters for the determinant,
+and it holds in either direction.
 
 **Rationality.** For rational `t_k`, `w_k = (2it_k−1)/(2it_k+1)` has rational real
 and imaginary parts; `cos(jθ_k) = Re(w_k^j)` is rational.  Hence `J ∈ ℚ^{m×m}` and
@@ -216,29 +244,28 @@ Chebyshev-to-monomial change-of-basis `U` (leading coefficient `2^{j-1}`):
 ### §4.5 Exact-collision with integer multiplicities (RESOLVED — PROOF-DRAFT)
 
 **Setup.** Fix rational `t₁, …, t_n` distinct positive, rational `σ₀ = 3/4`,
-rational `T` large.  By §4.3, `det J ≠ 0` over `ℚ`, so `α^ℚ = J^{-1}b ∈ ℚ^n`
-where `b = −δ^{off}(T) ∈ ℚ^n` (rational when `T, σ₀` rational, tests Li/moment).
+rational `T`.  By §4.3 (corrected), `det C ≠ 0` over `ℚ` (where `C_{jk} = 4(1−T_j(x_k))`
+and `x_k = (4t_k²−1)/(4t_k²+1) ∈ ℚ`), so `α^ℚ = C^{-1}b ∈ ℚ^m`
+where `b = −d(T) ∈ ℚ^m` (rational by Lemma 4.1 of OB-02 review, using corrected quartet formula).
 
 **Key scaling trick.** Let `R = lcm(denominators of α^ℚ_k)`.  Set:
 
 - Replace `Q(σ₀, T)` by `R` copies: `4R` off-line atoms.
-- Multiply adjustments: `α_k := R · α^ℚ_k ∈ ℤ` (possibly negative).
+- Multiply adjustments: `n_k := R · α^ℚ_k ∈ ℤ` (possibly negative).
 
-This scales `(*) J α = b` by `R` and gives `J (R α^ℚ) = R b` — the scaled
-integer vector satisfies the scaled equation exactly.
+This scales `C α^ℚ = b` by `R` and gives `C n + R d(T) = 0` — the scaled
+integer vector satisfies the equation exactly.
 
-**Sign resolution (the key insight).** The theorem asserts existence of an
-indistinguishable pair `(𝒵_+, 𝒵_-)` in `𝔛_sym`.  Both adversaries are
-**constructed** — we are not fixing `𝒵_+` to be ζ's zeros.  We are free to
-choose `𝒵_+` with any configuration in `𝔛_sym`.
+**Sign resolution (the key insight).** Both adversaries are **constructed** — we are
+not fixing `𝒵_+` to be ζ's zeros.
 
 **Construction of `𝒵_+`.** Set the multiplicity buffer:
 ```
-M := R · max_{k=1,...,n} |α^ℚ_k|    (well-defined, finite).
+M := max_{k=1,...,m} |n_k|    (well-defined, finite).
 ```
 Let `𝒵_+` be the finite multiset:
 ```
-𝒵_+ := { 1/2 ± it_k  :  k = 1, …, n,  each with multiplicity  M }.
+𝒵_+ := ⊔_{k=1}^{m} M · L(t_k)   (M copies of each critical-line pair).
 ```
 Verification that `𝒵_+ ∈ 𝔛_sym`:
 - Locally finite: yes (finite multiset).
@@ -248,60 +275,56 @@ Verification that `𝒵_+ ∈ 𝔛_sym`:
 
 **Construction of `𝒵_-`.**
 ```
-𝒵_- := 𝒵_+
-       ∪ { 1/2 ± it_k  :  α_k > 0,  each added α_k times }
-       ∖ { 1/2 ± it_k  :  α_k < 0,  each removed |α_k| times }
-       ∪ R copies of Q(σ₀, T).
+𝒵_- := (⊔_{k=1}^{m} (M + n_k) · L(t_k)) ⊔ R · Q(3/4, T).
 ```
-**Removals are valid** because each height `t_k` in `𝒵_+` has multiplicity `M`:
-```
-|α_k| = |R · α^ℚ_k| ≤ R · max_k |α^ℚ_k| = M.
-```
-So `𝒵_-` never removes more copies than `𝒵_+` has.
+Every multiplicity `M + n_k ≥ M − |n_k| ≥ 0` is a nonneg integer, so removals are valid.
 
-**Observation equality.** By construction:
+**Observation equality.** By construction and the corrected quartet formula:
 ```
-O_j(𝒵_-) − O_j(𝒵_+) = Σ_k α_k A_{jk} + R δ_j^{off}(T) = J(Rα^ℚ)_j + R b_j = 0.
+O_j(𝒵_-) − O_j(𝒵_+) = Σ_k n_k · C_{jk} + R · d_j(T)
+                       = (Cn + R d(T))_j = 0.
 ```
 So `O_Φ(𝒵_-) = O_Φ(𝒵_+)` exactly.  ✓
 
-**Predicate difference.** `P(𝒵_-) = 0` because `Q(σ₀, T)` contributes zeros at
-`σ₀ = 3/4 ≠ 1/2`.  `P(𝒵_+) = 1`.  ✓
+**Predicate difference.** `P(𝒵_-) = 0` because `Q(3/4, T)` contributes zeros at
+`Re ρ = 3/4 ≠ 1/2`.  `P(𝒵_+) = 1`.  ✓
 
-**Admissibility of `𝒵_-`.** The added/removed atoms are at bounded heights and
-finite in number; `𝒵_-` is locally finite, symmetric, and admissible.  ✓
+**Admissibility of `𝒵_-`.** The multiset is finite, symmetric, and locally finite.  ✓
 
-**Status: PROOF-DRAFT (integer-sign step RESOLVED).**
+**Exact m=2 sanity check (from OB-02 §7).** Take `t₁=1, t₂=2, T=1`.  Then
+`x₁ = 3/5`, `x₂ = 15/17`, giving:
 
-The add-only model (requiring `α_k ≥ 0`) is NOT needed.  The add-and-remove
-model works because we construct `𝒵_+` with sufficient multiplicity.
+```
+C = [[8/5,  8/17],
+     [128/25, 512/289]],     det C = 3072/7225 ≠ 0.
 
-**Limitation:** The collision pair `(𝒵_+, 𝒵_-)` consists of **finite** multisets
-in `𝔛_sym`, not the specific Riemann zero multiset.  The theorem asserts existence
-of an indistinguishable pair in the class; it does NOT claim the Riemann zero
-multiset is indistinguishable from an off-line object.
+d(1) = [1216/425, 1763072/180625].
 
-For the full B2 theorem (exact collision, integer multiplicities), the steps are:
+β = C⁻¹(−d(1)) = [−1426/1275, −854/375].
 
-1. Choose `n = m`, `t_k` rational, `σ₀ = 3/4`.  ✓
-2. `det J ≠ 0` over `ℚ` (Chebyshev, §4.3): PROOF-DRAFT.  ✓
-3. Solve `J α^ℚ = −δ^{off}(T) / R` over `ℚ`.  ✓ (conditional on rank)
-4. Scale by `R`: integer vector `α ∈ ℤ^n`.  ✓
-5. Construct `𝒵_+` with multiplicity buffer `M = R · max_k |α^ℚ_k|`.  ✓
-6. Construct `𝒵_-` (add/remove/quartet).  ✓
-7. Verify membership, observation equality, predicate difference.  ✓ (above)
+R = 6375,  n = (−7130, −14518),  M = 14518.
+
+Cn + R·d(1) = 0   (exactly).
+```
+
+`𝒵_+` has multiplicity 14518 at each pair; `𝒵_-` has multiplicities 7388 and 0
+at those pairs, plus 6375 copies of `Q(3/4, 1)`.
+
+**Status: PROOF-DRAFT (integer-sign step RESOLVED; corrections from OB-02 applied).**
 
 ---
 
-## §5. Construction (conditional on §4 succeeding)
+## §5. Construction summary
 
-Assume `det J ≠ 0` at heights `t₁, …, t_n`.  For large `T`:
+The full construction is contained in §4.5.  No additional choices are needed:
+`n = m`, `t_k` rational, `T` rational, `σ₀ = 3/4`.  The five steps are:
 
-1. Set `α = −J^{-1} δ^{off}(T)` (over `ℝ`).
-2. Since `δ^{off}(T) → 0`, for large enough `T` we have `|α_k|` small.
-3. Use the scaling argument of §4.5 to obtain integer multiplicities.
-4. Set `𝒵_− = 𝒵_+ ∪ {on-line atoms with mult α_k} ∪ Q(σ₀, T_*)`.
-5. `O_Φ(𝒵_−) = O_Φ(𝒵_+)` by construction.  ☐ (conditional)
+1. Compute `C_{jk} = 4(1 − T_j(x_k))` with `x_k = (4t_k²−1)/(4t_k²+1) ∈ ℚ`.  ✓
+2. Compute corrected `d(T)_j = 4 Re[φ_j(3/4+iT) + φ_j(1/4+iT)] ∈ ℚ`.  ✓
+3. Solve `β = −C^{-1} d(T) ∈ ℚ^m`; scale by `R` to get `n ∈ ℤ^m`.  ✓
+4. Construct `𝒵_+` with buffer `M = max_k |n_k|`; construct `𝒵_-` with adjusted
+   multiplicities and `R` copies of `Q(3/4, T)`.  ✓
+5. Verify `C n + R d(T) = 0` exactly (rational arithmetic).  ✓
 
 ---
 
@@ -330,14 +353,19 @@ This is left for refinement after the rank step.
 | Step | Status |
 |---|---|
 | Parameterization (§2) | PROOF-DRAFT ✓ |
-| Quartet tail decay (§3) | PROOF-DRAFT ✓ (inherits from B1) |
-| Li Jacobian full rank (§4.3, Vandermonde reduction) | PROOF-DRAFT ✓ — self-contained, no external citation |
+| Quartet contribution — corrected to include 1/4±iT pair (§3) | PROOF-DRAFT ✓ (OB-02 correction applied) |
+| Li pair contribution — corrected factor 4 (§4.3, previously factor 2) | PROOF-DRAFT ✓ (OB-02 correction applied) |
+| Li Jacobian full rank: det C ≠ 0 (Chebyshev + lower-triangular + Vandermonde) | PROOF-DRAFT ✓ — self-contained |
+| Monotonicity direction: x_k increasing in t_k (corrected from draft) | PROOF-DRAFT ✓ (x'(t) = 16t/(4t²+1)² > 0) |
+| Coefficient matrix A: lower-triangular (corrected from "upper") | PROOF-DRAFT ✓ |
 | Moment Jacobian full rank (§4.4, cosine-Vandermonde) | PROOF-DRAFT ✓ — self-contained |
-| Integer solution via scaling trick (§4.5) | PROOF-DRAFT ✓ (sign resolved) |
-| 𝒵_+ construction with multiplicity buffer | PROOF-DRAFT ✓ |
-| 𝒵_- construction (add/remove/quartet) | PROOF-DRAFT ✓ |
-| Admissibility + symmetry (§6) | PROOF-DRAFT ✓ |
-| Observation equality exact (§4.5) | PROOF-DRAFT ✓ |
+| Rationality of C and d(T) for rational t_k, T | PROOF-DRAFT ✓ |
+| Integer solution via scaling trick (§4.5) | PROOF-DRAFT ✓ |
+| 𝒵_+ construction with multiplicity buffer M = max|n_k| | PROOF-DRAFT ✓ |
+| 𝒵_- construction (corrected multiset-copy notation) | PROOF-DRAFT ✓ |
+| Admissibility + symmetry | PROOF-DRAFT ✓ |
+| Observation equality exact: Cn + R·d(T) = 0 | PROOF-DRAFT ✓ |
 | Predicate P(𝒵_-) = 0, P(𝒵_+) = 1 | PROOF-DRAFT ✓ |
+| Exact m=2 sanity check (OB-02 §7, t₁=1 t₂=2 T=1) | CONFIRMED ✓ (rational arithmetic) |
 | Counting-law refinement (§7) | DEFERRED |
-| Gate A status | PROOF-DRAFT complete — ready for independent check |
+| Overall theorem B2 | **CONFIRMED by OB-02 external review (2026-08-11)** |
