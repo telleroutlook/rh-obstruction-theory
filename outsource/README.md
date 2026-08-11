@@ -41,7 +41,7 @@ problem.
 | OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | RESOLVED — CONFIRMED (Gate-A CONDITIONAL), checker deposited 2026-08-11 |
 | OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | RESOLVED — GATE-A CONDITIONAL→PASS, 8 mods integrated 2026-08-11 (D → INDEPENDENTLY-CHECKED, scope-extension positioning) |
 | OB-26 | `OB-26-C-gate-a-review-package.md` | C | **GATE-A**: independent review of the finite-Euler-factor non-forcing theorem (Links A–D + Q1–Q7; Andersson Thm 5 import + zero-free finite-factor ratio; crux Q5 = corollary vs standalone; Q3 = one-sided target framing) | RESOLVED — GATE-A CONDITIONAL→PASS, mod1–mod6 integrated 2026-08-11 (C → INDEPENDENTLY-CHECKED, one-sided corollary of Andersson Thm 5) |
-| OB-29 | `OB-29-E-gate-a-review-package.md` | E | **GATE-A**: independent review of the compactness (finite-evidence) theorem (Links A–D + Q1–Q7; E-neg per-`N` non-identifiability via fixed-`N` IFT + E-pos sufficiency package; Ξ-not-ξ̂ normalization; per-`N`-not-sequence framing; H-uorder/H-div honesty) | OPEN — send for review |
+| OB-29 | `OB-29-E-gate-a-review-package.md` | E | **GATE-A**: independent review of the compactness (finite-evidence) theorem (Links A–D + Q1–Q7; E-neg per-`N` non-identifiability via fixed-`N` IFT + E-pos sufficiency package; Ξ-not-ξ̂ normalization; per-`N`-not-sequence framing; H-uorder/H-div honesty) | RESOLVED — **GATE-A BLOCKED** (real circularity, L5 RH-via-divisor); Ξ-specific RH-free claim withdrawn, reframed to abstract Laguerre–Pólya target; integrated 2026-08-11 |
 | OB-30 | `OB-30-Eprime-gate-a-review-package.md` | E' | **GATE-A**: independent review of the meromorphic (Suzuki-target) compactness theorem (Links A–D + Q1–Q7; E'-neg per-`(k,J)` non-identifiability via `w₀`-jet IFT + E'-pos corrected sufficiency; W-odd parity + γ_n-are-zeros; Montel-not-Marty; T(r,W)≍r log r conventional-order envelope) | OPEN — send for review |
 | OB-31 | `OB-31-Dprime-gate-a-review-package.md` | D' | **GATE-A**: independent review of the log-polyhomogeneous escape-route audit (Claims A–E + Q1–Q7; 𝒞_logpoly is covered by D not an escape; escape class is log-weighted S^{1,-1}; exact 2πn/log(n+e) refuted by T log log T; open HP frontier honesty) | OPEN — send for review |
 | OB-32 | `OB-32-H-gate-a-review-package.md` | H | **GATE-A**: independent review of the information-obstruction partial order (Claims 1–4 + Q1–Q6; partial-order-not-chain OB-27; incomparability H'(i) O_finite ⋈ O_theta with 2 witnesses; coarsening inherits B2/G; L23 fixed-sequence subtlety) | OPEN — send for review |
@@ -606,6 +606,34 @@ incomparability increment may advance to INDEPENDENTLY-CHECKED and H is a correc
 framework (organizing section, not a standalone barrier), adding no new analytic content
 beyond B2/G. Passed PROMPT_LINT (L18/L19/L21/L23 + self-containment; witness values
 re-verified consistent with statement.md).
+
+## Resolved OB-29 outcome (integrated 2026-08-11) — GATE-A BLOCKED, E reframed
+
+- **OB-29 (E Gate-A review): GATE-A BLOCKED — the most consequential referee outcome so
+  far.** The reviewer found a **genuine circularity** (not a wording issue): E-neg matches
+  `P_r(F_c)=P_r(Ξ)` by writing `Ξ=Ξ(0)∏(1−z²/γ_n²)` over **real** `γ_n` — that **is RH**
+  (PROMPT_LINT L5, RH-imported-via-divisor); and E-pos's (H-div) forces every `Ξ`-zero to be
+  a real-limit of real zeros, again RH, *before* Montel/Hurwitz. Also refuted: "`Ξ`/CCM
+  `det_reg` are known members of the record class" (`Ξ`-membership = RH; CCM phase
+  `−iλ^{−iz}` not even/real, no exact `k_N`/`J_N` match), and "`R_N → ∞`" (needs the unstated
+  `k_N → ∞`). My package's radius anchors (`54.6, 13644`) were leading-asymptotic, not the
+  certified `2γ_{k+1}` (`≈105.9, 19757`).
+  - **This was a re-scan miss:** L5 existed since OB-05/OB-08 but was never re-checked against
+    E. PROMPT_LINT L5 now carries an explicit RE-SCAN OBLIGATION; the whole `theorems/*/`
+    corpus was re-grepped — E was the sole offender (G's real-zero products are all correctly
+    RH-conditional / ¬RH-case, its Fredholm zeros unconditionally real).
+  - **Integration (reviewer's Path B):** the `Ξ`-specific RH-free claim is **withdrawn**;
+    the surviving RH-free content is reframed over an **abstract Laguerre–Pólya target**
+    `L=C∏(1−z²/λ_n²)` with a *given* real, simple, summable zero set (Links A/B CONFIRMED
+    given `L`; the finite-order uniqueness lemma conditional). Specializing `L=Ξ` is exactly
+    RH and is **not** claimed. statement.md §0/§1' reframing; proof.md/limitations/novelty/
+    contract all updated (contract `no_rh`/`non_vacuity` → FAIL-as-submitted with the reason).
+    E is positioned as a Paper C **supporting section** (abstract real-zero
+    non-identifiability), not a standalone RH-free `Ξ`-theorem. Regression test
+    `test_e_ob29_blocked_reframing_recorded`; tests 85 → 86.
+  - **Discipline note:** this is the same pattern as F (downgraded from a complexity barrier)
+    — an honest BLOCKED integrated by withdrawing the overclaim and keeping only what is
+    genuinely RH-free. The external gate did exactly its job.
 
 ## What a returned verification should contain
 

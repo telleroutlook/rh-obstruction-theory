@@ -1,7 +1,7 @@
 {
   "contract_version": "2",
   "claim_id": "E-compactness-theorem",
-  "note": "Theorem E (WP-E). Paper C. Two-part: E-neg (finite evidence doesn't imply Ξ convergence) + E-pos (sufficient package does). CCM entire-target normalization frozen. PROOF-DRAFT.",
+  "note": "Theorem E (WP-E). Paper C supporting section. Two-part: E-neg (finite record does not identify a real-zero target) + E-pos (conditional sufficiency). GATE-A BLOCKED (OB-29) for the Xi-specific RH-free claim (real circularity, L5); survives as an abstract Laguerre-Polya real-zero lemma.",
 
   "theorem_id": "E-compactness",
   "paper": "C",
@@ -40,15 +40,15 @@
   ],
 
   "acceptance_test_results": {
-    "note": "Self-assessed PROOF-DRAFT. E-pos gates clear (standard analysis). E-neg is per-N non-identifiability, quantitatively CONFIRMED (OB-03).",
-    "class": "PASS — membership in the E_N evidence-record class is checkable",
-    "non_vacuity": "PASS — CCM det_reg sequence is a serious published member; Suzuki W(a,theta;z) also a member",
-    "target": "PASS — E-neg: fiber E_N contains F far from Xi (per-N); E-pos objects converge (conditionally)",
-    "observation": "PASS — the finite evidence record E_N is exact (not numerical); the sup-distance lower bound is exact",
-    "invariant": "PASS — the finite evidence record and (H-bound)/(H-uorder)/(H-div) conditions are representation-independent",
-    "no_rh": "PASS — neither RH nor RH-equivalent among hypotheses of E-neg or E-pos",
-    "escape": "PASS — explicit escape package (H-norm + H-bound + H-uorder + H-div) specified",
-    "scope": "PASS — ambient class named (order-1 entire, CCM normalization); resource bound named (k_N zeros + J_N coefficients); E-neg is PER-N (not sequence non-convergence)"
+    "note": "GATE-A BLOCKED (OB-29) for the Xi-specific RH-free claim: real circularity (L5). Survives only as an abstract Laguerre-Polya real-zero benchmark lemma (RH-free); Xi-specialization is RH.",
+    "class": "PASS (abstract L) — membership in the E_N record class over a Laguerre-Polya target L is checkable. For Xi specifically: checking 'first k_N zeros real' is not RH-free.",
+    "non_vacuity": "FAIL as submitted (OB-29 Q5) — Xi is a member of the E_N class iff all its zeros are real (= RH); the CCM det_reg sequence carries the -i*lambda^{-iz} phase (not even/real-on-R) and is NOT proven to match E_N conditions 5,7. Non-vacuous only over an abstract given real-zero L.",
+    "target": "PASS (abstract L) — fiber E_N contains F far from L (per-N). For Xi: BLOCKED (identifying the divisor with Xi is RH).",
+    "observation": "PASS — the finite evidence record E_N is exact; the sup-distance lower bound is exact (over a given benchmark L).",
+    "invariant": "PASS — the record conditions are representation-independent.",
+    "no_rh": "FAIL as submitted (OB-29 Q1) — E-neg needs L=∏(1−z²/λ_n²) identified with Xi over REAL zeros (RH via divisor, L5); E-pos (H-div) forces every Xi-zero to be a real-limit of real zeros (RH) before Montel/Hurwitz. RH-free ONLY over an abstract L, where no such identification is claimed.",
+    "escape": "N/A restructured — E-pos (H-uorder)+(H-div) is a conditional sufficiency lemma; (H-div) over Xi is an RH-strong hypothesis, labelled as such (not a harmless compactness input).",
+    "scope": "PARTIAL — ambient class must be stated as abstract Laguerre-Polya L (order-1 entire, given real simple summable zeros), NOT Xi; per-N (radius escape needs k_N->inf); Suzuki target excluded."
   },
 
   "checker": {
@@ -60,5 +60,5 @@
   "assurance": {"required": ["formal-kernel"]},
   "replay": {"semantic": "required-when-witness-available", "byte_exact": "not_required"},
   "spec_status": "PROOF-DRAFT",
-  "status_note": "E-pos is PROOF-DRAFT-CLEAR (standard analysis; (H-uorder) r^{1+eps} envelope + (H-div) multiplicity-complete divisor are the identified missing ingredients, OB-14). E-neg is PER-N non-identifiability, quantitatively CONFIRMED by OB-03 (fixed-N log-power-sum IFT, exact Vandermonde Jacobian, Cauchy separation; no N->infty). OB-28 self-audit (2026-08-11): restated E-neg as per-N (matching proof.md §3), NOT sequence non-convergence; replaced the abandoned delta_n=c/n sketch. CCM entire normalization frozen; Suzuki meromorphic target out of scope. Whole-theorem Gate-A math review not yet done."
+  "status_note": "GATE-A BLOCKED (OB-29 2026-08-11) for the Xi-specific RH-free claim. Genuine circularity (PROMPT_LINT L5, RH-imported-via-divisor, a re-scan miss): E-neg's log-power-sum matching writes Xi=Xi(0)*prod(1-z^2/gamma_n^2) over REAL gamma_n = RH; E-pos's (H-div) forces every Xi-zero to be a real-limit of real zeros = RH before Montel/Hurwitz. Also: 'Xi/CCM det_reg are known members of E_N' is FALSE (Xi-membership = RH; CCM phase -i*lambda^{-iz} not even/real, no exact k_N/J_N match); 'R_N->inf' needs the unstated k_N->inf; radius anchors were leading-asymptotic (2*gamma_11=105.94, 2*gamma_10001=19757.3, not 54.5/13643). SURVIVES (RH-free): the IFT/scaled-Vandermonde/Cauchy machinery over an ABSTRACT Laguerre-Polya target L=C*prod(1-z^2/lambda_n^2) with a GIVEN real simple summable zero set (OB-29 Link A/B CONFIRMED given L); and the finite-order complete-divisor uniqueness lemma (Link D CONDITIONAL, once (H-uorder) r^{1+eps} + (H-div) precise). Specializing L=Xi is exactly RH and is NOT claimed. Reframed per OB-29 Path B. Positioned as a Paper C supporting section (abstract real-zero non-identifiability), NOT a standalone RH-free Xi-theorem."
 }

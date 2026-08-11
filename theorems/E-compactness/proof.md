@@ -1,6 +1,10 @@
 # Proof — Theorem E (finite evidence ⇏ compact convergence; sufficient package)
 
-**Status:** PROOF-DRAFT (E-neg quantitative §3 CONFIRMED by OB-03 external review 2026-08-11, with corrections applied)  
+**Status:** PROOF-DRAFT — **Gate-A BLOCKED (OB-29) for the `Ξ`-specific RH-free claim**
+(circularity: the products below over real `γ_n` are RH-via-divisor, L5). The IFT / Vandermonde
+/ Cauchy machinery is CONFIRMED **over an abstract Laguerre–Pólya target `L`** (statement.md
+§0/§1'); read every `Ξ`/`γ_n` below as `L`/`λ_n`, a GIVEN real-zero benchmark. Specializing
+`L=Ξ` is RH and is not claimed. (§3 construction CONFIRMED given `L`, OB-03 + OB-29 Link A/B.)  
 **Analytic / finite separation:** purely analytic; no finite certificate used.
 
 ---

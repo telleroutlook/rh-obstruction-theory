@@ -10,16 +10,21 @@
 ### 1. Folklore: "finite numerics ≠ infinite theorem"
 
 The observation that finite real-zero matching does not imply global convergence
-is folklore.  What is **new** in E-compactness is:
+is folklore.  What is **new** in E-compactness (after the OB-29 reframing) is:
 
-- the **quantified per-`N` witness** in the exact CCM normalization (a record-respecting
-  `F` with `sup_{|z|≤R_N}|F−Ξ| ≥ ε_N`, `R_N ≥ 2γ_{k_N+1}`);
+- the **quantified per-`N` witness over an abstract Laguerre–Pólya target `L`** (a
+  record-respecting `F` with `sup_{|z|≤R_N}|F−L| ≥ ε_N`, `R_N ≥ 2λ_{k_N+1}`), via the
+  explicit scaled-Vandermonde IFT + Cauchy estimate — **RH-free because it never identifies
+  `L` with `Ξ`**;
 - the **identified degree of freedom** (tail of the Hadamard product beyond `k_N`);
-- the **positive sufficient package** (H-bound + H-tail + H-modulus) as a
-  referee-grade checklist translating finite evidence into a rigorous convergence
-  theorem.
+- the **positive sufficient package** (H-bound + H-uorder + H-div) as a referee-grade
+  checklist for what would translate finite evidence into convergence — **with (H-div) over
+  `Ξ` explicitly flagged as an RH-strong hypothesis** (OB-29).
 
-The value is the CCM/Suzuki-specific packaging, not the abstract observation.
+**NOT new / withdrawn (OB-29 BLOCKED):** the `Ξ`-specific RH-free version. Matching
+`P_r(F_c)=P_r(Ξ)` needs `Ξ=Ξ(0)∏(1−z²/γ_n²)` over real `γ_n` = RH-via-divisor (L5); so the
+"exact CCM normalization" packaging cannot be claimed RH-free. The genuine content is the
+abstract-`L` lemma; the CCM/`Ξ` specialization is RH-conditional.
 
 ### 2. Standard complex analysis (Montel/Vitali/Hurwitz)
 
@@ -58,10 +63,12 @@ for the current theorem (meromorphic; separate pole/residue argument needed).
 
 ## Publication verdict
 
-E-compactness has genuine new content:
-- a precise **checklist** for the CCM convergence step (paper-quality);
-- the **per-`N` non-identifiability** witness (Paper C main negative result);
-- the **sufficient package** as the positive direction.
+**GATE-A BLOCKED (OB-29) for the `Ξ`-specific RH-free claim.** After reframing to the
+abstract Laguerre–Pólya target `L`, E has genuine but modest content:
+- the **abstract-`L` per-`N` non-identifiability** witness (RH-free; the surviving negative
+  result) — a supporting lemma, not a standalone barrier;
+- the **conditional sufficiency package** (with (H-div) over `Ξ` flagged as RH-strong).
 
-The negative theorem needs the quantitative §3 estimate before it is stronger
-than a "slogan." Paper C is publishable once proof.md §3 is completed.
+Positioned as a **Paper C supporting section** on real-zero-approximant non-identifiability,
+NOT a standalone RH-free `Ξ`-theorem. Specializing to `Ξ`/CCM is RH-conditional and must be
+labelled so. (OB-29 Q6: "supporting section, not standalone novelty".)

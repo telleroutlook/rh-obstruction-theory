@@ -45,12 +45,23 @@ For symmetric zeros `±z_j` with `Σ|z_j|^{-2}<∞`, the correct paired product 
 of **order 2** — verify via `E_1(z/a)E_1(z/−a) = (1−z/a)e^{z/a}(1+z/a)e^{−z/a} = 1−z²/a²`
 (the exponentials cancel in the pair). Never carry an unpaired `e^{z²/z_j²}` factor.
 
-## L5 — RH imported via the divisor (hit OB-05, OB-08)
+## L5 — RH imported via the divisor (hit OB-05, OB-08; re-scan hit E OB-29)
 Writing `Ξ(z) = Ξ(0)∏(1−z²/γ_n²)` with `γ_n` **real** and exhausting the zero divisor
 **IS RH**. CHECK: is the divisor asserted real/on-line? If so, that is a hypothesis, and it
 is RH — forbidden (CLAUDE.md, no RH-equivalent as premise). Use the unconditional **complex**
 divisor `ω_n ∈ ℂ` (`ω_ρ = γ − i(β−1/2)`), and keep `F_γ ≠ Ξ_R` unless RH is separately
 invoked. grep the prompt for "real zeros", "on the critical line", "γ_n real".
+**RE-SCAN OBLIGATION (hit again OB-29, E):** this was found a THIRD time — E-compactness's
+E-neg matched `P_r(F_c)=P_r(Ξ)` by writing `Ξ=Ξ(0)∏(1−z²/γ_n²)` over **real** `γ_n`, and
+E-pos's (H-div) forced every `Ξ`-zero to be a real-limit of real zeros — both **are RH**,
+imported before any convergence/Hurwitz step. The tell: a construction that (a) writes the
+target as a real-zero product AND (b) claims to be RH-free. There is no such reading — either
+the product is the true `Ξ`/`Ξ̂` (real zeros = RH) or it is not the target at all. FIX:
+retarget to an ABSTRACT Laguerre–Pólya `L=C∏(1−z²/λ_n²)` with a *given* real-zero set
+(RH-free, but does NOT specialize to `Ξ` without RH), OR label the theorem RH-conditional.
+When fixing this in one theorem, GREP every `theorems/*/` for `∏(1−z²/γ_n²)`, "real zeros",
+"real-rootedness", "(H-div)"/divisor-convergence-to-a-real-set, and check each is over an
+abstract `L` or explicitly RH-conditional — NOT over `Ξ` claimed RH-free.
 
 ## L6 — Vacuous target: real atoms / free-parameter inflation (hit OB-07)
 CHECK the ambient class does not admit atoms invisible to both the observation and the

@@ -404,6 +404,26 @@ def test_e_neg_construction_uses_ift_not_stale_sketch():
         "dependency must not say proof.md §3 is 'to be written' (it exists)"
 
 
+def test_e_ob29_blocked_reframing_recorded():
+    """OB-29: Gate-A BLOCKED the Xi-specific RH-free claim (circularity, L5). The theorem
+    must record the block and reframe to an abstract Laguerre-Polya target L; the contract
+    must NOT still assert no_rh:PASS or Xi/CCM as known members."""
+    stmt = (E_DIR / "statement.md").read_text()
+    assert "BLOCKED" in stmt and "OB-29" in stmt, \
+        "E statement must record the OB-29 Gate-A BLOCKED verdict"
+    assert "Laguerre" in stmt, \
+        "E must reframe to an abstract Laguerre-Polya target L (surviving RH-free content)"
+    # contract must reflect the circularity, not a clean no_rh PASS
+    with E_CONTRACT.open() as f:
+        data = json.load(f)
+    no_rh = data["acceptance_test_results"]["no_rh"]
+    assert "FAIL" in no_rh or "RH" in no_rh and "divisor" in no_rh.lower(), \
+        "E contract no_rh must record the RH-via-divisor circularity (not a clean PASS)"
+    assert data["acceptance_test_results"]["non_vacuity"].startswith("FAIL") or \
+        "iff all its zeros are real" in data["acceptance_test_results"]["non_vacuity"], \
+        "E contract non_vacuity must record that Xi-membership = RH"
+
+
 # ---- C-euler-tail theorem scaffold tests ----
 
 C_DIR = ROOT / "theorems" / "C-euler-tail"

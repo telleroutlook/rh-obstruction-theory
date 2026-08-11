@@ -5,6 +5,30 @@
 
 ---
 
+## 0. GATE-A BLOCKED for the `Ξ`-specific RH-free claim (OB-29, 2026-08-11) — primary limitation
+
+The independent Gate-A review **BLOCKED** the submitted theorem. The `Ξ`-specific, RH-free
+claim is **circular** (PROMPT_LINT L5, RH-imported-via-divisor):
+
+- **E-neg.** Matching the log-power-sums `P_r(F_c) = P_r(Ξ)` requires
+  `Ξ(z) = Ξ(0)∏_{n≥1}(1 − z²/γ_n²)` as a product over **real** `γ_n`. If the `γ_n` are the
+  complete real zero set of `Ξ`, that product **is RH**; if they are only "prescribed reals",
+  the product is not `Ξ` and the Taylor match fails. No RH-free reading gives both.
+- **E-pos.** (H-div) forces every `Ξ`-zero to be a real-limit of real zeros of `F_N`, i.e.
+  RH, *before* Montel/Hurwitz — (H-div) is an RH-strong hypothesis, not a harmless
+  compactness input.
+- **Also refuted:** "`Ξ` and the CCM `det_reg` sequence are known members of the record
+  class" (`Ξ`-membership = RH; the CCM phase `−iλ^{−iz}` is not even/real and no exact
+  `k_N`/`J_N` match is proven); and "`R_N → ∞`" (needs the unstated `k_N → ∞`).
+
+**What survives (RH-free)** — the actual content — is over an **abstract Laguerre–Pólya
+target** `L(z) = C∏(1 − z²/λ_n²)` with a *given* real, simple, summable-`λ_n^{-2}` zero set:
+the IFT / scaled-Vandermonde / Cauchy machinery (Links A/B, CONFIRMED given `L`) and the
+finite-order complete-divisor uniqueness lemma (Link D, conditional). **Specializing `L = Ξ`
+is exactly RH and is not claimed.** See statement.md §0/§1'. Positioned as a Paper C
+**supporting section** (abstract real-zero non-identifiability), not a standalone RH-free
+`Ξ`-theorem.
+
 ## 1. CCM entire target only — Suzuki meromorphic target excluded
 
 This theorem is stated and proved in the **CCM normalization** (entire target
@@ -27,25 +51,23 @@ function theorem — so conditions 1–7 of `ℰ_N` all hold. (An earlier draft 
 hand-picked `δ_n=c/n` tail that only handled `j=0`; that sketch was abandoned — see
 proof.md §2 for why summable hand-picked perturbations self-defeat.)
 
-## 3. E-neg is a per-`N` statement, quantitatively CONFIRMED (not open)
+## 3. E-neg is a per-`N` statement over the abstract target `L` (CONFIRMED given `L`)
 
-The quantitative lower bound `sup_{|z|≤R_N}|F − Ξ| ≥ ε_N` for a record-respecting `F`
-(fixed `N`, `R_N ≥ 2γ_{k_N+1}`) is **CONFIRMED** (OB-03 external review, 2026-08-11), via
-the exact Vandermonde Jacobian and a Cauchy coefficient estimate on the first unmatched
-log-power-sum. It is a **per-`N` non-identifiability** result and uses **no** `N→∞` passage.
+The quantitative lower bound `sup_{|z|≤R_N}|F − L| ≥ ε_N` for a record-respecting `F`
+(fixed `N`, `R_N ≥ 2λ_{k_N+1}`, over the abstract Laguerre–Pólya `L`) is CONFIRMED (OB-03
+construction; OB-29 Link A/B given `L`), via the exact scaled-Vandermonde Jacobian and a
+Cauchy coefficient estimate on the first unmatched log-power-sum. It uses **no** `N→∞`
+passage. **Over `Ξ` specifically it is BLOCKED** (§0): identifying the divisor with `Ξ` is RH.
 
-## 4. Not a claim that a sequence fails to converge (per-`N`, like B1's "no uniform margin")
+## 4. Not a claim that a sequence fails to converge (per-`N`)
 
-E-neg shows the finite record `ℰ_N` **alone** does not identify `Ξ` within its fiber, for
-each `N`. It does **NOT** assert that some particular sequence `(F_N)` fails to converge
-locally uniformly — the witness discrepancy sits at radius `R_N ≥ 2γ_{k_N+1} → ∞`, so it is
-consistent with locally-uniform convergence on every fixed compact (this is exactly why the
-positive package E-pos is not in conflict). Nor does it show that **no** sequence converges:
-the CCM sequence `det_reg(𝔇_{λ,N} − z)` is conjectured (numerically supported) to converge
-after suitable normalization. The theorem says the normalization/tail-control step is
-load-bearing — not that convergence is impossible. (This mirrors B1's "no uniform separation
-margin," and keeps E-neg clear of the "margin → 0" non-barrier label: the claim is a
-per-`N` fiber non-identifiability, not a shrinking positive margin.)
+E-neg (over `L`) shows the finite record `ℰ_N` **alone** does not identify `L` within its
+fiber, for each `N`. It does **NOT** assert that some sequence `(F_N)` fails to converge
+locally uniformly. The witness sits at radius `R_N ≥ 2λ_{k_N+1}`, which escapes to ∞ **only
+under the extra assumption `k_N → ∞`** (OB-29 §1.4) — the bare per-`N` statement omits that
+quantifier. Nor does it show that **no** sequence converges: the CCM sequence is conjectured
+(numerically supported) to converge after suitable normalization. (This mirrors B1's "no
+uniform separation margin," clear of the "margin → 0" non-barrier label.)
 
 ## 5. Not about RH
 
