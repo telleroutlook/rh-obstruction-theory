@@ -966,8 +966,10 @@ H_CONTRACT = ROOT / "domain" / "contracts" / "H-information-hierarchy.json"
 
 
 def test_h_partial_order_not_total_chain():
-    """OB-32: H's observation structure is a refinement PREORDER, not a total chain;
-    the incomparability H'(i) is NOT established (only one direction holds); O_oracle=Z."""
+    """OB-32 + repair-2: H's observation structure is a refinement PREORDER, not a total chain;
+    O_oracle=𝒵 (full multiset); the literal fixed O_theta is constant (⇒ comparable), while
+    incomparability H'(i) is established only for the NONCONSTANT O_theta^{samp} (both witnesses
+    inheriting established results). All these nuances must be present."""
     stmt = (H_DIR / "statement.md").read_text()
     # The strict-chain string may appear ONLY inside a note that repudiates it.
     for line in stmt.splitlines():
@@ -975,19 +977,23 @@ def test_h_partial_order_not_total_chain():
             assert ("earlier draft" in line or "false" in line.lower()
                     or "withdrawn" in line.lower() or "not" in line.lower()), \
                 f"strict total-chain asserted without repudiation: {line!r}"
-    # OB-32: incomparability must be recorded as NOT established, and the preorder / full-multiset
-    # oracle fixes must be present.
-    assert "NOT established" in stmt or "NOT ESTABLISHED" in stmt or "not established" in stmt, \
-        "H must record that the incomparability H'(i) is NOT established (OB-32)"
+    # preorder + full-multiset oracle fixes present
     assert "preorder" in stmt.lower(), \
         "H must describe the structure as a refinement preorder (lattice withdrawn)"
     assert "O_oracle = 𝒵" in stmt or "O_oracle=𝒵" in stmt or "full multiset" in stmt, \
         "H must define O_oracle as the full multiset 𝒵 (OB-32 fix)"
+    # the literal fixed O_theta must still be flagged constant/comparable (not silently upgraded)
+    assert "constant" in stmt and "O_theta^{samp}" in stmt, \
+        "H must distinguish the literal constant O_theta from the nonconstant O_theta^{samp}"
+    # the repair via the B2 pair must be recorded as inheriting the established collision
+    assert "B2 exact-collision" in stmt or "B2 exact collision" in stmt, \
+        "H repair-2 must cite the B2 exact-collision pair as the reverse witness"
 
 
 def test_h_contract_reflects_ob32_block():
-    """OB-32: H contract must record the BLOCK — preorder (not lattice), O_oracle=Z,
-    incomparability NOT established — and must NOT assert the withdrawn strict chain."""
+    """OB-32 + repair-2: H contract must record preorder (not lattice), O_oracle=Z, the
+    literal-O_theta-is-constant caveat, and the repaired incomparability via O_theta^{samp};
+    and must NOT assert the withdrawn strict chain."""
     assert H_CONTRACT.exists()
     with H_CONTRACT.open() as f:
         data = json.load(f)
@@ -996,11 +1002,11 @@ def test_h_contract_reflects_ob32_block():
         "H contract ambient_class must not assert the withdrawn strict chain"
     assert "PREORDER" in ambient.upper(), \
         "H contract ambient_class must describe a refinement preorder (not a lattice)"
-    assert "NOT established" in ambient or "NOT ESTABLISHED" in ambient.upper(), \
-        "H contract ambient_class must record incomparability is NOT established"
+    assert "CONSTANT" in ambient.upper() and "O_theta^{samp}" in ambient, \
+        "H contract must keep the literal-constant-O_theta caveat and the O_theta^{samp} repair"
     note = data["spec_status_note"]
-    assert "BLOCKED" in note and "OB-32" in note, \
-        "H contract spec_status_note must record the OB-32 BLOCK"
+    assert "BLOCKED" in note and "OB-32" in note and "REPAIR" in note.upper(), \
+        "H contract spec_status_note must record the OB-32 block AND the repair-2"
 
 
 def test_h_no_rh_claim():

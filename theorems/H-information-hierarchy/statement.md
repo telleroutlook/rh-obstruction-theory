@@ -153,25 +153,37 @@ chain, but the claimed **incomparability of `O_finite` and `O_theta` is NOT esta
 - `O_theta ≺ O_oracle`: `O_theta` is constant (literal reading), so trivially a coarsening;
   under a nonconstant reading it would need G Lemma G.2 — deferred with that reading.
 
-**Status: BLOCKED as stated (OB-32); PARTIAL repair for `K=1` (OB-32-repair).** Only
-`O_finite ⋠ O_theta` and the two coarsenings (with `O_oracle=𝒵`) were established at review
-time. **Repair progress:** with a **nonconstant** `O_theta` — the sampled-count map
-`O_theta^{samp}(𝒵) := (N_𝒵(d_m))_{m≤M}`, `N_𝒵(u)=#{ρ∈𝒵 : |Im ρ| ≤ u}` at fixed θ-levels
-`d_m` — the reverse direction is now established **for the `K=1` observation** by an *exact*
-witness: the two symmetric quartets `Q(1/4, 2)` and `Q(1/3, T₂)` with `T₂ = 2.024521…`
-(the positive root of `Li₁(1/3,T₂)=Li₁(1/4,2)=2144/4745`) have **equal `Li₁`** (exact, by
-construction) but different heights, so any sampled level `d_m ∈ (2, T₂)` gives
-`N_{𝒵₊}(d_m)=2 ≠ 0=N_{𝒵₋}(d_m)` — i.e. `O_finite^{(K=1)}` collides while `O_theta^{samp}`
-separates. Combined with `O_finite ⋠ O_theta`, this gives genuine **incomparability of
-`O_finite^{(K=1)}` and `O_theta^{samp}`**.
+**Status: BLOCKED as stated (OB-32); REPAIRED for all `K` via the B2 pair (OB-32-repair-2).**
+Adopt the **nonconstant** sampled-count map
+`O_theta^{samp}(𝒵) := (N_𝒵(d_m))_{m≤M}`, `N_𝒵(u)=#{ρ∈𝒵 : |Im ρ| ≤ u}` (with multiplicity), at
+a **fixed** level set `d_1<…<d_M`. Then genuine incomparability of `O_finite` and
+`O_theta^{samp}` holds **for every `K`**, with both witnesses inheriting *established* results:
 
-**What remains open.** (i) For the full `O_finite = (Li_1,…,Li_K)`, `K≥2`, an exact reverse
-witness needs `K` matched coordinates with `>K` free tail parameters — i.e. the B1/B2 IFT
-construction, **not** a closed-form 2-quartet pair; not delivered here. (ii) Under Theorem G's
-**literal** `O_theta = d_n = θ_level(n)` (a constant map), incomparability is still false
-(`O_theta ≺ O_finite`) — the repair requires adopting the nonconstant `O_theta^{samp}` as the
-definition. So H'(i) holds for `(K=1, O_theta^{samp})` and is open for `K≥2`; a resend should
-scope the claim to `O_theta^{samp}` and either restrict to `K=1` or supply the IFT witness.
+- **`O_finite ⋠ O_theta^{samp}`.** Two symmetric quartets at the **same height** `T`, different
+  real offset — `Q(3/4,T)` and `Q(9/10,T)` — share the imaginary-part multiset `{±T,±T}`, so
+  `O_theta^{samp}` is **equal at every level**, but `Li₁` differs (`51296/2576009 ≠
+  2001800/100820081` at `T=10`, exact). So an `O_theta^{samp}`-collision is not an
+  `O_finite`-collision. (Forward direction, elementary, script-verified.)
+- **`O_theta^{samp} ⋠ O_finite` (all `K`) — from the B2 exact-collision pair, Gate-A PASS
+  OB-20.** B2 produces `𝒵₊` (on-line atoms `{1/2±it_k}`, multiplicity `M_0`) and
+  `𝒵₋ = 𝒵₊` (multiplicities `M_0+n_k`) `∪ Q(σ₀,T)` (multiplicity `R≥1`), `T>t_n`, with
+  `O_j(𝒵₊)=O_j(𝒵₋)` **exactly for all `j≤m`** (the B2 collision `Cn+Rd=0`). But `𝒵₋` carries
+  the off-line quartet at height `T` that `𝒵₊` lacks: for a fixed level set, choose `T` so that
+  some `d_m` lands in `(t_n, T]` — then `N_{𝒵₋}(d_m) − N_{𝒵₊}(d_m) = 2Σ_k n_k` (levels in
+  `(t_n,T)`) or `= 2Σ_k n_k + 4R ≥ 4` (a level just above `T`, since the quartet's 4 atoms all
+  have `|Im|=T` and `R≥1`). So `O_theta^{samp}(𝒵₊) ≠ O_theta^{samp}(𝒵₋)` while
+  `O_finite(𝒵₊)=O_finite(𝒵₋)`. This is an **exact** reverse witness for the full
+  `O_finite=(Li_1,…,Li_m)`, `m≥1`, inheriting B2's established collision — **no new unaudited
+  construction**.
+
+**Therefore H'(i): `O_finite ⋈ O_theta^{samp}` (incomparable) is established for all `K`**,
+resting on (a) the elementary same-`Li₁` forward witness and (b) the Gate-A-established B2
+exact collision. **Caveats (honest):** the incomparability is for the **sampled-count**
+`O_theta^{samp}`, a deliberately nonconstant map — **not** Theorem G's literal fixed sequence
+`d_n=θ_level(n)` (which is constant, giving `O_theta ≺ O_finite`). The claim's content is a
+statement about *which coordinates each map sees*, and it now has exact witnesses both ways.
+This should be re-sent to Gate-A (candidate OB-34) scoped to `O_theta^{samp}` before advancing
+past PROOF-DRAFT.
 
 ---
 
@@ -213,7 +225,7 @@ their mutual incomparability (Theorem H′(i)) is independent of the G-hard ques
 | Observation structure (§2) | **BLOCKED as stated (OB-32)** — a refinement PREORDER (not a lattice); `O_oracle` must be the full multiset 𝒵; literal `O_theta` is constant ⇒ `O_theta ≺ O_finite` |
 | Theorem H for O_finite | INDEPENDENTLY-CHECKED via inheritance (B2 Gate-A PASS OB-20 + INDEPENDENT-CHECKER OB-21) |
 | Theorem H for O_theta | INDEPENDENTLY-CHECKED via inheritance (G-info Gate-A PASS OB-22 + INDEPENDENT-CHECKER OB-17) |
-| Theorem H' incomparability (§4(i)) | **NOT ESTABLISHED (OB-32)** — only `O_finite ⋠ O_theta` holds; reverse is false under literal `O_theta`; needs nonconstant `O_theta` + exact witness |
+| Theorem H' incomparability (§4(i)) | **REPAIRED for all K via O_theta^{samp} (OB-32-repair-2)** — forward: same-Im quartets; reverse: B2 exact-collision pair (Gate-A PASS OB-20). PROOF-DRAFT pending Gate-A re-send OB-34. Literal fixed `O_theta` stays constant (⇒ comparable). |
 | Theorem H' coarsening ≺ O_oracle=𝒵 (§4(ii)) | inherits exact B2/G collisions (firm, once `O_oracle=𝒵`) |
 | O_vM layer analysis (§5) | CONJECTURE (G-hard) |
 | H's own unification claim (partial-order framing) | PROOF-DRAFT — not independently reviewed |
