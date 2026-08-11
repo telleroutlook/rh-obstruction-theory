@@ -37,6 +37,7 @@ problem.
 | OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | RESOLVED — GATE-A PASS, integrated 2026-08-11 |
 | OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | RESOLVED — CONFIRMED, checker deposited 2026-08-11 |
 | OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | RESOLVED — GATE-A CONDITIONAL, 7 mods integrated 2026-08-11 |
+| OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -311,6 +312,23 @@ is the whole-theorem judgment.
   (math INDEPENDENTLY-CHECKED + computational INDEPENDENT-CHECKER). Tail bound cross-checked
   (referee's `0.000932773` vs OB-17's `0.000932724`, both `<10⁻³`, different majorants).
   New regression test `test_g_gate_a_conditions_integrated`; tests 66 → 67.
+
+## Third Gate-A push OB-23 (drafted 2026-08-11) — B1 finite-inequality non-discrimination
+
+Applies the Gate-A template to B1 (which already has an exact-rational computational
+checker via OB-18, so a math PASS would make it the third double-axis theorem). B1 is
+analytically cleaner than G (no conjecture, no factorization subtlety), but has its own
+delicate point built into the package:
+- **Precise-meaning constraint (OB-18):** B1 must be judged as "**no positive uniform
+  separation margin**", NOT "exact collision" (`δ_1(T) > 0` for every finite T; exact
+  collision is B2). Link D and Q4 lock this in so the reviewer does not over- or
+  under-credit the theorem.
+- **W1/W2 convention split:** Q2 asks to confirm both the Li/arithmetic (W1) and Weil (W2)
+  conventions are handled, and that the naive Weil evaluation at a *complex* point (which
+  blows up like `e^{R_j T}`) is explicitly NOT used.
+- Four links (A Σ' convergence, B quartet decay both conventions, C construction, D precise
+  meaning) + Q1–Q5. Load-bearing anchors (`δ_1(1)=1216/425`, `δ_j·T²→4j²`, `T*=127`)
+  already OB-18-certified. Uses REVIEW_PROMPT.md common header + Block A.
 
 ## What a returned verification should contain
 
