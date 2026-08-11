@@ -27,9 +27,9 @@ problem.
 | OB-08 | `OB-08-G-factorization-condition.md` | G | Factorization condition (2.7) for 𝔐_FC | RESOLVED — integrated 2026-08-11 |
 | OB-09 | `OB-09-E-prime-neg-IFT-odd-meromorphic.md` | E' §4 | IFT for odd meromorphic target: zero-perturbation Jacobian | RESOLVED — integrated 2026-08-11 |
 | OB-10 | `OB-10-G-Hurwitz-real-zeros.md` | G §7 | Hurwitz: PSD Fredholm limit has all-real zeros | RESOLVED — integrated 2026-08-11 |
-| OB-11 | `OB-11-E-prime-pos-convergence-identification.md` | E' §5 | E'-pos: Montel-on-Ω convergence + identification G=W | OPEN — send for review |
-| OB-12 | `OB-12-F-complexity-measure-welldefined.md` | F | Is the Schur-certificate complexity κ well-defined / non-collapsing? | OPEN — send for review |
-| OB-13 | `OB-13-B2-independent-exact-reconstruction.md` | B2 | Independent exact-rational reconstruction of the collision | OPEN — send for review |
+| OB-11 | `OB-11-E-prime-pos-convergence-identification.md` | E' §5 | E'-pos: Montel-on-Ω convergence + identification G=W | RESOLVED — integrated 2026-08-11 |
+| OB-12 | `OB-12-F-complexity-measure-welldefined.md` | F | Is the Schur-certificate complexity κ well-defined / non-collapsing? | RESOLVED — integrated 2026-08-11 |
+| OB-13 | `OB-13-B2-independent-exact-reconstruction.md` | B2 | Independent exact-rational reconstruction of the collision | RESOLVED — integrated 2026-08-11 |
 
 Notes on the OB-09 / OB-10 outcomes:
 
@@ -47,27 +47,33 @@ Notes on the OB-09 / OB-10 outcomes:
   Corollary G.5: convergence to Ξ̂ ⟹ RH, so 𝔐_FC membership condition 3 is unverifiable
   without proving RH. Integrated into G-fredholm-certificate proof.md §5b.
 
-## Difficulty (open tasks OB-11..OB-13)
+## Difficulty / outcomes (OB-11..OB-13, all resolved 2026-08-11)
 
-- **OB-11 (E'-pos convergence + identification):** Complex analysis (Montel normal
-  families on Ω, Hurwitz zero-transfer, meromorphic extension across poles). **Medium
-  difficulty.** The one genuinely nontrivial step is the Nevanlinna-order bound on the
-  extended limit (Step 4a); everything else is a careful assembly of standard theorems.
-  Allows an honest "hypotheses insufficient for Step 4a + minimal fix" outcome.
+- **OB-11 (E'-pos convergence + identification):** REFUTED as stated. Two independent
+  counterexamples: the growth gap (`F_n ≡ W·e^{z²−w₀²}` — a constant sequence meeting all
+  hypotheses whose limit ≠ W, with `T(r,H) ≍ r²`), and the pole-cancellation gap (a
+  rational-multiplier family that cancels a target pole while satisfying the original
+  (PL)/(ZT)). Referee supplied a corrected theorem adding (ZT_ℂ) full-plane tail
+  no-intrusion, (PL⁺) local pole matching without cancellation, and (UG) uniform
+  Nevanlinna bound, with a complete §6 proof (Montel not Marty; contour/residue pole
+  recovery; Ahlfors–Shimizu order transfer). Integrated into E-prime-meromorphic §5.
 
-- **OB-12 (F complexity measure well-defined):** Linear algebra / proof complexity.
-  **Medium difficulty but decisive.** Resolves an internal contradiction in Theorem F's
-  proof draft (Passage A says κ∈{1,+∞}; Passage B says κ=N). The task explicitly permits
-  a REFUTED outcome: if every orthogonally-invariant Schur/congruence measure collapses
-  to a spectral condition, Theorem F is not a genuine complexity lower bound and must be
-  downgraded. This is the most consequential of the three.
+- **OB-12 (F complexity measure):** REFUTED — the most consequential outcome. Every
+  well-defined Schur/congruence measure collapses (Model 1: {1,+∞}; Model 2 full-block:
+  1; scalar: N; cap b: ⌈N/b⌉), and the orthogonal-invariance obstruction shows no
+  invariant measure can detect eigenvector delocalization (it factors through the
+  eigenvalue multiset). Explicit isospectral witness + a factor-width counterexample
+  (`I−α N^{-1}𝟙𝟙^T` has flat min-eigenvector, factor width 2). **Theorem F is downgraded
+  from a complexity barrier to a spectral-margin statement** (`M ≽ δI ⟺ λ_min ≥ δ`) and
+  retired from Paper D. Integrated into F-schur-complexity §0.
 
-- **OB-13 (B2 independent exact reconstruction):** Computational verification (exact
-  rational arithmetic). **Low difficulty, high value.** Fills the currently-empty
-  INDEPENDENT-CHECKER computational axis for the B2 finite certificate. The m=2 anchor
-  table and a second m=3 instance were both verified by the producer's own script before
-  sending (exact zero residual; mutation guard breaks it); the task is a genuinely
-  independent cross-implementation replay.
+- **OB-13 (B2 independent exact reconstruction):** CONFIRMED. Full m=2 rational table
+  reproduced from φ_j in an independent implementation (Python stdlib `fractions`,
+  SHA-256-pinned source, direct-φ and Chebyshev routes agree entry-by-entry); independent
+  m=3 instance exact zero; mutation guard breaks it. **Fills the previously-empty
+  INDEPENDENT-CHECKER computational axis for the B2 finite certificate.** Two definitions
+  (global `O_j`, predicate `P`) made explicit. Validates only the finite identity, not any
+  analytic statement. Integrated into B2-exact-collision (computational status upgraded).
 
 ## What a returned verification should contain
 

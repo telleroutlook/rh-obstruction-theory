@@ -8,7 +8,7 @@
 # Two-axis evidence ledger (math x comp) per dependency.
 
 theorem_id: F-schur-complexity
-gate_a_status: PENDING  # non-vacuity gate OPEN; representation-invariance gate OPEN
+gate_a_status: REFUTED-AS-COMPLEXITY-BOUND  # OB-12 2026-08-11: downgraded to spectral-margin statement; no barrier claim
 
 dependencies:
 
@@ -56,8 +56,9 @@ dependencies:
 
   - id: F-SCHUR-LOWER-BOUND
     description: "Lower bound: certificate complexity k(a,delta,N,r) grows with a or N"
-    mathematical: PROOF-DRAFT
+    mathematical: REFUTED
     computational: NONE
     usable_as_premise: false
-    gate_a_status: PENDING
-    role: "the theorem itself; open steps: eigenvector-spread bound + Schur-residual argument"
+    gate_a_status: REFUTED
+    role: "WITHDRAWN. OB-12 (2026-08-11): every well-defined Schur/congruence measure collapses to a constant (1, N, or ceil(N/b)) or a spectral condition; orthogonally invariant measures factor through the eigenvalue multiset, so eigenvector delocalization cannot force growth. Only the spectral-margin statement M >= delta I <=> lambda_min(M) >= delta survives; that is not a complexity bound and not a barrier."
+    note: "See statement.md §0 and proof.md §0. Genuine future theorem needs a fixed representation + charged resource (factor width / clique / fill-in) + structural lower bound on that resource; delocalization alone is insufficient (OB-12 §7)."

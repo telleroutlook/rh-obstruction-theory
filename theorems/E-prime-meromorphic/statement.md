@@ -142,40 +142,58 @@ distinctness of `x_ℓ = γ_{k+ℓ}^{-2}`.
 
 ---
 
-## §5. Theorem E'-pos (sufficient conditions, OPEN)
+## §5. Theorem E'-pos (sufficient conditions — CORRECTED, OB-11 2026-08-11)
 
-The E-pos sufficient conditions for the entire target use the Montel normal family theorem
-(local uniform boundedness → precompact family). For the meromorphic target, the
-analogue requires:
-- **(H'-bound) / (LB*) (corrected, OB-06):** for each compact `L ⊂ Ω = ℂ\{poles of W}`,
-  there exists an open `U_L` with `L ⊂ U_L ⊂ Ω` and constants `N_L, M_L` such that
-  `F_n` is holomorphic on `U_L` and `|F_n| ≤ M_L` on `U_L` for all `n ≥ N_L`.
-  (This is stronger than the earlier (H'-bound); the weaker form is vacuously satisfiable
-  — see OB-06 referee §4.2.)
-- **(H'-pole-sep):** Poles of `F_n` are eventually outside any compact disjoint from
-  the poles of W; equivalently `U_L` in (LB*) is pole-free for all large n.
-- **(H'-tail):** Tail zeros of `F_n` at `γ_n` for `n > k_N` converge, with the
-  tail no-intrusion condition (T) (see E-compactness/proof.md §4).
-- **(H'-norm):** Normalization at a non-pole, non-zero base point `w₀`.
+**Status (OB-11 referee).** The E'-pos claim as originally stated (hypotheses (LB*),
+(H'-pole-sep), (H'-tail), (H'-norm) ⟹ G = W) is **REFUTED**: those hypotheses are
+insufficient. Two independent gaps, each with an explicit counterexample:
 
-Under these conditions, Montel (not Marty — OB-06 referee §4.4 confirms Montel suffices
-on Ω) + diagonal subsequence argument gives a locally uniform limit G on Ω, which is
-holomorphic on Ω.  The identification G = W then requires:
-- G odd (locally uniform limit of odd functions);
-- same complete zero divisor (zeros at γ_n — via H'-tail + tail no-intrusion);
-- same poles (limit of functions with same pole set — via H'-pole-sep + argument
-  principle or Hurwitz applied to 1/F_n);
-- G(w₀) = W(w₀) — via H'-norm.
+1. **Growth gap.** The complete zero/pole divisor plus one-point normalization only
+   forces `G = W·H` for a zero-free even entire `H` with `H(w₀) = 1`; they do NOT force
+   `H ≡ 1`. Counterexample: `F_n ≡ W·exp(z²−w₀²)` (constant sequence) satisfies (P),
+   (LB), (ZT), (PL), (N) but converges to `W·e^{z²−w₀²} ≠ W`. Here `T(r,H) ≍ r²`, so
+   the limit is NOT Nevanlinna order ≤ 1 — the order must be an independent hypothesis.
 
-Then Lemma E'.1 (with "odd" in place of "even") gives G = W.
+2. **Pole-cancellation gap.** The original (PL) (pole matching "on compact K ⊂ Ω") is
+   vacuous at the target poles `p ∈ 𝒫 ⊄ Ω`, and (ZT) only controls zeros *in Ω*.
+   Counterexample: a rational-multiplier family `F_n = W·H·Q_n` whose factors put a
+   double zero at `±p` (killing W's simple pole there) while moving the pole to `±p_n`;
+   it satisfies every stated hypothesis but its limit `W·H` has p removed from its polar
+   divisor. This gap is independent of the growth gap (the multipliers here keep
+   `T(r,F_n) = O(r)` uniformly).
 
-**Note on Marty vs Montel (OB-06 referee §4.5).** On Ω = ℂ\{poles of W}, with
-(LB*) ensuring F_n is holomorphic and bounded on an open neighborhood of each compact,
-**Montel's theorem for analytic functions suffices** — no Marty criterion needed.
-Marty would be required only to obtain convergence in the spherical metric on a domain
-that contains the poles as interior points; for convergence on Ω that is unnecessary.
+**Corrected hypotheses (OB-11 §5).** Replace (H'-bound)/(H'-tail) etc. by:
 
-**Status:** OPEN. The argument structure is complete; writing out all steps is open.
+- **(P) Parity.** Each `F_n` odd.
+- **(LB) Local boundedness on Ω.** For every compact `L ⊂ Ω` there is an open `U_L`
+  with `L ⊂ U_L ⋐ Ω` and `n_L, M_L` such that `F_n` is holomorphic and `|F_n| ≤ M_L`
+  on `U_L` for `n ≥ n_L`. (Montel on Ω; Marty not needed.)
+- **(ZT_ℂ) Full-plane tail no-intrusion.** For every `R > 0` there are `K, n₀` such that
+  for `n ≥ n₀`, EVERY zero of `F_n` in `{|z| ≤ R}` — including any at points of `𝒫` —
+  lies in `{0, ±z_{n,1}, …, ±z_{n,K}}`. (Strengthens (ZT.2) from "zeros in Ω" to
+  "zeros in ℂ"; this closes the pole-cancellation gap.)
+- **(PL⁺) Local pole matching without cancellation.** For each `p ∈ 𝒫` there is
+  `ρ_p > 0` with `D̄(p,ρ_p)` free of other W-zeros/poles, such that for large n, `F_n`
+  has exactly one simple pole `p_n → p` in the disk and **no zeros** there.
+- **(N) Normalization** at a non-pole, non-zero `w₀` with `F_n(w₀) → W(w₀) ≠ 0`.
+- **(UG) Uniform Nevanlinna bound.** Constants `C, C₀, r₀` independent of n with
+  `T(r, F_n) ≤ Cr + C₀` for all n, `r ≥ r₀`. (Closes the growth gap — a per-n order
+  bound with n-dependent constant does NOT transfer to the limit.)
+
+**Corrected Theorem E'-pos.** Under (P), (LB), (ZT.1), (ZT_ℂ), (PL⁺), (N), (UG): there
+is a subsequence `F_{n_j} → W` locally uniformly on Ω; if every subsequence has a
+further subsequence converging to W, the full sequence does. (Full proof: OB-11 §6 —
+Montel + diagonal extraction; zero identification via Hurwitz + (ZT_ℂ); genuine simple
+pole at each `p` via a contour/residue argument on `1/F_{n_j}` using (PL⁺); order
+transfer via Ahlfors–Shimizu characteristic + (UG); then Lemma E'.1 gives `G = W`.)
+
+**Montel vs Marty (OB-11 §1.3, confirmed).** On Ω, (LB) gives holomorphy + local uniform
+boundedness on an open neighborhood of each compact, so **Montel suffices** (Conway
+VII.2.9); Marty's spherical-derivative criterion is not needed.
+
+**Status:** the corrected theorem is PROOF-DRAFT (OB-11 §6 gives a line-by-line proof).
+The Suzuki application still requires verifying (LB), (ZT_ℂ), (PL⁺), (UG) for the
+specific Suzuki family — these are the concrete missing ingredients (§6).
 
 ---
 
@@ -189,12 +207,14 @@ W, normalization, first `J_N` Taylor coefficients) does not uniquely determine t
 uniform limit.  The E'-pos conditions identify what extra structure is needed.
 
 **Missing ingredients for Suzuki convergence:**
-- (H'-bound)/(LB*) not established for the Suzuki sequence `W(a,θ;z)`.
-- (H'-tail) not established: tail zeros of W(a,θ;z) converge to γ_n as a → 0 — not
-  yet proved.
+- (LB) not established for the Suzuki sequence `W(a,θ;z)`.
+- (ZT_ℂ) full-plane tail no-intrusion not established.
+- (PL⁺) local pole matching without cancellation not established.
+- (UG) uniform Nevanlinna characteristic bound (constant independent of the truncation
+  index) not established — the growth-control ingredient identified by OB-11.
 - The correct parity structure (odd functions) must be verified for the Suzuki family.
 
-These are the **precise missing ingredients** for the Suzuki track.
+These are the **precise missing ingredients** for the Suzuki track (OB-11-corrected list).
 
 ---
 
@@ -210,7 +230,9 @@ These are the **precise missing ingredients** for the Suzuki track.
 | E'-neg power-sum system Φ_r | REFUTED (OB-09): controls z=0 expansion, not w₀-jet |
 | E'-neg separation degree | CORRECTED to z^{2J+3} (odd), not z^{2J+2} (OB-09 §5.1) |
 | Old E'-pos identification ("even F_N → even W") | REFUTED (W is odd; even functions cannot converge to W) |
-| E'-pos sufficient conditions (§5) | OPEN — structure correct; Montel (not Marty) suffices on Ω |
-| (LB*) replacing old (H'-bound) | CORRECTION: old form vacuously satisfiable; (LB*) is the correct assumption |
-| Suzuki (H'-bound)/(H'-tail) | OPEN (missing ingredients) |
+| E'-pos as first stated ((LB*)+(H'-pole-sep)+(H'-tail)+(H'-norm) ⟹ G=W) | REFUTED (OB-11 2026-08-11): two counterexamples — growth gap (F_n=W·e^{z²−w₀²}) and pole-cancellation gap |
+| E'-pos CORRECTED (§5: adds (ZT_ℂ), (PL⁺), (UG)) | PROOF-DRAFT ✓ (OB-11 §6 line-by-line proof; Montel not Marty) |
+| E'-pos growth control (UG) | REQUIRED: per-n order bound with n-dependent constant does NOT transfer to limit (OB-11 §2) |
+| E'-pos pole non-cancellation (ZT_ℂ + PL⁺) | REQUIRED: old (PL)/(ZT) allow a zero to cancel a target pole (OB-11 §4) |
+| Suzuki missing ingredients | OPEN: (LB), (ZT_ℂ), (PL⁺), (UG), odd parity — for the Suzuki family |
 | Connection to Theorem E (same template) | ✓ explicit (corrected: zeros not poles) |

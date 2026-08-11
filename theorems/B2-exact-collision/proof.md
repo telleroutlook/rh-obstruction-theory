@@ -367,5 +367,8 @@ This is left for refinement after the rank step.
 | Observation equality exact: Cn + R·d(T) = 0 | PROOF-DRAFT ✓ |
 | Predicate P(𝒵_-) = 0, P(𝒵_+) = 1 | PROOF-DRAFT ✓ |
 | Exact m=2 sanity check (OB-02 §7, t₁=1 t₂=2 T=1) | CONFIRMED ✓ (rational arithmetic) |
+| Independent exact reconstruction (OB-13, m=2 + m=3 + mutation) | CONFIRMED ✓ INDEPENDENT-CHECKER (Python stdlib fractions, SHA-256-pinned, two routes agree) |
+| det C ≠ 0 closed form (OB-13 Lemma 2.3, scaled Vandermonde) | CONFIRMED ✓ |
+| Global O_j definition + predicate P made explicit (OB-13) | DONE (see statement.md) |
 | Counting-law refinement (§7) | DEFERRED |
-| Overall theorem B2 | **CONFIRMED by OB-02 external review (2026-08-11)** |
+| Overall theorem B2 | **CONFIRMED by OB-02 external review (2026-08-11); finite certificate INDEPENDENT-CHECKER by OB-13 (2026-08-11)** |

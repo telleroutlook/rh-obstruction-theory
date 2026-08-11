@@ -1,10 +1,62 @@
 # Theorem F — Lower Bounds for a Restricted Schur-Certificate System
 
-**Mathematical status:** PROOF-DRAFT (conditional on non-vacuity + invariance gates)  
+**Mathematical status:** REFUTED as a complexity lower bound (OB-12 external review
+2026-08-11). Downgraded to a spectral-margin statement. See §0 below.  
 **Computational status:** NONE  
 **Theorem ID:** F-schur-complexity  
 **Program ref:** §11 (WP-F), §11.F.1–F.4  
-**Paper target:** Paper D (exploratory; conditional on both gates)
+**Paper target:** NONE — not publishable as a complexity barrier (see §0)
+
+---
+
+## §0. Downgrade notice (OB-12 external review, 2026-08-11)
+
+**The complexity-lower-bound claim of Theorem F is REFUTED.** The proof draft contained
+an internal contradiction (a certificate is either cost 1 or cost +∞ under one reading,
+yet claimed to be cost N under another), traced to an ill-defined complexity measure.
+The external review (OB-12) resolved it decisively:
+
+1. **Model 1** (orthogonal congruence + whole-matrix PSD test): `κ₁(S) = 1` if
+   `S ≽ 0`, else `+∞`. Orthogonal congruence preserves the spectrum, so this is a pure
+   spectral condition — it cannot grow with the scaling parameter `a`.
+
+2. **Model 2** (Schur elimination, fixed basis): `κ = 1` with a full-block atom, `κ = N`
+   with scalar pivots, `κ = ⌈N/b⌉` with a fixed block cap `b`, **on every PD matrix** —
+   none varies with `a`. Every admissible pivot succeeds on a PD matrix (Haynsworth
+   inertia additivity), so the cost charges only the partition shape, not the matrix.
+
+3. **Orthogonal-invariance obstruction (the core no-go):** any orthogonally invariant
+   matrix measure `K_N(U^T S U) = K_N(S)` factors through the **eigenvalue multiset**
+   alone (spectral theorem). Delocalization of the minimum eigenvector in a chosen basis
+   carries **no eigenvalue information**, so it cannot force any invariant cost to grow.
+   Explicit witness (OB-12 Prop. 4.4): an isospectral family `S(a) = V(a) D V(a)^T` with
+   `V(a)` rotating the min-eigenvector to the flat vector `N^{-1/2}(1,…,1)` — fully
+   delocalized in the limit — on which **every** invariant measure is constant.
+
+4. Even a genuine fixed-basis non-collapsing measure (**factor width**) does not obey the
+   proposed bound: `S_α = I − α w w^T` with `w = N^{-1/2}(1,…,1)` has an exactly flat
+   minimum eigenvector yet factor width exactly 2 for all `N ≥ 2` (OB-12 §6, eq. 6.2).
+
+**Conclusion.** "Delocalization forces Schur-certificate complexity to grow" is false.
+What survives is only the spectral-margin equivalence
+```
+M ≽ δ I_N  ⟺  λ_min(M) ≥ δ,
+```
+plus the model-dependent constant-cost formulas above. This is an eigenvalue statement,
+NOT a proof-complexity lower bound. Per CLAUDE.md ("a margin → 0 is not a barrier"; "a
+representation-dependent margin must not be promoted"), Theorem F **must not be marketed
+as a barrier** and is retired from Paper D.
+
+**What a genuine future theorem would require (OB-12 §7, not currently available):**
+a semantically fixed representation (forbidding general orthogonal congruence), a
+checkable atomic witness with a charged resource (factor width / clique size / fill-in /
+bit complexity), and a structural lower bound on *that resource* — not eigenvector
+delocalization. Published fixed-basis frameworks exist (factor width: Boman–Chen–Parekh–
+Toledo 2005; DSOS/SDSOS: Ahmadi–Majumdar 2019; chordal sparsity: Agler–Helton–McCullough–
+Rodman 1988, Fukuda et al. 2001), but none yields the claimed growth from delocalization.
+
+The sections below are retained for the record; §4's "Theorem F (lower bound)" is
+**withdrawn** as a complexity claim and reinterpreted as the spectral-margin statement.
 
 ---
 
@@ -114,28 +166,30 @@ invariance gate (§2) is also passed.
 
 ---
 
-## §4. Theorem F (lower bound — conditional)
+## §4. Theorem F (lower bound — WITHDRAWN; reinterpreted as spectral margin)
 
-**Theorem F (conditional on gates).** Under the frozen system `P_{r,N}` (with
-the allowed operations of §1) and given:
+**[WITHDRAWN as a complexity lower bound — OB-12 external review 2026-08-11. See §0.]**
 
-- (H-inv) the representation-invariance conditions of §2 hold;
-- (H-nv) there exists a serious published construction in `P_{r,N}` (§3);
+The original conditional claim — that a spread minimum eigenvector forces
+`κ(a, δ, N, r) > r₀(a) → ∞` — is false: the complexity measure collapses to a
+constant (1, N, or ⌈N/b⌉) or to a spectral condition under every well-defined reading,
+and no orthogonally invariant measure can detect eigenvector delocalization (§0.3).
 
-then for sufficiently large `a` (or `N`) and fixed `r`, there exists a vector
-`v ∈ ℝ^N` such that:
-
+**What survives (spectral-margin statement, PROOF-DRAFT ✓).** For the frozen system
+`P_{r,N}` with the allowed operations of §1, the certifiability of `M_{a,N} ≽ δ I` is
+governed entirely by the least eigenvalue:
 ```
-v^T M_{a,N} v / v^T G_{a,N} v  ≥  δ  but  v is not certifiable by any
-P_{r,N}-certificate of rank ≤ r₀(a),
+M_{a,N} ≽ δ I_N   ⟺   λ_min(M_{a,N}) ≥ δ,
 ```
+and, as N → ∞, `λ_min(M_{a,N}) → λ(a)` (the representation-invariant Suzuki margin,
+`λ(a) = log(1/a) + μ₁ − log(2π) + ψ(2) − 1 + O(a)` as a → 0⁺). This is an eigenvalue /
+margin fact; it is NOT a certificate-complexity lower bound, and it is not a barrier.
 
-where `r₀(a) → ∞` as `a → ∞`.
+**No barrier is claimed.** By CLAUDE.md's one hard boundary and §3.3 of the program,
+a margin statement (even one with `λ(a) → −∞` as a grows) locates difficulty but does
+not prove impossibility for any method class. Theorem F therefore makes no barrier claim.
 
-**Consequence:** The certificate complexity `κ(a, δ, N, r₀(a)) > r₀(a)` for
-the stated system — the Schur/pivot rank must grow.
-
-**Status:** PROOF-DRAFT (both gates open).
+**Status:** REFUTED as complexity lower bound; spectral-margin statement retained.
 
 ---
 

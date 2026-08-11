@@ -1,10 +1,40 @@
 # Theorem B2 — Exact Finite-Observation Collision
 
 **Mathematical status:** PROOF-DRAFT (CONFIRMED by OB-02 external review 2026-08-11 — integer-sign step resolved; four notation corrections applied; see proof.md)  
-**Computational status:** REPRODUCIBLE (rational m=2 sanity check in proof.md §4.5: t₁=1, t₂=2, T=1, exact rational arithmetic ✓)  
+**Computational status:** INDEPENDENT-CHECKER (OB-13 external review 2026-08-11: the exact-rational collision was reconstructed from φ_j in an independent implementation — Python stdlib `fractions`, SHA-256-pinned source, two routes agree, adversarial mutation breaks it; m=2 and m=3 instances both give exact zero residual)  
 **Theorem ID:** B2-exact-collision  
 **Program ref:** §7.B.2.B2, §7.B.3  
 **Paper target:** Paper A (primary, if rank condition holds)
+
+---
+
+## Definitional clarifications (OB-13 external review, 2026-08-11)
+
+The finite-observation collision was independently reconstructed in exact rational
+arithmetic (OB-13, CONFIRMED). Two definitions, implicit in the B1-inherited setup, are
+made explicit here (they add no analytic assumption; they fix the normalization the
+numerical claim depends on):
+
+1. **Global observation map.** For a finite multiset `𝒵` of nonzero complex numbers
+   avoiding `{0,1}`, with multiplicity,
+   ```
+   O_j(𝒵) := Σ_{ρ ∈ 𝒵} [φ_j(ρ) + φ_j(1−ρ)].
+   ```
+   This is the `Σ'` symmetric convention of B1, written globally. It is additive under
+   multiset union. On one on-line pair `L(t)` the reflection `ρ ↦ 1−ρ` swaps the two
+   atoms, so `O_j(L(t)) = 4 Re φ_j(1/2+it)`; on the quartet `Q(3/4,T)`,
+   `O_j(Q) = 4 Re[φ_j(3/4+iT) + φ_j(1/4+iT)]`. (The factor 4 in both proof.md formulas
+   is forced by this global definition; the ordinary atomwise sum would halve C and d.)
+
+2. **Predicate.** `P(𝒵) = 1` iff every atom `ρ ∈ 𝒵` has `Re ρ = 1/2`, else `P(𝒵) = 0`.
+
+With these, OB-13 verified (exact rational arithmetic, no floating point):
+V1 the full m=2 table (x, C, det C, d, β, R, n, M, `Cn+Rd=0`); V2 nonneg multiplicities
+`(M+n₁, M+n₂)=(7388,0)`; V3 predicate separation; V4 an independent m=3 instance
+(`t=(1,2,3), T=2`) with exact zero residual; V5 adversarial mutation `n₁ ↦ n₁+1` giving
+nonzero residual `(8/5, 128/25)`. The nonsingularity `det C ≠ 0` for distinct positive
+heights was proved in closed form (OB-13 Lemma 2.3: scaled Vandermonde). This validates
+**only the finite identity** — it asserts nothing about any analytic function or RH.
 
 ---
 

@@ -1,7 +1,30 @@
 # Proof — Theorem F (restricted Schur-certificate complexity lower bound)
 
-**Status:** PROOF-DRAFT (conditional on non-vacuity + representation-invariance gates)  
+**Status:** REFUTED as a complexity lower bound (OB-12 external review 2026-08-11);
+spectral-margin statement retained. See statement.md §0.  
 **Analytic / finite separation:** purely analytic; no finite certificate.
+
+---
+
+## §0. Refutation summary (OB-12, 2026-08-11)
+
+The §3 lower-bound claim (`κ = N` for large a) contradicts §2's own observation
+(certifiability ⟺ `λ_min(M_{a,N}) ≥ δ`, a spectral condition). OB-12 resolved the
+contradiction against §3:
+
+- Every well-defined Schur/congruence complexity measure collapses to a constant
+  (Model 1: κ₁ ∈ {1,+∞}; Model 2 full-block: 1; scalar-pivot: N; block-cap b: ⌈N/b⌉),
+  because on a PD matrix **every** admissible pivot ordering succeeds (Haynsworth
+  inertia additivity, OB-12 Lemma 4.2). Cost charges the partition shape, not the matrix.
+- Any orthogonally invariant measure factors through the eigenvalue multiset (OB-12
+  Lemma 4.3), so eigenvector delocalization — which carries no eigenvalue information —
+  cannot force growth (OB-12 Prop. 4.4, explicit isospectral witness).
+- The "spread minimum eigenvector ⟹ high rank" intuition of §3 is false even for factor
+  width: `I − α N^{-1}(1..1)(1..1)^T` has a flat min-eigenvector and factor width 2.
+
+Sections §1–§5 below are retained for the record; the §3 lower-bound argument is
+**withdrawn**. Only the spectral-margin content (§2 observation, §5 λ(a) consistency)
+survives, and it is an eigenvalue statement, not a complexity bound and not a barrier.
 
 ---
 
@@ -95,9 +118,11 @@ Since `λ(a) = log(1/a) + μ₁ − log(2π) + ψ(2) − 1 + O(a)` is positive f
 
 | Step | Status |
 |---|---|
-| Representation-invariance gate (§4) | CONDITIONS STATED — must be verified for any specific `c_a` use |
-| Non-vacuity gate (statement.md §3) | OPEN — no specific example confirmed |
-| Certificate structure (§2) | PROOF-DRAFT ✓ |
-| Lower bound argument (§3) | PROOF-DRAFT (conditional — OPEN: eigenvector spread + Schur residual bound) |
+| §3 lower-bound argument (κ = N for large a) | **REFUTED** (OB-12 2026-08-11 — collapses to constant; invariance obstruction) |
+| Representation-invariance gate (§4) | Moot — the collapse holds for ALL orthogonally invariant measures |
+| Non-vacuity gate (statement.md §3) | Moot — no complexity claim survives to be non-vacuous |
+| Certificate structure (§2) | PROOF-DRAFT ✓ but yields only `certifiable ⟺ λ_min ≥ δ` (spectral) |
+| Spectral-margin statement `M ≽ δI ⟺ λ_min(M) ≥ δ` | PROOF-DRAFT ✓ (this is all that survives) |
 | Consistency with `λ(a)` (§5) | PROOF-DRAFT ✓ (small-a regime clear) |
-| No `−c_a I` overclaim | VERIFIED — no universal claim made; `c_a` use is frozen-system diagnostic only |
+| No `−c_a I` overclaim | VERIFIED — and now no complexity claim at all; only λ(a)/margin |
+| Barrier claim | NONE — margin statement is not a barrier (CLAUDE.md one hard boundary) |
