@@ -1,6 +1,8 @@
 # Proof — Theorem E' (E-prime-meromorphic)
 
-**Status:** PROOF-DRAFT (E'-neg redesigned after OB-06 2026-08-11); OPEN (E'-pos)  
+**Status:** PROOF-DRAFT — Gate-A BLOCKED (OB-30) for the Suzuki-target claim; survives as an
+ABSTRACT odd-meromorphic jet lemma (independent (A1)–(A3), separation at some nonzero odd
+degree `d≥3`, NOT a fixed `z^{2J+3}`). Not the real `ξ/ξ'` (see statement.md §0).  
 **Analytic / finite separation:** purely analytic.  
 **Key corrections (OB-06 2026-08-11):** W is ODD (not even); γ_n are ZEROS of W
 (not poles); poles of W come from zeros of ξ'(1/2−iz); old E'-neg construction
@@ -119,19 +121,36 @@ prevents collisions), and satisfies the J-jet condition. And `F^{(c)} ≠ W`: eq
 force `A_{u(c),c} ≡ A`, but `μ_n(c) = γ_n(1+c/(n−k)) < γ_n` for `c < 0`, n > k+J.
 Hence `F^{(c)} ∈ 𝔐_Suz` and `F^{(c)} ≠ W`. ✓ (OB-09 referee §7.2)
 
-**Separation (corrected degree, OB-09 §5.1).** The leading discrepancy is ODD:
+**Separation (CORRECTED AGAIN — OB-30). The fixed degree `z^{2J+3}` is WRONG.** Matching the
+`J`-jet at `w₀ = iτ ≠ 0` only makes `L(t) = O((t−t₀)^J)` at `t₀ = w₀²`; it does **not** force
+the first `J` log-power-sums `Δ_1,…,Δ_J` *at `t=0`* to vanish. So the leading discrepancy of
+`F^{(c)}−W` at the origin is generically `z³` (`=z^{2·1+1}` for `J=1`), **not** `z^{2J+3}`.
+The honest statement is:
 ```
-F^{(c)}(z) − W(z) = −(A(0)/B̃(0)) · Δ_{J+1}(c)/(J+1) · z^{2J+3} + O(z^{2J+5}),
+F^{(c)}(z) − W(z) = c_d · z^d + O(z^{d+2})   for SOME odd d ≥ 3 with c_d ≠ 0,
 ```
-degree **2J+3** (odd), not 2J+2 (the old even degree contradicted F−W being odd).
-For `0 < R < R_B := dist(0, Z(B)\{0})`, Cauchy's estimate gives
-`sup_{|z|=R} |F^{(c)}−W| ≥ |A(0)/B̃(0)·Δ_{J+1}(c)/(J+1)| R^{2J+3}`, with
-`Δ_{J+1}(c) ≠ 0` for small `c ≠ 0` (nondegeneracy via `q(y_m)` constant sign,
-OB-09 §5).
+and Cauchy's estimate then gives `sup_{|z|=R}|F^{(c)}−W| ≥ |c_d| R^d` for `0 < R < R_B :=
+dist(0, Z(B)\{0})` — a genuine separation, but at the *actual* (unspecified) degree `d`, not a
+prescribed `2J+3`.
 
-**Status: PROOF-DRAFT ✓ CONFIRMED AFTER CORRECTION (OB-09 2026-08-11).** The
-construction closes via the direct w₀-jet system (§7 of the referee report), not
-the power-sum system. The power-sum system Φ_r is REFUTED for this purpose.
+**Grounding (OB-30 §2.2 concrete instance, script-verified).** `A(z)=sin πz/(πz)=∏(1−z²/n²)`,
+`B(z)=sinh z`, `w₀=i`, `k=J=1` satisfy the abstract (A1)–(A3). The `J=1` jet condition
+`L(−1)=0` fixes `u(c)`, and the leading discrepancy is `z³` with coefficient `−Δ₁(c)`, where
+`Δ₁'(0) = Σ_{n≥3} (n²−4)/(2n²(n²+1)(n−1)) = 0.0338580562… > 0` (every term positive;
+partial-sum-to-2·10⁶ confirmed). So `Δ₁(c) ≠ 0` for small `c<0` and the leading term is a
+nonzero `z³` — confirming `d=3`, not `d=5`.
+
+**Scope (OB-30 — ABSTRACT only, NOT Suzuki).** This is a lemma about an **abstract** odd
+meromorphic `W = z²A/B` with `A,B` *independent* order-≤1 functions satisfying (A1)–(A3). It
+does **not** apply to the real `ξ/ξ'`: there `B = iA'`, so Rolle between real `A`-zeros forces
+a real `B`-zero, violating (A2) `Z(B)∩ℝ={0}`; and Suzuki's approximants `W(a,θ;z)` are entire
+(Thm 1.5), incompatible with a moving-pole convergence to the meromorphic `W`. See statement.md
+§0.
+
+**Status: PROOF-DRAFT (abstract lemma).** The `w₀`-jet IFT / Cauchy–Vandermonde Jacobian core
+(Link A/B) is correct given abstract (A1)–(A3); the separation is at *some* nonzero odd degree
+`d≥3` (Cauchy at `d`), not a fixed `2J+3`. The Suzuki-target claim is WITHDRAWN (OB-30). The
+power-sum system `Φ_r` remains refuted (OB-09).
 
 ---
 
@@ -193,7 +212,7 @@ theorem). Suzuki application: (LB), (ZT_ℂ), (PL⁺), (UG) must be verified for
 | Old E'-neg (perturbing "poles at γ_n") | REFUTED (γ_n are zeros not poles; residue argument entirely wrong) |
 | E'-neg power-sum system Φ_r | REFUTED (OB-09): matches expansion at z=0, not jet at nonzero w₀ |
 | E'-neg via direct w₀-jet system (§3, OB-09 §7) | CONFIRMED AFTER CORRECTION — Wronskian–Vandermonde Jacobian, closed IFT |
-| E'-neg separation degree | CORRECTED: leading term is z^{2J+3} (odd), not z^{2J+2} (OB-09 §5.1) |
+| E'-neg separation degree | RE-CORRECTED (OB-30): NOT a fixed z^{2J+3}; leading term is z^d for SOME odd d>=3 (J=1 instance gives z^3, Δ_1'(0)=0.03386>0, script-verified). Cauchy at the actual d. |
 | Old E'-pos ("even F_N → even W") | REFUTED (W is odd) |
 | E'-pos as first stated (LB*/H'-pole-sep/H'-tail/H'-norm ⟹ G=W) | REFUTED (OB-11): growth gap + pole-cancellation gap, each with counterexample |
 | E'-pos CORRECTED (adds ZT_ℂ, PL⁺, UG) | PROOF-DRAFT ✓ (OB-11 §6 line-by-line; Montel not Marty) |
