@@ -35,7 +35,7 @@ problem.
 | OB-16 | `OB-16-Dprime-escape-class-weyl-law.md` | D' §6 | \|ξ\|/log\|ξ\| escape class: T·logT counting law, outside 𝒞_ell; Hilbert–Pólya frontier | RESOLVED — integrated 2026-08-11 |
 | OB-17 | `OB-17-G-diagonal-fredholm-interval-replay.md` | G | INDEPENDENT-CHECKER: certified interval replay of diagonal Fredholm obstruction (Gram levels d_n, 3-way separation) | RESOLVED — integrated 2026-08-11 (checker deposited) |
 | OB-20 | `OB-20-B2-gate-a-review-package.md` | B2 | **GATE-A**: independent inspection of the full analytic assembly (6 links + Q1–Q5 verdict) | RESOLVED — GATE-A PASS, integrated 2026-08-11 |
-| OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | OPEN — send for review |
+| OB-21 | `OB-21-B2-certified-checker-request.md` | B2 | Request for an independently-written deposit-ready certified checker (full pipeline C→β→R,n,M→collision) | RESOLVED — CONFIRMED, checker deposited 2026-08-11 |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -260,6 +260,17 @@ be internally consistent before the Gate-A package ships.
   Integrated across B2 statement/proof/limitations/novelty/dependencies + contract; theorem
   restated **unconditional** (H-rank/H-real-mult now proved, not hypotheses); 2 new
   regression tests (status ≥ PROOF-DRAFT; Gate-A consistency guard). Tests 63 → 64.
+
+- **OB-21 (B2 certified checker):** **CONFIRMED — checker deposited.** The referee supplied
+  an independently-written stdlib checker (`b2_certified_checker.py`, exact `fractions`, no
+  float in certificate; `O_j` computed per-definition AND cross-checked against a Chebyshev
+  route; K1–K8 including the K7 mutation guard). **SHA-256 verified to match
+  (`776eeab5…b64dc83`) and re-run in-repo** → `ALL_CERTIFIED_CHECKS_PASSED`. Deposited at
+  `theorems/B2-exact-collision/checker/b2_certified_checker.py`; checker README documents
+  B2-CHK-0; 2 regression tests added (runs + emits pass flag; no-float-in-certificate
+  guard). Tests 64 → 66. **B2 now has BOTH a Gate-A math review (OB-20) AND a permanent,
+  machine-re-verified computational checker (OB-21)** — the "draft → established" loop is
+  fully closed for B2, and the checker is exercised on every `pytest`.
 
 ## What a returned verification should contain
 

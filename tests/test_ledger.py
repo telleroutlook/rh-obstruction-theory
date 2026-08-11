@@ -185,6 +185,27 @@ def test_b2_gate_a_consistency():
                 f"B2 {fname} still states the theorem as '(conditional on rank)' after Gate-A PASS"
 
 
+def test_b2_certified_checker_runnable():
+    """OB-21: B2's certified exact-rational checker must run and pass (INDEPENDENT-CHECKER)."""
+    checker = B2_DIR / "checker" / "b2_certified_checker.py"
+    assert checker.exists(), "B2 certified checker missing"
+    r = subprocess.run([sys.executable, str(checker)], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "ALL_CERTIFIED_CHECKS_PASSED" in r.stdout, \
+        "B2 certified checker did not emit ALL_CERTIFIED_CHECKS_PASSED"
+    # the exact collision and the mutation guard must both appear
+    assert "K4: PASS" in r.stdout and "K7: PASS" in r.stdout, \
+        "B2 checker output missing the K4 collision or K7 mutation-guard line"
+
+
+def test_b2_certified_checker_no_float_in_certificate():
+    """OB-21: the certified B2 checker must not use floating-point / float libs in the certificate path."""
+    src = (B2_DIR / "checker" / "b2_certified_checker.py").read_text()
+    for banned in ("import numpy", "import scipy", "import mpmath", "float("):
+        assert banned not in src, \
+            f"B2 certified checker must not use {banned!r} in the certificate path"
+
+
 def test_b2_proof_has_rank_section():
     proof = (B2_DIR / "proof.md").read_text()
     assert "Vandermonde" in proof or "Chebyshev" in proof or "rank" in proof.lower(), \
