@@ -39,6 +39,7 @@ problem.
 | OB-22 | `OB-22-G-gate-a-review-package.md` | G | **GATE-A**: independent review of the diagonal G-info obstruction (Links A–E + Q1–Q5; G-hard explicitly OUT of scope) | RESOLVED — GATE-A CONDITIONAL, 7 mods integrated 2026-08-11 |
 | OB-23 | `OB-23-B1-gate-a-review-package.md` | B1 | **GATE-A**: independent review of the finite-inequality non-discrimination (Links A–D + Q1–Q5; "no uniform margin", not exact collision) | RESOLVED — GATE-A CONDITIONAL, Σ′ convention + anchors corrected 2026-08-11 |
 | OB-24 | `OB-24-B1-corrected-checker-request.md` | B1 | Corrected R-atom certified checker (δ_1(1)=608/425, T*=90, 2j²) superseding OB-18's doubled convention | OPEN — send for review |
+| OB-25 | `OB-25-D-gate-a-review-package.md` | D | **GATE-A**: independent review of the spectral-asymptotic exclusion (Links A–E + Q1–Q6; heat-trace leading-log; novelty vs Endres–Steiner) | OPEN — send for review |
 | OB-18 | `OB-18-B1-approximate-collision-exact-replay.md` | B1 | INDEPENDENT-CHECKER: exact-rational replay of approximate-collision decay δ_j(T)→0 | RESOLVED — integrated 2026-08-11 |
 | OB-19 | `OB-19-D-zeta-heat-trace-leading-coefficient-replay.md` | D | INDEPENDENT-CHECKER: replay of Z_ζ leading singularity coefficient 1/2π (Laplace identities) | RESOLVED — integrated 2026-08-11 |
 
@@ -359,6 +360,26 @@ delicate point built into the package:
   INDEPENDENT-CHECKER → REPRODUCIBLE pending the corrected checker (OB-24). This is exactly
   the kind of latent cross-file inconsistency the lint re-scan exists to catch — surfaced
   here by an external referee applying the theorem's own definition.
+
+## Fourth Gate-A push OB-25 (drafted 2026-08-11) — D spectral-asymptotic exclusion
+
+Applies the Gate-A template to D, now that its Lesch citation is source-verified (in
+baseline/) and its Z_ζ side is INDEPENDENT-CHECKER (OB-19). Five links (A Weyl-mismatch,
+B heat-trace leading singularity via Lesch A=I j=0, C no-log-needs-both-facts, D Z_ζ side,
+E incompatibility) + six Gate-A questions. D-specific delicate points built in:
+- **Q2 (ellipticity mandatory):** the non-elliptic `1+D_x²+D_y⁴` counterexample (exponent
+  3/4 ≠ 1/2, script-verified ratio→1) confirms ellipticity is load-bearing, not decorative.
+- **Q3 (subleading logs OK):** the "no log at any order" claim is correctly withdrawn (Wres
+  can give `t^k log t`, k≥1); only the LEADING term matters. Reviewer confirms the argument
+  uses only the leading singularity.
+- **Q4 (citation scope, L17):** Lesch 1999 (source-verified) is load-bearing; BGV/Gilkey
+  (Laplace-type/differential only; Gilkey = Lemma 1.8.2) are scope-limited.
+- **Q5 (novelty honesty):** explicitly asks whether D is materially stronger than
+  Endres–Steiner 2010 (who did the Weyl-mismatch for compact quantum graphs) or a
+  corollary — an honest "heat-trace part is new, Weyl part is context" is an acceptable
+  verdict.
+Non-circularity: operator side is pure spectral geometry; Riemann side uses only the RvM
+count. Uses REVIEW_PROMPT.md common header + Block A.
 
 ## What a returned verification should contain
 
