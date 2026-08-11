@@ -4,7 +4,11 @@
 **Working title:** Finite Observables Do Not Determine Critical-Line Support  
 **Target:** ~15 pages; research note or short paper  
 **Theorem files:** `theorems/B1-finite-inequality/`, `theorems/B2-exact-collision/`  
-**Status:** PROOF-DRAFT complete; both theorems self-contained; ready for independent review
+**Status:** **INDEPENDENTLY-CHECKED** — both B1 (Gate-A PASS OB-23, after §7 mods) and B2
+(Gate-A PASS OB-20) passed whole-theorem independent Gate-A review; both have deposited
+independent checkers (B1 R-atom OB-24; B2 OB-21/OB-13). This is the strongest-standing paper:
+two double-axis-established obstruction theorems. (G-info, Paper-A-adjacent, is also
+Gate-A PASS OB-22 + checker OB-17 — see docs/STATUS.md.)
 
 ---
 

@@ -5,7 +5,16 @@
 of a Classical Elliptic Operator  
 **Target:** ~10 pages; short note  
 **Theorem files:** `theorems/D-spectral-asymptotic/`  
-**Status:** PROOF-DRAFT (novelty gate cleared; one item: Seeley-DeWitt no-log cite)
+**Status:** **INDEPENDENTLY-CHECKED for D (Gate-A PASS OB-25)** — but positioned as a
+**scope-extension / corollary**, NOT a standalone novelty (OB-25 Q5): the heat-trace
+formulation is the same leading-order obstruction as the Weyl-counting mismatch (Abel/Tauber),
+and near-direct precedents exist (Endres–Steiner 2010 for quantum graphs; Watson–Valentinuzzi
+2026 for elliptic *differential* operators). D's identifiable increment is the extension to
+the full classical elliptic ΨDO class + the leading-vs-subleading-log distinction.
+**Caution — do NOT fold in D' (D-prime-logpoly) as an established escape-route audit:** D' is
+**Gate-A BLOCKED (OB-31)** — its universal Claim A over `𝒞_logpoly` is false (missing
+ellipticity; non-elliptic counterexample has a leading log). Only the narrowed
+`𝒞_logpoly^{sub,ell}` lemma (PENDING) is defensible. See docs/STATUS.md.
 
 ---
 

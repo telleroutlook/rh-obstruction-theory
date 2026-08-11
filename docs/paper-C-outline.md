@@ -1,11 +1,28 @@
 # Paper C — Outline
 # Real-Rooted Approximants and the Missing Compactness Theorem in Spectral Approaches to RH
 
+> **⚠ SUPERSEDED BY OB-29 (Gate-A BLOCKED, 2026-08-12).** The abstract and theorem statements
+> below are the *original* `Ξ`-specific RH-free formulation, which the independent Gate-A
+> review found **circular** (RH-imported-via-divisor). Read the whole outline through the
+> reframing in `theorems/E-compactness/statement.md §0`: the target must be an **abstract
+> Laguerre–Pólya function `L`**, not `Ξ`; the `Ξ`/CCM specialization is RH and is withdrawn.
+> This file is retained for history; do not draft from it without applying the reframing.
+
+
 **Working title:** Real-Rooted Approximants and the Missing Compactness Theorem in
 Spectral Approaches to the Riemann Hypothesis  
 **Target:** ~20 pages; research paper  
 **Theorem files:** `theorems/E-compactness/`  
-**Status:** PROOF-DRAFT complete (E-neg + E-pos both self-contained); ready for review
+**Status:** **Gate-A BLOCKED (OB-29) for the `Ξ`-specific RH-free claim** — a genuine
+circularity (RH-imported-via-divisor, L5): the E-neg construction and the E-pos (H-div)
+hypothesis both require `Ξ = Ξ(0)∏(1−z²/γ_n²)` over **real** `γ_n`, which **is RH**. What
+survives is an **abstract Laguerre–Pólya real-zero non-identifiability lemma** (RH-free);
+specializing the target to `Ξ` is exactly RH and is not claimed. Paper C, if written, is a
+**supporting section on abstract real-zero-approximant non-identifiability**, NOT a standalone
+RH-free `Ξ`/CCM theorem. **Do NOT fold in E' (E-prime-meromorphic):** it is **Gate-A BLOCKED
+(OB-30)** — separation-degree error, (A2) false for the real `ξ/ξ'`, and Suzuki's entire
+approximants are incompatible with the moving-pole convergence. See docs/STATUS.md before
+drafting.
 
 ---
 
