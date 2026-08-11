@@ -21,33 +21,26 @@ problem.
 | OB-02 | `OB-02-B2-integer-collision.md` | B2 | Vandermonde rank + integer scaling construction | RESOLVED — integrated 2026-08-11 |
 | OB-03 | `OB-03-E-tail-estimate.md` | E §3 | Hadamard growth + Vandermonde IFT non-uniqueness | RESOLVED — integrated 2026-08-11 |
 | OB-04 | `OB-04-G-prop-G3-adversary.md` | G Prop. G.3 | `𝒵_smooth` adversary, O_θ indistinguishability | RESOLVED — integrated 2026-08-11 |
-| OB-05 | `OB-05-E-pos-identification.md` | E §4 | Evenness pins G = Ξ (Hadamard + Hurwitz) | OPEN — send for review |
-| OB-06 | `OB-06-E-prime-meromorphic-uniqueness.md` | E' | Meromorphic Hadamard uniqueness + Marty theorem | OPEN — send for review |
-| OB-07 | `OB-07-B2-ambient-class-counting-law.md` | B2 / Paper A | Ambient class 𝔛_sym: counting-law requirement? | OPEN — send for review |
-| OB-08 | `OB-08-G-factorization-condition.md` | G | Factorization condition (2.7) for 𝔐_FC | OPEN — send for review |
+| OB-05 | `OB-05-E-pos-identification.md` | E §4 | Evenness pins G = Ξ (Hadamard + Hurwitz) | RESOLVED — integrated 2026-08-11 |
+| OB-06 | `OB-06-E-prime-meromorphic-uniqueness.md` | E' | Meromorphic Hadamard uniqueness + Marty theorem | RESOLVED — integrated 2026-08-11 |
+| OB-07 | `OB-07-B2-ambient-class-counting-law.md` | B2 / Paper A | Ambient class 𝔛_sym: counting-law requirement? | RESOLVED — integrated 2026-08-11 |
+| OB-08 | `OB-08-G-factorization-condition.md` | G | Factorization condition (2.7) for 𝔐_FC | RESOLVED — integrated 2026-08-11 |
+| OB-09 | `OB-09-E-prime-neg-IFT-odd-meromorphic.md` | E' §4 | IFT for odd meromorphic target: zero-perturbation Jacobian | OPEN — send for review |
+| OB-10 | `OB-10-G-Hurwitz-real-zeros.md` | G §7 | Hurwitz: PSD Fredholm limit has all-real zeros | OPEN — send for review |
 
 ## Difficulty
 
-- **OB-01–04:** RESOLVED (referee reports integrated 2026-08-11).
+- **OB-01–08:** RESOLVED (referee reports integrated 2026-08-11).
 
-- **OB-05:** Complex analysis (Hadamard factorization for even entire functions,
-  Hurwitz theorem for zero convergence). **Low–medium difficulty.** Claim A (evenness
-  pins G=Ξ) is elementary; Claim B (Hurwitz zero-set convergence) requires careful
-  attention to hypotheses.
+- **OB-09:** Complex analysis (meromorphic IFT for odd target; Vandermonde in zero
+  reciprocals). **Medium difficulty.** The Vandermonde structure is identified; the
+  explicit write-out of the log-power-sum matching system for the odd meromorphic case
+  needs to be verified independently (analogous to OB-03 for the entire case).
 
-- **OB-06:** Complex analysis (meromorphic Hadamard uniqueness, normal families).
-  **Medium difficulty.** Three separate claims: meromorphic factorization citation,
-  Marty vs Montel decision, and simplicity-of-zeros scope.
-
-- **OB-07:** Analytic number theory / design question (ambient class definition).
-  **Low–medium difficulty.** Primarily a conceptual question: does the ambient class
-  𝔛_sym need the Riemann–von Mangoldt counting law for the obstruction to be
-  non-trivial? Requires checking whether finite multisets make the theorem vacuous.
-
-- **OB-08:** Operator theory / spectral theory (Fredholm determinants, method class
-  verification). **Medium difficulty.** Requires understanding of Fredholm determinants
-  and the factorization condition; the normalization sanity check (numerical anchor) is
-  elementary and decisive.
+- **OB-10:** Operator theory / complex analysis (Hurwitz theorem for Fredholm determinant
+  limits; PSD implies all-real zeros). **Low difficulty.** OB-08 referee Prop. 7.1 proves
+  this but the proof step (no zeros in upper/lower half-plane via Hurwitz + PSD) needs
+  independent confirmation and a precise citation.
 
 ## What a returned verification should contain
 

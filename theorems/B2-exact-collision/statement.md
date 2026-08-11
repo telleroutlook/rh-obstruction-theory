@@ -110,9 +110,63 @@ Same five escape routes as B1, plus:
 B2 is confirmed with nonneg integer multiplicities (proof.md §4.5, OB-02 2026-08-11).
 The Paper A theorem is:
 
-> For any fixed finite test family `Φ` of Li-type or moment-type tests, there exist
-> `𝒵_+ ∈ 𝔛_sym` with `P=1` and `𝒵_− ∈ 𝔛_sym` with `P=0` such that
-> `O_Φ(𝒵_−) = O_Φ(𝒵_+)` exactly (not just approximately).
+> For any fixed finite test family `Φ` of Li-type or moment-type tests satisfying (R)
+> and (OD) (see §7 below), there exist `𝒵_+ ∈ 𝔛_sym^{(*),nr}` with `P=1` and
+> `𝒵_− ∈ 𝔛_sym^{(*),nr}` with `P=0` such that `O_Φ(𝒵_−) = O_Φ(𝒵_+)` exactly.
 
-Open refinement question: whether the ambient class 𝔛_sym should additionally
-require the Riemann–von Mangoldt counting law (see outsource OB-07).
+**Counting-law lift (OB-07 referee Theorem 8.1, 2026-08-11).** Assuming the finite
+collision premise (FC) below, the Paper A theorem holds for the augmented ambient class
+`𝔛_sym^{(*),nr}` — the subclass of `𝔛_sym` satisfying:
+- **(NR):** `𝒵 ∩ ℝ = ∅` (no real atoms);
+- **(*):** `N_𝒵(T) = (T/2π)log(T/2π) − T/2π + O(log T)`.
+
+**Construction (unconditional background, OB-07 §6).** Define `F(T) = (T/2π)log(T/2π) − T/2π`
+and let `γ_n^{bg}` be the unique solution to `F(γ_n^{bg}) = n` for each `n ≥ 1`.  Set
+`𝒟 = ⊔_{n≥1} L(γ_n^{bg})`.  Then `N_𝒟(T) = F(T) + O(1)`, `𝒟` satisfies (NR) and all
+three conditions of `𝔛_sym`, and no zeta zero or RH hypothesis is used.
+
+Set `𝒵_+ = 𝒟 ⊔ A_+` and `𝒵_− = 𝒟 ⊔ A_−` where `A_+, A_−` are the finite B2 blocks.
+Then `𝒵_±  ∈ 𝔛_sym^{(*),nr}`, `P(𝒵_+) = 1`, `P(𝒵_−) = 0`, and `O_Φ(𝒵_+) = O_Φ(𝒵_−)`
+(using (OD) for absolute convergence and additivity of `O_Φ` under the finite adjunction,
+plus the finite-collision premise (FC)).
+
+**Finite-collision premise (FC).** The lift is a complete proof from (FC):
+> For the specified B2 test family Φ satisfying (R) and (OD), there are finite
+> symmetric nonreal multisets `A_+, A_−` such that every point of `A_+` is on
+> `Re s = 1/2`, `A_−` contains an off-line quartet, and `O_Φ(A_+) = O_Φ(A_−)`.
+
+(FC) is proved in proof.md §4 (OB-02, 2026-08-11). The lift above is independent of (FC)'s
+proof; it converts (FC) into the full Paper A theorem for the augmented class.
+
+**Non-vacuity note (OB-07 referee §4).** Without (NR), the class `𝔛_sym` admits real
+atoms `{1/4, 3/4}` which are invisible to both `N_𝒵` and `O_Φ`, making the obstruction
+vacuous.  (NR) is therefore mandatory for a non-trivial theorem.
+
+**Test-class restriction.** "Any fixed finite test family" must be qualified: the test
+functions must satisfy (R) (`φ_j(z̄) = φ_j(z)̄`) for `O_j` to be real-valued, and (OD)
+(uniform orbit-decay `|B_j(β+it)| ≤ C_j(1+t)^{−1−δ_j}`) for absolute convergence on
+infinite multisets.  The standard Li test family `φ_r(z) = 1−(1−z^{−1})^r` satisfies
+both (OD holds with `δ_r = 1`; see OB-07 referee §7).
+
+Open refinement question: whether the ambient class `𝔛_sym` should additionally
+require the Riemann–von Mangoldt counting law (now answered affirmatively by OB-07).
+
+---
+
+## §7. Counting-function formulas — CORRECTED (OB-07 referee §2.1)
+
+The formulas for `N_{A_+}` and `N_{A_-}` in proof.md had sign errors. The correct
+formulas are:
+
+For `T_* = max(t_1,…,t_m, T)` (height above all atoms):
+```
+N_{A_+}(T_*) = mM          (M pairs for each of m on-line heights).
+N_{A_-}(T_*) = mM + Σ_k n_k + 2R    (n_k on-line adjustments; Q contributes 2 upper-half points).
+```
+
+Note: one copy of `L(t)` contributes exactly ONE point with `Im > 0` (not two); one copy
+of `Q(3/4,T)` contributes exactly TWO points with `Im > 0`.  The original formulas `2mM`
+and `2Σ n_k + R` were incorrect.
+
+Also: `Σ_k n_k + 2R` need not be positive (n_k can be negative); the buffer M ≥ max|n_k|
+ensures nonneg multiplicities but does not force N_{A_-} > N_{A_+}.

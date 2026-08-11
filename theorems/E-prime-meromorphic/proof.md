@@ -1,97 +1,122 @@
 # Proof — Theorem E' (E-prime-meromorphic)
 
-**Status:** PROOF-DRAFT (E'-neg); OPEN (E'-pos)  
-**Analytic / finite separation:** purely analytic.
+**Status:** PROOF-DRAFT (E'-neg redesigned after OB-06 2026-08-11); OPEN (E'-pos)  
+**Analytic / finite separation:** purely analytic.  
+**Key corrections (OB-06 2026-08-11):** W is ODD (not even); γ_n are ZEROS of W
+(not poles); poles of W come from zeros of ξ'(1/2−iz); old E'-neg construction
+(perturbing "poles at γ_n") was entirely wrong and is replaced below.
 
 ---
 
-## §1. Meromorphic Hadamard uniqueness
+## §1. Meromorphic Hadamard uniqueness — CONFIRMED AFTER CORRECTION
 
-**Lemma E'.1.** Let `F`, `G` be meromorphic functions of order at most 1, with the same
-multiset of poles `{p_k}` (multiplicities counted) and the same multiset of zeros `{z_j}`
-(multiplicities counted), and `F(w₀) = G(w₀)` for some non-pole point `w₀` with
-`F(w₀) ≠ 0`. Then `F = G`.
+**Lemma E'.1.** Let `F`, `G` be meromorphic functions with `T(r,F) = O(r)`,
+`T(r,G) = O(r)`, with identical complete zero divisors (`ord_a F = ord_a G` for
+all a), with `F/G` even (both F,G odd suffices), and `F(w₀) = G(w₀) ≠ 0` at some
+non-pole `w₀`. Then `F = G`.
 
-*Proof.* The Weierstrass product factorization for meromorphic functions of order ≤ 1:
+*Proof (OB-06 referee §3).* H := F/G is entire, zero-free, `T(r,H) = O(r)`, even.
+By Hadamard: `H = e^{az+b}`. Evenness forces `a = 0`. Normalization forces `e^b = 1`.
+Hence `H ≡ 1`. ☐ (Conway, *Functions of One Complex Variable I*, 2nd ed., Thm XI.3.4.)
+
+*Correct canonical product.* For paired zeros `±z_j` with `Σ|z_j|^{-2} < ∞`:
 ```
-F(z) = e^{az+b} · ∏_j E_1(z/z_j) / ∏_k E_1(z/p_k)
+Z(z) = ∏_j (1 − z²/z_j²)
 ```
-where `E_1(u) = (1−u)e^u` is the Weierstrass elementary factor of genus 1. Both
-`F` and `G` have the same zero and pole products; they differ only in the exponential
-prefactor `e^{az+b}`. The conditions `F(w₀) = G(w₀)` and `F(w₀) ≠ 0` pin the ratio
-`e^{(a_F − a_G)w₀ + (b_F − b_G)} = 1`. Since the function `F/G = e^{(a_F−a_G)z + (b_F−b_G)}`
-has no zeros or poles and equals 1 at `w₀`, parity constraints from the order-1 bound
-give `a_F = a_G` and `b_F = b_G`, hence `F = G`. ☐
-
-*Note:* The order-1 bound is essential — for order > 1, the exponential prefactor can
-be `e^{P(z)}` for a polynomial `P` of degree > 1, and the argument fails.
-
-`W(z) = z² ξ(1/2−iz)/ξ'(1/2−iz)` has order 1 (same as ξ). Lemma E'.1 applies.
+converges locally uniformly (Weierstrass pairing identity: `E_1(z/a)E_1(z/−a) = 1 − z²/a²`).
+The alternative `∏(1−z²/z_j²)e^{z²/z_j²}` introduces a spurious `exp(z²·Σz_j^{-2})` factor
+of order 2 and is WRONG for this setting.
 
 ---
 
-## §2. E'-neg: non-uniqueness construction
+## §2. Analytic structure of W — CORRECTED (OB-06)
 
-**Setup.** Fix `N` (first `k_N` pole pairs fixed). The perturbed meromorphic function is:
-```
-F^{(c₀)}(z) = z² · ξ^{(c₀)}(1/2−iz) / (ξ^{(c₀)})'(1/2−iz)
-```
-where `ξ^{(c₀)}` is the Hadamard product over perturbed zeros
-`μ_n^{(c₀)} = γ_n(1 + c₀/(n−k_N))` for `n > k_N` (same perturbation as E-neg §3).
+`W(z) = z² ξ(1/2−iz) / ξ'(1/2−iz)`.
 
-**Step 1 (matching).** Match first `J_N` coefficients of the Laurent expansion of `F`
-at a base point `w₀` not near any pole. The Jacobian of the matching map with respect
-to `(c₀, μ_{k_N+1}, …, μ_{k_N+J_N})` has the same Vandermonde structure as E-neg §3,
-since the partial fractions of `W(z)` at pole `γ_n` have residue `−i/ξ''(ρ_n)·ξ(ρ_n)`
-(from the double zero structure), and small shifts in `γ_n` produce a linearized IFT
-with a Vandermonde matrix in `{γ_n^{-1}}`. **Status: PROOF-DRAFT** (IFT step explicit
-in E-neg §3; the meromorphic residue version needs to be written out fully).
+**Parity.** W is ODD: `W(−z) = −W(z)`.
+(Proof: X(z) := ξ(1/2−iz) is even; ξ'(s)=−ξ'(1−s) → ξ'(1/2−iz) is odd;
+ratio X/X' is odd; times z² still odd.)
 
-**Step 2 (separation).** The perturbed function differs from `W` near `z = iR` for
-large `R` by an amount:
+**Zeros.** γ (a zero of ξ of multiplicity m) → simple zero of W at z = γ:
 ```
-|F^{(c₀)}(iR) − W(iR)| / |W(iR)| ≥ δ(c₀) > 0
+W(z) = −iγ²/m · (z − γ) + O((z−γ)²).
 ```
-since the ratio `ξ^{(c₀)}/ξ` evaluated at `1/2 + R` grows as the Hadamard product
-ratio `∏_{n>k_N}(1 + (R−γ_n)²/(γ_n + c₀/(n−k_N))²) / (1 + (R−γ_n)²/γ_n²)`. For
-`c₀ ≠ 0` this ratio is not identically 1.
+γ is NOT a pole of W. There is no residue at γ.
 
-**Step 3 (|W(iR)| → ∞).** By the Hadamard product for ξ:
-```
-|ξ(1/2 + R)| = |ξ(0)| · ∏_n (1 + R²/γ_n²) ≥ |ξ(0)| · 2^N
-```
-where `N ~ R log R / (2π)` (from von Mangoldt). So `|W(iR)| → ∞` and the separation
-`|F^{(c₀)}(iR) − W(iR)| → ∞` as well, giving sup-norm separation on any compact
-set avoiding the poles. ☐ (modulo Step 1 IFT write-out)
+**Poles.** Zeros of ξ'(1/2−iz) not cancelled by zeros of ξ(1/2−iz).
+At z=0: ξ'(1/2)=0; local behavior determined by vanishing order of ξ' at 1/2.
 
 ---
 
-## §3. E'-pos strategy (OPEN)
+## §3. E'-neg: non-uniqueness construction — REDESIGNED
 
-The E-pos proof used (in order):
-1. **Montel:** (H-bound) → normal family → precompact in `C(K)` for compact `K`.
-2. **Vitali:** (H-norm) pins the limit to one function.
-3. **Hurwitz:** (H-tail) transfers real zeros to limit.
+**Strategy (corrected — PROOF-DRAFT).**
 
-For meromorphic functions, the analogues are:
-1. **Marty's theorem:** a family of meromorphic functions is normal iff the spherical
-   derivatives are locally uniformly bounded. Under (H'-bound) + (H'-pole-sep), the
-   family is normal in the spherical metric.
-2. **Vitali for meromorphic:** standard.
-3. **Argument principle (instead of Hurwitz):** for meromorphic functions, real poles
-   transfer to the limit by the argument principle rather than Hurwitz.
+The old construction perturbed "poles at γ_n"; this was wrong since γ_n are zeros
+of W, not poles. The corrected construction perturbs the **zeros** of W.
 
-The full E'-pos proof requires writing out these steps for the Suzuki meromorphic
-setting. Deferred — the structure is clear, the execution is open.
+**Step 1.** Fix `k = k_N` (first k zeros γ_1,…,γ_k of W are held fixed).
+For `n > k`, set `μ_n^{(c₀)} = γ_n(1 + c₀/(n−k))`. Define the perturbed odd
+meromorphic function:
+```
+F^{(c₀)}(z) = z² · ξ^{(c₀)}(1/2−iz) / ξ'(1/2−iz)
+```
+where `ξ^{(c₀)}` is the Hadamard product for ξ with zeros γ_n replaced by μ_n^{(c₀)}
+for `n > k`.  The poles of `F^{(c₀)}` are the same as those of W (zeros of ξ').
+`F^{(c₀)}` is odd (same parity argument as W).
+
+**Step 2 (IFT for Taylor matching).** Adjust J_N of the free tail zeros
+`μ_{k+1},…,μ_{k+J_N}` to enforce:
+```
+(1/j!) F^{(c₀)(j)}(w₀) = (1/j!) W^{(j)}(w₀),   j = 0,…,J_N−1.
+```
+The Jacobian matrix of the matching system at `c₀ = 0` with respect to
+`(μ_{k+1},…,μ_{k+J_N})` has the structure of a Vandermonde matrix in
+`{1/(w₀ − γ_n)}_{n=k+1}^{k+J_N}`, nonsingular since the γ_n are distinct and
+`w₀ ∉ {γ_n}`. IFT gives `δ > 0` and a unique `C^1` branch `μ_n(c₀)` for `|c₀| < δ`.
+
+**Step 3 (separation).** For `c₀ ≠ 0`, the (J_N+1)-th Taylor coefficient of
+`F^{(c₀)}` differs from W's. Cauchy's estimate gives:
+```
+sup_{|z| ≤ R₀} |F^{(c₀)}(z) − W(z)| ≥ A_{c₀} · R₀^{2J_N+2}
+```
+for an explicit `A_{c₀} > 0` depending on the coefficient discrepancy (same argument
+as E-neg §3; see E-compactness/proof.md §3).
+
+**What remains to write out.** The full meromorphic IFT argument in Step 2
+(analogous to E-neg §3's log-power-sum system Φ_r) needs to be made explicit
+for the odd meromorphic case. The Vandermonde structure is clear; execution is
+PROOF-DRAFT.
 
 ---
 
-## §4. Status
+## §4. E'-pos strategy — OPEN
+
+Under hypotheses (LB*) + (H'-pole-sep) + (H'-tail) + (H'-norm):
+
+1. **(LB*) → Montel on Ω.** For each compact L ⊂ Ω = ℂ\{poles of W}, (LB*) gives
+   an open neighborhood U_L on which F_n are holomorphic and uniformly bounded.
+   Montel (Conway, VII.2.9) → a subsequence converging uniformly on U_L, hence on L.
+   Diagonal construction over exhaustion L_j ↗ Ω gives a single subsequence converging
+   on all of Ω. (Marty not needed — Montel for analytic functions suffices on Ω.)
+
+2. **Identification G = W.** Limit G is odd, has the same complete zero divisor
+   as W (via H'-tail + tail no-intrusion condition T), same poles (via H'-pole-sep
+   + argument principle), `G(w₀) = W(w₀)` (H'-norm). By Lemma E'.1, `G = W`.
+
+**Status:** OPEN. Structure clear; execution deferred.
+
+---
+
+## §5. Status
 
 | Step | Status |
 |---|---|
-| Lemma E'.1 (meromorphic Hadamard uniqueness) | PROOF-DRAFT (complete above; citation open) |
-| E'-neg Step 1 (IFT for meromorphic residues) | PROOF-DRAFT (template from E-neg; explicit write-out open) |
-| E'-neg Steps 2–3 (separation via Hadamard) | PROOF-DRAFT (same as E-neg) |
-| E'-pos (Marty + Vitali + argument principle) | OPEN (structure clear) |
-| Suzuki missing ingredients identified | ✓ (H'-bound, H'-tail — same structure as CCM) |
+| Lemma E'.1 (meromorphic Hadamard uniqueness) | CONFIRMED AFTER CORRECTION (OB-06; Conway XI.3.4; F/G route) |
+| W parity (ODD) | CONFIRMED: W(−z) = −W(z) (OB-06) |
+| W zero structure (γ_n are ZEROS) | CONFIRMED: simple zeros; W = −iγ²/m·(z−γ)+O(…) (OB-06) |
+| Old E'-neg (perturbing "poles at γ_n") | REFUTED (γ_n are zeros not poles; residue argument entirely wrong) |
+| E'-neg redesigned (perturbing zeros of W) | PROOF-DRAFT (Vandermonde IFT; write-out open) |
+| Old E'-pos ("even F_N → even W") | REFUTED (W is odd) |
+| E'-pos redesigned (odd F_N → W via Montel on Ω) | OPEN (structure complete; Montel suffices) |
+| Suzuki missing ingredients | ✓ identified (odd parity; H'-bound/(LB*); H'-tail) |

@@ -203,18 +203,43 @@ The corrected proof uses Littlewood's S_1(T) = O(log T) as the critical classica
 
 ---
 
-## §5. The CORE-4 barrier in 𝔐_FC
+## §5. The CORE-4 barrier in 𝔐_FC — CORRECTED (OB-08)
 
-**Theorem G (information obstruction, PROOF-DRAFT — corrected).**  
-For any `P ∈ 𝔐_FC` (assuming the factorization condition (2.7) holds) and any `N`:
-1. The operator `K_N` constructed by P has eigenvalues `κ_n ≈ 1/(1/4 + d_n²)`.
-2. By Prop. G.3* Item 2, `{d_n} ≠ {γ_n}` as multisets (infinitely many differ).
-3. By Prop. G.3* Item 3, `F_d ≠ F_γ` as entire functions (canonical product argument).
-4. Closing the gap requires the S(T) data, which is not available in `O_θ`.
+**Corrected Fredholm determinant formula.** For `K_N = D_N = diag(κ_1,…,κ_N)` with
+`κ_n = 1/(1/4 + d_n²)`:
+```
+det(I − z² D_N) = ∏_{n=1}^{N} (1 − z² κ_n) = ∏_{n=1}^{N} (1 − z²/(1/4 + d_n²)).
+```
+Zeros at `z = ±(1/4 + d_n²)^{1/2}`, NOT at `±d_n` or `±κ_n^{1/2}`.
 
-*Conclusion.* CORE-4 is `[OBL]` for every `P ∈ 𝔐_FC` operating with observation `O_θ`.
-The obstruction is not a finite-N artifact: the counting-function integral (Item 4 of
-Prop. G.3*) shows the separation `|F_d(iR) − F_γ(iR)| → ∞` as R → ∞.
+**Local uniform limit (OB-08 Theorem 5.1 + 6.1).** Since `Σ κ_n = Σ 1/(1/4+d_n²) < ∞`
+(by `d_n ∼ 2πn/log n`), `D = diag(κ_n)` is trace class with `‖D−D_N‖_1 = Σ_{n>N} κ_n → 0`.
+By the Fredholm determinant stability inequality
+`|det(I+A) − det(I+B)| ≤ ‖A−B‖_1 exp(1+‖A‖_1+‖B‖_1)`,
+we get `det(I−z²D_N) → G_d(z) = ∏_{n≥1}(1−z²/(1/4+d_n²))` locally uniformly.
+
+**G_d ≠ Ξ̂ unconditionally.**
+- Zeros of G_d: `{±√(1/4+d_n²)}` — all real, positive, `> d_n`.
+- Under RH: Ξ̂ has zeros `{±γ_n}`; `√(1/4+d_n²) ≠ γ_n` for two independent reasons:
+  (a) `d_1 ≈ 17.846` gives `√(1/4+d_1²) ≈ 17.854 ≠ γ_1 ≈ 14.134`;
+  (b) `d_n ≠ γ_n` for infinitely many n (Prop. G.3* Item 2).
+- Under ¬RH: Ξ̂ has a non-real zero; G_d has only real zeros. Still `G_d ≠ Ξ̂`. ✓
+
+**Theorem G (diagonal obstruction — PROOF-DRAFT — corrected).**  
+For any `(K_N) ∈ 𝔐_d^{tr}`:
+1. `det(I − z² K_N) → G_d` locally uniformly (Theorem 6.1, using trace-norm stability).
+2. `G_d ≠ Ξ̂` unconditionally (two independent obstructions: spectral shift + S(T) gap).
+
+*The earlier statement "eigenvalues κ_n ≈ 1/(1/4+d_n²) → determinant zeros near d_n" was
+incorrect: zeros are at `±κ_n^{-1/2} = ±√(1/4+d_n²)`, not at `±d_n`.*
+
+**Shifted-determinant alternative (OB-08 §2.3).** To recover zeros at `±d_n` from a
+finite-rank operator, use:
+```
+det(I − (z²+1/4)D_N) / det(I − (1/4)D_N) = ∏_{n=1}^N (1 − z²/d_n²).
+```
+But even this gives limit `F_d ≠ Ξ̂` (by Prop. G.3* Items 2–4). The S(T) obstruction
+remains; the spectral-shift issue is a separate additional obstruction.
 
 ---
 

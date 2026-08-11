@@ -290,14 +290,37 @@ bounded.  By Montel's theorem, every subsequence has a further subsequence
 converging locally uniformly to some entire function `G`.
 
 **Step 2 (Identification).** We claim `G = Ξ`.
-- `G(z_0) = \lim F_{N_j}(z_0) = Ξ(z_0) ≠ 0` by (H-norm).  
-- By (H-tail), the zero sequence of `F_N` converges to the zero sequence of `Ξ`
-  (in the Hadamard-product sense), so `G` has the same zeros as `Ξ`.
-- `G` has order 1 (uniform limit of order-1 functions with bounded norm on each
-  disk).
-- By the Hadamard factorization uniqueness theorem, an entire function of order 1
-  is determined by its zeros up to an exponential factor `e^{az+b}`.  The
-  conditions `G(z_0) = Ξ(z_0)` and `G$ even pin the factor: `G = Ξ`.
+
+- `G(z_0) = lim F_{N_j}(z_0) = Ξ(z_0) ≠ 0` by (H-norm).
+- **Order:** By (H-bound), `{F_N}` is locally uniformly bounded, so `G` satisfies
+  `T(r,G) = O(r)` (Nevanlinna characteristic, classical from locally uniform limit);
+  hence `G` has **conventional order ≤ 1** in the sense of Nevanlinna.
+  (Note: "conventional order" means `ρ(G) = limsup_{r→∞} log log M_G(r)/log r ≤ 1`;
+  this is NOT the same as finite exponential type `|G(z)| = O(e^{C|z|})`.)
+- **Zero divisor:** Ξ has a zero divisor `{ω_n}_{n≥1}` ⊂ ℂ (its nontrivial zeros,
+  unconditionally complex — their reality is the content of RH, not a hypothesis here).
+  Write `Ξ(z) = Ξ(0) · ∏_{n≥1}(1 − z²/ω_n²)` if all zeros come in pairs ±ω_n
+  (which follows from the functional equation `Ξ(z) = Ξ(−z)` — Ξ is even — and
+  `Ξ(z̄) = \overline{Ξ(z)}`). The product converges locally uniformly since
+  `Σ |ω_n|^{-2} < ∞`.
+- **Tail no-intrusion condition (T):** (H-tail) must include condition (T):
+  for every `R > 0` there exist `M, N_0` such that for all `N ≥ N_0` and all
+  `n > M`, the n-th zero `α_n^{(N)}` of `F_N` satisfies `|α_n^{(N)}| > R`.
+  This prevents a "wandering" zero from introducing a spurious accumulation point
+  as `N → ∞` (see OB-05 referee Theorem B').
+- By (H-tail) + condition (T), the zero multiset of each subsequential limit `G`
+  equals the zero multiset `{ω_n}` of Ξ exactly (Hurwitz + tail no-intrusion).
+- `G` is even (locally uniform limit of even functions).
+- By the corrected Lemma A* (OB-05): an entire function of Nevanlinna order ≤ 1
+  with the same complete zero divisor as Ξ, which is even and shares one nonzero
+  value with Ξ, equals Ξ.  Proof: write `G = e^{az+b} · ∏(1−z²/ω_n²)`; evenness
+  forces `a = 0`; the normalization `G(z_0) = Ξ(z_0) ≠ 0` forces `e^b = 1`.
+  Hence `G = Ξ`.
+
+**RH-strength note.** The identification `G = Ξ` does NOT require the ω_n to be
+real — it works for any complete complex zero divisor.  The conclusion (Step 3 below)
+that the zeros of Ξ are real is RH-strength content; it follows from the convergence,
+not from any assumption in Step 2.
 
 **Step 3 (Hurwitz).** Since `F_N → Ξ` locally uniformly and `Ξ` is not
 identically zero, Hurwitz's theorem implies: every zero of `Ξ` is a limit of
