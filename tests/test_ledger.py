@@ -19,7 +19,7 @@ from checker.validate_ledger import load_claims, validate  # noqa: E402
 
 def test_all_claims_parse_and_validate():
     claims = load_claims(ROOT / "baseline" / "CLAIM_LEDGER.yaml")
-    assert len(claims) == 12, f"expected 12 claims, parsed {len(claims)}"
+    assert len(claims) == 14, f"expected 14 claims, parsed {len(claims)}"
     for c in claims:
         assert not validate(c), f"{c.get('id')}: {validate(c)}"
 
