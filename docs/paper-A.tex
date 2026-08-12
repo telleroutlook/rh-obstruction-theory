@@ -1,0 +1,378 @@
+% Paper A — Finite Observables Do Not Determine Critical-Line Support
+% Compilable LaTeX draft, generated from docs/paper-A-draft.md and the theorem files
+% theorems/{B1-finite-inequality,B2-exact-collision,G-fredholm-certificate}/.
+% All three theorems are Gate-A-established (independent whole-theorem review) with deposited
+% independent checkers. This source matches the reviewed status exactly; the per-theorem
+% statement.md files and docs/STATUS.md are authoritative.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\Xsym}{\mathfrak{X}_{\mathrm{sym}}}
+\newcommand{\Zp}{\mathcal{Z}_+}
+\newcommand{\Zm}{\mathcal{Z}_-}
+\newcommand{\Ohat}{\widehat{O}}
+\newcommand{\Xihat}{\widehat{\Xi}}
+\newcommand{\hhat}{\widehat{h}}
+\newcommand{\Md}{\mathfrak{M}}
+
+\title{Finite Observables Do Not Determine Critical-Line Support}
+\author{[authors]}
+\date{Draft --- \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove three information-theoretic \emph{obstruction theorems} for methods that decide the
+predicate ``all zeros lie on the critical line'' using only a finite or archimedean-level
+observation of a zeta-like zero multiset. Let $\Xsym$ be the class of locally finite zero
+multisets in the critical strip, symmetric under conjugation and $\rho\mapsto 1-\rho$, with an
+admissibility exponent bound.
+\begin{itemize}
+  \item \textbf{Theorem~\ref{thm:B1} (no uniform separation margin).} For any finite test
+  family $\Phi=(\varphi_1,\dots,\varphi_m)$ (Li, Weil--W2, or moment type) and any tolerance,
+  there exist $\Zp,\Zm\in\Xsym$ with $P(\Zp)=1$, $P(\Zm)=0$, whose observation vectors satisfy
+  $|O_\Phi(\Zp)-O_\Phi(\Zm)|<\varepsilon$ coordinatewise; the infimum over the construction of
+  the observation gap between the $P=1$ and $P=0$ classes is $0$.
+  \item \textbf{Theorem~\ref{thm:B2} (exact observation collision).} Under the same hypotheses
+  one may take $O_\Phi(\Zp)=O_\Phi(\Zm)$ \emph{exactly} (zero tolerance, integer
+  multiplicities), with $\Zp$ on-line and $\Zm$ additionally carrying an off-line quartet.
+  \item \textbf{Theorem~\ref{thm:Ginfo} (diagonal Fredholm obstruction).} For every method in a
+  natural archimedean-level class $\Md_d^{\mathrm{tr}}$, the locally uniform limit of the
+  associated finite-rank Fredholm determinant is a fixed function $G_d$ that is
+  unconditionally \emph{not} the target $\Xihat$.
+\end{itemize}
+All three exhibit a method class whose observation map does not determine the target
+predicate. \textbf{These are no-go theorems for a class of methods; they do not prove,
+disprove, or make progress toward the Riemann Hypothesis, and they hold regardless of its
+truth.}
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{What this paper does and does not claim}
+The Riemann Hypothesis (RH) is equivalent to many criteria---positivity of the Li coefficients
+\cite{Li1997}, positivity of the Weil functional \cite{Weil1952,Bombieri2000}, reality of the
+spectrum of conjectural operators \cite{BerryKeating1999,Connes1999}. Each such criterion
+\emph{locates} the difficulty of RH in a particular object; none, by itself, is a barrier to
+any proof strategy.
+
+This paper proves the complementary kind of statement: for three precisely delimited
+\emph{method classes}, the data the method observes \emph{does not determine} whether all zeros
+lie on the critical line. We emphasize at the outset, and repeat in the conclusion:
+\begin{quote}
+\textbf{This paper does not prove, disprove, or approach RH.} Its theorems are no-go results
+for method classes---statements of the form ``a method seeing only $O$ cannot decide the
+predicate $P$'', proved by exhibiting two admissible objects that agree on $O$ but differ on
+$P$. RH itself is never assumed, and no result here is an RH-equivalent reformulation.
+\end{quote}
+We call such a theorem a \emph{barrier} for a method class only when all five of the following
+are explicit: the method class, the ambient object class, the observation map, the target
+predicate, and an escape route (a strictly larger class or richer observation to which the
+obstruction does not apply). We are careful to distinguish a genuine obstruction from the
+non-results the program excludes: another RH-equivalence; a finite failure of one sufficient
+inequality; a positive margin tending to zero; or a synthetic configuration outside the
+ambient class.
+
+\subsection{Relation to prior work}
+That finite real-zero data cannot certify an infinite positivity criterion is folklore, and
+finite-Li limitations were noted by Bombieri--Lagarias \cite{BombieriLagarias1999}. Our
+contribution is (i) to make the obstruction \emph{exact}---zero tolerance and integer
+multiplicities (Theorem~\ref{thm:B2})---in a precisely defined ambient class with an explicit
+escape-route list; (ii) to prove the companion \emph{no uniform margin} statement
+(Theorem~\ref{thm:B1}) that keeps the result clear of the ``margin $\to 0$'' non-barrier; and
+(iii) to give the analogous archimedean-level obstruction (Theorem~\ref{thm:Ginfo}) for the
+diagonal Fredholm-determinant approach in the sense of Connes--Consani--Moscovici
+\cite{CCM2025}.
+
+\section{Setup}\label{sec:setup}
+
+\begin{definition}[Ambient class]
+$\Xsym$ is the set of locally finite multisets $\mathcal{Z}$ of points in the open critical
+strip $\{0<\operatorname{Re} s<1\}$, symmetric under $\rho\mapsto\bar\rho$ and $\rho\mapsto 1-\rho$, with a
+fixed admissibility exponent: $\sum_{\rho\in\mathcal Z}|\rho|^{-(1+\varepsilon)}<\infty$ for
+some $\varepsilon>0$. Membership is checkable, and any finite symmetric multiset is a member.
+\end{definition}
+
+\begin{definition}[Target predicate]
+$P(\mathcal Z)=1$ iff every atom $\rho\in\mathcal Z$ has $\operatorname{Re}\rho=\tfrac12$; else
+$P(\mathcal Z)=0$.
+\end{definition}
+
+\paragraph{Test families.} We use three interchangeable families:
+Li-type $\varphi_j(\rho)=1-(1-1/\rho)^j$; Weil--W2 $\varphi_j(\rho)=\hhat_j(\operatorname{Im}\rho)$ with
+$h_j\in C_c^\infty(\mathbb R;\mathbb R)$ even and
+$\hhat_j(\xi)=\int h_j(x)e^{i\xi x}\,dx$ (evaluation at the imaginary part only---complex-point
+Weil evaluation is excluded, as $\hhat$ has exponential type and need not decay); and moment
+$\varphi_j(\rho)=\rho^{-j}$, $j\ge 1$.
+
+\paragraph{Observation maps and the $\Sigma'$ convention.} The two finite-observation theorems
+use \emph{different} summation conventions, differing by a factor of $2$; a numerical anchor
+must not be transported between them.
+\begin{itemize}
+  \item \textbf{B1 (R-atom):} $O_j(\mathcal Z)=\sum'_{\rho\in\mathcal Z}\varphi_j(\rho)$---each
+  atom once, the prime a symmetric-height regularization for convergence, \emph{not} doubling.
+  \item \textbf{B2 (R-symm):} $O_j(\mathcal Z)=\sum_{\rho\in\mathcal
+  Z}[\varphi_j(\rho)+\varphi_j(1-\rho)]$---which doubles on a multiset closed under
+  $\rho\mapsto 1-\rho$.
+\end{itemize}
+Both give $O_j\in\mathbb R$ for the real-coefficient families. B2's collision identity is
+scale-invariant (\S\ref{sec:B2}), so the factor is harmless there; B1's decay anchors are
+stated in the R-atom convention and are \emph{not} the R-symm values.
+
+\paragraph{Off-line quartet.} For $\sigma_0\in(0,1)\setminus\{\tfrac12\}$ and $T>0$,
+$Q(\sigma_0,T):=\{\sigma_0+iT,\,1-\sigma_0+iT,\,\sigma_0-iT,\,1-\sigma_0-iT\}$, a symmetric
+member of $\Xsym$ with $P(Q)=0$. We fix $\sigma_0=\tfrac34$ throughout.
+
+\section{Theorem B1 --- no uniform separation margin}\label{sec:B1}
+
+\begin{theorem}\label{thm:B1}
+Let $\Phi=(\varphi_1,\dots,\varphi_m)$ be any finite test family of the above types, let
+$\Zp\in\Xsym$ with $P(\Zp)=1$ satisfy strict inequalities $(O_\Phi(\Zp))_j>c_j$
+($j=1,\dots,m$), and let $\varepsilon_j>0$. Then there exists $\Zm\in\Xsym$ with $P(\Zm)=0$ and
+$|(O_\Phi(\Zm))_j-(O_\Phi(\Zp))_j|<\varepsilon_j$ for all $j$; in particular
+$(O_\Phi(\Zm))_j>c_j$ whenever $\varepsilon_j<(O_\Phi(\Zp))_j-c_j$. Consequently the infimum,
+over admissible constructions, of the coordinatewise observation gap between the $P=1$ and
+$P=0$ classes is $0$: no fixed positive coordinate margin separates the two classes.
+\end{theorem}
+
+\noindent($\Zp$ ranges over abstract $P=1$ members---e.g.\ explicit finite on-line multisets.
+The instantiation ``$\Zp=$ the $\zeta$ zero multiset'' is conditional on RH and is not used.)
+
+\begin{lemma}[Off-line quartet]\label{lem:B1}
+For $\varphi$ of any of the three types and $\sigma_0\in(0,1)\setminus\{\tfrac12\}$, the
+quartet contribution
+$\delta_j(T):=\varphi_j(\sigma_0+iT)+\varphi_j(1-\sigma_0+iT)+\varphi_j(\sigma_0-iT)+\varphi_j(1-\sigma_0-iT)$
+is continuous in $T>0$ and $\delta_j(T)\to 0$ as $T\to\infty$.
+\end{lemma}
+\begin{proof}
+\emph{Li-type:} $|1/\rho|\le(T^2+\sigma_0^2)^{-1/2}\to 0$, so $\varphi_j(\sigma_0\pm iT)\to 0$
+and likewise for $1-\sigma_0\pm iT$. \emph{Weil--W2:} $h_j\in C_c^\infty$ gives, by $N$-fold
+integration by parts, $|\hhat_j(T)|\le C_N(1+|T|)^{-N}$; with $h_j$ even,
+$\delta_j(T)=4\hhat_j(T)\to 0$ (Riemann--Lebesgue, \cite[Thm.~9.6]{Rudin1987}).
+\emph{Moment:} $|\varphi_j(\rho)|=|\rho|^{-k}=O(T^{-k})\to 0$. Continuity is immediate from
+continuity of $\varphi_j$ in $\rho$ and of the quartet points in $T$.
+\end{proof}
+
+\begin{remark}[Convergence of $\Sigma'$, R-atom]
+The Li terms are only $O(|\rho|^{-1})$, not dominated by the admissibility series
+$\sum|\rho|^{-(1+\eta)}$. Grouping each $\rho=\sigma+it$ with its conjugate, the
+real-coefficient pair contributes $2\operatorname{Re}\varphi_j$; the leading term gives
+$2\operatorname{Re}(1/\rho)=2\sigma/(\sigma^2+t^2)=O(|\operatorname{Im}\rho|^{-2})$, and every higher inverse power is also
+$O(|\operatorname{Im}\rho|^{-2})$; since $1+\eta<2$, the grouped sum converges absolutely.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:B1}]
+By Lemma~\ref{lem:B1} choose $T_*$ so large that $|\delta_j(T_*)|<\varepsilon_j$ for all
+$j=1,\dots,m$ (possible since $m$ is finite). Set $\Zm:=\Zp\cup Q(\tfrac34,T_*)$. Then
+$\Zm\in\Xsym$ (union of admissible members); $P(\Zm)=0$ (the atoms $\tfrac34\pm iT_*$ are
+off-line); and $|(O_\Phi(\Zm))_j-(O_\Phi(\Zp))_j|=|\delta_j(T_*)|<\varepsilon_j$.
+\end{proof}
+
+\subsection{Precise strength}
+Theorem~\ref{thm:B1} asserts that the observation-gap \emph{infimum} between the classes is
+$0$---there is no positive uniform margin. It does \emph{not} assert an exact-discriminator
+failure at fixed inputs; distinguishing the two classes by an exact discontinuous rule on
+precise real inputs is not excluded by B1 (that is B2's job). The quartet contribution is
+strictly positive for each finite $T$ (e.g.\
+$\delta_1(T)=2[\sigma/(\sigma^2+T^2)+(1-\sigma)/((1-\sigma)^2+T^2)]>0$ for the Li first
+coordinate), so this is a statement about the observation-separation infimum, \emph{not} a
+shrinking positivity margin of a sufficient inequality---keeping B1 clear of the
+``margin $\to 0$'' non-barrier. In the R-atom convention the exact decay anchors are
+$\delta_1(1)=\tfrac{608}{425}$, threshold $T_*=90$ (for $\sigma_0=\tfrac34$, $m=2$,
+$\varepsilon=10^{-3}$), and $\delta_j(T)\cdot T^2\to 2j^2$; these are independently
+machine-checked (Appendix~\ref{app:checkers}).
+
+\section{Theorem B2 --- exact observation collision}\label{sec:B2}
+
+\begin{theorem}\label{thm:B2}
+For any finite test family $\Phi=(\varphi_1,\dots,\varphi_m)$ of Li or moment type there exist
+$\Zp,\Zm\in\Xsym$ with $P(\Zp)=1$, $P(\Zm)=0$, all multiplicities integers, and
+$O_\Phi(\Zp)=O_\Phi(\Zm)$ exactly. Here $\Zp$ consists of on-line pairs and $\Zm$ differs by
+adding an off-line quartet and adjusting on-line multiplicities.
+\end{theorem}
+
+We use the R-symm convention, additive under multiset union; on one on-line pair
+$L(t)=\{\tfrac12\pm it\}$ it gives $O_j(L(t))=4\operatorname{Re}\varphi_j(\tfrac12+it)$, and on the quartet
+$O_j(Q(\tfrac34,T))=4\operatorname{Re}[\varphi_j(\tfrac34+iT)+\varphi_j(\tfrac14+iT)]$.
+
+\subsection{Nonsingular Jacobian (self-contained Vandermonde)}
+Fix distinct rational heights $t_1<\dots<t_m>0$. For the Li family, with
+$x_k=(4t_k^2-1)/(4t_k^2+1)\in\mathbb Q$ and Chebyshev $T_j$,
+\[
+  C_{jk}:=O_j(L(t_k))=4\bigl(1-T_j(x_k)\bigr),\qquad j,k=1,\dots,m.
+\]
+Writing $1-T_j(x)=(1-x)Q_{j-1}(x)$ with $\deg Q_{j-1}=j-1$ and leading coefficient $2^{j-1}$,
+the matrix $[Q_{j-1}(x_k)]$ equals $U\cdot V(x_1,\dots,x_m)$ for an upper-triangular $U$
+(Chebyshev-to-monomial change of basis) and the Vandermonde $V$. Hence
+\[
+  \det C = 4^m\Bigl(\textstyle\prod_k(1-x_k)\Bigr)\,2^{m(m-1)/2}\!\!\prod_{k<l}(x_l-x_k)\neq 0,
+\]
+all factors nonzero ($1-x_k>0$; the $x_k$ distinct and increasing). For rational $t_k$,
+$x_k\in\mathbb Q$, so $C\in\mathbb Q^{m\times m}$ and $\det C\in\mathbb Q\setminus\{0\}$. (The
+moment family gives the analogous cosine-Vandermonde $[\cos(j\phi_k)]$, nonsingular by the same
+reduction.)
+
+\subsection{Exact collision with integer multiplicities}
+Let $d(T)_j:=O_j(Q(\tfrac34,T))\in\mathbb Q^m$ (rational for rational $T$) and solve
+$C\alpha^{\mathbb Q}=-d(T)$, $\alpha^{\mathbb Q}\in\mathbb Q^m$. Put
+$R:=\operatorname{lcm}(\text{denominators of }\alpha^{\mathbb Q})$ and
+$n_k:=R\,\alpha^{\mathbb Q}_k\in\mathbb Z$. Scaling by $R$ gives the exact integer identity
+\[
+  C\,n + R\,d(T)=0.
+\]
+This identity is scale-invariant ($C\to 2C$, $d\to 2d$ leaves $n,R$ and the identity
+unchanged), so the R-symm-vs-R-atom factor is immaterial here. Set the multiplicity buffer
+$M:=\max_k|n_k|$ and define
+\[
+  \Zp:=\bigsqcup_{k=1}^m M\cdot L(t_k),\qquad
+  \Zm:=\bigsqcup_{k=1}^m (M+n_k)\cdot L(t_k)\;\sqcup\; R\cdot Q(\tfrac34,T).
+\]
+Both are in $\Xsym$; $M+n_k\ge 0$ so $\Zm$ is a valid multiset; $P(\Zp)=1$, $P(\Zm)=0$. Since
+$O_\Phi$ is additive,
+\[
+  O_j(\Zm)-O_j(\Zp)=\sum_k n_k\,O_j(L(t_k))+R\,O_j(Q(\tfrac34,T))=(C\,n)_j+R\,d(T)_j=0. \qedhere
+\]
+
+\subsection{Non-vacuity and scope}
+Both adversaries are \emph{constructed} finite members of $\Xsym$; B2 does \emph{not} assert
+that $\zeta$'s zeros are indistinguishable from an off-line configuration. A structural
+non-vacuity check---the quartet's first coordinate
+$d_1(T)=64(16T^2+3)/(256T^4+160T^2+9)>0$ for all real $T$---confirms the target vector is
+nonzero, so the solve is nontrivial. The exact-rational collision has been independently
+reconstructed from the definition (two agreeing routes, adversarial mutation guard);
+Appendix~\ref{app:checkers}.
+
+\section{Theorem G-info --- diagonal Fredholm obstruction}\label{sec:Ginfo}
+
+We pass one observation layer up, to the archimedean levels used in
+Connes--Consani--Moscovici-style spectral-determinant approaches \cite{CCM2025}.
+
+\paragraph{Observation.} $O_\theta(n)=d_n:=\theta_{\mathrm{level}}(n)$, the zero-free
+Riemann--Siegel unfolding levels
+($\theta(t)=\operatorname{Im}\log\Gamma(\tfrac14+\tfrac{it}{2})-\tfrac{t}{2}\log\pi$), determined by the
+$\Gamma$-function alone.
+\paragraph{Method class.} $\Md_d^{\mathrm{tr}}$: finite-rank positive semidefinite families
+$(K_N)$ with $K_N=\Phi_N(d_1,\dots,d_N)$ and $\|K_N-D_N\|_1\to 0$, where
+$D_N=\operatorname{diag}(\kappa_1,\dots,\kappa_N)$, $\kappa_n=1/(\tfrac14+d_n^2)$. Non-empty
+(witness $K_N=D_N$).
+\paragraph{Target.} The predicate is ``the locally uniform limit of $\det(I-z^2K_N)$ equals
+$\Xihat$'', the entire CCM target (normalized $\Xihat(0)=1$), whose zeros are real iff RH holds.
+
+\begin{theorem}\label{thm:Ginfo}
+For every $(K_N)\in\Md_d^{\mathrm{tr}}$,
+\[
+  \det(I-z^2K_N)\;\longrightarrow\;G_d(z)=\prod_{n\ge 1}\Bigl(1-\frac{z^2}{\tfrac14+d_n^2}\Bigr)
+\]
+locally uniformly, and $G_d\neq\Xihat$ unconditionally.
+\end{theorem}
+\begin{proof}
+Locally uniform convergence follows from trace-norm stability of Fredholm determinants and
+$\|K_N-D_N\|_1\to 0$. For $G_d\neq\Xihat$: if RH holds, $\Xihat=C\prod(1-z^2/\gamma_n^2)$ has
+zeros $\{\pm\gamma_n\}$, while $G_d$ has zeros $\{\pm\sqrt{\tfrac14+d_n^2}\}$; these differ
+because $\sqrt{\tfrac14+d_n^2}>d_n$ and $d_n\neq\gamma_n$ for infinitely many $n$ (the
+arithmetic-fluctuation gap $\gamma_n-d_n\sim S(\gamma_n)/A'(\gamma_n)$, $A'(t)=\theta'(t)/\pi$;
+proved unconditionally). If RH fails, $\Xihat$ has a non-real zero while every zero of $G_d$ is
+real. Either way $G_d\neq\Xihat$.
+\end{proof}
+
+Two independent separations are visible: (i) a spectral-parameter shift
+$d_n\mapsto\sqrt{\tfrac14+d_n^2}$ (the diagonal determinant's zeros are not at $\pm d_n$), and
+(ii) the $S(T)$ gap $\{d_n\}\neq\{\gamma_n\}$; the first survives even if one corrects the
+$\tfrac14$ shift.
+
+\paragraph{Scope: G-info vs.\ G-hard.} Theorem~\ref{thm:Ginfo} is the diagonal obstruction.
+The general claim ``no method in the larger class $\Md_{\mathrm{FC}}$ can supply the $S(T)$
+data without reading zero ordinates or computing an RH-equivalent quantity'' is a separate
+\emph{conjecture} (G-hard) and is \emph{not} claimed here.
+
+\paragraph{Why convergence would be RH-strength.} If some $(K_N)$ in the class had
+$\det(I-z^2K_N)\to\Xihat$ locally uniformly, then by Hurwitz the real zeros of the approximants
+would force $\Xihat$ to have all real zeros---i.e.\ RH. So a convergence claim in this class
+cannot be a zero-independent input; it would \emph{imply} RH. Theorem~\ref{thm:Ginfo} shows the
+diagonal limit is a different function, $G_d$, so the approach does not even converge to the
+target.
+
+\section{Escape routes}\label{sec:escape}
+Each theorem names a strictly larger class or richer observation to which it does \emph{not}
+apply:
+\begin{enumerate}
+  \item Infinite test hierarchy ($K\to\infty$, all Li/Weil data).
+  \item Euler product / multiplicative structure (Selberg-class axioms).
+  \item Gamma factor and analytic continuation---archimedean data beyond $O_\Phi$.
+  \item Coefficient arithmetic (integrality/positivity of Dirichlet coefficients).
+  \item For G-info: methods supplying genuine $S(T)$ data (the G-hard frontier), or
+  non-diagonal $K_N$ outside $\Md_d^{\mathrm{tr}}$.
+\end{enumerate}
+
+\section{Limitations and honest boundaries}\label{sec:limits}
+\begin{itemize}
+  \item \textbf{Not RH.} No theorem here proves, disproves, or approaches RH; RH is neither
+  assumed nor concluded. B1/B2 construct adversary multisets, not $\zeta$; G-info's
+  $\mathcal Z_{\mathrm{RH}}$ appears only as a hypothetical target and its reality is never
+  used.
+  \item B1 is ``no uniform margin'', not an exact-discriminator failure (\S\ref{sec:B1}).
+  \item B2's adversaries are constructed, not $\zeta$'s zeros (\S\ref{sec:B2}).
+  \item G-info is the diagonal obstruction only; G-hard is a conjecture (\S\ref{sec:Ginfo}).
+  \item Finite certificates validate finite statements, not the analytic theorems.
+\end{itemize}
+
+\appendix
+\section{Deposited independent checkers}\label{app:checkers}
+All are pure-standard-library, exact-rational or outward-rounded interval, with no floating
+point in the certificate path; each re-runs to \texttt{ALL\_CERTIFIED\_CHECKS\_PASSED} and is
+pinned by SHA-256.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Checker & Theorem & SHA-256 (prefix) \\
+\hline
+\texttt{b1\_ratom\_certified\_checker.py} & B1 & \texttt{199c7dad}\\
+\texttt{b2\_certified\_checker.py} & B2 & \texttt{776eeab5}\\
+\texttt{diagonal\_fredholm\_interval\_replay.py} & G-info & \texttt{e197f2bb}\\
+\hline
+\end{tabular}
+\end{center}
+\noindent They validate, respectively: the R-atom decay
+($\delta_1(1)=\tfrac{608}{425}$, $T_*=90$, $\delta_jT^2\to 2j^2$); the exact collision
+$C\,n+R\,d=0$ via two agreeing routes with an adversarial mutation guard; and the Gram levels
+$d_n$ with the separation $\gamma_n<d_n<\sqrt{\tfrac14+d_n^2}$ and the tail bound. A finite
+certificate validates only the finite replayed statement, never the analytic theorem.
+
+\begin{thebibliography}{9}
+\bibitem{BerryKeating1999} M.~V. Berry and J.~P. Keating, \emph{$H=xp$ and the Riemann zeros},
+  SIAM Review \textbf{41} (1999), 236--266.
+\bibitem{Bombieri2000} E.~Bombieri, \emph{The Riemann Hypothesis}, Clay Mathematics Institute
+  problem description, 2000.
+\bibitem{BombieriLagarias1999} E.~Bombieri and J.~C. Lagarias, \emph{Complements to Li's
+  criterion for the Riemann Hypothesis}, J.~Number Theory \textbf{77} (1999), 274--287.
+\bibitem{CCM2025} A.~Connes, C.~Consani, and H.~Moscovici, \emph{Zeta spectral triples},
+  arXiv:2511.22755 (2025).
+\bibitem{Connes1999} A.~Connes, \emph{Trace formula in noncommutative geometry and the zeros of
+  the Riemann zeta function}, Selecta Math. \textbf{5} (1999), 29--106.
+\bibitem{Li1997} X.-J. Li, \emph{The positivity of a sequence of numbers and the Riemann
+  Hypothesis}, J.~Number Theory \textbf{65} (1997), 325--333.
+\bibitem{Rudin1987} W.~Rudin, \emph{Real and Complex Analysis}, 3rd ed., McGraw-Hill, 1987.
+\bibitem{Weil1952} A.~Weil, \emph{Sur les ``formules explicites'' de la th\'eorie des nombres
+  premiers}, Comm. S\'em. Math. Univ. Lund (1952), 252--265.
+\end{thebibliography}
+
+\end{document}
