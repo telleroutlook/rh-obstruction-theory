@@ -134,18 +134,50 @@ All four results are unconditional; none assumes RH.
 
 \subsection*{Comparison with prior work}
 
-Li's criterion is an RH-equivalence, not a barrier: it \emph{locates} the
-difficulty but does not establish a proof-method limitation.  The results here
-are distinct from it in kind.  The closest analogues in complexity theory are
-the Razborov--Rudich barrier for circuit lower bounds~\cite{RazborovRudich1997}
-and the relativization barriers of Baker--Gill--Solovay~\cite{BakerGillSolovay1975}.
+\textbf{Li's criterion and reformulations.}
+Li's criterion~\cite{Li1997} asserts RH is equivalent to $\lambda_n \geq 0$
+for all $n$; Bombieri--Lagarias~\cite{BombieriLagarias1999} gave an equivalent
+formulation in terms of explicit-formula positivity.  These are RH-\emph{equivalences},
+not barriers: they locate difficulty but do not block proof methods.
+The distinction is categorical: an equivalence $C \Leftrightarrow \mathrm{RH}$
+says the problem is hard; our results say a \emph{specific approach to that problem}
+cannot work.
 
-Within the analytic number theory literature, Connes' work on the Weil explicit
-formula~\cite{ConnesWeilFF1999} and the spectral interpretation of the Selberg
-trace formula suggest that a successful RH proof must use deep arithmetic
-structure.  Our results quantify one concrete aspect of this: \emph{finite
-finite-orbit observations of the zero set} are insufficient, and Li and counting
-measurements capture orthogonal information.
+\textbf{Weil explicit formula and positivity.}
+The Weil explicit formula expresses sums over zeros as sums over primes plus
+archimedean contributions; positivity of these sums for all test functions would
+imply RH.  Connes~\cite{ConnesWeilFF1999} interpreted this as a spectral
+absorption problem on an adelic space, and Bombieri~\cite{Bombieri2000} reformulated
+it as a positivity problem on $L^2$ spaces over the primes.  These approaches
+use \emph{all} test functions simultaneously; our results apply precisely when only
+a \emph{finite} family is used.
+
+\textbf{Selberg trace formula and spectral methods.}
+The Selberg trace formula connects eigenvalues of the Laplacian on hyperbolic
+surfaces to geodesic lengths, and analogies with the Riemann zeta function
+have been studied extensively (see Hejhal~\cite{Hejhal1976}).
+Connes--Consani--Moscovici~\cite{CCM2025} construct zeta spectral triples
+whose Dirac-operator regularized determinant encodes $\hat{\xi}(z)$; the
+open step is a normalization condition on those determinants.
+
+\textbf{Helson class and Dirichlet series.}
+Helson~\cite{Helson1969} introduced random Dirichlet series with unimodular
+coefficients; their zero distribution was studied by Seip~\cite{Seip2020} and
+Bochkov--Romanov~\cite{BochkovRomanov2022}.  Andersson~\cite{Andersson2024}
+proved that prescribed zeros in the critical strip can be realized by Helson
+zeta functions; Corollary~C of this paper makes the finite-Euler-factor
+limitation explicit as an information obstruction.
+
+\textbf{Complexity-theoretic analogues.}
+The closest formal analogues of our results in complexity theory are the
+Razborov--Rudich natural proofs barrier~\cite{RazborovRudich1997}
+(any ``natural'' proof technique for circuit lower bounds actually diagonalizes
+against itself) and the relativization barrier~\cite{BakerGillSolovay1975}.
+Our information-obstruction framework is a direct adaptation of the
+Razborov--Rudich structure: we identify a class of proof methods
+(those using only $\Ofinite^{(K)}$ or only $\Otheta$), construct explicit
+adversarial witnesses, and conclude that the class cannot decide the target
+predicate.
 
 Theorem~C is a corollary of Andersson~\cite{Andersson2024}; we record it here
 for completeness and to make the Euler-factor limitation explicit in the
@@ -420,18 +452,51 @@ $d(T) \neq 0$ (which holds because $d_1(T) > 0$ by Lemma~\ref{lem:d1pos}, so
 $d(T) \neq 0$, hence $\beta = -C^{-1}d(T) \neq 0$, hence $R \geq 1$).
 \end{proof}
 
-\subsection{Numerical illustration}
+\subsection{Numerical illustration ($m=2$, exact rational arithmetic)}
 
-For $m = 2$, $t_1 = 1$, $t_2 = 2$, $T = 1$, the explicit R-symm matrix and
-vector are (from exact rational arithmetic):
+We exhibit the complete collision for $m=2$ with parameters
+$t_1=1$, $t_2=2$, $T=3$, $\sigma_0=\frac{3}{4}$.
+
+\textbf{Chebyshev nodes.}
+$x_k = (4t_k^2-1)/(4t_k^2+1)$:
 \[
-  C = \begin{pmatrix} 4(1-\cos\theta_1) & 4(1-\cos\theta_2) \\
-                      4(1-\cos 2\theta_1) & 4(1-\cos 2\theta_2) \end{pmatrix},
+  x_1 = \tfrac{3}{5}, \qquad x_2 = \tfrac{15}{17}.
 \]
-where $\theta_k = 2\arctan(2t_k) - \pi$.  The solution gives a rational
-$\beta$ with $Cn + Rd(T) = 0$ exactly; independent exact-rational reconstruction
-(Python \texttt{fractions.Fraction}, SHA-256 pinned) confirms zero residual for
-both $m=2$ and $m=3$ instances.
+
+\textbf{Collision matrix.}  $C_{jk} = 4(1-T_j(x_k))$, where
+$T_1(x)=x$, $T_2(x)=2x^2-1$:
+\[
+  C = \begin{pmatrix} \tfrac{8}{5} & \tfrac{8}{17} \\[4pt]
+                      \tfrac{128}{25} & \tfrac{512}{289} \end{pmatrix},
+  \qquad \det C = \tfrac{3072}{7225} \neq 0.
+\]
+
+\textbf{Quartet tail.}  $d_j = \Li_j(Q(3/4, 3))$ via \eqref{eq:Lioffl}:
+\[
+  d_1 = \tfrac{3136}{7395}, \qquad d_2 = \tfrac{10041088}{6076225}.
+\]
+
+\textbf{Rational solution.}  $\beta = -C^{-1}d$:
+\[
+  \beta_1 = \tfrac{7978}{128673}, \qquad \beta_2 = -\tfrac{42082}{37845}.
+\]
+Clearing denominators: $R = \mathrm{lcm}(128673,\, 37845) = 643365$, giving
+\[
+  n_1 = R\beta_1 = 39890, \qquad n_2 = R\beta_2 = -715394.
+\]
+Buffer: $M = 715394$, so $M+n_1 = 755284 \geq 0$ and $M+n_2 = 0 \geq 0$.
+
+\textbf{Exact zero residual} (verified by Python \texttt{fractions.Fraction}):
+\[
+  C_{j1}n_1 + C_{j2}n_2 + R\,d_j = 0 \quad \text{for } j=1,2.
+\]
+
+\textbf{The collision pair.}  $\mathcal{Z}_+$ contains $M = 715394$ copies of
+$L(1)$ and $L(2)$; $\mathcal{Z}_-$ contains $755284$ copies of $L(1)$,
+$0$ copies of $L(2)$, and $R = 643365$ copies of $Q(3/4, 3)$.
+Both are in $\Hsym$ with nonneg integer multiplicities;
+$\Li_j(\mathcal{Z}_+) = \Li_j(\mathcal{Z}_-)$ exactly for $j=1,2$;
+and $P(\mathcal{Z}_+) = 1$, $P(\mathcal{Z}_-) = 0$.
 
 %%--------------------------------------------------------------------
 \section{No uniform Li separation (Theorem B1)}
@@ -743,11 +808,41 @@ T.~Baker, J.~Gill, and R.~Solovay,
 \emph{Relativizations of the $P=?NP$ question},
 SIAM J. Comput.~\textbf{4} (1975), no.~4, 431--442.
 
+\bibitem{BochkovRomanov2022}
+I.~Bochkov and A.~Romanov,
+\emph{The Helson zeta function},
+St. Petersburg Math. J.~\textbf{33} (2022), no.~5, 755--768.
+
+\bibitem{Bombieri2000}
+E.~Bombieri,
+\emph{Remarks on Weil's quadratic functional in the theory of prime numbers I},
+Rend. Mat. Accad. Lincei (9)~\textbf{11} (2000), 183--233.
+
+\bibitem{BombieriLagarias1999}
+E.~Bombieri and J.~C.~Lagarias,
+\emph{Complements to Li's criterion for the Riemann hypothesis},
+J. Number Theory~\textbf{77} (1999), 274--287.
+
+\bibitem{CCM2025}
+A.~Connes, C.~Consani, and H.~Moscovici,
+\emph{Zeta spectral triples},
+arXiv:2511.22755, 2025.
+
 \bibitem{ConnesWeilFF1999}
 A.~Connes,
 \emph{Trace formula in noncommutative geometry and the zeros of the Riemann
 zeta function},
 Selecta Math. (N.S.)~\textbf{5} (1999), no.~1, 29--106.
+
+\bibitem{Helson1969}
+H.~Helson,
+\emph{Compact groups and Dirichlet series},
+Ark. Mat.~\textbf{8} (1969), 139--143.
+
+\bibitem{Hejhal1976}
+D.~A.~Hejhal,
+\emph{The Selberg Trace Formula for $\mathrm{PSL}(2,\mathbb{R})$}, Vol.~1,
+Lecture Notes in Math.~548, Springer, Berlin, 1976.
 
 \bibitem{Li1997}
 X.-J.~Li,
@@ -763,6 +858,11 @@ J. Number Theory~\textbf{65} (1997), 325--333.
 A.~Razborov and S.~Rudich,
 \emph{Natural proofs},
 J. Comput. System Sci.~\textbf{55} (1997), no.~1, 24--35.
+
+\bibitem{Seip2020}
+K.~Seip,
+\emph{Helson's problem for sums of a random multiplicative function},
+Mathematika~\textbf{66} (2020), 511--543.
 
 \bibitem{Suzuki2013}
 M.~Suzuki,
