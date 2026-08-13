@@ -35,24 +35,37 @@ dependencies:
 
   - id: LEADING-SINGULARITY-COVERS-SUBPRINCIPAL-LOGPOLY
     statement: >
-      For H in the NARROWED class C_logpoly^{sub,ell} (H=H*>=-C on a closed manifold, compact
-      resolvent, uniformly positive-definite CLASSICAL ELLIPTIC principal symbol h_m, with
-      finite log terms only at strictly LOWER order j>=1), the Weyl principal term is fixed by
-      h_m alone, so the leading heat-trace singularity is a positive-coefficient pure power
-      t^{-d/m} (Karamata); subleading logs may occur. The genuine escape class (leading
-      t^{-1}log(1/t)) is the log-WEIGHTED S^{1,-1} (|xi|/log|xi|-type) class, N_H~cT log T,
-      inside Hormander S^1_{1,0} but outside C_ell and C_logpoly^{sub,ell}.
-    source: "OB-16 + OB-31 external review (statement.md §0/§4)."
-    mathematical: PROOF-DRAFT
+      For H in the NARROWED class C_logpoly^{sub,ell} (scalar, self-adjoint closure in
+      L^2(M,dmu), closed d-manifold, H>=-C, compact resolvent, uniformly positive classical
+      elliptic principal symbol h_m >= c|xi|^m, finite log terms only at strictly LOWER order
+      j>=1 with standard S^{m-J+eps}_{1,0} remainder estimates), the Weyl principal term is
+      fixed by h_m alone via a classical comparison / min-max argument (Hormander 1968 Thm 4.4
+      + p.215 reduction), so N_H(Lambda) ~ C_H Lambda^{d/m}; shifted Karamata (BGT Thm 1.7.1)
+      then gives Z_H(t) ~ Gamma(d/m+1) C_H t^{-d/m} -- a pure power, no leading log.
+      Comparison with Z_zeta(t) ~ (1/2pi) t^{-1} log(1/t) (Titchmarsh-Heath-Brown Thm 9.4 +
+      BGT) excludes spec(H) = {gamma_n} as multisets for any H in this class.
+    source: >
+      OB-33 external review 2026-08-13 (GATE-A CONDITIONAL, M1-M9 integrated).
+      Comparison proof: Hormander (1968) Acta Math. 121, Theorem 4.4 + p.215 classical
+      complex-power reduction; Bingham-Goldie-Teugels (1987) Thm 1.7.1 (Karamata);
+      Titchmarsh-Heath-Brown (1986) Thm 9.4 (RvM, unconditional).
+    mathematical: INDEPENDENTLY-CHECKED
     computational: NONE
-    usable_as_premise: false
-    gate_a_status: PENDING
+    usable_as_premise: true
+    gate_a_status: INDEPENDENTLY-CHECKED
+    gate_a_note: >
+      OB-33 GATE-A CONDITIONAL, 2026-08-13. Referee confirmed: (1) sub-principal logs are
+      o(|xi|^m) and do not enter Weyl term; (2) comparison/min-max proof correct;
+      (3) shifted Karamata correct; (4) T^4 non-elliptic counterexample confirmed (pi^2
+      coefficient); (5) no RH input. M1-M9 edits integrated into proof.md and statement.md.
+      Claim: ellipticity is sufficient (not iff) for C_H finite.
     role: >
-      NARROWED escape-class identification (renamed from LEADING-SINGULARITY-COVERS-LOGPOLY
-      after OB-31 BLOCKED its universal C_logpoly form). Claim A over the FULL finite-log-degree
-      C_logpoly is FALSE (non-elliptic counterexample H=(I-Delta_x)(I-Delta_y) on T^4 has
-      leading log). Stays PENDING; may advance only for the sub,ell narrowed class after
-      re-review. The exact 2pi*n/log(n+e) model is REFUTED (count-N_zeta ~ T log log T).
+      NARROWED leading-singularity lemma (renamed from LEADING-SINGULARITY-COVERS-LOGPOLY
+      after OB-31 BLOCKED its universal C_logpoly form). The full C_logpoly universal claim
+      is FALSE (non-elliptic H=(I-Delta_x)(I-Delta_y) on T^4 has leading log). The narrowed
+      C_logpoly^{sub,ell} lemma now INDEPENDENTLY-CHECKED (OB-33). The genuine escape class
+      (leading t^{-1}log(1/t)) is the log-WEIGHTED S^{1,-1} (|xi|/log|xi|-type) class; the
+      exact 2pi*n/log(n+e) model is REFUTED (count-N_zeta ~ T log log T).
 
   - id: SEELEY-DEWITT-EXPANSION
     statement: >

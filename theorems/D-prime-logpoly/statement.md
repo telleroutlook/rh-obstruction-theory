@@ -10,7 +10,7 @@ positive, self-adjoint, classical (log-degree 0), non-elliptic, with `N_H(Λ)~π
 `Z_H(t)~π²t⁻¹log(1/t)` — a **leading log**. The `S¹` witness is correct but does not prove
 the universal claim. Survives (narrowed): `𝒞_logpoly^{sub,ell}` (positive **elliptic**
 classical principal symbol + strictly-lower-order finite log) — see §0. Claims B/C/D-analytic/E
-CONFIRMED (D's numerical anchors corrected). `LEADING-SINGULARITY-COVERS-LOGPOLY` stays PENDING.
+CONFIRMED (D's numerical anchors corrected). `LEADING-SINGULARITY-COVERS-SUBPRINCIPAL-LOGPOLY` advances PENDING → **INDEPENDENTLY-CHECKED** (OB-33 GATE-A CONDITIONAL → integrated 2026-08-13, M1–M9).
 
 ---
 
@@ -23,16 +23,20 @@ universal form**:
   "order-`m` ΨDO, finite log-degree symbol" — no ellipticity, positivity of the *principal*
   symbol, or compact-resolvent guarantee. Counterexample: `H=(I−Δ_x)(I−Δ_y)` on `𝕋⁴`
   (`−Δ≥0`), a positive self-adjoint classical 4th-order **differential** operator (log-degree
-  0) that is **not** 4th-order elliptic (principal symbol `|ξ_x|²|ξ_y|²` vanishes off the
-  axes). Its spectrum `(1+|p|²)(1+|q|²)` gives `N_H(Λ)=π²Λ log Λ+O(Λ)` and (Karamata)
-  `Z_H(t)~π²t⁻¹log(1/t)` — a leading log, contradicting the predicted pure power `t^{-d/m}=t⁻¹`.
-  So finite log-degree does **not** force a pure-power leading term, and `𝒞_logpoly` (as
-  defined) is **not** shown to be covered by D. Also refuted: "logs only at `t^k`, `k≥0`"
+  0) that is **not** 4th-order elliptic (principal symbol `|ξ_x|²|ξ_y|²` vanishes on the
+  coordinate subspaces `{ξ_x=0}∪{ξ_y=0}`). Its spectrum `(1+|p|²)(1+|q|²)` gives
+  `N_H(Λ)=π²Λ log Λ+O(Λ)` and (Karamata) `Z_H(t)~π²t⁻¹log(1/t)` — a leading log,
+  contradicting the predicted pure power `t^{-d/m}=t⁻¹`. So finite log-degree does **not**
+  force a pure-power leading term, and `𝒞_logpoly` (as defined) is **not** shown to be covered
+  by D. Ellipticity is a **sufficient** condition here (it guarantees `0 < C_H < ∞`); the
+  non-elliptic example shows the universal claim fails without it, but does **not** assert
+  that every non-elliptic operator has a leading log. Also refuted: "logs only at `t^k`, `k≥0`"
   (a `𝕋³` sub-principal-log example gives a subleading `t⁻¹log(1/t)`); and Lesch `CL^{m,k}`
   explicitly permits a *top-order* log.
 - **Withdrawn:** the universal Claim A over the full finite-log-degree `𝒞_logpoly`, and the
-  status "`LEADING-SINGULARITY-COVERS-LOGPOLY` may advance". It stays **PENDING** and is
-  renamed `LEADING-SINGULARITY-COVERS-SUBPRINCIPAL-LOGPOLY`.
+  status "`LEADING-SINGULARITY-COVERS-LOGPOLY` may advance". Renamed
+  `LEADING-SINGULARITY-COVERS-SUBPRINCIPAL-LOGPOLY`; was PENDING after OB-31; **advances
+  to INDEPENDENTLY-CHECKED after OB-33 GATE-A CONDITIONAL (2026-08-13, M1–M9)**.
 - **Survives (narrowed class `𝒞_logpoly^{sub,ell}`):** `H=H*≥−C`, closed manifold, compact
   resolvent, `σ(H)~h_m+Σ_{j≥1}Σ_{ℓ≤K}h_{m−j,ℓ}(log|ξ|)^ℓ` with `h_m` a **uniformly positive
   definite classical elliptic principal symbol** (log terms strictly below the principal
