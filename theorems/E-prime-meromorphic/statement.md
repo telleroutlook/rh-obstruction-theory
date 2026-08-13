@@ -160,39 +160,52 @@ argument is identical: F/G even follows from both F, G odd) gives G = W.
 
 ---
 
-## §4. Theorem E'-neg (non-uniqueness for meromorphic target, CONFIRMED AFTER CORRECTION)
+## §4. Theorem E'-neg (non-uniqueness for meromorphic target, INDEPENDENTLY-CHECKED 2026-08-13)
 
-**Status (OB-09 referee 2026-08-11).** The construction is CONFIRMED after correction.
-The original power-sum matching system Φ_r was REFUTED (it controls the expansion at
-z=0, not the Taylor jet at a nonzero base point w₀); the corrected construction uses
-a **direct w₀-jet system** with an explicit rational Wronskian–Vandermonde Jacobian
-(referee §7). See proof.md §3 for the full argument.
+**Status (OB-09 referee 2026-08-11; OB-35 M1–M8 integrated 2026-08-13).**
+The abstract odd-meromorphic jet non-identifiability lemma is INDEPENDENTLY-CHECKED (Gate-A
+CONDITIONAL, OB-35). The original power-sum matching system Φ_r was REFUTED (it controls the
+expansion at z=0, not the Taylor jet at a nonzero base point w₀); the corrected construction
+uses a **direct w₀-jet system** with an explicit rational Wronskian–Vandermonde Jacobian
+(referee §7). The separation degree d=3 is proved by the general Δ₁'(0)≠0 formula (OB-35
+referee (0.1)). See proof.md §3 for the full argument.
 
-**Statement.** Fix k ≥ 1, J ≥ 1, and a base point `w₀ = iτ` (`τ ∈ ℝ\{0}`, `B(iτ) ≠ 0`).
+**Record class (M1).** Define ℰ_{k,J}^{mer}(w₀) to be the class of odd meromorphic functions
+F of conventional order at most one such that: (i) the finite poles of F, with multiplicity,
+are exactly those of W; (ii) the first k positive real zeros, counted with multiplicity, are
+the simple zeros γ_1,…,γ_k; (iii) lim_{z→0} F(z)/z = A(0)/B̃(0); and (iv) F^{(j)}(w₀) =
+W^{(j)}(w₀) for every integer 0 ≤ j < J.
+
+**Statement.** Fix k ≥ 0, J ≥ 1, and a base point `w₀ = iτ` (`τ ∈ ℝ\{0}`, `B(iτ) ≠ 0`).
 Under method-class assumptions (A1)–(A3) (see proof.md §3), for all sufficiently small
-`c < 0` there exists an odd meromorphic function `F^{(c)} ≠ W` satisfying all conditions
-of `ℰ_N^{mer}`, with quantitative separation:
+`c < 0` there exists an odd meromorphic function `F^{(c)} ≠ W` in ℰ_{k,J}^{mer}(w₀), with
+quantitative separation:
 ```
-sup_{|z| = R} |F^{(c)}(z) − W(z)| ≥ |A(0)/B̃(0) · Δ_{J+1}(c)/(J+1)| · R^{2J+3}
+F^{(c)}(z) − W(z) = −(A(0)/B̃(0))·Δ₁(c)·z³ + O(z⁵),
+sup_{|z|=R} |F^{(c)}(z) − W(z)| ≥ |A(0)/B̃(0)|·|Δ₁(c)|·R³
 ```
-for `0 < R < R_B := dist(0, Z(B)\{0})`, and `Δ_{J+1}(c) ≠ 0`.
+for `0 < R < R_B := dist(0, Z(B)\{0})` (convention: R_B := +∞ if Z(B)\{0} = ∅). Here
+`Δ₁(c) ≠ 0` for all small c ≠ 0 (since Δ₁(0)=0 and Δ₁'(0) ≠ 0 by general proof — see
+proof.md §3 formula (0.1)). The neighborhood radius `ε = ε(A,k,J,τ) > 0`.
 
-**Key corrections (OB-09):**
+**Key corrections (OB-09, OB-35):**
 1. Frozen first-k terms belong in the matching system (the power-sum system omitted them).
 2. Tail perturbation denominator is `J+m`, not `m`.
 3. Matching is at nonzero `w₀`, via jet functionals `Ψ_j(u,c) = ∂_t^j L(t₀;u,c)`,
    NOT via power sums.
-4. Leading separation degree is `2J+3` (odd), consistent with F−W being odd — NOT `2J+2`.
+4. Leading separation degree is `3` (d=3 iff Δ₁(c)≠0), proved by formula (0.1) (OB-35);
+   NOT the old `2J+3`. Sanity check: J=1..4 give Δ₁'(0) ≈ +0.03386, −0.00141, +4.34×10⁻⁵,
+   −9.847×10⁻⁷ (corrected J=4; earlier −1.2×10⁻⁶ was wrong).
 5. Non-collision assumption `Z(B)∩ℝ={0}` (A2) is mandatory to prevent pole/zero
    cancellation.
 6. The claim `|W(iR)|→∞` is FALSE in general and is not used; separation is via Cauchy
-   estimate.
+   estimate at d=3.
 
 **Jacobian (OB-09 §7).** `det D_u Ψ(u⁰,0) = (−t₀)^J (∏_{j<J} j!) ∏_{p<q}(x_q−x_p) /
 ∏_ℓ(1−x_ℓ t₀)^J ≠ 0` — a rational Wronskian–Vandermonde determinant, nonzero by
 distinctness of `x_ℓ = γ_{k+ℓ}^{-2}`.
 
-**Status: PROOF-DRAFT ✓ CONFIRMED AFTER CORRECTION (OB-09 2026-08-11).**
+**Status: INDEPENDENTLY-CHECKED ✓ (OB-35 M1–M8, 2026-08-13; abstract lemma only, not Suzuki target).**
 
 ---
 
@@ -284,10 +297,10 @@ These are the **precise missing ingredients** for the Suzuki track (OB-11-correc
 | Meromorphic Hadamard uniqueness (Lemma E'.1) | CONFIRMED AFTER CORRECTION (OB-06 2026-08-11; F/G ratio route; correct paired product) |
 | W parity | CORRECTION: W is ODD, not even (OB-06 2026-08-11) |
 | W zero/pole structure | CORRECTION: γ_n are ZEROS of W (not poles); poles come from zeros of ξ' (OB-06 2026-08-11) |
-| E'-neg construction (§4) | PROOF-DRAFT ✓ CONFIRMED AFTER CORRECTION (OB-09 2026-08-11; direct w₀-jet system, Wronskian–Vandermonde Jacobian) |
+| E'-neg construction (§4) | INDEPENDENTLY-CHECKED ✓ (OB-35 M1–M8 2026-08-13; d=3 per fixed J, general Δ₁'(0)≠0 formula (0.1); abstract lemma only) |
 | Old E'-neg (perturbing "poles at γ_n") | REFUTED (γ_n are zeros, not poles of W) |
 | E'-neg power-sum system Φ_r | REFUTED (OB-09): controls z=0 expansion, not w₀-jet |
-| E'-neg separation degree | CORRECTED to z^{2J+3} (odd), not z^{2J+2} (OB-09 §5.1) |
+| E'-neg separation degree | INDEPENDENTLY-CHECKED (OB-35 M1–M8 2026-08-13): d=3 iff Δ₁(c)≠0; Δ₁'(0)≠0 for all (A,k,J,τ) by formula (0.1); R_B=+∞ convention added; q₀ formulation replaces "next odd r" |
 | Old E'-pos identification ("even F_N → even W") | REFUTED (W is odd; even functions cannot converge to W) |
 | E'-pos as first stated ((LB*)+(H'-pole-sep)+(H'-tail)+(H'-norm) ⟹ G=W) | REFUTED (OB-11 2026-08-11): two counterexamples — growth gap (F_n=W·e^{z²−w₀²}) and pole-cancellation gap |
 | E'-pos CORRECTED (§5: adds (ZT_ℂ), (PL⁺), (UG)) | PROOF-DRAFT ✓ (OB-11 §6 line-by-line proof; Montel not Marty) |

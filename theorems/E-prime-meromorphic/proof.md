@@ -1,9 +1,9 @@
 # Proof — Theorem E' (E-prime-meromorphic)
 
-**Status:** PROOF-DRAFT — Gate-A BLOCKED (OB-30) for the Suzuki-target claim; survives as an
-ABSTRACT odd-meromorphic jet lemma. Separation degree REFINED (OB-35): `d=3` per fixed `J` at
-small `c`, iff `Δ₁(c)≠0` (exact criterion; `Δ₁'(0)≠0` computed J=1..4); constant degrades in
-`J`. NOT a fixed `z^{2J+3}`, NOT uniform in `J`. Not the real `ξ/ξ'` (see statement.md §0).  
+**Status:** Gate-A BLOCKED (OB-30) for the Suzuki-target claim. Abstract E'-neg jet lemma:
+INDEPENDENTLY-CHECKED (OB-35, M1–M8 integrated 2026-08-13); GATE-A CONDITIONAL passed. Separation
+degree `d=3` per fixed `J` at small `c`, iff `Δ₁(c)≠0`; general `Δ₁'(0)≠0` proved by formula
+(0.1) for all (A,k,J,τ) satisfying (A1)–(A3). NOT the real `ξ/ξ'` (see statement.md §0).  
 **Analytic / finite separation:** purely analytic.  
 **Key corrections (OB-06 2026-08-11):** W is ODD (not even); γ_n are ZEROS of W
 (not poles); poles of W come from zeros of ξ'(1/2−iz); old E'-neg construction
@@ -73,24 +73,32 @@ matches the expansion at z=0, NOT the Taylor jet at a nonzero base point w₀. T
 correct construction uses the direct w₀-jet system below (referee §7), which closes
 with an explicit rational Wronskian–Vandermonde Jacobian.]**
 
-**Method-class assumptions (corrected).** Fix k ≥ 1, J ≥ 1. Assume:
-- (A1) A even, Nevanlinna order ≤ 1, simple zeros exactly at {±γ_n}, A(0) ≠ 0:
+**Method-class assumptions (corrected).** Fix k ≥ 0, J ≥ 1. Assume:
+- (A1) A is an **entire** even function of conventional Nevanlinna order ≤ 1, with simple
+  zeros exactly at {±γ_n}, A(0) ≠ 0:
   `A(z) = A(0) ∏_{n≥1}(1 − a_n z²)`, `a_n = γ_n^{-2}`, `a_1 > a_2 > … > 0`, Σ a_n < ∞.
-- (A2) B odd, Nevanlinna order ≤ 1, all zeros simple, `Z(B) ∩ ℝ = {0}` (so no
-  real zero of B collides with the real ±γ_n).
+- (A2) B is an **entire** odd function (`B(z) = z·B̃(z)`, `B̃` even, `B̃(0) ≠ 0`) of
+  conventional Nevanlinna order ≤ 1, all zeros simple, `Z(B) ∩ ℝ = {0}` (so no real nonzero
+  zero of B collides with the real ±γ_n).
 - (A3) base point `w₀ = iτ`, `τ ∈ ℝ\{0}`, `B(iτ) ≠ 0`.
+
+**Construction symbols (OB-35 referee (2.1)–(2.5)).** Set `s := τ² > 0`,
+`t₀ := w₀² = −s < 0`. Define:
+```
+x_ℓ := a_{k+ℓ}   (1 ≤ ℓ ≤ J),      y_m := a_{k+J+m}  (m ≥ 1),
+b_m(c) := y_m (1 + c/(J+m))^{−2},
+A_{u,c}(z) := A(0) ∏_{n=1}^k (1−a_n z²) ∏_{ℓ=1}^J (1−u_ℓ z²) ∏_{m≥1} (1−b_m(c) z²),
+F^{(c)}(z) := z² A_{u(c),c}(z) / B(z).
+```
+Note a_1 > … > a_{k+J} = x_J > x_{J-1} > … > x_1 > 0, and x_J > y_m > 0 for all m ≥ 1.
 
 **Perturbation family.** Freeze γ_1,…,γ_k. For the tail `n = k+J+m` (m ≥ 1) set
 ```
-μ_{k+J+m}(c) = γ_{k+J+m}(1 + c/(J+m)),   so  b_m(c) = γ_{k+J+m}^{-2}(1+c/(J+m))^{-2},
+μ_{k+J+m}(c) = γ_{k+J+m}(1 + c/(J+m)),
 ```
-(note the denominator is **J+m**, not m — OB-09 §2.3 correction). The J positions
-`μ_{k+1},…,μ_{k+J}` are free variables `u_ℓ = μ_{k+ℓ}^{-2}`, adjusted by IFT.
-Define:
-```
-A_{u,c}(z) = A(0) ∏_{n=1}^k(1−a_n z²) ∏_{ℓ=1}^J(1−u_ℓ z²) ∏_{m≥1}(1−b_m(c) z²),
-F^{(c)}(z) = z² A_{u(c),c}(z) / B(z).
-```
+so `b_m(c) = y_m(1+c/(J+m))^{−2}` as above (denominator **J+m**, not m — OB-09 §2.3 correction).
+The J positions `μ_{k+1},…,μ_{k+J}` are free variables `u_ℓ = μ_{k+ℓ}^{-2}`, adjusted by IFT
+to enforce the jet conditions. A_{u,c} and F^{(c)} are as defined in "Construction symbols" above.
 
 **The correct jet system (OB-09 §7).** Let `t = z²`, `t₀ = w₀² = −τ² < 0`, and
 ```
@@ -114,13 +122,20 @@ from Σ y_m < ∞ and the dominated-derivative bound `|d/dc·b_m(c)^r| ≤ C·y_
 `A_{u(c),c}(z) − A(z) = O((z−w₀)^J)`. Multiplying by `z²/B(z)` (holomorphic, nonzero
 at w₀) gives the J-jet matching `(F^{(c)})^{(j)}(w₀) = W^{(j)}(w₀)`, j = 0,…,J−1. ✓
 
+**Record class (M1).** Define ℰ_{k,J}^{mer}(w₀) to be the class of odd meromorphic functions
+F of conventional order at most one such that: (i) the finite poles of F, with multiplicity,
+are exactly those of W; (ii) the first k positive real zeros, counted with multiplicity, are
+the simple zeros γ_1,…,γ_k; (iii) lim_{z→0} F(z)/z = A(0)/B̃(0); and (iv) F^{(j)}(w₀) =
+W^{(j)}(w₀) for every integer 0 ≤ j < J.
+
 **Membership + distinctness.** For small `c < 0`: `F^{(c)}` is odd, meromorphic of
 conventional order ≤ 1 (`T(r,F^{(c)}) ≍ r log r`, matching `W`: the poles of `B` give
 `N(r,∞) ≍ (1/2π)r log r`; the perturbed zeros `μ_n ≍ γ_n` add the same order — NOT `O(r)`),
 keeps the frozen simple zeros ±γ_1,…,±γ_k, has exactly the poles of W (assumption (A2)
 prevents collisions), and satisfies the J-jet condition. And `F^{(c)} ≠ W`: equality would
 force `A_{u(c),c} ≡ A`, but `μ_n(c) = γ_n(1+c/(n−k)) < γ_n` for `c < 0`, n > k+J.
-Hence `F^{(c)} ∈ 𝔐_Suz` and `F^{(c)} ≠ W`. ✓ (OB-09 referee §7.2)
+Hence `F^{(c)} ∈ ℰ_{k,J}^{mer}(w₀)` and `F^{(c)} ≠ W`. ✓
+(OB-09-E-prime-neg-IFT-odd-meromorphic.md, §7.1–§7.2, eqs. (7.3)–(7.7))
 
 **Separation — REFINED (OB-35, actual leading degree). The fixed `z^{2J+3}` was wrong; the
 actual degree is `3`, with an exact criterion.** Matching the `J`-jet at `w₀=iτ≠0` makes
@@ -133,35 +148,55 @@ where **`Δ₁(c) = [Σ (reciprocal-square zeros of F^{(c)})] − [Σ (reciproca
 is the net "`a`-mass" shift (`Δ₁(c) = Σ_ℓ u_ℓ(c) + Σ_m b_m(c) − Σ_ℓ x_ℓ − Σ_m y_m`). Hence:
 
 > **The leading degree is `d = 3` iff `Δ₁(c) ≠ 0`** (and then `sup_{|z|=R}|F^{(c)}−W| ≥
-> |A(0)/B̃(0)|·|Δ₁(c)|·R³` for `0 < R < R_B := dist(0, Z(B)\{0})`, by Cauchy). If `Δ₁(c)=0`, the
-> degree is the next odd `r` with `Δ_r(c)≠0` (some such `r` exists since `F^{(c)}≠W`).
+> |A(0)/B̃(0)|·|Δ₁(c)|·R³` for `0 < R < R_B := dist(0, Z(B)\{0})`
+> (convention: if Z(B)\{0} = ∅ then R_B := +∞), by Cauchy).
+> For q ≥ 1, define Δ_q(c) := Σ_ℓ (u_ℓ(c)^q − x_ℓ^q) + Σ_m (b_m(c)^q − y_m^q). If q₀ is the
+> least index with Δ_{q₀}(c) ≠ 0, then the leading degree is 2q₀+1 and its coefficient is
+> −A(0)Δ_{q₀}(c)/(q₀B̃(0)). Some q₀ must exist since F^{(c)} ≠ W.
 
-**`d=3` holds for each fixed `J` at small `c` (exact, script-verified).** `Δ₁(0)=0` and
-`Δ₁'(0) ≠ 0`, computed by solving the jet system exactly (sympy, tail to 2000–3000 terms) for
-the model `γ_n=n`, `k=1` frozen, `w₀=i`:
+**`d=3` for each fixed `J` at small `c` — general proof.** We show Δ₁'(0) ≠ 0 for all
+(A,k,J,τ) satisfying (A1)–(A3). Differentiate the jet equation L(t₀;u(c),c)=O((t−t₀)^J) at
+c=0. Set s:=τ²>0, X_ℓ:=x_ℓ/(1+s·x_ℓ), Y_m:=y_m/(1+s·y_m), α_ℓ:=u_ℓ'(0)/(1+s·x_ℓ),
+p_m:=2y_m/((J+m)(1+s·y_m))>0. The jet conditions at c=0 give moment equations
+`Σ_ℓ α_ℓ X_ℓ^q = Σ_m p_m Y_m^q` for 0 ≤ q < J. Let I_X h denote the Lagrange interpolant
+of degree < J at nodes X_1,…,X_J, and take h(X):=1/(1−sX). Then:
 ```
-J = 1:  Δ₁'(0) = +0.033858…     J = 2:  −0.0014…     J = 3:  +4.3·10⁻⁵     J = 4:  −1.2·10⁻⁶
+Δ₁'(0) = (−1)^{J+1} · 2s^J · Σ_{m≥1} y_m · ∏_{ℓ=1}^J (x_ℓ − y_m) / ((J+m)(1+s·y_m)^J)
 ```
-(J=1 reproduces the reviewer's `0.03386`.) Each is nonzero, so for each fixed `J` there is
-`c₀(J)>0` with `Δ₁(c)≠0`, hence `d=3`, for `0<|c|<c₀(J)`.
+(OB-35 referee formula (0.1), derived via (4.1)–(4.6)). Since x_J > y_m > 0 for all m, every
+factor (x_ℓ − y_m) > 0, so every term in the sum is nonzero and shares the sign (−1)^{J+1}.
+The series converges absolutely (Σ y_m < ∞). Hence **Δ₁'(0) ≠ 0 for all (A,k,J,τ)
+satisfying (A1)–(A3)**; sign = (−1)^{J+1}. By Δ₁(0)=0 and Δ₁'(0) ≠ 0, there is
+`c₀ = c₀(A,k,J,τ) > 0` with Δ₁(c) ≠ 0 for 0 < |c| < c₀, hence d=3.
 
-**Honest caveat (no uniform-in-`J` degree/constant).** `|Δ₁'(0)|` **falls ~10× per unit `J`
-and alternates sign** — the separation *constant* `|c₃| ≈ |A(0)/B̃(0)|·|Δ₁'(0)|·|c|` degrades
-rapidly with `J` (and could in principle vanish at a special `(J,c)`, pushing the degree to
-`≥5`). So the refined claim is **per-fixed-`J`, small `c`: `d=3` with the explicit `Δ₁`
-criterion** — NOT a degree or constant uniform in `J`. The earlier `z^{2J+3}` is fully retired.
+**Sanity check (model γ_n=n, k=1, w₀=i; exact interval arithmetic, OB-35 referee §5):**
+```
+J = 1:  Δ₁'(0) ≈ +0.03385805626     J = 2:  ≈ −0.001414395659
+J = 3:  Δ₁'(0) ≈ +4.336708886×10⁻⁵  J = 4:  ≈ −9.84706645×10⁻⁷
+```
+(J=1 matches the OB-30/OB-35 cross-check 0.0338580562…; J=4 corrected from earlier −1.2×10⁻⁶.)
+
+**Honest caveat (non-uniformity in `J`).** For every fixed `J`, the local leading degree is `3`.
+No `J`-independent neighborhood in `c` is proved, and the linearized cubic coefficient has no
+positive lower bound uniform in `J`; indeed from formula (0.1), `|Δ₁'(0)| ≤ (2s^J/(J+1))
+(∏_ℓ x_ℓ)(Σ_m y_m)` → 0 as J → ∞ for fixed (A,k,τ). In the model γ_n=n, k=1, w₀=i the
+successive absolute-value ratios for J=1→4 are approximately 23.94, 32.61, 44.04; no
+asymptotic rate is inferred from these four values. The claim is **per-fixed-`J`, small `c`:
+`d=3` with the exact `Δ₁` criterion**. The earlier `z^{2J+3}` is fully retired.
 
 **Scope (OB-30 — ABSTRACT only, NOT Suzuki).** This is a lemma about an **abstract** odd
-meromorphic `W = z²A/B` with `A,B` *independent* order-≤1 functions satisfying (A1)–(A3). It
+meromorphic `W = z²A/B` with `A,B` *independent* entire order-≤1 functions satisfying (A1)–(A3). It
 does **not** apply to the real `ξ/ξ'`: there `B = iA'`, so Rolle between real `A`-zeros forces
 a real `B`-zero, violating (A2) `Z(B)∩ℝ={0}`; and Suzuki's approximants `W(a,θ;z)` are entire
-(Thm 1.5), incompatible with a moving-pole convergence to the meromorphic `W`. See statement.md
-§0.
+(Masatoshi Suzuki, *A family of deformations of the Riemann xi-function*, Acta Arith. 157 (2013),
+no. 3, 201–230, DOI 10.4064/aa157-3-1, Theorem 2.2(2),(7)), incompatible with a moving-pole
+convergence to the meromorphic `W` (contour-integral argument). See statement.md §0.
 
-**Status: PROOF-DRAFT (abstract lemma).** The `w₀`-jet IFT / Cauchy–Vandermonde Jacobian core
-(Link A/B) is correct given abstract (A1)–(A3); the separation is at *some* nonzero odd degree
-`d≥3` (Cauchy at `d`), not a fixed `2J+3`. The Suzuki-target claim is WITHDRAWN (OB-30). The
-power-sum system `Φ_r` remains refuted (OB-09).
+**Status: INDEPENDENTLY-CHECKED (abstract lemma, OB-35 M1–M8 2026-08-13).** The `w₀`-jet IFT /
+Cauchy–Vandermonde Jacobian core (Link A/B) is confirmed given abstract (A1)–(A3); the general
+Δ₁'(0)≠0 proof (formula (0.1)) closes Link C; separation degree d=3 per fixed J, with exact Δ₁
+criterion. The Suzuki-target claim is WITHDRAWN (OB-30). The power-sum system `Φ_r` remains
+refuted (OB-09). Scope: abstract odd-meromorphic jet non-identifiability lemma only.
 
 ---
 
@@ -223,7 +258,7 @@ theorem). Suzuki application: (LB), (ZT_ℂ), (PL⁺), (UG) must be verified for
 | Old E'-neg (perturbing "poles at γ_n") | REFUTED (γ_n are zeros not poles; residue argument entirely wrong) |
 | E'-neg power-sum system Φ_r | REFUTED (OB-09): matches expansion at z=0, not jet at nonzero w₀ |
 | E'-neg via direct w₀-jet system (§3, OB-09 §7) | CONFIRMED AFTER CORRECTION — Wronskian–Vandermonde Jacobian, closed IFT |
-| E'-neg separation degree | REFINED (OB-35): actual leading degree d=3 iff Δ_1(c)!=0 (net recip-sq-zero shift); Δ_1'(0)!=0 for J=1..4 (0.0339,-0.0014,4.3e-5,-1.2e-6, exact) => d=3 per fixed J, small c. Constant degrades ~10x/J and alternates sign; NOT uniform in J. z^{2J+3} retired. |
+| E'-neg separation degree | INDEPENDENTLY-CHECKED (OB-35 M1–M8 2026-08-13): actual leading degree d=3 iff Δ₁(c)≠0 (net recip-sq-zero shift); Δ₁'(0)≠0 proved by formula (0.1) for all (A,k,J,τ) satisfying (A1)–(A3); sign=(−1)^{J+1}; c₀=c₀(A,k,J,τ)>0; sanity check J=1..4 with corrected values (+0.03385805626, −0.001414395659, +4.336708886×10⁻⁵, −9.84706645×10⁻⁷). No J-uniform c₀; cubic coefficient → 0 as J→∞. z^{2J+3} retired. |
 | Old E'-pos ("even F_N → even W") | REFUTED (W is odd) |
 | E'-pos as first stated (LB*/H'-pole-sep/H'-tail/H'-norm ⟹ G=W) | REFUTED (OB-11): growth gap + pole-cancellation gap, each with counterexample |
 | E'-pos CORRECTED (adds ZT_ℂ, PL⁺, UG) | PROOF-DRAFT ✓ (OB-11 §6 line-by-line; Montel not Marty) |

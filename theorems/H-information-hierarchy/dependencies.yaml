@@ -1,7 +1,7 @@
 # Dependencies — Theorem H (H-information-hierarchy)
 
 theorem_id: H-information-hierarchy
-status: PROOF-DRAFT (inherits B2+G, both now INDEPENDENTLY-CHECKED; H' own increment = INCOMPARABILITY, PROOF-DRAFT — OB-27; Gate-A package OB-32)
+status: PROOF-DRAFT (inherits B2+G, both now INDEPENDENTLY-CHECKED; H' own increment = INCOMPARABILITY, INDEPENDENTLY-CHECKED — OB-34 2026-08-13)
 
 dependencies:
 
@@ -33,7 +33,7 @@ dependencies:
     usable_as_premise: true
     gate_a_status: CLEARED
     gate_a_note: "B2 Gate-A PASS (OB-20) + INDEPENDENT-CHECKER (OB-21). Updated OB-32."
-    role: "O_finite instantiation of Theorem H (Step A); coarsening O_finite ≺ O_oracle (H' part ii)."
+    role: "O_finite instantiation of Theorem H (Step A); coarsening O_finite ≺ O_oracle (H' part ii); reverse witness for H'(i) incomparability via non-cancellation lemma."
 
   - id: G-INFO-OBSTRUCTION
     statement: "G-info: O_theta collision via S(T) gap; Prop. G.3* construction."
@@ -45,12 +45,36 @@ dependencies:
     gate_a_note: "G-info Gate-A PASS (OB-22) + INDEPENDENT-CHECKER (OB-17). Updated OB-32."
     role: "O_theta instantiation of Theorem H (Step A); coarsening O_theta ≺ O_oracle (H' part ii)."
 
-gate_a_status: OPEN
+  - id: H-PRIME-I-INCOMPARABILITY
+    statement: >
+      For fixed M>=1 and positive levels 0<d_1<...<d_M, and for every K>=1, the maps
+      O_finite^{(K)} and O_theta^{samp} are incomparable on the class ℌ_sym (finite
+      multisets in {0<Re rho<1}, reflection-symmetric). Witness 1: same-height quartets
+      Q(3/4,T) and Q(9/10,T) share O_theta^{samp} but differ in Li_1 (double-count
+      normalization, M2/M4). Witness 2: B2 exact-collision pair (OB-02/OB-13) with
+      non-cancellation parameter selection (M6 non-cancellation lemma).
+    source: "proof.md §4; OB-02-B2-integer-collision.md; OB-13-B2-independent-exact-reconstruction.md."
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    gate_a_status: INDEPENDENTLY-CHECKED
+    gate_a_note: >
+      OB-34 Gate-A CONDITIONAL verdict 2026-08-13. M1-M8 all integrated same date.
+      Forward witness: Li_1 values corrected to 102592/2576009 and 4003600/100820081 (M4,
+      double-counting per M2). Reverse witness: non-cancellation lemma replaces the faulty
+      2*sum(n_k)+4R>=4 argument (M6); exact rational counter-example K=2 at
+      t1=1/24, t2=9/40, T=3/8 documented. B2 citation narrowed to OB-02 Theorem B2
+      Lemmas 3.1+4.1 eqs (5.1)-(5.8) and OB-13 Lemmas 2.1-2.3 V1-V5 (M3); sigma_0=3/4
+      (M3); finite quantifier corrected to j=1,...,K (M5); domain restricted to
+      {0<Re rho<1} (M1); Theorem G constant map clarified (M7).
+    role: "H's own increment — incomparability H'(i); organizes B2+G under refinement-preorder framework."
+
+gate_a_status: INDEPENDENTLY-CHECKED
 gate_a_note: >
-  REFEREED items usable as premises. B2-RANK-RESULT and G-INFO-OBSTRUCTION are now
+  REFEREED items usable as premises. B2-RANK-RESULT and G-INFO-OBSTRUCTION are
   INDEPENDENTLY-CHECKED (B2 Gate-A PASS OB-20 + OB-21 checker; G-info Gate-A PASS OB-22 +
-  OB-17 checker) — so H's two inherited obstructions (the coarsenings O_finite ≺ O_oracle
-  and O_theta ≺ O_oracle, H' part ii) rest on established results. H's OWN increment —
-  the partial-order framing and the incomparability theorem H'(i) (O_finite ⋈ O_theta,
-  with two script-verified witnesses) — is PROOF-DRAFT and is what the OB-32 Gate-A review
-  targets. H introduces no new analytic content beyond B2/G; it is a unification framework.
+  OB-17 checker) — H's two inherited obstructions (the coarsenings O_finite ≺ O_oracle
+  and O_theta ≺ O_oracle, H' part ii) rest on established results. H'(i) incomparability
+  (O_finite^{(K)} ⋈ O_theta^{samp}) is now INDEPENDENTLY-CHECKED via OB-34 (Gate-A
+  CONDITIONAL, M1-M8 integrated 2026-08-13). H introduces no new analytic content beyond
+  B2/G plus one elementary parameter-selection lemma (M6); it is a unification framework.

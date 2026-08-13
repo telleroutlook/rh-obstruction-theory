@@ -56,37 +56,93 @@ method operating via O_theta. **Status: PROOF-DRAFT (Bochner positivity).**
 
 ---
 
-## §4. Incomparability + coarsening (Theorem H', corrected OB-27)
+## §4. Incomparability (Theorem H'(i), corrected OB-34 — INDEPENDENTLY-CHECKED)
 
-**Claim (corrected).** `O_finite` and `O_theta` are **incomparable** (neither refines the
-other); both are strict coarsenings of `O_oracle`. The earlier claim "O_finite ⊊ O_theta,
-every finite collision is a theta collision" was **false** and is withdrawn.
+**Historical note (OB-27/OB-32).** The original claim "O_finite ⊊ O_theta" was withdrawn.
+Theorem G's literal `O_theta(𝒵) = d_n = θ_level(n)` is a fixed, 𝒵-independent sequence and
+hence a constant map; a constant map refines every map, giving `O_theta ≺ O_finite` (strictly
+coarser, not incomparable). Genuine incomparability requires the nonconstant sampled-count
+map `O_theta^{samp}`.
 
-*Why the old inclusion fails.* `O_theta` in the sense of Theorem G is the fixed, zero-free
-archimedean sequence `d_n = θ_level(n)` (Riemann–Siegel θ, independent of the multiset 𝒵);
-as a map on multisets it is constant, so it separates no pair and cannot dominate anything.
-Even read charitably as a functional of 𝒵 (the θ-unfolded count of the imaginary parts), it
-is blind to real parts.
+**Setup (M1).** Fix integers K≥1 and M≥1, and fix real sampling levels 0<d₁<…<d_M. Let
+ℌ_sym be the class of finite multisets contained in {ρ∈ℂ : 0<Re ρ<1}, invariant with
+multiplicity under ρ↦ρ̄ and ρ↦1−ρ. (Requiring 0<Re ρ<1 ensures φ_j(ρ) and φ_j(1−ρ) are
+well-defined for every element; in particular 0 and 1 are excluded.)
 
-*Incomparability, direction 1 (`O_theta` does not refine `O_finite`).* Two symmetric
-quartets at the same height `T` but different real offset — `𝒵_a` at `σ=3/4`
-(atoms `{3/4±iT, 1/4±iT}`) and `𝒵_b` at `σ=9/10` (atoms `{9/10±iT, 1/10±iT}`) — have the
-identical imaginary-part multiset `{±T,±T}`, hence identical `O_theta`, but different
-`O_finite`: `Li₁(𝒵) = Σ_ρ 1/ρ` gives `0.0199129…` vs `0.0198551…` (script-verified,
-`T=10`). So `O_theta(𝒵_a)=O_theta(𝒵_b)` while `O_finite(𝒵_a)≠O_finite(𝒵_b)`.
+**Normalization (M2).** Because 𝒵 is reflection-symmetric,
+`Li_j(𝒵) = 2∑_{ρ∈𝒵} φ_j(ρ)`; in particular `Li₁(𝒵) = 2∑_{ρ∈𝒵} 1/ρ`. Conjugation
+symmetry makes these values real.
 
-*Incomparability, direction 2 (`O_finite` does not refine `O_theta`).* An S(T)-type
-perturbation `γ_n → γ_n + ε_n` chosen in the kernel of the first K Li functionals (finite
-matching, B1/B2 IFT) still moves the unfolded count, so `O_finite` collides while `O_theta`
-separates. (Explicit finite matching: the B1 quartet decay + Vandermonde kernel of
-§2/§3.)
+**B2 citation (M3).** For every m≥1, Theorem B2 in `OB-02-B2-integer-collision.md`,
+Lemmas 3.1 and 4.1 and equations (5.1)–(5.8), constructs an exact collision for the specific
+Li family φ_j, j=1,…,m, at σ₀=3/4. Its normalization agrees with the present one on ℌ_sym.
+The independent exact replay `OB-13-B2-independent-exact-reconstruction.md`, Lemmas 2.1–2.3
+and V1–V5, checks the normalization and the explicit m=2,3 instances. No claim is made here
+for an arbitrary finite family of unrelated test functions.
 
-*Coarsening (`O_finite ≺ O_oracle` and `O_theta ≺ O_oracle`).* The B2 quartet pair has
-`O_finite(𝒵₊)=O_finite(𝒵₋)` (exact Li collision, B2 §4.3 — Gate-A PASS OB-20) but distinct
-ordinates, so `O_finite ≺ O_oracle`. By Lemma G.2, an S(T) perturbation with
-`ε_n` bounded by `S(γ_n)/A'(γ_n)` (`A'(t)=θ'(t)/π`) preserves `O_theta` but changes the
-ordinates, so `O_theta ≺ O_oracle`. **Status: part (ii) inherits the exact B2/G collisions
-(firm); part (i)'s two witnesses are explicit but not yet independently checked.**
+**Witness 1 — `O_finite^{(K)} ⋠ O_theta^{samp}`.** Two symmetric quartets at height T=10
+but different real offset: 𝒵_a = Q(3/4,10) = {3/4±10i, 1/4±10i} and 𝒵_b = Q(9/10,10) =
+{9/10±10i, 1/10±10i}. Both have imaginary-part multiset {±10,±10}, so N_{𝒵_a}(u) =
+N_{𝒵_b}(u) at every level u, giving `O_theta^{samp}(𝒵_a) = O_theta^{samp}(𝒵_b)` (equal).
+
+By the double-counting normalization (M2, M4):
+
+  Li₁(Q(3/4,10)) = 102592/2576009 ≈ 0.039825947813…
+  Li₁(Q(9/10,10)) = 4003600/100820081 ≈ 0.039710343022…
+  (Exact difference = 30024117552/259713436036729 > 0, script-verified with exact rationals.)
+
+(Note: the per-atom sums S(3/4,10)=51296/2576009 and S(9/10,10)=2001800/100820081 are half
+these values — the correct Li₁ applies the reflection factor 2 per M2.) Since Li₁ values
+differ, `O_finite^{(K)}(𝒵_a) ≠ O_finite^{(K)}(𝒵_b)`, so `O_finite^{(K)} ⋠ O_theta^{samp}`.
+
+**Witness 2 — `O_theta^{samp} ⋠ O_finite^{(K)}` (all K, M5, M6).** Fix K≥1. From Theorem B2
+(σ₀=3/4), B2 produces 𝒵₊ (on-line atoms {1/2±it_k}, multiplicity M₀) and 𝒵₋ carrying
+additionally the off-line quartet Q(3/4,T)^{(R)}. The B2 exact collision gives:
+
+  `O_finite^{(K)}(𝒵₊) = O_finite^{(K)}(𝒵₋)` exactly for every j=1,…,K
+
+(with a new B2 pair chosen for each fixed K).
+
+For the sampling separation, we invoke the **non-cancellation parameter selection lemma**:
+
+> **Lemma (M6).** Fix K≥1 and d_*>0. One can choose rational numbers 0<t₁<…<t_K<T<d_*
+> such that the B2 vector β = −C⁻¹q(T) satisfies
+>   G_K(t₁,…,t_K,T) := 2 + ∑_{k=1}^K β_k ≠ 0.
+>
+> *Proof.* For fixed distinct positive t_k, as T→∞, φ_j(a+iT)→0, hence q(T)→0, β→0,
+> G_K→2. So G_K is not identically zero as a rational function of parameters. If it were
+> zero on the open set U_{d_*} = {0<t₁<…<t_K<T<d_*}, clearing denominators would give a
+> polynomial zero on an open set, hence the zero polynomial — contradicting G_K→2. So G_K≠0
+> somewhere in U_{d_*}; non-zero is an open condition and rational points are dense, so
+> parameters can be chosen rational. □
+
+Choose parameters by the lemma with d_* = d₁ (placing all atoms below d₁). Then:
+
+  N_{𝒵₋}(d₁) − N_{𝒵₊}(d₁) = 2∑_k n_k + 4R = 2R(∑_k β_k + 2) = 2R·G_K ≠ 0.
+
+So `O_theta^{samp}(𝒵₊) ≠ O_theta^{samp}(𝒵₋)` while `O_finite^{(K)}(𝒵₊) = O_finite^{(K)}(𝒵₋)`:
+`O_theta^{samp} ⋠ O_finite^{(K)}`. The key is that **parameters can be chosen** to avoid
+cancellation; this is not automatic for every B2 pair — exact rational counter-example at
+K=2, t₁=1/24, t₂=9/40, T=3/8 gives G_K=0 (OB-34 verdict §5.2).
+
+**Theorem G / constant observation (M7).** The levels d_n defined from θ in Theorem G are
+fixed and 𝒵-independent. If one defines the observation O_const(𝒵) := (d_n), then O_const
+is constant and hence strictly coarser than the nonconstant O_finite^{(K)}. This constant
+map is not O_theta^{samp}.
+
+**Corrected Theorem H'(i) (M8).** Fix M≥1 and positive levels 0<d₁<…<d_M. On the corrected
+class ℌ_sym, for every K≥1, `O_finite^{(K)} ⋈ O_theta^{samp}`. The first non-refinement is
+witnessed by the same-height quartets; the reverse non-refinement is witnessed by a B2 pair
+selected using the non-cancellation lemma above. This is an RH-free statement about finite
+artificial multisets and an information-refinement preorder, not a standalone analytic barrier.
+
+**Coarsening (`O_finite ≺ O_oracle` and `O_theta^{samp} ≺ O_oracle`).** The B2 quartet pair has
+`O_finite(𝒵₊)=O_finite(𝒵₋)` (exact Li collision, Theorem B2, Gate-A PASS OB-20) but
+`𝒵₊ ≠ 𝒵₋`, so `O_finite ≺ O_oracle`. For `O_theta^{samp}`: by the non-cancellation lemma,
+`O_theta^{samp}(𝒵₊) ≠ O_theta^{samp}(𝒵₋)` for the chosen parameters, so the B2 collision is
+not an `O_theta^{samp}`-collision; hence `O_theta^{samp} ≺ O_oracle` as well.
+
+**Status: INDEPENDENTLY-CHECKED (OB-34 Gate-A CONDITIONAL → integrated 2026-08-13, M1–M8).**
 
 ---
 

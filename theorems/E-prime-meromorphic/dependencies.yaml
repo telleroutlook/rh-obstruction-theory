@@ -81,18 +81,48 @@ dependencies:
       unnecessary. The genuine simple pole at each p in the polar set is recovered by a
       contour/residue argument on 1/F_{n_j} (E'-pos proof step 3), not by Marty normality.
 
-gate_a_status: BLOCKED
+  - id: EPRIME-NEG-ABSTRACT-JET-LEMMA
+    statement: >
+      Abstract odd-meromorphic jet non-identifiability lemma (OB-35). Under (A1)-(A3)
+      (A, B independent entire functions of conventional order <= 1; A even, zeros {+-gamma_n};
+      B odd, Z(B) cap R = {0}; base point w0=i*tau, tau != 0), for every k >= 0, J >= 1,
+      for all sufficiently small c < 0 there exists F^{(c)} in E_{k,J}^{mer}(w0) with
+      F^{(c)} != W and F^{(c)}(z) - W(z) = -(A(0)/B~(0)) * Delta_1(c) * z^3 + O(z^5).
+      Delta_1'(0) = (-1)^{J+1} * 2s^J * sum_{m>=1} y_m * prod_{l=1}^J (x_l - y_m) /
+      ((J+m)(1+s*y_m)^J) != 0 for all admissible (A,k,J,tau); hence d=3 per fixed J,
+      c_0 = c_0(A,k,J,tau) > 0. Scope: abstract only; not the real xi/xi' or Suzuki target.
+    source: >
+      OB-35-Eprime-refined-degree-resend.md, reviewed by OB-35-referee-verdict.md (2026-08-13).
+      Links A-D confirmed; Q1-Q5 answered; M1-M8 integrated 2026-08-13.
+      Internal file: OB-09-E-prime-neg-IFT-odd-meromorphic.md, sec. 7.1-7.2, eqs. (7.3)-(7.7).
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    peer_reviewed: false
+    gate_a_status: INDEPENDENTLY-CHECKED
+    gate_a_note: >
+      OB-35 GATE-A CONDITIONAL (2026-08-13): Links A-D confirmed, Q1-Q5 answered.
+      M1-M8 modifications integrated: record class redefined as E_{k,J}^{mer}(w0) with
+      conditions (i)-(iv); construction symbols (2.1)-(2.5) inserted; general Delta_1'(0)!=0
+      proved via formula (0.1)/(4.1)-(4.6); J=4 anchor corrected to -9.84706645e-7; ratio
+      description corrected (23.94, 32.61, 44.04); non-uniformity statement corrected;
+      higher-degree formula corrected to q0 -> 2q0+1; R_B=+inf convention added; citations
+      updated to OB-09 sec.7.1-7.2 eqs.(7.3)-(7.7) and Suzuki 2013 Thm 2.2(2),(7).
+      Scope: abstract odd-meromorphic jet non-identifiability lemma only. NOT the Suzuki
+      target or real xi/xi'.
+    role: >
+      E'-neg abstract lemma: for each fixed (k,J,w0), the finite record E_{k,J}^{mer}(w0)
+      does not uniquely determine W. The separation is d=3 (with exact Delta_1 criterion)
+      for every admissible (A,k,J,tau). Used as the non-identifiability premise in the
+      E-prime-meromorphic information obstruction (abstract class only).
+
+gate_a_status: BLOCKED (Suzuki-target) / INDEPENDENTLY-CHECKED (abstract E'-neg lemma)
 gate_a_note: >
-  Gate-A BLOCKED (OB-30 2026-08-12). Three independent fatal errors: (1) E'-neg separation
-  degree z^{2J+3} is WRONG — matching the J-jet at w0!=0 gives L=O((t-t0)^J) but does NOT
-  kill the first J log-power-sums at t=0; explicit J=1 counterexample (A=sin(pi z)/(pi z),
-  B=sinh z, w0=i) gives leading z^3, not z^5. (2) Assumption (A2) Z(B) cap R = {0} is FALSE
-  for the actual B=i*xi'(1/2-iz): Rolle between consecutive real xi-zeros forces a real
-  B-zero. So (A1)-(A3) hold only for an ABSTRACT independent pair, not the real xi/xi'; and
-  (A1)'s all-simple-real-A-zeros is RH+simplicity. (3) Suzuki W(a,theta;z) is ENTIRE (Thm 1.5);
-  the moving-pole (PL+) approximation is INCOMPATIBLE with entire approximants (contour
-  argument), not a still-open Suzuki ingredient. Suzuki cite corrected to Corollary 1.6.
-  SURVIVES only as an abstract odd-meromorphic jet lemma (Link A/B core given abstract
-  (A1)-(A3)) with a nonzero-Taylor-coefficient separation (degree not fixed), plus the correct
-  meromorphic uniqueness Lemma E'.1. Does NOT specialize to the Suzuki target. WEIERSTRASS /
-  MARTY citation-formality notes unchanged. HADAMARD-PRODUCT-XI / SUZUKI-COR6 baseline CLEAR.
+  Gate-A BLOCKED (OB-30 2026-08-12) for the Suzuki-target claim. Three independent fatal
+  errors: (1) E'-neg separation degree z^{2J+3} is WRONG — matching the J-jet at w0!=0 gives
+  L=O((t-t0)^J) but does NOT kill the first J log-power-sums at t=0; (2) Assumption (A2)
+  Z(B) cap R = {0} is FALSE for the actual B=i*xi'(1/2-iz): Rolle between consecutive real
+  xi-zeros forces a real B-zero; (3) Suzuki W(a,theta;z) is ENTIRE (Thm 1.5); the moving-pole
+  (PL+) approximation is INCOMPATIBLE with entire approximants.
+  Gate-A INDEPENDENTLY-CHECKED (OB-35 2026-08-13) for the abstract E'-neg jet lemma: M1-M8
+  integrated; see EPRIME-NEG-ABSTRACT-JET-LEMMA entry above.
