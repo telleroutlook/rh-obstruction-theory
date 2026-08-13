@@ -1,0 +1,775 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+%\usepackage{bbm}
+
+%% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+%% Notation macros
+\newcommand{\Hsym}{\mathfrak{H}_{\mathrm{sym}}}
+\newcommand{\Xsym}{\mathfrak{X}_{\mathrm{sym}}}
+\newcommand{\Li}{\mathrm{Li}}
+\newcommand{\Ofinite}{O_{\mathrm{fin}}}   % use \Ofinite^{(K)} at call sites
+\newcommand{\Otheta}{O_{\theta}^{\mathrm{samp}}}
+\newcommand{\Ooracle}{O_{\mathrm{oracle}}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\N}{N_{\mathcal{Z}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\incomp}{\mathbin{\bowtie}}
+
+\begin{document}
+
+\title{Arithmetic Information Barriers for the Riemann Hypothesis}
+
+\author{Lin Tao}
+\date{2026}
+
+\begin{abstract}
+We prove three theorems showing that natural classes of finite-arithmetic
+proof strategies for the Riemann Hypothesis face provable information
+obstructions. The ambient class is a collection of finite zero multisets
+symmetric under complex conjugation and the functional-equation reflection
+$\rho \mapsto 1-\rho$, equipped with an information-refinement preorder.
+\textbf{Theorem~B2} (exact Li collision): for every fixed finite collection
+of Li-type test functions, there exist two multisets that are indistinguishable
+by those tests yet differ in whether all atoms lie on the critical line.
+\textbf{Theorem~B1} (no uniform separation): no fixed finite Li test family
+enforces a strictly positive gap between on-line and off-line multisets.
+\textbf{Theorem~H$'$(i)} (incomparability): the Li observation map and the
+sampled counting map are incomparable in the refinement preorder — each can
+distinguish objects the other cannot. We also record, as a corollary of
+Andersson~\cite{Andersson2024}, that no finite Euler-factor constraint on a
+Helson zeta function forces its zeros to lie on the critical line.
+
+None of these results assume or imply the Riemann Hypothesis.
+They are barrier theorems in the sense of Razborov--Rudich~\cite{RazborovRudich1997}:
+they establish limits on natural \emph{proof methods}, not on the truth of RH.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+%%--------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+%%--------------------------------------------------------------------
+
+Li's criterion~\cite{Li1997} asserts that RH is equivalent to the nonnegativity
+of all Li coefficients $\lambda_n = \sum_\rho [1-(1-1/\rho)^n]$, where the sum
+runs over nontrivial zeros of~$\zeta$.  This reformulation sparked a research
+programme: can one establish RH by proving, for each~$n$ individually or for
+long finite stretches, that $\lambda_n \geq 0$?  The results of this paper say
+that any such strategy faces a fundamental obstruction: finitely many Li
+inequalities carry insufficient information to determine whether all zeros lie on
+the critical line.
+
+\subsection*{What is an information barrier?}
+
+We use ``information barrier'' in a precise technical sense, following the
+programme set out in~\cite{ProgramV2}.  Fix a class $\mathcal{M}$ of admissible
+proof methods and an \emph{observation map} $O : \Xsym \to S$, where $\Xsym$
+is the ambient class of admissible zero multisets and $S$ is a set of
+observable records.  An \emph{information obstruction} for the pair
+$(\mathcal{M}, O)$ is an explicit pair $(\mathcal{Z}_+, \mathcal{Z}_-)$ such
+that:
+\begin{enumerate}[label=(\roman*)]
+  \item $O(\mathcal{Z}_+) = O(\mathcal{Z}_-)$ (the method cannot distinguish the two inputs);
+  \item the target predicate $P(\mathcal{Z}_+) \neq P(\mathcal{Z}_-)$ (the two
+  inputs give opposite answers to the question the method is trying to decide);
+  \item neither $\mathcal{Z}_+$ nor $\mathcal{Z}_-$ involves RH as a hypothesis.
+\end{enumerate}
+
+This is the zero-multiset analogue of a Razborov--Rudich natural proof barrier:
+it shows that a method constrained to observe only $O(\mathcal{Z})$ cannot, in
+principle, prove $P(\mathcal{Z}) = 1$ for all admissible inputs.  An information
+barrier does not prevent RH from being true, nor does it prevent an RH proof
+using different methods.  The escape route (the set of methods \emph{not}
+blocked) is named explicitly in each theorem.
+
+\subsection*{Results}
+
+The ambient class $\Hsym$ consists of finite zero multisets in the open critical
+strip $\{0 < \re \rho < 1\}$, closed under $\rho \mapsto \bar\rho$ and
+$\rho \mapsto 1 - \rho$ (Section~\ref{sec:setup}).  The target predicate is
+$P(\mathcal{Z}) = 1$ iff every atom has $\re \rho = 1/2$.
+
+\begin{itemize}
+\item \textbf{Theorem~B2} (Section~\ref{sec:B2}): For every fixed finite
+  Li-type test family $\Phi = (\varphi_1, \ldots, \varphi_m)$, there exist
+  $\mathcal{Z}_+, \mathcal{Z}_- \in \Hsym$ with $P(\mathcal{Z}_+) = 1$,
+  $P(\mathcal{Z}_-) = 0$, and $\Li_j(\mathcal{Z}_+) = \Li_j(\mathcal{Z}_-)$
+  exactly for $j = 1, \ldots, m$.  The collision is realised by explicit
+  rational-arithmetic witnesses.
+
+\item \textbf{Theorem~B1} (Section~\ref{sec:B1}): No fixed finite Li test
+  family admits a uniform strictly positive lower bound separating
+  $P(\mathcal{Z}) = 1$ from $P(\mathcal{Z}) = 0$ within $\Hsym$.
+
+\item \textbf{Theorem~H$'$(i)} (Section~\ref{sec:H}): Fix $M \geq 1$ and
+  positive sampling levels $0 < d_1 < \cdots < d_M$.  For every $K \geq 1$,
+  the Li observation map $\Ofinite^{(K)}$ and the sampled counting map $\Otheta$ are
+  incomparable in the information refinement preorder on $\Hsym$.
+
+\item \textbf{Corollary~C} (Section~\ref{sec:C}): For every finite prime cutoff
+  $P_0$ and every $z_1$ with $0 < \re z_1 < 1$, $\re z_1 \neq 1/2$, there
+  exists a Helson zeta function that agrees with $\zeta$ on all Euler factors
+  $p \leq P_0$ yet has a zero at $z_1$.
+\end{itemize}
+
+All four results are unconditional; none assumes RH.
+
+\subsection*{Comparison with prior work}
+
+Li's criterion is an RH-equivalence, not a barrier: it \emph{locates} the
+difficulty but does not establish a proof-method limitation.  The results here
+are distinct from it in kind.  The closest analogues in complexity theory are
+the Razborov--Rudich barrier for circuit lower bounds~\cite{RazborovRudich1997}
+and the relativization barriers of Baker--Gill--Solovay~\cite{BakerGillSolovay1975}.
+
+Within the analytic number theory literature, Connes' work on the Weil explicit
+formula~\cite{ConnesWeilFF1999} and the spectral interpretation of the Selberg
+trace formula suggest that a successful RH proof must use deep arithmetic
+structure.  Our results quantify one concrete aspect of this: \emph{finite
+finite-orbit observations of the zero set} are insufficient, and Li and counting
+measurements capture orthogonal information.
+
+Theorem~C is a corollary of Andersson~\cite{Andersson2024}; we record it here
+for completeness and to make the Euler-factor limitation explicit in the
+framework.
+
+\subsection*{Mathematical status}
+
+All main results have been through independent Gate-A review (mathematical
+status: INDEPENDENTLY-CHECKED in the two-axis evidence ledger of~\cite{ProgramV2}).
+The exact rational witnesses have been independently reconstructed from first
+principles in exact arithmetic.
+
+%%--------------------------------------------------------------------
+\section{Setup and notation}
+\label{sec:setup}
+%%--------------------------------------------------------------------
+
+\subsection{Ambient class}
+
+\begin{definition}[Ambient class $\Hsym$]
+\label{def:ambient}
+A finite multiset $\mathcal{Z}$ of complex numbers is in $\Hsym$ if:
+\begin{enumerate}[label=\textup{(S\arabic*)}]
+  \item\label{itm:strip} every atom satisfies $0 < \re\rho < 1$;
+  \item\label{itm:conj} $\rho \in \mathcal{Z}$ implies $\bar\rho \in \mathcal{Z}$
+    with the same multiplicity;
+  \item\label{itm:fe} $\rho \in \mathcal{Z}$ implies $1-\rho \in \mathcal{Z}$
+    with the same multiplicity.
+\end{enumerate}
+The target predicate is $P(\mathcal{Z}) = 1$ iff $\re\rho = 1/2$ for every
+$\rho \in \mathcal{Z}$.
+\end{definition}
+
+Condition~\ref{itm:strip} excludes $0$ and $1$, ensuring that $\varphi_j(\rho)$
+and $\varphi_j(1-\rho)$ are well-defined for all Li-type tests.
+Conditions~\ref{itm:conj} and~\ref{itm:fe} mimic the two symmetries of the
+nontrivial zeros of $\zeta$.
+
+\begin{remark}[Finiteness]
+We work with \emph{finite} multisets throughout.  This is the natural domain for
+the finite-observation theorems (B2, B1, H).  Corollary~C involves an infinite
+Helson zeta function, whose zero multiset in the critical strip is treated
+separately.
+\end{remark}
+
+\subsection{Li-type tests and the finite observation map}
+
+Fix $m \geq 1$ and \emph{Li-type test functions}
+\[
+  \varphi_j(\rho) = 1 - \bigl(1 - \rho^{-1}\bigr)^j, \qquad j = 1, \ldots, m.
+\]
+More generally, one may take $\varphi_j$ to be moment-type ($\varphi_j(\rho) = \rho^{-k_j}$)
+or Weil-type (real-valued even $h \in C_c^\infty(\RR)$ with $\varphi_j(\rho)=\hat h(\im\rho)$), provided each $\varphi_j$ is
+meromorphic in $\{0 < \re\rho < 1\}$ and satisfies:
+\begin{enumerate}[label=\textup{(W\arabic*)}]
+  \item\label{itm:realval} $\varphi_j(\bar\rho) = \overline{\varphi_j(\rho)}$
+    (ensures real-valued observations), and
+  \item\label{itm:decay} $|\varphi_j(\sigma + it)| \leq C_j(1 + |t|)^{-1-\delta_j}$
+    uniformly in $\sigma \in (0,1)$ for some $C_j, \delta_j > 0$.
+\end{enumerate}
+The standard Li tests satisfy \ref{itm:decay} with $\delta_j = 1$.
+
+\begin{definition}[Li observation and finite observation map]
+\label{def:Li}
+For $\mathcal{Z} \in \Hsym$ and $j \geq 1$, set
+\[
+  \Li_j(\mathcal{Z}) = 2 \sum_{\rho \in \mathcal{Z}} \varphi_j(\rho).
+\]
+This sum is real by \ref{itm:realval} and the reflection symmetry
+\ref{itm:fe}: since $\mathcal{Z}$ is closed under $\rho \mapsto 1 - \rho$,
+we have $\sum_\rho \varphi_j(\rho) = \sum_\rho \varphi_j(1-\rho)$, and
+condition \ref{itm:realval} plus conjugation symmetry~\ref{itm:conj} then
+forces the sum to be real.
+
+The \emph{finite observation map} with $K$ tests is
+\[
+  \Ofinite^{(K)} : \Hsym \longrightarrow \RR^K, \qquad
+  \Ofinite^{(K)}(\mathcal{Z}) = \bigl(\Li_1(\mathcal{Z}), \ldots, \Li_K(\mathcal{Z})\bigr).
+\]
+\end{definition}
+
+\begin{remark}[Normalization convention]
+\label{rem:normconv}
+Two conventions appear in the literature.  The \emph{R-symm} convention
+(used here) defines $\Li_j(\mathcal{Z}) = 2\sum_{\rho \in \mathcal{Z}} \varphi_j(\rho)$;
+the \emph{R-atom} convention sums $\varphi_j$ once per atom without the factor~$2$.
+On a multiset closed under $\rho \mapsto 1-\rho$ these differ by exactly a factor~$2$,
+and every qualitative conclusion (existence of collisions, absence of uniform gaps)
+is convention-independent.  All numerical anchors in this paper use R-symm.
+\end{remark}
+
+\subsection{Sampled counting map}
+
+\begin{definition}[Sampled counting map]
+\label{def:Otheta}
+Fix $M \geq 1$ and positive sampling levels $0 < d_1 < \cdots < d_M$.  For
+$\mathcal{Z} \in \Hsym$, let $N_{\mathcal{Z}}(u) = \#\{\rho \in \mathcal{Z} : |\im\rho| \leq u\}$
+(with multiplicity).  The \emph{sampled counting map} is
+\[
+  \Otheta : \Hsym \longrightarrow \Z_{\geq 0}^M, \qquad
+  \Otheta(\mathcal{Z}) = \bigl(N_{\mathcal{Z}}(d_1), \ldots, N_{\mathcal{Z}}(d_M)\bigr).
+\]
+\end{definition}
+
+The restriction to positive levels $d_m > 0$ ensures this map is non-constant:
+taking two symmetric quartets with different imaginary parts, one below $d_1$
+and one above $d_M$, gives different first coordinates.
+
+\subsection{Information refinement preorder}
+
+\begin{definition}[Refinement preorder]
+\label{def:preorder}
+For two observation maps $O_a, O_b : \Hsym \to S_a$ and $\Hsym \to S_b$,
+write $O_a \preceq O_b$ (``$O_b$ refines $O_a$'') if there is a function
+$f$ such that $O_a = f \circ O_b$.  Write $O_a \bowtie O_b$ for
+\emph{incomparability}: $O_a \npreceq O_b$ and $O_b \npreceq O_a$.
+\end{definition}
+
+This is a preorder (reflexive and transitive) but not in general antisymmetric.
+No lattice structure is claimed.
+
+\subsection{Building blocks: the on-line pair and the off-line quartet}
+
+Two basic building blocks recur throughout:
+\begin{align*}
+  L(t) &= \{{\textstyle\frac{1}{2}} + it,\; {\textstyle\frac{1}{2}} - it\} && \text{(critical-line conjugate pair, }t > 0\text{)},\\
+  Q(\sigma_0, T) &= \{\sigma_0 \pm iT,\; 1-\sigma_0 \pm iT\} && \text{(off-line symmetric quartet, }\sigma_0 \neq {\textstyle\frac{1}{2}}\text{)}.
+\end{align*}
+Both are in $\Hsym$ for any $0 < \sigma_0 < 1$ and $t, T > 0$.
+We have $P(L(t)) = 1$ and $P(Q(\sigma_0,T)) = 0$ (for $\sigma_0 \neq 1/2$).
+
+Direct computation using~Definition~\ref{def:Li} gives:
+\begin{align}
+  \Li_j(L(t))         &= 4\,\re\varphi_j\!\bigl({\textstyle\frac12}+it\bigr), \label{eq:Lionline}\\
+  \Li_j(Q(\sigma_0,T)) &= 4\,\re\bigl[\varphi_j(\sigma_0+iT) + \varphi_j(1-\sigma_0+iT)\bigr]. \label{eq:Lioffl}
+\end{align}
+For the standard Li tests, $|\Li_j(Q(\sigma_0,T))| = O(T^{-1})$ as $T \to \infty$.
+
+%%--------------------------------------------------------------------
+\section{Li observations admit exact collisions (Theorem B2)}
+\label{sec:B2}
+%%--------------------------------------------------------------------
+
+\subsection{Statement}
+
+\begin{theorem}[B2 --- exact Li collision]
+\label{thm:B2}
+For every $m \geq 1$ and every family of test functions
+$\Phi = (\varphi_1, \ldots, \varphi_m)$ satisfying \textup{\ref{itm:realval}}
+and \textup{\ref{itm:decay}}, there exist multisets
+$\mathcal{Z}_+, \mathcal{Z}_- \in \Hsym$ with $P(\mathcal{Z}_+) = 1$,
+$P(\mathcal{Z}_-) = 0$, and
+\[
+  \Li_j(\mathcal{Z}_+) = \Li_j(\mathcal{Z}_-) \qquad \text{for all } j = 1, \ldots, m.
+\]
+Moreover, $\mathcal{Z}_\pm$ can be taken to have rational heights and all
+multiplicities nonnegative integers.
+\end{theorem}
+
+\subsection{The collision matrix}
+
+Fix distinct positive rationals $0 < t_1 < \cdots < t_m$ and a rational
+$T > t_m$.  Let $\mathcal{Z}_+$ consist of $M$ copies of each $L(t_k)$ (for a
+buffer $M \geq 1$ to be chosen), and let $\mathcal{Z}_-$ be obtained from
+$\mathcal{Z}_+$ by adding $n_k$ copies of $L(t_k)$ (where $n_k \in \Z$ with
+$M + n_k \geq 0$) and $R$ copies of $Q(3/4, T)$.
+
+The exact collision condition $\Li_j(\mathcal{Z}_+) = \Li_j(\mathcal{Z}_-)$
+becomes, for $j = 1, \ldots, m$:
+\[
+  \sum_{k=1}^m n_k \, C_{jk} + R \, d_j(T) = 0, \tag{$\star$}\label{eq:collision}
+\]
+where
+\begin{align*}
+  C_{jk} &= \Li_j(L(t_k)) = 4\,\re\varphi_j\!\bigl({\textstyle\frac12}+it_k\bigr),\\
+  d_j(T) &= \Li_j(Q(3/4,T)) = 4\,\re\bigl[\varphi_j({\textstyle\frac34}+iT) + \varphi_j({\textstyle\frac14}+iT)\bigr].
+\end{align*}
+In matrix form, $Cn + Rd(T) = 0$ where $C \in \RR^{m \times m}$ and
+$d(T) \in \RR^m$.
+
+\subsection{Non-vanishing of the quartet tail}
+
+\begin{lemma}[Positivity of $d_1(T)$]
+\label{lem:d1pos}
+For every $T > 0$, $d_1(T) > 0$.
+\end{lemma}
+
+\begin{proof}
+For the standard Li test $\varphi_1(\rho) = 1 - (1 - \rho^{-1}) = \rho^{-1}$,
+one computes
+\[
+  d_1(T) = 4\,\re\bigl[\tfrac{1}{\frac34+iT} + \tfrac{1}{\frac14+iT}\bigr]
+         = 4\biggl(\frac{3/4}{(3/4)^2+T^2} + \frac{1/4}{(1/4)^2+T^2}\biggr) > 0.
+\]
+The explicit rational formula is
+$d_1(T) = \frac{64(16T^2+3)}{(256T^4+160T^2+9)}$,
+whose numerator $64(16T^2+3)$ and denominator $256T^4+160T^2+9$ are sums of
+positive terms, so $d_1(T) > 0$ for all real~$T$.
+\end{proof}
+
+\subsection{Non-singularity of the Li collision matrix}
+
+\begin{lemma}[Full rank of $C$]
+\label{lem:Crank}
+For distinct $t_1, \ldots, t_m > 0$, the matrix $C = (C_{jk})$ with
+$C_{jk} = 4(1 - T_j(x_k))$ \textup{(}where $x_k = (4t_k^2 - 1)/(4t_k^2+1)$
+and $T_j$ is the degree-$j$ Chebyshev polynomial\textup{)} satisfies $\det C \neq 0$.
+\end{lemma}
+
+\begin{proof}
+We reduce to a Vandermonde determinant.  Since $T_j(1) = 1$, we have
+$1 - T_j(x) = (1-x)\,q_j(x)$ for a polynomial $q_j$ of degree exactly $j-1$
+with leading coefficient $2^{j-1}$.  Thus
+\[
+  C_{jk} = 4(1-x_k)\,q_j(x_k),
+\]
+and $C = 4 \cdot [q_j(x_k)] \cdot \operatorname{diag}(1-x_k)$.
+Since $x_k \in (-1,1)$ each factor $1-x_k > 0$, so $\det C \neq 0$ iff
+$\det[q_j(x_k)] \neq 0$.
+
+The polynomials $\{q_j\}_{j=1}^m$ have degrees $0, 1, \ldots, m-1$ with
+positive leading coefficients; they form a lower-triangular basis over the
+monomial basis.  Writing $q_j(x) = \sum_{i=1}^j a_{ji} x^{i-1}$ with
+$a_{jj} = 2^{j-1} > 0$, the evaluation matrix factors as
+$[q_j(x_k)] = A \cdot V(x_1, \ldots, x_m)$
+where $A$ is lower-triangular with diagonal $2^{j-1} > 0$
+and $V(x_1,\ldots,x_m)$ is the Vandermonde matrix with $(i,k)$-entry $x_k^{i-1}$.
+Since the $t_k$ are distinct and $x(t) = (4t^2-1)/(4t^2+1)$ is strictly
+increasing, the $x_k$ are distinct, so $\det V \neq 0$.  Hence $\det C \neq 0$.
+\end{proof}
+
+\begin{remark}
+The same rank argument applies to moment-type tests $\varphi_j(\rho) = \rho^{-j}$
+via a cosine-Vandermonde reduction on $\cos\theta_k$ where $\theta_k = 2\arctan(2t_k)$.
+\end{remark}
+
+\subsection{Rational solution and non-negative integer multiplicities}
+
+\begin{proof}[Proof of Theorem~\ref{thm:B2}]
+Choose distinct rational $t_1 < \cdots < t_m$ and rational $T > t_m$.
+Lemma~\ref{lem:Crank} gives $C$ invertible over $\Q$ (the matrix entries are
+rational when $t_k, T$ are rational).  Set
+\[
+  \beta = -C^{-1} d(T) \in \Q^m.
+\]
+Let $R = \operatorname{lcm}(\text{denominators of }\beta_1,\ldots,\beta_m) \in \Z_{\geq 1}$ and
+$n_k = R\beta_k \in \Z$.  Then $Cn + Rd(T) = 0$, i.e.~\eqref{eq:collision} holds.
+
+\textbf{Non-negative multiplicities.} Set $M = \max_k |n_k|$.  Then
+$M + n_k \geq 0$ for all~$k$.  Define:
+\[
+  \mathcal{Z}_+ = \bigsqcup_{k=1}^m (M+n_k) \cdot L(t_k) \cdot \{n_k \geq 0\} \cup M \cdot L(t_k) \cdot \{n_k < 0\},
+\]
+i.e., $\mathcal{Z}_+$ contains $M$ copies of each $L(t_k)$ (if $n_k < 0$,
+these will be ``removed'' to form $\mathcal{Z}_-$; if $n_k \geq 0$, one can
+take $\mathcal{Z}_+$ to contain $(M + n_k)$ and $\mathcal{Z}_-$ to contain $M$
+copies, or equivalently start from $M$ copies and add $n_k \geq 0$ copies to
+form $\mathcal{Z}_-$).
+
+More precisely: let $\mathcal{Z}_+$ contain $M$ copies of $L(t_k)$ for each $k$,
+and let $\mathcal{Z}_-$ contain $(M + n_k)$ copies of $L(t_k)$ plus $R$ copies
+of $Q(3/4, T)$.  Both are in $\Hsym$; all multiplicities are $\geq 0$ since
+$M + n_k \geq 0$.
+
+\textbf{Observation collision.} By construction $Cn + Rd(T) = 0$, which is
+exactly $\Li_j(\mathcal{Z}_-) - \Li_j(\mathcal{Z}_+) = 0$ for each $j$.
+
+\textbf{Predicate separation.}  $P(\mathcal{Z}_+) = 1$ (all atoms on $\re\rho = 1/2$).
+$P(\mathcal{Z}_-) = 0$ since $\mathcal{Z}_-$ contains atoms at $\re\rho = 3/4$
+from the $R \geq 1$ copies of $Q(3/4,T)$; $R \geq 1$ follows from
+$d(T) \neq 0$ (which holds because $d_1(T) > 0$ by Lemma~\ref{lem:d1pos}, so
+$d(T) \neq 0$, hence $\beta = -C^{-1}d(T) \neq 0$, hence $R \geq 1$).
+\end{proof}
+
+\subsection{Numerical illustration}
+
+For $m = 2$, $t_1 = 1$, $t_2 = 2$, $T = 1$, the explicit R-symm matrix and
+vector are (from exact rational arithmetic):
+\[
+  C = \begin{pmatrix} 4(1-\cos\theta_1) & 4(1-\cos\theta_2) \\
+                      4(1-\cos 2\theta_1) & 4(1-\cos 2\theta_2) \end{pmatrix},
+\]
+where $\theta_k = 2\arctan(2t_k) - \pi$.  The solution gives a rational
+$\beta$ with $Cn + Rd(T) = 0$ exactly; independent exact-rational reconstruction
+(Python \texttt{fractions.Fraction}, SHA-256 pinned) confirms zero residual for
+both $m=2$ and $m=3$ instances.
+
+%%--------------------------------------------------------------------
+\section{No uniform Li separation (Theorem B1)}
+\label{sec:B1}
+%%--------------------------------------------------------------------
+
+\subsection{Statement}
+
+\begin{theorem}[B1 --- no uniform separation]
+\label{thm:B1}
+Fix $m \geq 1$ and a test family $\Phi$ satisfying \textup{\ref{itm:realval}}
+and \textup{\ref{itm:decay}}.  Let $\mathcal{Z}_+ \in \Hsym$ satisfy
+$P(\mathcal{Z}_+) = 1$ and suppose each $\Li_j(\mathcal{Z}_+)$ strictly exceeds
+a threshold $c_j \in \RR$.  Then for every $\varepsilon > 0$ there exists
+$\mathcal{Z}_- \in \Hsym$ with $P(\mathcal{Z}_-) = 0$ and
+\[
+  |\Li_j(\mathcal{Z}_-) - \Li_j(\mathcal{Z}_+)| < \varepsilon \qquad
+  \text{for all } j = 1, \ldots, m.
+\]
+In particular, $\mathcal{Z}_-$ also satisfies $\Li_j(\mathcal{Z}_-) > c_j$
+whenever $\varepsilon < \Li_j(\mathcal{Z}_+) - c_j$.
+\end{theorem}
+
+\begin{proof}
+Add a single off-line quartet $Q(3/4, T)$ to $\mathcal{Z}_+$ to obtain
+$\mathcal{Z}'_- = \mathcal{Z}_+ \sqcup Q(3/4, T)$.  Then
+$\Li_j(\mathcal{Z}'_-) = \Li_j(\mathcal{Z}_+) + d_j(T)$, and $d_j(T) \to 0$
+as $T \to \infty$ by condition~\ref{itm:decay}.  Hence for large enough $T$,
+$|\Li_j(\mathcal{Z}'_-) - \Li_j(\mathcal{Z}_+)| < \varepsilon$ for all~$j$.
+Since $Q(3/4,T)$ contributes atoms at $\re\rho = 3/4 \neq 1/2$, we have
+$P(\mathcal{Z}'_-) = 0$.
+\end{proof}
+
+\begin{corollary}[B1-Li]
+\label{cor:B1Li}
+For every fixed $K$, satisfying the first $K$ strict positivity conditions
+$\lambda_j > 0$ for $j = 1, \ldots, K$ does not determine whether all atoms
+lie on the critical line: there exist $\mathcal{Z}_- \in \Hsym$ with
+$P(\mathcal{Z}_-) = 0$ satisfying all $K$ conditions.
+\end{corollary}
+
+\subsection{Relation to Theorem B2}
+
+Theorem~B1 gives approximate non-discrimination (tolerance $\varepsilon$);
+Theorem~B2 gives exact non-discrimination ($\varepsilon = 0$).  B1 requires
+only the decay condition~\ref{itm:decay}, while B2 additionally requires
+the matrix $C$ to be invertible over $\Q$.  Both escape routes are identical:
+a method using an infinite hierarchy $m \to \infty$ of tests, an Euler product
+constraint, or the functional equation is not blocked by either theorem.
+
+%%--------------------------------------------------------------------
+\section{Li and counting observations are incomparable (Theorem H$'$(i))}
+\label{sec:H}
+%%--------------------------------------------------------------------
+
+\subsection{Statement}
+
+\begin{theorem}[H$'$(i) --- incomparability]
+\label{thm:Hincomp}
+Fix $M \geq 1$ and positive sampling levels $0 < d_1 < \cdots < d_M$.  For
+every $K \geq 1$,
+\[
+  \Ofinite^{(K)} \bowtie \Otheta \qquad \text{on } \Hsym.
+\]
+That is, $\Ofinite^{(K)} \npreceq \Otheta$ and $\Otheta \npreceq \Ofinite^{(K)}$.
+\end{theorem}
+
+Incomparability is the formal expression of the claim that Li observations and
+counting observations \emph{capture orthogonal aspects} of the zero multiset:
+each can distinguish configurations the other cannot.
+
+\subsection{Witness 1: same-height quartets ($\Ofinite^{(K)} \npreceq \Otheta$)}
+
+For $T > 0$ and $\sigma_0 \in (1/2, 1)$, the multiset $Q(\sigma_0, T)$ has
+imaginary parts $\pm T$ (each with multiplicity~$2$), so
+$N_{Q(\sigma_0,T)}(u) = 4$ for $u \geq T$ and $= 0$ for $u < T$.
+In particular, $\Otheta(Q(\sigma_0, T))$ depends only on~$T$, not on $\sigma_0$.
+
+Taking $T = 10$, $\sigma_0 = 3/4$ and $\sigma_0' = 9/10$:
+$\Otheta(Q(3/4, 10)) = \Otheta(Q(9/10, 10))$ at every level $d_m$.
+
+However, using the Li test $\varphi_1(\rho) = \rho^{-1}$ and the normalization
+of Definition~\ref{def:Li}:
+\begin{align*}
+  \Li_1(Q(3/4,10)) &= 4\,\re\bigl[\tfrac{1}{3/4+10i} + \tfrac{1}{1/4+10i}\bigr]
+                    = \frac{102592}{2576009} \approx 0.039826,\\
+  \Li_1(Q(9/10,10)) &= 4\,\re\bigl[\tfrac{1}{9/10+10i} + \tfrac{1}{1/10+10i}\bigr]
+                     = \frac{4003600}{100820081} \approx 0.039710.
+\end{align*}
+The exact difference is $\frac{30024117552}{259713436036729} > 0$
+(verified by exact rational arithmetic).
+
+Therefore the pair $(Q(3/4,10),\, Q(9/10,10))$ satisfies:
+$\Otheta$ cannot distinguish them, but $\Ofinite^{(K)}$ can.
+This proves $\Ofinite^{(K)} \npreceq \Otheta$.
+
+\subsection{The non-cancellation lemma}
+
+\begin{lemma}[Non-cancellation parameter selection]
+\label{lem:noncancel}
+Fix $K \geq 1$ and $d_* > 0$.  One can choose rational parameters
+$0 < t_1 < \cdots < t_K < T < d_*$ such that the B2 vector
+$\beta = -C^{-1}d(T) \in \Q^K$ satisfies
+\[
+  G_K(t_1, \ldots, t_K, T) := 2 + \sum_{k=1}^K \beta_k \neq 0.
+\]
+\end{lemma}
+
+\begin{proof}
+For fixed rational $t_1 < \cdots < t_K$, the entries of $C$, $d(T)$, and
+$\beta = -C^{-1}d(T)$ are rational functions of $T$.  As $T \to \infty$ with
+$t_k$ fixed, $\varphi_j(\sigma + iT) \to 0$ for any $\sigma \in (0,1)$,
+so $d(T) \to 0$ and $\beta \to 0$, hence $G_K \to 2 \neq 0$.
+
+Therefore $G_K$ is not the identically zero rational function of $(t_1,\ldots,t_K,T)$.
+Its non-vanishing is an open condition; the set where $G_K \neq 0$ is a dense open
+subset of the parameter domain $\{0 < t_1 < \cdots < t_K < T < d_*\}$.
+Since rational points are dense in this open set, one can choose all parameters
+rational with $G_K \neq 0$.
+\end{proof}
+
+\begin{remark}
+The lemma is necessary: the exact rational counterexample $K=2$, $t_1 = 1/24$,
+$t_2 = 9/40$, $T = 3/8$ gives $G_2 = 0$ (verified by exact computation).
+The claim ``any B2 pair automatically separates the counting observation'' is
+false; one must select parameters avoiding the cancellation locus.
+\end{remark}
+
+\subsection{Witness 2: B2 pair with non-cancellation ($\Otheta \npreceq \Ofinite^{(K)}$)}
+
+\begin{proof}[Proof of $\Otheta \npreceq \Ofinite^{(K)}$]
+Fix $K \geq 1$.  Choose rational $0 < t_1 < \cdots < t_K < T < d_1$ using
+Lemma~\ref{lem:noncancel}, so that the B2 parameters satisfy $G_K \neq 0$.
+
+Construct the B2 collision pair as in Theorem~\ref{thm:B2}: let $R = \operatorname{lcm}(\text{denom of }\beta)$,
+$n_k = R\beta_k$, $M = \max_k |n_k|$.  Set $\mathcal{Z}_+$ with $M$ copies of $L(t_k)$
+and $\mathcal{Z}_-$ with $(M+n_k)$ copies of $L(t_k)$ plus $R$ copies of $Q(3/4,T)$.
+By Theorem~\ref{thm:B2}, $\Ofinite^{(K)}(\mathcal{Z}_+) = \Ofinite^{(K)}(\mathcal{Z}_-)$.
+
+For the counting observation, since $T < d_1$, all atoms of both $\mathcal{Z}_+$
+and $\mathcal{Z}_-$ have $|\im\rho| \leq T < d_1$.  Computing:
+\begin{align*}
+  N_{\mathcal{Z}_-}(d_1) - N_{\mathcal{Z}_+}(d_1)
+  &= 2\sum_{k=1}^K n_k + 4R
+   = 2R\!\left(\sum_{k=1}^K \beta_k + 2\right)
+   = 2R \, G_K.
+\end{align*}
+By Lemma~\ref{lem:noncancel}, $G_K \neq 0$, and $R \geq 1$, so
+$N_{\mathcal{Z}_-}(d_1) \neq N_{\mathcal{Z}_+}(d_1)$.  Hence
+$\Otheta(\mathcal{Z}_-) \neq \Otheta(\mathcal{Z}_+)$, proving
+$\Otheta \npreceq \Ofinite^{(K)}$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:Hincomp}}
+
+Both directions are now established:
+$\Ofinite^{(K)} \npreceq \Otheta$ by Witness~1 (same-height quartets, Section~4.2),
+and $\Otheta \npreceq \Ofinite^{(K)}$ by Witness~2 (B2 pair with non-cancellation,
+Section~4.4).  This gives $\Ofinite^{(K)} \bowtie \Otheta$ for every $K \geq 1$.
+\qed
+
+\subsection{Remark on the oracle}
+
+The finest observation is the full multiset $O_{\mathrm{oracle}}(\mathcal{Z}) = \mathcal{Z}$.
+Both $\Ofinite^{(K)}$ and $\Otheta$ are strictly coarser: the B2 pair exhibits
+$\Ofinite^{(K)}(\mathcal{Z}_+) = \Ofinite^{(K)}(\mathcal{Z}_-)$ with $\mathcal{Z}_+ \neq \mathcal{Z}_-$,
+and similarly for $\Otheta$ via the same-height quartet.
+A successful RH proof would need to use information strictly beyond either of
+these two observation classes --- or a combination that is not blocked.
+
+%%--------------------------------------------------------------------
+\section{Finite Euler factors do not force critical-line zeros (Corollary C)}
+\label{sec:C}
+%%--------------------------------------------------------------------
+
+\subsection{Setting: Helson zeta functions}
+
+For a completely multiplicative unimodular function $\chi : \mathbb{N} \to \mathbb{T}$
+($|\chi(p)| = 1$ for all primes $p$), define the Helson zeta function
+$\zeta_\chi(s) = \sum_{n \geq 1} \chi(n) n^{-s} = \prod_p (1-\chi(p)p^{-s})^{-1}$,
+convergent for $\re s > 1$.  For a finite prime cutoff $P_0$, say $\chi$ is
+\emph{$P_0$-standard} if $\chi(p) = 1$ for all primes $p \leq P_0$.
+
+Let $\mathcal{H}_S$ denote the Helson zeta functions admitting meromorphic
+continuation to the open strip $S = \{0 < \re s < 1\}$.  Define the target
+predicate $P_S(\zeta_\chi) = 1$ iff every zero $\rho \in S$ of $\zeta_\chi$
+satisfies $\re\rho = 1/2$.
+
+\subsection{Statement}
+
+\begin{corollary}[C --- finite Euler factors do not force critical-line zeros]
+\label{cor:C}
+For every finite prime cutoff $P_0$ and every $z_1 \in S$ with $\re z_1 \neq 1/2$,
+there exists a completely multiplicative unimodular $\tilde\chi$ with
+$\tilde\chi(p) = 1$ for all $p \leq P_0$ \textup{(}$P_0$-standard\textup{)},
+such that $\zeta_{\tilde\chi} \in \mathcal{H}_S$ and $P_S(\zeta_{\tilde\chi}) = 0$.
+
+In particular, for every satisfiable observation value
+$a = (a_p)_{p \leq P_0} \in \mathbb{T}^{\pi(P_0)}$, there exists $\zeta \in \mathcal{H}_S$
+with the prescribed Euler data and $P_S(\zeta) = 0$.
+\end{corollary}
+
+\begin{proof}
+\textbf{Step 1.} By Andersson~\cite[Theorem~5]{Andersson2024}, there exists
+a Helson zeta function $\zeta_\chi$ with a simple zero at $z_1 \in S$,
+$\re z_1 \neq 1/2$.
+
+\textbf{Step 2.} Define the finite-factor ratio
+\[
+  R(s) = \prod_{p \leq P_0} \frac{1 - \chi(p)p^{-s}}{1 - p^{-s}}.
+\]
+This is a ratio of two finite Euler products, meromorphic on $\mathbb{C}$.
+Since $|\chi(p)| = 1$, the zeros of $1 - \chi(p)p^{-s} = 0$ satisfy
+$\re s = 0$; similarly for $1 - p^{-s} = 0$.  Hence $R$ is \emph{holomorphic
+and nowhere zero on the entire strip $S$}.
+
+\textbf{Step 3.} Set $\zeta_{\tilde\chi} = \zeta_\chi \cdot R(s)$.  The factor
+$R$ replaces the Euler factors at $p \leq P_0$ by the standard ones, so
+$\tilde\chi(p) = 1$ for $p \leq P_0$.  Since $R(z_1) \neq 0$ (Step~2), the
+zero of $\zeta_\chi$ at $z_1$ is preserved in $\zeta_{\tilde\chi}$.
+Thus $P_S(\zeta_{\tilde\chi}) = 0$, while the Euler data matches
+$(1, \ldots, 1)$ at all $p \leq P_0$.
+
+For the all-fiber strengthening, replace $R$ by
+$R_a(s) = \prod_{p \leq P_0}(1-\chi(p)p^{-s})/(1-a_p p^{-s})$; the argument
+is identical.
+\end{proof}
+
+\begin{remark}[Scope limitation]
+Corollary~C applies only to the Helson class.  It does \emph{not} apply to the
+Selberg class (which imposes the functional equation, the gamma factor, and
+Dirichlet coefficient multiplicativity not present in the Helson class), nor to
+$\zeta$ itself.  The escape route is any proof method that uses the full
+Selberg-class axioms or $\zeta$-specific structure.
+\end{remark}
+
+%%--------------------------------------------------------------------
+\section{Discussion}
+\label{sec:discussion}
+%%--------------------------------------------------------------------
+
+\subsection{What the barriers say together}
+
+The three main theorems cover complementary aspects of the finite-arithmetic
+landscape:
+
+\begin{itemize}
+\item B2 and B1 together say: \emph{no finite collection of Li values, however
+  large, determines whether all zeros are on the critical line.}  B2 achieves
+  this as an exact collision; B1 says the gap cannot be bounded away from zero.
+
+\item H$'$(i) says: \emph{Li values and counting data are not redundant---each
+  sees things the other cannot.}  This means one cannot substitute one
+  observation type for the other, and a method combining both faces barriers
+  from both sides.
+
+\item Corollary~C says: \emph{finite Euler product information also leaves a
+  gap}, specifically within the Helson class.
+\end{itemize}
+
+Together they suggest that a complete finite-arithmetic proof of RH would need
+to use all three types of information simultaneously, and in an essentially
+infinite (or growing with $T$) way.
+
+\subsection{Escape routes}
+
+The following methods are \emph{not} blocked by the theorems in this paper:
+
+\begin{enumerate}
+\item An unbounded hierarchy of Li tests ($m \to \infty$, all simultaneously).
+\item The full Euler product $\prod_p (1-p^{-s})^{-1}$ plus functional equation.
+\item Combined Euler-product and Li discipline with growing $K = K(T)$.
+\item The Selberg-class axioms (for Corollary~C only).
+\item Methods that use the imaginary part of $\log\zeta(1/2+it)$ continuously
+  (not just finitely many samples).
+\end{enumerate}
+
+\subsection{Open problems}
+
+\begin{enumerate}
+\item \textbf{Grow-with-$T$ barriers.} Is there an information obstruction that
+  remains valid even as $K = K(T)$ grows with the height parameter $T$?
+
+\item \textbf{Combined Li + Euler barriers.} Does combining $O_{\mathrm{fin}}^{(K)}$
+  with the first $\pi(T)$ Euler factors still leave a gap, or does the combined
+  observation resolve RH for sufficiently large $K, T$?
+
+\item \textbf{Weil-type barriers.} Do analogues of B2 and H$'$(i) hold for
+  continuous Weil-type observations $\hat h(\gamma_n)$ for fixed $h \in C_c^\infty(\RR)$?
+
+\item \textbf{Information hierarchy for the full zero multiset.}  Is there a
+  natural chain of observations $O_1 \preceq O_2 \preceq \cdots$ that converges
+  to $O_{\mathrm{oracle}}$, and at what level does the chain separate $P = 1$
+  from $P = 0$?
+\end{enumerate}
+
+%%--------------------------------------------------------------------
+\bibliographystyle{amsalpha}
+\begin{thebibliography}{99}
+
+\bibitem{Andersson2024}
+J.~Andersson,
+\emph{On the zeros of Dirichlet series with completely multiplicative
+unimodular coefficients},
+arXiv:2408.15713v1, 2024.
+
+\bibitem{BakerGillSolovay1975}
+T.~Baker, J.~Gill, and R.~Solovay,
+\emph{Relativizations of the $P=?NP$ question},
+SIAM J. Comput.~\textbf{4} (1975), no.~4, 431--442.
+
+\bibitem{ConnesWeilFF1999}
+A.~Connes,
+\emph{Trace formula in noncommutative geometry and the zeros of the Riemann
+zeta function},
+Selecta Math. (N.S.)~\textbf{5} (1999), no.~1, 29--106.
+
+\bibitem{Li1997}
+X.-J.~Li,
+\emph{The positivity of a sequence of numbers and the Riemann hypothesis},
+J. Number Theory~\textbf{65} (1997), 325--333.
+
+\bibitem{ProgramV2}
+[Research programme document],
+\emph{RH Obstruction Theory: a programme of exact barrier theorems}, v2.0,
+\texttt{spec/PROGRAM.md} (this repository).
+
+\bibitem{RazborovRudich1997}
+A.~Razborov and S.~Rudich,
+\emph{Natural proofs},
+J. Comput. System Sci.~\textbf{55} (1997), no.~1, 24--35.
+
+\bibitem{Suzuki2013}
+M.~Suzuki,
+\emph{A family of deformations of the Riemann xi-function},
+Acta Arith.~\textbf{157} (2013), no.~3, 201--230.
+DOI: 10.4064/aa157-3-1.
+
+\end{thebibliography}
+
+\end{document}
