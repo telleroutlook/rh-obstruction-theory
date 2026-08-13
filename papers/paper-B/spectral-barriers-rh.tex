@@ -1,10 +1,12 @@
 \documentclass[12pt]{amsart}
+\usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{hyperref}
 \usepackage{enumitem}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
@@ -14,54 +16,46 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
-\newcommand{\Ccl}{\mathcal{C}_{\mathrm{ell}}}
 \newcommand{\Csub}{\mathcal{C}_{\mathrm{logpoly}}^{\mathrm{sub,ell}}}
 
-\title[Spectral Barriers for Hilbert--P\'olya Realizations]{Spectral and Function-Theoretic Barriers for Hilbert--P\'olya
-  Realizations of Riemann Zeros}
+\title[Spectral Exclusions for Riemann Zero Operators]{%
+  Spectral Exclusion Results for Operators Whose Spectrum
+  Would Equal the Riemann Zero Ordinates}
 
 \author{Lin Tao}
-
-\date{\today}
+\date{2026}
 
 \begin{document}
 
 \begin{abstract}
-We prove three spectral exclusion results and one function-theoretic
-non-identifiability lemma concerning operators whose spectra could
-conceivably equal the multiset $\{\gamma_n\}$ of positive imaginary
-parts of the non-trivial zeros of the Riemann zeta function. All
-results are unconditional (no Riemann Hypothesis assumed or implied).
+We prove two spectral exclusion results and record two supporting
+observations about operators $H$ whose spectrum would equal the multiset
+$\{\gamma_n\}$ of positive ordinates of the nontrivial zeros of the
+Riemann zeta function.
 
-\textbf{Theorem~D} shows that no positive classical elliptic
+\textbf{Theorem~D.}  No positive classical elliptic
 pseudodifferential operator of order $m>0$ on any compact smooth
-manifold can have $\{\gamma_n\}$ as its spectrum: the Weyl counting law
-gives a pure-power heat trace, while the Riemann zero heat sum
-$Z_\zeta(t)\sim\frac{1}{2\pi}t^{-1}\log(1/t)$ carries an unavoidable
+manifold has spectrum $\{\gamma_n\}$: the Weyl counting law forces a
+pure-power heat trace, while the zero ordinate heat sum
+$Z_\zeta(t)\sim\frac{1}{2\pi}t^{-1}\log(1/t)$ has an unavoidable
 logarithmic factor.
 
-\textbf{Theorem~D$'$} extends the exclusion to the class $\Csub$ of
-operators whose symbols contain log-polyhomogeneous corrections below
-the principal order; the pure-power Weyl asymptotics persist by a
-min-max squeeze argument.
+\textbf{Theorem~D$'$.}  The exclusion extends to the class~$\Csub$
+of operators with log-polyhomogeneous sub-principal symbols,
+via a min-max squeeze argument.
 
-\textbf{Lemma~E$'$} establishes that any reference odd meromorphic
-function $W$ of conventional order $\le 1$, satisfying mild abstract
-conditions, admits a one-parameter deformation $F^{(c)}$ in the same
-class that agrees with $W$ on any prescribed finite jet at a base
-point yet differs globally; finite jet data do not identify $W$ within
-the class.
+\textbf{Lemma~E$'$.}  Within a natural class of odd meromorphic
+functions, the first $k$ positive real zeros together with a $J$-jet
+at a base point $w_0$ do not identify a reference function $W$: a
+one-parameter polynomial-multiplier deformation achieves the same
+finite data while differing globally.
 
-\textbf{Theorem~G} shows that diagonal trace-class operators with
-spectrum equal to the sequence of Gram levels $\{d_n\}$ cannot have
-their regularized Fredholm determinant equal the Riemann xi function:
-the first Gram level $d_1>\gamma_1$ ensures the determinant is
-non-vanishing at the first zero ordinate $\gamma_1$.
+\textbf{Proposition~G.}  The canonical Hadamard product $F_d$ with
+zeros $\pm d_n$ (Gram levels) is distinct from the completed xi
+function $\hat\Xi$ because $\gamma_1\notin\{d_n\}$.
 
-Together these results delineate the boundary of what the Hilbert--P\'olya
-programme can achieve with classical operator-theoretic tools, and
-they identify concrete escape directions requiring genuinely
-sub-classical symbol growth.
+All results are unconditional; none assumes or concludes the Riemann
+Hypothesis.
 \end{abstract}
 
 \maketitle
@@ -72,73 +66,67 @@ sub-classical symbol growth.
 \label{sec:intro}
 %-----------------------------------------------------------------------
 
-\subsection*{The Hilbert--P\'olya programme}
+\subsection*{Setup and motivation}
 
-A celebrated heuristic due to Hilbert and P\'olya suggests that the
-Riemann Hypothesis might follow if one could exhibit a self-adjoint
-operator $H$ on a Hilbert space whose spectrum coincides with the
-multiset $\{\gamma_n\}_{n\ge 1}$, where $\rho_n = \tfrac{1}{2}+i\gamma_n$
-ranges over the non-trivial zeros of $\zeta(s)$ in the upper half-plane
-(listed with multiplicity, $0<\gamma_1\le\gamma_2\le\cdots$).
-Self-adjointness forces the spectrum to be real, which would immediately
-yield $\re(\rho_n)=\tfrac{1}{2}$ for all $n$.
+The nontrivial zeros of $\zeta(s)$ in the upper half-plane may be
+written as $\rho_n = \beta_n + i\gamma_n$ with $\beta_n\in(0,1)$ and
+$\gamma_n>0$ (listed with multiplicity, $0<\gamma_1\le\gamma_2\le\cdots$).
+The ordinates $\gamma_n$ are unconditionally real; the Riemann
+Hypothesis asserts that $\beta_n=\tfrac{1}{2}$ for all $n$.
 
-Despite substantial efforts, no such operator has been constructed in
-a mathematically complete form.  A complementary programme therefore
-seeks to determine \emph{which classes} of operators are provably
-incapable of realizing $\{\gamma_n\}$ as a spectrum, and to give the
-boundaries of those classes precisely enough to point toward what any
-successful realization \emph{must} look like.
+A programme going back to Hilbert and P\'olya asks whether a
+self-adjoint operator $H$ on a Hilbert space can be exhibited with
+$\operatorname{spec}(H)=\{\gamma_n\}$.  (Note: because $\gamma_n$ are
+already real, self-adjointness alone does not imply RH; one would
+additionally need the spectral determinant to encode $\zeta$ in a way
+that forces $\beta_n=\tfrac12$.  The present paper studies only the
+\emph{spectral matching} question $\operatorname{spec}(H)=\{\gamma_n\}$,
+which is a prerequisite for any such programme.)
 
-\subsection*{Results of this paper}
+A complementary programme asks which operator classes are
+\emph{provably incapable} of realizing $\{\gamma_n\}$ as a spectrum.
+This paper contributes to that programme.
 
-We prove four results in this direction; none assumes or concludes the
-Riemann Hypothesis.
+\subsection*{Results}
 
-\begin{enumerate}[label=(\textbf{\Alph*})]
-  \setcounter{enumi}{3}
-  \item \textbf{Theorem~D} (Section~\ref{sec:elliptic}).  Classical
-    elliptic pseudodifferential operators on compact manifolds are
-    excluded by a comparison of heat-trace asymptotics.
-  \item \textbf{Theorem~D$'$} (Section~\ref{sec:logpoly}).  The
-    exclusion extends to the class $\Csub$ of operators with
-    log-polyhomogeneous symbols, still with positive elliptic principal
-    part.
-  \item \textbf{Lemma~E$'$} (Section~\ref{sec:jet}).  Jet data at a
-    single base point do not identify an odd meromorphic function of
-    conventional order $\le 1$ within a natural record class.
-  \item \textbf{Theorem~G} (Section~\ref{sec:fredholm}).  Diagonal
-    operators with Gram-level spectrum have a Fredholm determinant that
-    cannot equal the Riemann xi function.
+\begin{enumerate}[label=(\textbf{D\arabic*})]
+  \item[\textbf{D}] (Section~\ref{sec:elliptic}).  Classical elliptic
+    pseudodifferential operators on compact manifolds are excluded
+    by a heat-trace comparison.
+  \item[\textbf{D$'$}] (Section~\ref{sec:logpoly}).  The exclusion
+    extends to the class $\Csub$ of operators with
+    log-polyhomogeneous sub-principal symbols.
 \end{enumerate}
+\begin{enumerate}[label=(\textbf{E$'$})]
+  \item (Section~\ref{sec:jet}).  Jet data at a single point do not
+    identify an odd meromorphic function within a natural abstract class.
+\end{enumerate}
+\begin{enumerate}[label=(\textbf{G})]
+  \item (Section~\ref{sec:gram}).  The Gram-level Hadamard product is
+    distinct from $\hat\Xi$ by Hadamard uniqueness.
+\end{enumerate}
+
+All four results are RH-free; they establish structural constraints
+independent of the truth or falsity of RH.
 
 \subsection*{Related work}
 
-The connection between spectral theory and zeros of zeta functions has
-a long history.  Connes~\cite{Connes1999} placed the zeros in a
-semi-classical setting via an adelic operator.
+Watson--Valentinuzzi~\cite{Watson2026} prove a Weyl-law obstruction
+for compact elliptic \emph{differential} operators; Theorem~D
+subsumes their result and extends it to all classical elliptic
+pseudodifferential operators via H\"ormander~\cite{Hormander1968}
+(Theorem~4.4).  Theorem~D$'$ covers a wider log-polyhomogeneous
+symbol class via Lesch~\cite{Lesch1999}.  Connes~\cite{Connes1999}
+places zeta zeros in an adelic spectral setting.
 Connes--Consani--Moscovici~\cite{CCM2025} construct a Dirac-type
-operator $\mathfrak{D}$ such that $\det_{\mathrm{reg}}(\mathfrak{D}-z)
-= -i\lambda^{-iz}\hat{\xi}(z)$; their open step is showing that
-``suitably normalized'' determinants converge to the Riemann $\Xi$
-function.  Suzuki~\cite{Suzuki2013} studies a Weil-type quadratic form
-whose lowest eigenvalue $\lambda(a)$ is positive for small $a$ and
-satisfies $\lambda(a)=\log(1/a)+\text{const}+O(a)$.
-Watson--Valentinuzzi~\cite{Watson2026} (unpublished) prove a
-Weyl-law obstruction for differential operators; our Theorem~D
-extends their conclusion to all classical elliptic pseudodifferential
-operators via H\"ormander~\cite{Hormander1968}, and
-Theorem~D$'$ covers a wider symbol class not treated there.  The heat
-kernel machinery used in Theorems D and D$'$ is classical:
-Berline--Getzler--Vergne~\cite{BGV2004} (Theorem~2.30) handle
-Laplace-type operators, and Gilkey~\cite{Gilkey1995} (Lemma~1.8.2)
-handles differential operators; for general classical elliptic
-pseudodifferential operators we rely on Lesch~\cite{Lesch1999}
-(Theorem~3.7) and H\"ormander~\cite{Hormander1968} (Theorem~4.4).
-The function-theoretic part (Lemma~E$'$) is related in spirit to the
-natural boundaries discussion in Li~\cite{Li1997} and to the
-Razborov--Rudich~\cite{RazborovRudich1997} philosophy of natural proofs,
-though our content is entirely different.
+operator $\mathfrak{D}$ on an adelic space and establish a
+regularized determinant identity involving a function $\hat\xi(z)$
+(defined via a local Weil quadratic form, not to be confused with
+the global Riemann xi function) for which showing convergence to the
+Riemann $\Xi$ is the open step.  Suzuki~\cite{Suzuki2013} studies
+deformations of the Riemann xi-function via a Weil-type quadratic
+form; our Lemma~E$'$ is an abstract function-theoretic statement
+that does not apply to those specific functions.
 
 %-----------------------------------------------------------------------
 \section{Setup and Notation}
@@ -148,158 +136,146 @@ though our content is entirely different.
 \subsection{Heat traces and counting functions}
 
 Let $H$ be a non-negative self-adjoint operator with compact resolvent
-on a separable Hilbert space.  Write $\{e_n\}_{n\ge 1}$ for the
-eigenvalues in non-decreasing order (with multiplicity).  The
+on a separable Hilbert space, with eigenvalues
+$0\le e_1\le e_2\le\cdots$ (listed with multiplicity).  The
 \emph{heat trace} and \emph{spectral counting function} are
 \[
-  Z_H(t) = \operatorname{Tr}(e^{-tH}) = \sum_{n=1}^\infty e^{-e_n t},
-  \qquad t>0,
-\]
-\[
-  N_H(\Lambda) = \#\{n : e_n \le \Lambda\}.
+  Z_H(t)=\operatorname{Tr}(e^{-tH})=\sum_{n=1}^\infty e^{-e_n t},
+  \quad t>0; \qquad
+  N_H(\Lambda)=\#\{n:e_n\le\Lambda\}.
 \]
 
 \begin{theorem}[Karamata~\cite{BGT1987}, Theorem~1.7.1]
 \label{thm:karamata}
-Let $\alpha>0$ and $C>0$.  Then
+For $\alpha>0$ and $C>0$,
 \[
-  N_H(\Lambda)\sim C\Lambda^\alpha \text{ as }\Lambda\to+\infty
-  \quad\iff\quad
-  Z_H(t)\sim C\,\Gamma(\alpha+1)\,t^{-\alpha} \text{ as }t\to 0^+.
+  N_H(\Lambda)\sim C\Lambda^\alpha
+  \;\iff\;
+  Z_H(t)\sim C\,\Gamma(\alpha+1)\,t^{-\alpha}
+  \quad(t\to 0^+).
 \]
 \end{theorem}
 
-\subsection{The Riemann zero heat sum}
+\subsection{The zero ordinate heat sum}
 
-Let $\rho_n = \tfrac{1}{2}+i\gamma_n$ ($n\ge 1$, $\gamma_n>0$, listed
-with multiplicity, $\gamma_1\le\gamma_2\le\cdots$) denote the
-non-trivial zeros of $\zeta(s)$ in the upper half-plane.  Define
+Write the nontrivial zeros in the upper half-plane as
+$\rho_n=\beta_n+i\gamma_n$ ($\beta_n\in(0,1)$, $\gamma_n>0$, listed
+with multiplicity).  Define $Z_\zeta(t)=\sum_{n=1}^\infty e^{-\gamma_n t}$.
+The Riemann--von Mangoldt formula (Titchmarsh--Heath-Brown~\cite{Titchmarsh1986},
+Theorem~9.4) gives
 \[
-  Z_\zeta(t) = \sum_{n=1}^\infty e^{-\gamma_n t}, \qquad t>0.
+  N_\zeta(T)\;:=\;\#\{n:\gamma_n\le T\}
+  \;\sim\;\frac{T\log T}{2\pi}
+  \quad(T\to+\infty),
 \]
-
-The zero-counting function $N_\zeta(T) = \#\{n:\gamma_n\le T\}$
-satisfies the unconditional asymptotic
-\[
-  N_\zeta(T) \sim \frac{T\log T}{2\pi} \quad (T\to+\infty),
-\]
-due to von Mangoldt and developed in Titchmarsh--Heath-Brown~\cite{Titchmarsh1986}
-(Theorem~9.4); no Riemann Hypothesis is required.  Applying
-Karamata's theorem in its Tauberian form (see, e.g.,~\cite{BGT1987}
-Theorem~1.7.1 extended to logarithmically varying functions) yields
+unconditionally.  Applying the Tauberian form of Karamata's theorem
+for logarithmically varying functions (\cite{BGT1987}, \S1.7) yields
 \begin{equation}
   \label{eq:zetaheat}
-  Z_\zeta(t)\sim \frac{1}{2\pi}\,t^{-1}\log\!\bigl(1/t\bigr)
-  \quad \text{as }t\to 0^+.
+  Z_\zeta(t)\sim\frac{1}{2\pi}\,t^{-1}\log(1/t)
+  \quad(t\to 0^+).
 \end{equation}
-The logarithmic factor in~\eqref{eq:zetaheat} is the source of all
-four obstructions proved below.
 
-\subsection{Conventions}
+\subsection{Manifold conventions}
 
-All manifolds are closed (compact without boundary) and smooth unless
+All manifolds are closed (compact, without boundary) and smooth unless
 otherwise stated.  A \emph{classical elliptic pseudodifferential
 operator} of order $m>0$ on a $d$-dimensional manifold $M$ is a
-positive self-adjoint operator $H$ with compact resolvent whose full
-symbol is polyhomogeneous of order $m$ and whose principal symbol
-$h_m(x,\xi)$ satisfies $h_m(x,\xi)\ge c|\xi|^m$ uniformly for
-$|\xi|\ge 1$.  The principal symbol is well-defined modulo lower-order
-terms.
+positive self-adjoint operator $H$ with compact resolvent whose
+complete symbol is polyhomogeneous of order $m$ and whose principal
+symbol $h_m(x,\xi)$ satisfies $h_m(x,\xi)\ge c|\xi|^m$ uniformly
+for $|\xi|\ge 1$.
 
 %-----------------------------------------------------------------------
-\section{Classical Elliptic Operators Cannot Realize Riemann Zeros}
+\section{Classical Elliptic Operators Are Excluded}
 \label{sec:elliptic}
 %-----------------------------------------------------------------------
 
-\begin{theorem}[Theorem~D]
+\begin{theorem}[D]
 \label{thm:D}
-Let $M$ be a closed smooth $d$-dimensional Riemannian manifold ($d\ge 1$),
-and let $H$ be a positive classical elliptic pseudodifferential operator
-of order $m>0$ on $M$ with compact resolvent.  Then
-\[
-  \operatorname{spec}(H) \ne \{\gamma_n\}_{n\ge 1}
-\]
-as multisets.
+Let $M$ be a closed smooth $d$-manifold and $H$ a positive classical
+elliptic pseudodifferential operator of order $m>0$ on $M$ with compact
+resolvent.  Then $\operatorname{spec}(H)\ne\{\gamma_n\}$ as multisets.
 \end{theorem}
 
 \begin{proof}
-By H\"ormander~\cite{Hormander1968} (Theorem~4.4; see also
-Lesch~\cite{Lesch1999} Theorem~3.7 for the pseudodifferential
-generalization), the spectral counting function of $H$ satisfies the
-Weyl law
-\begin{equation}
-  \label{eq:weyl}
-  N_H(\Lambda) \sim C_H\,\Lambda^{d/m}
-  \quad\text{as }\Lambda\to+\infty,
-\end{equation}
+By the Weyl law (H\"ormander~\cite{Hormander1968}, Theorem~4.4),
+\[
+  N_H(\Lambda)\sim C_H\,\Lambda^{d/m}
+  \quad(\Lambda\to+\infty),
+\]
 where
 \[
-  C_H = (2\pi)^{-d}\,\omega_d\,\operatorname{Vol}(M)
-         \int_{h_m(x,\xi)\le 1} d\xi\,dx\;>\;0.
+  C_H=(2\pi)^{-d}\int_{T^*M}\mathbf{1}_{h_m(x,\xi)\le 1}\,d\xi\,dx\;>\;0.
 \]
-Here $\omega_d$ is the volume of the unit ball in $\RR^d$.  Applying
-Theorem~\ref{thm:karamata} (Karamata) to~\eqref{eq:weyl} gives
+(For the specific case $h_m(x,\xi)=|\xi|_x^m$ this reduces to
+$(2\pi)^{-d}\omega_d\operatorname{Vol}(M)$, but the general formula
+is the cosphere integral above.)  By Theorem~\ref{thm:karamata},
 \begin{equation}
   \label{eq:classheat}
-  Z_H(t) \sim C_H\,\Gamma\!\bigl(d/m+1\bigr)\,t^{-d/m}
-  \quad\text{as }t\to 0^+.
+  Z_H(t)\sim C_H\,\Gamma(d/m+1)\,t^{-d/m}
+  \quad(t\to 0^+).
 \end{equation}
-The right-hand side of~\eqref{eq:classheat} is a pure power in $t$
-with no logarithmic factor.
 
-Now suppose for contradiction that $\operatorname{spec}(H)=\{\gamma_n\}$
-as multisets.  Then $Z_H(t)=Z_\zeta(t)$ for all $t>0$, so
-$Z_H(t)\sim\frac{1}{2\pi}t^{-1}\log(1/t)$ by~\eqref{eq:zetaheat}.
-Comparing exponents: as $t\to 0^+$, the ratio
+Suppose for contradiction that $\operatorname{spec}(H)=\{\gamma_n\}$.
+Then $Z_H(t)=Z_\zeta(t)$ for all $t>0$, so by~\eqref{eq:zetaheat}:
 \[
-  \frac{Z_H(t)}{t^{-1}} \sim C_H\Gamma(d/m+1)\,t^{1-d/m}
+  C_H\,\Gamma(d/m+1)\,t^{-d/m}
+  \;\sim\;
+  \frac{1}{2\pi}\,t^{-1}\log(1/t).
 \]
-must tend to a finite positive limit, which forces $d/m=1$.  But then
+Let $\alpha=d/m>0$.  As $t\to 0^+$, the ratio of the two sides is
 \[
-  Z_H(t)\sim C_H\,\Gamma(2)\,t^{-1} = C_H\,t^{-1},
+  \frac{C_H\Gamma(\alpha+1)\,t^{-\alpha}}{(1/2\pi)t^{-1}\log(1/t)}
+  \;=\;
+  2\pi C_H\Gamma(\alpha+1)\,
+  \frac{t^{1-\alpha}}{\log(1/t)}.
 \]
-while $Z_\zeta(t)\sim\frac{1}{2\pi}t^{-1}\log(1/t)\to+\infty$ relative
-to $t^{-1}$.  Thus $Z_H(t)/Z_\zeta(t)\to 0$, contradicting
-$Z_H(t)=Z_\zeta(t)$.
+\begin{itemize}
+\item If $\alpha<1$: the numerator $t^{1-\alpha}\to 0$ while the
+  denominator $\log(1/t)\to+\infty$, so the ratio $\to 0$;
+  the two sides cannot be asymptotic.
+\item If $\alpha>1$: $t^{1-\alpha}\to+\infty$ while $\log(1/t)\to+\infty$
+  more slowly, so the ratio $\to+\infty$; again the two sides
+  cannot be asymptotic.
+\item If $\alpha=1$: the ratio becomes
+  $2\pi C_H\Gamma(2)/\log(1/t)\to 0$
+  as $t\to 0^+$; so $Z_H(t)\sim C_H t^{-1}$ while
+  $Z_\zeta(t)\sim(1/2\pi)t^{-1}\log(1/t)$, and
+  $Z_H(t)/Z_\zeta(t)\to 0$; again a contradiction.
+\end{itemize}
+In all three cases the assumption $Z_H=Z_\zeta$ is impossible.
 \end{proof}
 
 \begin{remark}
 \label{rem:bgvgilkey}
-The classical references BGV~\cite{BGV2004} (Theorem~2.30) and
-Gilkey~\cite{Gilkey1995} (Lemma~1.8.2) derive heat-kernel asymptotics
-for Laplace-type and differential operators respectively; those results
-are sufficient for a restricted version of Theorem~D but do not cover
-general classical elliptic pseudodifferential operators.  Our proof
-uses H\"ormander~\cite{Hormander1968} (Theorem~4.4) directly, which
-applies to the full pseudodifferential class.
+Berline--Getzler--Vergne~\cite{BGV2004} (Theorem~2.30) and
+Gilkey~\cite{Gilkey1995} (\S1.7) give heat-kernel asymptotics
+for Laplace-type and differential operators; those results
+suffice for a restricted version of Theorem~D but do not
+cover general classical elliptic pseudodifferential operators.
+The full case uses H\"ormander~\cite{Hormander1968} (Theorem~4.4).
 \end{remark}
 
-\begin{remark}
-\label{rem:wv}
-Watson--Valentinuzzi~\cite{Watson2026} establish a similar exclusion for
-differential operators on compact manifolds.  Theorem~D subsumes their
-result and extends it to all classical elliptic pseudodifferential operators.
+\begin{remark}[Relation to Watson--Valentinuzzi]
+Watson and Valentinuzzi~\cite{Watson2026} prove a Weyl-law obstruction
+for compact differential operators.  Theorem~D subsumes this and
+covers all classical elliptic pseudodifferential operators
+via H\"ormander~\cite{Hormander1968} (Theorem~4.4).
 \end{remark}
 
 \subsection*{Escape routes from Theorem~D}
 
-The proof uses the Weyl law~\eqref{eq:weyl}, which requires:
-(i)~the manifold $M$ to be compact, (ii)~the operator to be elliptic,
-and (iii)~the symbol to be polyhomogeneous.  Genuine escape routes are:
-
+The proof uses the classical Weyl law, which requires: (i) $M$ compact,
+(ii) the operator elliptic, (iii) the symbol polyhomogeneous.
+Genuine escape routes are:
 \begin{enumerate}[label=(\arabic*)]
-  \item \emph{Non-elliptic operators.}  An operator whose principal
-    symbol vanishes on a characteristic set can have non-classical
-    counting asymptotics.
-  \item \emph{Operators on non-compact manifolds.}  The Weyl law
-    in the form~\eqref{eq:weyl} does not hold in general for
-    non-compact $M$.
-  \item \emph{Infinite-dimensional settings.}  The compact-resolvent
-    hypothesis fails; heat-trace machinery does not apply directly.
-  \item \emph{Sub-elliptic or log-type symbol growth.}  Symbols of
-    type $|\xi|/\log|\xi|$ can produce logarithmically enhanced
-    counting functions; see the counterexample in
-    Section~\ref{sec:logpoly}.
+\item \emph{Non-elliptic operators}---principal symbol vanishing on a
+  characteristic set can produce non-pure-power counting asymptotics
+  (see the counterexample in Section~\ref{sec:logpoly}).
+\item \emph{Operators on non-compact manifolds.}
+\item \emph{Sub-classical symbol growth}, e.g.\ $|\xi|/\log|\xi|$-type
+  symbols; see the discussion in Section~\ref{sec:logpoly}.
 \end{enumerate}
 
 %-----------------------------------------------------------------------
@@ -307,395 +283,306 @@ and (iii)~the symbol to be polyhomogeneous.  Genuine escape routes are:
 \label{sec:logpoly}
 %-----------------------------------------------------------------------
 
-\subsection{The class \texorpdfstring{$\Csub$}{Clogpoly}}
+\subsection{The class \texorpdfstring{$\Csub$}{C-logpoly}}
 
 \begin{definition}
 \label{def:csub}
-Let $d\ge 1$, $m>0$, $K\ge 0$.  The class $\Csub$ consists of scalar
-self-adjoint operators $H\ge -C_0$ with compact resolvent on a closed
-$d$-manifold $M$, whose complete symbol has the asymptotic expansion
+The class $\Csub$ consists of scalar self-adjoint operators $H\ge -C_0$
+(some $C_0\ge 0$) with compact resolvent on a closed $d$-manifold $M$
+whose complete symbol has the asymptotic expansion
 \[
   \sigma(H)(x,\xi)
-  \;\sim\;
+  \sim
   h_m(x,\xi)
-  \;+\;
-  \sum_{j\ge 1}\sum_{\ell=0}^{K} h_{m-j,\ell}(x,\xi)\,(\log|\xi|)^\ell
-  \qquad (|\xi|\to\infty),
+  +
+  \sum_{j\ge 1}\sum_{\ell=0}^{K}
+    h_{m-j,\ell}(x,\xi)(\log|\xi|)^\ell
+  \quad(|\xi|\to\infty),
 \]
 where each $h_{m-j,\ell}$ is homogeneous of degree $m-j$, and the
-principal symbol satisfies $h_m(x,\xi)\ge c|\xi|^m$ uniformly for
+principal symbol $h_m$ satisfies $h_m(x,\xi)\ge c|\xi|^m$ for
 $|\xi|\ge 1$ (positive classical elliptic principal part).
 \end{definition}
 
-The log-polyhomogeneous calculus is developed in Grubb--Seeley~\cite{GrubbSeeley1995}
-and Lesch~\cite{Lesch1999}; see especially Lesch~\cite{Lesch1999}
-Theorem~3.7.  The key point is that the log terms enter the symbol only
-at orders strictly below $m$.
+The log-polyhomogeneous calculus is developed in
+Grubb--Seeley~\cite{GrubbSeeley1995} and Lesch~\cite{Lesch1999}.
 
-\begin{theorem}[Theorem~D$'$]
+\subsection{Form boundedness of the log correction}
+
+The sub-principal log terms constitute an operator $Q=H-P$, where $P$
+is the classical elliptic operator with principal symbol $h_m$ and no
+log corrections.  For any $\varepsilon>0$, each term
+$h_{m-j,\ell}(x,\xi)(\log|\xi|)^\ell$ with $j\ge 1$ belongs to the
+symbol class $S^{m-1+\varepsilon}(T^*M)$ (since $|\log|\xi||=O(|\xi|^\varepsilon)$
+for every $\varepsilon>0$).  By the Calder\'on--Vaillancourt theorem and
+Sobolev interpolation, $Q$ is form-bounded relative to $P$ with bound~$0$:
+for every $\delta>0$ there exists $C_\delta>0$ such that
+\begin{equation}
+  \label{eq:formbdd}
+  \lvert\langle Qu,u\rangle\rvert
+  \;\le\;
+  \delta\langle Pu,u\rangle+C_\delta\|u\|^2
+  \qquad\forall\,u\in H^{m/2}(M).
+\end{equation}
+Equivalently, as quadratic forms on $H^{m/2}(M)$:
+\begin{equation}
+  \label{eq:formineq}
+  (1-\delta)P-C_\delta\;\le\; H\;\le\;(1+\delta)P+C_\delta.
+\end{equation}
+
+\begin{theorem}[D$'$]
 \label{thm:Dprime}
-Any $H\in\Csub$ satisfies
-\[
-  Z_H(t)\sim C_H\,\Gamma(d/m+1)\,t^{-d/m}
-  \quad\text{as }t\to 0^+,
-\]
-where $C_H>0$ depends only on the principal symbol $h_m$.  In particular,
-$\operatorname{spec}(H)\ne\{\gamma_n\}$.
+Any $H\in\Csub$ satisfies $N_H(\Lambda)\sim C_H\Lambda^{d/m}$, where
+$C_H>0$ is the Weyl constant of the principal symbol $h_m$.  In
+particular, $\operatorname{spec}(H)\ne\{\gamma_n\}$.
 \end{theorem}
 
 \begin{proof}
-Fix $\delta>0$ and let $P$ be the classical elliptic operator (no log
-corrections) with the same principal symbol $h_m$.  Since the
-log-correction terms in the symbol of $H-P$ are of order strictly less
-than $m$, the difference $H-P$ is an operator of order $m-1$ (or lower).
-Standard pseudodifferential calculus gives a constant $C_\delta>0$ such
-that
-\[
-  (1-\delta)P - C_\delta \;\le\; H \;\le\; (1+\delta)P + C_\delta
-\]
-in the sense of quadratic forms on the natural domain.
+Replace $H$ by $H+C_0+1$ (shifting so that $H+C_0+1\ge 1>0$), which
+does not alter the leading asymptotics.  We may therefore assume
+$H\ge 1$.  The comparison operator $P$ satisfies $P\ge c>0$ as well,
+and~\eqref{eq:formineq} holds.
 
-By the min-max principle (Courant--Fischer variational characterization
-of eigenvalues),
+By the min-max (Courant--Fischer) principle, \eqref{eq:formineq}
+implies
 \begin{equation}
-  \label{eq:squeeze}
-  N_P\!\bigl((1-\delta)\Lambda - C_\delta\bigr)
+  \label{eq:minmax}
+  N_P\!\Bigl(\frac{\Lambda-C_\delta}{1+\delta}\Bigr)
   \;\le\;
   N_H(\Lambda)
   \;\le\;
-  N_P\!\bigl((1+\delta)\Lambda + C_\delta\bigr).
+  N_P\!\Bigl(\frac{\Lambda+C_\delta}{1-\delta}\Bigr),
+  \qquad 0<\delta<1.
 \end{equation}
-Since $N_P(\Lambda)\sim C_H\Lambda^{d/m}$ by the Weyl law (Theorem~D),
-dividing~\eqref{eq:squeeze} by $\Lambda^{d/m}$ and sending
+(From $H\le(1+\delta)P+C_\delta$: $\lambda_k(H)\le(1+\delta)\lambda_k(P)+C_\delta$,
+so $\lambda_k(P)\le(\Lambda-C_\delta)/(1+\delta)$ whenever $\lambda_k(H)\le\Lambda$,
+giving the lower bound.  The upper bound is analogous from the left
+inequality.)
+
+Since $N_P(\Lambda)\sim C_H\Lambda^{d/m}$ (Theorem~D, applied to $P$),
+dividing~\eqref{eq:minmax} by $\Lambda^{d/m}$ and letting
 $\Lambda\to+\infty$ gives
 \[
-  C_H(1-\delta)^{d/m}
-  \;\le\;
-  \liminf_{\Lambda\to\infty}\frac{N_H(\Lambda)}{\Lambda^{d/m}}
-  \;\le\;
-  \limsup_{\Lambda\to\infty}\frac{N_H(\Lambda)}{\Lambda^{d/m}}
-  \;\le\;
-  C_H(1+\delta)^{d/m}.
+  C_H(1+\delta)^{-d/m}
+  \;\le\;\liminf_{\Lambda\to\infty}\frac{N_H(\Lambda)}{\Lambda^{d/m}}
+  \;\le\;\limsup_{\Lambda\to\infty}\frac{N_H(\Lambda)}{\Lambda^{d/m}}
+  \;\le\;C_H(1-\delta)^{-d/m}.
 \]
 Since $\delta>0$ is arbitrary, $N_H(\Lambda)\sim C_H\Lambda^{d/m}$.
-Karamata (Theorem~\ref{thm:karamata}) gives the heat-trace asymptotics,
+By Theorem~\ref{thm:karamata}, $Z_H(t)\sim C_H\Gamma(d/m+1)t^{-d/m}$,
 and the exclusion follows by the same argument as Theorem~D.
 \end{proof}
 
-\subsection{A genuine escape: non-elliptic product operators}
+\begin{remark}
+Lesch~\cite{Lesch1999} Theorem~3.7 establishes heat-trace asymptotics of
+$\operatorname{Tr}(Ae^{-tP})$ for log-polyhomogeneous $A$ and classical
+elliptic $P$; it does not directly give $e^{-tH}$ asymptotics for
+log-polyhomogeneous $H$.  Our proof avoids this gap by using the
+form-boundedness comparison~\eqref{eq:formineq} and the classical
+Weyl law for $P$, together with the min-max principle.
+\end{remark}
+
+\subsection{A genuine non-elliptic escape}
 
 The following example shows that log-enhanced heat traces \emph{can}
-occur once ellipticity is dropped, so ellipticity is a necessary
-condition for the pure-power conclusion of Theorems~D and~D$'$.
+occur once ellipticity is dropped.
 
 \begin{remark}[Non-elliptic counterexample]
 \label{rem:counterex}
-Let $\mathbb{T}^4 = \mathbb{T}^2_x\times\mathbb{T}^2_y$ be the
-four-torus and set
-\[
-  H_{\mathrm{prod}} = (I-\Delta_x)(I-\Delta_y).
-\]
-The spectrum is $\{(1+|p|^2)(1+|q|^2)\}_{p,q\in\ZZ^2}$.  A standard
-lattice-point count gives
-\[
-  N_{H_{\mathrm{prod}}}(\Lambda)
-  \;\sim\;
-  \pi^2\,\Lambda\log\Lambda
-  \quad (\Lambda\to+\infty).
-\]
-By Karamata, $Z_{H_{\mathrm{prod}}}(t)\sim \pi^2\,t^{-1}\log(1/t)$ as
-$t\to 0^+$, which has the same logarithmically enhanced form as
-$Z_\zeta(t)$.  This operator is \emph{not} elliptic on $\mathbb{T}^4$
-(its symbol $(1+|\xi|^2)(1+|\eta|^2)$ is a product, not a standard
-elliptic symbol of order 4).  Hence the logarithmic heat-trace form is
-achievable, but only outside the elliptic class.
+Let $\mathbb{T}^4=\mathbb{T}^2_x\times\mathbb{T}^2_y$ and set
+$H_{\mathrm{prod}}=(I-\Delta_x)(I-\Delta_y)$.  The spectrum is
+$\{(1+|p|^2)(1+|q|^2)\}_{p,q\in\ZZ^2}$, and a standard lattice-point
+argument gives $N_{H_{\mathrm{prod}}}(\Lambda)\sim\pi^2\Lambda\log\Lambda$.
+(The torus $\mathbb{T}^2=\RR^2/(2\pi\ZZ)^2$ normalization gives integer
+Fourier modes.)  By Karamata,
+$Z_{H_{\mathrm{prod}}}(t)\sim\pi^2 t^{-1}\log(1/t)$ as $t\to 0^+$.
+This operator is \emph{not} elliptic on $\mathbb{T}^4$: its principal
+symbol $|\xi|^2|\eta|^2$ vanishes on the characteristic set
+$\{\xi=0\}\cup\{\eta=0\}$, which is non-empty.  Hence logarithmically
+enhanced heat traces are achievable outside the elliptic class.
 \end{remark}
 
 \subsection*{The genuine escape class}
 
-Remark~\ref{rem:counterex} identifies the precise escape direction: to
-match $Z_\zeta(t)$, one needs eigenvalue counting $N_H(T)\sim C\,T\log T$.
-A heuristic symbol leading to such a counting law is a classical-type
-symbol of the form $|\xi|/\log|\xi|$ (in one dimension).  More precisely,
-consider the Lambert-W corrected symbol on $S^1$:
+To match $Z_\zeta(t)$ one needs $N_H(T)\sim CT\log T$.  A heuristic
+that achieves this counting law is the Lambert-W corrected symbol on the
+complete circle $S^1$ (both positive and negative Fourier modes):
 \[
-  g(r) = \frac{2\pi r}{W(r/e)},
+  g(r)=\frac{4\pi r}{W(2r/e)},
 \]
-where $W$ is the Lambert-W function ($W(x)e^{W(x)}=x$).  The counting
-function for eigenvalues of an operator with this symbol satisfies the
-same two-term law as $N_\zeta(T)$ through the $T/2\pi$ and
-$(T/2\pi)\log T$ terms, though not individual spacings.  Whether a
-self-adjoint realization with spectrum exactly $\{\gamma_n\}$ can be
-constructed from such symbols is entirely open; Theorems~D and~D$'$
-show only that the classical elliptic regime is excluded.
+where $W$ is the Lambert-W function ($W(x)e^{W(x)}=x$).  The factor
+$4\pi$ (rather than $2\pi$) accounts for the double-sided spectrum
+$\{\pm n\}_{n\ge 1}$ on $S^1$: if $g^{-1}(T)\sim\frac{T}{4\pi}\log(T/2)$,
+then $N(T)\approx 2g^{-1}(T)\sim\frac{T}{2\pi}\log T$, matching the
+first term of $N_\zeta(T)$.  Whether a self-adjoint realization with
+spectrum exactly $\{\gamma_n\}$ can be constructed from such symbols
+remains open.
 
 %-----------------------------------------------------------------------
 \section{Jet Non-Identifiability of Odd Meromorphic Functions}
 \label{sec:jet}
 %-----------------------------------------------------------------------
 
-\subsection{Abstract setup}
+\subsection{Setup}
 
-We work with abstract sequences and odd meromorphic functions; the
-results do not reference the Riemann zeta function or its zeros.
+We work with abstract sequences; the results do not reference $\zeta$.
 
 Let $(a_n)_{n\ge 1}$ be a strictly increasing sequence of positive
-reals satisfying the following abstract conditions:
-\begin{enumerate}[label=(\textbf{A\arabic*})]
-  \item \label{A1} $\sum_{n=1}^\infty a_n^{-2} < \infty$
-    (the sequence is $\ell^2$-summable in reciprocals);
-  \item \label{A2} $a_n\to+\infty$ monotonically;
-  \item \label{A3} The Hadamard product
-    $A(z) = \prod_{n=1}^\infty(1-a_n z^2)$
-    converges absolutely in $\CC$ and defines an entire function of
-    conventional order $\le 1$.
-\end{enumerate}
+reals satisfying $\sum_{n=1}^\infty a_n^{-2}<\infty$.  Define the
+Hadamard product
+\[
+  A(z)=\prod_{n=1}^\infty\Bigl(1-\frac{z^2}{a_n^2}\Bigr),
+\]
+which converges absolutely and defines an even entire function with
+simple real zeros $\pm a_n$.  Let $B$ be an entire function with no
+real zeros, $B(0)\ne 0$, and set $\tilde{B}(z)=B(z)B(-z)$ (even,
+nonvanishing on $\RR$).  Define
+\[
+  W(z)=\frac{z\,A(z)}{\tilde{B}(z)},
+\]
+which is an \emph{odd} meromorphic function of conventional order $\le 1$.
 
-Let $B(z)$ be an entire function with no real zeros, $B(0)\ne 0$,
-$\tilde B(z) = B(z)B(-z)$ even, and set $W(z) = z^2 A(z)/\tilde B(z)$,
-which is an odd meromorphic function of conventional order $\le 1$.
-
-Fix $k\ge 1$, $J\ge 1$, a base point $w_0\in\RR\setminus\{0\}$, and
-set $s=w_0^2>0$.
-
-\begin{definition}
+\begin{definition}[Record class]
 \label{def:recordclass}
-The \emph{record class} $\mathcal{E}_{k,J}^{\mathrm{mer}}(w_0)$ consists
-of all odd meromorphic functions $F$ of conventional order $\le 1$ such that:
+Fix $k\ge 1$, $J\ge 1$, and a base point $w_0\in\RR\setminus\{0\}$
+with $W(w_0)\ne 0$ (i.e., $w_0\ne\pm a_n$ for all $n$).  The
+\emph{record class} $\mathcal{E}_{k,J}^{\mathrm{mer}}(w_0)$ consists
+of all odd meromorphic functions $F$ of conventional order $\le 1$
+satisfying:
 \begin{enumerate}[label=(\roman*)]
-  \item the finite poles of $F$ coincide with those of $W$;
-  \item $F$ has positive real zeros at $a_1,\ldots,a_k$
-    (agreeing with the first $k$ zeros of $W$);
-  \item $\lim_{z\to 0}F(z)/z = A(0)/\tilde B(0)$;
-  \item $F^{(j)}(w_0) = W^{(j)}(w_0)$ for $0\le j < J$.
+\item the (finite) poles of $F$ coincide with those of $W$
+  (with the same multiplicities);
+\item $F$ has positive real zeros at $a_1,\ldots,a_k$
+  (matching the first $k$ zeros of $W$);
+\item $\lim_{z\to 0}F(z)/z=A(0)/\tilde{B}(0)$;
+\item $F^{(j)}(w_0)=W^{(j)}(w_0)$ for $0\le j<J$.
 \end{enumerate}
 \end{definition}
 
-\begin{lemma}[Lemma~E$'$]
+\begin{lemma}[E$'$]
 \label{lem:Eprime}
-Under conditions~\ref{A1}--\ref{A3}, for any $W = z^2A/\tilde B$ as above,
-the record class $\mathcal{E}_{k,J}^{\mathrm{mer}}(w_0)$ contains
-functions $F\ne W$.  In particular, the first $k$ positive real zeros
-together with a $J$-jet at $w_0$ do not identify $W$ within the class.
+Under the above conditions, for every $c>0$ sufficiently small the
+function
+\[
+  F_c(z)=W(z)\cdot Q_c(z),
+  \quad\text{where }Q_c(z)=1+c\,z^2\,(z^2-w_0^2)^{2J},
+\]
+belongs to $\mathcal{E}_{k,J}^{\mathrm{mer}}(w_0)$ and satisfies
+$F_c\ne W$.
 \end{lemma}
 
 \begin{proof}
-Write $x_\ell = a_{k+\ell}$ for $1\le\ell\le J$ and
-$y_m = a_{k+J+m}$ for $m\ge 1$.  Fix $u=(u_1,\ldots,u_J)\in\RR^J$
-near $(x_1,\ldots,x_J)$ and a small parameter $c\in\RR$.  Set the
-perturbed tail zeros
-\[
-  b_m(c) = y_m\Bigl(1+\frac{c}{J+m}\Bigr)^{-2}, \qquad m\ge 1.
-\]
-For $|c|$ small enough, $b_m(c)>0$ and $\sum_m b_m(c)^{-2}<\infty$
-(since $\sum y_m^{-2}<\infty$ and the perturbation is summably bounded).
-Define the entire function
-\[
-  A_{u,c}(z) = A(0)\prod_{n=1}^k(1-a_n z^2)
-               \prod_{\ell=1}^J(1-u_\ell z^2)
-               \prod_{m=1}^\infty(1-b_m(c)z^2)
-\]
-and the candidate function $F^{(c)}(z) = z^2 A_{u(c),c}(z)/\tilde B(z)$.
+$Q_c$ is an even entire polynomial, so $F_c=W\cdot Q_c$ is odd.
+$F_c$ has the same poles as $W$ (since $Q_c$ is entire).
 
-\medskip
-\noindent\textit{Jet matching via the implicit function theorem.}
-Set $t_0 = -s = -w_0^2$ and
-$L(t;\,u,c) = \log A_{u,c}(-t) - \log A(-t)$ (defined for $t$
-near $t_0$ away from zeros).  The jet condition
-$F^{(j)}(w_0)=W^{(j)}(w_0)$ for $0\le j<J$ is equivalent, after
-differentiating the logarithm, to
-\[
-  \Psi_j(u,c) := \partial_t^j L(t_0;\,u,c) = 0, \qquad 0\le j<J.
-\]
-This is a system $\Psi(u,c)=0$ of $J$ equations in $J$ unknowns
-$u=(u_1,\ldots,u_J)$.  At $c=0$ and $u=x:=(x_1,\ldots,x_J)$ we
-have $\Psi(x,0)=0$ (trivially).
+\emph{Real zeros.}  For $z\in\RR$ and $c>0$: $z^2\ge 0$ and
+$(z^2-w_0^2)^{2J}\ge 0$, so $Q_c(z)\ge 1>0$.  Hence $F_c$ has no
+real zeros beyond those of $W$; in particular its first $k$ positive
+real zeros are $a_1,\ldots,a_k$. \checkmark
 
-The Jacobian $D_u\Psi(x,0)$ is computed from the contribution of the
-$J$ new factors $(1-u_\ell z^2)$:
-\[
-  [D_u\Psi(x,0)]_{j\ell}
-  = \partial_{u_\ell}\partial_t^j\,
-    \log\!\bigl(1-u_\ell(-t)\bigr)\big|_{t=t_0,u=x}
-  = \frac{j!\,s^j}{(1+s\,x_\ell)^{j+1}}.
-\]
-Hence
-\[
-  \det D_u\Psi(x,0)
-  = \frac{s^J\,\prod_{j=0}^{J-1}j!}
-         {\prod_\ell(1+s\,x_\ell)^J}
-    \cdot
-    \prod_{p<q}(x_q-x_p),
-\]
-which is a Vandermonde determinant in $(x_1,\ldots,x_J)$ scaled by
-positive factors.  Since the $x_\ell$ are distinct ($(a_n)$ strictly
-increasing), this determinant is non-zero.  By the Implicit Function
-Theorem there is a $C^1$ branch $u(c)$ defined for $|c|<c_0$ with
-$\Psi(u(c),c)=0$, i.e., $F^{(j)}(w_0)=W^{(j)}(w_0)$ for all $j<J$.
+\emph{Normalization at 0.}  $Q_c(0)=1$, so
+$\lim_{z\to 0}F_c(z)/z=\lim_{z\to 0}W(z)/z\cdot Q_c(0)=A(0)/\tilde{B}(0)$. \checkmark
 
-\medskip
-\noindent\textit{Global non-agreement.}
-For $c\ne 0$, $b_m(c)\ne y_m$, so $A_{u(c),c}\ne A$ as entire
-functions (they have different zero sets beyond the first $k+J$
-zeros).  Therefore $F^{(c)}\ne W$.
+\emph{Jet condition.}  At $z=w_0$: $(z^2-w_0^2)^{2J}$ has a zero of
+order $2J$ (since $(z^2-w_0^2)$ vanishes simply at $w_0\ne 0$), and
+$w_0^2\ne 0$, so $(Q_c-1)=c\,z^2(z^2-w_0^2)^{2J}$ vanishes to order
+$2J$ at $w_0$.  Since $W(w_0)\ne 0$,
+$F_c-W=W\cdot(Q_c-1)$ also vanishes to order $2J$ at $w_0$, giving
+$F_c^{(j)}(w_0)=W^{(j)}(w_0)$ for $0\le j<J$. \checkmark
 
-More precisely, the leading difference term is
-\[
-  F^{(c)}(z) - W(z)
-  = -\frac{A(0)}{\tilde B(0)}\,\Delta_1(c)\,z^3 + O(z^5),
-\]
-where
-\[
-  \Delta_1'(0) = (-1)^{J+1}\cdot\frac{2s^J}{\prod_\ell(1+sx_\ell)^J}
-    \sum_{m=1}^\infty
-    \frac{y_m\prod_{\ell=1}^J(x_\ell - y_m)}{(J+m)(1+sy_m)^J}.
-\]
-Positivity or non-vanishing of $\Delta_1'(0)$ follows from the
-alternating sign structure and the fact that
-$\prod_\ell(x_\ell-y_m)$ has a definite sign for all $m$ (since
-$x_\ell < y_m$ for all $\ell,m$ by construction), combined with the
-$(-1)^{J+1}$ prefactor.  This confirms $F^{(c)}\ne W$ for small
-$|c|>0$.
+\emph{Global non-agreement.}  $Q_c\ne 1$ for $c\ne 0$, so $F_c\ne W$.
 \end{proof}
 
 \begin{remark}[Scope restriction -- mandatory]
 \label{rem:scope}
-Lemma~E$'$ applies only to abstract odd meromorphic functions satisfying
-conditions~\ref{A1}--\ref{A3} on the abstract sequence $(a_n)$.  It
-does \emph{not} apply to the actual Riemann $\xi$-function or the Suzuki
-family $W(a,\theta;z)$: instantiating condition~\ref{A1} with the actual
-zero set of $\Xi$ without independently verifying~\ref{A1}--\ref{A3}
-for that specific function would import as a hypothesis either RH or
-closely related unproved information about the location of zeta zeros.
-The lemma is a statement about a class of abstract functions, not a
-statement about $\Xi$ or any RH-related object.
+Lemma~E$'$ applies only to abstract odd meromorphic functions with
+the prescribed structure.  It does \emph{not} apply to the actual
+Riemann $\xi$-function $\Xi$ or to the Suzuki family $W(a,\theta;z)$:
+instantiating the conditions with the actual zero set of $\Xi$ without
+independently proving those conditions would import RH-equivalent
+information.  The lemma is a statement about an abstract class.
+\end{remark}
+
+\begin{remark}[Scope of the record class]
+\label{rem:trivial}
+The record class $\mathcal{E}_{k,J}^{\mathrm{mer}}(w_0)$ is wide
+enough that the one-parameter polynomial deformation $F_c$ is
+available by inspection.  Lemma~E$'$ shows that any observation
+strategy reading only the first $k$ zeros and a $J$-jet at $w_0$
+cannot identify $W$ within this class.  To obtain a result with
+more analytic content one would need to impose additional global
+constraints (e.g., fixed complete zero density, prescribed growth
+rate, or a functional equation).
 \end{remark}
 
 %-----------------------------------------------------------------------
-\section{Diagonal Fredholm Determinant Obstruction}
-\label{sec:fredholm}
+\section{Gram-Level Hadamard Product}
+\label{sec:gram}
 %-----------------------------------------------------------------------
 
-\subsection{Gram levels}
+\subsection{Gram points}
 
 The Riemann--Siegel theta function is
 \[
-  \vartheta(t) = \im\log\Gamma\!\Bigl(\tfrac{1}{4}+\tfrac{it}{2}\Bigr)
-                - \frac{t}{2}\log\pi,
+  \vartheta(t)=\im\log\Gamma\!\Bigl(\tfrac14+\tfrac{it}{2}\Bigr)-\tfrac{t}{2}\log\pi,
 \]
-which satisfies $\vartheta(t) = \frac{t}{2}\log\frac{t}{2\pi}
-- \frac{t}{2} - \frac{\pi}{8} + O(1/t)$ as $t\to+\infty$.
-The \emph{Gram points} $d_n$ are defined by $\vartheta(d_n) = (n-1)\pi$
-($n\ge 1$).  They satisfy $d_n\approx\frac{2\pi n}{\log n}$ for large $n$,
-and the sequence is strictly increasing with $d_n\to+\infty$.
-
-\subsection{Gram-level separation from Riemann zeros}
-
-It is known (see Titchmarsh--Heath-Brown~\cite{Titchmarsh1986}) that on
-average (in the sense of density) the Gram points interleave with the
-imaginary parts of the zeta zeros.  In particular, $d_1 \approx 9.666$
-while $\gamma_1\approx 14.135$, so
+satisfying $\vartheta(t)=\tfrac{t}{2}\log\tfrac{t}{2\pi}-\tfrac{t}{2}
+-\tfrac\pi8+O(1/t)$ as $t\to+\infty$.  The \emph{Gram points}
+$d_n$ ($n\ge 1$) are defined by $\vartheta(d_n)=(n-1)\pi$.  The
+first few values are
 \[
-  d_1 < \gamma_1.
+  d_1\approx 17.8456,\quad
+  d_2\approx 23.1703,\quad
+  d_3\approx 27.6702,
 \]
-More generally, the first few Gram levels satisfy $d_n < \gamma_n$ for
-small $n$ (this reverses at larger $n$ where Gram's law breaks).
+and $d_n\sim 2\pi n/\log n$ for large $n$ (so $\sum_n d_n^{-2}<\infty$).
+The first zero ordinate is $\gamma_1\approx 14.1347$.
+Note that
+\[
+  \gamma_1\approx 14.1347 < d_1\approx 17.8456,
+\]
+so $\gamma_1\notin\{d_n\}_{n\ge 1}$.
 
-\begin{remark}
-\label{rem:gapdir}
-For the purposes of Theorem~G we use only the concrete numerical fact
-$d_1 < \gamma_1$ (equivalently $\gamma_1\notin\{d_n\}$) together with
-the structure of the Hadamard product, neither of which requires RH.
-\end{remark}
+\subsection{The canonical Gram Hadamard product}
 
-\subsection{The diagonal class and Fredholm obstruction}
+Since $\sum_n d_n^{-2}<\infty$, the canonical Hadamard product
+\[
+  F_d(z)=\prod_{n=1}^\infty\Bigl(1-\frac{z^2}{d_n^2}\Bigr)
+\]
+converges absolutely and defines an even entire function of conventional
+order $\le 1$, with simple real zeros $\pm d_n$ and $F_d(0)=1$.
 
-\begin{definition}
-\label{def:gramclass}
-Let $\mathfrak{M}_d^{\mathrm{tr}}$ be the class of diagonal trace-class
-operators on $\ell^2(\mathbb{N})$ with spectrum $= \{d_n\}_{n\ge 1}$
-(Gram levels, each with multiplicity one).
-\end{definition}
+Recall the completed xi function $\hat\xi(s)=\tfrac12 s(s-1)\pi^{-s/2}
+\Gamma(s/2)\zeta(s)$; set $\hat\Xi(z)=\hat\xi(\tfrac12+iz)$, an even
+entire function whose positive real zeros are exactly $\{\gamma_n\}$.
 
-For any $D\in\mathfrak{M}_d^{\mathrm{tr}}$, the regularized Fredholm
-determinant (see Simon~\cite{Simon2005}) is
-\begin{equation}
-  \label{eq:Gd}
-  G_d(z) = \det_{\mathrm{reg}}(D-z)
-  = \prod_{n=1}^\infty\!\Bigl(1-\frac{z}{d_n}\Bigr)\exp\!\Bigl(\frac{z}{d_n}\Bigr).
-\end{equation}
-The product~\eqref{eq:Gd} converges because $\sum_n d_n^{-2}<\infty$
-(which follows from the two-term counting law for Gram points together
-with condition~\ref{A1}-type summability).
-
-Recall the completed xi function $\hat\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}
-\Gamma(s/2)\zeta(s)$, which is entire and satisfies $\hat\xi(1/2+iz)=\hat\xi(1/2-iz)$.
-We write $\hat\Xi(z) = \hat\xi(1/2+iz)$ for the entire function whose zeros
-are precisely $\pm\gamma_n$ (and complex conjugates, but since $\gamma_n>0$
-real the set of positive real zeros of $\hat\Xi$ on $\RR$ is $\{\gamma_n\}$).
-
-\begin{theorem}[Theorem~G]
-\label{thm:G}
-For any $D\in\mathfrak{M}_d^{\mathrm{tr}}$, the regularized determinant
-$G_d$ satisfies $G_d(\gamma_1)\ne 0$.  In particular, $G_d\not\equiv\hat\Xi$,
-and no member of $\mathfrak{M}_d^{\mathrm{tr}}$ can have its Fredholm
-determinant equal to any normalization of the completed xi function
-with zeros at $\{\gamma_n\}$.
-\end{theorem}
+\begin{proposition}[G]
+\label{prop:G}
+$F_d\ne\hat\Xi$.
+\end{proposition}
 
 \begin{proof}
-From the definition~\eqref{eq:Gd},
-\[
-  G_d(\gamma_1)
-  = \prod_{n=1}^\infty\!\Bigl(1-\frac{\gamma_1}{d_n}\Bigr)
-    \exp\!\Bigl(\frac{\gamma_1}{d_n}\Bigr).
-\]
-Since $d_1\approx 9.666 < 14.135\approx\gamma_1$, we have
-$\gamma_1/d_1>1$, so the factor with $n=1$ satisfies
-$1-\gamma_1/d_1<0$.  For $n\ge 2$, the Gram point $d_n$ grows
-monotonically; in fact $d_n\to\infty$, and for the first several
-values one can check numerically that $d_n > \gamma_1$ for $n\ge 2$
-(since $d_2\approx 17.846>\gamma_1$).  Thus each factor
-$(1-\gamma_1/d_n)$ for $n\ge 2$ is positive, and the factor for $n=1$
-is negative.
-
-The product $G_d(\gamma_1)$ converges absolutely (by $\ell^2$-summability
-of $\{d_n^{-1}\}$ combined with the exponential compensators), and each
-individual factor is non-zero (since $\gamma_1\notin\{d_n\}$, as
-$\gamma_1\approx 14.135$ and $d_1\approx 9.666$, $d_2\approx 17.846$,
-and $d_n$ is strictly increasing).  Therefore $G_d(\gamma_1)\ne 0$.
-
-On the other hand, $\hat\Xi(\gamma_1)=0$ by definition of $\gamma_1$
-as an imaginary part of a nontrivial zero.  Hence $G_d\not\equiv\hat\Xi$.
-Any normalization $c\cdot\hat\Xi$ (with $c\ne 0$) also vanishes at
-$\gamma_1$, so no normalization with zeros at $\{\gamma_n\}$ can equal
-$G_d$.
+$\hat\Xi(\gamma_1)=0$ by construction.  Since $\gamma_1\notin\{d_n\}$,
+each factor $(1-\gamma_1^2/d_n^2)\ne 0$, so
+$F_d(\gamma_1)=\prod_{n=1}^\infty(1-\gamma_1^2/d_n^2)\ne 0$.
+Hence $F_d(\gamma_1)\ne\hat\Xi(\gamma_1)$, giving $F_d\ne\hat\Xi$.
 \end{proof}
 
-\begin{remark}[Comparison with CCM]
-\label{rem:ccm}
-Connes--Consani--Moscovici~\cite{CCM2025} construct an explicit
-Dirac-type operator $\mathfrak{D}$ on an adelic space and show that
-$\det_{\mathrm{reg}}(\mathfrak{D}-z) = -i\lambda^{-iz}\hat\xi(z)$
-for a suitable $\lambda$.  Their open step is proving that
-``suitably normalized'' determinants converge to $\Xi$; the phase factor
-$\lambda^{-iz}$ preserves zeros but is not locally uniform, making the
-normalization question load-bearing.  Theorem~G is complementary: it
-shows that the \emph{diagonal} class $\mathfrak{M}_d^{\mathrm{tr}}$,
-which uses Gram levels as eigenvalues, is obstructed.  The CCM operator
-is emphatically \emph{not} in $\mathfrak{M}_d^{\mathrm{tr}}$, so
-Theorem~G does not obstruct the CCM approach.
+\begin{remark}
+Proposition~G follows from Hadamard uniqueness: two entire functions
+of order $\le 1$ with different zero sets are distinct.
+Since $\gamma_1 < d_1$, the zero sets $\{d_n\}$ and $\{\gamma_n\}$
+are disjoint, so $F_d \ne \hat\Xi$ even modulo a nonvanishing
+entire factor.  No operator-theoretic framework is required.
 \end{remark}
 
-\begin{remark}[Escape from Theorem~G]
-\label{rem:escapeG}
-Non-diagonal Fredholm classes escape Theorem~G: if the spectrum of $D$
-were $\{\gamma_n\}$ (not $\{d_n\}$), the determinant $\det_{\mathrm{reg}}(D-z)$
-would have zeros exactly at $\{\gamma_n\}$, matching $\hat\Xi$.  The
-obstruction is specific to the Gram-level diagonal class, not to
-Fredholm determinants in general.  Whether a non-diagonal or
-non-trace-class construction can realize $\det_{\mathrm{reg}}=\hat\Xi$
-is the open question that CCM addresses.
+\begin{remark}[Relation to CCM]
+\label{rem:ccm}
+Connes--Consani--Moscovici~\cite{CCM2025} construct an explicit
+Dirac-type operator $\mathfrak{D}$ and study its regularized
+determinant.  That construction uses spectrum related to primes and
+adelic structure, not the Gram sequence $\{d_n\}$; Proposition~G
+does not bear on the CCM programme.
 \end{remark}
 
 %-----------------------------------------------------------------------
@@ -703,70 +590,33 @@ is the open question that CCM addresses.
 \label{sec:discussion}
 %-----------------------------------------------------------------------
 
-\subsection{What the four results say together}
+Theorems~D and~D$'$ close off the classical elliptic pseudodifferential
+regime on compact manifolds.  The obstruction is the Weyl law: classical
+elliptic operators produce pure-power heat traces, incompatible with the
+log-enhanced $Z_\zeta(t)\sim(1/2\pi)t^{-1}\log(1/t)$.  Theorem~D$'$
+shows this obstruction is stable under log-polyhomogeneous lower-order
+perturbations.  The $\mathbb{T}^4$ counterexample shows that once
+ellipticity is dropped the log-enhancement is achievable.
 
-Theorems~D and~D$'$ close off the entire classical elliptic
-pseudodifferential regime on compact manifolds; the obstacle is purely
-the absence of logarithmic enhancement in the Weyl law.  Theorem~D$'$
-shows that this obstruction is stable under perturbations of the symbol
-by any log-polyhomogeneous lower-order terms; the only way to generate
-the required $t^{-1}\log(1/t)$ heat trace is to break ellipticity at
-the principal level.  The counterexample in Section~\ref{sec:logpoly}
-(the product operator on $\mathbb{T}^4$) shows that the obstruction is
-sharp: once ellipticity is dropped, the logarithmic enhancement is
-achievable.
+Lemma~E$'$ is a function-theoretic statement: within the abstract record
+class, finitely many zeros and a finite jet cannot pin down $W$ globally.
+Its record class is intentionally minimal; strengthening it (e.g., by
+imposing a functional equation or a fixed complete zero density) would
+give a more substantive result.
 
-Lemma~E$'$ operates at the function-theoretic level and is independent
-of the spectral results.  It shows that within a natural class of odd
-meromorphic functions, finite jet data at a base point do not pin down
-the function globally.  This is a non-identifiability result: any
-observation strategy that reads only finitely many derivatives at a
-point cannot distinguish the target $W$ from nearby competitors in the
-same class.
-
-Theorem~G operates at the level of Fredholm determinants.  It shows
-that the Gram-level diagonal class, a natural and explicitly described
-operator family, cannot realize $\hat\Xi$ as its determinant.  The
-three-way separation $\gamma_1 < d_1 < \sqrt{\tfrac{1}{4}+d_1^2}$
-(numerically: $14.135 < 9.666$ is wrong -- actually $\gamma_1>d_1$)
-is what forces the sign discrepancy at $z=\gamma_1$.
-
-\subsection{Genuine escape class for D and \texorpdfstring{D$'$}{D-prime}}
-
-The correct escape class for Theorems~D and~D$'$ is operators with
-eigenvalue growth $N_H(T)\sim C\,T\log T$.  The Lambert-W corrected
-symbol $g(r) = 2\pi r/W(r/e)$ on $S^1$ produces a counting law
-matching the first two terms of $N_\zeta(T)$, but individual spectral
-spacings are not controlled.  A full construction of a self-adjoint
-operator on some Hilbert space with spectrum exactly $\{\gamma_n\}$
-via such symbols is an open problem; the present results show only that
-any such construction must leave the elliptic regime.
-
-\subsection{Complementarity of spectral and function-theoretic obstructions}
-
-Lemma~E$'$ shows that jet matching is not global identification;
-Theorems~D, D$'$, and~G show that certain operator classes are
-spectrally obstructed.  These results are complementary: one can
-imagine an operator correctly reproducing a finite portion of the zero
-data while still being spectrally mismatched globally.  The combination
-says: matching finitely many zeros and finitely many derivatives does
-not force the operator into the Riemann zero spectrum, and the natural
-classical operator classes cannot realize that spectrum at all.
-
-\subsection{Open questions}
+Proposition~G records that the Gram-level Hadamard product $F_d$ and the
+completed xi function $\hat\Xi$ are distinct entire functions, with
+$\gamma_1$ as an explicit distinguishing point.
 
 \begin{enumerate}[label=(\arabic*)]
-  \item Can the CCM normalization step (``suitably normalized''
-    determinants $\to\Xi$) be completed?  Theorem~G is not an obstacle
-    to this.
-  \item Are there non-diagonal Fredholm classes that escape Theorem~G
-    while remaining in a tractable operator-theoretic framework?
-  \item Can a self-adjoint operator with a $|\xi|/\log|\xi|$-type
-    symbol (or Lambert-W correction) on some compact or non-compact
-    space realize $\{\gamma_n\}$ as its spectrum?
-  \item What is the minimal analytic condition on a symbol that
-    permits logarithmically enhanced Weyl asymptotics while retaining
-    a well-defined functional calculus?
+\item Can the CCM normalization step be completed?  Propositions~G does
+  not obstruct this, as CCM uses a different operator class.
+\item Can a self-adjoint operator with $|\xi|/\log|\xi|$-type symbol on
+  some manifold realize $\{\gamma_n\}$ as its spectrum?
+\item What is the minimal analytic condition on a symbol class that
+  permits $N_H(T)\sim CT\log T$ while retaining a functional calculus?
+\item Can Lemma~E$'$ be strengthened by imposing a functional equation
+  or prescribed zero density on the record class?
 \end{enumerate}
 
 \begin{thebibliography}{99}
@@ -775,14 +625,12 @@ classical operator classes cannot realize that spectrum at all.
 N.~H. Bingham, C.~M. Goldie, and J.~L. Teugels,
 \emph{Regular Variation},
 Cambridge University Press, Cambridge, 1987.
-Theorem~1.7.1 (Karamata's theorem in both directions).
 
 \bibitem{BGV2004}
 N.~Berline, E.~Getzler, and M.~Vergne,
 \emph{Heat Kernels and Dirac Operators},
 Grundlehren der Mathematischen Wissenschaften, vol.~298,
 Springer-Verlag, Berlin, 2004.
-Theorem~2.30 (heat kernel asymptotics for Laplace-type operators).
 
 \bibitem{Connes1999}
 A.~Connes,
@@ -799,59 +647,40 @@ Zeta spectral triples,
 G.~Grubb and R.~T. Seeley,
 Weakly parametric pseudodifferential operators and Atiyah--Patodi--Singer
 boundary problems,
-\emph{Invent. Math.}\ \textbf{121} (1995), no.~3, 481--529.
+\emph{Invent.\ Math.}\ \textbf{121} (1995), no.~3, 481--529.
 
 \bibitem{Gilkey1995}
 P.~B. Gilkey,
-\emph{Invariance Theory, the Heat Equation, and the Atiyah--Singer Index Theorem},
-2nd ed., CRC Press, Boca Raton, FL, 1995.
-Lemma~1.8.2 (heat kernel asymptotics for differential operators).
+\emph{Invariance Theory, the Heat Equation, and the Atiyah--Singer Index
+Theorem}, 2nd ed., CRC Press, Boca Raton, FL, 1995.
 
 \bibitem{Hormander1968}
 L.~H\"ormander,
 The spectral function of an elliptic operator,
 \emph{Acta Math.}\ \textbf{121} (1968), 193--218.
-Theorem~4.4 (Weyl law for classical elliptic pseudodifferential operators).
 
 \bibitem{Lesch1999}
 M.~Lesch,
 On the noncommutative residue for pseudodifferential operators with
 log-polyhomogeneous symbols,
-\emph{Ann. Global Anal. Geom.}\ \textbf{17} (1999), no.~2, 151--187.
-Theorem~3.7 (heat-trace asymptotics for log-polyhomogeneous symbols).
-
-\bibitem{Li1997}
-X.-J. Li,
-The positivity of a sequence of numbers and the Riemann hypothesis,
-\emph{J. Number Theory}\ \textbf{65} (1997), 325--333.
-
-\bibitem{RazborovRudich1997}
-A.~A. Razborov and S. Rudich,
-Natural proofs,
-\emph{J. Comput. System Sci.}\ \textbf{55} (1997), no.~1, 24--35.
-
-\bibitem{Simon2005}
-B.~Simon,
-Trace ideals and their applications, 2nd ed.,
-\emph{Mathematical Surveys and Monographs}, vol.~120,
-American Mathematical Society, Providence, RI, 2005.
+\emph{Ann.\ Global Anal.\ Geom.}\ \textbf{17} (1999), no.~2, 151--187.
 
 \bibitem{Suzuki2013}
 M.~Suzuki,
-A spectral interpretation of zeros of certain functions,
-\emph{Acta Arith.}\ \textbf{157} (2013), no.~3, 201--230,
-DOI \href{https://doi.org/10.4064/aa157-3-1}{10.4064/aa157-3-1}.
+A family of deformations of the Riemann xi-function,
+\emph{Acta Arith.}\ \textbf{157} (2013), no.~3, 201--230.
 
 \bibitem{Titchmarsh1986}
 E.~C. Titchmarsh,
 \emph{The Theory of the Riemann Zeta-Function},
-2nd ed., revised by D.~R. Heath-Brown, Oxford University Press, Oxford, 1986.
-Theorem~9.4 (zero-counting function $N(T)$).
+2nd ed., revised by D.~R. Heath-Brown, Oxford University Press,
+Oxford, 1986.
 
 \bibitem{Watson2026}
-T.~Watson and M.~Valentinuzzi,
-Weyl law obstructions for Hilbert--P\'olya operators,
-preprint, 2026 (unpublished).
+D.~F. Watson and T.~Valentinuzzi,
+Spectral-dimension obstructions for operators with superlinear counting
+laws,
+\emph{Bull.\ Sci.\ Math.}\ (2026), arXiv:2604.00052.
 
 \end{thebibliography}
 
