@@ -194,9 +194,10 @@ All results are unconditional.
 \textbf{Li's criterion and reformulations.}
 Li's criterion~\cite{Li1997} and Bombieri--Lagarias~\cite{BombieriLagarias1999}
 give RH-\emph{equivalences}: they locate difficulty but do not block proof
-methods.  Bombieri--Lagarias (Theorem~1 in~\cite{BombieriLagarias1999})
-also show that $\lambda_n \geq 0$ for all $n$ is equivalent to RH for
-arbitrary complex multisets; the present paper works in the more
+methods.  Bombieri--Lagarias (Corollary~1 in~\cite{BombieriLagarias1999},
+under the conjugate and $s\mapsto 1-s$ symmetry)
+show that $\lambda_n \geq 0$ for all $n$ is equivalent to RH;
+the present paper works in the more
 constrained symmetric class $\Hsym$ and shows that \emph{finite} truncations
 $(\Li_1,\ldots,\Li_m)$ are non-identifying within this class.
 
@@ -206,8 +207,10 @@ plus archimedean contributions; positivity of these sums for all test
 functions would imply RH.  Connes~\cite{ConnesWeilFF1999} and
 Bombieri~\cite{Bombieri2000} reformulate this as a positivity and
 spectral-absorption problem.  These approaches use \emph{all} test functions
-simultaneously; our results apply precisely when only a \emph{finite}
-family is used.
+simultaneously; the present results show that, within the finite symmetric
+class $\Hsym$, a \emph{fixed finite initial segment} of standard Li values
+does not determine $P$.  The case of a fixed finite family of general
+Weil-type tests is addressed by Open Problem~2.
 
 \textbf{Selberg trace formula and spectral methods.}
 The Selberg trace formula connects eigenvalues to geodesic lengths;
@@ -310,7 +313,7 @@ The \emph{finite observation map} with $K$ tests is
 \begin{remark}[Normalization convention]
 \label{rem:normconv}
 The factor of $2$ in Definition~\ref{def:Li} is a non-standard rescaling
-(``R-symm'', as in~\cite{BombieriLagarias1999} Remark~4.2): the standard
+(``R-symm'', a non-standard rescaling introduced here): the standard
 convention sums $\varphi_j$ once per atom (``R-atom''), giving half the
 value.  Every qualitative conclusion (existence of collisions, absence of
 uniform gaps) is convention-independent; all numerical anchors use R-symm.
@@ -403,27 +406,35 @@ uniformly in $\sigma_0\in(0,1)$.  In particular, $q_j(T) \to 0$.
 \end{lemma}
 
 \begin{proof}
-By~\eqref{eq:Lioffl} and Lemma~\ref{lem:phiident},
-$q_j(T) = 4\re[\varphi_j(\sigma_0+iT)\cdot\varphi_j(1-\sigma_0+iT)]$.
-Set $\rho = \sigma_0+iT$.  Expanding via $1/\rho = \sigma_0/T^2 - i/T + O(T^{-3})$:
+By~\eqref{eq:Lioffl},
+$q_j(T) = 4\re[\varphi_j(\sigma_0+iT) + \varphi_j(1-\sigma_0+iT)]$.
+Set $s_1 = \sigma_0+iT$ and $s_2 = 1-\sigma_0+iT$.
+For each $s_k = \sigma_k + iT$ ($\sigma_1=\sigma_0$, $\sigma_2=1-\sigma_0$),
+expanding $1/s_k = \sigma_k/T^2 - i/T + O(T^{-3})$ gives
 \[
-  \varphi_j(\rho) = -\tfrac{ij}{T} + \tfrac{j(\sigma_0 + j/2 - 1/2)}{T^2} + O(T^{-3}).
+  \varphi_j(s_k) = 1 - (1-s_k^{-1})^j
+  = -\tfrac{ij}{T} + \tfrac{j(\sigma_k + j/2 - 1/2)}{T^2} + O(T^{-3}).
 \]
-Substituting $1-\sigma_0$ for $\sigma_0$ gives
-$\varphi_j(1-\sigma_0+iT) = \tfrac{ij}{T} + \tfrac{j(1-\sigma_0+j/2-1/2)}{T^2} + O(T^{-3})$.
-The cross-term product of the $O(1/T)$ parts gives $j^2/T^2$; all
-$O(T^{-3})$ contributions to $\re[\cdot]$ are purely imaginary (verified
-by expanding $j\log(1-1/\rho)$ to fourth order), so
-$\re[\varphi_j(\rho)\cdot\varphi_j(1-\rho)] = j^2/T^2 + O(T^{-4})$. \qed
+Summing over $k=1,2$ and using $\sigma_1+\sigma_2 = 1$:
+\[
+  \varphi_j(s_1) + \varphi_j(s_2)
+  = -\tfrac{2ij}{T} + \tfrac{j^2}{T^2} + O(T^{-3}).
+\]
+The leading $-2ij/T$ term is purely imaginary, so
+$\re[\varphi_j(s_1)+\varphi_j(s_2)] = j^2/T^2 + O(T^{-4})$
+and $q_j(T) = 4j^2/T^2 + O(T^{-4})$.
 \end{proof}
 
 \begin{remark}
-The main term $4j^2/T^2$ is independent of $\sigma_0$.  For $j=1$ the
-exact formula $q_1(T) = 4(T^2+\sigma_0(1-\sigma_0))/(({\sigma_0}^2+T^2)
-((1-\sigma_0)^2+T^2))$ confirms $q_1(T) = 4/T^2 + O(T^{-4})$.
-In particular $q_j(T) > 0$ for all $T>0$ (explicit: $q_1(T) > 0$
-since numerator and denominator are both positive; the general case
-follows from $j^2/T^2 > 0$ and the exact formula's sign being preserved).
+The main term $4j^2/T^2$ is independent of $\sigma_0$.  For $j=1$:
+\[
+  q_1(T) = 4\Bigl[\frac{\sigma_0}{\sigma_0^2+T^2}
+            + \frac{1-\sigma_0}{(1-\sigma_0)^2+T^2}\Bigr] > 0
+\]
+for all $T>0$, since both terms are positive.
+For $j\geq 2$, $q_j(T)>0$ for all sufficiently large $T$ (following from
+$q_j(T) = 4j^2/T^2 + O(T^{-4})$), but this need not hold for small $T$:
+for example, $q_2(1/10) < 0$ at $\sigma_0 = 3/4$.
 \end{remark}
 
 %%--------------------------------------------------------------------
@@ -443,7 +454,8 @@ with $P(\mathcal{Z}_+) = 1$, $P(\mathcal{Z}_-) = 0$, and
 \]
 where $\Li_j$ uses the standard Li tests $\varphi_j(\rho)=1-(1-\rho^{-1})^j$.
 Moreover, $\mathcal{Z}_\pm$ can be taken to have rational atom-heights and
-all multiplicities nonnegative integers.
+all multiplicities nonnegative integers.  For any $H>0$, the parameters
+can be chosen so that all atoms of $\mathcal{Z}_\pm$ have $|\im\rho|>H$.
 \end{mainthm}
 
 \subsection{The collision matrix}
@@ -482,16 +494,30 @@ and satisfies $\det C \neq 0$.
 \end{lemma}
 
 \begin{proof}
+\textbf{Step 1: derive $C_{jk} = 4(1-T_j(x_k))$.}
+Let $w_k = 1 - \rho_k^{-1}$ where $\rho_k = \tfrac12 + it_k$.
+Then
+\[
+  |w_k|^2 = \frac{(t_k^2 - 1/4)^2 + t_k^2}{(1/4+t_k^2)^2}
+           = \frac{(t_k^2+1/4)^2}{(t_k^2+1/4)^2} = 1,
+\]
+so $w_k$ lies on the unit circle with $\re w_k = (4t_k^2-1)/(4t_k^2+1) = x_k$.
+Since $|w_k|=1$, the Chebyshev identity $\re(z^j)=T_j(\re z)$ for $|z|=1$ gives
+$\re w_k^j = T_j(x_k)$.  Hence
+$\re\varphi_j(\rho_k) = \re(1-w_k^j) = 1-T_j(x_k)$,
+so $C_{jk} = 4(1-T_j(x_k))$.
+
+\textbf{Step 2: rationality and non-singularity.}
 Since $t_k \in \QQ$, each $x_k \in \QQ$; since $T_j$ has integer
 coefficients, $C_{jk} = 4(1-T_j(x_k)) \in \QQ$.  For non-singularity:
-$T_j(1) = 1$ gives $1 - T_j(x) = (1-x)\,q_j(x)$ for a polynomial $q_j$
+$T_j(1) = 1$ gives $1 - T_j(x) = (1-x)\,r_{j-1}(x)$ for a polynomial $r_{j-1}$
 of degree exactly $j-1$ with leading coefficient $2^{j-1}$.  Thus
-$C_{jk} = 4(1-x_k)\,q_j(x_k)$,
-and $C = 4 \cdot [q_j(x_k)] \cdot \operatorname{diag}(1-x_k)$.
+$C_{jk} = 4(1-x_k)\,r_{j-1}(x_k)$,
+and $C = 4 \cdot [r_{j-1}(x_k)] \cdot \operatorname{diag}(1-x_k)$.
 Since $x_k \in (-1,1)$, each $1-x_k > 0$, so $\det C \neq 0$ iff
-$\det[q_j(x_k)] \neq 0$.  The polynomials $\{q_j\}_{j=1}^m$ have
+$\det[r_{j-1}(x_k)] \neq 0$.  The polynomials $\{r_{j-1}\}_{j=1}^m$ have
 degrees $0,1,\ldots,m-1$ with positive leading coefficients, so
-$[q_j(x_k)] = A \cdot V(x_1, \ldots, x_m)$ where $A$ is lower-triangular
+$[r_{j-1}(x_k)] = A \cdot V(x_1, \ldots, x_m)$ where $A$ is lower-triangular
 with positive diagonal entries and $V$ is the Vandermonde matrix.
 The $x_k$ are distinct (since $x(t)=(4t^2-1)/(4t^2+1)$ is strictly
 increasing on $(0,\infty)$), so $\det V \neq 0$, hence $\det C \neq 0$.
@@ -513,7 +539,8 @@ choice of exponents and nodes.
 \subsection{Rational solution and nonnegative integer multiplicities}
 
 \begin{proof}[Proof of Theorem~A]
-Choose distinct rational $t_1 < \cdots < t_m$ and rational $T > t_m$.
+Choose distinct rational $t_1 < \cdots < t_m$ and rational $T > t_m$;
+for the $H>0$ clause, choose all $t_k, T > H$.
 By Lemma~\ref{lem:Crank}, $C \in \QQ^{m\times m}$ with $\det C \neq 0$.
 When $T \in \QQ$, each $q_j(T)$ is rational (sum of rational functions
 evaluated at rational $T$), so $q(T) \in \QQ^m$.  Set
@@ -581,34 +608,40 @@ and $P(\mathcal{Z}_+) = 1$, $P(\mathcal{Z}_-) = 0$.
 
 \begin{mainthm}[No uniform separation]
 \label{thm:B}
-Fix $m \geq 1$.  Let $\mathcal{Z}_+ \in \Hsym$ satisfy $P(\mathcal{Z}_+)=1$
-and $\Li_j(\mathcal{Z}_+) > c_j$ for each $j=1,\ldots,m$.
-Then for every $\varepsilon > 0$ there exists
+Fix $m \geq 1$ and $c_1,\ldots,c_m \in \RR$.  Let $\mathcal{Z}_+ \in \Hsym$
+satisfy $P(\mathcal{Z}_+)=1$ and $\Li_j(\mathcal{Z}_+) > c_j$ for each
+$j=1,\ldots,m$.  Then for every $\varepsilon > 0$ there exists
 $\mathcal{Z}_- \in \Hsym$ with $P(\mathcal{Z}_-) = 0$ and
 $|\Li_j(\mathcal{Z}_-) - \Li_j(\mathcal{Z}_+)| < \varepsilon$
 for all $j = 1, \ldots, m$.
-In particular, $\mathcal{Z}_-$ satisfies $\Li_j(\mathcal{Z}_-) > c_j$
-whenever $\varepsilon < \Li_j(\mathcal{Z}_+) - c_j$.
+In particular, $\mathcal{Z}_-$ satisfies $\Li_j(\mathcal{Z}_-) > c_j$ for all $j$
+whenever
+$0 < \varepsilon < \min_{1 \leq j \leq m}\bigl(\Li_j(\mathcal{Z}_+) - c_j\bigr)$.
 \end{mainthm}
 
 \begin{proof}
 Set $\mathcal{Z}_- = \mathcal{Z}_+ \sqcup Q(3/4, T)$ for large $T$.  Then
 $\Li_j(\mathcal{Z}_-) = \Li_j(\mathcal{Z}_+) + q_j(T)$, where
 $q_j(T) = 4j^2/T^2 + O(T^{-4}) \to 0$ by Lemma~\ref{lem:qasympt}.
-Choose $T$ large enough that $q_j(T) < \varepsilon$ for all $j$.
+Choose $T$ large enough that $|q_j(T)| < \varepsilon$ for all $j$.
 Since $Q(3/4,T)$ contributes atoms at $\re\rho = 3/4 \neq 1/2$,
 $P(\mathcal{Z}_-) = 0$.
 \end{proof}
 
 \begin{remark}[Approximate vs.\ exact obstruction]
 \label{rem:approxvsexact}
-Theorem~B produces an \emph{approximate} non-discrimination (tolerance
-$\varepsilon$); Theorem~A provides the exact version ($\varepsilon=0$).
-Theorem~B requires only $q_j(T)\to 0$; Theorem~A additionally uses
-the $\QQ$-rationality of $C$ (Lemma~\ref{lem:Crank}).
-The escape from Theorem~B is the same as from Theorem~A: an unbounded
-hierarchy $m\to\infty$, or imposing the full Euler product, functional
-equation, or Riemann--von Mangoldt counting asymptotics.
+Theorems~A and~B have different quantifier structures and are logically
+independent.  Theorem~A constructs one specific pair
+$(\mathcal{Z}_+, \mathcal{Z}_-)$ with exactly equal Li values; it does
+\emph{not} assert that every $P=1$ witness admits an exact collision partner.
+Theorem~B asserts that for \emph{any} given $P=1$ witness $\mathcal{Z}_+$,
+a $P=0$ object can be found approximating all $m$ Li values to within~$\varepsilon$.
+Theorem~A additionally uses the $\QQ$-rationality of $C$
+(Lemma~\ref{lem:Crank}) to achieve $\varepsilon=0$ for a specific pair;
+Theorem~B requires only $q_j(T)\to 0$.
+The escape from both theorems is an unbounded hierarchy $m\to\infty$,
+or imposing the full Euler product, functional equation, or
+Riemann--von Mangoldt counting asymptotics.
 \end{remark}
 
 \begin{corollary}[Positivity threshold]
@@ -620,7 +653,8 @@ $\Li_j(\mathcal{Z}_-) > 0$ for $j=1,\ldots,K$.
 \end{corollary}
 
 \begin{proof}
-Apply Theorem~B to the given $\mathcal{Z}_+$ with
+Apply Theorem~B with $c_j = 0$ for all $j = 1,\ldots,K$ to the given
+$\mathcal{Z}_+$ with
 $\varepsilon = \tfrac12\min_{1\le j\le K}\Li_j(\mathcal{Z}_+) > 0$
 to obtain $\mathcal{Z}_-$ with $P(\mathcal{Z}_-)=0$ and
 $\Li_j(\mathcal{Z}_-) > \Li_j(\mathcal{Z}_+)/2 > 0$.
@@ -635,8 +669,119 @@ where the positivity hypothesis holds.
 \end{remark}
 
 %%--------------------------------------------------------------------
+\section{Finite Euler factors do not force critical-line zeros
+  (Corollary~D)}
+\label{sec:C}
+%%--------------------------------------------------------------------
+
+\subsection{Setting: Helson zeta functions}
+
+For a completely multiplicative unimodular function
+$\chi : \mathbb{N} \to \TT$ ($|\chi(p)| = 1$ for all primes $p$), define
+\[
+  \zeta_\chi(s) = \sum_{n \geq 1} \chi(n) n^{-s}
+               = \prod_p (1-\chi(p)p^{-s})^{-1},
+\]
+convergent for $\re s > 1$.  For a finite prime cutoff $P_0$, say $\chi$
+is \emph{$P_0$-standard} if $\chi(p) = 1$ for all primes $p \leq P_0$.
+
+Let $\mathcal{H}_S$ denote the Helson zeta functions admitting
+meromorphic continuation along a connected open set
+$U \supset \{\re s > 1\} \cup S$ to the open strip
+$S = \{0 < \re s < 1\}$.  Define the target predicate
+$P_S(\zeta_\chi) = 1$ iff every zero $\rho \in S$ of $\zeta_\chi$
+satisfies $\re\rho = 1/2$.
+
+\begin{remark}
+The Helson coefficients satisfy $|\chi(n)| = 1$ for all $n$, which
+is a very strong (in fact Ramanujan-type) bound.  Nevertheless the Helson
+class does not require a functional equation, gamma factors, or a finite
+analytic conductor; it therefore does not carry full Selberg-class
+structure.  The escape route for Corollary~D is any proof method that
+uses the functional equation, Gamma factors, or the Selberg-class axioms.
+\end{remark}
+
+\subsection{Statement}
+
+\begin{maincor}[Finite Euler factors do not force critical-line zeros]
+\label{cor:D}
+For every finite prime cutoff $P_0$ and every $z_1 \in S$ with
+$\re z_1 \neq 1/2$, there exist:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item a completely multiplicative unimodular $\tilde\chi$ that is
+    $P_0$-standard, such that $\zeta_{\tilde\chi} \in \mathcal{H}_S$
+    and $P_S(\zeta_{\tilde\chi}) = 0$;
+  \item a completely multiplicative unimodular $\chi^+$,
+    also $P_0$-standard, such that $\zeta_{\chi^+} \in \mathcal{H}_S$
+    and $P_S(\zeta_{\chi^+}) = 1$.
+\end{enumerate}
+In particular, the pair $(\zeta_{\chi^+}, \zeta_{\tilde\chi})$ is an
+existential information obstruction for the finite-Euler-factor observation
+$O_{P_0}(\zeta_\chi) = (\chi(p))_{p \leq P_0}$.
+\end{maincor}
+
+\begin{proof}
+\textbf{Part (a): constructing $P_S=0$.}
+
+By Andersson~\cite[Theorem~5]{Andersson2024}, there exists a completely
+multiplicative unimodular $\chi$ such that $\zeta_\chi$ extends
+meromorphically to $S$ with a simple zero at $z_1$ ($\re z_1 \neq 1/2$).
+Define
+\[
+  \tilde\chi(p) =
+    \begin{cases} 1 & p \leq P_0, \\ \chi(p) & p > P_0, \end{cases}
+\]
+extended completely multiplicatively.  Then $\tilde\chi$ is
+$P_0$-standard.  For $\re s > 1$:
+\[
+  \zeta_{\tilde\chi}(s) = \zeta_\chi(s) \cdot
+    \prod_{p \leq P_0} \frac{1 - \chi(p)p^{-s}}{1 - p^{-s}}
+  =: \zeta_\chi(s) \cdot R(s).
+\]
+Since $|\chi(p)| = 1$ and $|p^{-s}| = p^{-\re s}$, the zeros
+of $1-\chi(p)p^{-s}$ satisfy $|p^{-s}|=1$, i.e.\ $\re s = 0$;
+similarly the zeros of $1-p^{-s}$ satisfy $\re s = 0$.
+So $R$ extends to a holomorphic, nonvanishing function on
+$\{\re s > 0\} \supset S$.  Since $R(z_1) \neq 0$, $\zeta_{\tilde\chi}$
+has a zero at $z_1$, hence $P_S(\zeta_{\tilde\chi}) = 0$.
+
+\textbf{Part (b): constructing $P_S=1$.}
+
+By Andersson~\cite[Corollary~3]{Andersson2024}, there exists a completely
+multiplicative unimodular $\chi_0$ such that $\zeta_{\chi_0}$ extends
+to an entire function on $\CC$ with no zeros in $S$.  Apply the same
+finite-factor modification:
+\[
+  \chi^+(p) =
+    \begin{cases} 1 & p \leq P_0, \\ \chi_0(p) & p > P_0, \end{cases}
+\]
+extended completely multiplicatively.  Then $\chi^+$ is $P_0$-standard,
+and
+$\zeta_{\chi^+} = \zeta_{\chi_0} \cdot R_0$
+where $R_0(s) = \prod_{p\le P_0}(1-\chi_0(p)p^{-s})/(1-p^{-s})$ is
+holomorphic and nonvanishing on $S$ (same argument as part~(a)).
+Since $\zeta_{\chi_0}$ has no zeros in $S$ and $R_0$ has none either,
+$\zeta_{\chi^+}$ has no zeros in $S$, hence $P_S(\zeta_{\chi^+}) = 1$.
+\end{proof}
+
+\begin{remark}
+Corollary~D is an \emph{existential} obstruction: Andersson's theorem
+gives existence but not explicit values of $\chi(p)$.  The pair
+$(\zeta_{\chi^+}, \zeta_{\tilde\chi})$ exists but is not constructive.
+\end{remark}
+
+\begin{remark}
+In part~(b), $\zeta_{\chi^+}$ has no zeros in $S$ by construction;
+$P_S(\zeta_{\chi^+}) = 1$ holds vacuously (the zero set in $S$ is empty).
+The obstruction remains valid: $O_{P_0}$ cannot distinguish
+$\zeta_{\tilde\chi}$ (with a zero off the critical line) from
+$\zeta_{\chi^+}$ (zero-free in $S$) when their Euler factors at all
+primes $p \leq P_0$ agree.
+\end{remark}
+
+%%--------------------------------------------------------------------
 \section{Li and counting observations are incomparable (Theorem~C
-and Corollaries~D, E)}
+and Corollary~E)}
 \label{sec:H}
 %%--------------------------------------------------------------------
 
@@ -744,9 +889,11 @@ Fix any $T > d_M$ and $\sigma_0 \neq 1/2$.  Take
 $\mathcal{Z}_+ = 2L(T)$ (two copies of $L(T)$, giving four atoms on
 the critical line) and $\mathcal{Z}_- = Q(\sigma_0, T)$ (four atoms off
 the critical line).  Both have all imaginary parts equal to $\pm T$, so
-$\Otheta(\mathcal{Z}_+) = \Otheta(\mathcal{Z}_-) = (4,\ldots,4)$
-(since $T > d_M > d_m$ for all $m$).  But $P(\mathcal{Z}_+)=1$ and
-$P(\mathcal{Z}_-)=0$.  Hence $\Otheta$ alone does not determine $P$.
+since $T > d_M \geq d_m$ for every sampling level, no atom satisfies
+$|\im\rho| \leq d_m$; hence
+$\Otheta(\mathcal{Z}_+) = \Otheta(\mathcal{Z}_-) = (0,\ldots,0)$.
+But $P(\mathcal{Z}_+)=1$ and $P(\mathcal{Z}_-)=0$.
+Hence $\Otheta$ alone does not determine $P$.
 \end{remark}
 
 \subsection{Joint observation also admits an exact obstruction}
@@ -762,8 +909,9 @@ $(\Ofinite^{(K)}\times\Otheta)(\mathcal{Z}_+) =
 \end{maincor}
 
 \begin{proof}
-Apply Theorem~A with parameters $d_M < t_1 < \cdots < t_m < T$ (all
-atom heights strictly above $d_M$).  Then all atoms of both $\mathcal{Z}_\pm$
+Apply Theorem~A with $m = K$ and parameters $d_M < t_1 < \cdots < t_K < T$
+(all atom heights strictly above $d_M$, as permitted by the $H > 0$ clause
+in Theorem~A).  Then all atoms of both $\mathcal{Z}_\pm$
 have $|\im\rho| > d_M \geq d_m$ for every sampling level, so
 $N_{\mathcal{Z}_\pm}(d_m) = 0$ and $\Otheta(\mathcal{Z}_+) = \Otheta(\mathcal{Z}_-)
 = (0,\ldots,0)$.  By Theorem~A, $\Ofinite^{(K)}(\mathcal{Z}_+) =
@@ -775,108 +923,6 @@ Corollary~E supersedes the earlier ``open problem'' of whether the joint
 observation $\Ofinite^{(K)}\times\Otheta$ admits an obstruction:
 it does, as a direct consequence of Theorem~A with parameter choice
 above all sampling levels.
-\end{remark}
-
-%%--------------------------------------------------------------------
-\section{Finite Euler factors do not force critical-line zeros
-  (Corollary~D)}
-\label{sec:C}
-%%--------------------------------------------------------------------
-
-\subsection{Setting: Helson zeta functions}
-
-For a completely multiplicative unimodular function
-$\chi : \mathbb{N} \to \TT$ ($|\chi(p)| = 1$ for all primes $p$), define
-\[
-  \zeta_\chi(s) = \sum_{n \geq 1} \chi(n) n^{-s}
-               = \prod_p (1-\chi(p)p^{-s})^{-1},
-\]
-convergent for $\re s > 1$.  For a finite prime cutoff $P_0$, say $\chi$
-is \emph{$P_0$-standard} if $\chi(p) = 1$ for all primes $p \leq P_0$.
-
-Let $\mathcal{H}_S$ denote the Helson zeta functions admitting
-meromorphic continuation along a connected open set
-$U \supset \{\re s > 1\} \cup S$ to the open strip
-$S = \{0 < \re s < 1\}$.  Define the target predicate
-$P_S(\zeta_\chi) = 1$ iff every zero $\rho \in S$ of $\zeta_\chi$
-satisfies $\re\rho = 1/2$.
-
-\begin{remark}
-The Helson coefficients satisfy $|\chi(n)| = 1$ for all $n$, which
-is a very strong (in fact Ramanujan-type) bound.  Nevertheless the Helson
-class does not require a functional equation, gamma factors, or a finite
-analytic conductor; it therefore does not carry full Selberg-class
-structure.  The escape route for Corollary~D is any proof method that
-uses the functional equation, Gamma factors, or the Selberg-class axioms.
-\end{remark}
-
-\subsection{Statement}
-
-\begin{maincor}[Finite Euler factors do not force critical-line zeros]
-\label{cor:D}
-For every finite prime cutoff $P_0$ and every $z_1 \in S$ with
-$\re z_1 \neq 1/2$, there exist:
-\begin{enumerate}[label=\textup{(\alph*)}]
-  \item a completely multiplicative unimodular $\tilde\chi$ that is
-    $P_0$-standard, such that $\zeta_{\tilde\chi} \in \mathcal{H}_S$
-    and $P_S(\zeta_{\tilde\chi}) = 0$;
-  \item a completely multiplicative unimodular $\chi^+$,
-    also $P_0$-standard, such that $\zeta_{\chi^+} \in \mathcal{H}_S$
-    and $P_S(\zeta_{\chi^+}) = 1$.
-\end{enumerate}
-In particular, the pair $(\zeta_{\chi^+}, \zeta_{\tilde\chi})$ is an
-existential information obstruction for the finite-Euler-factor observation
-$O_{P_0}(\zeta_\chi) = (\chi(p))_{p \leq P_0}$.
-\end{maincor}
-
-\begin{proof}
-\textbf{Part (a): constructing $P_S=0$.}
-
-By Andersson~\cite[Theorem~5]{Andersson2024}, there exists a completely
-multiplicative unimodular $\chi$ such that $\zeta_\chi$ extends
-meromorphically to $S$ with a simple zero at $z_1$ ($\re z_1 \neq 1/2$).
-Define
-\[
-  \tilde\chi(p) =
-    \begin{cases} 1 & p \leq P_0, \\ \chi(p) & p > P_0, \end{cases}
-\]
-extended completely multiplicatively.  Then $\tilde\chi$ is
-$P_0$-standard.  For $\re s > 1$:
-\[
-  \zeta_{\tilde\chi}(s) = \zeta_\chi(s) \cdot
-    \prod_{p \leq P_0} \frac{1 - \chi(p)p^{-s}}{1 - p^{-s}}
-  =: \zeta_\chi(s) \cdot R(s).
-\]
-Since $|\chi(p)| = 1$ and $|p^{-s}| = p^{-\re s}$, the zeros
-of $1-\chi(p)p^{-s}$ satisfy $|p^{-s}|=1$, i.e.\ $\re s = 0$;
-similarly the zeros of $1-p^{-s}$ satisfy $\re s = 0$.
-So $R$ extends to a holomorphic, nonvanishing function on
-$\{\re s > 0\} \supset S$.  Since $R(z_1) \neq 0$, $\zeta_{\tilde\chi}$
-has a zero at $z_1$, hence $P_S(\zeta_{\tilde\chi}) = 0$.
-
-\textbf{Part (b): constructing $P_S=1$.}
-
-By Andersson~\cite[Corollary~3]{Andersson2024}, there exists a completely
-multiplicative unimodular $\chi_0$ such that $\zeta_{\chi_0}$ extends
-to an entire function on $\CC$ with no zeros in $S$.  Apply the same
-finite-factor modification:
-\[
-  \chi^+(p) =
-    \begin{cases} 1 & p \leq P_0, \\ \chi_0(p) & p > P_0, \end{cases}
-\]
-extended completely multiplicatively.  Then $\chi^+$ is $P_0$-standard,
-and
-$\zeta_{\chi^+} = \zeta_{\chi_0} \cdot R_0$
-where $R_0(s) = \prod_{p\le P_0}(1-\chi_0(p)p^{-s})/(1-p^{-s})$ is
-holomorphic and nonvanishing on $S$ (same argument as part~(a)).
-Since $\zeta_{\chi_0}$ has no zeros in $S$ and $R_0$ has none either,
-$\zeta_{\chi^+}$ has no zeros in $S$, hence $P_S(\zeta_{\chi^+}) = 1$.
-\end{proof}
-
-\begin{remark}
-Corollary~D is an \emph{existential} obstruction: Andersson's theorem
-gives existence but not explicit values of $\chi(p)$.  The pair
-$(\zeta_{\chi^+}, \zeta_{\tilde\chi})$ exists but is not constructive.
 \end{remark}
 
 %%--------------------------------------------------------------------
