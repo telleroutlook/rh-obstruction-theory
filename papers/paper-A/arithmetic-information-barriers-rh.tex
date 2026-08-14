@@ -50,7 +50,7 @@
 
 \begin{document}
 
-\title[Finite Li-Statistic Collisions for Formal Symmetric Zero Multisets]{Finite
+\title[Finite Li-Statistic Collisions]{Finite
   Li-Statistic Collisions for Formal Symmetric Zero Multisets}
 
 \author{Lin Tao}
@@ -58,7 +58,7 @@
 
 \begin{abstract}
 We prove three theorems about the standard Li-type observation of finite
-symmetric zero multisets, and record two corollaries.
+symmetric zero multisets, and record two main corollaries and one auxiliary corollary.
 Let $\Hsym$ be the class of finite multisets in the open critical strip
 symmetric under $\rho\mapsto\bar\rho$ and $\rho\mapsto 1-\rho$, and let
 $P(\mathcal{Z})=1$ iff every atom has $\re\rho=1/2$.
@@ -118,13 +118,15 @@ full Li criterion and is not blocked.
 
 We work with an \emph{observation map} $O : \Hsym \to S$, where $\Hsym$
 is the ambient class of finite symmetric zero multisets and $S$ is a set
-of observable records.  An \emph{information obstruction for $O$} is an
-explicit pair $(\mathcal{Z}_+, \mathcal{Z}_-) \in \Hsym^2$ such that:
+of observable records.  An \emph{information obstruction for $O$} is a
+pair $(\mathcal{Z}_+, \mathcal{Z}_-) \in \Hsym^2$ such that:
 \begin{enumerate}[label=(\roman*)]
   \item $O(\mathcal{Z}_+) = O(\mathcal{Z}_-)$ (exact collision);
   \item $P(\mathcal{Z}_+) \neq P(\mathcal{Z}_-)$ (predicate separated);
   \item neither $\mathcal{Z}_+$ nor $\mathcal{Z}_-$ involves RH as a hypothesis.
 \end{enumerate}
+The obstruction is \emph{constructive} if the pair is explicitly computable;
+otherwise it is \emph{existential}.
 An obstruction pair shows that no $f : S \to \{0,1\}$ satisfies
 $P(\mathcal{Z}) = f(O(\mathcal{Z}))$ for all $\mathcal{Z}\in\Hsym$.
 
@@ -177,7 +179,8 @@ predicate is $P(\mathcal{Z}) = 1$ iff every atom has $\re \rho = 1/2$.
   cutoff $P_0$ and every $z_1 \in S$ with $\re z_1 \neq 1/2$, there
   exists a Helson zeta function agreeing with $\zeta$ on all Euler
   factors $p \leq P_0$ yet having a zero at $z_1$; and there exists one
-  agreeing on all Euler factors $p \leq P_0$ with all zeros on $\re s = 1/2$.
+  agreeing on all Euler factors $p \leq P_0$ that is zero-free in $S$
+  (hence $P_S = 1$ vacuously).
 
 \item \textbf{Corollary~\ref{cor:E}} (Section~\ref{sec:H}): The joint observation
   $\Ofinite^{(K)} \times \Otheta$ also has an exact information obstruction
@@ -213,9 +216,13 @@ Weil-type tests is addressed by Open Problem~2.
 The Selberg trace formula connects eigenvalues to geodesic lengths;
 see Hejhal~\cite{Hejhal1976}.  Connes--Consani--Moscovici~\cite{CCM2025}
 construct zeta spectral triples whose Dirac-operator regularized determinant
-is related to a function $\hat\xi$ defined via a local Weil form.
-Establishing the convergence of suitably normalized determinants to the
-Riemann $\Xi$ function is the open step in that programme.
+is related (conditionally on the lowest eigenvalue being simple and the
+corresponding eigenfunction being even) to a function $\hat\xi_\lambda$
+defined via a semilocal Weil quadratic form.
+Establishing that the cut-off kernel $k_\lambda$ converges sufficiently
+to the lowest eigenfunction, and separately that the suitably normalized
+determinants recover the Riemann $\Xi$ function, are the open steps in
+that programme.
 
 \textbf{Helson class and Dirichlet series.}
 Helson~\cite{Helson1969} introduced random Dirichlet series with unimodular
@@ -270,12 +277,12 @@ uniformly in $\sigma$, but not $O(|t|^{-1-\delta})$ for any $\delta>0$.
 \end{definition}
 
 \begin{remark}[Other test families]
-Moment-type tests $\varphi_j(\rho)=\rho^{-k_j}$ (with specified distinct
-exponents $k_j$ and $k$ distinct nodes $x_k = \re\rho_k$) admit an analogous
-Vandermonde rank argument (Remark~\ref{rem:momentVander}); non-singularity
-requires that the evaluation matrix at the chosen nodes is invertible over
-$\QQ$, which holds when the exponents and nodes satisfy a standard
-Vandermonde non-degeneracy condition.
+For moment-type tests $\varphi_j(\rho)=\rho^{-k_j}$ (with specified distinct
+exponents $k_j$), distinct heights $t_k$ do not by themselves imply
+nonsingularity of the matrix $[4\Re((1/2+it_k)^{-k_j})]$: the nodes
+$\re\rho_k = 1/2$ are all equal and a standard Vandermonde argument
+does not apply.  Invertibility must be verified separately for each
+choice of exponents (see Remark~\ref{rem:momentVander}).
 For test functions $h\in C_c^\infty(\RR)$, the Paley--Wiener theorem
 implies that the Fourier transform $\hat h$ extends to an entire function
 of $z\in\CC$, so $\varphi_h(\rho)=\hat h((\rho-\tfrac12)/i)$ is an
@@ -418,10 +425,15 @@ Summing over $k=1,2$ and using $\sigma_1+\sigma_2 = 1$:
 \]
 Set $g(T) = \varphi_j(s_1)+\varphi_j(s_2)$.
 Since $\varphi_j$ has real coefficients, $\varphi_j(\bar{s}) = \overline{\varphi_j(s)}$,
-hence $g(-T) = \overline{g(T)}$.  Writing $g(T) = \sum_n c_n T^{-n}$, this forces
-$c_n(-1)^n = \bar{c}_n$: odd-indexed coefficients are purely imaginary and
-even-indexed are real.  The $O(T^{-3})$ term is therefore purely imaginary,
-giving $\re[g(T)] = j^2/T^2 + O(T^{-4})$
+hence $g(-T) = \overline{g(T)}$.  Writing $g(T) = \sum_n c_n T^{-n}$ as an analytic
+function of $u=1/T$, the symmetry $g(-T)=\overline{g(T)}$ forces
+$c_n(-1)^n = \bar c_n$: odd-indexed coefficients are purely imaginary and
+even-indexed are real.  The expansion to the relevant order is therefore
+\[
+  g(T) = -\tfrac{2ij}{T} + \tfrac{j^2}{T^2} + \tfrac{ic_3}{T^3} + \tfrac{c_4}{T^4}
+  + O(T^{-5}), \qquad c_3, c_4 \in \RR,
+\]
+so $\re[g(T)] = j^2/T^2 + c_4/T^4 + O(T^{-5}) = j^2/T^2 + O(T^{-4})$
 and $q_j(T) = 4j^2/T^2 + O(T^{-4})$.
 \end{proof}
 
@@ -452,7 +464,7 @@ For every $m \geq 1$ there exist $\mathcal{Z}_+, \mathcal{Z}_- \in \Hsym$
 with $P(\mathcal{Z}_+) = 1$, $P(\mathcal{Z}_-) = 0$, and
 \[
   \Li_j(\mathcal{Z}_+) = \Li_j(\mathcal{Z}_-) \qquad
-  \text{for all } j = 1, \ldots, m.
+  \text{for all } j = 1, \ldots, m,
 \]
 where $\Li_j$ uses the standard Li tests $\varphi_j(\rho)=1-(1-\rho^{-1})^j$.
 Moreover, $\mathcal{Z}_\pm$ can be taken to have rational atom-heights and
@@ -655,7 +667,7 @@ or imposing the full Euler product, functional equation, or
 Riemann--von Mangoldt counting asymptotics.
 \end{remark}
 
-% Original corollary; follows directly from Theorem~\ref{thm:A} by the collision construction
+% Auxiliary corollary; requires Theorem~\ref{thm:B} (given any $\mathcal{Z}_+$, construct a matching $\mathcal{Z}_-$)
 \begin{corollary}[Positivity threshold]
 \label{cor:B1Li}
 Let $\mathcal{Z}_+ \in \Hsym$ satisfy $P(\mathcal{Z}_+)=1$ and
@@ -735,9 +747,11 @@ $O_{P_0}(\zeta_\chi) = (\chi(p))_{p \leq P_0}$.
 \begin{proof}
 \textbf{Part (a): constructing $P_S=0$.}
 
-By Andersson~\cite[Theorem~5]{Andersson2024}, there exists a completely
+By Andersson~\cite[Theorem~5]{Andersson2024} applied with $U = \{\re s > 0\}$
+and the signed divisor $D = [z_1]$ (a simple zero at $z_1$, $\re z_1 \neq 1/2$),
+there exists a completely
 multiplicative unimodular $\chi$ such that $\zeta_\chi$ extends
-meromorphically to $S$ with a simple zero at $z_1$ ($\re z_1 \neq 1/2$).
+meromorphically to $S$ with a simple zero at $z_1$.
 Define
 \[
   \tilde\chi(p) =
@@ -1010,12 +1024,14 @@ counting asymptotics, or Hadamard/functional-equation/Euler-product constraints.
   $\varphi_h(\rho) = \hat{h}((\rho-\tfrac12)/i)$ is an entire function
   of $\rho$.  The Chebyshev--Vandermonde reduction used in Theorem~\ref{thm:A}
   does not directly apply because the resulting observation values are
-  transcendental rather than rational.  Does an analogue of Theorem~\ref{thm:A} hold
+  not guaranteed to be rational, and no general transcendence statement
+  is available.  Does an analogue of Theorem~\ref{thm:A} hold
   for such observations?
 
 \item \textbf{Information hierarchy convergence.}
   Is there a natural sequence of observations
   $O_1 \preceq O_2 \preceq \cdots$ converging to $O_{\mathrm{oracle}}$
+  (the identity observation $O_{\mathrm{oracle}}(\mathcal{Z})=\mathcal{Z}$)
   in some appropriate sense, and at what level does the chain separate
   $P = 1$ from $P = 0$?
 \end{enumerate}
