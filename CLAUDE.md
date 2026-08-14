@@ -181,6 +181,20 @@ any premise is above its inspected evidence level.
 - **Privacy:** no personal absolute paths, company names, or internal hosts in any file
   (proxy/host may appear only in a shell command, never written to a file).
 
+## Paper pre-submission checklist (mandatory)
+
+Before sending any `papers/*/` file for external review, run all checks in
+`papers/PAPER_LINT.md` (items P1–P17) against the target `.tex` file.  Record
+the one-line output of each automatable check next to the item.  Fix every
+failure before submission.  "Looks fine by eye" is not a pass.
+
+```bash
+TEX=papers/<id>/<file>.tex  # set this first
+# Then run each grep/script from PAPER_LINT.md in order P1 → P17.
+```
+
+---
+
 ## Outsource-prompt pre-send checklist (mandatory)
 
 Before sending any `outsource/` problem, self-check these failure modes (each has

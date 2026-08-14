@@ -15,6 +15,14 @@
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\Csub}{\mathcal{C}_{\mathrm{logpoly}}^{\mathrm{sub,ell}}}
 
+% Main theorems D and D' use alphabetic/prime labeling inherited from the parent project.
+% \ref{thm:D} produces "D"; \ref{thm:Dprime} produces "D$'$".
+\newtheorem{mainthm}{Theorem}
+\renewcommand{\themainthm}{\Alph{mainthm}}
+\setcounter{mainthm}{3}    % counter=3 → next \begin{mainthm} displays as D
+\newtheorem{mainthmprime}{Theorem}
+\renewcommand{\themainthmprime}{D$'$}
+
 \title[Spectral Exclusions for Riemann Zero Operators]{%
   Spectral Exclusion Results for Operators Whose Eigenvalue
   Multiset Would Equal the Riemann Zero Ordinates}
@@ -30,7 +38,7 @@ a natural geometric class can have its eigenvalue multiset equal to
 $\{\gamma_n\}$, the positive ordinates of the nontrivial zeros of
 the Riemann zeta function.
 
-\textbf{Theorem~D.}  No positive classical elliptic
+\textbf{Theorem~\ref{thm:D}.}  No positive classical elliptic
 pseudodifferential operator of order $m>0$ on any closed smooth
 manifold of dimension $d\ge 1$ has eigenvalue multiset $\{\gamma_n\}$:
 the Weyl counting law forces a pure-power leading term in the heat
@@ -38,7 +46,7 @@ trace, while the zero ordinate heat sum
 $Z_\zeta(t)\sim\frac{1}{2\pi}t^{-1}\log(1/t)$
 has an unavoidable logarithmic factor.
 
-\textbf{Theorem~D$'$.}  The exclusion extends to the class~$\Csub$
+\textbf{Theorem~\ref{thm:Dprime}.}  The exclusion extends to the class~$\Csub$
 of operators whose symbol has a classical positive elliptic principal
 part and strictly lower-order log-polyhomogeneous corrections,
 via a min-max squeeze argument.
@@ -52,7 +60,7 @@ Riemann Hypothesis.
 
 %-----------------------------------------------------------------------
 \section{Introduction}
-\label{sec:intro}
+\label{sec:intro}% xref-only
 %-----------------------------------------------------------------------
 
 \subsection*{Setup and motivation}
@@ -95,11 +103,14 @@ independent of the truth or falsity of RH.
 \subsection*{Related work}
 
 Watson--Valentinuzzi~\cite{Watson2026} prove a Weyl-law obstruction
-for compact elliptic \emph{differential} operators; Theorem~D
+for compact elliptic \emph{differential} operators; Theorem~\ref{thm:D}
 establishes the same obstruction for classical elliptic
 pseudodifferential operators of any order $m>0$ via the
 pseudodifferential Weyl law (H\"ormander~\cite{Hormander1968}).
-Theorem~D$'$ extends the result to the subclass of the
+The Laplace-type and differential-operator results of
+Berline--Getzler--Vergne~\cite{BGV2004} and Gilkey~\cite{Gilkey1995}
+cover a restricted subclass; see Remark~\ref{rem:bgvgilkey}.
+Theorem~\ref{thm:Dprime} extends the result to the subclass of the
 log-polyhomogeneous symbol calculus of Lesch~\cite{Lesch1999} in
 which the principal symbol is classical and positive elliptic and all
 logarithmic terms appear only at strictly lower orders.
@@ -110,9 +121,10 @@ Connes~\cite{Connes1999} places zeta zeros in a noncommutative
 geometric setting.  In Connes--Consani--Moscovici~\cite{CCM2025},
 scaling operators on $L^2([\lambda^{-1},\lambda])$ (with log-scale
 measure) yield the regularized-determinant identity
-$\det_{\mathrm{reg}}(\mathfrak{D}-z)=-i\lambda^{-iz}\hat{\xi}(z)$,
-where $\hat{\xi}$ is the Fourier transform of $\xi(s)$ and
-$\Xi(t):=\xi(\tfrac{1}{2}+it)$; the open steps are establishing that
+$\det_{\mathrm{reg}}(\mathfrak{D}-z)=-i\lambda^{-iz}\hat{\Xi}(z)$,
+where $\Xi(t):=\xi(\tfrac{1}{2}+it)$ is the completed zeta function
+on the critical line (not Riemann's $\xi(s)$ at a general argument)
+and $\hat{\Xi}$ denotes its Fourier transform; the open steps are establishing that
 the lowest eigenvalue is simple and even, and that the renormalized
 kernel $k_\lambda$ converges sufficiently to the lowest eigenfunction.
 Theorems~D and~D$'$ do not obstruct the CCM approach, since the CCM
@@ -120,7 +132,7 @@ operators belong to a different class.
 
 %-----------------------------------------------------------------------
 \section{Setup and Notation}
-\label{sec:setup}
+\label{sec:setup}% xref-only
 %-----------------------------------------------------------------------
 
 \subsection{Heat traces and counting functions}
@@ -185,19 +197,23 @@ operator} of order $m>0$ on a closed $d$-dimensional manifold $M$
 resolvent whose complete symbol is polyhomogeneous of order $m$ and
 whose principal symbol $h_m(x,\xi)$ satisfies $h_m(x,\xi)\ge c|\xi|^m$
 uniformly for $|\xi|\ge 1$.
+Throughout, all operators act on \emph{scalar} functions (sections of
+the trivial line bundle over $M$); for operators on sections of a
+vector bundle of rank $r$, the Weyl constant $C_H$ acquires a factor
+of $r$ and the exclusion arguments go through unchanged.
 
 %-----------------------------------------------------------------------
 \section{Classical Elliptic Operators Are Excluded}
 \label{sec:elliptic}
 %-----------------------------------------------------------------------
 
-\begin{theorem}[D]
+\begin{mainthm}[D]
 \label{thm:D}
 Let $M$ be a closed smooth manifold of dimension $d\ge 1$ and $H$ a
 positive classical elliptic pseudodifferential operator of order $m>0$
 on $M$ with compact resolvent.  Then
 $\operatorname{spec}_{\times}(H)\ne\{\gamma_n\}$.
-\end{theorem}
+\end{mainthm}
 
 \begin{proof}
 By the pseudodifferential Weyl law
@@ -243,18 +259,18 @@ contradicting $Z_H(t)=Z_\zeta(t)$.
 The heat-kernel results of Berline--Getzler--Vergne~\cite{BGV2004}
 (Theorem~2.30) and Gilkey~\cite{Gilkey1995} (\S1.7) cover
 Laplace-type and differential operators; those results suffice for
-a restricted version of Theorem~D but do not cover general
+a restricted version of Theorem~\ref{thm:D} but do not cover general
 classical elliptic pseudodifferential operators.
 \end{remark}
 
 \begin{remark}[Watson--Valentinuzzi]
 Watson and Valentinuzzi~\cite{Watson2026} prove a Weyl-law obstruction
-for compact elliptic differential operators.  Theorem~D establishes
+for compact elliptic differential operators.  Theorem~\ref{thm:D} establishes
 the same obstruction for classical elliptic pseudodifferential
 operators of any order $m>0$.
 \end{remark}
 
-\subsection*{Escape routes from Theorem~D}
+\subsection*{Escape routes from Theorem~\ref{thm:D}}
 
 The proof uses the classical Weyl law, which requires: (i) $M$ compact,
 (ii) the operator elliptic, (iii) the symbol polyhomogeneous.
@@ -280,8 +296,7 @@ Escape routes include:
 Let $M$ be a closed smooth manifold of dimension $d\ge 1$, $m>0$,
 $K\in\mathbb{N}_0$.
 The class $\Csub$ consists of scalar operators $H$ on $L^2(M)$,
-self-adjoint on a domain $\mathrm{Dom}(H)\subseteq H^m(M)$, with
-compact resolvent and $H\ge -C_0$ for some $C_0\ge 0$, whose complete
+with $H\ge -C_0$ for some $C_0\ge 0$, whose complete
 symbol in any local coordinate chart satisfies the asymptotic expansion
 \[
   \sigma(H)(x,\xi)
@@ -289,10 +304,11 @@ symbol in any local coordinate chart satisfies the asymptotic expansion
   h_m(x,\xi)
   +
   \sum_{j\ge 1}\sum_{\ell=0}^{K}
-    h_{m-j,\ell}(x,\xi)(\log|\xi|)^\ell
+    h_{m-j,\ell}(x,\xi)\,\chi(\xi)\,(\log|\xi|)^\ell
   \quad(|\xi|\to\infty),
 \]
-where:
+where $\chi\in C^\infty(\RR^d)$ with $\chi(\xi)=0$ for $|\xi|\le 1$ and
+$\chi(\xi)=1$ for $|\xi|\ge 2$, and:
 \begin{enumerate}[label=(\roman*)]
   \item each $h_{m-j,\ell}$ is smooth and positively homogeneous of
     degree $m-j$ in $\xi$ for $|\xi|\ge 1$, satisfying
@@ -303,17 +319,21 @@ where:
     for all multiindices $\alpha,\beta$;
   \item the $N$th remainder
     \[
-      \sigma(H)-h_m-\sum_{1\le j\le N}\sum_\ell h_{m-j,\ell}(\log|\xi|)^\ell
+      \sigma(H)-h_m-\sum_{1\le j\le N}\sum_\ell h_{m-j,\ell}\,\chi\,(\log|\xi|)^\ell
     \]
-    lies in $\bigcap_{\varepsilon>0}S^{m-N+\varepsilon}(T^*U)$
+    lies in the standard H\"ormander class $S^{m-N}_{1,0}(T^*U)$
     for each coordinate chart $U$
     \emph{(in the sense of Lesch~\cite{Lesch1999}, Definition~3.1)};
   \item the principal symbol satisfies $h_m(x,\xi)\ge c|\xi|^m$ for
     $|\xi|\ge 1$ and all $x\in M$
     (\emph{positive classical elliptic principal part}).
 \end{enumerate}
-The quadratic form $q_H(u)=\langle Hu,u\rangle$ closes on $H^{m/2}(M)$
-by elliptic regularity, defining the self-adjoint realization.
+By the G\r{a}rding inequality~\cite{Hormander1968} applied to $h_m$,
+the symmetric form $q_H[u]:=\langle (H+C_0+1)u,u\rangle$, initially
+on $C^\infty(M)$, satisfies $q_H[u]\ge c\,\|u\|^2_{H^{m/2}(M)}$ and
+closes uniquely on $\mathrm{Dom}(q_H)=H^{m/2}(M)$.
+The KLMN theorem then yields the unique self-adjoint realization of $H$
+with $\mathrm{Dom}(H)\subseteq H^m(M)$ and compact resolvent.
 \end{definition}
 
 \subsection{Form boundedness of the strictly lower-order log corrections}
@@ -326,24 +346,32 @@ symmetrization, and addition of a positive constant to ensure $P\ge c>0$.
 Then $P\in\Psi^m_{\mathrm{cl}}(M)$ with $\sigma_m(P)=h_m$ and
 $\mathrm{Dom}(q_P)=H^{m/2}(M)$.
 
-Since $H\in\Csub$ has the same classical elliptic principal symbol
-$h_m$, elliptic regularity gives $\mathrm{Dom}(q_H)=H^{m/2}(M)$ as
-well (Seeley~\cite{Seeley1967}).
-The difference $Q=H-P$ is a log-polyhomogeneous operator of order at
-most $m-1$.
+By the G\r{a}rding inequality~\cite{Hormander1968} applied to the
+elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
+\begin{equation}
+  \label{eq:garding}
+  \langle Pu,u\rangle \;\ge\; c_0\,\|u\|^2_{H^{m/2}(M)} - C_1\,\|u\|^2,
+  \qquad u\in C^\infty(M).
+\end{equation}
+Since $H\in\Csub$ has the same principal symbol $h_m$,
+Definition~\ref{def:csub} gives $\mathrm{Dom}(q_H)=H^{m/2}(M)$ as well.
+At the level of quadratic forms, define $q_Q[u]:=q_H[u]-q_P[u]$ for
+$u\in H^{m/2}(M)$; the subsequent estimates are all form-level.
+The sub-principal correction terms are formally in $\Psi^{m-1+\varepsilon}(M)$
+for any $\varepsilon\in(0,1)$, because
 
 For any $\varepsilon\in(0,1)$, since $K<\infty$ and $j\ge 1$,
-each symbol term $h_{m-j,\ell}(x,\xi)(\log|\xi|)^\ell$ satisfies
-the $S^{m-1+\varepsilon}$ symbol estimates: for $|\xi|\ge 1$ and all
+each symbol term $h_{m-j,\ell}(x,\xi)\chi(\xi)(\log|\xi|)^\ell$ satisfies
+the $S^{m-1+\varepsilon}_{1,0}$ symbol estimates: for $|\xi|\ge 1$ and all
 $0\le\ell\le K$, the estimate $|(\log|\xi|)^\ell|\le C_{\varepsilon,K}|\xi|^\varepsilon$
 together with the derivative estimates on $h_{m-j,\ell}$ and the
 product rule give
 \[
-  |\partial_x^\alpha\partial_\xi^\beta[h_{m-j,\ell}(\log|\xi|)^\ell]|
+  |\partial_x^\alpha\partial_\xi^\beta[h_{m-j,\ell}\chi(\xi)(\log|\xi|)^\ell]|
   \le C'_{\alpha\beta}(1+|\xi|)^{m-1+\varepsilon-|\beta|}.
 \]
 The $N$th remainder is controlled by Definition~\ref{def:csub}(ii).
-Hence $Q\in\Psi^{m-1+\varepsilon}(M)$ for every $\varepsilon\in(0,1)$.
+Hence $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}(M)$ for every $\varepsilon\in(0,1)$.
 
 For $u\in H^{m/2}(M)$, the form estimate proceeds as follows.
 If $m>1-\varepsilon$, the Sobolev interpolation inequality on $M$
@@ -353,23 +381,27 @@ gives, for every $\delta>0$:
   \;\le\;
   \delta\,\|u\|_{H^{m/2}(M)}^2+C_\delta\,\|u\|_{L^2(M)}^2,
 \]
-since $(m-1+\varepsilon)/2<m/2$.  The pseudodifferential Sobolev
+since $(m-1+\varepsilon)/2<m/2$.  By~\eqref{eq:garding},
+$\|u\|^2_{H^{m/2}}\le c_0^{-1}(\langle Pu,u\rangle+C_1\|u\|^2)$,
+so the interpolation can be absorbed into $\langle Pu,u\rangle$.
+The pseudodifferential Sobolev
 mapping theorem gives
 $Q\colon H^{(m-1+\varepsilon)/2}(M)\to H^{-(m-1+\varepsilon)/2}(M)$,
 so
 \[
-  |\langle Qu,u\rangle|
+  |q_Q[u]|=|\langle Qu,u\rangle|
   \le C'\|u\|_{H^{(m-1+\varepsilon)/2}}^2
   \le C'\bigl(\delta\|u\|_{H^{m/2}}^2+C_\delta\|u\|_{L^2}^2\bigr).
 \]
 If instead $m\le 1-\varepsilon$, then $Q\in\Psi^{m-1+\varepsilon}$
 with $m-1+\varepsilon\le 0$ is $L^2$-bounded~\cite{Hormander1968},
-so $|\langle Qu,u\rangle|\le C\|u\|_{L^2}^2\le
+so $|q_Q[u]|=|\langle Qu,u\rangle|\le C\|u\|_{L^2}^2\le
 C(\delta\|u\|_{H^{m/2}}^2+C_\delta\|u\|_{L^2}^2)$.
-In both cases, adjusting constants yields: for every $\delta>0$,
+In both cases, adjusting constants and using~\eqref{eq:garding} yields:
+for every $\delta>0$,
 \begin{equation}
   \label{eq:formbdd}
-  |\langle Qu,u\rangle|
+  |q_Q[u]|
   \;\le\;
   \delta\langle Pu,u\rangle+C_\delta\|u\|^2
   \qquad\forall\,u\in H^{m/2}(M).
@@ -380,13 +412,13 @@ Equivalently, as quadratic forms on their common domain $H^{m/2}(M)$:
   (1-\delta)P-C_\delta\;\le\; H\;\le\;(1+\delta)P+C_\delta.
 \end{equation}
 
-\begin{theorem}[D$'$]
+\begin{mainthmprime}[D$'$]
 \label{thm:Dprime}
 Any $H\in\Csub$ satisfies
 $N_H(\Lambda)\sim C_H\Lambda^{d/m}$ as $\Lambda\to\infty$,
 where $C_H>0$ is the Weyl constant of the principal symbol $h_m$.
 In particular, $\operatorname{spec}_{\times}(H)\ne\{\gamma_n\}$.
-\end{theorem}
+\end{mainthmprime}
 
 \begin{proof}
 Write $a=C_0+1$.  Replace $H$ by $\tilde H=H+a$, which satisfies
@@ -394,9 +426,10 @@ $\tilde H\ge 1>0$ and $N_{\tilde H}(\Lambda)=N_H(\Lambda-a)$, so
 $N_H(\Lambda)\sim C_H\Lambda^{d/m}$ is equivalent to
 $N_{\tilde H}(\Lambda)\sim C_H\Lambda^{d/m}$.
 The difference $\tilde Q:=\tilde H-P=Q+aI$ satisfies
-$|\langle\tilde Qu,u\rangle|\le|\langle Qu,u\rangle|+a\|u\|^2$,
+$|q_{\tilde Q}[u]|\le|q_Q[u]|+a\|u\|^2$,
 so~\eqref{eq:formbdd} holds for $\tilde Q$ with $C_\delta$ replaced by
-$C_\delta+a$.  Denoting $\tilde H$ by $H$ for the rest of the proof:
+$C_\delta+a$.  The form inequality~\eqref{eq:formineq} for $H$
+becomes, after the shift, for the rest of the proof:
 \begin{equation}
   \label{eq:formineqshift}
   (1-\delta)P-C_\delta\;\le\; H\;\le\;(1+\delta)P+C_\delta,
@@ -433,8 +466,10 @@ $\Lambda\to+\infty$ gives
 \]
 Since $\delta>0$ is arbitrary, $N_H(\Lambda)\sim C_H\Lambda^{d/m}$.
 By Theorem~\ref{thm:karamata}(i),
-$Z_H(t)\sim C_H\Gamma(d/m+1)t^{-d/m}$,
-and the exclusion follows by the same argument as Theorem~D.
+$Z_{\tilde H}(t)\sim C_H\Gamma(d/m+1)t^{-d/m}$.
+Since $Z_H(t)=e^{at}Z_{\tilde H}(t)$ and $e^{at}\to 1$ as $t\to 0^+$,
+we also have $Z_H(t)\sim C_H\Gamma(d/m+1)t^{-d/m}$,
+and the exclusion follows by the same argument as Theorem~\ref{thm:D}.
 \end{proof}
 
 \begin{remark}
@@ -497,7 +532,7 @@ This operator is \emph{not} elliptic on $\mathbb{T}^4$: its principal
 symbol $|\xi|^2|\eta|^2$ vanishes on $\{\xi=0\}\cup\{\eta=0\}$.
 Hence logarithmically enhanced heat traces are achievable outside the
 elliptic class, showing that ellipticity is essential for the
-Weyl-law argument in Theorem~D.
+Weyl-law argument in Theorem~\ref{thm:D}.
 \end{remark}
 
 \subsection*{The escape class}
@@ -530,7 +565,7 @@ broader programme.
 
 %-----------------------------------------------------------------------
 \section{Discussion}
-\label{sec:discussion}
+\label{sec:discussion}% xref-only
 %-----------------------------------------------------------------------
 
 Theorems~D and~D$'$ show that no operator in the class of positive
@@ -541,7 +576,7 @@ can have eigenvalue multiset $\{\gamma_n\}$.  The obstruction is the
 Weyl law: operators in these classes have a pure-power leading term in
 their heat trace, incompatible with
 $Z_\zeta(t)\sim(1/2\pi)t^{-1}\log(1/t)$.
-Theorem~D$'$ shows this obstruction is stable under strictly
+Theorem~\ref{thm:Dprime} shows this obstruction is stable under strictly
 lower-order log-polyhomogeneous perturbations.
 The $\mathbb{T}^4$ counterexample (Remark~\ref{rem:counterex})
 shows that ellipticity of the principal symbol is essential for the
@@ -589,12 +624,6 @@ zeta function,
 A.~Connes, C.~Consani, and H.~Moscovici,
 Zeta spectral triples,
 \emph{arXiv:2511.22755} (2025).
-
-\bibitem{GrubbSeeley1995}
-G.~Grubb and R.~T. Seeley,
-Weakly parametric pseudodifferential operators and
-Atiyah--Patodi--Singer boundary problems,
-\emph{Invent.\ Math.}\ \textbf{121} (1995), no.~3, 481--529.
 
 \bibitem{Gilkey1995}
 P.~B. Gilkey,
