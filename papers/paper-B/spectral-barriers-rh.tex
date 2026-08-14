@@ -23,7 +23,7 @@
 \newtheorem{mainthmprime}{Theorem}
 \renewcommand{\themainthmprime}{D$'$}
 
-\title[Spectral Exclusions for Riemann Zero Operators]{%
+\title[Spectral Exclusion Results for Riemann Zero Operators]{%
   Spectral Exclusion Results for Operators Whose Eigenvalue
   Multiset Would Equal the Riemann Zero Ordinates}
 
@@ -163,9 +163,10 @@ For $\alpha>0$ and $C>0$,
   Z_H(t)\sim C\,\Gamma(\alpha+1)\,t^{-\alpha}
   \quad(t\to 0^+).
 \]
-\item \emph{(Log-varying case, \cite{BGT1987} \S1.7)}
+\item \emph{(Log-varying case, \cite{BGT1987} \S1.7.2, Theorem~1.7.1)}
 If $N_H(\Lambda)\sim C\Lambda\log\Lambda$, then
 $Z_H(t)\sim C\,t^{-1}\log(1/t)$ as $t\to 0^+$.
+(Take $\rho=1$, $c=C$, $\ell(x)=\log x$, $\Gamma(2)=1$ in Theorem~1.7.1.)
 \end{enumerate}
 \end{theorem}
 
@@ -220,7 +221,8 @@ By the pseudodifferential Weyl law
 (H\"ormander~\cite{Hormander1968}, Theorem~4.4; for general order $m>0$
 reduce to order~$1$ via $H^{1/m}$, which is a classical elliptic
 $\Psi$DO of order~$1$ by Seeley's complex-powers
-theory~\cite{Seeley1967}, with $N_H(\Lambda)=N_{H^{1/m}}(\Lambda^{1/m})$),
+construction (Shubin~\cite{Shubin2001}, \S11, Theorem~11.2;
+see also~\cite{Seeley1967}), with $N_H(\Lambda)=N_{H^{1/m}}(\Lambda^{1/m})$),
 \[
   N_H(\Lambda)\sim C_H\,\Lambda^{d/m}
   \quad(\Lambda\to+\infty),
@@ -498,7 +500,9 @@ $(1+|p|^2)(1+|q|^2)$ for $(p,q)\in\ZZ^2\times\ZZ^2$
 We show $N_{H_{\mathrm{prod}}}(\Lambda)\sim\pi^2\Lambda\log\Lambda$.
 
 Let $A(X)=\#\{q\in\ZZ^2:1+|q|^2\le X\}=\pi X+O(X^{1/2})$
-(standard two-dimensional lattice-point estimate).  Then
+(standard two-dimensional lattice-point estimate; see
+Hardy--Wright~\cite{HardyWright2008}, Theorem~278 for $r_2$, and the
+circle bound follows by unit-square area comparison).  Then
 \[
   N_{H_{\mathrm{prod}}}(\Lambda)
   =\sum_{\substack{p\in\ZZ^2\\1+|p|^2\le\Lambda}}
@@ -614,6 +618,12 @@ M.~V. Berry and J.~P. Keating,
 The Riemann zeros and eigenvalue asymptotics,
 \emph{SIAM Rev.}\ \textbf{41} (1999), no.~2, 236--266.
 
+\bibitem{HardyWright2008}
+G.~H. Hardy and E.~M. Wright,
+\emph{An Introduction to the Theory of Numbers},
+6th ed., revised by D.~R. Heath-Brown and J.~H. Silverman,
+Oxford University Press, Oxford, 2008.
+
 \bibitem{Connes1999}
 A.~Connes,
 Trace formula in noncommutative geometry and the zeros of the Riemann
@@ -647,6 +657,11 @@ R.~T. Seeley,
 Complex powers of an elliptic operator,
 in \emph{Singular Integrals (Proc.\ Sympos.\ Pure Math., Chicago,
 1966)}, Amer.\ Math.\ Soc., Providence, RI, 1967, pp.~288--307.
+
+\bibitem{Shubin2001}
+M.~A. Shubin,
+\emph{Pseudodifferential Operators and Spectral Theory},
+2nd ed., Springer-Verlag, Berlin, 2001.
 
 \bibitem{Titchmarsh1986}
 E.~C. Titchmarsh,

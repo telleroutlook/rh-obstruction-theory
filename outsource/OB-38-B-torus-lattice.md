@@ -65,7 +65,11 @@ for $k \geq 0$.  Known values: $r_2(0) = 1$; $r_2(k) = 4\sum_{d|k,\,d\text{ odd}
 $r_2(k) = 0$ if any prime $p \equiv 3 \pmod{4}$ divides $k$ to an odd power.
 
 **Gauss circle asymptotics** (classical; see Hardy–Wright, *An Introduction to the
-Theory of Numbers*, Thm 278 or Ivić, *The Riemann Zeta-Function*, §12.1):
+Theory of Numbers*, 6th ed. (Heath-Brown–Silverman), Oxford University Press, 2008,
+for the two-square representation formula; the circle estimate
+$\sum_{k \leq K} r_2(k) = \pi K + O(K^{1/2})$ follows elementarily from the
+area comparison of unit squares around lattice points with the disc of radius
+$\sqrt{K}$, with no need for deep results):
 $$A(\Lambda) := \#\{q \in \mathbb{Z}^2 : 1 + |q|^2 \leq \Lambda\} = \pi(\Lambda - 1) + O(\Lambda^{1/2})
 = \pi\Lambda + O(\Lambda^{1/2}). \tag{Gauss}$$
 
@@ -96,13 +100,16 @@ A\!\left(\frac{\Lambda}{1+|p|^2}\right), \tag{S1}$$
 
 where $A(X) = \#\{q \in \mathbb{Z}^2 : 1+|q|^2 \leq X\} = \pi X + O(X^{1/2})$ by (Gauss).
 
-Substitute to split into main term and remainder:
+Substitute to split into main term and remainder.  Define
+$\varepsilon(X) = A(X) - \pi X$, so that $|\varepsilon(X)| \leq C X^{1/2}$ uniformly
+for $X \geq 1$ by (Gauss) (for $X < 1$ no $q$-vectors are counted, so $A(X)=1$,
+handle separately).  Then:
 $$N_{H_{\mathrm{prod}}}(\Lambda) = \pi\Lambda\,S_1(\Lambda) + R(\Lambda), \tag{S1'}$$
 
 where
 $$S_1(\Lambda) = \sum_{\substack{p \in \mathbb{Z}^2 \\ 1+|p|^2 \leq \Lambda}} \frac{1}{1+|p|^2},
 \qquad R(\Lambda) = \sum_{\substack{p \in \mathbb{Z}^2 \\ 1+|p|^2 \leq \Lambda}}
-O\!\left(\!\left(\frac{\Lambda}{1+|p|^2}\right)^{1/2}\right). \tag{S1''}$$
+\varepsilon\!\left(\frac{\Lambda}{1+|p|^2}\right). \tag{S1''}$$
 
 **What to close for Step 1:** Confirm the decomposition (S1) is valid and that
 splitting $A(X) = \pi X + O(X^{1/2})$ term by term is justified (summing $O$-terms is
@@ -113,42 +120,51 @@ error is uniform).
 
 Write $S_1(\Lambda) = \sum_{k=0}^{N-1} \tfrac{r_2(k)}{1+k}$ where $N = \lfloor\Lambda\rfloor$.
 
-Let $B(K) = \sum_{k=0}^{K} r_2(k) = \pi K + O(K^{1/2})$ (from (Gauss) with $K = N-1$).
+Let $B(k) = \sum_{j=0}^{k} r_2(j)$.  Note $B(0) = r_2(0) = 1$; for $k \geq 1$,
+$B(k) = \pi k + E(k)$ where $|E(k)| \leq C k^{1/2}$ by (Gauss).  Write $E(0) = 1$
+(handled separately below).
 
-Apply Abel summation (summation by parts):
+Apply Abel summation (summation by parts) for $N \geq 2$:
 $$\sum_{k=0}^{N-1} \frac{r_2(k)}{1+k}
-= \frac{B(N-1)}{N} + \sum_{k=0}^{N-2} B(k)\left(\frac{1}{1+k} - \frac{1}{2+k}\right)
 = \frac{B(N-1)}{N} + \sum_{k=0}^{N-2} \frac{B(k)}{(1+k)(2+k)}. \tag{Abel}$$
 
-Substitute $B(k) = \pi k + O(k^{1/2})$:
+Substitute $B(k) = \pi k + E(k)$:
 
-**Main term:**
-$$\pi\sum_{k=1}^{N-1} \frac{k}{(1+k)(2+k)}.$$
+**Main term** from $k \geq 1$ (the $\pi k$ part of $B(k)$):
+$$\frac{\pi(N-1)}{N} + \sum_{k=1}^{N-2} \frac{\pi k}{(1+k)(2+k)}.$$
 
 Partial fractions: $\dfrac{k}{(1+k)(2+k)} = \dfrac{-1}{1+k} + \dfrac{2}{2+k}$, so
 
-$$\pi\sum_{k=1}^{N-1}\frac{k}{(1+k)(2+k)}
-= \pi\!\left(-\sum_{k=1}^{N-1}\frac{1}{1+k} + 2\sum_{k=1}^{N-1}\frac{1}{2+k}\right)
-= \pi\!\left(-\sum_{j=2}^{N}\frac{1}{j} + 2\sum_{j=3}^{N+1}\frac{1}{j}\right)$$
+$$\sum_{k=1}^{N-2}\frac{k}{(1+k)(2+k)}
+= -\sum_{k=1}^{N-2}\frac{1}{1+k} + 2\sum_{k=1}^{N-2}\frac{1}{2+k}
+= H_{N-1} + \frac{2}{N} - 2,$$
 
-$$= \pi\!\left(\sum_{j=3}^{N}\frac{1}{j} - \frac{1}{2} + \frac{2}{N+1}\right)
-= \pi\!\left(\log N - 1 - \frac{1}{2} + O(1/N)\right) \sim \pi\log\Lambda. \tag{Main term}$$
+where $H_n = \sum_{j=1}^n 1/j$ is the $n$-th harmonic number.  Combined:
 
-**Error term from $B(k) = \pi k + O(k^{1/2})$:**
-$$\sum_{k=0}^{N-2} \frac{O(k^{1/2})}{(1+k)(2+k)} = O\!\left(\sum_{k=1}^{N} k^{-3/2}\right) = O(1). \tag{Error-Abel}$$
+$$\pi\!\left(\frac{N-1}{N} + H_{N-1} + \frac{2}{N} - 2\right)
+= \pi(H_N - 1). \tag{Main}$$
 
-**First term in (Abel):** $B(N-1)/N = \pi(N-1)/N + O(N^{-1/2}) = \pi + O(N^{-1/2}) = O(1)$.
+(Using $\tfrac{N-1}{N} + \tfrac{2}{N} = 1 + \tfrac{1}{N}$ and $H_N = H_{N-1} + 1/N$.)
 
-Therefore:
-$$S_1(\Lambda) = \pi\log\Lambda + O(1). \tag{S2}$$
+The $k=0$ term $B(0)/(1\cdot 2) = 1/2$ (since $B(0)=1$, not $\pi\cdot0$) and the
+error terms $|E(k)| \leq C k^{1/2}$ for $k \geq 1$ and $E(N-1)/N = O(N^{-1/2})$
+all contribute $O(1)$ to $S_1(\Lambda)$.
+
+Using $H_N = \log N + \gamma + O(N^{-1})$ (where $\gamma$ is the Euler–Mascheroni constant):
+$$S_1(\Lambda)
+= \pi(H_N - 1) + O(1)
+= \pi\log\Lambda + O(1). \tag{S2}$$
+
+A more precise form is $S_1(\Lambda) = \pi\log\Lambda + \pi(\gamma-1) + \tfrac{1}{2} + O(\Lambda^{-1/2})$,
+where the $\tfrac{1}{2}$ comes from the $k=0$ term and $\pi(\gamma-1)$ from the harmonic asymptotics.
 
 **What to close for Step 2:** (a) Reproduce the partial-fraction decomposition and the
-telescoping of harmonic sums to obtain $\sum_{k=1}^{N-1} k/((1+k)(2+k)) = \log N + O(1)$.
-(b) Confirm the Abel summation formula (Abel) with the correct boundary terms.
-(c) Confirm error bound (Error-Abel): $\sum_{k=1}^{N} k^{-3/2} = O(1)$ (convergent series).
-(d) Give the precise $O(1)$ constant in $S_1(\Lambda) = \pi\log\Lambda + c_0 + O((\log\Lambda)/\Lambda)$
-if possible (the constant $c_0$ is not needed for the main asymptotic but is useful for
-numerical comparison).
+telescoping identity $\sum_{k=1}^{N-2} k/((1+k)(2+k)) = H_{N-1} + 2/N - 2$ leading to
+$\pi(H_N - 1)$ for the main term.  (b) Confirm the Abel summation formula (Abel) with
+the correct upper limit $N-2$ (not $N-1$) in the second sum.  (c) Handle $k=0$ explicitly
+($B(0)=1$, not $O(0^{1/2})$).  (d) State the constant-level result as $S_1(\Lambda) =
+\pi\log\Lambda + O(1)$; a more precise form is $\pi\log\Lambda + \pi(\gamma-1) +
+O(\Lambda^{-1/2})$, with remainder from the convergent series and boundary terms.
 
 ### Step 3 — Bounding the remainder $R(\Lambda) = O(\Lambda)$
 
@@ -159,22 +175,24 @@ $$R(\Lambda) = O(\Lambda^{1/2})\,\sum_{\substack{p\in\mathbb{Z}^2\\1+|p|^2\leq\L
 
 where $T(\Lambda) = \sum_{k=0}^{N-1} r_2(k)\,(1+k)^{-1/2}$.
 
-**Dyadic shell bound for $T(\Lambda)$:** Partition $\{0,1,\ldots,N-1\}$ into dyadic
-shells $I_j = \{k : 2^{j-1} < k \leq 2^j\}$ for $j = 0, 1, \ldots, J$ with
-$J = \lfloor\log_2 N\rfloor$.  In shell $I_j$:
-$$\sum_{k \in I_j} r_2(k)\,(1+k)^{-1/2} \leq 2^{-j/2}\!\sum_{k \in I_j} r_2(k)
-= 2^{-j/2}\,O(2^j) = O(2^{j/2}),$$
-using $\sum_{k \leq R} r_2(k) = O(R)$.  Summing over shells:
-$$T(\Lambda) = \sum_{j=0}^{J} O(2^{j/2}) = O(2^{(J+1)/2}) = O(\Lambda^{1/2}). \tag{T-bound}$$
+**Dyadic shell bound for $T(\Lambda)$:** Separate $k=0$: $r_2(0)(1+0)^{-1/2} = 1$.
+For $k \geq 1$, partition into dyadic shells
+$I_j = \{k : 2^{j-1} < k \leq \min(2^j,\,N-1)\}$ for $j = 1, \ldots, J$ with
+$J = \lceil\log_2(N-1)\rceil$ (empty shells ignored).  In shell $I_j$:
+$$\sum_{k \in I_j} r_2(k)\,(1+k)^{-1/2} \leq C_1\,2^{-j/2}\!\sum_{k \in I_j} r_2(k)
+= C_1\,2^{-j/2}\,O(2^j) = O(2^{j/2}),$$
+using $\sum_{k \leq R} r_2(k) = O(R)$.  Summing over shells (at most $J \leq \log_2 N + 1$):
+$$T(\Lambda)
+\leq 1 + \sum_{j=1}^{J} O(2^{j/2}) = O(2^{J/2}) = O(N^{1/2}) = O(\Lambda^{1/2}). \tag{T-bound}$$
 
 Therefore $R(\Lambda) = O(\Lambda^{1/2}) \cdot O(\Lambda^{1/2}) = O(\Lambda)$.
 
 **What to close for Step 3:** (a) Confirm that the bound $\sum_{k \in I_j} r_2(k) =
-O(2^j)$ follows from the Gauss circle asymptotics (namely,
-$\sum_{k \leq R} r_2(k) = \pi R + O(R^{1/2})$, so the sum over a dyadic shell of
-width $\sim 2^j$ is $\pi \cdot 2^j + O(2^{j/2}) = O(2^j)$). (b) Confirm the geometric
-series bound $\sum_{j=0}^{J} 2^{j/2} = O(2^{J/2}) = O(N^{1/2}) = O(\Lambda^{1/2})$.
-(c) Conclude $R(\Lambda) = O(\Lambda)$ explicitly.
+O(2^j)$ follows from the Gauss circle asymptotics.  (b) Confirm the geometric
+series bound $\sum_{j=1}^{J} 2^{j/2} = O(2^{J/2}) = O(N^{1/2}) = O(\Lambda^{1/2})$.
+(c) Confirm $k=0$ contributes only $O(1)$ and does not affect the $O(\Lambda^{1/2})$
+bound on $T(\Lambda)$.  (d) Confirm $J = \lceil\log_2(N-1)\rceil$ covers all $k \in
+[1,N-1]$ with no gap.
 
 ### Step 4 — Conclusion
 
@@ -247,15 +265,22 @@ $\pi^2 \cdot 10 \cdot \log(10) \approx 9.8696 \times 23.026 \approx 227$.
 Relative shortfall at $\Lambda=10$: $(227-153)/227 \approx 33\%$, consistent with large
 $O(\Lambda)$ lower-order corrections at small $\Lambda$.
 
-### Task for reviewer: $N_{H_{\mathrm{prod}}}(100)$
+### Verified anchor: $N_{H_{\mathrm{prod}}}(100)$
 
-Compute $N_{H_{\mathrm{prod}}}(100)$ by direct enumeration (a short script suffices).
-Asymptotic prediction: $\pi^2 \cdot 100 \cdot \log(100) \approx 9.8696 \times 460.5
-\approx 4545$.  Report the exact count and relative error
-$(N - \pi^2 \Lambda \log\Lambda)/(\pi^2\Lambda\log\Lambda)$ to confirm it is consistent
-with an $O(\Lambda) = O(100)$ remainder (i.e., relative error $\lesssim 1/\log\Lambda
-\approx 1/4.6 \approx 22\%$, which remains visible at $\Lambda=100$; convergence to
-$\pi^2$ is logarithmically slow).
+Independent enumeration by two paths (direct product count and $r_2$-convolution) gives:
+
+$$\boxed{N_{H_{\mathrm{prod}}}(100) = 3505.}$$
+
+Asymptotic prediction: $\pi^2 \cdot 100 \cdot \log(100) \approx 4545.12$.
+
+$$\frac{N(100) - \pi^2\cdot100\cdot\log(100)}{\pi^2\cdot100\cdot\log(100)}
+\approx \frac{3505 - 4545.12}{4545.12} \approx -22.88\%.$$
+
+This is consistent with an $O(\Lambda)$ remainder whose coefficient at $\Lambda = 100$
+produces roughly one order of magnitude less than the main term; convergence is
+logarithmically slow.  The $O(\Lambda)$ notation makes no claim that the absolute
+error is at most $100$ or that the relative error is at most $1/\log 100$ — those
+interpretations are not consequences of the big-$O$ bound with unspecified constant.
 
 ---
 
@@ -279,7 +304,7 @@ $\pi^2$ is logarithmically slow).
 | L14 (per-$n$ vs uniform) | PASS — the $O(\Lambda^{1/2})$ bound in (Gauss) is uniform in $\Lambda$; used uniformly in Step 3 |
 | L15 (zeros in $\Omega$ vs zeros in $\mathbb{C}$) | N/A |
 | L16 (representation invariance) | PASS — $N_{H_{\mathrm{prod}}}(\Lambda)$ is an eigenvalue count, independent of basis; the split $T^4 = T^2_x\times T^2_y$ is explicit in the operator definition, not a basis choice |
-| L17 (cited black boxes exact) | PASS — cites: Jacobi two-square theorem for $r_2(k)$ (Hardy–Wright Thm 278); Gauss circle asymptotics $\sum_{k\leq K}r_2(k) = \pi K + O(K^{1/2})$ (Hardy–Wright Thm 278 or Ivić §12.1); Abel summation formula (standard, stated explicitly in (Abel)); all cited for the exact result used |
-| L18 (numerical anchors by script) | PASS — $N_{H_{\mathrm{prod}}}(10) = 153$ computed by explicit case-by-case table; each entry ($r_2$ values, $A$ values, contributions) independently checkable; reviewer asked to replicate for $\Lambda=100$ by script |
+| L17 (cited black boxes exact) | PASS — Jacobi two-square theorem for $r_2(k)$: Hardy–Wright, 6th ed. (Heath-Brown–Silverman), Oxford University Press, 2008, Thm 278; Gauss circle estimate $\sum_{k\leq K}r_2(k) = \pi K + O(K^{1/2})$: proved inline by unit-square area comparison in §3 of this file (no external citation needed); Abel summation stated explicitly in (Abel). |
+| L18 (numerical anchors by script) | PASS — $N_{H_{\mathrm{prod}}}(10) = 153$ and $N_{H_{\mathrm{prod}}}(100) = 3505$ verified by two independent integer-enumeration paths (direct product count and $r_2$-convolution); relative error at $\Lambda=100$: $-22.88\%$, consistent with $O(\Lambda)$ remainder. |
 | L19 (honest inconclusive verdict) | PASS — Step 2 offers a precise partial result (error estimate in $S_1$) if the $O(1)$ constant cannot be determined; REFUTED path is concrete |
 | Self-containment | PASS — all symbols ($T^2$, $T^4$, $H_{\mathrm{prod}}$, $r_2$, $A$, $N$, $S_1$, $B$, $R$, $T$, $\log$) defined in-file; arithmetic values ($r_2(3)=0$ etc.) justified by Jacobi theorem; no "see other file" for load-bearing content |

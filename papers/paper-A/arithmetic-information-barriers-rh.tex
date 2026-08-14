@@ -372,7 +372,7 @@ Direct computation using Definition~\ref{def:Li} gives:
 
 \subsection{Sum-product identity and quartet asymptotics}
 
-\begin{lemma}[Sum-product identity]
+\begin{lemma}[Sum-product identity~{\cite{BombieriLagarias1999}}]
 For all $j \geq 1$ and $s \in \CC \setminus \{0,1\}$:
 \[
   \varphi_j(s) + \varphi_j(1-s) \;=\; \varphi_j(s)\cdot\varphi_j(1-s).
@@ -390,6 +390,7 @@ we have $AB = [(1-s^{-1})(1-(1-s)^{-1})]^j = 1$.  Hence
 \end{align*}
 \end{proof}
 
+% Original result; independently verified in theorems/B2-exact-collision/checker/b2_certified_checker.py
 \begin{lemma}[Quartet Li asymptotics]
 \label{lem:qasympt}
 For $j\ge 1$ and $\sigma_0\in(0,1)$, as $T\to+\infty$:
@@ -433,7 +434,9 @@ The main term $4j^2/T^2$ is independent of $\sigma_0$.  For $j=1$:
 for all $T>0$, since both terms are positive.
 For $j\geq 2$, $q_j(T)>0$ for all sufficiently large $T$ (following from
 $q_j(T) = 4j^2/T^2 + O(T^{-4})$), but this need not hold for small $T$:
-for example, $q_2(1/10) < 0$ at $\sigma_0 = 3/4$.
+for example, $q_2(1/10) < 0$ at $\sigma_0 = 3/4$
+(verified by exact rational arithmetic in
+\texttt{checker/q2\_sign\_check.py}).
 \end{remark}
 
 %%--------------------------------------------------------------------
@@ -483,6 +486,7 @@ and $q(T) \in \RR^m$.
 
 \subsection{Non-singularity of the Li collision matrix}
 
+% Original result; proof self-contained via Chebyshev identity and Vandermonde determinant
 \begin{lemma}[Full rank of $C$ over $\QQ$]
 \label{lem:Crank}
 For distinct positive rationals $t_1, \ldots, t_m$, the matrix
@@ -651,6 +655,7 @@ or imposing the full Euler product, functional equation, or
 Riemann--von Mangoldt counting asymptotics.
 \end{remark}
 
+% Original corollary; follows directly from Theorem~\ref{thm:A} by the collision construction
 \begin{corollary}[Positivity threshold]
 \label{cor:B1Li}
 Let $\mathcal{Z}_+ \in \Hsym$ satisfy $P(\mathcal{Z}_+)=1$ and
@@ -828,6 +833,7 @@ Hence $\Ofinite^{(K)} \npreceq \Otheta$.
 
 \subsection{The non-cancellation lemma}
 
+% Original existence lemma; constructive proof via continuity and Vandermonde non-singularity
 \begin{lemma}[Non-cancellation parameter selection]
 \label{lem:noncancel}
 Fix $K \geq 1$ and $d_* > 0$.  There exist rational parameters

@@ -19,13 +19,13 @@ Paper A (B2 framework), Lemma 2.9 (label `lem:qasympt`) asserts:
 $$q_j(T) = \frac{4j^2}{T^2} + O(T^{-4}) \quad \text{as } T \to +\infty,$$
 
 where $q_j(T)$ is the Li evaluation of the four-point multiset $Q(\sigma_0, T)$ for
-fixed $\sigma_0 \in (0,1)$, $\sigma_0 \neq 1/2$ (full definitions below).  The
+fixed $\sigma_0 \in (0,1)$ (full definitions below).  The
 expansion exhibits a conspicuous gap: the leading $T^{-2}$ term is followed directly
 by $O(T^{-4})$, with no $T^{-3}$ term.  A direct Laurent expansion produces an
 $O(T^{-3})$ remainder in $\operatorname{Re} g(T)$; Paper A's proof sketch invoked a
 parity argument to promote that remainder to $O(T^{-4})$.
 
-**This problem asks for independent verification** of all three components:
+**This problem asks for independent verification** of all four components:
 
 1. The parity identity $g(-T) = \overline{g(T)}$ holds algebraically for all
    $T \in \mathbb{R}$.
@@ -56,7 +56,7 @@ $\varphi_3(\rho) = 3\rho^{-1} - 3\rho^{-2} + \rho^{-3}$.
 
 ### The four-point multiset
 
-Fix $\sigma_0 \in (0,1)$, $\sigma_0 \neq 1/2$.  For $T \in \mathbb{R} \setminus \{0\}$
+Fix $\sigma_0 \in (0,1)$.  For $T \in \mathbb{R} \setminus \{0\}$
 define the multiset:
 
 $$Q(\sigma_0, T) = \{\sigma_0 + iT,\; \sigma_0 - iT,\; 1-\sigma_0 + iT,\; 1-\sigma_0 - iT\}.$$
@@ -104,7 +104,7 @@ $$\operatorname{Re} g(T) = \frac{j^2}{T^2} + O(T^{-4}),
 ## The claim to be verified
 
 **Claim (Lemma 2.9 coefficient).** For all integers $j \geq 1$, all
-$\sigma_0 \in (0,1)$ with $\sigma_0 \neq 1/2$, and $T \to +\infty$:
+$\sigma_0 \in (0,1)$, and $T \to +\infty$:
 
 $$q_j(T) = \frac{4j^2}{T^2} + O(T^{-4}).$$
 
@@ -152,11 +152,13 @@ $\varphi_1(3/4-3i) = 4/51 + 16i/51 = \overline{\varphi_1(3/4+3i)}$.
 From Step 1, $\operatorname{Re} g(-T) = \operatorname{Re}\,\overline{g(T)} = \operatorname{Re}\,g(T)$.
 So $h(T) := \operatorname{Re}\,g(T)$ is an **even** function of $T$.
 
-For large $|T|$, $h(T)$ admits a Laurent expansion in $1/T$ (the denominator of each
-$\varphi_j(\sigma+iT)$ is $(\sigma^2+T^2)^j$, which is an even polynomial in $T$; so
-$h(T)$ extends as a rational function in $T$ near $1/T=0$).  Since $h(-T) = h(T)$,
-every odd-power coefficient must vanish: $a_k = 0$ for all odd $k \geq 1$.  In
-particular $\mathbf{a_1 = 0}$ and $\mathbf{a_3 = 0}$.
+For large $|T|$, $h(T)$ admits a Laurent expansion in $1/T$.  After rationalization,
+$\varphi_j(\sigma+iT)$ and in particular its real part can be written with the real even
+denominator $(\sigma^2+T^2)^j$; hence $H(x)=\operatorname{Re}\,g(1/x)$ is rational and
+analytic near $x=0$.  Since $h(-T) = h(T)$, every odd-power coefficient must vanish:
+$a_k = 0$ for all odd $k \geq 1$.  If the series is indexed from $k\ge1$, then
+$\mathbf{a_1 = 0}$; in the displayed series beginning at $k=2$, the relevant
+conclusion is $\mathbf{a_3 = 0}$.
 
 **What to close for Step 2:** confirm that the denominator
 $(\sigma^2+T^2)^j$ is indeed even in $T$ (it is, since $T$ appears only as $T^2$), so
@@ -252,10 +254,11 @@ $i c_3/T^3$ contributes 0 to $\operatorname{Re}\,g$.
 ## Acceptance criteria
 
 1. **CONFIRMED:** Steps 1–3 are each verified to be correct; the consistency check
-   confirms the $T^{-3}$ coefficient in $\operatorname{Re}\,g$ is purely imaginary; both
+   confirms that the $T^{-3}$ coefficient in $g$ is purely imaginary, hence the
+   $T^{-3}$ coefficient in $\operatorname{Re}\,g$ is zero; both
    numerical anchors match the exact values below.  Report the accepted statement:
    "For all $j \geq 1$, $\sigma_0 \in (0,1)$, and $T \to +\infty$, the expansion
-   $q_j(T) = 4j^2/T^2 + O(T^{-4})$ holds, with the $T^{-3}$ coefficient identically
+   $q_j(T) = 4j^2/T^2 + O_{j,\sigma_0}(T^{-4})$ holds, with the $T^{-3}$ coefficient identically
    zero by the parity of $\operatorname{Re}\,g(T)$ as an even function of $T$, and
    leading coefficient $j^2$ from $\sigma_0 + (1-\sigma_0) = 1$."
 
@@ -265,7 +268,7 @@ $i c_3/T^3$ contributes 0 to $\operatorname{Re}\,g$.
 
 3. **REFUTED:** An explicit triple $(j, \sigma_0, T)$ where the $T^{-3}$ term in
    $q_j(T)$ is demonstrably nonzero by exact arithmetic, or where $T^2 q_j(T)
-   \not\to 4j^2$.  Provide the exact rational matrix and identify the step in the
+   \not\to 4j^2$.  Provide the exact rational calculation (or exact rational value) and identify the step in the
    skeleton that fails.
 
 4. **INCONCLUSIVE:** Parity (Step 1) confirmed and $T^{-3}$ vanishing (Step 2)
@@ -361,7 +364,7 @@ $$q_2(3) = \frac{4 \times 22\,592\,448}{54\,686\,025}
 = \frac{10\,041\,088}{6\,076\,225}.$$
 
 $$T^2 \cdot q_2(3) = 9 \cdot \frac{10\,041\,088}{6\,076\,225}
-= \frac{90\,369\,792}{6\,076\,225} \approx 14.876.$$
+= \frac{90\,369\,792}{6\,076\,225} \approx 14.8726869068.$$
 
 Expected limit: $4 \cdot 2^2 = 16$.
 Finite-$T$ error: $16 - 90\,369\,792/6\,076\,225 = 6\,849\,808/6\,076\,225 \approx 1.127$.

@@ -29,11 +29,15 @@ The **Seeley 1967** paper is:
 R.T. Seeley, "Complex powers of an elliptic operator," in *Singular Integrals
 (Proc. Sympos. Pure Math., Chicago, 1966)*, AMS, Providence, RI, 1967, pp. 288–307.
 
-**The gap:** Seeley's paper works in what is now called Seeley's calculus (or the
-$S^m_{1,0}$ calculus with specific amplitude conditions), which is broader than the
-classical $S^m_{\rm cl}$ calculus of polyhomogeneous symbols.  Whether the output
-$H^{1/m}$ lands in the *classical* calculus (as stated) or only in Seeley's
-general calculus is the question.
+**No gap: Seeley's construction is in the classical calculus.** The contour-integral
+construction in Seeley [1967] uses a parametric resolvent whose symbol has a full
+asymptotic expansion in terms homogeneous of degrees $-m-j$ (in $(\xi,\lambda^{1/m})$);
+integrating term by term against $\lambda^z\,d\lambda$ yields a symbol with a complete
+polyhomogeneous expansion of degrees $mz, mz-1, mz-2, \ldots$.  Hence
+$H^z\in\Psi^{mz}_{\rm cl}(M)$.  The $S^{mz}_{1,0}$ membership is only the weaker
+outer envelope that classical symbols automatically satisfy; it is not the final
+precision of the construction.  The precise reference is Shubin (2001), §11,
+Theorem 11.2; §9 covers only the parametric resolvent.
 
 ---
 
@@ -65,10 +69,14 @@ function on $T^*M\setminus 0$.
 For a positive classical elliptic $H\in\Psi^m_{\rm cl}(M)$ with $H>0$, Seeley
 [1967] defines $H^z$ for $z\in\CC$ as an operator whose symbol is constructed via
 a contour integral:
-$$H^z = \frac{i}{2\pi}\int_\Gamma \lambda^z (\lambda-H)^{-1}\,d\lambda,$$
-where $\Gamma$ is a ray in the resolvent set.  Seeley proves $H^z\in\Psi^{mz}(M)$
-(in Seeley's amplitude class), where $\Psi^s(M)$ denotes operators with symbol in
-$S^s_{1,0}(T^*U)$ for each coordinate chart $U$.
+$$H^z = \frac{i}{2\pi}\int_\Gamma \lambda^z (H-\lambda)^{-1}\,d\lambda,$$
+where $\Gamma$ is a ray (or keyhole contour) in the resolvent set of $H$, oriented
+from $\infty e^{-i\varphi}$ to $\infty e^{i\varphi}$ around the spectral cut along
+the negative real axis (Seeley's convention); equivalently in standard orientation,
+$$H^z = \frac{1}{2\pi i}\int_\Gamma \lambda^z (\lambda-H)^{-1}\,d\lambda$$
+with $\Gamma$ encircling the spectrum counterclockwise.  Seeley proves
+$H^z\in\Psi^{mz}_{\rm cl}(M)$ (see Shubin §11, Theorem 11.2 for the explicit
+classical-symbol statement).
 
 **The key question:** Is the output $H^z$ in the *classical* calculus
 $\Psi^{mz}_{\rm cl}(M)$ (polyhomogeneous symbol), or only in $\Psi^{mz}(M)$
@@ -107,6 +115,14 @@ is valid, and that the Weyl law for $H^{1/m}$ gives Weyl constant
 $C_H = (2\pi)^{-d}\!\int_{T^*M}\!\mathbf{1}_{h_m(x,\xi)^{1/m}\le 1}\,d\xi\,dx
 = (2\pi)^{-d}\!\int_{T^*M}\!\mathbf{1}_{h_m(x,\xi)\le 1}\,d\xi\,dx$.
 
+This formula is for $H$ acting on scalar functions (or sections of a rank-1 bundle).
+If Paper B allows $H$ acting on sections of a vector bundle $E$ of fiber rank $r$,
+the Weyl constant becomes
+$C_H = (2\pi)^{-d}\!\int_{T^*M}\!\operatorname{tr}_E\!\bigl(\mathbf{1}_{h_m(x,\xi)\le 1}\bigr)\,d\xi\,dx$,
+where $h_m(x,\xi)$ is a positive self-adjoint endomorphism of $E_x$ and the indicator
+is applied in the spectral sense.  The reduction $N_H(\Lambda)=N_{H^{1/m}}(\Lambda^{1/m})$
+is unaffected: it is a pointwise eigenvalue identity holding at every multiplicity.
+
 ---
 
 ## Proof skeleton to be closed
@@ -130,7 +146,7 @@ If Seeley does not directly give classicality, identify the correct reference.
 
 **Candidate references:**
 - M.A. Shubin, *Pseudodifferential Operators and Spectral Theory*, Springer, 2001,
-  §9 (complex powers of elliptic operators).
+  **§11, Theorem 11.2** (complex powers; §9 covers only the parametric resolvent).
 - M. Taylor, *Partial Differential Equations II*, Springer, 1996, §7.
 - L. Hörmander, *The Analysis of Linear Partial Differential Operators III*,
   Springer, 1985, §18.1.
@@ -196,18 +212,13 @@ For $H = -d^2/dx^2 + 1$ on $S^1 = \RR/(2\pi\ZZ)$ (order $m=2$, dimension $d=1$):
   $= N_{H^{1/2}}(\Lambda^{1/2})$, since
   $\#\{n : (n^2+1)^{1/2}\le\Lambda^{1/2}\} = \#\{n : n^2+1\le\Lambda\}$. ✓
 
-Weyl constants: for $H$ of order 2 on $S^1$,
-$C_H = (2\pi)^{-1}\int_{T^*S^1}\mathbf{1}_{\xi^2+1\le 1}\,d\xi\,dx$
-$= (2\pi)^{-1}\cdot 2\pi\cdot\int_{-\infty}^\infty\mathbf{1}_{\xi^2\le 0}\,d\xi = 0$
-(since $h_2 = \xi^2\ge 0$, $h_2\le 1$ means $|\xi|\le 1$: volume = $2\pi\cdot 2/(2\pi)=2/\pi$).
-Actually: $C_H = (2\pi)^{-1}\int_0^{2\pi}\int_{-1}^1 d\xi\,dx = 1/\pi$.
-Weyl law predicts $N_H(\Lambda)\sim C_H\Lambda^{d/m} = (1/\pi)\Lambda^{1/2}$.
-Actual: $N_H(\Lambda) = 2\lfloor\sqrt{\Lambda-1}\rfloor+1\sim 2\sqrt{\Lambda}/\sqrt{1}\cdot...$
-Hmm, $N_H(\Lambda)\sim 2\sqrt{\Lambda}$, and $C_H\Lambda^{1/2} = (1/\pi)\Lambda^{1/2}$.
-Wait: $C_H = (2\pi)^{-1}\int_M\int_\xi \mathbf{1}_{h_m\le 1}\,d\xi\,dx$.
-On $S^1$, $\int_M dx = 2\pi$; $\int_\xi\mathbf{1}_{|\xi|\le 1}d\xi = 2$.
-So $C_H = (1/(2\pi))\cdot 2\pi\cdot 2 = 2$.
-Then $N_H(\Lambda)\sim 2\Lambda^{1/2}$. ✓  (since $N_H(\Lambda) = 2\lfloor\sqrt{\Lambda-1}\rfloor+1\sim 2\sqrt{\Lambda}$).
+Weyl constant: the principal symbol is $h_2(x,\xi)=\xi^2$ (not $\xi^2+1$; the $+1$
+is lower order and does not contribute to the Weyl constant).
+$$C_H = (2\pi)^{-1}\int_{T^*S^1}\mathbf{1}_{h_2(x,\xi)\le 1}\,d\xi\,dx
+= (2\pi)^{-1}\cdot\underbrace{\int_0^{2\pi}dx}_{2\pi}\cdot
+  \underbrace{\int_{-1}^1 d\xi}_{2} = 2.$$
+Weyl law predicts $N_H(\Lambda)\sim 2\Lambda^{1/2}$, matching
+$N_H(\Lambda)=2\lfloor\sqrt{\Lambda-1}\rfloor+1\sim 2\sqrt\Lambda$. ✓
 
 Reviewer should verify: $N_H(100) = 2\cdot 9+1=19$ (since $\sqrt{99}\approx 9.95$,
 so $n^2+1\le 100$ iff $|n|\le 9$: gives $n=-9,...,9$, total 19 modes).
