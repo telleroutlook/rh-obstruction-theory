@@ -450,17 +450,22 @@ function of $u=1/T$, the symmetry $g(-T)=\overline{g(T)}$ forces
 $c_n(-1)^n = \bar c_n$: odd-indexed coefficients are purely imaginary and
 even-indexed are real.  The expansion to the relevant order is therefore
 \[
-  g(T) = -\tfrac{2ij}{T} + \tfrac{j^2}{T^2} + \tfrac{ic_3}{T^3} + \tfrac{c_4}{T^4}
-  + O(T^{-5}), \qquad c_3, c_4 \in \RR,
+  g(T) = -\tfrac{2ij}{T} + \tfrac{j^2}{T^2} + \tfrac{ic_3(\sigma_0)}{T^3} + \tfrac{c_4(\sigma_0)}{T^4}
+  + O_j(T^{-5}), \qquad c_3(\sigma_0), c_4(\sigma_0) \in \RR,
 \]
-so $\re[g(T)] = j^2/T^2 + c_4/T^4 + O(T^{-5}) = j^2/T^2 + O(T^{-4})$
+so $\re[g(T)] = j^2/T^2 + c_4(\sigma_0)/T^4 + O_j(T^{-5}) = j^2/T^2 + O_j(T^{-4})$
 and $q_j(T) = 4j^2/T^2 + O(T^{-4})$.
-The substitution $u=1/T$ gives $(\sigma_0+iT)^{-1}=u/(i+\sigma_0 u)$,
-which is analytic at $u=0$ (denominator equals $i\ne0$ there), so
-$\varphi_j(\sigma_0+i/u)=1-(1-u/(i+\sigma_0 u))^j$ is a polynomial in $u$
-with coefficients bounded uniformly in $\sigma_0\in[0,1]$.
-Hence $\varphi_j(\sigma_0+iT)$ is jointly analytic in $(\sigma_0,u)$ for
-$\sigma_0\in[0,1]$ and $u=1/T$ near~$0$, and the remainder $O_j(T^{-4})$ is
+The function
+\[
+  F_j(\sigma_0,u)
+  := \varphi_j\!\left(\sigma_0+\tfrac{i}{u}\right)
+  = 1-\left(1-\tfrac{u}{i+\sigma_0 u}\right)^j
+\]
+is rational in $u$ and extends holomorphically to a complex
+neighbourhood of $[0,1]\times\{0\}$ (the denominator $i+\sigma_0 u$
+evaluates to $i\ne 0$ at $u=0$, uniformly in $\sigma_0\in[0,1]$).
+Hence its Taylor coefficients and remainders at $u=0$ are bounded
+uniformly in $\sigma_0\in[0,1]$, so the remainder $O_j(T^{-4})$ is
 uniform in $\sigma_0\in[0,1]$.
 \end{proof}
 
@@ -678,7 +683,7 @@ $0 < \varepsilon < \min_{1 \leq j \leq m}\bigl(\Li_j(\mathcal{Z}_+) - c_j\bigr)$
 Set $\mathcal{Z}_- = \mathcal{Z}_+ \sqcup Q(3/4, T)$ for large $T$.  Then
 $\Li_j(\mathcal{Z}_-) = \Li_j(\mathcal{Z}_+) + q_j(T)$, where
 $q_j(T) = 4j^2/T^2 + O_j(T^{-4}) \to 0$ by~\eqref{eq:djasympt} and Lemma~\ref{lem:qasympt}.
-Choose $T$ large enough that $|q_j(T)| < \varepsilon$ for all $j\in\{1,\ldots,m\}$
+Choose $T$ large enough that $|q_j(T)| < \varepsilon$ for all $j\in\{1,\ldots,m\}$.
 Since $Q(3/4,T)$ contributes atoms at $\re\rho = 3/4 \neq 1/2$,
 $P(\mathcal{Z}_-) = 0$.
 \end{proof}

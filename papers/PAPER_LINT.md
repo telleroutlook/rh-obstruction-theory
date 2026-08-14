@@ -1311,6 +1311,96 @@ $1-u/(i+\sigma u)$ is analytic at $u=0$ uniformly in $\sigma\in[0,1]$.
 
 ---
 
+### P49 — Rational vs polynomial: verify the algebraic type of analytic functions
+
+When a paper writes "is a polynomial in $u$" to justify that a function is analytic
+at $u=0$, verify whether the expression is literally a polynomial (no denominator) or
+a rational function that happens to be holomorphic at $u=0$.  The argument is correct
+in either case — but stating "polynomial" for a rational function is a factual error
+visible to specialists.
+
+**Common pattern:** substituting $u=1/T$ in $\varphi(s_0+i/u)$ yields a rational
+expression like $1-(1-u/(a+bu))^j$, which is rational (denominator $a+bu$), not a
+polynomial.  The correct description is "rational in $u$, extending holomorphically
+to $[0,1]\times\{0\}$" (since the denominator evaluates to $a\ne0$ at $u=0$).
+
+```bash
+# Grep for "polynomial in" near rational expressions
+grep -n 'polynomial in\|polynomial.*of.*u\|power series in' "$TEX" | head -20
+# Inspect each match: does the expression have a denominator depending on u?
+```
+
+**Manual check:** for each "polynomial in $u$" claim, substitute $u=0$ in the
+denominator and verify it is nonzero.  If the expression has a nontrivial denominator,
+replace "polynomial" with "rational function holomorphic at $u=0$" (or "extends
+holomorphically to a complex neighbourhood of…").
+
+**Precedent (paper-A):** $F_j(\sigma_0,u)=1-(1-u/(i+\sigma_0 u))^j$ is rational
+with denominator $(i+\sigma_0 u)^j$; the correct description is "rational in $u$,
+holomorphic on a neighbourhood of $[0,1]\times\{0\}$."
+
+---
+
+### P50 — Counting-function and spectral equalities: state the range of validity
+
+Equalities of the form $N_H(\Lambda)=N_{\widetilde H}(\Lambda)$,
+$N_H(\Lambda)=N_{H^{1/m}}(\Lambda^{1/m})$, or similar counting-function identities
+arising from spectral manipulations (shifting the kernel, taking fractional powers)
+hold only for $\Lambda$ above some threshold ($\Lambda\ge 1$, or $\Lambda > C$), not
+for all $\Lambda\ge 0$.  Writing the equality without a domain qualifier is
+technically false for small $\Lambda$.
+
+```bash
+# Flag counting-function equalities without a domain qualifier
+grep -n 'N_H.*=\|N_{\\tilde\|N_{H\^{' "$TEX" | grep -v 'Lambda\\ge\|ge1\|ge 1\|sim\|to.*infty\|asymp' | head -20
+```
+
+**Manual check:** for each equality $A(\Lambda)=B(\Lambda)$:
+1. Determine at what threshold value of $\Lambda$ the equality becomes exact.
+2. Add "$\Lambda\ge C$" or "$\Lambda\ge 1$" (whichever applies) to the statement,
+   or change to "$A(\Lambda)=B(\Lambda)+O(1)$" to make it valid for all $\Lambda$.
+
+For Weyl-law purposes the $O(1)$ correction is harmless, but the missing qualifier is
+a correctness gap for readers who apply the identity at small $\Lambda$.
+
+**Precedent (paper-B):** after replacing $H$ by $\widetilde H=H+\Pi_{\ker H}$,
+the identity $N_H(\Lambda)=N_{\widetilde H^{1/m}}(\Lambda^{1/m})$ holds for $\Lambda\ge 1$
+(once the shifted eigenvalues reach $\Lambda=1$), not for all $\Lambda$.
+
+---
+
+### P51 — Unquantified bound variable in definition body
+
+A definition body that uses a symbol like "the $N$th remainder" must bind $N$ with an
+explicit quantifier ("for every $N\in\mathbb{N}_0$") before using it.  An unquantified
+variable $N$ inside a definition is formally a free variable, making the membership
+condition incompletely specified.  This is closely related to P30 (free variables in
+theorems) but applies specifically to *definition bodies* and *class descriptions*.
+
+```bash
+# Find definition blocks containing "the Nth" or "N-th" without a preceding quantifier
+sed -n '/\\begin{definition}/,/\\end{definition}/p' "$TEX" \
+  | grep -n 'th remainder\|th order\|N\-th\|Nth\|the.*N\b' | head -20
+# Also grep for implicit index variables in definitions
+grep -n 'lies in\|belong.*to\|satisfies.*for each' "$TEX" \
+  | awk -F: '$1>=(DEFSTART) && $1<=(DEFEND)' | head -10
+```
+
+**Manual check:** for each variable appearing in "the $N$th …" or "for $j\le N$" in
+a definition body:
+1. Is $N$ universally quantified ("for every $N\in\mathbb{N}_0$") before this clause?
+2. If not, add the quantifier as the opening of the list item or the sentence.
+
+Including $N=0$ in the quantifier is often important: it gives the base case
+($\sigma(H)-h_m\in\bigcap_\varepsilon S^{m-1+\varepsilon}$) that is needed in downstream
+form-boundedness proofs.
+
+**Precedent (paper-B):** the $\mathcal{C}_{\mathrm{sub}}$ definition item (ii) wrote
+"the $N$th remainder lies in…" without "for every $N\in\mathbb{N}_0$", making the
+completeness of the asymptotic expansion formally unquantified.
+
+---
+
 ## Running order for pre-submission
 
 ### Phase 0 — Compilation gate (must pass before any manual review)
@@ -1381,6 +1471,11 @@ $1-u/(i+\sigma u)$ is analytic at $u=0$ uniformly in $\sigma\in[0,1]$.
 52. **Classical vs log-polyhomogeneous class check (P46)** — grep `Seeley` / classical citations near log-poly class usage
 53. **Open problems not already solved in paper (P47)** — extract open-problem claims, cross-check theorem list
 54. **Removable singularity / joint analyticity at boundary points (P48)** — grep `1/T` or `u=1/T` substitutions; verify $g(\sigma,0)$ defined
+
+### Phase 7 — Algebraic precision and definition completeness
+55. **Rational vs polynomial: verify algebraic type of analytic functions (P49)** — grep "polynomial in" near rational/analytic expressions
+56. **Counting-function / asymptotic equality domain qualifier (P50)** — grep `N_H\|N_{\|counting function` near `=` without `\Lambda\ge` or `\to\infty`
+57. **Unquantified bound variable in definition body (P51)** — grep `\begin{definition}` blocks for free variables (index N, parameter k) without "for every" or "for all" quantifier
 
 ---
 
