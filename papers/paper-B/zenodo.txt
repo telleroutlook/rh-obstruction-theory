@@ -11,8 +11,7 @@ Publication type: Preprint
 BASIC INFORMATION
 ----------------------------------------------------------------------
 Title:
-  Spectral Exclusion Results for Operators Whose Eigenvalue Multiset
-  Would Equal the Riemann Zero Ordinates
+Spectral Exclusion Results for Operators Whose Eigenvalue Multiset Would Equal the Riemann Zero Ordinates
 
 Authors:
   Family name:  Tao
@@ -24,35 +23,18 @@ DOI:            (assigned by Zenodo on upload)
 Publication date: 2026
 
 ----------------------------------------------------------------------
-DESCRIPTION  (plain text, paste into Zenodo's "Description" box)
+DESCRIPTION  (plain text — paste each paragraph as one block)
 ----------------------------------------------------------------------
-We prove two spectral exclusion results showing that no operator in a
-natural geometric class can have its eigenvalue multiset equal to
-{gamma_n}, the positive ordinates of the nontrivial zeros of the
-Riemann zeta function.
+We prove two spectral exclusion results showing that no operator in a natural geometric class can have its eigenvalue multiset equal to {gamma_n}, the positive ordinates of the nontrivial zeros of the Riemann zeta function.
 
-Theorem D: No positive classical elliptic pseudodifferential operator
-of order m > 0 on any closed smooth manifold of dimension d >= 1 has
-eigenvalue multiset {gamma_n}. The Weyl counting law forces a
-pure-power leading term N_H(T) ~ C_H * T^(d/m) in the eigenvalue
-counting function, while the zero-ordinate heat sum satisfies
-Z_zeta(t) ~ (1/(2*pi)) * t^(-1) * log(1/t) as t -> 0+, which has an
-unavoidable logarithmic factor incompatible with any pure-power Weyl
-law.
+Theorem D: No positive classical elliptic pseudodifferential operator of order m > 0 on any closed smooth manifold of dimension d >= 1 has eigenvalue multiset {gamma_n}. The Weyl counting law forces a pure-power leading term N_H(T) ~ C_H * T^(d/m) in the eigenvalue counting function, while the zero-ordinate heat sum satisfies Z_zeta(t) ~ (1/(2*pi)) * t^(-1) * log(1/t) as t -> 0+, which has an unavoidable logarithmic factor incompatible with any pure-power Weyl law.
 
-Theorem D': The exclusion extends to the class C_sub of operators
-whose symbol has a classical positive elliptic principal part and
-strictly lower-order log-polyhomogeneous corrections (in the sense of
-Lesch 1999), via a min-max squeeze argument comparing heat-trace
-asymptotics.
+Theorem D': The exclusion extends to the class C_sub of operators whose symbol has a classical positive elliptic principal part and strictly lower-order log-polyhomogeneous corrections (in the sense of Lesch 1999), via a min-max squeeze argument comparing heat-trace asymptotics.
 
-Both results are unconditional; neither assumes nor concludes the
-Riemann Hypothesis. The paper also includes a non-elliptic escape
-example showing the class boundary is sharp, and an open problem
-section on symbol classes whose counting law could match T*log(T).
+Both results are unconditional; neither assumes nor concludes the Riemann Hypothesis. The paper also includes a non-elliptic escape example showing the class boundary is sharp, and an open problem section on symbol classes whose counting law could match T*log(T).
 
 ----------------------------------------------------------------------
-KEYWORDS  (enter each on a separate line or comma-separated)
+KEYWORDS  (enter each on a separate line)
 ----------------------------------------------------------------------
 Weyl law
 spectral theory
@@ -112,9 +94,6 @@ NOTES (for "Additional notes" field)
 ----------------------------------------------------------------------
 MSC 2020 classification: 35P20, 47G30, 58J50, 11M06
 
-Companion paper: "Finite Li-Statistic Collisions for Formal Symmetric
-Zero Multisets" (paper-A in the same repository, deposited separately
-on Zenodo).
+Companion paper: "Finite Li-Statistic Collisions for Formal Symmetric Zero Multisets" (paper-A in the same repository, deposited separately on Zenodo).
 
-All proofs are unconditional. The Riemann Hypothesis is neither
-assumed nor concluded anywhere in this paper.
+All proofs are unconditional. The Riemann Hypothesis is neither assumed nor concluded anywhere in this paper.

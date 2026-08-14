@@ -11,7 +11,7 @@ Publication type: Preprint
 BASIC INFORMATION
 ----------------------------------------------------------------------
 Title:
-  Finite Li-Statistic Collisions for Formal Symmetric Zero Multisets
+Finite Li-Statistic Collisions for Formal Symmetric Zero Multisets
 
 Authors:
   Family name:  Tao
@@ -23,44 +23,26 @@ DOI:            (assigned by Zenodo on upload)
 Publication date: 2026
 
 ----------------------------------------------------------------------
-DESCRIPTION  (plain text, paste into Zenodo's "Description" box)
+DESCRIPTION  (plain text — paste each paragraph as one block)
 ----------------------------------------------------------------------
-We prove three theorems about the standard Li-type observation of
-finite symmetric zero multisets, and record two main corollaries.
+We prove three theorems about the standard Li-type observation of finite symmetric zero multisets, and record two main corollaries.
 
-Let H_sym be the class of finite multisets in the open critical strip
-symmetric under rho -> rho-bar and rho -> 1-rho, and let P(Z) = 1
-iff every atom has Re(rho) = 1/2.
+Let H_sym be the class of finite multisets in the open critical strip symmetric under rho -> rho-bar and rho -> 1-rho, and let P(Z) = 1 iff every atom has Re(rho) = 1/2.
 
-Theorem A (exact Li collision): for every m >= 1 there exist Z+, Z-
-in H_sym with P(Z+) = 1, P(Z-) = 0, and identical standard Li
-observations Li_j(Z+) = Li_j(Z-) for j = 1, ..., m, realised by
-explicit rational-arithmetic witnesses.
+Theorem A (exact Li collision): for every m >= 1 there exist Z+, Z- in H_sym with P(Z+) = 1, P(Z-) = 0, and identical standard Li observations Li_j(Z+) = Li_j(Z-) for j = 1, ..., m, realised by explicit rational-arithmetic witnesses.
 
-Theorem B (no uniform separation): no fixed finite initial segment of
-standard Li values enforces a strictly positive gap between P = 1 and
-P = 0 within H_sym.
+Theorem B (no uniform separation): no fixed finite initial segment of standard Li values enforces a strictly positive gap between P = 1 and P = 0 within H_sym.
 
-Theorem C (incomparability): the standard Li map O_fin^(K) and the
-sampled counting map O_theta are incomparable in the information
-refinement preorder on H_sym.
+Theorem C (incomparability): the standard Li map O_fin^(K) and the sampled counting map O_theta are incomparable in the information refinement preorder on H_sym.
 
-Corollary D (Andersson): agreement with any fixed finite initial
-collection of Euler factors of the Riemann zeta function does not
-force a Helson zeta function's zeros to lie on the critical line
-(existential obstruction pair, using Andersson 2024, Theorem 5 and
-Corollary 3).
+Corollary D (Andersson): agreement with any fixed finite initial collection of Euler factors of the Riemann zeta function does not force a Helson zeta function's zeros to lie on the critical line (existential obstruction pair, using Andersson 2024, Theorem 5 and Corollary 3).
 
-Corollary E (joint obstruction): the combined observation
-O_fin^(K) x O_theta also admits an exact information obstruction.
+Corollary E (joint obstruction): the combined observation O_fin^(K) x O_theta also admits an exact information obstruction.
 
-None of these results assume or imply the Riemann Hypothesis. The
-class H_sym consists of finite formal multisets; the actual zero set
-of zeta is infinite and subject to additional analytic structure not
-imposed on H_sym.
+None of these results assume or imply the Riemann Hypothesis. The class H_sym consists of finite formal multisets; the actual zero set of zeta is infinite and subject to additional analytic structure not imposed on H_sym.
 
 ----------------------------------------------------------------------
-KEYWORDS  (enter each on a separate line or comma-separated)
+KEYWORDS  (enter each on a separate line)
 ----------------------------------------------------------------------
 Li's criterion
 Riemann hypothesis
@@ -115,9 +97,6 @@ NOTES (for "Additional notes" field)
 ----------------------------------------------------------------------
 MSC 2020 classification: 11M06, 11M26, 94A17
 
-Companion paper: "Spectral Exclusion Results for Operators Whose
-Eigenvalue Multiset Would Equal the Riemann Zero Ordinates" (paper-B
-in the same repository, to be deposited separately on Zenodo).
+Companion paper: "Spectral Exclusion Results for Operators Whose Eigenvalue Multiset Would Equal the Riemann Zero Ordinates" (paper-B in the same repository, to be deposited separately on Zenodo).
 
-All proofs are unconditional. The Riemann Hypothesis is neither
-assumed nor concluded anywhere in this paper.
+All proofs are unconditional. The Riemann Hypothesis is neither assumed nor concluded anywhere in this paper.
