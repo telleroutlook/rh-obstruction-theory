@@ -1,40 +1,71 @@
-# papers/PAPER_LINT.md — pre-submission self-audit checklist
+# PAPER_LINT.md — pre-submission self-audit checklist for rigorous mathematical papers
 
-Every check must be **actually run** (grep command, script, compilation) before
-submission.  "Looks fine by eye" is not a pass.  Record the run output as a one-line
-note next to each item.
-
-This file lives at `papers/PAPER_LINT.md`.  Run it against a specific paper by
-substituting `TEX=papers/<id>/<file>.tex` in the commands below.
+This file is designed to be copied into any project producing a formal mathematics paper.
+Project-specific adaptations are confined to `Precedent:` lines and "Domain note:" callouts;
+the rules themselves are general.
 
 ---
 
-## Part I — TeX / structural (automatable)
+## Architecture: two complementary layers
+
+**Reactive layer (Parts I–IV, items P1–P38).** Specific, automatable or semi-automatable
+checks — each item was added after a known defect class was observed.  These checks are
+fast, targeted, and will always have gaps: a new defect class will not appear here until
+it has already been caught once.
+
+**Proactive layer (Part V, items S1–S5).** Structural completeness questions asked
+*once per theorem*, derived from the fundamental invariants of rigorous mathematical
+writing.  If you answer S1–S5 honestly for every result, the defects caught by P1–P38
+become impossible — not because we enumerated them, but because their underlying cause
+was eliminated.
+
+**Recommended workflow:**
+
+1. Run Part I gates (P1–P4): fix compilation errors before reading further.
+2. For each new or substantially revised theorem: answer S1–S5 (Part V) in writing.
+3. Run Parts II–IV grep sweeps to catch anything S1–S5 missed.
+4. Record one-line output for each automatable item before submission.
+
+"Looks fine by eye" is not a pass for any item in this file.
+
+---
+
+## PART I — Compilation and TeX structure (automatable)
+
+These five checks must pass before any manual review.
+
+---
 
 ### P1 — No hardcoded cross-references
 
-Every `Theorem A`, `Lemma 2.4`, `Corollary D`, etc. in the body must be a
-`\ref{...}`, not a hand-typed letter or number.  Hard-coded refs become stale when
-theorem order changes.
+Every **internally defined** `Theorem A`, `Lemma 2.4`, `Corollary D`, etc. in the body
+must be a `\ref{...}`, not a hand-typed letter or number.  Hardcoded refs become stale
+when theorem order changes.
+
+**Known false-positive pattern:** references to theorems in *external* sources
+(e.g. `Lemma~7.3` from a cited arXiv paper, `Theorem~X.23` from a textbook chapter)
+are not `\ref{}` candidates — they should instead be verified via P25 (literature
+formula descriptions).  Filter them out by excluding lines that contain `\cite` within
+the same sentence.
 
 ```bash
-TEX=papers/paper-A/arithmetic-information-barriers-rh.tex
-# Detect hardcoded main-result refs (Theorem~X, Corollary~X, Lemma~N.N)
-grep -n 'Theorem~[A-Z]\|Corollary~[A-Z]\|Lemma~[0-9]' "$TEX" \
+# Step 1: find candidates (adapt letter/number patterns to your naming scheme)
+grep -n 'Theorem~[A-Z]\|Corollary~[A-Z]\|Lemma~[0-9]\|Proposition~[0-9]' "$TEX" \
   | grep -v '\\ref{'
+# Step 2: for each hit, check whether the same line also contains \cite{...}
+# Lines with \cite are external theorem references → feed to P25, not P1
+grep -n 'Theorem~[A-Z]\|Corollary~[A-Z]\|Lemma~[0-9]\|Proposition~[0-9]' "$TEX" \
+  | grep -v '\\ref{' | grep -v '\\cite'
 ```
 
-**Pass:** zero lines output.
-**Current status (paper-A):** 38 hardcoded occurrences found — fix before external review.
+**Pass (step 2):** zero lines — all remaining hits are genuine internal hardcoded refs.
+Lines filtered out by step 2 (`\cite` present) are external citations; verify those via P25.
 
 ---
 
 ### P2 — Every `\label` is referenced at least once
 
-An unreferenced label wastes the reader's lookup effort and signals dead structure.
-
 ```bash
-# Extract all label names; skip lines marked % xref-only; check each appears in a \ref or \eqref
 grep -P '\\label\{[^}]+\}' "$TEX" | while IFS= read -r LINE; do
   echo "$LINE" | grep -q 'xref-only' && continue
   L=$(echo "$LINE" | grep -oP '(?<=\\label\{)[^}]+')
@@ -43,17 +74,14 @@ grep -P '\\label\{[^}]+\}' "$TEX" | while IFS= read -r LINE; do
 done
 ```
 
-**Pass:** zero `UNUSED` lines.  Exception: section labels referenced only from a
-table-of-contents or external hyperlink are acceptable — mark with a comment
-`% xref-only`.
-**Current status (paper-A):** 21 unused labels — either add `\ref` usages or remove.
+**Pass:** zero `UNUSED` lines.  Exception: labels referenced only from a table of
+contents or external hyperlink — mark with `% xref-only`.
 
 ---
 
 ### P3 — Every bibliography entry is cited
 
 ```bash
-# Extract all \bibitem keys; check each appears in a \cite
 grep -oP '\\bibitem\{[^}]+\}' "$TEX" | sed 's/\\bibitem{//;s/}//' | while read K; do
   n=$(grep -c "\\\\cite[^{]*{[^}]*\\b$K\\b" "$TEX" 2>/dev/null)
   [ "$n" -eq 0 ] && echo "UNCITED: $K"
@@ -64,16 +92,18 @@ done
 
 ---
 
-### P4 — Clean LaTeX compilation
+### P4 — Clean LaTeX compilation (three passes)
 
 ```bash
 cd "$(dirname "$TEX")"
-pdflatex -interaction=nonstopmode "$(basename "$TEX")" 2>&1 \
-  | grep -E "undefined|Warning.*ref|Warning.*cite|Error" | grep -v Overfull | grep -v Underfull
+for i in 1 2 3; do
+  pdflatex -interaction=nonstopmode "$(basename "$TEX")" 2>&1
+done | grep -E "undefined|Warning.*ref|Warning.*cite|Error" \
+      | grep -v 'Overfull\|Underfull'
 ```
 
-**Pass:** zero lines (only Overfull/Underfull hbox warnings are acceptable at draft
-stage — fix before final submission).
+**Pass:** zero lines (Overfull/Underfull acceptable at draft stage; fix before final
+submission).
 
 ---
 
@@ -83,21 +113,40 @@ stage — fix before final submission).
 grep -n '\\title\[' "$TEX"
 ```
 
-Manually verify that the bracketed short title preserves all load-bearing
-qualifiers (e.g. "Formal", "Finite", "Exact") that distinguish the paper's actual
-scope from a broader claim.
-
-**Current status (paper-A):** short title drops "Formal" — fix before submission.
+Manually verify the bracketed short title preserves all load-bearing qualifiers
+(e.g. "Formal", "Exact", "Conditional") that distinguish the paper's actual scope
+from a broader claim.
 
 ---
 
-## Part II — Mathematical content
+## PART II — Mathematical content integrity
+
+### Preliminary: preamble inventory (run once before Parts II–IV)
+
+Many checks in Parts II–IV search for specific LaTeX token sequences.  Papers routinely
+define custom macros (`\newcommand`) and theorem-like environments (`\newtheorem`) that
+expand to those sequences — a grep for `\mathcal{C}` silently misses `\Csub`.
+
+Run these two commands once and keep the output nearby when running subsequent checks:
+
+```bash
+# All custom \newtheorem environment names (feed into P6, P30, P35)
+grep '\\newtheorem{' "$TEX" | grep -oP '(?<=\\newtheorem\{)[^}]+'
+
+# All custom \newcommand / \DeclareMathOperator definitions (feed into P7, P28, P34, P35)
+grep '\\newcommand\|\\DeclareMathOperator\|\\renewcommand' "$TEX" \
+  | grep -oP '\\newcommand\{[^}]+\}\{[^}]+\}' | head -40
+```
+
+When a subsequent check says "grep for `X`", also grep for every macro that expands to
+`X`.  This manual step cannot be automated without a LaTeX expansion engine; be explicit
+about it.
+
+---
 
 ### P6 — Every lemma / proposition / theorem is used in a later proof
 
 ```bash
-# List all \label{lem:*}, \label{thm:*}, \label{prop:*}, \label{cor:*}
-# Then check each is \ref'd in the proof text
 grep -oP '\\label\{(lem|thm|prop|cor):[^}]+\}' "$TEX" \
   | sed 's/\\label{//;s/}//' | while read L; do
   n=$(grep -c "\\\\ref{$L}" "$TEX")
@@ -105,70 +154,64 @@ grep -oP '\\label\{(lem|thm|prop|cor):[^}]+\}' "$TEX" \
 done
 ```
 
-For each `UNUSED RESULT`: either (a) use it in a proof, (b) remove it, or
-(c) add a comment explaining it is background context only.  A result proved but never
-used is misleading about the logical dependencies.
+For each `UNUSED RESULT`: (a) use it in a proof, (b) remove it, or (c) add a comment
+explaining it is background context only.
 
 ---
 
 ### P7 — Definition consistency: same predicate, same wording throughout
 
-For each formally defined object (predicate, class, map), grep for its name and
-verify every occurrence uses identical quantifiers and modifiers.
+For each formally defined object (predicate, class, map), grep for its name and verify
+every occurrence uses identical quantifiers and modifiers.
 
 ```bash
-# Example: predicate P — check "every atom" vs "every nontrivial atom" vs other variants
-grep -n "every.*atom\|nontrivial atom\|P(\\\\mathcal" "$TEX"
+# Adapt the grep pattern to your key defined terms
+grep -n "<your-key-term>" "$TEX"
 ```
 
-Repeat for every defined term.  **Pass:** all occurrences use identical wording,
-or differences are explicitly flagged as "informal paraphrase."
-
-**What to check in paper-A:** predicate $P$, ambient class $\mathfrak{H}_\text{sym}$,
-collision condition $(\star)$, observation map $O_j$.
+**Pass:** all occurrences use identical wording, or differences are explicitly flagged
+as "informal paraphrase."
 
 ---
 
-### P8 — Every borrowed result is attributed at first use
+### P8 — Every *restatement* of a prior result is attributed at first use
 
-If a lemma restates or builds on a known result, the citation must appear **at that
-lemma** (not only in the bibliography or in a later remark).
+This check targets lemmas that restate or directly depend on a known published result.
+**Original results proved in this paper legitimately have no citation** and should not
+be flagged.
+
+A lemma is a *restatement* candidate if its optional title argument `[...]` contains
+an author name, an attribution keyword ("following", "cf.", "after"), or a well-known
+theorem name.  Plain descriptive titles ("Quartet Li asymptotics", "Full rank of C")
+indicate original results.
 
 ```bash
-grep -n '\\begin{lemma}\|\\begin{proposition}\|\\begin{corollary}' "$TEX" \
-  | while IFS=: read lineno rest; do
-  # Check the 5 lines following for a \cite
-  window=$(sed -n "$((lineno)),$((lineno+5))p" "$TEX")
-  echo "$window" | grep -q '\\cite' || echo "Line $lineno: no \\cite near $(echo $rest | head -c 60)"
-done
+# Flag theorem-like environments whose title suggests prior art attribution
+grep -n '\\begin{\(lemma\|proposition\|corollary\)}\[.*\(Bombieri\|Hadamard\|Karamata\|Weyl\|Tauberian\|Ikehara\|Hardy\|Titchmarsh\|Suzuki\|Connes\|Hurwitz\|Montel\|Conway\|Seeley\|BGV\|Gilkey\|following\|cf\.\|after \)' "$TEX"
 ```
 
-**Manual follow-up:** for any lemma without a nearby `\cite`, confirm the result is
-original or add the attribution.
+For each hit: verify a `\cite{...}` appears in the environment opener or its first two
+lines.  For hits NOT matching the pattern above, no citation is required — skip them.
 
-**Current status (paper-A):** Lemma 2.8 (sum-product identity) restates
-Bombieri–Lagarias (1999) without a citation at the lemma — add `\cite{BombieriLagarias1999}`.
+**Manual supplement:** for any lemma that *uses* (rather than restates) an external
+result as a key step, the citation should appear at that step inside the proof
+(checked by P16), not necessarily in the lemma statement.
 
 ---
 
 ### P9 — Asymptotic error orders verified by script
 
-For every displayed asymptotic of the form $f(T) = g(T) + O(T^{-k})$:
+For every displayed asymptotic $f(T) = g(T) + O(T^{-k})$:
 
-1. Write or point to a script in `checker/` or `discovery/` that independently
-   expands $f$ to the stated order.
-2. Confirm the remainder really is $O(T^{-k})$, not $O(T^{-(k-1)})$.
-3. If the order improvement relies on a parity/symmetry argument
-   (e.g. a real/imaginary splitting), state the symmetry explicitly in the proof.
+1. Point to a script in `checker/` or `discovery/` that independently expands $f$ to
+   the stated order.
+2. Confirm the remainder is $O(T^{-k})$, not $O(T^{-(k-1)})$.
+3. If the order improvement relies on a parity/symmetry cancellation, state the symmetry
+   explicitly (see also P19).
 
 ```bash
-grep -n 'O(T\^{-\|O(T^{-' "$TEX"
+grep -n 'O(T\^{-\|O(T^{-\|o(T\^{-\|o(T^{-' "$TEX"
 ```
-
-For each hit: is the claimed order independently verified?  Record the script path.
-
-**Current status (paper-A):** Lemma 2.9 ($q_j(T) = 4j^2/T^2 + O(T^{-4})$) — the
-$O(T^{-3}) \to O(T^{-4})$ step was unargued; parity argument now added (this session).
 
 ---
 
@@ -179,664 +222,846 @@ grep -n 'nontrivial\|clearly\|obvious\|trivially\|it is easy to see\|well-known'
 ```
 
 In **formal definitions and theorem statements**: remove or replace with a precise
-condition.  In proof text or remarks: acceptable if genuinely self-evident to the
-target audience, but flag for review.
+condition.  In proof text: acceptable only if genuinely self-evident; flag for review.
 
 ---
 
 ### P11 — All formulas in remarks / footnotes verified
 
-For every `\begin{remark}` containing a formula:
-
-1. Is the formula consistent with the surrounding definitions?
-2. If it claims a structural property (e.g. "Vandermonde relation", "Chebyshev
-   identity applies"), is the prerequisite (e.g. $|z|=1$) actually satisfied?
-
 ```bash
-# Extract remark blocks for manual reading
 awk '/\\begin{remark}/,/\\end{remark}/' "$TEX"
 ```
 
-For each formula in a remark: check the preconditions hold for the objects being
-discussed, not merely for superficially similar objects.
-
-**Current status (paper-A):** Remark 2.7 — cosine-Vandermonde claim had wrong angle
-factor ×2 and missing $r_k^j$ precondition; fixed this session.
-
----
-
-## Part III — Methodology and scope (per CLAUDE.md)
-
-### P12 — Barrier criteria: all five components explicit
-
-A result may be labeled a *barrier* only when the paper explicitly states:
-1. **Method class** (membership checkable)
-2. **Ambient object class**
-3. **Observation map**
-4. **Target predicate**
-5. **Escape route** (explicit construction outside the class)
-
-```bash
-grep -n 'barrier\|obstruction\|no-go' "$TEX" | grep -iv '%'
-```
-
-For each hit: verify all five components are named in the theorem statement or
-immediately adjacent text.
-
----
-
-### P13 — No RH-equivalent claimed as a barrier
-
-An RH-equivalent criterion (`C ⟺ RH`) locates difficulty; it does not prove
-impossibility.
-
-```bash
-grep -n 'equivalent.*RH\|iff.*RH\|RH.*iff\|if and only if.*Riemann' "$TEX"
-```
-
-For each hit: confirm the result is labeled "RH-equivalent reformulation" or
-"locates difficulty," **not** "barrier" or "obstruction."
-
----
-
-### P14 — Abstract and introduction scope claims
-
-```bash
-sed -n '/\\begin{abstract}/,/\\end{abstract}/p' "$TEX"
-sed -n '/\\section{Introduction}/,/\\section{/p' "$TEX" | head -80
-```
-
-Manually verify: no sentence implies progress toward, or evidence for/against, RH.
-Permitted: "this shows a class of strategies cannot succeed" with explicit class.
-Forbidden: "this suggests RH is…", "this is consistent with RH", "this supports RH."
-
----
-
-### P15 — Complexity-theory analogies labeled as motivational only
-
-```bash
-grep -n 'natural proof\|Razborov\|Baker.*Gill\|relativiz\|barrier.*complex' "$TEX"
-```
-
-For each hit: confirm the text contains a qualifier such as "structural and
-motivational, not a formal reduction."  A bare analogy without this disclaimer
-overstates the result.
-
----
-
-### P16 — Two-axis evidence status for every imported claim
-
-Every claim imported from the literature that is used as a **premise** in a proof
-must have:
-- Mathematical status: `REFEREED` or `INDEPENDENTLY-CHECKED`
-- Computational status (if a computational claim): `REPRODUCIBLE` or higher
-
-```bash
-grep -n '\\cite{' "$TEX" | while IFS=: read lineno rest; do
-  # Flag citations in proof environments
-  context=$(sed -n "$((lineno-3)),$((lineno+3))p" "$TEX")
-  echo "$context" | grep -q '\\begin{proof}\|therefore\|hence\|it follows\|by.*,' \
-    && echo "Line $lineno: cite in proof context — check evidence level: $rest"
-done | head -30
-```
-
-**Manual follow-up:** for each citation inside a proof, check the cited result is
-verified in `baseline/` or labeled as an assumption.
-
----
-
-### P17 — Representation-invariant margins only
-
-```bash
-grep -n 'margin\|eigenvalue\|Schur\|pivot\|shift.*I\|c_a\|c_L\|lambda.*shift' "$TEX"
-```
-
-For each margin-like quantity: confirm it is the generalized Rayleigh quotient
-$\lambda(a)$ or another proved invariant under the method class's allowed
-transformations.  A scalar shift $-c I$ or an unnormalized Schur residual is a
-diagnostic, not a universal lower bound.
-
----
-
-### P18 — Constructive/existential qualifier: definition honors downstream corollaries
-
-When a formal definition contains a qualifier such as "explicit", "constructive",
-"computable", or "effective", every theorem or corollary that claims to produce an
-instance of the class must satisfy the qualifier.  Where a corollary is non-constructive
-(e.g. proved via a pure-existence argument), the definition must explicitly allow
-existential instances, or the qualifier must be removed.
-
-```bash
-# Step 1: find all occurrences of qualifier words
-grep -n 'explicit\|constructive\|computable\|effective' "$TEX" | grep -v '%'
-# Step 2: find all \begin{definition} blocks
-awk '/\\begin\{definition\}/,/\\end\{definition\}/' "$TEX"
-```
-
-**Manual check:** for each definition block containing a qualifier, list every
-downstream theorem/corollary that claims an instance.  Verify each either (a) provides
-an explicit construction, or (b) is labeled "existential" and the definition permits it.
+For each formula in a remark: (a) are the preconditions satisfied for the objects being
+discussed, not merely for superficially similar objects? (b) is every claimed identity
+or inequality independently verifiable?
 
 ---
 
 ### P19 — Parity/symmetry arguments proven to sufficient order
 
-When a proof invokes a parity or symmetry argument to cancel an error term
-(e.g. "the $T^{-k}$ coefficient is purely imaginary, so $\operatorname{Re}[\cdot]$
-has no $T^{-k}$ term"), the expansion must be displayed to **one order beyond** the
-claimed cancellation.  The proof must show explicitly that the next real part is
-non-zero (or state its sign), not leave it implicit.
+When a proof invokes a parity/symmetry argument to cancel an error term, the expansion
+must be displayed to **one order beyond** the claimed cancellation.  Show the next real
+part is non-zero (or state its sign) — do not leave the cancellation implicit.
 
 ```bash
 grep -n 'purely imaginary\|purely real\|odd.*order\|even.*order\|imaginary part\|real part.*vanish' "$TEX"
 ```
 
-For each hit inside a proof block: check that the asymptotic expansion is carried to
-sufficient order that the cancellation is self-contained.
-
 ---
 
-### P20 — No unsupported strong number-theoretic assertions
+### P20 — No unsupported strong number-theoretic or analytic assertions
 
-Assertions such as "is transcendental", "is irrational", "cannot be rational",
-"must be algebraic", "is provably" outside a formal proof require an explicit
-citation or must be weakened to "is not currently known to be rational" (or
-analogous hedge).
+Assertions such as "is transcendental", "is irrational", "cannot be rational", or
+"is provably" outside a formal proof require an explicit citation or must be weakened
+to a hedged phrasing ("is not currently known to be rational").
 
 ```bash
 grep -n 'transcendental\|irrational\|cannot be rational\|must be algebraic\|provably\b' "$TEX" \
   | grep -iv '%'
 ```
 
-**Pass:** every hit either falls inside a `\begin{proof}...\end{proof}` block and the
-claim is derived there, or is immediately followed by a `\cite{...}`, or is replaced
-with a hedged phrasing.
+**Pass:** every hit either falls inside a `\begin{proof}` block with the claim derived
+there, or is immediately followed by `\cite{...}`, or uses a hedge.
 
 ---
 
 ### P21 — "Analogous argument" claims have no in-paper refutation
 
-When a passage says "an analogous argument applies to [Y]", grep the rest of the
-paper for any remark, footnote, or parenthetical that restricts or explicitly refuses
-the analogy for [Y].
-
 ```bash
-grep -n 'analogous\|same argument\|by the same reasoning\|an analogous\|same proof' "$TEX"
+grep -n 'analogous\|same argument\|by the same reasoning\|same proof' "$TEX"
 ```
 
-For each hit: search for the specific object [Y] named in the analogy claim and
-verify no other passage contradicts it.  If a later section adds a restriction
-(e.g. "for moment-type tests, distinct heights do not imply Vandermonde
-invertibility"), then the earlier "analogous argument" claim must be qualified or
-removed.
+For each hit: search the paper for the specific object named in the analogy claim and
+verify no other passage adds a restriction that contradicts it.  If a later section
+limits the analogy, qualify or remove the earlier claim.
+
+---
+
+## PART III — Formal definition and citation rigor
 
 ---
 
 ### P22 — External theorem invocations name all substituted parameters
 
-When a proof invokes an external theorem by author and number
-(e.g. "By Andersson \cite{...}, Theorem 5"), the proof text must state what
-specific objects, sets, and parameter values are being substituted into the
-cited theorem's hypotheses.  A bare citation without a parameter-mapping is
+When a proof invokes an external theorem ("By Andersson \cite{...}, Theorem 5"), the
+proof text must state what specific objects and parameter values are being substituted
+into that theorem's hypotheses.  A bare citation without a parameter-mapping is
 insufficient.
 
 ```bash
-grep -n 'By.*\\\\cite\|by.*\\\\cite\|Apply.*\\\\cite\|Applying.*\\\\cite\|invoking.*\\\\cite' "$TEX"
+grep -n 'By.*\\cite\|by.*\\cite\|Apply.*\\cite\|Applying.*\\cite\|invoking.*\\cite' "$TEX"
 ```
 
 For each hit: verify the sentence or the immediately following one names the specific
-inputs (e.g. "applied with $U = \{\operatorname{Re} s > 0\}$ and divisor
-$D = [z_1]$").
+inputs.
 
 ---
 
 ### P23 — Operator class definition: formal symmetry precedes self-adjoint extension
 
-When an operator class definition depends on an extension theorem (KLMN /
-Friedrichs / Lax–Milgram), the definition must first establish formal symmetry
-and semi-boundedness on a dense domain **before** invoking the extension.
-Self-adjointness may not be assumed as a hypothesis and then derived by KLMN:
-that is circular.
+When an operator class definition depends on an extension theorem (KLMN / Friedrichs /
+Lax–Milgram), the definition must first establish **formal symmetry** and
+**semi-boundedness** on a dense domain *before* invoking the extension.
+Self-adjointness may not be assumed as a hypothesis and then derived by KLMN: that is
+circular.
 
 ```bash
 grep -n 'KLMN\|Friedrichs\|self-adjoint.*extension\|quadratic form\|form domain' "$TEX"
 ```
 
-For each hit: verify the surrounding definition/proof lists (i)~formally symmetric
-on $C^\infty(M)$ and (ii)~semi-bounded on $C^\infty(M)$ as explicit hypotheses
-**prior** to the statement "the Friedrichs extension is the unique self-adjoint
-operator associated with the shifted form."
-
----
-
-### P25 — Literature formula descriptions match the cited source
-
-When the text (introduction, background, or body) describes a formula from a cited
-external result — e.g. writes an explicit equation and attributes it to a specific
-author/paper — the formula must be checked against the source in `baseline/` or the
-arXiv tarball, not relied on from memory.  Common failure modes:
-
-- Confusing two normalizations in the same paper (e.g. CCM's $\hat{\xi}_\lambda$ vs
-  the separate $k_\lambda \to \Xi$ result, Lemma 7.3).
-- Omitting an open step that the cited paper names explicitly.
-- Describing the cited theorem's conclusion as if the open step were already closed.
-
-```bash
-# Find every sentence that contains both a formula and a \cite, outside proof blocks
-grep -n '\\cite{' "$TEX" | grep -v '\\begin{proof}\|\\end{proof}' | head -30
-```
-
-**Manual check:** for each hit, open the corresponding `baseline/` source (or arXiv
-tarball) and verify: (a) the displayed formula matches the cited paper's exact
-statement, (b) any open step named in the cited paper is also flagged as open in
-this paper's description.
+For each hit: verify the surrounding block lists (i) formally symmetric on $C^\infty(M)$
+and (ii) semi-bounded on $C^\infty(M)$ as explicit conditions **prior** to the extension
+statement.
 
 ---
 
 ### P24 — Optional theorem-environment titles do not repeat the automatic label
 
-`\begin{theorem}[D]` renders as "Theorem 1 (D)" when the theorem is automatically
-numbered 1 — and as "Theorem D (D)" if the environment is already titled `D` by a
-custom counter.  Grep for optional arguments to theorem-like environments and
-manually verify the rendered output does not duplicate the label.
+`\begin{theorem}[D]` renders as "Theorem 1 (D)" when automatically numbered 1 — and
+as "Theorem D (D)" if the counter already produces "D".  Check the rendered output does
+not duplicate the label.
 
 ```bash
 grep -n '\\begin{.*}\[' "$TEX"
 ```
 
-For each hit: check the rendered PDF (or mentally evaluate the counter) to confirm
-the optional argument is a descriptive subtitle, not a repetition of the
-auto-generated theorem identifier.
+---
+
+### P25 — Literature formula descriptions match the cited source exactly
+
+When the text describes a formula from a cited external result, check it against the
+source file in `baseline/` (or the arXiv tarball) — not from memory.  Common failure
+modes: (a) conflating two normalizations in the same paper; (b) omitting an open step
+that the cited paper names explicitly; (c) describing the theorem's conclusion as if
+the open step were closed.
+
+```bash
+grep -n '\\cite{' "$TEX" | grep -v '\\begin{proof}\|\\end{proof}' | head -30
+```
+
+For each hit outside a proof block: open the corresponding source and verify the
+displayed formula matches the cited paper's exact statement, and that any open step
+named in the source is also flagged as open in this paper's description.
 
 ---
 
-### P26 — Reference operator construction does not introduce spurious symbol-class terms
+### P26 — Reference operator construction: no spurious symbol-class terms
 
-When a proof constructs a reference operator $P$ (to compare with $H$) by
-quantization, symmetrization, and addition of a positive constant $b$, the
-difference $Q = H - P$ contains a $-bI$ term of order~$0$.
-For $m < 1$ and $\varepsilon < 1-m$, the order $m-1+\varepsilon < 0$ is
-strictly below~$0$, so $-bI \notin \Psi^{m-1+\varepsilon}_{1,0}$.
-The claim ``$Q \in \Psi^{m-1+\varepsilon}_{1,0}$ for every $\varepsilon\in(0,1)$''
-is therefore wrong when $m < 1$.
+When a proof constructs a reference operator $P = P_0 + bI$ by adding a positive
+constant to ensure positivity, the difference $Q = H - P$ contains a $-bI$ term of
+order 0.  For $m < 1$ and $\varepsilon < 1-m$, this means $-bI \notin
+\Psi^{m-1+\varepsilon}_{1,0}$.  The claim "$Q \in \Psi^{m-1+\varepsilon}$" is then
+wrong.
 
 ```bash
-# Find all operator constructions that add a constant to ensure positivity
-grep -n 'positive constant\|P\\\s*:=\|P\s*=.*bI\|ensure.*P.*ge\|P\\\ge.*c.*>' "$TEX"
+grep -n 'positive constant\|P\s*:=\|P\s*=.*bI\|ensure.*P.*ge\|P.*\ge.*c' "$TEX"
 ```
 
-**For each hit:** verify one of the following:
-(a) The construction uses $P = A^*A + \Pi_{\ker A}$ (no additive constant, so $Q = H-P \in \Psi^{m-1+\varepsilon}$ for all $\varepsilon$); or
-(b) the constant is explicitly split: write $Q = Q_0 - bI$ where $Q_0 = H - P_0 \in \Psi^{m-1+\varepsilon}$ and the $-bI$ term is handled as a direct $b\|u\|^2$ form contribution; or
-(c) the symbol-class claim is restricted to $\varepsilon > \max(0, 1-m)$.
+For each hit: verify one of: (a) $P = A^*A + \Pi_{\ker A}$ (no additive constant); or
+(b) the constant is split explicitly as a direct form contribution; or (c) the
+symbol-class claim is restricted to $\varepsilon > \max(0,1-m)$.
 
 ---
 
 ### P27 — Tauberian theorems used in both directions are stated as biconditionals
 
-When a Tauberian theorem (Karamata, Ikehara, Wiener–Ikehara, etc.) is invoked
-in the paper in **both** the forward direction ($N \Rightarrow Z$) and the
-inverse direction ($Z \Rightarrow N$), verify the cited theorem is actually a
-biconditional ($\iff$), not only a one-way implication.
+When a Tauberian theorem (Karamata, Wiener–Ikehara, etc.) is invoked in both the
+forward direction ($N \Rightarrow Z$) and the inverse direction ($Z \Rightarrow N$),
+the cited theorem must be a biconditional ($\iff$).
 
 ```bash
-# Find Karamata / Tauberian invocations
-grep -n 'Karamata\|Tauberian\|Ikehara\|Wiener.*Ikehara\|one needs\|suffices to have' "$TEX"
+grep -n 'Karamata\|Tauberian\|Ikehara\|Wiener.*Ikehara' "$TEX"
 ```
 
-For each hit involving ``one needs $N_H(T) \sim \ldots$ to match $Z_H(t) \sim \ldots$'':
-trace the cited theorem to confirm the $\Leftarrow$ direction is stated.  If only
-the $\Rightarrow$ direction appears in the theorem statement, either add the
-reverse direction or replace ``one needs'' with ``one sufficient condition is.''
+For each hit: trace the cited theorem and confirm the $\Leftarrow$ direction is stated.
+If only $\Rightarrow$ appears, replace "one needs" with "one sufficient condition is."
 
 ---
 
 ### P28 — Single-letter symbol conflicts resolved
 
-When a paper uses the same single letter for two distinct mathematical objects
-(e.g.\ $S$ for both the set of observable records and the critical strip
-$\{0 < \operatorname{Re} s < 1\}$), one occurrence must be renamed.
-
 ```bash
-# Check for overloaded single-letter symbols in definitions and theorem statements
-# Look for the same capital letter used in two different \begin{definition} blocks
 grep -n '\\begin{definition}' "$TEX" | while IFS=: read lineno rest; do
   window=$(sed -n "${lineno},$((lineno+15))p" "$TEX")
   echo "Line $lineno: $(echo "$window" | grep -o '\$[A-Z]\$' | sort -u | tr '\n' ' ')"
 done
 ```
 
-**Manual check:** for each definition block, list the single-letter capitals it
-introduces; verify none conflicts with a same-letter symbol introduced in another
-definition or used as standard notation (strip, domain, set, space) elsewhere in
-the paper.
+For each definition block: list the single-letter capitals introduced; verify none
+conflicts with a same-letter symbol introduced elsewhere (strip, domain, set, space).
 
 ---
 
 ### P29 — `\texorpdfstring` bookmark text matches formula's logical meaning
 
-When a section/subsection uses `\texorpdfstring{$formula$}{bookmark-text}`, the
-bookmark text must accurately express the *logical content* of the formula under
-the definitions in force, not just a superficial reading of its symbols.
-
-Common failure mode: a binary relation $R(A,B)$ reads as "$A$ does not $R$ $B$"
-in the symbol string, but the *defined* meaning of $R$ makes $B$ the active
-agent, so the correct reading is "$B$ does not [inverse of $R$] $A$".
+When `\texorpdfstring{$formula$}{bookmark-text}` is used, the bookmark text must express
+the *logical content* of the formula under the definitions in force — not just a
+literal reading of the symbols.
 
 ```bash
 grep -n '\\texorpdfstring' "$TEX"
 ```
 
-For each hit: identify the definition of every relation/operator used in the
-formula; re-derive what the formula asserts in plain English; compare with the
-bookmark text.  **Pass:** bookmark text and logical meaning agree.
+For each hit: re-derive what the formula asserts in plain language; compare with the
+bookmark text.
 
-**Precedent (paper-A):** $\Ofinite\npreceq\Otheta$ with definition
-$O_a\preceq O_b\iff O_a=f\circ O_b$ (i.e.\ "$O_b$ refines $O_a$") was given
-bookmark "O-fin does not refine O-theta" — wrong direction; correct bookmark
-is "O-theta does not refine O-fin".
+**Common failure mode:** a binary relation $R(A,B)$ reads as "$A$ does not $R$ $B$" in
+the symbol string, but the defined meaning of $R$ makes $B$ the active agent, so the
+correct reading is "$B$ does not [inverse of $R$] $A$".
 
 ---
 
 ### P30 — Every free variable in a theorem/corollary statement is explicitly bound
 
-In every `\begin{theorem}`, `\begin{corollary}`, `\begin{proposition}` block,
-each variable that is not a universally quantified dummy must be bound by an
-explicit prefix ("Fix $K\ge 1$", "Let $K\ge 1$ be given", "for all $K\ge 1$",
-or as a conclusion variable in the "there exists" clause).
+Papers often define custom theorem-like environments with `\newtheorem` (e.g.
+`mainthm`, `maincor`, `mainthmprime`).  The grep pattern must include these, or the
+main theorems — the most important results — will be silently skipped.
 
 ```bash
-# Extract all theorem-like environment openers and the 15 lines following
-grep -n '\\begin{\(theorem\|corollary\|proposition\|maincor\|mainthm\|mainthmprime\)}' "$TEX" \
-  | while IFS=: read lineno rest; do
-    window=$(sed -n "${lineno},$((lineno+15))p" "$TEX")
-    echo "--- Line $lineno ---"
-    echo "$window"
-    echo
-  done
+# Step 1: extract all custom \newtheorem environment names from the preamble
+ENVS=$(grep '\\newtheorem{' "$TEX" | grep -oP '(?<=\\newtheorem\{)[^}]+' | tr '\n' '\|')
+ENVS="theorem|corollary|proposition|${ENVS%|}"   # add standard names
+echo "Checking environments: $ENVS"
+
+# Step 2: check each environment for free variables
+grep -nP "\\\\begin\\{($ENVS)\\}" "$TEX" | while IFS=: read lineno rest; do
+  window=$(sed -n "${lineno},$((lineno+15))p" "$TEX")
+  echo "--- Line $lineno ---"; echo "$window"; echo
+done
 ```
 
-**Manual check:** for each block, list every capital letter and named parameter
-that appears; verify each is bound.
+For each block: every capital letter and named parameter must be bound by
+"Fix $K\ge 1$", "for all $K\ge 1$", "Let $M$ be a…", or as a conclusion variable
+in the "there exists" clause.  A parameter appearing only in the conclusion with no
+"for some" or "there exists" quantifier is a free variable.
 
-**Precedent (paper-A):** Corollary "Positivity threshold" used $K$ in
-"$\Li_j(\mathcal{Z}_+)>0$ for $j=1,\ldots,K$" without first writing "Fix $K\ge 1$".
+**Known limitation:** `\newtheorem` names inside `\begin{comment}` or conditionally
+compiled sections are also extracted — inspect the `ENVS` list before running Step 2.
 
 ---
 
 ### P31 — "Same argument as part (X)" spells out the conclusion for part (Y)
 
-When a multi-part proof abbreviates a sub-proof with "by the same argument as
-part~(X)" or "an analogous argument gives", the *conclusion* of that sub-proof
-must be stated explicitly for part~(Y), not left implicit.
-
-In particular: if part~(X) proves "$\zeta \in \mathcal{H}_S$" via a chain
-$A \Rightarrow B \Rightarrow \zeta\in\mathcal{H}_S$, then part~(Y) must
-exhibit the corresponding chain ending with "$\zeta'\in\mathcal{H}_S$",
-even if step~$A$ is abbreviated.
+When a multi-part proof abbreviates with "by the same argument as part~(X)", the
+*conclusion* of that sub-proof must be stated explicitly for part~(Y).
 
 ```bash
-grep -n 'same argument\|analogous argument\|same reasoning\|as part~\|as in part' "$TEX"
+grep -n 'same argument\|analogous argument\|as part~\|as in part' "$TEX"
 ```
 
-For each hit: verify the conclusion of the current part is spelled out
-explicitly (not just "hence [condition X]" while omitting the class-membership
-conclusion that requires the full chain).
-
-**Precedent (paper-A):** Part~(b) of Corollary~D said $R_0$ "holomorphic on $S$
-(same argument as part~(a))" but omitted "$\zeta_{\chi^+}$ extends
-holomorphically to $U_0$, so $\zeta_{\chi^+}\in\mathcal{H}_S$" — a required
-intermediate conclusion suppressed by the abbreviation.
+For each hit: verify the conclusion of the current part is spelled out, not left
+implicit behind the abbreviation.
 
 ---
 
-### P32 — Operator class definition: Friedrichs realization identified by name after construction
+### P32 — Canonical realization identified by name after its construction
 
-When a definition block constructs a Friedrichs (or other canonical)
-realization $H_F$ of a formal operator $H$, the text immediately following
-the `\end{definition}` must state explicitly that $H$ is henceforth identified
-with $H_F$ and that all spectral objects (counting function, heat trace,
-spectrum) refer to $H_F$.
-
-Without this declaration, theorems using $N_H$ or $\operatorname{spec}_\times(H)$
-are technically undefined for the original formal operator.
+When a definition constructs a Friedrichs (or other canonical) realization $H_F$, the
+text immediately after `\end{definition}` must state explicitly that $H$ henceforth
+denotes $H_F$ and that all spectral objects refer to $H_F$.  Without this, theorems
+using $N_H$ or $\operatorname{spec}(H)$ are technically undefined for the formal operator.
 
 ```bash
-# Find definitions that introduce a Friedrichs extension
-grep -n 'Friedrichs\|H_F\|self-adjoint.*extension' "$TEX"
+grep -n 'Friedrichs\|H_F\|self-adjoint.*extension\|canonical.*realization' "$TEX"
 ```
-
-For each hit inside a `\begin{definition}...\end{definition}` block:
-verify the line immediately after `\end{definition}` contains an explicit
-identification sentence.
-
-**Precedent (paper-B):** Definition of $\Csub$ constructed $H_F$ inside the
-block, but Theorem~D$'$ then used $N_H$ and $\operatorname{spec}_\times(H)$
-without the identification having been declared.
 
 ---
 
-### P33 — Statement-proof domain mismatch: lemma statement must cover the full domain used by proof and downstream
+### P33 — Statement-proof domain mismatch: statement must cover the full domain used by proof and downstream
 
-When a proof establishes a result for a **broader domain** than the lemma statement claims
-(e.g., proof uses only the fact that entries are distinct positive reals, but statement
-restricts to positive rationals), and downstream theorems use the result over the broader
-domain, the statement must be upgraded to match.
+When a proof establishes a result for a **broader domain** than the lemma statement
+claims (e.g. proof uses only "distinct positive reals", statement restricts to "positive
+rationals"), and downstream theorems use the result over the broader domain, the
+statement must be upgraded.
 
-Additionally: if downstream usage relies on **connectivity** of the domain (e.g., for
-analytic continuation, an implicit function theorem application, or "$\Omega$ is connected"
-to conclude that a zero-set is isolated), that connectivity must be stated as an explicit
-hypothesis or conclusion in the lemma, not left implicit.
+Also: if downstream usage relies on **connectivity** of the domain (for analytic
+continuation, IFT, or an isolation argument), that connectivity must be an explicit
+hypothesis or conclusion of the lemma.
 
 ```bash
-# Step 1: Find every lemma whose proof contains a domain-relevant word
+# Proofs that mention real/positive-real but statements may not
 grep -n '\\begin{lemma}\|\\begin{proposition}' "$TEX" | while IFS=: read lineno rest; do
-  # Look in the 40 lines of proof following this lemma
   proof=$(sed -n "${lineno},$((lineno+40))p" "$TEX")
-  echo "$proof" | grep -qi 'real\|positive real\|\\mathbb{R}\|distinct.*real' && \
+  echo "$proof" | grep -qi 'real\|\\mathbb{R}\|distinct.*real' && \
     echo "Line $lineno: proof mentions real — check statement domain"
 done
-# Step 2: Find downstream uses outside the lemma that reference its name
-grep -n 'Lemma.*[0-9]\.' "$TEX" | grep -v '\\begin{lemma}\|\\begin{proof}' | head -20
+# Downstream sites using lemma labels
+grep -n '\\ref{lem:' "$TEX" | grep -v '\\begin{lemma}' | head -20
 ```
 
-**Manual check:** for each flagged lemma, (a) read the proof and record the actual domain
-used; (b) read the statement and record the claimed domain; (c) find every downstream
-`\ref` site; (d) check the downstream site requires the actual (broader) domain;
-(e) if yes, upgrade the statement.  Also verify the domain is explicitly stated as
-connected wherever a connectivity argument is used.
+**Manual check:** for each flagged lemma, (a) record the actual domain used in the
+proof; (b) record the claimed domain in the statement; (c) find every downstream `\ref`
+site; (d) check the site requires the actual domain; (e) if yes, upgrade the statement.
 
-**Precedent (paper-A):** Lemma 3.1 stated for positive rationals; proof only needed distinct
-positive reals; lines 895–908 used it over the open real set $\Omega$.  The "Vandermonde is
-real" argument was complete — only the statement was too narrow.
+**Precedent:** Lemma 3.1 (paper-A) stated for positive rationals; proof needed only
+distinct positive reals; lines 895–908 used it over the open real set $\Omega$.
 
 ---
 
 ### P34 — Spectral/counting definition domain covers every operator sub-class that uses it
 
-When formal spectral invariants $(N_H, Z_H, \operatorname{spec}_\times(H),$ heat trace, etc.)
-are defined for a **restricted operator class** (e.g.\ non-negative, or positive-definite),
-verify that **every** operator appearing in a theorem that invokes those invariants provably
-belongs to that restricted class — or extend the definition to a broader class (e.g.\
-lower-semibounded with finitely many negative eigenvalues) and state the extension explicitly.
+When formal spectral invariants ($N_H$, $Z_H$, $\operatorname{spec}_\times(H)$, heat
+trace, etc.) are defined for a **restricted operator class** (e.g. non-negative,
+positive-definite), verify that every operator appearing in a theorem that invokes
+those invariants provably belongs to that class — or extend the definition to a broader
+class (e.g. lower-semibounded with finitely many negative eigenvalues) and state the
+extension explicitly.
+
+**Macro-blindness warning:** papers commonly define shorthand macros for spectral
+invariants (e.g. `\newcommand{\Nop}{N_H}`).  The grep below will miss those unless
+you also search for the macro names.
 
 ```bash
-# Find all definitions of spectral invariants
-grep -n 'N_H\|Z_H\|\\operatorname{spec}_\\times\|\\operatorname{spec}' "$TEX" \
-  | grep '\\begin{definition}\|:=\|\\coloneqq' | head -20
-# Find all operator classes in definitions / theorem statements
-grep -n '\\mathcal{C}\|\\mathcal{H}\|H_F\|\\Csub\|lower.semibounded\|semi.*bound' "$TEX" | head -20
+# Step 1: find macro names that expand to spectral invariants
+grep '\\newcommand' "$TEX" | grep -iE 'N_H|Z_H|spec|Tr|heat|count' | head -10
+# Step 2: find spectral invariant definitions (raw LaTeX and common macro names)
+grep -n 'N_H\|Z_H\|\\operatorname{spec}\|\\operatorname{Tr}' "$TEX" | head -20
+# Also search inside \begin{definition}...\end{definition} blocks
+awk '/\\begin\{definition\}/,/\\end\{definition\}/' "$TEX" \
+  | grep -n 'non-negative\|lower.*semi\|positive.*definite\|H\s*\ge\|H\s*>\s*0' | head -20
+# Step 3: find operator classes in theorem headers (including custom macro names)
+grep -n '\\mathcal{C}\|H_F\|lower.*semibounded\|semi.*bound\|\\lambda_1\le\|\\Csub' "$TEX" | head -20
 ```
 
-**Manual check:** (a) read the definition block that introduces each spectral invariant and
-record the stated domain of $H$; (b) for each theorem using that invariant, identify the
-operator class $\mathcal{C}$; (c) verify $\mathcal{C}$ satisfies the domain restriction.
-If $\mathcal{C}$ admits finitely many negative eigenvalues but the definition requires
-non-negativity, add a sentence:
+**Manual check:** build a 2-column table — column 1: restrictions in the invariant
+definition; column 2: operator classes in theorems using that invariant.  For each pair,
+write one sentence confirming the class satisfies the restriction.
 
-> For any lower-semibounded self-adjoint operator with compact resolvent, list its
-> eigenvalues $\lambda_1 \le \lambda_2 \le \cdots$ with multiplicity and apply the
-> same definitions of $N_H$ and $Z_H$.
-
-**Precedent (paper-B):** $N_H$, $Z_H$, $\operatorname{spec}_\times(H)$ defined for
-non-negative $H$; but $H_F\in\mathcal{C}_\mathrm{sub}$ can have finitely many negative
-eigenvalues.  Finite negative spectrum does not affect the asymptotic conclusion, but the
-definition must explicitly permit it.
+**Precedent:** $N_H$, $Z_H$ defined for non-negative $H$; but $H_F \in \mathcal{C}_\mathrm{sub}$
+can have finitely many negative eigenvalues (paper-B).  Finite negative spectrum does not
+affect the asymptotic but the definition must permit it.
 
 ---
 
 ### P35 — Parameterized class superscripts re-quantified in dependent theorems; local symbol constants localized
 
 **Part A — parameter re-quantification.**
-When a definition introduces a class with superscript/subscript parameters
-(e.g.\ $\mathcal{C}_\mathrm{sub}^{m,K}(M)$), every theorem or corollary that produces or
-asserts membership in the class must either (a) universally quantify all parameters
-("for all $m\ge 1$, $K\ge 1$, $M$ compact without boundary…") or (b) reference a fixed
-previously-named instance.  A theorem header that drops the superscripts leaves the
-parameters ambiguous.
+When a definition introduces a class $\mathcal{C}^{m,K}(M)$ with superscript parameters,
+every theorem asserting membership in or properties of that class must either (a)
+universally quantify all parameters ("for all $m \ge 1$, $K \ge 1$, compact $M$…") or
+(b) reference a fixed previously-named instance.
+
+**Macro-blindness warning:** the class name is often a custom macro (e.g. `\Csub`).
+Extract macro names from the preamble and include them in the grep.
 
 ```bash
-# Find class names with potential superscripts used in theorem/corollary blocks
-grep -n '\\begin{\(theorem\|corollary\|proposition\)}' "$TEX" | while IFS=: read L _; do
+# Step 1: find macros that name the parameterized class
+CLASS_MACROS=$(grep '\\newcommand' "$TEX" | grep -oP '\\newcommand\{\\[^}]+\}' \
+  | grep -i 'sub\|ell\|logpoly\|class\|Cscr\|Hscr' | grep -oP '(?<=\{\\)[^}]+')
+echo "Class macros to check: $CLASS_MACROS"
+
+# Step 2: find custom \newtheorem environment names (so mainthm/maincor are included)
+ENVS=$(grep '\\newtheorem{' "$TEX" | grep -oP '(?<=\\newtheorem\{)[^}]+' | tr '\n' '\|')
+ENVS="theorem|corollary|${ENVS%|}"
+
+# Step 3: check theorem headers for the class name (raw LaTeX and macros)
+grep -nP "\\\\begin\\{($ENVS)\\}" "$TEX" | while IFS=: read L _; do
   window=$(sed -n "${L},$((L+10))p" "$TEX")
-  echo "$window" | grep -qE '\\mathcal\{C\}|\\mathcal\{H\}|\\Csub' && \
-    echo "Line $L: check class parameters are re-quantified"
+  echo "$window" | grep -qE '\\mathcal\{C\}|\\mathcal\{H\}|\^\{m|\\Csub|\\Hscr' && \
+    echo "Line $L: check class parameters re-quantified"
 done
 ```
 
 **Part B — local vs global symbol constants.**
-Symbol/PDE estimates of the form $|(\partial^\alpha_x\partial^\beta_\xi a)(x,\xi)| \le C_{\alpha\beta}$
+Symbol/PDE estimates $|(\partial^\alpha_x\partial^\beta_\xi a)(x,\xi)| \le C_{\alpha\beta}$
 are valid only locally when the symbol $a$ is defined on a coordinate patch $U$.  The
-constant must be written $C_{\alpha\beta,U_0}$ for every $U_0 \Subset U$, not a single
-global constant, unless the manifold is compact and the operator is globally defined.
+constant must be $C_{\alpha\beta,U_0}$ for every $U_0 \Subset U$, not a global constant,
+unless the manifold is compact and the operator is globally defined.
 
 ```bash
-grep -n 'C_{\\\\\alpha\|C_\\alpha\|symbol.*estimate\|uniform.*bound.*symbol' "$TEX"
+grep -n 'C_.*alpha\|symbol.*estim\|uniform.*bound.*symbol' "$TEX"
 ```
 
-**Manual check (Part B):** for each symbol estimate, verify whether $a(x,\xi)$ is defined
-on a coordinate patch or globally; if on a patch, confirm the bound writes $C_{\alpha\beta,U_0}$
-and states "$U_0\Subset U$."
+**Manual check (B):** for each symbol estimate, verify whether $a$ is a patch symbol;
+if so, confirm the bound writes $C_{\alpha\beta,U_0}$ and states "$U_0 \Subset U$."
 
-**Precedent (paper-B):** $\mathcal{C}_\mathrm{sub}$ used in Theorem D$'$ without
-re-quantifying $m,K,M$; local symbol estimate wrote $C_{\alpha\beta}$ for a
-coordinate-patch symbol.
-
----
+**Precedent (paper-B):** $\mathcal{C}_\mathrm{sub}$ (macro `\Csub`) used in Theorem D$'$
+without re-quantifying $m,K,M$; local symbol estimate wrote $C_{\alpha\beta}$.
 
 ### P36 — Existence vs construction: citation qualifier when a specific object is needed
 
-When a theorem has an **existence conclusion** (proved by compactness, contradiction, or a
-non-constructive fixed-point argument) but a downstream proof uses a **specific object**
-produced by that theorem (e.g.\ a particular sequence of parameters, a specific certificate,
-or an explicit formula from the construction), the citation must be qualified:
+When a theorem has an **existence conclusion** (proved by compactness, contradiction,
+or a non-constructive argument) but a downstream proof uses a **specific object**
+produced by that theorem, the citation must be qualified:
 
-> By **the construction in the proof of** Theorem~X (equivalently, equation~$(\star)$), …
+> By the **construction in the proof of** Theorem~X (equivalently, equation~$(\star)$), …
 
-A bare "By Theorem~X" in that context implies only that some object with the stated
-properties exists, not that the downstream argument has access to a particular one.
+A bare "By Theorem~X" implies only that some object with the stated properties exists.
 
 ```bash
-# Find all bare "By Theorem" / "by Theorem" citations not followed by "proof" or "construction"
 grep -n 'By Theorem\|by Theorem\|By Corollary\|by Corollary' "$TEX" \
-  | grep -v 'proof\|construction\|equation\|formula' | head -30
+  | grep -v 'proof\|construction\|equation\|formula\|explicit' | head -30
 ```
 
-**Manual check:** for each hit, determine whether the downstream argument uses only the
-*existence* of an object or whether it relies on a *specific* object produced by the proof.
-If the latter, add "the construction in the proof of" or cite the specific equation.
+For each hit: determine whether the downstream argument uses only existence or relies on
+a specific construction.  If the latter, add "the construction in the proof of."
 
-**Precedent (paper-A):** line 922 cited "By Theorem~A" but needed the specific parameters
-from the Theorem~A construction (equation $(\star)$); the existence statement alone did not
-supply those parameters.
+**Precedent (paper-A):** line 922 cited "By Theorem~A" but needed the specific
+parameters from the construction (equation $(\star)$).
 
 ---
 
-### P37 — Degenerate-parameter case convention explicit in counting/combinatorial formulas
+### P37 — Degenerate-parameter case convention explicit in counting / combinatorial formulas
 
-When a counting lemma, quartet asymptotic, or combinatorial observation formula admits a
-**degenerate parameter value** where the geometric object collapses or a multiplicity changes
-(e.g.\ $\sigma_0=1/2$ makes a four-point orbit collapse to two on-line points each appearing
-with multiplicity~2; $h=0$ makes a test trivial), the multiset interpretation and the
-resulting formula for that special case must be stated **explicitly** — either in the theorem
-as an additional case, or in an immediately adjacent remark.
+When a counting or combinatorial formula admits a **degenerate parameter value** where
+the geometric object collapses or a multiplicity changes (e.g. $\sigma_0 = 1/2$ makes
+a four-point orbit collapse to two on-line points each with multiplicity 2), the
+multiset interpretation and the resulting formula for that special case must be stated
+explicitly — either as an additional case or in an immediately adjacent remark.
 
 ```bash
-# Find "quartet" / "Q(" / "L(T)" and orbit formulas
-grep -n 'quartet\|Q(1/2\|\\sigma_0=1/2\|degenerate\|\\sigma_0\\ne 1/2' "$TEX" | head -20
-# Find formulas that use a parameter that could be zero or a boundary value
-grep -n 'multiset\|orbit.*multiplicity\|with multiplicity\|counted with' "$TEX" | head -20
+# Find counting / orbit formulas and the parameter domain
+grep -n 'multiset\|orbit.*multiplicity\|with multiplicity\|degenerate\|special.*case' "$TEX" | head -20
+grep -n '\\sigma_0\|\\beta_0\|degenerate\|boundary.*case' "$TEX" | head -20
 ```
 
-**Manual check:** for each counting formula, list all parameter boundary values allowed by
-the stated domain; for each boundary value, work out what the formula gives and whether
-that agrees with the geometric meaning.  If a special case needs a separate sub-formula or
-a "multisets" qualifier, add it.
+For each counting formula: list all boundary values of each parameter in its domain;
+work out what the formula gives at each boundary; confirm it matches the geometric
+meaning.
 
-**Precedent (paper-A):** $Q(\sigma_0,T)$ for $\sigma_0=1/2$ collapses to two on-line points
-with multiplicity~2 each, giving $Q(1/2,T)=2L(T)$; this was not stated, leaving the
-multiplicity convention ambiguous.
+**Precedent (paper-A):** $Q(\sigma_0,T)$ for $\sigma_0=1/2$ gives $Q(1/2,T)=2L(T)$;
+this multiset collapse was not stated.
 
 ---
 
 ### P38 — Self-adjointness inner product named at every invocation
 
 When a theorem asserts, or cites a result asserting, that an operator is **self-adjoint**,
-the **inner product** on which self-adjointness holds must be named — especially when a
-non-standard inner product (e.g.\ Weil quadratic form, Sobolev form, graph inner product)
-is in use.  A bare "is self-adjoint on $\mathcal{H}$" is incomplete if $\mathcal{H}$ can
-be equipped with more than one natural inner product.
+the **inner product** must be named — especially when a non-standard inner product
+(Weil quadratic form, Sobolev form, graph inner product) is in play.  A bare "is
+self-adjoint on $\mathcal{H}$" is incomplete when $\mathcal{H}$ admits multiple natural
+inner products.
 
 ```bash
 grep -n 'self-adjoint\|self.adjoint\|hermitian\|symmetric.*operator' "$TEX" | head -30
 ```
 
-**Manual check:** for each hit, identify the inner product in force.  If the inner product
-is not the standard $L^2$ inner product, verify the text names it.  For cited results
-(e.g.\ CCM Theorem 5.10), open the source and confirm the inner product used in the
-citation matches the inner product used in the paper.
+For each hit: identify the inner product.  If non-standard, verify the text names it.
+For cited results, open the source and confirm the inner product matches.
 
-**Precedent (paper-B):** CCM Theorem 5.10 asserts self-adjointness on $E_N'\oplus E_N^\perp$
-equipped with the **Weil quadratic form-induced inner product**, not the standard $L^2$
-inner product; the description omitted this, making "self-adjoint" ambiguous.
+**Precedent (paper-B):** CCM Theorem 5.10 asserts self-adjointness on
+$E_N' \oplus E_N^\perp$ with the Weil quadratic form-induced inner product, not the
+standard $L^2$ inner product; the description omitted this.
+
+---
+
+## PART IV — Scope, methodology, and evidence quality
+
+---
+
+### P12 — No-go / impossibility theorem: all five components explicit
+
+A result may be labeled a *barrier*, *no-go theorem*, or *obstruction* only when the
+paper explicitly states all five:
+
+1. **Method class** (membership is checkable, not ad hoc)
+2. **Ambient object class** (the universe of objects being considered)
+3. **Observation map** (what the method can see)
+4. **Target predicate** (what the method is trying to decide)
+5. **Escape route** (an explicit construction outside the method class, proving
+   non-vacuity)
+
+```bash
+grep -n 'barrier\|obstruction\|no-go\|impossibility\|cannot prove' "$TEX" | grep -iv '%'
+```
+
+For each hit: verify all five components are named in the theorem statement or
+immediately adjacent text.
+
+**Why escape route is mandatory:** without it, the theorem is vacuous (the method class
+might be empty; the observation map might never be exact).
+
+---
+
+### P13 — No equivalence reformulation claimed as an impossibility result
+
+An equivalence criterion ($C \iff P$) **locates** difficulty; it does not prove
+impossibility.  A result may not be labeled "barrier" or "obstruction" solely on the
+basis of being equivalent to the target predicate.
+
+```bash
+grep -n 'equivalent.*\|iff\b\|if and only if' "$TEX" | grep -iv '%' | head -20
+```
+
+For each hit: confirm the result is labeled "equivalent reformulation" or "locates
+difficulty," **not** "barrier" or "obstruction."
+
+---
+
+### P14 — Abstract and introduction scope claims bounded to what theorems prove
+
+```bash
+sed -n '/\\begin{abstract}/,/\\end{abstract}/p' "$TEX"
+sed -n '/\\section{Introduction}/,/\\section{/p' "$TEX" | head -80
+```
+
+Manually verify: no sentence implies a stronger conclusion than the theorems prove.
+Common over-reach patterns:
+- "this suggests [X]" when the theorems only rule out a *sub-class* of approaches to X
+- "this is consistent with [conjecture Y]" when the argument does not actually bear on Y
+- scope words ("any", "all", "every") not matched by the theorem's quantifiers
+
+---
+
+### P15 — Analogies to other impossibility frameworks labeled motivational
+
+When the paper draws a structural analogy to another impossibility framework (natural
+proofs, relativization barriers, information-theoretic lower bounds, etc.):
+
+```bash
+grep -n 'natural proof\|Baker.*Gill\|relativiz\|information.*theoretic.*lower\|barrier.*analog' "$TEX"
+```
+
+For each hit: confirm the text contains a qualifier such as "structural and motivational,
+not a formal reduction."  A bare analogy without this disclaimer overstates the result.
+
+---
+
+### P16 — Evidence level for every imported premise
+
+Every claim imported from the literature that is used as a **premise** in a proof must
+carry a verified evidence level.  Recommended two-axis taxonomy:
+
+| Axis | Allowed values |
+|---|---|
+| Mathematical | `DEFINITION`, `CONJECTURE`, `PROOF-DRAFT`, `INDEPENDENTLY-CHECKED`, `REFEREED` |
+| Computational | `NONE`, `EXPLORATORY`, `REPRODUCIBLE`, `INDEPENDENT-CHECKER`, `FORMALIZED` |
+
+- A repository deposit / DOI is **archival publication, not peer review.**
+- A finite verification certificate validates only the finite instance replayed, never
+  the analytic theorem producing it.
+- Status is **derived by the checker**, never self-declared by the generator.
+
+```bash
+grep -n '\\cite{' "$TEX" | while IFS=: read lineno rest; do
+  context=$(sed -n "$((lineno-3)),$((lineno+3))p" "$TEX")
+  echo "$context" | grep -q '\\begin{proof}\|therefore\|hence\|it follows\|by.*,' \
+    && echo "Line $lineno: cite in proof context — verify evidence level: $rest"
+done | head -30
+```
+
+---
+
+### P17 — Invariance under method class transformations
+
+When a quantity is proposed as a "margin", "measure of complexity", or "lower bound" for
+a method class, verify it is **invariant** under every transformation the method class
+allows (rescaling, congruence, preconditioning, basis change, etc.).
+
+```bash
+grep -n 'margin\|complexity.*measure\|lower bound\|Schur\|pivot\|shift.*I\|c_a\|c_L' "$TEX"
+```
+
+For each margin-like quantity:
+- If it is orthogonally invariant, it factors through the **eigenvalue multiset** (spectral
+  theorem) — it cannot detect eigenvector localization.
+- If it depends on a basis, it can be reduced to a constant by choosing the eigenbasis —
+  it is a representation artifact, not a universal bound.
+- A quantity that stays provable while tending to zero is a *diagnostic*, not a barrier.
+
+---
+
+### P18 — Constructive/existential qualifier: definition honors downstream corollaries
+
+When a formal definition contains "explicit", "constructive", "computable", or
+"effective", every theorem that claims to produce an instance must satisfy the qualifier.
+A non-constructive proof (compactness, contradiction) must either (a) have the definition
+allow existential instances, or (b) remove the qualifier.
+
+```bash
+grep -n 'explicit\|constructive\|computable\|effective' "$TEX" | grep -v '%'
+awk '/\\begin\{definition\}/,/\\end\{definition\}/' "$TEX"
+```
+
+---
+
+## PART V — Proactive per-theorem structural audit
+
+**Run this section once for every new or substantially revised theorem / lemma /
+corollary before running any grep from Parts I–IV.**  If you answer S1–S5 honestly,
+most defects caught by Parts I–IV become impossible by construction.
+
+These five questions derive from the fundamental invariants of rigorous mathematical
+writing.  They are *complete* in the sense that their scope covers every defect class
+currently in Parts I–IV and any new class of the same structural type.
+
+---
+
+### S1 — Hypothesis shadow test
+*Catches: undeclared domain extensions (P33), definition domain gaps (P34), missing
+inner-product specifications (P38), and any hidden assumption of any kind.*
+
+**What to do:**
+Read the proof body.  For every step of the form "since [property P] holds for [object X]",
+ask: **where is P established for X?**
+
+Classify each such use into one of:
+- **(H)** — P is an explicit hypothesis of the theorem statement.
+- **(D)** — P follows directly from a definition in scope.
+- **(L)** — P is proved by a cited lemma (go to S3 for that citation).
+- **(GAP)** — P is neither of the above.
+
+Any `(GAP)` is a defect.  Resolution options:
+- Add P as an explicit hypothesis.
+- Prove P from the existing hypotheses and insert the proof.
+- Restructure the proof to avoid needing P.
+
+**Written output required:** a table with columns `[Step]`, `[Property used]`,
+`[Object]`, `[Classification]`.  Every row must be `(H)`, `(D)`, or `(L)`.
+
+```bash
+# Aid for finding implicit uses: look for "since", "note that", "observe that",
+# "clearly", "because" in proof blocks
+awk '/\\begin{proof}/,/\\end{proof}/' "$TEX" \
+  | grep -n 'since\|note that\|observe\|clearly\|because\|follows from'
+```
+
+**Red flags that indicate a gap:**
+- "by continuity" — of what function, on what domain, proved where?
+- "by the previous lemma" — does the object satisfy the lemma's domain restriction? (→ S2)
+- "it suffices to assume" — is this actually sufficient, or is it only necessary?
+- "WLOG" — does the reduction preserve every property used later in the proof?
+- "analogously" — does the analogy go through for *this* object? (→ P21)
+
+---
+
+### S2 — Definition domain coverage table
+*Catches: spectral invariant domain gaps (P34), parameterized class coverage (P35),
+citation scope errors (P22), and any use of a tool outside its stated domain.*
+
+**What to do:**
+For every formal definition or cited result D used in the paper, build the following
+table:
+
+| Definition / Lemma | Domain restriction(s) | Objects in this paper that invoke D | Verification sentence |
+|---|---|---|---|
+| [name] | [e.g. "H ≥ 0", "t_k distinct positive reals"] | [list] | [one sentence per object] |
+
+**Pass condition:** the Verification sentence column is non-empty for every row, and
+every sentence is either a reference to a hypothesis or a short derivation.
+
+**Common coverage failures:**
+- A spectral invariant defined for non-negative operators applied to a lower-semibounded one.
+- A Weyl-law result stated for second-order differential operators applied to a
+  pseudodifferential operator.
+- A Hurwitz-type theorem stated for entire functions applied to a meromorphic function.
+- A convergence theorem stated for compact sets applied on an unbounded domain.
+
+For any coverage failure: either extend the definition explicitly, or add the restriction
+as a hypothesis.
+
+```bash
+# Find all definitions and their domain words
+awk '/\\begin{definition}/,/\\end{definition}/' "$TEX" \
+  | grep -n 'non-negative\|positive\|compact\|distinct\|entire\|meromorphic\|classical' | head -30
+# Find all invocations of defined objects outside their definition blocks
+grep -n '\\ref{def:\|by Definition\|by the definition of' "$TEX" | head -20
+```
+
+---
+
+### S3 — Citation full instantiation record
+*Catches: bare citations in proofs (P22), existence-vs-construction errors (P36),
+wrong theorem number (P25, L17), and wrong version/normalization (L22).*
+
+**What to do:**
+For every `\cite{...}` occurring inside a `\begin{proof}...\end{proof}` block, write
+a one-line instantiation record of the form:
+
+> Apply [Author], [Theorem/Lemma N] with: [list of specific substitutions] ↦ [objects in
+> current proof].  Conclusion used: [specific conclusion, not the full theorem].
+
+Additionally, for each citation answer these three questions:
+1. **Type:** is the conclusion an existence statement or does the proof produce a specific
+   construction?  If specific construction, cite "the construction in the proof of Theorem N."
+2. **Version:** is the cited theorem from a preprint or a published version?  If both exist,
+   record both equation/theorem numbers (preprint vs journal pagination may differ).
+3. **Normalization:** does the cited paper use the same normalization convention as this
+   paper for every object in the instantiation?  Write the normalization explicitly.
+
+```bash
+# Extract all citations inside proof blocks
+awk '/\\begin{proof}/,/\\end{proof}/' "$TEX" | grep -n '\\cite{' | head -40
+```
+
+**Pass condition:** every proof-internal `\cite` has a written instantiation record.
+
+---
+
+### S4 — Parameter boundary sweep
+*Catches: degenerate-case convention gaps (P37), vacuous targets (see PROMPT_LINT L6),
+and formula errors at domain boundaries.*
+
+**What to do:**
+For every formula, counting function, or asymptotic that involves a **parameter**
+$p \in D$ (where $D$ is a stated domain):
+
+1. List all **interior** behavior (what the formula does generically).
+2. List all **boundary values** of $D$ (endpoints, zeros, special values where a
+   symmetry is gained/lost, or where the geometric object degenerates).
+3. For each boundary value, evaluate the formula and verify the result agrees with
+   the geometric or mathematical meaning.
+4. If the formula collapses or changes character at a boundary (e.g. a quartet becomes
+   two double-counted points), state the special-case formula explicitly.
+
+```bash
+# Find all parameter-indexed formulas
+grep -n '\\sigma_0\|\\beta_0\|\\varepsilon\s*=\|p\s*=\s*[0-9]\|k\s*=\s*0\|m\s*=\s*1\b' "$TEX" | head -20
+```
+
+**Common boundary failures:**
+- A parity argument that ceases to apply when a parameter equals its symmetry value.
+- A counting formula that double-counts when two orbits coincide.
+- An error bound that blows up or changes sign at the boundary of the parameter domain.
+- A "without loss of generality" reduction that fails at a boundary case.
+
+---
+
+### S5 — Normalization source check
+*Catches: formula description mismatches (P25), inner-product errors (P38), conflated
+normalizations, and open-step suppression.*
+
+**What to do:**
+For every formula, constant, operator, or spectral object borrowed from the literature:
+
+1. Open the **primary source** (arXiv tarball, published PDF, or `baseline/` directory).
+2. Locate the **specific theorem or equation** by number.
+3. Write its exact statement verbatim or as a close paraphrase.
+4. Beside it, write your paper's version.
+5. Verify they agree on: (a) normalization constants, (b) inner product, (c) whether any
+   step in the cited theorem is itself open/conditional, (d) domain/range of every map.
+
+```bash
+# Find every place a formula is attributed to a citation
+grep -n '\\cite{' "$TEX" | grep -v '\\begin{proof}' \
+  | grep '=\|\\sim\|\\asymp\|\\le\|\\ge\|\\to' | head -30
+```
+
+**Common normalization traps:**
+- Two results in the same paper that look similar but differ by a factor of 2 from
+  distinct symmetrization conventions.
+- A cited theorem with a meromorphic target (poles at zeros of a derivative) vs a
+  cited theorem with an entire target (all zeros real) — distinct normalizations, never
+  interchangeable.
+- A self-adjointness result stated with respect to a non-standard inner product induced
+  by a quadratic form, described in the paper as simply "self-adjoint."
+- Preprint equation numbers shifted by ±1 relative to the published version.
+
+**Pass condition:** for every imported formula, the source check is recorded and every
+discrepancy is resolved.
+
+---
+
+### P39 — Open problems / questions sections: all variables defined inline
+
+When a paper includes a section of open problems, questions, or conjectures, each
+item is often written informally — but any parameter or object introduced there must
+still be defined within that item.  A variable borrowed from the body (e.g. $N$, $K$,
+$T$, $h$) without re-introduction becomes undefined if the reader reads the section
+standalone, and the question itself may be ill-posed.
+
+Common failure modes:
+- "Does there exist $N$ such that…" where $N$ was defined much earlier as a specific
+  sequence length, but here appears to be a free integer.
+- "For the Weil test $h$…" when the body uses a finite family $h_1,\ldots,h_r$ but the
+  question writes only $h$.
+- A bound "denominator height $\le T^A$" where $A$ is not defined anywhere in the item.
+
+```bash
+# Find open-problem / conjecture / question sections
+grep -n '\\section\|\\subsection' "$TEX" \
+  | grep -i 'open\|question\|conjecture\|further\|remark' | head -10
+# For each such section, extract its content and check for undefined single-letter params
+```
+
+**Manual check:** for each open-problem item, list every parameter and object that
+appears; verify each is either (a) defined within the item itself ("let $N \ge 1$"),
+(b) universally quantified ("for all $h \in \mathcal{H}$"), or (c) a standard
+universally understood constant (e.g. $\pi$, $e$).
+
+**Precedent (paper-A):** open problem used $N$ without definition (should be
+"$\#\mathcal{Z}_\pm \le T^A$") and wrote $h$ where the body used $h_1,\ldots,h_r$.
 
 ---
 
 ## Running order for pre-submission
 
-1. `pdflatex` — fix all errors and undefined-ref warnings (P4)
-2. Hardcoded refs grep → convert to `\ref` (P1)
-3. Unused labels grep → add `\ref` or remove (P2)
-4. Unused bibliography grep (P3)
-5. Short title check (P5)
-6. Unused results grep (P6)
-7. Definition consistency grep for each key term (P7)
-8. Attribution grep for each lemma block (P8)
-9. Asymptotics grep → point to or run verifying scripts (P9)
-10. Informal qualifiers grep (P10)
-11. Remark formula audit (P11) — verify every inequality/identity claimed, not just display
-12. Barrier criterion grep (P12–P13)
-13. Abstract/intro scope read (P14)
-14. Complexity analogy grep (P15)
-15. Evidence-level audit of proof citations (P16–P17)
-16. Constructive/existential qualifier consistency (P18)
-17. Parity arguments to sufficient order (P19)
-18. Strong number-theoretic assertions (P20)
-19. Analogy claim refutation check (P21)
-20. External theorem parameter instantiation (P22)
-21. **Statement-proof domain mismatch — statement ≥ proof domain (P33)**
-22. Operator definition prerequisite ordering (P23)
-23. **Spectral definition domain covers all operator sub-classes (P34)**
-24. Literature formula descriptions vs source (P25)
-25. Optional theorem title duplication (P24)
-26. Reference operator symbol class (P26)
-27. **Parameterized class superscripts re-quantified; local symbol constants (P35)**
-28. **Existence vs construction citation qualifier (P36)**
-29. Tauberian theorems used bidirectionally (P27)
-30. Single-letter symbol conflicts (P28)
-31. `\texorpdfstring` bookmark semantic correctness (P29)
-32. Free variable binding in theorem statements (P30)
-33. "Same argument" conclusion completeness (P31)
-34. Friedrichs realization identification after definition (P32)
-35. **Degenerate-parameter case convention in counting formulas (P37)**
-36. **Self-adjointness inner product named at invocation (P38)**
+### Phase 0 — Compilation gate (must pass before any manual review)
+1. `pdflatex` three passes → fix errors and undefined-ref warnings (P4)
+2. Hardcoded refs → internal `\ref` or external citation check (P1)
+3. Unused bibliography → cite or remove (P3)
+4. **Preamble inventory** — extract all `\newtheorem` and `\newcommand` names; keep
+   the list open for use in P30, P34, P35, P7, P28
+
+### Phase 1 — Per-theorem structural audit (run for each theorem/lemma/corollary)
+5. Hypothesis shadow test (S1) — write the table
+6. Definition domain coverage table (S2) — write the table
+7. Citation full instantiation record (S3) — write one line per proof citation
+8. Parameter boundary sweep (S4) — evaluate formula at each domain boundary
+9. Normalization source check (S5) — open source, compare verbatim
+
+### Phase 2 — Automated symptom sweeps
+10. Unused labels → add `\ref` or remove (P2)
+11. Short title check (P5)
+12. Unused results (P6)
+13. Definition consistency grep for each key term, **including macro names** (P7)
+14. Restatement lemma attribution grep (P8)
+15. Asymptotics grep → point to verifying scripts (P9)
+16. Informal qualifiers grep (P10)
+17. Remark formula audit (P11)
+18. Parity arguments to sufficient order (P19)
+19. Strong analytic/number-theoretic assertions (P20)
+20. Analogy refutation check (P21)
+21. **Open problem/question section variable binding (P39)**
+
+### Phase 3 — Definition and citation rigor
+22. External theorem parameter instantiation (P22)
+23. **Statement-proof domain mismatch (P33)** — upgrade statement if proof is stronger
+24. Operator definition prerequisite ordering (P23)
+25. **Spectral definition domain vs usage (P34)** — search definition blocks + macro names
+26. Literature formula descriptions vs source (P25)
+27. Optional theorem title duplication (P24)
+28. Reference operator symbol class (P26)
+29. **Parameterized class superscripts re-quantified (P35)** — use macro names from preamble inventory
+30. **Existence vs construction citation qualifier (P36)** — flag bare "By Theorem" in proofs
+31. Tauberian theorems used bidirectionally (P27)
+32. Single-letter symbol conflicts (P28)
+33. `\texorpdfstring` bookmark semantic correctness (P29)
+34. **Free variable binding in all theorem environments (P30)** — include custom `\newtheorem` names
+35. "Same argument" conclusion completeness (P31)
+36. Canonical realization identification after definition (P32)
+37. **Degenerate-parameter case convention (P37)**
+38. **Self-adjointness inner product named (P38)**
+
+### Phase 4 — Scope and methodology
+39. No-go theorem completeness (P12)
+40. No equivalence claimed as impossibility (P13)
+41. Abstract/intro scope claims (P14)
+42. Analogies labeled motivational (P15)
+43. Evidence level for imported premises (P16)
+44. Invariance under method class transformations (P17)
+45. Constructive/existential qualifier consistency (P18)
+
+---
+
+## Notes for project-specific adaptations
+
+When adopting this file for a new project:
+
+1. **P7:** replace the example grep pattern with the key defined terms in your project.
+2. **P9:** point to your project's `checker/` or equivalent directory.
+3. **P12:** the five components are general; the names "method class / ambient class /
+   observation map / target predicate / escape route" may be adapted to your domain's
+   terminology.
+4. **P16:** the two-axis evidence taxonomy is general; if your project uses a different
+   evidence-tracking system, map its levels onto the two axes.
+5. **P17:** the specific transforms to check (rescaling, congruence, preconditioning)
+   depend on the method class; name them explicitly for your domain.
+6. **S2:** the "common coverage failures" list should be extended with domain-specific
+   tools (e.g. specific cited theorems that have restricted domains in your field).
+7. **S5:** the "common normalization traps" list should be extended with the specific
+   pairs of look-alike results in your reference literature.
+
+Remove or rename `Precedent (paper-A/B):` lines when the precedent is not meaningful
+outside this project.  The rules themselves remain valid.
