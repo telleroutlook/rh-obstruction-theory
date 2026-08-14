@@ -130,7 +130,7 @@ $\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_{\lambda
 where $\xi_{\lambda,N}$ is the normalized lowest eigenvector of the
 finite-truncation Weil form~$QW_\lambda^N$.
 The convergence $\hat{k}_\lambda\to\Xi$ for $|\operatorname{Im}z|<\tfrac{1}{2}$
-is already established in Lemma~7.3.
+is already established in Lemma~7.3 of~\cite{CCM2025}.
 The open steps named in \S8 of~\cite{CCM2025} are:
 (i)~the lowest eigenvalue of the continuous $QW_\lambda$ is simple
 with even eigenfunction; and
@@ -148,6 +148,7 @@ operators belong to a different class.
 %-----------------------------------------------------------------------
 
 \subsection{Heat traces and counting functions}
+\label{subsec:heattraces}
 
 Let $H$ be a non-negative self-adjoint operator with compact resolvent
 on a separable Hilbert space, with eigenvalues
@@ -169,7 +170,9 @@ Finitely many negative eigenvalues do not affect the asymptotic statements below
 
 \begin{theorem}[Karamata~\cite{BGT1987}]
 \label{thm:karamata}
-Let $H$ be as above.
+Let $H$ be a self-adjoint operator with compact resolvent on a separable
+Hilbert space, lower-semibounded with at most finitely many negative
+eigenvalues, with $N_H$ and $Z_H$ as in~\S\ref{subsec:heattraces}.
 \begin{enumerate}[label=(\roman*)]
 \item \emph{(Pure-power case, \cite{BGT1987} Theorem~1.7.1)}
 For $\alpha>0$ and $C>0$,
@@ -488,7 +491,7 @@ Equivalently, as quadratic forms on their common domain $H^{m/2}(M)$:
 
 \begin{mainthmprime}
 \label{thm:Dprime}
-Let $M$ be a closed smooth manifold of dimension $d\ge 1$, $m>0$, and $K\ge 0$.
+Let $M$ be a closed smooth manifold of dimension $d\ge 1$, $m>0$, and $K\in\mathbb{N}_0$.
 Any $H\in\Csub$ satisfies
 $N_H(\Lambda)\sim C_H\Lambda^{d/m}$ as $\Lambda\to\infty$,
 where $C_H>0$ is the Weyl constant of the principal symbol $h_m$.

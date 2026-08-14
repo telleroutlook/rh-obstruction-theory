@@ -439,6 +439,25 @@ in the "there exists" clause.  A parameter appearing only in the conclusion with
 **Known limitation:** `\newtheorem` names inside `\begin{comment}` or conditionally
 compiled sections are also extracted — inspect the `ENVS` list before running Step 2.
 
+**Step 3 (new) — "as above" cross-references inside theorem bodies.**
+A theorem statement that says "Let $H$ be as above" or "as defined above" is not
+self-contained: a reader who encounters the theorem in isolation (e.g. from a citation)
+cannot reconstruct the hypotheses.  Flag every occurrence.
+
+```bash
+# Detect "as above / as defined above / as before" inside theorem-like environments
+ENVS=$(grep '\\newtheorem{' "$TEX" | grep -oP '(?<=\\newtheorem\{)[^}]+' | tr '\n' '\|')
+ENVS="theorem|lemma|corollary|proposition|${ENVS%|}"
+
+grep -nP "\\\\begin\\{($ENVS)\\}" "$TEX" | while IFS=: read lineno rest; do
+  window=$(sed -n "${lineno},$((lineno+20))p" "$TEX")
+  echo "$window" | grep -qiE 'as above|as defined above|as before|notation above' && \
+    echo "FINDING P30(step3): Line $lineno — cross-reference phrase inside theorem body"
+done
+```
+
+Replace every flagged phrase with a brief inline restatement of the relevant hypothesis.
+
 ---
 
 ### P31 — "Same argument as part (X)" spells out the conclusion for part (Y)
@@ -575,6 +594,35 @@ grep -n 'C_.*alpha\|symbol.*estim\|uniform.*bound.*symbol' "$TEX"
 
 **Manual check (B):** for each symbol estimate, verify whether $a$ is a patch symbol;
 if so, confirm the bound writes $C_{\alpha\beta,U_0}$ and states "$U_0 \Subset U$."
+
+**Part C — notation consistency between a definition's parameter domain and theorem statements.**
+When a definition introduces a parameter with a specific type (e.g. $K\in\mathbb{N}_0$,
+$m\in\mathbb{Z}_{>0}$, $p\in[1,\infty)$), every theorem that re-quantifies that parameter
+must use the **same type notation**, not a weaker or different form (e.g. $K\ge 0$
+silently admits non-integer values; $m>0$ allows non-integer orders).
+
+```bash
+# Identify parameter-with-type declarations in \begin{definition}...\end{definition}
+grep -n '\\in\\mathbb\|\\in\\NN\|\\in\\ZZ\|\\in\[' "$TEX" | head -30
+
+# Then for each parameter name found (e.g. K, m), grep theorem headers for the same
+# parameter with a potentially weaker type
+PARAM=K    # set to each parameter found above
+grep -n "\\\\begin{theorem\|\\\\begin{mainthm\|\\\\begin{lemma" "$TEX" | \
+  while IFS=: read L _; do
+    window=$(sed -n "${L},$((L+6))p" "$TEX")
+    echo "$window" | grep -qP "\b${PARAM}\b" && \
+    echo "$window" | grep -vqP "${PARAM}\\\\in\\\\mathbb|${PARAM}\\\\in\\\\NN" && \
+      echo "Line $L: $PARAM appears without set-membership type — check consistency"
+  done
+```
+
+**Manual check (C):** for each flagged line, open the original definition and compare the
+declared type.  If the theorem weakens the type (e.g. $K\ge 0$ when definition says
+$K\in\mathbb{N}_0$), replace with the definition's type.
+
+**Precedent (paper-B):** Definition used `$K\in\mathbb{N}_0$`; Theorem~D$'$ wrote
+`$K\ge 0$` — silently admitting non-integer $K$ where the symbol expansion is undefined.
 
 **Precedent (paper-B):** $\mathcal{C}_\mathrm{sub}$ (macro `\Csub`) used in Theorem D$'$
 without re-quantifying $m,K,M$; local symbol estimate wrote $C_{\alpha\beta}$.
