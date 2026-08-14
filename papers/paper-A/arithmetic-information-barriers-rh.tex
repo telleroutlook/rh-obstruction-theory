@@ -455,8 +455,12 @@ even-indexed are real.  The expansion to the relevant order is therefore
 \]
 so $\re[g(T)] = j^2/T^2 + c_4/T^4 + O(T^{-5}) = j^2/T^2 + O(T^{-4})$
 and $q_j(T) = 4j^2/T^2 + O(T^{-4})$.
-Since $\varphi_j(\sigma_0+iT)$ is jointly analytic in $(\sigma_0,u)$ for
-$\sigma_0\in[0,1]$ and $u=1/T$ near~$0$, the remainder $O(T^{-4})$ is
+The substitution $u=1/T$ gives $(\sigma_0+iT)^{-1}=u/(i+\sigma_0 u)$,
+which is analytic at $u=0$ (denominator equals $i\ne0$ there), so
+$\varphi_j(\sigma_0+i/u)=1-(1-u/(i+\sigma_0 u))^j$ is a polynomial in $u$
+with coefficients bounded uniformly in $\sigma_0\in[0,1]$.
+Hence $\varphi_j(\sigma_0+iT)$ is jointly analytic in $(\sigma_0,u)$ for
+$\sigma_0\in[0,1]$ and $u=1/T$ near~$0$, and the remainder $O_j(T^{-4})$ is
 uniform in $\sigma_0\in[0,1]$.
 \end{proof}
 

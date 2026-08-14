@@ -1204,6 +1204,113 @@ class definition and the theorem that the realization exists.
 
 ---
 
+### P46 — Classical operator hypothesis check: log-polyhomogeneous ≠ classical (PDE)
+
+Theorems about classical pseudodifferential operators (Seeley's trace formula,
+Atiyah–Singer index theorem, certain Weyl laws) require the operator to have a
+*classical* symbol expansion: $\sigma(H) \sim \sum_j h_{m-j}$ with *positively
+homogeneous* terms $h_{m-j}$, no logarithmic factors.  A log-polyhomogeneous class
+$\mathcal{C}_{\mathrm{sub}}$ (or any class allowing $(\log|\xi|)^\ell$ factors) is
+strictly larger than the classical class — adding a constant to a log-poly operator
+does not remove the log factors and does not produce a classical operator.
+
+**Common error pattern:**  a paper introduces a class $H\in\mathcal{C}^{\mathrm{logpoly}}$,
+then invokes Seeley's trace-class theorem (which requires classical elliptic $H$) by
+arguing "shift $H$ to make it positive, then apply Seeley."  The shift does not
+eliminate the log terms.
+
+```bash
+# Grep for Seeley or classical trace citations near log-poly class usage
+grep -n 'Seeley\|classical.*elliptic\|trace.*class\|Tr.*e\^{-t' "$TEX" | head -20
+# Grep for log-polyhomogeneous class names / macros
+grep -n '\\Csub\|log.poly\|logpoly\|log.*hom\|log.*ell' "$TEX" | head -20
+```
+
+**Manual check:** for every invocation of a theorem that requires classical ellipticity
+(Seeley, Atiyah–Singer, etc.), verify that the operator in question:
+1. Belongs to the *classical* symbol class $S^m_{\mathrm{cl}}$ (no log factors), OR
+2. Has an explicit reduction step to a classical operator that actually works.
+
+If the operator is only log-polyhomogeneous, cite an extension of the theorem that
+covers that class (e.g., Lesch's log-polyhomogeneous Weyl law), or derive the needed
+property (trace class, spectral counting) from first principles.
+
+**Precedent (paper-B):** the trace class argument "$(H+C_0)$ is a positive classical
+elliptic operator" for $H\in\mathcal{C}_{\mathrm{sub}}$ is incorrect; $H+C_0$ inherits
+the log-polyhomogeneous terms from $H$.  The correct derivation uses the Weyl counting
+bound $N_{\widetilde H}(\Lambda)=O(\Lambda^{d/m})$ to deduce $\sum e^{-t\lambda_k}<\infty$.
+
+---
+
+### P47 — Open problem sections must not contain problems already solved in the paper
+
+An "open problem" or "open question" that is fully answered by a result proved earlier
+in the same paper is a logical error: it signals to readers that something is unknown
+when the paper has already resolved it.  This often happens when the open-problem
+section is written independently of the main body, or when a theorem is strengthened
+without updating the open questions.
+
+```bash
+# Grep for open-problem / conjecture / question sections
+grep -n '\\section\|\\subsection' "$TEX" | grep -i 'open\|question\|conjecture\|problem\|further'
+
+# For each open-problem item, extract the mathematical claim and compare with
+# theorem statements in the body:
+grep -n '\\begin{openproblem}\|\\begin{question}\|\\item.*open\|\\item.*whether' "$TEX" | head -20
+```
+
+**Manual check:** for each open-problem item:
+1. State the core mathematical assertion the problem is asking about.
+2. Search the paper's theorems, lemmas, and corollaries for any result that implies
+   or directly answers the assertion.
+3. If one exists, the item should be rewritten as a proposition (with the proof
+   reference), and the truly open part (if any) stated separately.
+
+Common triggers: injectivity / uniqueness questions answered by the same paper's
+main theorems; convergence questions answered in the proof of the main theorem.
+
+**Precedent (paper-A):** Open Problem 3 asked whether the Li-observation sequence
+determines the multiset; the paper's own Theorem A + Newton-identity argument shows
+$(\Li_j)_{j\ge 1}$ is injective on finite multisets.  The problem should become a
+proposition, and the genuinely open part (noisy/bounded reconstruction) stated instead.
+
+---
+
+### P48 — Analytic extension at boundary points: removable singularities must be justified
+
+When a function $f(T)$ is defined via $1/T$ (or $u = 1/T$) and a claim is made about
+behavior as $T\to\infty$ (equivalently $u\to 0$), any assertion of analyticity or
+uniform remainder in $\sigma$ at $u=0$ requires an explicit argument that:
+1. the expression $f(\sigma + i/u) = g(\sigma, u)$ is well-defined at $u=0$
+   (the apparent singularity at $T=\infty$ is removable), and
+2. $g$ is jointly analytic (or jointly smooth) in $(\sigma, u)$ near $u=0$.
+
+A bare "Taylor-expand $1/s$" argument omits step (1).
+
+```bash
+# Grep for 1/T substitutions and Taylor expansion near T -> infty
+grep -n '1/T\|u=1/T\|T\to.*infty\|T\to\\infty\|as T\|T\to+\\infty' "$TEX" | head -20
+# Grep for joint analyticity / uniform remainder claims
+grep -n 'jointly.*anal\|uniform.*remainder\|uniform.*sigma\|uniformly.*sigma_0' "$TEX" | head -10
+```
+
+**Manual check:** for each asymptotic expansion in $1/T$:
+- Write $u = 1/T$ and rewrite the expression as $g(\sigma, u)$.
+- Verify $g$ is defined at $u=0$ (no $1/u$ poles surviving).
+- Verify joint analyticity: typically by showing $g(\sigma, u) = h(\sigma u, u)$
+  where $h$ is a power series with jointly convergent coefficients.
+
+If not explicitly argued, add a one-sentence proof of the removable singularity
+(e.g.\ "$\varphi_j(\sigma+i/u) = 1-(1-u/(i+\sigma u))^j$ extends to a polynomial in $u$
+near $u=0$ uniformly in $\sigma\in[0,1]$, so $g$ is jointly analytic").
+
+**Precedent (paper-A):** $\varphi_j(\sigma+iT) = 1-(1-(\sigma+iT)^{-1})^j$ is written
+as a function of $T$ with $O_j(T^{-4})$ remainder, but the claim that the remainder
+is uniform in $\sigma$ requires the substitution $u=1/T$ and verification that
+$1-u/(i+\sigma u)$ is analytic at $u=0$ uniformly in $\sigma\in[0,1]$.
+
+---
+
 ## Running order for pre-submission
 
 ### Phase 0 — Compilation gate (must pass before any manual review)
@@ -1269,6 +1376,11 @@ class definition and the theorem that the realization exists.
 49. **Trace class hypothesis for heat semigroup (P43)** — flag lower-semibounded + `Z_H` without trace class statement
 50. **Homogeneous vs truncated principal symbol (P44)** — grep `\chi` near Weyl constant integral
 51. **No forward `\ref` inside `\begin{definition}` (P45)** — grep `\ref`/`\eqref` in definition blocks
+
+### Phase 6 — Operator class precision and open problem hygiene
+52. **Classical vs log-polyhomogeneous class check (P46)** — grep `Seeley` / classical citations near log-poly class usage
+53. **Open problems not already solved in paper (P47)** — extract open-problem claims, cross-check theorem list
+54. **Removable singularity / joint analyticity at boundary points (P48)** — grep `1/T` or `u=1/T` substitutions; verify $g(\sigma,0)$ defined
 
 ---
 
