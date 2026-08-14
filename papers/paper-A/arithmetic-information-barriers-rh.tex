@@ -103,7 +103,8 @@ A consequence is that $\Otheta$ alone does not determine $P$
 Li's criterion~\cite{Li1997} asserts that RH is equivalent to the
 nonnegativity of all Li coefficients
 $\lambda_n = \sum_\rho [1-(1-1/\rho)^n]$,
-where the sum is taken in the symmetric sense
+where $\rho$ runs over the nontrivial zeros of $\zeta$ counted with
+multiplicity, and the sum is taken in the symmetric sense
 $\lim_{T\to\infty}\sum_{|\im\rho|\leq T}$
 (Bombieri--Lagarias~\cite{BombieriLagarias1999}).
 This reformulation raises a natural question: can one establish RH by
@@ -116,10 +117,10 @@ full Li criterion and is not blocked.
 
 \subsection*{What is an information obstruction?}
 
-We work with an \emph{observation map} $O : \Hsym \to S$, where $\Hsym$
-is the ambient class of finite symmetric zero multisets and $S$ is a set
-of observable records.  An \emph{information obstruction for $O$} is a
-pair $(\mathcal{Z}_+, \mathcal{Z}_-) \in \Hsym^2$ such that:
+We work with an \emph{observation map} $O : X \to Y$, where $X$ is an
+ambient class of formal zero configurations and $Y$ is a set of observable
+records.  An \emph{information obstruction for $O$} is a
+pair $(\mathcal{Z}_+, \mathcal{Z}_-) \in X^2$ such that:
 \begin{enumerate}[label=(\roman*)]
   \item $O(\mathcal{Z}_+) = O(\mathcal{Z}_-)$ (exact collision);
   \item $P(\mathcal{Z}_+) \neq P(\mathcal{Z}_-)$ (predicate separated);
@@ -127,6 +128,9 @@ pair $(\mathcal{Z}_+, \mathcal{Z}_-) \in \Hsym^2$ such that:
 \end{enumerate}
 The obstruction is \emph{constructive} if the pair is explicitly computable;
 otherwise it is \emph{existential}.
+In Theorems~A--C, $X=\Hsym$ (finite symmetric zero multisets) and
+$O=\Ofinite^{(K)}$; in Corollary~D, $X=\mathcal{H}_S$ (the Helson class,
+\S\ref{sec:helson}).
 An obstruction pair shows that no $f : S \to \{0,1\}$ satisfies
 $P(\mathcal{Z}) = f(O(\mathcal{Z}))$ for all $\mathcal{Z}\in\Hsym$.
 
@@ -216,13 +220,15 @@ Weil-type tests is addressed by Open Problem~2.
 The Selberg trace formula connects eigenvalues to geodesic lengths;
 see Hejhal~\cite{Hejhal1976}.  Connes--Consani--Moscovici~\cite{CCM2025}
 construct zeta spectral triples whose Dirac-operator regularized determinant
-is related (conditionally on the lowest eigenvalue being simple and the
-corresponding eigenfunction being even) to a function $\hat\xi_\lambda$
-defined via a semilocal Weil quadratic form.
-Establishing that the cut-off kernel $k_\lambda$ converges sufficiently
-to the lowest eigenfunction, and separately that the suitably normalized
-determinants recover the Riemann $\Xi$ function, are the open steps in
-that programme.
+satisfies (Theorem~5.10, conditionally on the lowest eigenfunction
+$\xi_{\lambda,N}$ of the finite-truncation Weil form~$QW_\lambda^N$ being
+simple and even)
+$\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_{\lambda,N}(z)$.
+Two further open steps are: establishing the simple-even property for the
+continuum lowest eigenfunction $\xi_\lambda$ (the $N\to\infty$ limit), and
+establishing that the cut-off kernel~$k_\lambda$ converges sufficiently
+to~$\xi_\lambda$ so that the suitably normalized determinants recover the
+Riemann $\Xi$ function.
 
 \textbf{Helson class and Dirichlet series.}
 Helson~\cite{Helson1969} introduced random Dirichlet series with unimodular
@@ -301,11 +307,13 @@ For $\mathcal{Z} \in \Hsym$ and $j \geq 1$, define
 Here $\varphi_j$ is the standard Li test from Definition~\ref{def:Listd}.
 This sum is real.  Indeed, conditions~\ref{itm:conj} and~\ref{itm:fe}
 together imply that $\mathcal{Z}$ is closed under complex conjugation
-($\rho\mapsto\bar\rho$), so the sum comes in conjugate pairs
-$\varphi_j(\rho)+\varphi_j(\bar\rho) = \varphi_j(\rho)+\overline{\varphi_j(\rho)}
-= 2\re\varphi_j(\rho) \in \RR$
+($\rho\mapsto\bar\rho$), so the sum comes in conjugate orbits:
+non-real atoms pair as $\{\rho,\bar\rho\}$, contributing
+$\varphi_j(\rho)+\varphi_j(\bar\rho) = 2\re\varphi_j(\rho) \in \RR$
 (using $\varphi_j(\bar\rho)=\overline{\varphi_j(\rho)}$, which follows
-from $\bar\rho^{-1}=\overline{\rho^{-1}}$).
+from $\bar\rho^{-1}=\overline{\rho^{-1}}$);
+real atoms satisfy $\bar\rho=\rho$, so $\varphi_j(\rho)\in\RR$ directly
+and each contributes $2\varphi_j(\rho)\in\RR$ as a self-conjugate orbit.
 
 The \emph{finite observation map} with $K$ tests is
 \[
@@ -435,6 +443,9 @@ even-indexed are real.  The expansion to the relevant order is therefore
 \]
 so $\re[g(T)] = j^2/T^2 + c_4/T^4 + O(T^{-5}) = j^2/T^2 + O(T^{-4})$
 and $q_j(T) = 4j^2/T^2 + O(T^{-4})$.
+Since $\varphi_j(\sigma_0+iT)$ is jointly analytic in $(\sigma_0,u)$ for
+$\sigma_0\in[0,1]$ and $u=1/T$ near~$0$, the remainder $O(T^{-4})$ is
+uniform in $\sigma_0\in[0,1]$.
 \end{proof}
 
 \begin{remark}
@@ -653,8 +664,8 @@ $P(\mathcal{Z}_-) = 0$.
 \end{proof}
 
 \begin{remark}[Approximate vs.\ exact obstruction]
-Theorems~A and~B have different quantifier structures and are logically
-independent.  Theorem~\ref{thm:A} constructs one specific pair
+Theorems~A and~B have different quantifier structures; neither statement
+is an immediate consequence of the other.  Theorem~\ref{thm:A} constructs one specific pair
 $(\mathcal{Z}_+, \mathcal{Z}_-)$ with exactly equal Li values; it does
 \emph{not} assert that every $P=1$ witness admits an exact collision partner.
 Theorem~\ref{thm:B} asserts that for \emph{any} given $P=1$ witness $\mathcal{Z}_+$,
@@ -709,10 +720,9 @@ $\chi : \mathbb{N} \to \TT$ ($|\chi(p)| = 1$ for all primes $p$), define
 convergent for $\re s > 1$.  For a finite prime cutoff $P_0$, say $\chi$
 is \emph{$P_0$-standard} if $\chi(p) = 1$ for all primes $p \leq P_0$.
 
-Let $\mathcal{H}_S$ denote the Helson zeta functions admitting
-meromorphic continuation along a connected open set
-$U \supset \{\re s > 1\} \cup S$ to the open strip
-$S = \{0 < \re s < 1\}$.  Define the target predicate
+Let $\mathcal{H}_S$ denote the class of Helson zeta functions $\zeta_\chi$
+that admit a single-valued meromorphic continuation to some connected open
+set $U\supset\{\re s>1\}\cup S$, where $S=\{0<\re s<1\}$.  Define the target predicate
 $P_S(\zeta_\chi) = 1$ iff every zero $\rho \in S$ of $\zeta_\chi$
 satisfies $\re\rho = 1/2$.
 
@@ -913,7 +923,7 @@ and $\Otheta \npreceq \Ofinite^{(K)}$ by Witness~2.
 
 \begin{remark}[$\Otheta$ does not determine $P$]
 \label{rem:theta-not-P}
-Fix any $T > d_M$ and $\sigma_0 \neq 1/2$.  Take
+Fix any $T > d_M$ and $\sigma_0 \in (0,1)\setminus\{1/2\}$.  Take
 $\mathcal{Z}_+ = 2L(T)$ (two copies of $L(T)$, giving four atoms on
 the critical line) and $\mathcal{Z}_- = Q(\sigma_0, T)$ (four atoms off
 the critical line).  Both have all imaginary parts equal to $\pm T$, so
@@ -988,8 +998,8 @@ full analytic structure of $\zeta$.
 \subsection{Relation to Bombieri--Lagarias}
 
 Bombieri--Lagarias~\cite{BombieriLagarias1999} study the Li criterion for
-arbitrary (possibly complex and infinite) multisets, proving it equivalent
-to RH.  The present paper restricts to the symmetric finite class $\Hsym$
+arbitrary (possibly complex and infinite) multisets, proving that the
+criterion applied to the multiset of $\zeta$-zeros is equivalent to RH.  The present paper restricts to the symmetric finite class $\Hsym$
 and shows that \emph{truncations} $(\Li_1,\ldots,\Li_m)$ are
 non-identifying within this class.  The key addition is the explicit
 rational-arithmetic construction (Theorem~\ref{thm:A}), which yields exact collisions

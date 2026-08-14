@@ -121,15 +121,15 @@ Connes~\cite{Connes1999} places zeta zeros in a noncommutative
 geometric setting.  In Connes--Consani--Moscovici~\cite{CCM2025},
 scaling operators $D_{\log}^{(\lambda,N)}$ on $L^2([\lambda^{-1},\lambda],d^\times u)$
 satisfy (Theorem~5.10) the regularized-determinant identity
-$\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_\lambda(z)$,
-where $\hat{\xi}_\lambda$ is the Fourier transform of the lowest eigenfunction
-$\xi_\lambda$ of the localized Weil form at scale~$\lambda$---not the Riemann
-completed-zeta function $\Xi(t):=\xi(\tfrac{1}{2}+it)$, which arises
-in the separate convergence result $\hat{k}_\lambda\to\Xi$ (Lemma~7.3).
-The open steps (\S8) are establishing that $\xi_\lambda$ is simple and even,
-and that the cut-off kernel $k_\lambda$ converges sufficiently to $\xi_\lambda$
-to recover $\Xi$ in the limit; the normalization is the load-bearing
-unresolved ingredient.
+$\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_{\lambda,N}(z)$,
+where $\xi_{\lambda,N}$ is the lowest eigenfunction of the finite-truncation Weil
+form~$QW_\lambda^N$---not the Riemann completed-zeta function
+$\Xi(t):=\xi(\tfrac{1}{2}+it)$, which arises in the separate convergence result
+$\hat{k}_\lambda\to\Xi$ for $|\operatorname{Im}z|<\tfrac{1}{2}$ (Lemma~7.3).
+The open steps (\S8) are establishing that the continuum lowest eigenfunction
+$\xi_\lambda$ (the $N\to\infty$ limit) is simple and even, and that the cut-off
+kernel $k_\lambda$ converges sufficiently to $\xi_\lambda$ to recover~$\Xi$;
+the normalization is the load-bearing unresolved ingredient.
 Theorems~D and~D$'$ do not obstruct the CCM approach, since the CCM
 operators belong to a different class.
 
@@ -167,8 +167,12 @@ For $\alpha>0$ and $C>0$,
   \quad(t\to 0^+).
 \]
 \item \emph{(Log-varying case, \cite{BGT1987} \S1.7.2, Theorem~1.7.1)}
-If $N_H(\Lambda)\sim C\Lambda\log\Lambda$, then
-$Z_H(t)\sim C\,t^{-1}\log(1/t)$ as $t\to 0^+$.
+\[
+  N_H(\Lambda)\sim C\Lambda\log\Lambda
+  \;\iff\;
+  Z_H(t)\sim C\,t^{-1}\log(1/t)
+  \quad(t\to 0^+).
+\]
 (Take $\rho=1$, $c=C$, $\ell(x)=\log x$, $\Gamma(2)=1$ in Theorem~1.7.1.)
 \end{enumerate}
 \end{theorem}
@@ -340,28 +344,30 @@ and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
     (\emph{positive classical elliptic principal part}).
 \end{enumerate}
 By the G\r{a}rding inequality for classical elliptic $\Psi$DOs
-(Shubin~\cite{Shubin2001}, \S4) applied to $h_m$,
+(Shubin~\cite{Shubin2001}, \S6, Theorem~6.2) applied to $h_m$,
 the shifted form $q_{H,+}[u]:=\langle(H+C_0+1)u,u\rangle$, initially
 on $C^\infty(M)$, satisfies $q_{H,+}[u]\ge c\,\|u\|^2_{H^{m/2}(M)}$
 and closes to the Sobolev form domain $\mathrm{Dom}(q_{H,+})=H^{m/2}(M)$.
-The KLMN theorem yields the Friedrichs self-adjoint extension of $H$
-as the unique self-adjoint operator associated with the closed form $q_{H,+}$;
+The first representation theorem for quadratic forms
+(Reed--Simon~\cite{RS1975}, Theorem~X.23) yields a unique self-adjoint
+operator, the Friedrichs extension of~$H$, associated with the closed
+form~$q_{H,+}$;
 by elliptic regularity (Shubin~\cite{Shubin2001}, \S7),
 $\mathrm{Dom}(H)=H^m(M)$ and the resolvent is compact.
 \end{definition}
 
 \subsection{Form boundedness of the strictly lower-order log corrections}
 
-Let $P$ be the positive classical elliptic operator of order $m$ on $M$
-with principal symbol $h_m$ and no log-polyhomogeneous terms,
-constructed by global pseudodifferential quantization of $h_m$ (via
-a partition of unity, cf.~H\"ormander~\cite{Hormander1968}),
-symmetrization, and addition of a positive constant to ensure $P\ge c>0$.
+Let $P_0$ be the classical elliptic operator of order~$m$ on~$M$ with
+principal symbol~$h_m$ and no log-polyhomogeneous terms, obtained by
+global pseudodifferential quantization of~$h_m$ (via a partition of
+unity, cf.~H\"ormander~\cite{Hormander1968}) and symmetrization.
+Fix $b\ge 0$ so that $P:=P_0+bI\ge 1$.
 Then $P\in\Psi^m_{\mathrm{cl}}(M)$ with $\sigma_m(P)=h_m$ and
 $\mathrm{Dom}(q_P)=H^{m/2}(M)$.
 
 By the G\r{a}rding inequality for classical elliptic $\Psi$DOs
-(Shubin~\cite{Shubin2001}, \S4) applied to the
+(Shubin~\cite{Shubin2001}, \S6, Theorem~6.2) applied to the
 elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
 \begin{equation}
   \label{eq:garding}
@@ -370,11 +376,11 @@ elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
 \end{equation}
 Since $H\in\Csub$ has the same principal symbol $h_m$,
 Definition~\ref{def:csub} gives $\mathrm{Dom}(q_H)=H^{m/2}(M)$ as well.
-At the level of quadratic forms, define $q_Q[u]:=\langle(H-P)u,u\rangle$
-for $u\in C^\infty(M)$, extended by density to $H^{m/2}(M)$;
-all subsequent estimates are form-level.
-We show $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}_{1,0}(M)$
-for every $\varepsilon\in(0,1)$, as follows.
+Write $Q_0:=H-P_0$ and $Q:=H-P=Q_0-bI$.
+On $C^\infty(M)$, $q_Q[u]=q_{Q_0}[u]-b\|u\|^2$; the $-b\|u\|^2$ term
+is absorbed directly into~$C_\delta\|u\|^2$ in the form bound below.
+We show $Q_0\in\Psi^{m-1+\varepsilon}_{1,0}(M)$ for every $\varepsilon\in(0,1)$,
+as follows.
 
 For any $\varepsilon\in(0,1)$, since $K<\infty$ and $j\ge 1$,
 each symbol term $h_{m-j,\ell}(x,\xi)\chi(\xi)(\log|\xi|)^\ell$ satisfies
@@ -387,7 +393,7 @@ product rule give
   \le C'_{\alpha\beta}(1+|\xi|)^{m-1+\varepsilon-|\beta|}.
 \]
 The $N$th remainder is controlled by Definition~\ref{def:csub}(ii).
-Hence $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}_{1,0}(M)$ for every $\varepsilon\in(0,1)$.
+Hence $Q_0\in\Psi^{m-1+\varepsilon}_{1,0}(M)$ for every $\varepsilon\in(0,1)$.
 
 For $u\in H^{m/2}(M)$, the form estimate proceeds as follows.
 If $m>1-\varepsilon$, the Sobolev interpolation inequality on $M$
@@ -402,18 +408,19 @@ $\|u\|^2_{H^{m/2}}\le c_0^{-1}(\langle Pu,u\rangle+C_1\|u\|^2)$,
 so the interpolation can be absorbed into $\langle Pu,u\rangle$.
 The pseudodifferential Sobolev
 mapping theorem gives
-$Q\colon H^{(m-1+\varepsilon)/2}(M)\to H^{-(m-1+\varepsilon)/2}(M)$,
+$Q_0\colon H^{(m-1+\varepsilon)/2}(M)\to H^{-(m-1+\varepsilon)/2}(M)$,
 so
 \[
-  |q_Q[u]|=|\langle Qu,u\rangle|
+  |q_{Q_0}[u]|=|\langle Q_0 u,u\rangle|
   \le C'\|u\|_{H^{(m-1+\varepsilon)/2}}^2
   \le C'\bigl(\delta\|u\|_{H^{m/2}}^2+C_\delta\|u\|_{L^2}^2\bigr).
 \]
-If instead $m\le 1-\varepsilon$, then $Q\in\Psi^{m-1+\varepsilon}_{1,0}$
+If instead $m\le 1-\varepsilon$, then $Q_0\in\Psi^{m-1+\varepsilon}_{1,0}$
 with $m-1+\varepsilon\le 0$ is $L^2$-bounded~\cite{CalderonVaillancourt1972},
-so $|q_Q[u]|=|\langle Qu,u\rangle|\le C\|u\|_{L^2}^2\le
+so $|q_{Q_0}[u]|\le C\|u\|_{L^2}^2\le
 C(\delta\|u\|_{H^{m/2}}^2+C_\delta\|u\|_{L^2}^2)$.
-In both cases, adjusting constants and using~\eqref{eq:garding} yields:
+In both cases, $|q_Q[u]|\le|q_{Q_0}[u]|+b\|u\|^2$, so adjusting constants
+and using~\eqref{eq:garding} yields:
 for every $\delta>0$,
 \begin{equation}
   \label{eq:formbdd}
@@ -567,7 +574,8 @@ corrected symbol on $S^1$ (both positive and negative Fourier modes):
 (extended smoothly to $r\in[0,1]$ to satisfy the $\Psi$DO symbol
 estimates at low frequency), where $W$ is the Lambert-$W$ function
 ($W(x)e^{W(x)}=x$).  Setting
-$g(r)=T$ and solving gives the exact inverse (valid for $T\ge 2\pi e$)
+$g(r)=T$ and solving gives the exact inverse (valid for $T\ge 4\pi/W(2/e)\approx 27.1$,
+equivalently for all sufficiently large~$T$)
 \[
   g^{-1}(T)=\frac{T}{4\pi}\log\frac{T}{2\pi e}.
 \]
@@ -618,6 +626,12 @@ Open questions:
 \end{enumerate}
 
 \begin{thebibliography}{99}
+
+\bibitem{RS1975}
+M.~Reed and B.~Simon,
+\emph{Methods of Modern Mathematical Physics, Vol.~II: Fourier Analysis,
+  Self-Adjointness},
+Academic Press, New York, 1975.
 
 \bibitem{BGT1987}
 N.~H. Bingham, C.~M. Goldie, and J.~L. Teugels,

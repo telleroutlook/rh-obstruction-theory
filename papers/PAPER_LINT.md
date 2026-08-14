@@ -450,6 +450,69 @@ auto-generated theorem identifier.
 
 ---
 
+### P26 — Reference operator construction does not introduce spurious symbol-class terms
+
+When a proof constructs a reference operator $P$ (to compare with $H$) by
+quantization, symmetrization, and addition of a positive constant $b$, the
+difference $Q = H - P$ contains a $-bI$ term of order~$0$.
+For $m < 1$ and $\varepsilon < 1-m$, the order $m-1+\varepsilon < 0$ is
+strictly below~$0$, so $-bI \notin \Psi^{m-1+\varepsilon}_{1,0}$.
+The claim ``$Q \in \Psi^{m-1+\varepsilon}_{1,0}$ for every $\varepsilon\in(0,1)$''
+is therefore wrong when $m < 1$.
+
+```bash
+# Find all operator constructions that add a constant to ensure positivity
+grep -n 'positive constant\|P\\\s*:=\|P\s*=.*bI\|ensure.*P.*ge\|P\\\ge.*c.*>' "$TEX"
+```
+
+**For each hit:** verify one of the following:
+(a) The construction uses $P = A^*A + \Pi_{\ker A}$ (no additive constant, so $Q = H-P \in \Psi^{m-1+\varepsilon}$ for all $\varepsilon$); or
+(b) the constant is explicitly split: write $Q = Q_0 - bI$ where $Q_0 = H - P_0 \in \Psi^{m-1+\varepsilon}$ and the $-bI$ term is handled as a direct $b\|u\|^2$ form contribution; or
+(c) the symbol-class claim is restricted to $\varepsilon > \max(0, 1-m)$.
+
+---
+
+### P27 — Tauberian theorems used in both directions are stated as biconditionals
+
+When a Tauberian theorem (Karamata, Ikehara, Wiener–Ikehara, etc.) is invoked
+in the paper in **both** the forward direction ($N \Rightarrow Z$) and the
+inverse direction ($Z \Rightarrow N$), verify the cited theorem is actually a
+biconditional ($\iff$), not only a one-way implication.
+
+```bash
+# Find Karamata / Tauberian invocations
+grep -n 'Karamata\|Tauberian\|Ikehara\|Wiener.*Ikehara\|one needs\|suffices to have' "$TEX"
+```
+
+For each hit involving ``one needs $N_H(T) \sim \ldots$ to match $Z_H(t) \sim \ldots$'':
+trace the cited theorem to confirm the $\Leftarrow$ direction is stated.  If only
+the $\Rightarrow$ direction appears in the theorem statement, either add the
+reverse direction or replace ``one needs'' with ``one sufficient condition is.''
+
+---
+
+### P28 — Single-letter symbol conflicts resolved
+
+When a paper uses the same single letter for two distinct mathematical objects
+(e.g.\ $S$ for both the set of observable records and the critical strip
+$\{0 < \operatorname{Re} s < 1\}$), one occurrence must be renamed.
+
+```bash
+# Check for overloaded single-letter symbols in definitions and theorem statements
+# Look for the same capital letter used in two different \begin{definition} blocks
+grep -n '\\begin{definition}' "$TEX" | while IFS=: read lineno rest; do
+  window=$(sed -n "${lineno},$((lineno+15))p" "$TEX")
+  echo "Line $lineno: $(echo "$window" | grep -o '\$[A-Z]\$' | sort -u | tr '\n' ' ')"
+done
+```
+
+**Manual check:** for each definition block, list the single-letter capitals it
+introduces; verify none conflicts with a same-letter symbol introduced in another
+definition or used as standard notation (strip, domain, set, space) elsewhere in
+the paper.
+
+---
+
 ## Running order for pre-submission
 
 1. `pdflatex` — fix all errors and undefined-ref warnings (P4)
@@ -475,3 +538,6 @@ auto-generated theorem identifier.
 21. Operator definition prerequisite ordering (P23)
 22. Literature formula descriptions vs source (P25)
 23. Optional theorem title duplication (P24)
+24. Reference operator symbol class (P26)
+25. Tauberian theorems used bidirectionally (P27)
+26. Single-letter symbol conflicts (P28)
