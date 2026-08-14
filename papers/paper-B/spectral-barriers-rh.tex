@@ -119,14 +119,17 @@ approach and the relationship between eigenvalue asymptotics and zero
 counting.
 Connes~\cite{Connes1999} places zeta zeros in a noncommutative
 geometric setting.  In Connes--Consani--Moscovici~\cite{CCM2025},
-scaling operators on $L^2([\lambda^{-1},\lambda])$ (with log-scale
-measure) yield the regularized-determinant identity
-$\det_{\mathrm{reg}}(\mathfrak{D}-z)=-i\lambda^{-iz}\hat{\Xi}(z)$,
-where $\Xi(t):=\xi(\tfrac{1}{2}+it)$ is the completed zeta function
-on the critical line (not Riemann's $\xi(s)$ at a general argument)
-and $\hat{\Xi}$ denotes its Fourier transform; the open steps are establishing that
-the lowest eigenvalue is simple and even, and that the renormalized
-kernel $k_\lambda$ converges sufficiently to the lowest eigenfunction.
+scaling operators $D_{\log}^{(\lambda,N)}$ on $L^2([\lambda^{-1},\lambda],d^\times u)$
+satisfy (Theorem~5.10) the regularized-determinant identity
+$\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_\lambda(z)$,
+where $\hat{\xi}_\lambda$ is the Fourier transform of the lowest eigenfunction
+$\xi_\lambda$ of the localized Weil form at scale~$\lambda$---not the Riemann
+completed-zeta function $\Xi(t):=\xi(\tfrac{1}{2}+it)$, which arises
+in the separate convergence result $\hat{k}_\lambda\to\Xi$ (Lemma~7.3).
+The open steps (\S8) are establishing that $\xi_\lambda$ is simple and even,
+and that the cut-off kernel $k_\lambda$ converges sufficiently to $\xi_\lambda$
+to recover $\Xi$ in the limit; the normalization is the load-bearing
+unresolved ingredient.
 Theorems~D and~D$'$ do not obstruct the CCM approach, since the CCM
 operators belong to a different class.
 
@@ -200,15 +203,17 @@ whose principal symbol $h_m(x,\xi)$ satisfies $h_m(x,\xi)\ge c|\xi|^m$
 uniformly for $|\xi|\ge 1$.
 Throughout, all operators act on \emph{scalar} functions (sections of
 the trivial line bundle over $M$); for operators on sections of a
-vector bundle of rank $r$, the Weyl constant $C_H$ acquires a factor
-of $r$ and the exclusion arguments go through unchanged.
+vector bundle with positive-definite endomorphism-valued principal
+symbol $p_m(x,\xi)$, the Weyl constant takes the general form
+$(2\pi)^{-d}\!\int_{T^*M}\operatorname{tr}\bigl[\mathbf{1}_{p_m(x,\xi)\le 1}\bigr]\,d\xi\,dx$
+(indicator applied spectrally); the exclusion arguments go through unchanged.
 
 %-----------------------------------------------------------------------
 \section{Classical Elliptic Operators Are Excluded}
 \label{sec:elliptic}
 %-----------------------------------------------------------------------
 
-\begin{mainthm}[D]
+\begin{mainthm}
 \label{thm:D}
 Let $M$ be a closed smooth manifold of dimension $d\ge 1$ and $H$ a
 positive classical elliptic pseudodifferential operator of order $m>0$
@@ -297,9 +302,12 @@ Escape routes include:
 \label{def:csub}
 Let $M$ be a closed smooth manifold of dimension $d\ge 1$, $m>0$,
 $K\in\mathbb{N}_0$.
-The class $\Csub$ consists of scalar operators $H$ on $L^2(M)$,
-with $H\ge -C_0$ for some $C_0\ge 0$, whose complete
-symbol in any local coordinate chart satisfies the asymptotic expansion
+The class $\Csub$ consists of \emph{formally symmetric} scalar
+pseudodifferential operators $H$ on $C^\infty(M)$---meaning
+$\langle Hu,v\rangle=\langle u,Hv\rangle$ for all $u,v\in C^\infty(M)$---that
+are \emph{semi-bounded}: $\langle Hu,u\rangle\ge -C_0\|u\|^2$ for some
+$C_0\ge 0$ and all $u\in C^\infty(M)$.
+The complete symbol in any local coordinate chart satisfies the asymptotic expansion
 \[
   \sigma(H)(x,\xi)
   \sim
@@ -309,8 +317,9 @@ symbol in any local coordinate chart satisfies the asymptotic expansion
     h_{m-j,\ell}(x,\xi)\,\chi(\xi)\,(\log|\xi|)^\ell
   \quad(|\xi|\to\infty),
 \]
-where $\chi\in C^\infty(\RR^d)$ with $\chi(\xi)=0$ for $|\xi|\le 1$ and
-$\chi(\xi)=1$ for $|\xi|\ge 2$, and:
+where $h_m$ is a \emph{real-valued}, smooth, positively homogeneous symbol
+of degree $m$, $\chi\in C^\infty(\RR^d)$ with $\chi(\xi)=0$ for $|\xi|\le 1$
+and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
 \begin{enumerate}[label=(\roman*)]
   \item each $h_{m-j,\ell}$ is smooth and positively homogeneous of
     degree $m-j$ in $\xi$ for $|\xi|\ge 1$, satisfying
@@ -330,12 +339,15 @@ $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
     $|\xi|\ge 1$ and all $x\in M$
     (\emph{positive classical elliptic principal part}).
 \end{enumerate}
-By the G\r{a}rding inequality~\cite{Hormander1968} applied to $h_m$,
-the symmetric form $q_H[u]:=\langle (H+C_0+1)u,u\rangle$, initially
-on $C^\infty(M)$, satisfies $q_H[u]\ge c\,\|u\|^2_{H^{m/2}(M)}$ and
-closes uniquely on $\mathrm{Dom}(q_H)=H^{m/2}(M)$.
-The KLMN theorem then yields the unique self-adjoint realization of $H$
-with $\mathrm{Dom}(H)\subseteq H^m(M)$ and compact resolvent.
+By the G\r{a}rding inequality for classical elliptic $\Psi$DOs
+(Shubin~\cite{Shubin2001}, \S4) applied to $h_m$,
+the shifted form $q_{H,+}[u]:=\langle(H+C_0+1)u,u\rangle$, initially
+on $C^\infty(M)$, satisfies $q_{H,+}[u]\ge c\,\|u\|^2_{H^{m/2}(M)}$
+and closes to the Sobolev form domain $\mathrm{Dom}(q_{H,+})=H^{m/2}(M)$.
+The KLMN theorem yields the Friedrichs self-adjoint extension of $H$
+as the unique self-adjoint operator associated with the closed form $q_{H,+}$;
+by elliptic regularity (Shubin~\cite{Shubin2001}, \S7),
+$\mathrm{Dom}(H)=H^m(M)$ and the resolvent is compact.
 \end{definition}
 
 \subsection{Form boundedness of the strictly lower-order log corrections}
@@ -348,7 +360,8 @@ symmetrization, and addition of a positive constant to ensure $P\ge c>0$.
 Then $P\in\Psi^m_{\mathrm{cl}}(M)$ with $\sigma_m(P)=h_m$ and
 $\mathrm{Dom}(q_P)=H^{m/2}(M)$.
 
-By the G\r{a}rding inequality~\cite{Hormander1968} applied to the
+By the G\r{a}rding inequality for classical elliptic $\Psi$DOs
+(Shubin~\cite{Shubin2001}, \S4) applied to the
 elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
 \begin{equation}
   \label{eq:garding}
@@ -357,8 +370,9 @@ elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
 \end{equation}
 Since $H\in\Csub$ has the same principal symbol $h_m$,
 Definition~\ref{def:csub} gives $\mathrm{Dom}(q_H)=H^{m/2}(M)$ as well.
-At the level of quadratic forms, define $q_Q[u]:=q_H[u]-q_P[u]$ for
-$u\in H^{m/2}(M)$; all subsequent estimates are form-level.
+At the level of quadratic forms, define $q_Q[u]:=\langle(H-P)u,u\rangle$
+for $u\in C^\infty(M)$, extended by density to $H^{m/2}(M)$;
+all subsequent estimates are form-level.
 We show $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}_{1,0}(M)$
 for every $\varepsilon\in(0,1)$, as follows.
 
@@ -414,7 +428,7 @@ Equivalently, as quadratic forms on their common domain $H^{m/2}(M)$:
   (1-\delta)P-C_\delta\;\le\; H\;\le\;(1+\delta)P+C_\delta.
 \end{equation}
 
-\begin{mainthmprime}[D$'$]
+\begin{mainthmprime}
 \label{thm:Dprime}
 Any $H\in\Csub$ satisfies
 $N_H(\Lambda)\sim C_H\Lambda^{d/m}$ as $\Lambda\to\infty$,
@@ -430,12 +444,13 @@ $N_{\tilde H}(\Lambda)\sim C_H\Lambda^{d/m}$.
 The difference $\tilde Q:=\tilde H-P=Q+aI$ satisfies
 $|q_{\tilde Q}[u]|\le|q_Q[u]|+a\|u\|^2$,
 so~\eqref{eq:formbdd} holds for $\tilde Q$ with $C_\delta$ replaced by
-$C_\delta+a$.  The form inequality~\eqref{eq:formineq} for $H$
-becomes, after the shift, for the rest of the proof:
+$C_\delta+a$.  Since $\tilde Q=Q+aI$, \eqref{eq:formbdd} gives
+$|q_{\tilde Q}[u]|\le\delta\langle Pu,u\rangle+(C_\delta+a)\|u\|^2$,
+so the form inequality for $\tilde H$ is:
 \begin{equation}
   \label{eq:formineqshift}
-  (1-\delta)P-C_\delta\;\le\; H\;\le\;(1+\delta)P+C_\delta,
-  \quad H\ge 1.
+  (1-\delta)P-(C_\delta+a)\;\le\;\tilde H\;\le\;(1+\delta)P+(C_\delta+a),
+  \quad \tilde H\ge 1.
 \end{equation}
 
 By the min-max (Courant--Fischer) principle, if $A\le B$ as quadratic
@@ -443,17 +458,17 @@ forms on a common domain, then $\lambda_k(A)\le\lambda_k(B)$.
 Applying this to~\eqref{eq:formineqshift}:
 \begin{equation}
   \label{eq:minmax}
-  N_P\!\Bigl(\frac{\Lambda-C_\delta}{1+\delta}\Bigr)
+  N_P\!\Bigl(\frac{\Lambda-(C_\delta+a)}{1+\delta}\Bigr)
   \;\le\;
-  N_H(\Lambda)
+  N_{\tilde H}(\Lambda)
   \;\le\;
-  N_P\!\Bigl(\frac{\Lambda+C_\delta}{1-\delta}\Bigr),
+  N_P\!\Bigl(\frac{\Lambda+(C_\delta+a)}{1-\delta}\Bigr),
   \qquad 0<\delta<1.
 \end{equation}
-(Lower bound: $H\le(1+\delta)P+C_\delta$ implies
-$\lambda_k(P)\le(\Lambda-C_\delta)/(1+\delta)\Rightarrow\lambda_k(H)\le\Lambda$;
-upper bound: $(1-\delta)P-C_\delta\le H$ implies
-$\lambda_k(H)\le\Lambda\Rightarrow\lambda_k(P)\le(\Lambda+C_\delta)/(1-\delta)$.)
+(Lower bound: $\tilde H\le(1+\delta)P+(C_\delta+a)$ implies
+$\lambda_k(P)\le(\Lambda-(C_\delta+a))/(1+\delta)\Rightarrow\lambda_k(\tilde H)\le\Lambda$;
+upper bound: $(1-\delta)P-(C_\delta+a)\le\tilde H$ implies
+$\lambda_k(\tilde H)\le\Lambda\Rightarrow\lambda_k(P)\le(\Lambda+(C_\delta+a))/(1-\delta)$.)
 
 Since $P$ is a positive classical elliptic pseudodifferential operator
 of order $m$, the pseudodifferential Weyl law~\cite{Hormander1968}
@@ -462,11 +477,13 @@ Dividing~\eqref{eq:minmax} by $\Lambda^{d/m}$ and letting
 $\Lambda\to+\infty$ gives
 \[
   C_H(1+\delta)^{-d/m}
-  \;\le\;\liminf_{\Lambda\to\infty}\frac{N_H(\Lambda)}{\Lambda^{d/m}}
-  \;\le\;\limsup_{\Lambda\to\infty}\frac{N_H(\Lambda)}{\Lambda^{d/m}}
+  \;\le\;\liminf_{\Lambda\to\infty}\frac{N_{\tilde H}(\Lambda)}{\Lambda^{d/m}}
+  \;\le\;\limsup_{\Lambda\to\infty}\frac{N_{\tilde H}(\Lambda)}{\Lambda^{d/m}}
   \;\le\;C_H(1-\delta)^{-d/m}.
 \]
-Since $\delta>0$ is arbitrary, $N_H(\Lambda)\sim C_H\Lambda^{d/m}$.
+Since $\delta>0$ is arbitrary, $N_{\tilde H}(\Lambda)\sim C_H\Lambda^{d/m}$.
+Since $N_H(\Lambda)=N_{\tilde H}(\Lambda+a)$, it follows that
+$N_H(\Lambda)\sim C_H\Lambda^{d/m}$.
 By Theorem~\ref{thm:karamata}(i),
 $Z_{\tilde H}(t)\sim C_H\Gamma(d/m+1)t^{-d/m}$.
 Since $Z_H(t)=e^{at}Z_{\tilde H}(t)$ and $e^{at}\to 1$ as $t\to 0^+$,
@@ -477,8 +494,7 @@ and the exclusion follows by the same argument as Theorem~\ref{thm:D}.
 \begin{remark}
 Lesch~\cite{Lesch1999} Theorem~3.7 establishes the resolvent kernel
 expansion for log-polyhomogeneous operators, from which
-equations~(3.18)--(3.20) of the published version (equations~(3.9)--(3.10)
-of the preprint) derive heat-trace asymptotics for
+equations~(3.18)--(3.20) derive heat-trace asymptotics for
 $\operatorname{Tr}(Ae^{-tP})$ with log-polyhomogeneous $A$ and
 classical elliptic $P$.  This does not directly give $Z_H(t)$
 asymptotics when $H$ itself is log-polyhomogeneous; the present proof
@@ -546,11 +562,12 @@ $N_H(T)\sim\frac{1}{2\pi}T\log T$.
 A heuristic model achieving this counting law is the Lambert-$W$
 corrected symbol on $S^1$ (both positive and negative Fourier modes):
 \[
-  g(r)=\frac{4\pi r}{W(2r/e)}\;\text{ for }r>0,
-  \qquad g(0)=\lim_{r\to 0^+}g(r)=2\pi e,
+  g(r)=\frac{4\pi r}{W(2r/e)}\;\text{ for }r\ge 1
 \]
-where $W$ is the Lambert-$W$ function ($W(x)e^{W(x)}=x$).  Setting
-$g(r)=T$ and solving gives the exact inverse
+(extended smoothly to $r\in[0,1]$ to satisfy the $\Psi$DO symbol
+estimates at low frequency), where $W$ is the Lambert-$W$ function
+($W(x)e^{W(x)}=x$).  Setting
+$g(r)=T$ and solving gives the exact inverse (valid for $T\ge 2\pi e$)
 \[
   g^{-1}(T)=\frac{T}{4\pi}\log\frac{T}{2\pi e}.
 \]
