@@ -123,7 +123,8 @@ scaling operators $D_{\log}^{(\lambda,N)}$ on $L^2([\lambda^{-1},\lambda],d^\tim
 satisfy (Theorem~5.10, under the hypothesis that the lowest eigenvalue of
 $QW_\lambda^N$ is simple with even eigenvector, normalized by
 $\delta_N(\xi_{\lambda,N})=1$; self-adjointness of $D_{\log}^{(\lambda,N)}$
-is a conclusion of that theorem, not an extra assumption)
+is a conclusion of that theorem (with the inner product induced by the
+Weil quadratic form on $E_N'$), not an extra assumption)
 the regularized-determinant identity
 $\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_{\lambda,N}(z)$,
 where $\xi_{\lambda,N}$ is the normalized lowest eigenvector of the
@@ -161,6 +162,10 @@ and the \emph{heat trace} and \emph{spectral counting function} are
   \quad t>0; \qquad
   N_H(\Lambda)=\#\{n:e_n\le\Lambda\}.
 \]
+For any lower-semibounded self-adjoint operator with compact resolvent,
+list its eigenvalues $\lambda_1\le\lambda_2\le\cdots$ with multiplicity;
+the definitions of $N_H$ and $Z_H$ apply verbatim.
+Finitely many negative eigenvalues do not affect the asymptotic statements below.
 
 \begin{theorem}[Karamata~\cite{BGT1987}]
 \label{thm:karamata}
@@ -240,8 +245,9 @@ $\operatorname{spec}_{\times}(H)\ne\{\gamma_n\}$.
 \end{mainthm}
 
 \begin{proof}
-By the pseudodifferential Weyl law
-(H\"ormander~\cite{Hormander1968}, Theorem~4.4; for general order $m>0$
+By the pseudodifferential Weyl law---following from the local spectral
+function estimate (H\"ormander~\cite{Hormander1968}, Theorem~4.4) by
+integration; for general order $m>0$
 reduce to order~$1$ via $H^{1/m}$, which is a classical elliptic
 $\Psi$DO of order~$1$ by Seeley's complex-powers
 construction (Shubin~\cite{Shubin2001}, \S11, Theorem~11.2;
@@ -348,9 +354,9 @@ $|\xi|\le 1$ and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
     degree $m-j$ in $\xi$ for $|\xi|\ge 1$, satisfying
     \[
       |\partial_x^\alpha\partial_\xi^\beta h_{m-j,\ell}(x,\xi)|
-      \le C_{\alpha\beta}(1+|\xi|)^{m-j-|\beta|}
+      \le C_{\alpha\beta,U_0}(1+|\xi|)^{m-j-|\beta|}
     \]
-    for all multiindices $\alpha,\beta$;
+    for each $U_0\Subset U$ and all multiindices $\alpha,\beta$;
   \item the $N$th remainder
     \[
       \sigma(H)-h_m-\sum_{1\le j\le N}\sum_\ell h_{m-j,\ell}\,\chi\,(\log|\xi|)^\ell
@@ -383,7 +389,7 @@ $q_{H,+}[u] := q_H[u] + (C_0+1)\|u\|^2$ satisfies
 \]
 so the $q_{H,+}$-norm is equivalent to the $H^{m/2}(M)$-norm,
 and $q_{H,+}$ closes with form domain $\mathrm{Dom}(q_{H,+})=H^{m/2}(M)$.
-The first representation theorem for quadratic forms
+The Friedrichs extension theorem
 (Reed--Simon~\cite{RS1975}, Theorem~X.23) yields a unique non-negative
 self-adjoint operator $A_+$ associated with the closed form~$q_{H,+}$;
 the \emph{Friedrichs extension} of $H$ is then $H_F := A_+ - (C_0+1)I$.
@@ -398,11 +404,12 @@ $\operatorname{spec}_\times(H)$) refer to $H_F$.
 \subsection{Form boundedness of the strictly lower-order log corrections}
 \label{subsec:formbdd}
 
-Let $P_0$ be the classical elliptic operator of order~$m$ on~$M$ with
-principal symbol~$h_m$ and no log-polyhomogeneous terms, obtained by
+Let $P_0$, with domain $H^m(M)$, denote the self-adjoint realization of
+the formally symmetric classical elliptic operator of order~$m$ on~$M$
+with principal symbol~$h_m$ and no log-polyhomogeneous terms, obtained by
 global pseudodifferential quantization of~$h_m$ (via a partition of
 unity, cf.~H\"ormander~\cite{Hormander1968}) and symmetrization.
-Fix $b\ge 0$ so that $P:=P_0+bI\ge 1$.
+Choose $b\ge 0$ so that $P:=P_0+bI\ge 1$.
 Then $P\in\Psi^m_{\mathrm{cl}}(M)$ with $\sigma_m(P)=h_m$ and
 $\mathrm{Dom}(q_P)=H^{m/2}(M)$.
 
@@ -417,7 +424,7 @@ elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
 Since $H\in\Csub$ has the same principal symbol $h_m$,
 the coercive estimate for $q_H$ follows from~\eqref{eq:garding} combined
 with the form-bound of $Q_0$ established below
-(KLMN theorem: $q_P$ closes on $H^{m/2}(M)$ and $q_{Q_0}$ is
+(KLMN theorem (Reed--Simon~\cite{RS1975}, Theorem~X.17): $q_P$ closes on $H^{m/2}(M)$ and $q_{Q_0}$ is
 infinitesimally form-bounded w.r.t.\ $q_P$, hence $q_H=q_{P_0}+q_{Q_0}$
 closes on $H^{m/2}(M)$; see~\eqref{eq:formbdd}).
 Write $Q_0:=H-P_0$ and $Q:=H-P=Q_0-bI$.
@@ -434,8 +441,9 @@ together with the derivative estimates on $h_{m-j,\ell}$ and the
 product rule give
 \[
   |\partial_x^\alpha\partial_\xi^\beta[h_{m-j,\ell}\chi(\xi)(\log|\xi|)^\ell]|
-  \le C'_{\alpha\beta}(1+|\xi|)^{m-1+\varepsilon-|\beta|}.
+  \le C'_{\alpha\beta,U_0}(1+|\xi|)^{m-1+\varepsilon-|\beta|}
 \]
+for each $U_0\Subset U$ and all multiindices $\alpha,\beta$.
 The $N$th remainder is controlled by Definition~\ref{def:csub}(ii).
 Hence $Q_0\in\Psi^{m-1+\varepsilon}_{1,0}(M)$ for every $\varepsilon\in(0,1)$.
 
@@ -480,6 +488,7 @@ Equivalently, as quadratic forms on their common domain $H^{m/2}(M)$:
 
 \begin{mainthmprime}
 \label{thm:Dprime}
+Let $M$ be a closed smooth manifold of dimension $d\ge 1$, $m>0$, and $K\ge 0$.
 Any $H\in\Csub$ satisfies
 $N_H(\Lambda)\sim C_H\Lambda^{d/m}$ as $\Lambda\to\infty$,
 where $C_H>0$ is the Weyl constant of the principal symbol $h_m$.
@@ -665,8 +674,13 @@ Open questions:
   normalized lowest eigenfunction sufficiently accurately in a suitable
   sense---be completed, yielding a spectral realization of $\Xi$ from
   the scaling-operator family?
-\item Can a self-adjoint operator with $|\xi|/\log|\xi|$-type symbol
-  on some manifold realize $\{\gamma_n\}$ as its eigenvalue multiset?
+\item Can a self-adjoint operator on some manifold, whose symbol lies in
+  $S^1_{1,0}$ (H\"ormander class) with the specific growth bound
+  $|\sigma(H)(x,\xi)|\sim|\xi|/\log|\xi|$ for large $|\xi|$, together
+  with explicit derivative bounds, ellipticity conditions, domain
+  characterization, and multiplicity convention (each taken as a formal
+  membership condition, not merely a heuristic description),
+  realize $\{\gamma_n\}$ as its eigenvalue multiset?
 \item For which symbol classes, specified by explicit membership
   conditions (decay of symbol derivatives, ellipticity type, domain
   characterization), does the counting law $N_H(T)\sim CT\log T$ hold?

@@ -232,7 +232,7 @@ normalized by $\delta_N(\xi_{\lambda,N})=1$; self-adjointness is a conclusion
 of the theorem)
 $\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_{\lambda,N}(z)$.
 The convergence $\hat{k}_\lambda\to\Xi$ for $|\operatorname{Im}z|<\tfrac12$
-is established in Lemma~7.3.  The open steps named in \S8 of~\cite{CCM2025} are: (i)~establishing that
+is established in Lemma~7.3 of~\cite{CCM2025}.  The open steps named in \S8 of~\cite{CCM2025} are: (i)~establishing that
 the lowest eigenvalue of the continuous $QW_\lambda$ is simple with even
 eigenfunction; and (ii)~verifying that $k_\lambda$ approximates the
 corresponding normalized lowest eigenfunction sufficiently accurately to
@@ -267,7 +267,7 @@ A finite multiset $\mathcal{Z}$ of complex numbers is in $\Hsym$ if:
   \item\label{itm:strip} every atom satisfies $0 < \re\rho < 1$;
   \item\label{itm:conj} $\rho \in \mathcal{Z}$ implies $\bar\rho \in \mathcal{Z}$
     (same multiplicity);
-  \item\label{itm:fe} $\rho \in \mathcal{Z}$ implies $1-\rho \in \mathcal{Z}$
+  \item $\rho \in \mathcal{Z}$ implies $1-\rho \in \mathcal{Z}$
     (same multiplicity).
 \end{enumerate}
 The target predicate is $P(\mathcal{Z}) = 1$ iff $\re\rho = 1/2$ for every
@@ -384,6 +384,7 @@ Two basic building blocks recur throughout:
 \end{align*}
 Both are in $\Hsym$ for $0 < \sigma_0 < 1$, $t, T > 0$.
 We have $P(L(t)) = 1$ and $P(Q(\sigma_0,T)) = 0$ for $\sigma_0 \neq 1/2$.
+All collections above are interpreted as multisets; in particular, $Q(1/2,T) = 2L(T)$.
 
 Direct computation using Definition~\ref{def:Li} gives:
 \begin{align}
@@ -521,13 +522,13 @@ and $q(T) \in \RR^m$.
 \subsection{Non-singularity of the Li collision matrix}
 
 % Original result; proof self-contained via Chebyshev identity and Vandermonde determinant
-\begin{lemma}[Full rank of $C$ over $\QQ$]
+\begin{lemma}[Full rank of $C$]
 \label{lem:Crank}
-For distinct positive rationals $t_1, \ldots, t_m$, the matrix
+For distinct positive real numbers $t_1, \ldots, t_m$, the matrix
 $C = (C_{jk})$ with $C_{jk} = 4(1 - T_j(x_k))$,
 where $x_k = (4t_k^2 - 1)/(4t_k^2+1)$ and $T_j$ is the
-degree-$j$ Chebyshev polynomial, lies in $\QQ^{m\times m}$
-and satisfies $\det C \neq 0$.
+degree-$j$ Chebyshev polynomial, satisfies $\det C \neq 0$.
+If moreover $t_k \in \QQ$, then $C \in \QQ^{m\times m}$.
 \end{lemma}
 
 \begin{proof}
@@ -896,6 +897,7 @@ $\beta = -C^{-1}q(T) \in \QQ^K$ satisfies
 The entries of $C$, $q(T)$, and $\beta = -C^{-1}q(T)$ are rational
 functions of $(t_1,\ldots,t_K,T)$ on the open region
 $\Omega = \{0 < t_1 < \cdots < t_K < T\}$.
+The set $\Omega$ is connected.
 Thus $G_K = 2 + \sum_k \beta_k$ is a real-analytic function on $\Omega$.
 
 As $T \to \infty$ with $t_k$ fixed, $q_j(T) = O(T^{-2}) \to 0$,
@@ -923,7 +925,7 @@ Construct the Theorem~\ref{thm:A} collision pair: $R = \mathrm{lcm}(\mathrm{deno
 $n_k = R\beta_k$, $B = \max_k|n_k|$.  Let $\mathcal{Z}_+$ contain $B$
 copies of $L(t_k)$ and $\mathcal{Z}_-$ contain $(B+n_k)$ copies of
 $L(t_k)$ plus $R$ copies of $Q(3/4,T)$.
-By Theorem~\ref{thm:A}, $\Ofinite^{(K)}(\mathcal{Z}_+) = \Ofinite^{(K)}(\mathcal{Z}_-)$.
+By the construction in the proof of Theorem~\ref{thm:A}, $\Ofinite^{(K)}(\mathcal{Z}_+) = \Ofinite^{(K)}(\mathcal{Z}_-)$.
 
 Since all $t_k < T < d_1$ and all atoms of $\mathcal{Z}_\pm$ have
 $|\im\rho| \in \{t_k\} \cup \{T\}$ with $t_k < T < d_1$, we compute:
@@ -976,7 +978,7 @@ Apply Theorem~\ref{thm:A} with $m = K$ and parameters $d_M < t_1 < \cdots < t_K 
 in Theorem~\ref{thm:A}).  Then all atoms of both $\mathcal{Z}_\pm$
 have $|\im\rho| > d_M \geq d_m$ for every sampling level, so
 $N_{\mathcal{Z}_\pm}(d_m) = 0$ and $\Otheta(\mathcal{Z}_+) = \Otheta(\mathcal{Z}_-)
-= (0,\ldots,0)$.  By Theorem~\ref{thm:A}, $\Ofinite^{(K)}(\mathcal{Z}_+) =
+= (0,\ldots,0)$.  By the construction in the proof of Theorem~\ref{thm:A}, $\Ofinite^{(K)}(\mathcal{Z}_+) =
 \Ofinite^{(K)}(\mathcal{Z}_-)$ and $P(\mathcal{Z}_+) \neq P(\mathcal{Z}_-)$.
 \end{proof}
 
@@ -1051,12 +1053,14 @@ counting asymptotics, or Hadamard/functional-equation/Euler-product constraints.
 \item \textbf{Grow-with-$T$ obstruction.}  Is there an exact
   information obstruction for $\Ofinite^{(K(T))}$ that remains valid even
   as $K = K(T)$ grows with the height parameter $T$ while satisfying a
-  uniform bound $N \leq T^A$ on total atom count or denominator height?
+  uniform bound $\#\mathcal{Z}_\pm \leq T^A$ on total atom count or denominator height?
 
 \item \textbf{Weil-type observations.}
-  For fixed $h \in C_c^\infty(\RR)$, the observation
-  $\varphi_h(\rho) = \hat{h}((\rho-\tfrac12)/i)$ is an entire function
-  of $\rho$.  The Chebyshev--Vandermonde reduction used in Theorem~\ref{thm:A}
+  For a fixed finite family $h_1, \ldots, h_r \in C_c^\infty(\RR)$ of
+  real-valued, even functions, the observations
+  $\varphi_{h_i}(\rho) = \hat{h}_i((\rho-\tfrac12)/i)$ are entire functions
+  of $\rho$ with real values on the critical line.
+  The Chebyshev--Vandermonde reduction used in Theorem~\ref{thm:A}
   does not directly apply because the resulting observation values are
   not guaranteed to be rational, and no general transcendence statement
   is available.  Does an analogue of Theorem~\ref{thm:A} hold
