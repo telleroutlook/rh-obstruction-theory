@@ -85,10 +85,30 @@ dependencies:
       Comparison reference: C_ell (subset of C_logpoly with tau_k=0) has pure-power
       leading term. Scope corrected: BGV/Gilkey are differential/Laplace-type only.
 
-gate_a_status: OPEN
-gate_a_note: >
-  Citation numbers pinned by OB-15 (Lesch 1999 Thm 3.7 + Grubb-Seeley 1995 Thm 2.7);
-  scope corrected (BGV/Gilkey differential/Laplace-type only; Gilkey is Lemma 1.8.2 not
-  Thm 1.8.1). The corrected conclusion (C_logpoly is NOT the escape; the log-weighted
-  S^{1,-1} class is, with the exact model refuted) is PROOF-DRAFT and must not be used as
-  a premise in another theorem until independently reviewed.
+  - id: FORM-BOUNDEDNESS-OF-Q
+    statement: >
+      For H in C_sub (positive, self-adjoint, classical elliptic principal symbol h_m,
+      sub-principal terms in ∩ Ψ^{m-1+ε}_{1,0}(M) for every ε∈(0,1)) and P∈C_ell with
+      the same principal symbol, Q := H - P ∈ ∩ Ψ^{m-1+ε}_{1,0}(M) has relative form
+      bound 0 with respect to P: for every δ>0 there exists C_δ≥0 such that
+      |q_Q[u]| ≤ δ q_P[u] + C_δ ‖u‖² for all u ∈ H^{m/2}(M).
+    source: >
+      OB-37-B external review 2026-08-14 (GATE-A CONDITIONAL, all 12 fixes M1–M12
+      integrated). Key references: Taylor, Partial Differential Equations II (1996)
+      §7; Reed–Simon Vol. 2 Theorem X.18 (KLMN theorem); Shubin (2001) §11.
+      Symbol-class: Ψ^{m-1+ε}_{1,0}(M), Hörmander class (NOT classical Ψ_cl).
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: NONE
+    usable_as_premise: true
+    gate_a_status: INDEPENDENTLY-CHECKED
+    gate_a_note: >
+      OB-37-B GATE-A CONDITIONAL, 2026-08-14. Referee confirmed: form bound 0 via
+      Sobolev interpolation + Gårding, KLMN absorption, Calderón–Vaillancourt for m≤1-ε
+      branch. Correct symbol class is Ψ^{m-1+ε}_{1,0} (Hörmander), not Ψ_cl.
+      All 12 fixes (M1–M12) integrated into paper and outsource file.
+    role: >
+      Key analytic lemma for Theorem D' proof: establishes that sub-principal
+      perturbations have form bound 0, allowing the Weyl law for H to coincide with
+      the Weyl law for its principal-symbol reference operator P.
+
+gate_a_status: CONDITIONAL-PASS (OB-33 2026-08-13 + OB-37-B 2026-08-14; LEADING-SINGULARITY and FORM-BOUNDEDNESS both INDEPENDENTLY-CHECKED; SEELEY-DEWITT citation scope and LOG-POLYHOMOGENEOUS-HEAT-KERNEL physical-copy verification still tracked open)

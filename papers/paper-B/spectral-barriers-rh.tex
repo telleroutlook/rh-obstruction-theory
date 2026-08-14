@@ -359,7 +359,7 @@ Since $H\in\Csub$ has the same principal symbol $h_m$,
 Definition~\ref{def:csub} gives $\mathrm{Dom}(q_H)=H^{m/2}(M)$ as well.
 At the level of quadratic forms, define $q_Q[u]:=q_H[u]-q_P[u]$ for
 $u\in H^{m/2}(M)$; all subsequent estimates are form-level.
-We show $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}(M)$
+We show $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}_{1,0}(M)$
 for every $\varepsilon\in(0,1)$, as follows.
 
 For any $\varepsilon\in(0,1)$, since $K<\infty$ and $j\ge 1$,
@@ -373,7 +373,7 @@ product rule give
   \le C'_{\alpha\beta}(1+|\xi|)^{m-1+\varepsilon-|\beta|}.
 \]
 The $N$th remainder is controlled by Definition~\ref{def:csub}(ii).
-Hence $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}(M)$ for every $\varepsilon\in(0,1)$.
+Hence $q_Q[u]=\langle Qu,u\rangle$ with $Q\in\Psi^{m-1+\varepsilon}_{1,0}(M)$ for every $\varepsilon\in(0,1)$.
 
 For $u\in H^{m/2}(M)$, the form estimate proceeds as follows.
 If $m>1-\varepsilon$, the Sobolev interpolation inequality on $M$
@@ -395,8 +395,8 @@ so
   \le C'\|u\|_{H^{(m-1+\varepsilon)/2}}^2
   \le C'\bigl(\delta\|u\|_{H^{m/2}}^2+C_\delta\|u\|_{L^2}^2\bigr).
 \]
-If instead $m\le 1-\varepsilon$, then $Q\in\Psi^{m-1+\varepsilon}$
-with $m-1+\varepsilon\le 0$ is $L^2$-bounded~\cite{Hormander1968},
+If instead $m\le 1-\varepsilon$, then $Q\in\Psi^{m-1+\varepsilon}_{1,0}$
+with $m-1+\varepsilon\le 0$ is $L^2$-bounded~\cite{CalderonVaillancourt1972},
 so $|q_Q[u]|=|\langle Qu,u\rangle|\le C\|u\|_{L^2}^2\le
 C(\delta\|u\|_{H^{m/2}}^2+C_\delta\|u\|_{L^2}^2)$.
 In both cases, adjusting constants and using~\eqref{eq:garding} yields:
@@ -612,6 +612,11 @@ N.~Berline, E.~Getzler, and M.~Vergne,
 \emph{Heat Kernels and Dirac Operators},
 Grundlehren der Mathematischen Wissenschaften, vol.~298,
 Springer-Verlag, Berlin, 2004.
+
+\bibitem{CalderonVaillancourt1972}
+A.~P. Calder\'on and R.~Vaillancourt,
+A class of bounded pseudo-differential operators,
+\emph{Proc.\ Nat.\ Acad.\ Sci.\ U.S.A.}\ \textbf{69} (1972), no.~5, 1185--1187.
 
 \bibitem{BerryKeating1999}
 M.~V. Berry and J.~P. Keating,

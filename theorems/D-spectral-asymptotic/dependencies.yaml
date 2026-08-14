@@ -1,7 +1,7 @@
 # Dependencies — Theorem D (D-spectral-asymptotic)
 
 theorem_id: D-spectral-asymptotic
-status: PROOF-DRAFT (Gate-A CONDITIONAL->PASS after OB-25 mods; positioned as scope-extension/corollary)
+status: INDEPENDENTLY-CHECKED (Gate-A PASS OB-25 2026-08-11; Karamata step confirmed OB-39-B 2026-08-14; Seeley step confirmed OB-40-B 2026-08-14)
 
 dependencies:
 
@@ -118,7 +118,7 @@ dependencies:
       existence establishes that a leading-log obstruction for (differential) elliptic
       operators is already in the literature; D's contribution is the PsiDO-class extension.
 
-gate_a_status: CONDITIONAL-PASS (OB-25 2026-08-11)
+gate_a_status: PASS (OB-25 2026-08-11; all 8 textual mods integrated; Karamata step OB-39-B confirmed BGT §1.7.2 Thm 1.7.1 2026-08-14; Seeley step OB-40-B confirmed Shubin §11 Thm 11.2 2026-08-14)
 gate_a_note: >
   OB-25 whole-theorem review: math chain CONFIRMED (Links A-E), RH-non-circularity
   CONFIRMED, Lesch scope CONFIRMED. Verdict GATE-A CONDITIONAL, upgrading to PASS after the
