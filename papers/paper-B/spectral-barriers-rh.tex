@@ -120,16 +120,24 @@ counting.
 Connes~\cite{Connes1999} places zeta zeros in a noncommutative
 geometric setting.  In Connes--Consani--Moscovici~\cite{CCM2025},
 scaling operators $D_{\log}^{(\lambda,N)}$ on $L^2([\lambda^{-1},\lambda],d^\times u)$
-satisfy (Theorem~5.10) the regularized-determinant identity
+satisfy (Theorem~5.10, under the hypothesis that the lowest eigenvalue of
+$QW_\lambda^N$ is simple with even eigenvector, normalized by
+$\delta_N(\xi_{\lambda,N})=1$; self-adjointness of $D_{\log}^{(\lambda,N)}$
+is a conclusion of that theorem, not an extra assumption)
+the regularized-determinant identity
 $\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_{\lambda,N}(z)$,
-where $\xi_{\lambda,N}$ is the lowest eigenfunction of the finite-truncation Weil
-form~$QW_\lambda^N$---not the Riemann completed-zeta function
-$\Xi(t):=\xi(\tfrac{1}{2}+it)$, which arises in the separate convergence result
-$\hat{k}_\lambda\to\Xi$ for $|\operatorname{Im}z|<\tfrac{1}{2}$ (Lemma~7.3).
-The open steps (\S8) are establishing that the continuum lowest eigenfunction
-$\xi_\lambda$ (the $N\to\infty$ limit) is simple and even, and that the cut-off
-kernel $k_\lambda$ converges sufficiently to $\xi_\lambda$ to recover~$\Xi$;
-the normalization is the load-bearing unresolved ingredient.
+where $\xi_{\lambda,N}$ is the normalized lowest eigenvector of the
+finite-truncation Weil form~$QW_\lambda^N$.
+The convergence $\hat{k}_\lambda\to\Xi$ for $|\operatorname{Im}z|<\tfrac{1}{2}$
+is already established in Lemma~7.3.
+The open steps named in \S8 of~\cite{CCM2025} are:
+(i)~the lowest eigenvalue of the continuous $QW_\lambda$ is simple
+with even eigenfunction; and
+(ii)~$k_\lambda$ approximates the corresponding normalized lowest
+eigenfunction sufficiently accurately to recover~$\Xi$.
+The breakdown of step~(i) into a finite-$N$ simplicity claim and an
+$N\to\infty$ continuum limit is the authors' own refinement, not an
+explicit item in~\S8.
 Theorems~D and~D$'$ do not obstruct the CCM approach, since the CCM
 operators belong to a different class.
 
@@ -189,7 +197,9 @@ The Riemann--von Mangoldt formula
   \;\sim\;\frac{T\log T}{2\pi}
   \quad(T\to+\infty),
 \]
-unconditionally.  Applying Theorem~\ref{thm:karamata}(ii) yields
+unconditionally.  Applying Theorem~\ref{thm:karamata}(ii) (to the diagonal
+operator $H_\zeta$ on $\ell^2(\mathbb{N})$ defined by $H_\zeta e_n := \gamma_n e_n$)
+yields
 \begin{equation}
   \label{eq:zetaheat}
   Z_\zeta(t)\sim\frac{1}{2\pi}\,t^{-1}\log(1/t)
@@ -199,7 +209,11 @@ unconditionally.  Applying Theorem~\ref{thm:karamata}(ii) yields
 \subsection{Manifold conventions}
 
 All manifolds are closed (compact, without boundary) and smooth unless
-otherwise stated.  A \emph{classical elliptic pseudodifferential
+otherwise stated.  Fix once and for all a smooth Riemannian metric $g$ on
+$M$ and the associated smooth positive density $|dvol_g|$; all $L^2(M)$
+inner products, formal symmetry, and Sobolev norms $\|\cdot\|_{H^s(M)}$
+are defined with respect to this fixed structure.
+A \emph{classical elliptic pseudodifferential
 operator} of order $m>0$ on a closed $d$-dimensional manifold $M$
 ($d\ge 1$) is a positive self-adjoint operator $H$ with compact
 resolvent whose complete symbol is polyhomogeneous of order $m$ and
@@ -231,7 +245,10 @@ By the pseudodifferential Weyl law
 reduce to order~$1$ via $H^{1/m}$, which is a classical elliptic
 $\Psi$DO of order~$1$ by Seeley's complex-powers
 construction (Shubin~\cite{Shubin2001}, \S11, Theorem~11.2;
-see also~\cite{Seeley1967}), with $N_H(\Lambda)=N_{H^{1/m}}(\Lambda^{1/m})$),
+see also~\cite{Seeley1967}; if $\ker H\ne 0$, replace $H$ by
+$H+\Pi_{\ker H}$ before applying Seeley's construction, which
+shifts finitely many eigenvalues by~$1$ and leaves all leading
+asymptotics unchanged), with $N_H(\Lambda)=N_{H^{1/m}}(\Lambda^{1/m})$),
 \[
   N_H(\Lambda)\sim C_H\,\Lambda^{d/m}
   \quad(\Lambda\to+\infty),
@@ -321,9 +338,11 @@ The complete symbol in any local coordinate chart satisfies the asymptotic expan
     h_{m-j,\ell}(x,\xi)\,\chi(\xi)\,(\log|\xi|)^\ell
   \quad(|\xi|\to\infty),
 \]
-where $h_m$ is a \emph{real-valued}, smooth, positively homogeneous symbol
-of degree $m$, $\chi\in C^\infty(\RR^d)$ with $\chi(\xi)=0$ for $|\xi|\le 1$
-and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
+where $h_m$ is a \emph{real-valued} symbol, smooth on $T^*U\setminus 0$
+for each coordinate chart $U$ and positively homogeneous of degree $m$ in
+$\xi$ for $|\xi|\ge 1$ (smoothly extended to a neighbourhood of $\xi=0$
+via the cutoff $\chi$), $\chi\in C^\infty(\RR^d)$ with $\chi(\xi)=0$ for
+$|\xi|\le 1$ and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
 \begin{enumerate}[label=(\roman*)]
   \item each $h_{m-j,\ell}$ is smooth and positively homogeneous of
     degree $m-j$ in $\xi$ for $|\xi|\ge 1$, satisfying
@@ -336,7 +355,7 @@ and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
     \[
       \sigma(H)-h_m-\sum_{1\le j\le N}\sum_\ell h_{m-j,\ell}\,\chi\,(\log|\xi|)^\ell
     \]
-    lies in the standard H\"ormander class $S^{m-N}_{1,0}(T^*U)$
+    lies in $\bigcap_{\varepsilon>0}S^{m-N-1+\varepsilon}_{1,0}(T^*U)$
     for each coordinate chart $U$
     \emph{(in the sense of Lesch~\cite{Lesch1999}, Definition~3.1)};
   \item the principal symbol satisfies $h_m(x,\xi)\ge c|\xi|^m$ for
@@ -344,19 +363,40 @@ and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
     (\emph{positive classical elliptic principal part}).
 \end{enumerate}
 By the G\r{a}rding inequality for classical elliptic $\Psi$DOs
-(Shubin~\cite{Shubin2001}, \S6, Theorem~6.2) applied to $h_m$,
-the shifted form $q_{H,+}[u]:=\langle(H+C_0+1)u,u\rangle$, initially
-on $C^\infty(M)$, satisfies $q_{H,+}[u]\ge c\,\|u\|^2_{H^{m/2}(M)}$
-and closes to the Sobolev form domain $\mathrm{Dom}(q_{H,+})=H^{m/2}(M)$.
+(Shubin~\cite{Shubin2001}, standard elliptic coercivity estimate) applied to $h_m$
+(as the symbol of the classical reference operator $P_0$; the transfer of the
+coercive estimate to $H$ uses the form-boundedness of $Q_0=H-P_0$, established in
+Subsection~\ref{subsec:formbdd} below), there exist
+$c_1>0$ and $C_2<\infty$ such that
+\[
+  q_H[u] \;\ge\; c_1\,\|u\|^2_{H^{m/2}(M)} - C_2\,\|u\|^2,
+  \qquad u\in C^\infty(M).
+\]
+Symbol estimates for $H\in\Psi^m_{1,0}$ also give an upper bound
+$|q_H[u]|\le C_3\,\|u\|^2_{H^{m/2}(M)}$ for some $C_3<\infty$.
+Setting $C_0 := C_2$, the shifted form
+$q_{H,+}[u] := q_H[u] + (C_0+1)\|u\|^2$ satisfies
+\[
+  c_1\,\|u\|^2_{H^{m/2}(M)}
+  \;\le\; q_{H,+}[u]
+  \;\le\; (C_3+C_0+1)\,\|u\|^2_{H^{m/2}(M)},
+\]
+so the $q_{H,+}$-norm is equivalent to the $H^{m/2}(M)$-norm,
+and $q_{H,+}$ closes with form domain $\mathrm{Dom}(q_{H,+})=H^{m/2}(M)$.
 The first representation theorem for quadratic forms
-(Reed--Simon~\cite{RS1975}, Theorem~X.23) yields a unique self-adjoint
-operator, the Friedrichs extension of~$H$, associated with the closed
-form~$q_{H,+}$;
-by elliptic regularity (Shubin~\cite{Shubin2001}, \S7),
-$\mathrm{Dom}(H)=H^m(M)$ and the resolvent is compact.
+(Reed--Simon~\cite{RS1975}, Theorem~X.23) yields a unique non-negative
+self-adjoint operator $A_+$ associated with the closed form~$q_{H,+}$;
+the \emph{Friedrichs extension} of $H$ is then $H_F := A_+ - (C_0+1)I$.
+By elliptic regularity (Shubin~\cite{Shubin2001}, \S7),
+$\mathrm{Dom}(H_F)=H^m(M)$ and the resolvent of $H_F$ is compact.
 \end{definition}
 
+Henceforth, for $H\in\Csub$, we identify $H$ with its Friedrichs
+realization $H_F$; all spectral objects ($N_H$, $Z_H$,
+$\operatorname{spec}_\times(H)$) refer to $H_F$.
+
 \subsection{Form boundedness of the strictly lower-order log corrections}
+\label{subsec:formbdd}
 
 Let $P_0$ be the classical elliptic operator of order~$m$ on~$M$ with
 principal symbol~$h_m$ and no log-polyhomogeneous terms, obtained by
@@ -367,7 +407,7 @@ Then $P\in\Psi^m_{\mathrm{cl}}(M)$ with $\sigma_m(P)=h_m$ and
 $\mathrm{Dom}(q_P)=H^{m/2}(M)$.
 
 By the G\r{a}rding inequality for classical elliptic $\Psi$DOs
-(Shubin~\cite{Shubin2001}, \S6, Theorem~6.2) applied to the
+(Shubin~\cite{Shubin2001}, standard elliptic coercivity estimate) applied to the
 elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
 \begin{equation}
   \label{eq:garding}
@@ -375,7 +415,11 @@ elliptic principal symbol $h_m$, there exist $c_0>0$ and $C_1<\infty$ such that
   \qquad u\in C^\infty(M).
 \end{equation}
 Since $H\in\Csub$ has the same principal symbol $h_m$,
-Definition~\ref{def:csub} gives $\mathrm{Dom}(q_H)=H^{m/2}(M)$ as well.
+the coercive estimate for $q_H$ follows from~\eqref{eq:garding} combined
+with the form-bound of $Q_0$ established below
+(KLMN theorem: $q_P$ closes on $H^{m/2}(M)$ and $q_{Q_0}$ is
+infinitesimally form-bounded w.r.t.\ $q_P$, hence $q_H=q_{P_0}+q_{Q_0}$
+closes on $H^{m/2}(M)$; see~\eqref{eq:formbdd}).
 Write $Q_0:=H-P_0$ and $Q:=H-P=Q_0-bI$.
 On $C^\infty(M)$, $q_Q[u]=q_{Q_0}[u]-b\|u\|^2$; the $-b\|u\|^2$ term
 is absorbed directly into~$C_\delta\|u\|^2$ in the form bound below.
@@ -499,8 +543,11 @@ and the exclusion follows by the same argument as Theorem~\ref{thm:D}.
 
 \begin{remark}
 Lesch~\cite{Lesch1999} Theorem~3.7 establishes the resolvent kernel
-expansion for log-polyhomogeneous operators, from which
-equations~(3.18)--(3.20) derive heat-trace asymptotics for
+expansion for log-polyhomogeneous operators; the subsequent equations
+of that theorem give: (3.18)~the heat-trace asymptotic expansion,
+(3.19)~a bound on the degree of log-polynomial terms,
+and~(3.20) together with the subsequent text: the Mellin formula and
+meromorphic continuation of the spectral zeta function, all for
 $\operatorname{Tr}(Ae^{-tP})$ with log-polyhomogeneous $A$ and
 classical elliptic $P$.  This does not directly give $Z_H(t)$
 asymptotics when $H$ itself is log-polyhomogeneous; the present proof
@@ -614,9 +661,10 @@ can occur.
 Open questions:
 \begin{enumerate}[label=(\arabic*)]
 \item Can the CCM open steps---establishing that the lowest eigenvalue
-  is simple and even, and that $k_\lambda$ converges to the lowest
-  eigenfunction in a suitable sense---be completed, yielding a
-  spectral realization of $\Xi$ from the scaling-operator family?
+  is simple and even, and that $k_\lambda$ approximates the corresponding
+  normalized lowest eigenfunction sufficiently accurately in a suitable
+  sense---be completed, yielding a spectral realization of $\Xi$ from
+  the scaling-operator family?
 \item Can a self-adjoint operator with $|\xi|/\log|\xi|$-type symbol
   on some manifold realize $\{\gamma_n\}$ as its eigenvalue multiset?
 \item For which symbol classes, specified by explicit membership

@@ -513,6 +513,109 @@ the paper.
 
 ---
 
+### P29 — `\texorpdfstring` bookmark text matches formula's logical meaning
+
+When a section/subsection uses `\texorpdfstring{$formula$}{bookmark-text}`, the
+bookmark text must accurately express the *logical content* of the formula under
+the definitions in force, not just a superficial reading of its symbols.
+
+Common failure mode: a binary relation $R(A,B)$ reads as "$A$ does not $R$ $B$"
+in the symbol string, but the *defined* meaning of $R$ makes $B$ the active
+agent, so the correct reading is "$B$ does not [inverse of $R$] $A$".
+
+```bash
+grep -n '\\texorpdfstring' "$TEX"
+```
+
+For each hit: identify the definition of every relation/operator used in the
+formula; re-derive what the formula asserts in plain English; compare with the
+bookmark text.  **Pass:** bookmark text and logical meaning agree.
+
+**Precedent (paper-A):** $\Ofinite\npreceq\Otheta$ with definition
+$O_a\preceq O_b\iff O_a=f\circ O_b$ (i.e.\ "$O_b$ refines $O_a$") was given
+bookmark "O-fin does not refine O-theta" — wrong direction; correct bookmark
+is "O-theta does not refine O-fin".
+
+---
+
+### P30 — Every free variable in a theorem/corollary statement is explicitly bound
+
+In every `\begin{theorem}`, `\begin{corollary}`, `\begin{proposition}` block,
+each variable that is not a universally quantified dummy must be bound by an
+explicit prefix ("Fix $K\ge 1$", "Let $K\ge 1$ be given", "for all $K\ge 1$",
+or as a conclusion variable in the "there exists" clause).
+
+```bash
+# Extract all theorem-like environment openers and the 15 lines following
+grep -n '\\begin{\(theorem\|corollary\|proposition\|maincor\|mainthm\|mainthmprime\)}' "$TEX" \
+  | while IFS=: read lineno rest; do
+    window=$(sed -n "${lineno},$((lineno+15))p" "$TEX")
+    echo "--- Line $lineno ---"
+    echo "$window"
+    echo
+  done
+```
+
+**Manual check:** for each block, list every capital letter and named parameter
+that appears; verify each is bound.
+
+**Precedent (paper-A):** Corollary "Positivity threshold" used $K$ in
+"$\Li_j(\mathcal{Z}_+)>0$ for $j=1,\ldots,K$" without first writing "Fix $K\ge 1$".
+
+---
+
+### P31 — "Same argument as part (X)" spells out the conclusion for part (Y)
+
+When a multi-part proof abbreviates a sub-proof with "by the same argument as
+part~(X)" or "an analogous argument gives", the *conclusion* of that sub-proof
+must be stated explicitly for part~(Y), not left implicit.
+
+In particular: if part~(X) proves "$\zeta \in \mathcal{H}_S$" via a chain
+$A \Rightarrow B \Rightarrow \zeta\in\mathcal{H}_S$, then part~(Y) must
+exhibit the corresponding chain ending with "$\zeta'\in\mathcal{H}_S$",
+even if step~$A$ is abbreviated.
+
+```bash
+grep -n 'same argument\|analogous argument\|same reasoning\|as part~\|as in part' "$TEX"
+```
+
+For each hit: verify the conclusion of the current part is spelled out
+explicitly (not just "hence [condition X]" while omitting the class-membership
+conclusion that requires the full chain).
+
+**Precedent (paper-A):** Part~(b) of Corollary~D said $R_0$ "holomorphic on $S$
+(same argument as part~(a))" but omitted "$\zeta_{\chi^+}$ extends
+holomorphically to $U_0$, so $\zeta_{\chi^+}\in\mathcal{H}_S$" — a required
+intermediate conclusion suppressed by the abbreviation.
+
+---
+
+### P32 — Operator class definition: Friedrichs realization identified by name after construction
+
+When a definition block constructs a Friedrichs (or other canonical)
+realization $H_F$ of a formal operator $H$, the text immediately following
+the `\end{definition}` must state explicitly that $H$ is henceforth identified
+with $H_F$ and that all spectral objects (counting function, heat trace,
+spectrum) refer to $H_F$.
+
+Without this declaration, theorems using $N_H$ or $\operatorname{spec}_\times(H)$
+are technically undefined for the original formal operator.
+
+```bash
+# Find definitions that introduce a Friedrichs extension
+grep -n 'Friedrichs\|H_F\|self-adjoint.*extension' "$TEX"
+```
+
+For each hit inside a `\begin{definition}...\end{definition}` block:
+verify the line immediately after `\end{definition}` contains an explicit
+identification sentence.
+
+**Precedent (paper-B):** Definition of $\Csub$ constructed $H_F$ inside the
+block, but Theorem~D$'$ then used $N_H$ and $\operatorname{spec}_\times(H)$
+without the identification having been declared.
+
+---
+
 ## Running order for pre-submission
 
 1. `pdflatex` — fix all errors and undefined-ref warnings (P4)
@@ -525,7 +628,7 @@ the paper.
 8. Attribution grep for each lemma block (P8)
 9. Asymptotics grep → point to or run verifying scripts (P9)
 10. Informal qualifiers grep (P10)
-11. Remark formula audit (P11)
+11. Remark formula audit (P11) — verify every inequality/identity claimed, not just display
 12. Barrier criterion grep (P12–P13)
 13. Abstract/intro scope read (P14)
 14. Complexity analogy grep (P15)
@@ -541,3 +644,7 @@ the paper.
 24. Reference operator symbol class (P26)
 25. Tauberian theorems used bidirectionally (P27)
 26. Single-letter symbol conflicts (P28)
+27. `\texorpdfstring` bookmark semantic correctness (P29)
+28. Free variable binding in theorem statements (P30)
+29. "Same argument" conclusion completeness (P31)
+30. Friedrichs realization identification after definition (P32)

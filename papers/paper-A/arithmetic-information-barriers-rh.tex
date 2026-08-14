@@ -69,16 +69,17 @@ $P(\mathcal{Z}_-)=0$, and identical standard Li observations
 $\Li_j(\mathcal{Z}_+)=\Li_j(\mathcal{Z}_-)$ for $j=1,\ldots,m$,
 realised by explicit rational-arithmetic witnesses.
 
-\textbf{Theorem~\ref{thm:B}} (no uniform separation): no fixed finite collection of
-standard Li values enforces a strictly positive gap between $P=1$ and $P=0$
+\textbf{Theorem~\ref{thm:B}} (no uniform separation): no fixed finite initial
+segment of standard Li values enforces a strictly positive gap between $P=1$ and $P=0$
 within $\Hsym$.
 
 \textbf{Theorem~\ref{thm:C}} (incomparability): the standard Li map
 $\Ofinite^{(K)}$ and the sampled counting map $\Otheta$ are
 incomparable in the information refinement preorder on $\Hsym$.
 
-\textbf{Corollary~\ref{cor:D}} (Andersson): no finite Euler-factor constraint on a
-Helson zeta function forces its zeros to lie on the critical line
+\textbf{Corollary~\ref{cor:D}} (Andersson): agreement with any fixed finite initial
+collection of Euler factors of $\zeta$ does not force
+a Helson zeta function's zeros to lie on the critical line
 (existential obstruction pair, using Andersson~\cite{Andersson2024}
 Theorem~5 and Corollary~3).
 
@@ -110,7 +111,7 @@ $\lim_{T\to\infty}\sum_{|\im\rho|\leq T}$
 This reformulation raises a natural question: can one establish RH by
 verifying, via a uniform template over all $n$, that $\lambda_n \geq 0$?
 The results of this paper say that a strategy based on any \emph{fixed
-finite} collection of Li values cannot decide the target predicate even on
+finite initial segment} of Li values cannot decide the target predicate even on
 the simplified class $\Hsym$ of finite symmetric multisets.  A proof scheme
 that separately handles each $n$ but uses a uniform method reduces to the
 full Li criterion and is not blocked.
@@ -128,15 +129,20 @@ pair $(\mathcal{Z}_+, \mathcal{Z}_-) \in X^2$ such that:
 \end{enumerate}
 The obstruction is \emph{constructive} if the pair is explicitly computable;
 otherwise it is \emph{existential}.
-In Theorems~A--C, $X=\Hsym$ (finite symmetric zero multisets) and
-$O=\Ofinite^{(K)}$; in Corollary~D, $X=\mathcal{H}_S$ (the Helson class,
-\S\ref{sec:helson}).
+Theorem~\ref{thm:A} gives an exact information obstruction for $\Ofinite^{(m)}$
+($X=\Hsym$, $O=\Ofinite^{(m)}$); Theorem~\ref{thm:B} is an approximation statement
+(no uniform margin); Theorem~\ref{thm:C} concerns refinement incomparability between
+$\Ofinite^{(K)}$ and $\Otheta$; in Corollary~\ref{cor:D}, $X=\mathcal{H}_S$ (the Helson class,
+\S\ref{sec:helson}); Corollary~\ref{cor:E} gives an exact obstruction for the joint
+map $\Ofinite^{(K)}\times\Otheta$.
 An obstruction pair shows that no $f : Y \to \{0,1\}$ satisfies
 $P(\mathcal{Z}) = f(O(\mathcal{Z}))$ for all $\mathcal{Z}\in\Hsym$.
 
 \begin{remark}[Scope of these results]
-All obstructions are proved for the class $\Hsym$ of \emph{finite}
-symmetric multisets, not for the actual zero set of $\zeta$.  The actual
+Theorems~\ref{thm:A}--\ref{thm:C} and Corollary~\ref{cor:E} are proved for the class $\Hsym$ of
+\emph{finite} symmetric multisets (Corollary~\ref{cor:D} concerns the Helson
+class $\mathcal{H}_S$); none of these results apply directly to the
+actual zero set of~$\zeta$.  The actual
 zero set is infinite, satisfies the Riemann--von Mangoldt counting
 asymptotic, and is governed by the Hadamard product, functional equation,
 Gamma factor, and Euler product --- none of which are imposed on $\Hsym$.
@@ -220,15 +226,19 @@ Weil-type tests is addressed by Open Problem~2.
 The Selberg trace formula connects eigenvalues to geodesic lengths;
 see Hejhal~\cite{Hejhal1976}.  Connes--Consani--Moscovici~\cite{CCM2025}
 construct zeta spectral triples whose Dirac-operator regularized determinant
-satisfies (Theorem~5.10, conditionally on the lowest eigenfunction
-$\xi_{\lambda,N}$ of the finite-truncation Weil form~$QW_\lambda^N$ being
-simple and even)
+satisfies (Theorem~5.10, under the hypothesis that the lowest eigenvalue of
+the finite-truncation Weil form~$QW_\lambda^N$ is simple with even eigenvector,
+normalized by $\delta_N(\xi_{\lambda,N})=1$; self-adjointness is a conclusion
+of the theorem)
 $\det_{\mathrm{reg}}(D_{\log}^{(\lambda,N)}-z)=-i\lambda^{-iz}\hat{\xi}_{\lambda,N}(z)$.
-Two further open steps are: establishing the simple-even property for the
-continuum lowest eigenfunction $\xi_\lambda$ (the $N\to\infty$ limit), and
-establishing that the cut-off kernel~$k_\lambda$ converges sufficiently
-to~$\xi_\lambda$ so that the suitably normalized determinants recover the
-Riemann $\Xi$ function.
+The convergence $\hat{k}_\lambda\to\Xi$ for $|\operatorname{Im}z|<\tfrac12$
+is established in Lemma~7.3.  The open steps named in \S8 of~\cite{CCM2025} are: (i)~establishing that
+the lowest eigenvalue of the continuous $QW_\lambda$ is simple with even
+eigenfunction; and (ii)~verifying that $k_\lambda$ approximates the
+corresponding normalized lowest eigenfunction sufficiently accurately to
+recover~$\Xi$.  The decomposition of step~(i) into a finite-$N$
+simplicity/evenness claim and an $N\to\infty$ continuum limit is the
+authors' refinement, not an explicit item in~\S8.
 
 \textbf{Helson class and Dirichlet series.}
 Helson~\cite{Helson1969} introduced random Dirichlet series with unimodular
@@ -305,8 +315,8 @@ For $\mathcal{Z} \in \Hsym$ and $j \geq 1$, define
   \Li_j(\mathcal{Z}) = 2 \sum_{\rho \in \mathcal{Z}} \varphi_j(\rho).
 \]
 Here $\varphi_j$ is the standard Li test from Definition~\ref{def:Listd}.
-This sum is real.  Indeed, conditions~\ref{itm:conj} and~\ref{itm:fe}
-together imply that $\mathcal{Z}$ is closed under complex conjugation
+This sum is real.  Indeed, condition~\ref{itm:conj}
+implies that $\mathcal{Z}$ is closed under complex conjugation
 ($\rho\mapsto\bar\rho$), so the sum comes in conjugate orbits:
 non-real atoms pair as $\{\rho,\bar\rho\}$, contributing
 $\varphi_j(\rho)+\varphi_j(\bar\rho) = 2\re\varphi_j(\rho) \in \RR$
@@ -449,6 +459,7 @@ uniform in $\sigma_0\in[0,1]$.
 \end{proof}
 
 \begin{remark}
+\label{rem:q1sign}
 The main term $4j^2/T^2$ is independent of $\sigma_0$.  For $j=1$:
 \[
   q_1(T) = 4\Bigl[\frac{\sigma_0}{\sigma_0^2+T^2}
@@ -560,14 +571,16 @@ $r_k = |z_k| = 2/\sqrt{1+4t_k^2}$ and $\alpha_k = \arctan(2t_k)$, so
 \]
 Unlike the standard Li case, where $w_k = 1-\rho_k^{-1}$ lies exactly on the
 unit circle and the Chebyshev identity $\re(z^j)=T_j(\re z)$ applies for
-$|z|=1$, here $r_k < 1$ and the $j$-dependent factor $r_k^j$ cannot be
+$|z|=1$, here $r_k$ is generally not equal to~$1$ ($r_k<1$ iff $t_k>\sqrt{3}/2$,
+e.g.\ $r_k=\sqrt{2}>1$ when $t_k=1/2$), and the $j$-dependent factor $r_k^j$ cannot be
 absorbed into a Chebyshev evaluation; the reduction of
 Lemma~\ref{lem:Crank} does not apply.  The matrix $[C_{jk}] = 4[\re(z_k^j)]$
 is the real part of the Vandermonde matrix in $z_1,\ldots,z_m$; whether
 it is non-singular for given nodes $z_k = \rho_k^{-1}$ requires a separate
 argument and does not follow from ``distinct $\cos\alpha_k$'' alone.
-For non-consecutive exponents $\{k_j\}$, the matrix is a sub-Vandermonde
-evaluated at $z_k$; non-singularity over $\QQ$ requires a separate
+For non-consecutive exponents $\{k_j\}$, the matrix is the real part of a
+sub-Vandermonde evaluated at $z_k$ (i.e.\ $C_{jk}=4\operatorname{Re}(z_k^{k_j})$);
+taking the real part may destroy invertibility, so non-singularity requires a separate
 verification for each choice of exponents and nodes.
 \end{remark}
 
@@ -582,7 +595,8 @@ evaluated at rational $T$), so $q(T) \in \QQ^m$.  Set
 \[
   \beta = -C^{-1} q(T) \in \QQ^m.
 \]
-By Lemma~\ref{lem:qasympt}, $q(T) \neq 0$ (since $q_1(T) > 0$),
+Since $q_1(T) > 0$ for all $T>0$ (exact formula in
+Remark~\ref{rem:q1sign}, both terms positive), $q(T) \neq 0$,
 so $\beta \neq 0$.
 Let $R = \operatorname{lcm}(\text{denominators of } \beta_1,\ldots,\beta_m)
 \geq 1$ and $n_k = R\beta_k \in \ZZ$.
@@ -681,6 +695,7 @@ Riemann--von Mangoldt counting asymptotics.
 % Auxiliary corollary; requires Theorem~\ref{thm:B} (given any $\mathcal{Z}_+$, construct a matching $\mathcal{Z}_-$)
 \begin{corollary}[Positivity threshold]
 \label{cor:B1Li}
+Fix $K\ge 1$.
 Let $\mathcal{Z}_+ \in \Hsym$ satisfy $P(\mathcal{Z}_+)=1$ and
 $\Li_j(\mathcal{Z}_+) > 0$ for $j=1,\ldots,K$.  Then there exists
 $\mathcal{Z}_- \in \Hsym$ with $P(\mathcal{Z}_-) = 0$ and
@@ -710,6 +725,7 @@ where the positivity hypothesis holds.
 %%--------------------------------------------------------------------
 
 \subsection{Setting: Helson zeta functions}
+\label{sec:helson}
 
 For a completely multiplicative unimodular function
 $\chi : \mathbb{N} \to \TT$ ($|\chi(p)| = 1$ for all primes $p$), define
@@ -720,11 +736,12 @@ $\chi : \mathbb{N} \to \TT$ ($|\chi(p)| = 1$ for all primes $p$), define
 convergent for $\re s > 1$.  For a finite prime cutoff $P_0$, say $\chi$
 is \emph{$P_0$-standard} if $\chi(p) = 1$ for all primes $p \leq P_0$.
 
-Let $\mathcal{H}_S$ denote the class of Helson zeta functions $\zeta_\chi$
-that admit a single-valued meromorphic continuation to some connected open
-set $U\supset\{\re s>1\}\cup S$, where $S=\{0<\re s<1\}$.  Define the target predicate
-$P_S(\zeta_\chi) = 1$ iff every zero $\rho \in S$ of $\zeta_\chi$
-satisfies $\re\rho = 1/2$.
+Set $U_0 := \{\re s > 0\}$.  Let $\mathcal{H}_S$ denote the class of
+Helson zeta functions $\zeta_\chi$ that admit a single-valued meromorphic
+continuation to the fixed half-plane $U_0$ (both constructions in
+Corollary~\ref{cor:D} satisfy this condition).  Set $S := \{0 < \re s < 1\}$
+and define the target predicate $P_S(\zeta_\chi) = 1$ iff every zero
+$\rho \in S$ of $\zeta_\chi$ satisfies $\re\rho = 1/2$.
 
 \begin{remark}
 The Helson coefficients satisfy $|\chi(n)| = 1$ for all $n$, which
@@ -761,7 +778,7 @@ By Andersson~\cite[Theorem~5]{Andersson2024} applied with $U = \{\re s > 0\}$
 and the signed divisor $D = [z_1]$ (a simple zero at $z_1$, $\re z_1 \neq 1/2$),
 there exists a completely
 multiplicative unimodular $\chi$ such that $\zeta_\chi$ extends
-meromorphically to $S$ with a simple zero at $z_1$.
+meromorphically to $U_0=\{\re s>0\}$ with a simple zero at $z_1$.
 Define
 \[
   \tilde\chi(p) =
@@ -778,7 +795,9 @@ Since $|\chi(p)| = 1$ and $|p^{-s}| = p^{-\re s}$, the zeros
 of $1-\chi(p)p^{-s}$ satisfy $|p^{-s}|=1$, i.e.\ $\re s = 0$;
 similarly the zeros of $1-p^{-s}$ satisfy $\re s = 0$.
 So $R$ extends to a holomorphic, nonvanishing function on
-$\{\re s > 0\} \supset S$.  Since $R(z_1) \neq 0$, $\zeta_{\tilde\chi}$
+$\{\re s > 0\} \supset S$.  Thus $\zeta_{\tilde\chi} = \zeta_\chi \cdot R$
+extends meromorphically to $U_0$, so $\zeta_{\tilde\chi}\in\mathcal{H}_S$.
+Since $R(z_1) \neq 0$, $\zeta_{\tilde\chi}$
 has a zero at $z_1$, hence $P_S(\zeta_{\tilde\chi}) = 0$.
 
 \textbf{Part (b): constructing $P_S=1$.}
@@ -794,8 +813,13 @@ finite-factor modification:
 extended completely multiplicatively.  Then $\chi^+$ is $P_0$-standard,
 and
 $\zeta_{\chi^+} = \zeta_{\chi_0} \cdot R_0$
-where $R_0(s) = \prod_{p\le P_0}(1-\chi_0(p)p^{-s})/(1-p^{-s})$ is
-holomorphic and nonvanishing on $S$ (same argument as part~(a)).
+where $R_0(s) = \prod_{p\le P_0}(1-\chi_0(p)p^{-s})/(1-p^{-s})$.
+By the same Euler-factor argument as part~(a), the zeros of each factor
+$(1-\chi_0(p)p^{-s})$ and $(1-p^{-s})$ satisfy $\re s = 0$, so $R_0$
+extends to a holomorphic, nonvanishing function on $\{\re s > 0\} = U_0$.
+Since $\zeta_{\chi_0}$ is entire (hence extends holomorphically to $U_0$),
+$\zeta_{\chi^+} = \zeta_{\chi_0}\cdot R_0$ extends holomorphically to $U_0$,
+so $\zeta_{\chi^+}\in\mathcal{H}_S$.
 Since $\zeta_{\chi_0}$ has no zeros in $S$ and $R_0$ has none either,
 $\zeta_{\chi^+}$ has no zeros in $S$, hence $P_S(\zeta_{\chi^+}) = 1$.
 \end{proof}
@@ -839,7 +863,7 @@ See Remark~\ref{rem:theta-not-P} for $P$-separation by $\Otheta$
 (Definition~\ref{def:Otheta}).
 \end{remark}
 
-\subsection{Witness 1: \texorpdfstring{$\Ofinite^{(K)} \npreceq \Otheta$}{O-fin does not refine O-theta}}
+\subsection{Witness 1: \texorpdfstring{$\Ofinite^{(K)} \npreceq \Otheta$}{O-theta does not refine O-fin}}
 
 For $T > 0$ and $\sigma_0 \in (1/2, 1)$, the multiset $Q(\sigma_0, T)$
 has all imaginary parts equal to $\pm T$, so $\Otheta(Q(\sigma_0, T))$
@@ -890,7 +914,7 @@ $t_1 = 1/24$, $t_2 = 9/40$, $T = 3/8$ gives $G_2 = 0$
 (verified by exact computation).
 \end{remark}
 
-\subsection{Witness 2: \texorpdfstring{$\Otheta \npreceq \Ofinite^{(K)}$}{O-theta does not refine O-fin}}
+\subsection{Witness 2: \texorpdfstring{$\Otheta \npreceq \Ofinite^{(K)}$}{O-fin does not refine O-theta}}
 
 \begin{proof}[Proof of $\Otheta \npreceq \Ofinite^{(K)}$]
 Fix $K \geq 1$.  Choose rational $0 < t_1 < \cdots < t_K < T < d_1$
@@ -970,7 +994,7 @@ above all sampling levels.
 \subsection{What the results say together}
 
 \begin{itemize}
-\item Theorems~A and~B together: \emph{no fixed finite collection of
+\item Theorems~A and~B together: \emph{no fixed finite initial segment of
   standard Li values, however large, can determine $P$ on $\Hsym$.}
   Theorem~\ref{thm:A} achieves exact non-determination; Theorem~\ref{thm:B} says the gap
   cannot be bounded away from zero.  In particular, Corollary~\ref{cor:B1Li} shows
