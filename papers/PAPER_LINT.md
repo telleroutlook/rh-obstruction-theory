@@ -616,6 +616,192 @@ without the identification having been declared.
 
 ---
 
+### P33 — Statement-proof domain mismatch: lemma statement must cover the full domain used by proof and downstream
+
+When a proof establishes a result for a **broader domain** than the lemma statement claims
+(e.g., proof uses only the fact that entries are distinct positive reals, but statement
+restricts to positive rationals), and downstream theorems use the result over the broader
+domain, the statement must be upgraded to match.
+
+Additionally: if downstream usage relies on **connectivity** of the domain (e.g., for
+analytic continuation, an implicit function theorem application, or "$\Omega$ is connected"
+to conclude that a zero-set is isolated), that connectivity must be stated as an explicit
+hypothesis or conclusion in the lemma, not left implicit.
+
+```bash
+# Step 1: Find every lemma whose proof contains a domain-relevant word
+grep -n '\\begin{lemma}\|\\begin{proposition}' "$TEX" | while IFS=: read lineno rest; do
+  # Look in the 40 lines of proof following this lemma
+  proof=$(sed -n "${lineno},$((lineno+40))p" "$TEX")
+  echo "$proof" | grep -qi 'real\|positive real\|\\mathbb{R}\|distinct.*real' && \
+    echo "Line $lineno: proof mentions real — check statement domain"
+done
+# Step 2: Find downstream uses outside the lemma that reference its name
+grep -n 'Lemma.*[0-9]\.' "$TEX" | grep -v '\\begin{lemma}\|\\begin{proof}' | head -20
+```
+
+**Manual check:** for each flagged lemma, (a) read the proof and record the actual domain
+used; (b) read the statement and record the claimed domain; (c) find every downstream
+`\ref` site; (d) check the downstream site requires the actual (broader) domain;
+(e) if yes, upgrade the statement.  Also verify the domain is explicitly stated as
+connected wherever a connectivity argument is used.
+
+**Precedent (paper-A):** Lemma 3.1 stated for positive rationals; proof only needed distinct
+positive reals; lines 895–908 used it over the open real set $\Omega$.  The "Vandermonde is
+real" argument was complete — only the statement was too narrow.
+
+---
+
+### P34 — Spectral/counting definition domain covers every operator sub-class that uses it
+
+When formal spectral invariants $(N_H, Z_H, \operatorname{spec}_\times(H),$ heat trace, etc.)
+are defined for a **restricted operator class** (e.g.\ non-negative, or positive-definite),
+verify that **every** operator appearing in a theorem that invokes those invariants provably
+belongs to that restricted class — or extend the definition to a broader class (e.g.\
+lower-semibounded with finitely many negative eigenvalues) and state the extension explicitly.
+
+```bash
+# Find all definitions of spectral invariants
+grep -n 'N_H\|Z_H\|\\operatorname{spec}_\\times\|\\operatorname{spec}' "$TEX" \
+  | grep '\\begin{definition}\|:=\|\\coloneqq' | head -20
+# Find all operator classes in definitions / theorem statements
+grep -n '\\mathcal{C}\|\\mathcal{H}\|H_F\|\\Csub\|lower.semibounded\|semi.*bound' "$TEX" | head -20
+```
+
+**Manual check:** (a) read the definition block that introduces each spectral invariant and
+record the stated domain of $H$; (b) for each theorem using that invariant, identify the
+operator class $\mathcal{C}$; (c) verify $\mathcal{C}$ satisfies the domain restriction.
+If $\mathcal{C}$ admits finitely many negative eigenvalues but the definition requires
+non-negativity, add a sentence:
+
+> For any lower-semibounded self-adjoint operator with compact resolvent, list its
+> eigenvalues $\lambda_1 \le \lambda_2 \le \cdots$ with multiplicity and apply the
+> same definitions of $N_H$ and $Z_H$.
+
+**Precedent (paper-B):** $N_H$, $Z_H$, $\operatorname{spec}_\times(H)$ defined for
+non-negative $H$; but $H_F\in\mathcal{C}_\mathrm{sub}$ can have finitely many negative
+eigenvalues.  Finite negative spectrum does not affect the asymptotic conclusion, but the
+definition must explicitly permit it.
+
+---
+
+### P35 — Parameterized class superscripts re-quantified in dependent theorems; local symbol constants localized
+
+**Part A — parameter re-quantification.**
+When a definition introduces a class with superscript/subscript parameters
+(e.g.\ $\mathcal{C}_\mathrm{sub}^{m,K}(M)$), every theorem or corollary that produces or
+asserts membership in the class must either (a) universally quantify all parameters
+("for all $m\ge 1$, $K\ge 1$, $M$ compact without boundary…") or (b) reference a fixed
+previously-named instance.  A theorem header that drops the superscripts leaves the
+parameters ambiguous.
+
+```bash
+# Find class names with potential superscripts used in theorem/corollary blocks
+grep -n '\\begin{\(theorem\|corollary\|proposition\)}' "$TEX" | while IFS=: read L _; do
+  window=$(sed -n "${L},$((L+10))p" "$TEX")
+  echo "$window" | grep -qE '\\mathcal\{C\}|\\mathcal\{H\}|\\Csub' && \
+    echo "Line $L: check class parameters are re-quantified"
+done
+```
+
+**Part B — local vs global symbol constants.**
+Symbol/PDE estimates of the form $|(\partial^\alpha_x\partial^\beta_\xi a)(x,\xi)| \le C_{\alpha\beta}$
+are valid only locally when the symbol $a$ is defined on a coordinate patch $U$.  The
+constant must be written $C_{\alpha\beta,U_0}$ for every $U_0 \Subset U$, not a single
+global constant, unless the manifold is compact and the operator is globally defined.
+
+```bash
+grep -n 'C_{\\\\\alpha\|C_\\alpha\|symbol.*estimate\|uniform.*bound.*symbol' "$TEX"
+```
+
+**Manual check (Part B):** for each symbol estimate, verify whether $a(x,\xi)$ is defined
+on a coordinate patch or globally; if on a patch, confirm the bound writes $C_{\alpha\beta,U_0}$
+and states "$U_0\Subset U$."
+
+**Precedent (paper-B):** $\mathcal{C}_\mathrm{sub}$ used in Theorem D$'$ without
+re-quantifying $m,K,M$; local symbol estimate wrote $C_{\alpha\beta}$ for a
+coordinate-patch symbol.
+
+---
+
+### P36 — Existence vs construction: citation qualifier when a specific object is needed
+
+When a theorem has an **existence conclusion** (proved by compactness, contradiction, or a
+non-constructive fixed-point argument) but a downstream proof uses a **specific object**
+produced by that theorem (e.g.\ a particular sequence of parameters, a specific certificate,
+or an explicit formula from the construction), the citation must be qualified:
+
+> By **the construction in the proof of** Theorem~X (equivalently, equation~$(\star)$), …
+
+A bare "By Theorem~X" in that context implies only that some object with the stated
+properties exists, not that the downstream argument has access to a particular one.
+
+```bash
+# Find all bare "By Theorem" / "by Theorem" citations not followed by "proof" or "construction"
+grep -n 'By Theorem\|by Theorem\|By Corollary\|by Corollary' "$TEX" \
+  | grep -v 'proof\|construction\|equation\|formula' | head -30
+```
+
+**Manual check:** for each hit, determine whether the downstream argument uses only the
+*existence* of an object or whether it relies on a *specific* object produced by the proof.
+If the latter, add "the construction in the proof of" or cite the specific equation.
+
+**Precedent (paper-A):** line 922 cited "By Theorem~A" but needed the specific parameters
+from the Theorem~A construction (equation $(\star)$); the existence statement alone did not
+supply those parameters.
+
+---
+
+### P37 — Degenerate-parameter case convention explicit in counting/combinatorial formulas
+
+When a counting lemma, quartet asymptotic, or combinatorial observation formula admits a
+**degenerate parameter value** where the geometric object collapses or a multiplicity changes
+(e.g.\ $\sigma_0=1/2$ makes a four-point orbit collapse to two on-line points each appearing
+with multiplicity~2; $h=0$ makes a test trivial), the multiset interpretation and the
+resulting formula for that special case must be stated **explicitly** — either in the theorem
+as an additional case, or in an immediately adjacent remark.
+
+```bash
+# Find "quartet" / "Q(" / "L(T)" and orbit formulas
+grep -n 'quartet\|Q(1/2\|\\sigma_0=1/2\|degenerate\|\\sigma_0\\ne 1/2' "$TEX" | head -20
+# Find formulas that use a parameter that could be zero or a boundary value
+grep -n 'multiset\|orbit.*multiplicity\|with multiplicity\|counted with' "$TEX" | head -20
+```
+
+**Manual check:** for each counting formula, list all parameter boundary values allowed by
+the stated domain; for each boundary value, work out what the formula gives and whether
+that agrees with the geometric meaning.  If a special case needs a separate sub-formula or
+a "multisets" qualifier, add it.
+
+**Precedent (paper-A):** $Q(\sigma_0,T)$ for $\sigma_0=1/2$ collapses to two on-line points
+with multiplicity~2 each, giving $Q(1/2,T)=2L(T)$; this was not stated, leaving the
+multiplicity convention ambiguous.
+
+---
+
+### P38 — Self-adjointness inner product named at every invocation
+
+When a theorem asserts, or cites a result asserting, that an operator is **self-adjoint**,
+the **inner product** on which self-adjointness holds must be named — especially when a
+non-standard inner product (e.g.\ Weil quadratic form, Sobolev form, graph inner product)
+is in use.  A bare "is self-adjoint on $\mathcal{H}$" is incomplete if $\mathcal{H}$ can
+be equipped with more than one natural inner product.
+
+```bash
+grep -n 'self-adjoint\|self.adjoint\|hermitian\|symmetric.*operator' "$TEX" | head -30
+```
+
+**Manual check:** for each hit, identify the inner product in force.  If the inner product
+is not the standard $L^2$ inner product, verify the text names it.  For cited results
+(e.g.\ CCM Theorem 5.10), open the source and confirm the inner product used in the
+citation matches the inner product used in the paper.
+
+**Precedent (paper-B):** CCM Theorem 5.10 asserts self-adjointness on $E_N'\oplus E_N^\perp$
+equipped with the **Weil quadratic form-induced inner product**, not the standard $L^2$
+inner product; the description omitted this, making "self-adjoint" ambiguous.
+
+---
+
 ## Running order for pre-submission
 
 1. `pdflatex` — fix all errors and undefined-ref warnings (P4)
@@ -638,13 +824,19 @@ without the identification having been declared.
 18. Strong number-theoretic assertions (P20)
 19. Analogy claim refutation check (P21)
 20. External theorem parameter instantiation (P22)
-21. Operator definition prerequisite ordering (P23)
-22. Literature formula descriptions vs source (P25)
-23. Optional theorem title duplication (P24)
-24. Reference operator symbol class (P26)
-25. Tauberian theorems used bidirectionally (P27)
-26. Single-letter symbol conflicts (P28)
-27. `\texorpdfstring` bookmark semantic correctness (P29)
-28. Free variable binding in theorem statements (P30)
-29. "Same argument" conclusion completeness (P31)
-30. Friedrichs realization identification after definition (P32)
+21. **Statement-proof domain mismatch — statement ≥ proof domain (P33)**
+22. Operator definition prerequisite ordering (P23)
+23. **Spectral definition domain covers all operator sub-classes (P34)**
+24. Literature formula descriptions vs source (P25)
+25. Optional theorem title duplication (P24)
+26. Reference operator symbol class (P26)
+27. **Parameterized class superscripts re-quantified; local symbol constants (P35)**
+28. **Existence vs construction citation qualifier (P36)**
+29. Tauberian theorems used bidirectionally (P27)
+30. Single-letter symbol conflicts (P28)
+31. `\texorpdfstring` bookmark semantic correctness (P29)
+32. Free variable binding in theorem statements (P30)
+33. "Same argument" conclusion completeness (P31)
+34. Friedrichs realization identification after definition (P32)
+35. **Degenerate-parameter case convention in counting formulas (P37)**
+36. **Self-adjointness inner product named at invocation (P38)**
