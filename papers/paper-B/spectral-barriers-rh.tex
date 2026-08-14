@@ -30,6 +30,10 @@
 \author{Lin Tao}
 \date{2026}
 
+%% Typesetting tolerance
+\tolerance=1500
+\emergencystretch=2em
+
 \begin{document}
 
 \begin{abstract}
@@ -473,7 +477,7 @@ $\|u\|^2_{H^{m/2}}\le c_0^{-1}(\langle Pu,u\rangle+C_1\|u\|^2)$,
 so the interpolation can be absorbed into $\langle Pu,u\rangle$.
 The pseudodifferential Sobolev
 mapping theorem gives
-$Q_0\colon H^{(m-1+\varepsilon)/2}(M)\to H^{-(m-1+\varepsilon)/2}(M)$,
+$Q_0\colon H^{(m-1+\varepsilon)/2}(M)\to\allowbreak H^{-(m-1+\varepsilon)/2}(M)$,
 so
 \[
   |q_{Q_0}[u]|=|\langle Q_0 u,u\rangle|
@@ -704,6 +708,7 @@ Open questions:
   characterization), does the counting law $N_H(T)\sim CT\log T$ hold?
 \end{enumerate}
 
+{\sloppy
 \begin{thebibliography}{99}
 
 \bibitem{RS1975}
@@ -792,5 +797,5 @@ counting laws,
 \href{https://doi.org/10.1016/j.bulsci.2026.103824}{doi:10.1016/j.bulsci.2026.103824}.
 
 \end{thebibliography}
-
+}
 \end{document}

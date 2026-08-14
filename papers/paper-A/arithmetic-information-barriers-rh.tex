@@ -48,6 +48,10 @@
 \newcommand{\TT}{\mathbb{T}}
 \newcommand{\incomp}{\mathbin{\bowtie}}
 
+%% Typesetting tolerance — allows up to 2em of extra stretch before overfull
+\tolerance=1500
+\emergencystretch=2em
+
 \begin{document}
 
 \title[Finite Li-Statistic Collisions]{Finite
@@ -536,8 +540,8 @@ and $q(T) \in \RR^m$.
 \label{lem:Crank}
 For distinct positive real numbers $t_1, \ldots, t_m$, the matrix
 $C = (C_{jk})$ with $C_{jk} = 4(1 - T_j(x_k))$,
-where $x_k = (4t_k^2 - 1)/(4t_k^2+1)$ and $T_j$ is the
-degree-$j$ Chebyshev polynomial, satisfies $\det C \neq 0$.
+where $x_k = (4t_k^2-1)/(4t_k^2+1)$ and $T_j$ is the
+Chebyshev polynomial of degree~$j$, satisfies $\det C \neq 0$.
 If moreover $t_k \in \QQ$, then $C \in \QQ^{m\times m}$.
 \end{lemma}
 
@@ -609,8 +613,8 @@ evaluated at rational $T$), so $q(T) \in \QQ^m$.  Set
 Since $q_1(T) > 0$ for all $T>0$ (exact formula in
 Remark~\ref{rem:q1sign}, both terms positive), $q(T) \neq 0$,
 so $\beta \neq 0$.
-Let $R = \operatorname{lcm}(\text{denominators of } \beta_1,\ldots,\beta_m)
-\geq 1$ and $n_k = R\beta_k \in \ZZ$.
+Let $R\ge 1$ be the least common multiple of the denominators of
+$\beta_1,\ldots,\beta_m$, and set $n_k = R\beta_k \in \ZZ$.
 Then $Cn + Rq(T) = 0$, i.e.\ \eqref{eq:collision} holds.
 
 Set $B = \max_k |n_k| \geq 1$.  Then $B + n_k \geq 0$ for all~$k$.
@@ -1084,6 +1088,7 @@ counting asymptotics, or Hadamard/functional-equation/Euler-product constraints.
   $P = 1$ from $P = 0$?
 \end{enumerate}
 
+{\sloppy
 \begin{thebibliography}{99}
 
 \bibitem{Andersson2024}
@@ -1150,5 +1155,5 @@ functions},
 J.\ Anal.\ Math.~\textbf{141} (2020), 331--381.
 
 \end{thebibliography}
-
+}
 \end{document}

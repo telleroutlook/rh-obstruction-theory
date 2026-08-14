@@ -1401,6 +1401,101 @@ completeness of the asymptotic expansion formally unquantified.
 
 ---
 
+### P52 — Preamble must include `\emergencystretch` and `\tolerance` settings
+
+Long-form mathematics papers routinely contain inline expressions that exceed the text
+width unless TeX is given extra line-breaking flexibility.  The default `\tolerance=200`
+is appropriate for prose but not for symbol-heavy text; without
+`\emergencystretch`, any long inline formula becomes a potential overfull hbox.
+
+Recommended preamble additions (after `\usepackage` declarations):
+
+```latex
+%% Typesetting tolerance — prevents most minor overfull hboxes from inline math
+\tolerance=1500
+\emergencystretch=2em
+```
+
+`\tolerance=1500` allows slightly looser word spacing before TeX tries the next
+pass; `\emergencystretch=2em` adds up to 2em of extra stretch per line in the
+emergency pass.  Together they eliminate overfulls up to ~9pt without manual
+intervention.
+
+```bash
+grep -n 'emergencystretch\|tolerance' "$TEX" | head -5
+```
+
+**Manual check:** if neither `\emergencystretch` nor `\tolerance` appears in the
+preamble, add both.  If overfulls larger than 10pt persist after adding them,
+those need manual restructuring (P54).
+
+**Precedent (both papers):** adding `\tolerance=1500\emergencystretch=2em` eliminated
+six out of eight overfull warnings in paper-A and all small overfulls in paper-B.
+
+---
+
+### P53 — `\begin{thebibliography}` must be wrapped in `{\sloppy ... }` or equivalent
+
+Bibliography entries regularly produce underfull or overfull `\hbox` warnings from
+long journal names, arXiv identifiers, DOI strings, and multi-word titles that TeX
+cannot hyphenate.  Wrapping the bibliography in `{\sloppy\begin{thebibliography}...
+\end{thebibliography}}` suppresses these warnings by relaxing the justification
+constraint within the bibliography only.
+
+```bash
+# Check whether \sloppy (or \raggedright) precedes \begin{thebibliography}
+grep -n 'sloppy\|raggedright' "$TEX" | grep -v '%'
+grep -n '\\begin{thebibliography}' "$TEX"
+```
+
+**Manual check:** the `\sloppy` (or `{\sloppy ... }` group) must appear *before*
+`\begin{thebibliography}`.  If using BibTeX/BibLaTeX, wrap the `\printbibliography`
+call similarly.
+
+**Precedent (both papers):** the Andersson arXiv entry and the CCM entry in paper-A
+produced underfull hbox warnings (badness 3668 and 6300); wrapping the bibliography
+in `{\sloppy ... }` resolved both.
+
+---
+
+### P54 — Long inline operator expressions must be displayed
+
+Inline math containing `\operatorname{foo}(\text{...}, \beta_1,\ldots,\beta_m)` or
+similar compound expressions (operator name + text argument + subscripted parameters)
+almost always exceeds the line width and produces large overfull hboxes (>10pt) that
+`\emergencystretch` alone cannot fix.  These must be moved to a displayed equation.
+
+Common culprits:
+- `$R = \operatorname{lcm}(\text{denominators of }\beta_1,\ldots,\beta_m) \ge 1$`
+- `$\sigma(H)\colon H^{s_1}(M) \to H^{s_2}(M)$ with $s_1-s_2=m$`
+- Long Sobolev mapping: `$Q_0\colon H^{(m-1+\varepsilon)/2}(M)\to H^{-(m-1+\varepsilon)/2}(M)$`
+
+```bash
+# Grep for long inline operatorname or Sobolev norm patterns
+grep -n '\\operatorname{.*}(\\text\|\\operatorname.*ldots\|H\^{.*varepsilon' "$TEX" | head -20
+# Also check for inline \colon mappings between Sobolev spaces
+grep -n '\\colon H\^{' "$TEX" | head -10
+```
+
+**Manual check:** for each match, estimate the rendered width.  If the expression
+contains a text argument (`\text{...}`) inside `\operatorname{...}(...)`, or a
+Sobolev mapping with fractional exponents, replace with prose + display:
+
+Instead of:
+```latex
+Let $R = \operatorname{lcm}(\text{denominators of }\beta_1,\ldots,\beta_m)\ge 1$.
+```
+Write:
+```latex
+Let $R\ge 1$ be the least common multiple of the denominators of $\beta_1,\ldots,\beta_m$.
+```
+or display the definition.
+
+**Precedent (paper-A):** `\operatorname{lcm}(\text{denominators of }\beta_1,\ldots,\beta_m)`
+caused a 15.17pt overfull; rewriting as prose eliminated it.
+
+---
+
 ## Running order for pre-submission
 
 ### Phase 0 — Compilation gate (must pass before any manual review)
@@ -1476,6 +1571,11 @@ completeness of the asymptotic expansion formally unquantified.
 55. **Rational vs polynomial: verify algebraic type of analytic functions (P49)** — grep "polynomial in" near rational/analytic expressions
 56. **Counting-function / asymptotic equality domain qualifier (P50)** — grep `N_H\|N_{\|counting function` near `=` without `\Lambda\ge` or `\to\infty`
 57. **Unquantified bound variable in definition body (P51)** — grep `\begin{definition}` blocks for free variables (index N, parameter k) without "for every" or "for all" quantifier
+
+### Phase 8 — Typesetting hygiene
+58. **Preamble `\emergencystretch` and `\tolerance` (P52)** — grep preamble for these settings
+59. **Bibliography wrapped in `{\sloppy}` (P53)** — grep for `\sloppy` before `\begin{thebibliography}`
+60. **Long inline operator expressions displayed (P54)** — grep `\operatorname.*\text` and long `\colon H^{` mappings
 
 ---
 

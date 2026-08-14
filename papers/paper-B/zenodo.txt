@@ -1,0 +1,120 @@
+== ZENODO UPLOAD — paper-B ==
+Prepared: 2026-08-14
+
+----------------------------------------------------------------------
+UPLOAD TYPE
+----------------------------------------------------------------------
+Type:             Publication
+Publication type: Preprint
+
+----------------------------------------------------------------------
+BASIC INFORMATION
+----------------------------------------------------------------------
+Title:
+  Spectral Exclusion Results for Operators Whose Eigenvalue Multiset
+  Would Equal the Riemann Zero Ordinates
+
+Authors:
+  Family name:  Tao
+  Given name:   Lin
+  Affiliation:  (leave blank or fill in if submitting with affiliation)
+  ORCID:        (fill in if available)
+
+DOI:            (assigned by Zenodo on upload)
+Publication date: 2026
+
+----------------------------------------------------------------------
+DESCRIPTION  (plain text, paste into Zenodo's "Description" box)
+----------------------------------------------------------------------
+We prove two spectral exclusion results showing that no operator in a
+natural geometric class can have its eigenvalue multiset equal to
+{gamma_n}, the positive ordinates of the nontrivial zeros of the
+Riemann zeta function.
+
+Theorem D: No positive classical elliptic pseudodifferential operator
+of order m > 0 on any closed smooth manifold of dimension d >= 1 has
+eigenvalue multiset {gamma_n}. The Weyl counting law forces a
+pure-power leading term N_H(T) ~ C_H * T^(d/m) in the eigenvalue
+counting function, while the zero-ordinate heat sum satisfies
+Z_zeta(t) ~ (1/(2*pi)) * t^(-1) * log(1/t) as t -> 0+, which has an
+unavoidable logarithmic factor incompatible with any pure-power Weyl
+law.
+
+Theorem D': The exclusion extends to the class C_sub of operators
+whose symbol has a classical positive elliptic principal part and
+strictly lower-order log-polyhomogeneous corrections (in the sense of
+Lesch 1999), via a min-max squeeze argument comparing heat-trace
+asymptotics.
+
+Both results are unconditional; neither assumes nor concludes the
+Riemann Hypothesis. The paper also includes a non-elliptic escape
+example showing the class boundary is sharp, and an open problem
+section on symbol classes whose counting law could match T*log(T).
+
+----------------------------------------------------------------------
+KEYWORDS  (enter each on a separate line or comma-separated)
+----------------------------------------------------------------------
+Weyl law
+spectral theory
+pseudodifferential operators
+Riemann zeta function
+log-polyhomogeneous symbols
+eigenvalue asymptotics
+heat trace
+elliptic operators
+spectral barriers
+Riemann zero ordinates
+Karamata Tauberian theorem
+classical symbol calculus
+
+----------------------------------------------------------------------
+LICENSE
+----------------------------------------------------------------------
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+----------------------------------------------------------------------
+VERSION & LANGUAGE
+----------------------------------------------------------------------
+Version:  1.0
+Language: English
+
+----------------------------------------------------------------------
+COMMUNITIES (optional, Zenodo community slugs)
+----------------------------------------------------------------------
+mathematics
+mathematical-physics
+
+----------------------------------------------------------------------
+RELATED IDENTIFIERS
+----------------------------------------------------------------------
+Type: is_supplemented_by
+Identifier: https://github.com/telleroutlook/rh-obstruction-theory
+Relation: supplementary material (source code, checkers, witnesses)
+Scheme: URL
+
+Type: is_related_to
+Identifier: https://arxiv.org/abs/2511.22755
+Relation: cites (Connes-Consani-Moscovici 2025, Zeta spectral triples)
+Scheme: URL
+
+Type: is_related_to
+Identifier: https://arxiv.org/pdf/dg-ga/9708010
+Relation: cites (Lesch 1999, log-polyhomogeneous calculus)
+Scheme: URL
+
+Type: is_related_to
+Identifier: https://doi.org/10.1016/j.bulsci.2026.103824
+Relation: cites (Watson-Valentinuzzi 2026, differential operator Weyl obstruction)
+Scheme: URL
+
+----------------------------------------------------------------------
+NOTES (for "Additional notes" field)
+----------------------------------------------------------------------
+MSC 2020 classification: 35P20, 47G30, 58J50, 11M06
+
+Companion paper: "Finite Li-Statistic Collisions for Formal Symmetric
+Zero Multisets" (paper-A in the same repository, deposited separately
+on Zenodo).
+
+All proofs are unconditional. The Riemann Hypothesis is neither
+assumed nor concluded anywhere in this paper.
