@@ -298,6 +298,158 @@ diagnostic, not a universal lower bound.
 
 ---
 
+### P18 — Constructive/existential qualifier: definition honors downstream corollaries
+
+When a formal definition contains a qualifier such as "explicit", "constructive",
+"computable", or "effective", every theorem or corollary that claims to produce an
+instance of the class must satisfy the qualifier.  Where a corollary is non-constructive
+(e.g. proved via a pure-existence argument), the definition must explicitly allow
+existential instances, or the qualifier must be removed.
+
+```bash
+# Step 1: find all occurrences of qualifier words
+grep -n 'explicit\|constructive\|computable\|effective' "$TEX" | grep -v '%'
+# Step 2: find all \begin{definition} blocks
+awk '/\\begin\{definition\}/,/\\end\{definition\}/' "$TEX"
+```
+
+**Manual check:** for each definition block containing a qualifier, list every
+downstream theorem/corollary that claims an instance.  Verify each either (a) provides
+an explicit construction, or (b) is labeled "existential" and the definition permits it.
+
+---
+
+### P19 — Parity/symmetry arguments proven to sufficient order
+
+When a proof invokes a parity or symmetry argument to cancel an error term
+(e.g. "the $T^{-k}$ coefficient is purely imaginary, so $\operatorname{Re}[\cdot]$
+has no $T^{-k}$ term"), the expansion must be displayed to **one order beyond** the
+claimed cancellation.  The proof must show explicitly that the next real part is
+non-zero (or state its sign), not leave it implicit.
+
+```bash
+grep -n 'purely imaginary\|purely real\|odd.*order\|even.*order\|imaginary part\|real part.*vanish' "$TEX"
+```
+
+For each hit inside a proof block: check that the asymptotic expansion is carried to
+sufficient order that the cancellation is self-contained.
+
+---
+
+### P20 — No unsupported strong number-theoretic assertions
+
+Assertions such as "is transcendental", "is irrational", "cannot be rational",
+"must be algebraic", "is provably" outside a formal proof require an explicit
+citation or must be weakened to "is not currently known to be rational" (or
+analogous hedge).
+
+```bash
+grep -n 'transcendental\|irrational\|cannot be rational\|must be algebraic\|provably\b' "$TEX" \
+  | grep -iv '%'
+```
+
+**Pass:** every hit either falls inside a `\begin{proof}...\end{proof}` block and the
+claim is derived there, or is immediately followed by a `\cite{...}`, or is replaced
+with a hedged phrasing.
+
+---
+
+### P21 — "Analogous argument" claims have no in-paper refutation
+
+When a passage says "an analogous argument applies to [Y]", grep the rest of the
+paper for any remark, footnote, or parenthetical that restricts or explicitly refuses
+the analogy for [Y].
+
+```bash
+grep -n 'analogous\|same argument\|by the same reasoning\|an analogous\|same proof' "$TEX"
+```
+
+For each hit: search for the specific object [Y] named in the analogy claim and
+verify no other passage contradicts it.  If a later section adds a restriction
+(e.g. "for moment-type tests, distinct heights do not imply Vandermonde
+invertibility"), then the earlier "analogous argument" claim must be qualified or
+removed.
+
+---
+
+### P22 — External theorem invocations name all substituted parameters
+
+When a proof invokes an external theorem by author and number
+(e.g. "By Andersson \cite{...}, Theorem 5"), the proof text must state what
+specific objects, sets, and parameter values are being substituted into the
+cited theorem's hypotheses.  A bare citation without a parameter-mapping is
+insufficient.
+
+```bash
+grep -n 'By.*\\\\cite\|by.*\\\\cite\|Apply.*\\\\cite\|Applying.*\\\\cite\|invoking.*\\\\cite' "$TEX"
+```
+
+For each hit: verify the sentence or the immediately following one names the specific
+inputs (e.g. "applied with $U = \{\operatorname{Re} s > 0\}$ and divisor
+$D = [z_1]$").
+
+---
+
+### P23 — Operator class definition: formal symmetry precedes self-adjoint extension
+
+When an operator class definition depends on an extension theorem (KLMN /
+Friedrichs / Lax–Milgram), the definition must first establish formal symmetry
+and semi-boundedness on a dense domain **before** invoking the extension.
+Self-adjointness may not be assumed as a hypothesis and then derived by KLMN:
+that is circular.
+
+```bash
+grep -n 'KLMN\|Friedrichs\|self-adjoint.*extension\|quadratic form\|form domain' "$TEX"
+```
+
+For each hit: verify the surrounding definition/proof lists (i)~formally symmetric
+on $C^\infty(M)$ and (ii)~semi-bounded on $C^\infty(M)$ as explicit hypotheses
+**prior** to the statement "the Friedrichs extension is the unique self-adjoint
+operator associated with the shifted form."
+
+---
+
+### P25 — Literature formula descriptions match the cited source
+
+When the text (introduction, background, or body) describes a formula from a cited
+external result — e.g. writes an explicit equation and attributes it to a specific
+author/paper — the formula must be checked against the source in `baseline/` or the
+arXiv tarball, not relied on from memory.  Common failure modes:
+
+- Confusing two normalizations in the same paper (e.g. CCM's $\hat{\xi}_\lambda$ vs
+  the separate $k_\lambda \to \Xi$ result, Lemma 7.3).
+- Omitting an open step that the cited paper names explicitly.
+- Describing the cited theorem's conclusion as if the open step were already closed.
+
+```bash
+# Find every sentence that contains both a formula and a \cite, outside proof blocks
+grep -n '\\cite{' "$TEX" | grep -v '\\begin{proof}\|\\end{proof}' | head -30
+```
+
+**Manual check:** for each hit, open the corresponding `baseline/` source (or arXiv
+tarball) and verify: (a) the displayed formula matches the cited paper's exact
+statement, (b) any open step named in the cited paper is also flagged as open in
+this paper's description.
+
+---
+
+### P24 — Optional theorem-environment titles do not repeat the automatic label
+
+`\begin{theorem}[D]` renders as "Theorem 1 (D)" when the theorem is automatically
+numbered 1 — and as "Theorem D (D)" if the environment is already titled `D` by a
+custom counter.  Grep for optional arguments to theorem-like environments and
+manually verify the rendered output does not duplicate the label.
+
+```bash
+grep -n '\\begin{.*}\[' "$TEX"
+```
+
+For each hit: check the rendered PDF (or mentally evaluate the counter) to confirm
+the optional argument is a descriptive subtitle, not a repetition of the
+auto-generated theorem identifier.
+
+---
+
 ## Running order for pre-submission
 
 1. `pdflatex` — fix all errors and undefined-ref warnings (P4)
@@ -315,3 +467,11 @@ diagnostic, not a universal lower bound.
 13. Abstract/intro scope read (P14)
 14. Complexity analogy grep (P15)
 15. Evidence-level audit of proof citations (P16–P17)
+16. Constructive/existential qualifier consistency (P18)
+17. Parity arguments to sufficient order (P19)
+18. Strong number-theoretic assertions (P20)
+19. Analogy claim refutation check (P21)
+20. External theorem parameter instantiation (P22)
+21. Operator definition prerequisite ordering (P23)
+22. Literature formula descriptions vs source (P25)
+23. Optional theorem title duplication (P24)
