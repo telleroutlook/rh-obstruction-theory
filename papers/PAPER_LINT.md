@@ -1033,6 +1033,177 @@ universally understood constant (e.g. $\pi$, $e$).
 
 ---
 
+### P40 — Uniform vs pointwise index quantification in asymptotic expansions
+
+An asymptotic relation $f(j, T) \sim g(j, T)$ as $T\to\infty$ may hold
+*for each fixed $j$* (with an error constant that depends on $j$) or
+*uniformly in $j$* (with a single error constant). These are different statements:
+the first allows $O_j(T^{-k})$; the second requires $O(T^{-k})$ with a $j$-independent
+implicit constant. Conflating them is a correctness error: a result that holds "for
+fixed $j$" cannot be summed over $j$ unless the dependence on $j$ is made explicit.
+
+```bash
+# Grep for asymptotics near an index variable — look for O(...) without O_j or O_n
+grep -n 'O(T\|O(T^{-\|\\sim C\|\\asymp' "$TEX" | head -30
+
+# Also grep for "uniformly" near summation contexts
+grep -n 'uniformly\|uniform in\|for fixed' "$TEX" | head -20
+```
+
+**Manual check:** for each asymptotic line, determine:
+1. Does the error constant depend on any free summation index (j, n, k)?
+2. If yes: write $O_j(T^{-k})$ and add "for each fixed $j$" to the quantifier.
+3. If the result is used in a sum over $j$: also bound the $j$-dependence explicitly.
+
+**Precedent (paper-A):** $q_j(T) = 4j^2/T^2 + O(T^{-4})$ holds for each fixed $j$;
+the implicit constant depends on $j$. Text should read
+"For each fixed $j \ge 1$, $q_j(T) = 4j^2/T^2 + O_j(T^{-4})$."
+
+---
+
+### P41 — Author count in possessive references ("the author's" vs "the authors'")
+
+When a paper is referenced with a possessive phrase ("the author's refinement",
+"the authors' construction"), the grammatical number must match the actual authorship
+of the cited work. Citing a solo-authored paper as "the authors'" or a multi-authored
+paper as "the author's" is a factual error visible to the cited author.
+
+```bash
+# Grep for possessive author phrases near \cite
+grep -n "the author" "$TEX" | grep -iv "present author\|this author"
+```
+
+**Manual check:** for each match, open the bibliography entry and count the authors.
+Confirm singular/plural. For the present paper itself, use "the present author" (not
+"we" if single-authored, not "the authors" if solo).
+
+**Precedent (paper-A):** CCM 2025 (arXiv:2511.22755) has three authors; a phrase
+"the present author's refinement" in a paper about it should be "the authors'
+refinement."  Conversely, if a cited work has a single author, "the authors'" is wrong.
+
+---
+
+### P42 — Checker files referenced in text must exist in the repository
+
+When the text references a file by path (e.g. "`checker/q2_sign_check.py`",
+"`pilots/cert.json`"), that file must actually exist at the stated path. A missing
+file means the claim "verified by [script]" is unverifiable and the companion
+computation is unreproducible.
+
+```bash
+# Extract file paths referenced in the TeX source
+grep -oE 'checker/[^ $}]+\|pilots/[^ $}]+\|scripts/[^ $}]+' "$TEX"
+
+# For each path found, verify it exists
+while IFS= read -r fpath; do
+  [ -f "$fpath" ] || echo "MISSING: $fpath"
+done < <(grep -oE 'checker/[^ $}]+|pilots/[^ $}]+|scripts/[^ $}]+' "$TEX")
+```
+
+**Manual check:** if a referenced file is missing, either (a) add the file to the
+repo before submission, or (b) replace the reference with an inline exact value
+(e.g. the rational certificate value) so the claim is self-contained without the file.
+
+**Precedent (paper-A):** `checker/q2_sign_check.py` referenced in text but not
+included; exact value $q_2(1/10)|_{\sigma_0=3/4} = -380550400/44102881 < 0$ should
+be included inline.
+
+---
+
+### P43 — Trace class hypothesis for heat semigroup (operator theory)
+
+The existence of a well-defined heat trace $Z_H(t) = \operatorname{Tr}(e^{-tH}) < \infty$
+requires more than lower-semiboundedness with compact resolvent: $e^{-tH}$ must itself
+be trace class. A counterexample: $He_n = \log(n+1)e_n$ has compact resolvent yet
+$\operatorname{Tr}(e^{-tH}) = \sum_{n\ge 1}(n+1)^{-t}$ diverges for $0 < t \le 1$.
+
+Situations where trace class is guaranteed without extra hypothesis:
+- Classical elliptic operators of order $m > d$ on a compact $d$-manifold (by Weyl).
+- Operators with explicit eigenvalue growth $e_n \sim C n^\alpha$ with $\alpha > 0$.
+
+```bash
+# Flag definitions of Z_H or heat trace near lower-semibounded / compact resolvent
+# without an explicit trace class hypothesis
+grep -n 'lower.semibounded\|lower semibounded\|semi-bounded\|compact resolvent' "$TEX"
+grep -n 'Tr.*e\^{-t\|Z_H\|heat trace\|trace.*class' "$TEX"
+```
+
+**Manual check:** for each place where $Z_H(t) < \infty$ is assumed or used:
+1. Is there an explicit "assume $e^{-tH}$ is trace class for all $t > 0$" hypothesis?
+2. Or is trace class derived from Weyl asymptotics / eigenvalue growth?
+
+If neither holds, add a hypothesis or restrict to operators where it is automatic.
+
+**Precedent (paper-B):** the subsection defined $Z_H(t)$ for lower-semibounded
+operators with compact resolvent without stating trace class; an explicit hypothesis
+or a proof that the relevant subclass has trace class heat semigroup is required.
+
+---
+
+### P44 — Homogeneous principal symbol vs cutoff extension (spectral geometry / PDE)
+
+In spectral geometry, the Weyl constant is computed from the *homogeneous* principal
+symbol $h_m^{\mathrm{hom}}$, defined on $T^*M \setminus 0$ by positive homogeneity of
+degree $m$: $h_m^{\mathrm{hom}}(x, r\xi) = r^m h_m^{\mathrm{hom}}(x, \xi)$ for $r > 0$.
+Full symbols use a smooth cutoff: $\chi(\xi) h_m^{\mathrm{hom}}(x,\xi)$ (vanishing near zero).
+
+**Two common errors:**
+1. Writing the Weyl constant integral $\int\mathbf{1}_{\{h_m \le 1\}}$ without specifying
+   whether $h_m$ is the homogeneous part or the cutoff extension — the integral can
+   differ on $\{|\xi| \le 1\}$.
+2. Using the cutoff symbol in an expansion but then citing a Weyl law whose proof
+   requires the homogeneous symbol.
+
+```bash
+# Grep for Weyl constant / volume integral near chi or cutoff
+grep -n '\\chi\|cutoff\|h_m.*hom\|hom.*h_m\|Weyl.*const\|int.*1_{h_m\|int.*{h_m' "$TEX"
+# Grep for homogeneous notation
+grep -n 'r\^m\|homogeneous.*degree\|degree.*m\|hom}' "$TEX" | head -20
+```
+
+**Manual check:** for each Weyl constant formula:
+- Is it written in terms of $h_m^{\mathrm{hom}}$?
+- Is the manifold part clearly $\{(x,\xi)\in T^*M: h_m^{\mathrm{hom}}(x,\xi) \le 1\}$?
+- Does the proof of the Weyl law cited use the homogeneous or the truncated symbol?
+
+**Precedent (paper-B):** symbol class $\mathcal{C}_{\mathrm{sub}}$ uses a cutoff
+$\chi(\xi)$; the Weyl constant formula and the Hörmander/Lesch Weyl law references
+must consistently refer to the homogeneous principal symbol $h_m^{\mathrm{hom}}$.
+
+---
+
+### P45 — No forward-referencing `\ref` inside `\begin{definition}` blocks
+
+A definition is an axiomatic construct: it must not rely on a result that will only be
+proved later. If a `\begin{definition}` block contains `\ref{thm:X}` (or
+`\eqref{eq:Y}`) and `thm:X` (or `eq:Y`) is defined *after* the definition in the
+source, this is a forward dependency — the definition implicitly assumes the existence
+or truth of a result not yet established.
+
+Common symptom: "The Friedrichs realization $H_F$ (see Theorem~\ref{thm:friedrichs})
+is defined as…" where `thm:friedrichs` appears 50 lines later.
+
+```bash
+# Extract line numbers of all \begin{definition} and their \end{definition}
+grep -n '\\begin{definition}\|\\end{definition}' "$TEX"
+
+# For each definition block, grep for \ref or \eqref
+sed -n '/\\begin{definition}/,/\\end{definition}/p' "$TEX" | grep -n '\\ref\|\\eqref'
+```
+
+**Manual check:** for each `\ref` / `\eqref` found inside a definition:
+1. Locate the referenced label in the file.
+2. If it appears *after* the definition, this is a forward dependency.
+3. Resolution: either (a) move the referenced result before the definition, (b) state
+   the needed property as a hypothesis of the definition, or (c) restructure as a
+   "Definition + Proposition" pair where the proposition is proved immediately after.
+
+**Precedent (paper-B):** the definition of $\mathcal{C}_{\mathrm{sub}}$ referenced
+the Friedrichs realization (proved later), creating a circular dependency between the
+class definition and the theorem that the realization exists.
+
+---
+
 ## Running order for pre-submission
 
 ### Phase 0 — Compilation gate (must pass before any manual review)
@@ -1090,6 +1261,14 @@ universally understood constant (e.g. $\pi$, $e$).
 43. Evidence level for imported premises (P16)
 44. Invariance under method class transformations (P17)
 45. Constructive/existential qualifier consistency (P18)
+
+### Phase 5 — Quantification, reproducibility, and operator hygiene
+46. **Uniform vs pointwise index quantification (P40)** — grep `O(` near summation index
+47. **Author count in possessive references (P41)** — grep "the author" near `\cite`
+48. **Checker/script files referenced must exist (P42)** — grep paths, then `[ -f ]`
+49. **Trace class hypothesis for heat semigroup (P43)** — flag lower-semibounded + `Z_H` without trace class statement
+50. **Homogeneous vs truncated principal symbol (P44)** — grep `\chi` near Weyl constant integral
+51. **No forward `\ref` inside `\begin{definition}` (P45)** — grep `\ref`/`\eqref` in definition blocks
 
 ---
 

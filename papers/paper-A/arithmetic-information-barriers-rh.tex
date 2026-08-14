@@ -419,12 +419,13 @@ we have $AB = [(1-s^{-1})(1-(1-s)^{-1})]^j = 1$.  Hence
 % Original result; independently verified in theorems/B2-exact-collision/checker/b2_certified_checker.py
 \begin{lemma}[Quartet Li asymptotics]
 \label{lem:qasympt}
-For $j\ge 1$ and $\sigma_0\in(0,1)$, as $T\to+\infty$:
+For each fixed $j\ge 1$ and every $\sigma_0\in(0,1)$, as $T\to+\infty$:
 \begin{equation}
   \label{eq:djasympt}
-  q_j(T) \;:=\; \Li_j(Q(\sigma_0,T)) \;=\; \frac{4j^2}{T^2} + O(T^{-4}),
+  q_j(T) \;:=\; \Li_j(Q(\sigma_0,T)) \;=\; \frac{4j^2}{T^2} + O_j(T^{-4}),
 \end{equation}
-uniformly in $\sigma_0\in(0,1)$.  In particular, $q_j(T) \to 0$.
+uniformly in $\sigma_0\in(0,1)$ (the implied constant depends on $j$).
+In particular, $q_j(T) \to 0$ for each fixed $j$.
 \end{lemma}
 
 \begin{proof}
@@ -672,8 +673,8 @@ $0 < \varepsilon < \min_{1 \leq j \leq m}\bigl(\Li_j(\mathcal{Z}_+) - c_j\bigr)$
 \begin{proof}
 Set $\mathcal{Z}_- = \mathcal{Z}_+ \sqcup Q(3/4, T)$ for large $T$.  Then
 $\Li_j(\mathcal{Z}_-) = \Li_j(\mathcal{Z}_+) + q_j(T)$, where
-$q_j(T) = 4j^2/T^2 + O(T^{-4}) \to 0$ by~\eqref{eq:djasympt} and Lemma~\ref{lem:qasympt}.
-Choose $T$ large enough that $|q_j(T)| < \varepsilon$ for all $j$.
+$q_j(T) = 4j^2/T^2 + O_j(T^{-4}) \to 0$ by~\eqref{eq:djasympt} and Lemma~\ref{lem:qasympt}.
+Choose $T$ large enough that $|q_j(T)| < \varepsilon$ for all $j\in\{1,\ldots,m\}$
 Since $Q(3/4,T)$ contributes atoms at $\re\rho = 3/4 \neq 1/2$,
 $P(\mathcal{Z}_-) = 0$.
 \end{proof}

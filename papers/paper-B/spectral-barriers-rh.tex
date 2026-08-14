@@ -137,7 +137,7 @@ with even eigenfunction; and
 (ii)~$k_\lambda$ approximates the corresponding normalized lowest
 eigenfunction sufficiently accurately to recover~$\Xi$.
 The breakdown of step~(i) into a finite-$N$ simplicity claim and an
-$N\to\infty$ continuum limit is the authors' own refinement, not an
+$N\to\infty$ continuum limit is the author's own refinement, not an
 explicit item in~\S8.
 Theorems~D and~D$'$ do not obstruct the CCM approach, since the CCM
 operators belong to a different class.
@@ -163,7 +163,11 @@ and the \emph{heat trace} and \emph{spectral counting function} are
   \quad t>0; \qquad
   N_H(\Lambda)=\#\{n:e_n\le\Lambda\}.
 \]
-For any lower-semibounded self-adjoint operator with compact resolvent,
+For any lower-semibounded self-adjoint operator with compact resolvent and with
+$e^{-tH}$ trace class for all $t>0$ (a condition automatic for all $H\in\Csub$:
+writing $H\ge -C_0$ gives $e^{-tH}=e^{tC_0}e^{-t(H+C_0)}$ and $H+C_0\ge 0$
+is a positive classical elliptic operator, hence $e^{-t(H+C_0)}$ is trace class
+by Seeley~\cite{Seeley1967}),
 list its eigenvalues $\lambda_1\le\lambda_2\le\cdots$ with multiplicity;
 the definitions of $N_H$ and $Z_H$ apply verbatim.
 Finitely many negative eigenvalues do not affect the asymptotic statements below.
@@ -371,11 +375,13 @@ $|\xi|\le 1$ and $\chi(\xi)=1$ for $|\xi|\ge 2$, and:
     $|\xi|\ge 1$ and all $x\in M$
     (\emph{positive classical elliptic principal part}).
 \end{enumerate}
-By the G\r{a}rding inequality for classical elliptic $\Psi$DOs
+\end{definition}
+
+The G\r{a}rding inequality for classical elliptic $\Psi$DOs
 (Shubin~\cite{Shubin2001}, standard elliptic coercivity estimate) applied to $h_m$
 (as the symbol of the classical reference operator $P_0$; the transfer of the
 coercive estimate to $H$ uses the form-boundedness of $Q_0=H-P_0$, established in
-Subsection~\ref{subsec:formbdd} below), there exist
+Subsection~\ref{subsec:formbdd}), yields
 $c_1>0$ and $C_2<\infty$ such that
 \[
   q_H[u] \;\ge\; c_1\,\|u\|^2_{H^{m/2}(M)} - C_2\,\|u\|^2,
@@ -398,7 +404,6 @@ self-adjoint operator $A_+$ associated with the closed form~$q_{H,+}$;
 the \emph{Friedrichs extension} of $H$ is then $H_F := A_+ - (C_0+1)I$.
 By elliptic regularity (Shubin~\cite{Shubin2001}, \S7),
 $\mathrm{Dom}(H_F)=H^m(M)$ and the resolvent of $H_F$ is compact.
-\end{definition}
 
 Henceforth, for $H\in\Csub$, we identify $H$ with its Friedrichs
 realization $H_F$; all spectral objects ($N_H$, $Z_H$,
@@ -494,7 +499,9 @@ Equivalently, as quadratic forms on their common domain $H^{m/2}(M)$:
 Let $M$ be a closed smooth manifold of dimension $d\ge 1$, $m>0$, and $K\in\mathbb{N}_0$.
 Any $H\in\Csub$ satisfies
 $N_H(\Lambda)\sim C_H\Lambda^{d/m}$ as $\Lambda\to\infty$,
-where $C_H>0$ is the Weyl constant of the principal symbol $h_m$.
+where $C_H>0$ is the Weyl constant of the positively homogeneous principal
+symbol~$h_m$ (computed on $T^*M\setminus 0$ and independent of the
+low-frequency cutoff~$\chi$).
 In particular, $\operatorname{spec}_{\times}(H)\ne\{\gamma_n\}$.
 \end{mainthmprime}
 
