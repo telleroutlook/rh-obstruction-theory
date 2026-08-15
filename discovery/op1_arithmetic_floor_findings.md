@@ -1038,6 +1038,28 @@ but does not close the LEG3 gap.  The remaining core (§6r-note3) is now a TWO-T
 show that at the min over Φ-minimizers, v_p(Re H) + v_p(x - α) <= 2 for slack_x >= 1 and
 <= 3 at slack_x = 0, uniformly in the orbit.  Not a proof.  RH stays [OUT].
 
+### §6s-note — term attribution: the lag lives in v_p(x - α) (probe_leg3_twoterm)
+
+Adversarial coordinate ascent on VALID collisions, reporting the two terms of (§6s-main)
+SEPARATELY at the achieving Φ-minimizer, ORBIT-INDEPENDENT (D=425 and D=4 agree exactly):
+
+    slack_x = 0 (tight boundary): max lag = 3, ALL of it in v_p(x - α) = 3, v_p(Re H) = 0.
+    slack_x >= 1                : max lag = 1 (this light search), v_p(Re H) <= 1, v_p(x-α) <= 1.
+
+So the degeneracy bonus at slack_x = 0 -- and the dominant part of the lag in every regime
+-- is carried by the ARGUMENT-RATIO term (ii) v_p(x - α), i.e. the p-adic depth to which
+Im(H)/Re(H) approaches the fixed target (σ - x)/τ.  The real-part term (i) v_p(Re H) is a
+MINOR contributor (<= 1, and only in the slack_x >= 1 regime).  This collapses the remaining
+LEG3 core to a SINGLE-TERM bound:
+
+    at the min over Φ-minimizers,  v_p(x - α) <= 2 for slack_x >= 1,  <= 3 at slack_x = 0,
+
+uniformly in the orbit, where α = σ - τ·Im(H)/Re(H) and the swing node x is a doubled
+x-class residue.  (The +1 at slack_x = 0 is the x_of ±-degeneracy, §6r-note3; light search
+here shows the plateau of the slack_x >= 1 side at 1, heavier search in §6r-note3 reaches 2.)
+HONEST (L5): S=81/6-restart local search, small p,m; the attribution is clean and orbit-
+consistent but not exhaustive.  Not a proof.  RH stays [OUT].
+
 ## 3. Corrections to the earlier (superseded) picture
 
   * The naive p-adic "prime-obstruction" idea, using a SPLIT prime (p == 1 mod 4)
