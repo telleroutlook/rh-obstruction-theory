@@ -997,6 +997,44 @@ that the sole remaining LEG3 gap is the clean two-line bound "min-psi <= 2 for s
 <= 3 at slack_x = 0", provable from the pairwise-swap lemma (§6r) plus the ±-degeneracy
 count, uniformly in the orbit.  Not yet a proof.  RH stays [OUT].
 
+### §6s — the argument-ratio reduction of ψ (candidate [THM], verified)
+
+A closed-form simplification of the §6o affine root α that turns the LEG3 lag into a
+single-scalar p-adic-approximation question.  Setup (§6l/§6o): for a Φ-minimizer subset
+whose complement product is H := (u-1)·∏_{j in C}(u - x_j) = P + Qi, with u = σ + τi and
+node x, the affine identity Ψ(x) = 2·Re[(u - x)·H] = 2[(σ - x)P - τQ] vanishes at
+
+    α = a_k / b_k = (σP - τQ)/P = σ - τ·(Q/P) = σ - τ·Im(H)/Re(H),
+
+using a_k = 2Re[uH] = 2(σP - τQ) and b_k = 2Re[H] = 2P.  Hence
+
+    ψ = v_p(x - α) = v_p( (σ - x) - τ·Im(H)/Re(H) ),
+
+and since b_k = 2Re(H) = 2P is a p-unit whenever ψ >= 1 (§6m Lemma A: the pivot column is
+cleared, so Re(H) is a unit), this equals v_p( (σ - x)·Re(H) - τ·Im(H) ) directly (= v_p(Ψ),
+consistent).  The USEFUL content is the FIRST form:
+
+    ψ >= d+1   <=>   x ≡ α (mod p^{d+1})   <=>   Im(H)/Re(H) ≡ (σ - x)/τ  (mod p^{d+1}).
+
+So the incidence lag is EXACTLY the p-adic depth to which the "argument ratio"
+Im(H)/Re(H) of the on-line complement product H approaches the FIXED rational target
+(σ - x)/τ (fixed by the orbit u and the doubled node x).  Because
+arg(H) = arg(u - 1) + Σ_{j in C} arg(u - x_j), this recasts LEG3 as: "how deeply can a sum
+of arg(u - x_j), each x_j an on-line ladder residue, p-adically align a tangent ratio with
+a fixed target?"  The pairwise-swap lemma (§6r) bounds this by v_p(x_a - x_b) for a
+swappable same-class pair; §6s explains WHY the bound is small — deep alignment forces
+Im(H)/Re(H) to match the target to high p-adic order, which the collision constraint
+(K >= m on-line columns, §6q) plus the (p-1)/2 x-class ceiling (§6r-note3) obstruct.
+
+VERIFICATION (inline exact-arithmetic Fraction script, L9): the identity
+α == σ - τ·Im(H)/Re(H) held on 6000/6000 random configs across ALL THREE off-line orbits
+(D=425, D=4, D=26).  This is an algebraic identity (exact), not a numerical coincidence.
+
+STATUS: §6s is a rigorous restatement (candidate [THM]) that SHARPENS but does not yet
+CLOSE the LEG3 gap.  The sole remaining core is still the two-line bound of §6r-note3
+(min-ψ <= 2 for slack_x >= 1, <= 3 at slack_x = 0, uniform in the orbit).  §6s reduces it
+to a clean argument-ratio approximation statement.  Not a proof.  RH stays [OUT].
+
 ## 3. Corrections to the earlier (superseded) picture
 
   * The naive p-adic "prime-obstruction" idea, using a SPLIT prime (p == 1 mod 4)
