@@ -997,43 +997,46 @@ that the sole remaining LEG3 gap is the clean two-line bound "min-psi <= 2 for s
 <= 3 at slack_x = 0", provable from the pairwise-swap lemma (§6r) plus the ±-degeneracy
 count, uniformly in the orbit.  Not yet a proof.  RH stays [OUT].
 
-### §6s — the argument-ratio reduction of ψ (candidate [THM], verified)
+### §6s — the two-source valuation identity for ψ (candidate [THM], verified exact)
 
-A closed-form simplification of the §6o affine root α that turns the LEG3 lag into a
-single-scalar p-adic-approximation question.  Setup (§6l/§6o): for a Φ-minimizer subset
-whose complement product is H := (u-1)·∏_{j in C}(u - x_j) = P + Qi, with u = σ + τi and
-node x, the affine identity Ψ(x) = 2·Re[(u - x)·H] = 2[(σ - x)P - τQ] vanishes at
+A closed-form decomposition of the §6o affine root α that splits the LEG3 lag into TWO
+independent p-adic contributions.  Setup (§6l/§6o): for a Φ-minimizer subset with swing
+node x, write the complement product H := (u-1)·∏_{j in C}(u - x_j) = P + Qi, where u is
+the OFF-LINE ATOM and σ := Re(u), τ := Im(u) are its OWN real/imaginary parts (NOT the
+orbit parameters; u = off_atoms_u(...) is the Joukowski image of the atom).  Then the
+affine value factors EXACTLY as
 
-    α = a_k / b_k = (σP - τQ)/P = σ - τ·(Q/P) = σ - τ·Im(H)/Re(H),
+    Ψ(x) = 2·Re[(u - x)·H] = 2[(σ - x)P - τQ] = 2·Re(H)·(α - x),   α = σ - τ·Im(H)/Re(H),
 
-using a_k = 2Re[uH] = 2(σP - τQ) and b_k = 2Re[H] = 2P.  Hence
+using Re[(u-x)H] = (σ - x)P - τQ and (σ - x) - τQ/P = α - x.  Taking p-adic valuations
+gives the UNCONDITIONAL identity
 
-    ψ = v_p(x - α) = v_p( (σ - x) - τ·Im(H)/Re(H) ),
+    ψ = v_p(Ψ) = v_p(Re H) + v_p(x - α),   α = σ - τ·Im(H)/Re(H).            (§6s-main)
 
-and since b_k = 2Re(H) = 2P is a p-unit whenever ψ >= 1 (§6m Lemma A: the pivot column is
-cleared, so Re(H) is a unit), this equals v_p( (σ - x)·Re(H) - τ·Im(H) ) directly (= v_p(Ψ),
-consistent).  The USEFUL content is the FIRST form:
+So the incidence lag has TWO independent p-adic sources:
+  (i)  v_p(Re H)   -- the real part of the on-line complement product being p-divisible;
+  (ii) v_p(x - α)  -- the p-adic distance of the swing node to the argument-ratio root α,
+       i.e. the depth to which Im(H)/Re(H) approaches the fixed target (σ - x)/τ
+       (arg H = arg(u-1) + Σ_{j in C} arg(u - x_j), so (ii) is a sum-of-arctangents
+       alignment against a fixed target).
+An upper bound on the lag must control BOTH terms; either alone can inflate ψ.
 
-    ψ >= d+1   <=>   x ≡ α (mod p^{d+1})   <=>   Im(H)/Re(H) ≡ (σ - x)/τ  (mod p^{d+1}).
+VERIFICATION (inline exact-arithmetic Fraction scripts, L9), across ALL THREE off-line
+orbits (D=425, D=4, D=26):
+  * algebraic  Ψ == 2·Re(H)·(α - x)  with  α = σ - τ·Im(H)/Re(H):  0 / 6000 failures.
+  * valuation  ψ == v_p(Re H) + v_p(x - α):                        0 / 6000 failures.
+Both are EXACT identities (rational arithmetic), not numerical coincidences.
 
-So the incidence lag is EXACTLY the p-adic depth to which the "argument ratio"
-Im(H)/Re(H) of the on-line complement product H approaches the FIXED rational target
-(σ - x)/τ (fixed by the orbit u and the doubled node x).  Because
-arg(H) = arg(u - 1) + Σ_{j in C} arg(u - x_j), this recasts LEG3 as: "how deeply can a sum
-of arg(u - x_j), each x_j an on-line ladder residue, p-adically align a tangent ratio with
-a fixed target?"  The pairwise-swap lemma (§6r) bounds this by v_p(x_a - x_b) for a
-swappable same-class pair; §6s explains WHY the bound is small — deep alignment forces
-Im(H)/Re(H) to match the target to high p-adic order, which the collision constraint
-(K >= m on-line columns, §6q) plus the (p-1)/2 x-class ceiling (§6r-note3) obstruct.
+HONEST CORRECTION (L5) to the first draft of §6s: the one-term form "ψ = v_p(x - α)" is
+WRONG in general -- it holds only when v_p(Re H) = 0.  §6m Lemma A does NOT force this at
+every Φ-minimizer: over 21535 Φ-minimizer swing columns of VALID collisions, 1956 had
+v_p(Re H) > 0 (probe_leg3_s check).  The correct, verified statement is the two-term
+(§6s-main).  Dropping the v_p(Re H) term was an over-simplification; it is reinstated here.
 
-VERIFICATION (inline exact-arithmetic Fraction script, L9): the identity
-α == σ - τ·Im(H)/Re(H) held on 6000/6000 random configs across ALL THREE off-line orbits
-(D=425, D=4, D=26).  This is an algebraic identity (exact), not a numerical coincidence.
-
-STATUS: §6s is a rigorous restatement (candidate [THM]) that SHARPENS but does not yet
-CLOSE the LEG3 gap.  The sole remaining core is still the two-line bound of §6r-note3
-(min-ψ <= 2 for slack_x >= 1, <= 3 at slack_x = 0, uniform in the orbit).  §6s reduces it
-to a clean argument-ratio approximation statement.  Not a proof.  RH stays [OUT].
+STATUS: §6s-main is a rigorous UNCONDITIONAL restatement (candidate [THM]).  It sharpens
+but does not close the LEG3 gap.  The remaining core (§6r-note3) is now a TWO-TERM bound:
+show that at the min over Φ-minimizers, v_p(Re H) + v_p(x - α) <= 2 for slack_x >= 1 and
+<= 3 at slack_x = 0, uniformly in the orbit.  Not a proof.  RH stays [OUT].
 
 ## 3. Corrections to the earlier (superseded) picture
 
