@@ -986,6 +986,17 @@ slack, one level up: LEG3's constant is governed by slack_x, i.e. by how many di
 x-classes (p-1)/2 the prime supplies versus the m-1 the observation needs.  Cleanest LEG3
 statement: min-psi <= 2 for slack_x >= 1, <= 3 at slack_x = 0; m-independent given slack_x.
 
+ORBIT-INDEPENDENCE (probe_leg3_orbits.py, EXIT 0, privacy-clean).  The regime split holds
+across ALL THREE off-line orbits (D=425, D=4, D=26), p in {7,11,13}, non-artifact cells:
+  D=425: slack_x>=1 -> max min-psi 2,  slack_x=0 -> 3
+  D=4:   slack_x>=1 -> max min-psi 2,  slack_x=0 -> 3
+  D=26:  slack_x>=1 -> max min-psi 2,  slack_x=0 -> 2
+So LEG3's lag constant is governed by the x-class slack (p-1)/2 - (m-1) of the PRIME, NOT
+by the specific curve/orbit -- an orbit-independent arithmetic law.  This is strong EVIDENCE
+that the sole remaining LEG3 gap is the clean two-line bound "min-psi <= 2 for slack_x >= 1,
+<= 3 at slack_x = 0", provable from the pairwise-swap lemma (§6r) plus the ±-degeneracy
+count, uniformly in the orbit.  Not yet a proof.  RH stays [OUT].
+
 ## 3. Corrections to the earlier (superseded) picture
 
   * The naive p-adic "prime-obstruction" idea, using a SPLIT prime (p == 1 mod 4)
