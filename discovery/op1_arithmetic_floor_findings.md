@@ -949,6 +949,43 @@ restricting the node set (deep 1-in-p^k nodes cannot all coexist in a bounded on
 family while keeping every minimizer aligned).  (R2) must be proved via this joint
 structure, NOT per-node.  One candidate proof path is thereby eliminated.  RH stays [OUT].
 
+### §6r-note3  CORRECTION: min-psi is 3 (not 2); the +1 is the x_of ±-degeneracy
+
+An ADVERSARIAL coordinate-ascent search at the HARDEST pool size K=m (probe_leg3_r2joint.py
++ probe_leg3_witness.py + probe_leg3_regime.py, EXIT 0, privacy-clean) corrects the §6r
+"max min-psi = 2": that 2 was a RANDOM-SAMPLING under-count.  The adversary reaches min-psi
+= 3 in a canonically re-verified VALID collision.
+
+WITNESS (p=7, m=4, K=m, orbit D=425; qmin_fast True): nodes t = [688,426,596,1374],
+navail = 2, m-1 = 3, minPhi = 1, and BOTH Phi-minimizers {(0,1,2),(1,2,3)} have psi = 3.
+Crucially navail = 2 = m-2 with minPhi = 1: this is a DEGENERATE config where the t -> -t
+symmetry of x_of(t) = (4t^2-1)/(4t^2+1) (which depends only on t^2, so x_of(b) = x_of(p-b))
+collapses two residue bases into ONE x-class.
+
+MECHANISM (regime split; unifies with §6h "lag plateaus at 3"):
+  * NON-degenerate (navail = m-1, minPhi = 0): min-psi small (pairwise-swap regime);
+  * ±-DEGENERATE (navail = m-2, minPhi >= 1): the doubled x-class adds one unit -> min-psi 3.
+So the LEG3 constant is 3, and the extra +1 is EXACTLY the x_of class-doubling.
+
+SMALL-p ARTIFACT (important scoping).  Because only (p-1)/2 distinct nonzero-t x-classes
+exist (t and -t share one), a NON-degenerate navail = m-1 config REQUIRES p >= 2m-1.  For
+p < 2m-1 the m-1 distinct classes cannot be filled, the config is FORCED degenerate, and
+min-psi rises with the deficit d = (m-1) - navail (e.g. p=7,m=5 forced d>=1 gave min-psi 4).
+Such (p,m) are artifacts, NOT counterexamples: LEG3 O(1) must be read in the p >= 2m-1
+regime (the same p-vs-m regime as the §6c-h e_max floor), where the deficit is bounded.
+Refined LEG3 target: prove min-psi <= 2 + d with d = (m-1) - navail bounded on the actual
+split-only observation family.  HONEST correction (L5): the constant is 3, tied to a
+concrete arithmetic cause; the m-independence holds per degeneracy level.  RH stays [OUT].
+
+DATA (probe_leg3_regime.py, non-artifact cells p >= 2m-1, bucketed by deficit d):
+  p=11 (#xcls=5): m=3 [d=0:2, d=1:0];  m=4 [d=0:1, d=1:1];  m=5 [d=0:0, d=1:2]  -- all <= 2.
+  p=7  (#xcls=3): m=4 (x-class SLACK = 0) [d=1:3]  -- the boundary case reaching 3.
+So min-psi <= 2 whenever there is x-class SLACK  slack_x := (p-1)/2 - (m-1) >= 1, and the
+extra +1 (-> 3) appears only at the TIGHT boundary slack_x = 0.  This mirrors §6m's packing
+slack, one level up: LEG3's constant is governed by slack_x, i.e. by how many distinct
+x-classes (p-1)/2 the prime supplies versus the m-1 the observation needs.  Cleanest LEG3
+statement: min-psi <= 2 for slack_x >= 1, <= 3 at slack_x = 0; m-independent given slack_x.
+
 ## 3. Corrections to the earlier (superseded) picture
 
   * The naive p-adic "prime-obstruction" idea, using a SPLIT prime (p == 1 mod 4)
