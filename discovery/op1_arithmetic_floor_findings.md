@@ -1219,6 +1219,47 @@ de-biased generator. The sharp open target is unchanged and correctly regime-sco
 for p <= 2m-1, that the fixed off-line d-bar meets the top p-part of Z^m/L up to a bounded
 deficit. RH stays [OUT].
 
+### 6w. The PER-PRIME floor claim is REFUTED at p=13 — but the FULL q_min stays enormous (this session)
+
+§6v's optimism ("per-prime linear q_min floor survives") was itself under-sampled: it tested
+only p in {7,11}. Pushing the SAME adversarial minimization to p=13 and larger m
+(`discovery/probe_qmin_perprime_floor.py`, 3 orbits, exact SNF/DVR) BREAKS it:
+
+  p= 7 m<=8  floor<=1 : adv min v_p(q_min) >= floor           (slack 0..+1, holds)
+  p=11 m<=10 floor<=1 : adv min v_p(q_min) >= floor           (slack 0..+1, holds)
+  p=13 m= 9  floor=1  : adv min v_13(q_min) = 0               (slack -1  *** VIOLATION ***)
+  p=13 m=10  floor=1  : adv min v_13(q_min) = 0               (slack -1  *** VIOLATION ***)
+
+So the clean statement `v_p(q_min) >= ceil(2m/(p+3))-1 for every prime` (which would, via
+Mertens, force q_min super-polynomial and CLOSE OP1) is FALSE. The proved e_max floor (§6g)
+does NOT transfer to q_min prime-by-prime: the fixed off-line d-bar can miss the top p-part
+of Z^m/L entirely at a given prime even when e_max there is >= 2.
+
+**DECISIVE follow-up (`discovery/verify_ppf_violation_fullqmin.py`, exact).** At the p=13,
+m=9 violation — witness nodes t = [158,496,14,365,458,443,341,80,354], x-residues mod 13 =
+[7,7,11,11,2,11,2,7,2] (navail=3), rank(A)=9=m (C2 valid), qmin finite (C1 valid), e_max=3 —
+the FULL integer q_min is
+
+    q_min = 2^39 * 3^9 * 5^16 * 7^3 * 11^3 * 17^11 * 19 * 23 * ... * 823   (379 bits, 115 digits)
+
+with v_13(q_min) = 0. So q_min is ENORMOUS despite its 13-part vanishing: the growth is
+carried by the OTHER primes (2, 5, 17, ... — the confluent-Vandermonde mass clustering
+forces into D_m). This is the same lesson as §6u at a finer grain: q_min is an AGGREGATE
+quantity, and any single prime's contribution can be adversarially drained to 0 without
+denting the whole.
+
+**CONSEQUENCE — corrected open target.** The per-prime route to OP1 is DEAD (a second
+mis-formulated sufficient condition, after the lag lemma). What survives, and what the
+barrier actually needs, is the AGGREGATE bound
+
+    OP1 target :  sum_{p} v_p(q_min) * log p  =  log q_min  is super-polynomial in m,
+
+for which NO uniform per-prime floor holds — the mass can migrate between primes. The honest
+next handle is a DIRECT lower bound on log q_min (the confluent-Vandermonde / det-D_m growth
+of §6c-6d), NOT a prime-by-prime floor. §6v is hereby narrowed: the floor transfers for the
+primes/ranges it sampled (p<=11 here) but is NOT uniform over p; do not cite it as a
+per-prime law. RH stays [OUT] — a finite exact-arithmetic correction with no RH bearing.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
