@@ -1771,6 +1771,47 @@ READINGS (L5):
 
 Bounded search, one orbit (D=425).  Evidence, not proof.  RH stays [OUT].
 
+### §6aj — residue prime content: the min-q floor is SMOOTH and AGGREGATE over small primes
+
+Factoring the adversarial-minimum q_min (probe_qmin_residue_primes, exact trial division to B=1e5, L9)
+decides which proof toolkit the nucleus needs.  Best-of-6 coordinate descents to min log2 q_min, then
+split q_min into ramified 5^a 17^b, generic small primes (<=B, excl 5/17), and a large cofactor (>B):
+
+    m | log2 q | 5^a17^b | ram bits | #gen p | gen bits | largest p | cofactor bits
+    3 |  24.01 | (3,0)   |    6.97  |   3    |  17.04   |    11     |   0.00
+    4 |  37.99 | (4,3)   |   21.55  |   4    |  16.44   |    11     |   0.00
+    5 |  59.43 | (1,2)   |   10.50  |   7    |  48.93   |    43     |   0.00
+    6 |  72.47 | (3,3)   |   19.23  |   6    |  53.24   |    37     |   0.00
+    7 |  89.98 | (4,4)   |   25.64  |   8    |  64.34   |    53     |   0.00
+
+READINGS (L5):
+  (1) COFACTOR BITS == 0 at every m; the largest prime factor is TINY (11,11,43,37,53).  The min-q q_min
+      is an extremely SMOOTH number -- ALL prime factors <= 53 for m<=7.  This KILLS the S-unit / Baker
+      "a few large primes" hypothesis outright: the floor has NO large-prime content whatsoever.  The
+      adversary reaches its minimum precisely by making q_min friable (small primes only).
+  (2) The ramified {5,17} do NOT vanish at the JOINT minimum (ram bits 7..26, ~20-30% of the total).
+      This REFINES §6ae honestly: §6ae drained 5 and 17 individually, one prime-key at a time, but that
+      does NOT survive simultaneous minimization of the whole q_min -- at the global optimum the ramified
+      channel persists.  (Per-prime drainability =/= simultaneous drainability.)
+  (3) The DOMINANT part is many small GENERIC primes (3,4,7,6,8 of them, all <=53), carrying the majority
+      of the bits.  So the floor is an AGGREGATE over the small primes -- exactly the §6d/§6g pigeonhole
+      floor v_p(D_m(A)) >= ceil(2m/(p+3))-1 summed over small p -- NOT a single-large-prime, single-Smith-
+      invariant, or purely-ramified phenomenon.
+
+REFRAME (sharpest yet).  The min-q q_min is B-smooth with B ~ small (largest prime grows very slowly,
+~53 at m=7), and log q_min ~ O(m).  A smooth number of size exp(O(m)) with primes <= B has ~ O(m)/log B
+prime-power factors: the floor is the SUM over small primes p of a per-prime valuation floor.  Any SINGLE
+prime is drainable (§6ae), but they are NOT simultaneously drainable -- driving collisions mod one prime
+(to zero v_p) forces spreading mod another.  The true open nucleus is therefore a SIMULTANEOUS small-prime
+pigeonhole / CRT-tension bound: sum_{p<=B} v_p(q_min) log p >= c*m uniformly, because the m nodes cannot
+be jointly aligned to N(p) x-classes for all small p at once.  This is markedly more concrete and classical
+than the abstract residue log|det A| - log D_m([A|d]) -- it is a covering/incidence statement over a fixed
+finite set of small primes.  Next: §6ak measures per-prime v_p(q_min) at min-q vs the pigeonhole floor
+ceil(2m/(p+3))-1 to see which small primes are "active" and whether the aggregate is tight.
+
+Trial division bounded (large cofactor would be left unfactored, but none occurs).  One orbit (D=425).
+Bounded search.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
