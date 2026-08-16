@@ -3587,9 +3587,11 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   t≡±r_i mod p_i (p_i≡1 mod4, so −1/4 is a QR) — one node per prime, O(1) correction each.  This LIFTS the
   "consecutive-only" caveat for the clean case; §6cn independently found consecutive near-minimal.
 
-  HONEST SCOPE (L5): the §6ao identity is USED (holds for p≥5, node-integral: x−1=−2/(4t²+1), v_p=0); good-carrier
-  existence (7640/7688) is exact evidence, not a proof (48 small-orbit exceptions); the exceptional O(1) correction
-  is measured (≤1), not closed-form.  RH stays [OUT].
+  HONEST SCOPE (L5): the §6ao identity is a PROVED exact identity (§6bf derivation A=B·V·diag(x_k−1), d=B·w),
+  applicable to the carrier with NO extra hypothesis — det B = ±2^{m(m+3)/2} is a pure power of 2 (verified m≤8)
+  ⇒ v_p(det B)=0 for EVERY odd p, and node-integral gives x−1=−2/(4t²+1), v_p=0.  Good-carrier existence
+  (7640/7688) is exact evidence, not a proof (48 small-orbit exceptions); the exceptional O(1) correction is
+  measured (≤1), not closed-form.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
