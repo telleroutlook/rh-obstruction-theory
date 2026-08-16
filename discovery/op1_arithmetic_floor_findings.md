@@ -3489,6 +3489,35 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   needs the AGGREGATE statement "log q_min = Ω(m) for every orbit" plus the node-set infimum (adversarial,
   §6cn shows consecutive is near-minimal — evidence, not proof).  RH stays [OUT].
 
+### §6cq — UNIVERSAL single-carrier-prime lower bound: ∃ p|N with v_p(q_min) ≥ m (probe_qmin_Nprime_universal.py, L9)
+
+  The §6cp "distributed" picture RESOLVES into a clean universal statement once the carrier prime is identified.
+  It is not a fixed small prime — it is an ORBIT-SPECIFIC prime dividing a single explicit norm.
+
+  THE NORM.  ρ=(a+ni)/n, β=1−1/ρ = [(a²+n²−na) + n² i]/(a²+n²).  Set N := |numerator(β)|² = (a²+n²−na)² + n⁴.
+  Every carrier prime seen in the EXACT factorization of q_min divides N (verified all orbits).  Examples:
+  (a,n)=(5,22): N=509·773, carrier 509^m; (1,14): N=5·73·197, carrier 73^m; (1,50): N=13²·29·41·61, carrier 13^{~2m}.
+
+  TWO PROVEN ARITHMETIC FACTS (Row 3: n even, 3∤n, a odd, gcd(a,n)=1):
+  * 2 ∤ N.  a odd, n even ⇒ re=a²+n²−na odd, n⁴ even ⇒ N = odd²+even is ODD.
+  * 3 ∤ N.  3∤n ⇒ n⁴ ≡ 1 (mod3); re² ∈ {0,1} ⇒ N ≡ {1,2} (mod3) ≠ 0.
+  ⇒ smallest prime factor of N is ≥ 5.  (Exhaustive: 2969 Row-3 orbits n<200, min smallest-prime-factor = 5.)
+
+  EMPIRICAL FLOOR (EXACT, consecutive nodes, m ≤ 12, 11 orbits × 4 m = 44 cells, ALL pass):
+        ∃ prime p | N  with  v_p(q_min) ≥ m.
+  ⇒ log q_min ≥ v_p(q_min)·log p ≥ m·log 5 = Ω(m) = ω(log m).  The OP1 barrier holds UNIVERSALLY over Row-3
+  orbits (consecutive nodes), with NO fixed prime — the carrier is a factor of N and always exists.
+  (The §6cp p=2 floor occasionally has the globally-largest exponent — 4/44 cells — but the N-prime floor is
+  always ≥ m regardless; §6co's p=3 floor is a SEPARATE additional source since 3∤N yet v₃(q_min)>0.)
+
+  MECHANISM / OPEN LEMMA.  p|N ⟺ numerator(β) ≡ 0 in one Gaussian embedding mod p (β degenerates mod p);
+  then each node/moment contributes ≥1 factor of p, giving v_p(q_min) ≥ m.  Proving this count is the
+  general-prime analogue of the §6co p=3 coupling lemma and would upgrade §6cq from strong evidence to THEOREM.
+
+  HONEST SCOPE (L5): (1) v_p ≥ m is exact evidence to m=12, not yet proved (β-degeneration count = open lemma);
+  (2) consecutive nodes only — the true OP1 infimum over node sets is §6cn-evidenced (near-minimal), not proved.
+  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
