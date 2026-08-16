@@ -2833,12 +2833,13 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
 
   UPDATED COVERAGE MAP (superseding §6bo's table on Row 2):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
-        n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br), C_j(m)=⌊−3m/2⌋+O(1),
-                                          O(1) tie-correction BOUNDED in m (§6bt); tie is r=(0,1) (§6bv), but
-                                          the depth ceiling is a GLOBAL MINIMAX fact, NOT a local σ-bound
-                                          (§6bw refutes the image-lemma route), floor ~(9/2)m
-                                          [profile+tie-locus PROVED §6br/§6bv; floor LINEAR to m=22 §6bt;
-                                           no-cancellation ceiling = OPEN global minimax core (§6bw)]
+        n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br); W_top=v₂(w_{m−1})=1−3m/2
+                                          (m≡0 mod4) / 2−3m/2 (m≡2 mod4), orbit-independent (§6by).
+                                          SPLIT (§6bz/§6ca): m≡0 mod4 → strict profile min ⇒ C_j=W_top for ALL
+                                          columns UNCONDITIONALLY (leading-domination) ⇒ v₂(q_min)≥(9/2)m−3
+                                          [THEOREM CANDIDATE from proved facts, NO minimax]; m≡2 mod4 → top-two
+                                          TIE r=(0,1) (§6bv), the bounded lift = sole OPEN global minimax core
+                                          (§6bw refutes the local image-lemma route), floor still ~(9/2)m
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
 
@@ -2988,6 +2989,54 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   CORRECT for p=2/p=3 but does NOT dissolve the §6bw hard-minimax difficulty — it re-expresses it as "some
   Lagrange weight of the fixed functional w, on nodes with pairwise v₂≥3 differences, has 2-power denominator
   ≥ 2^{(9/2)m}".  Structural identity check (adversary-free).  RH [OUT].
+
+### §6by — CORE-2 has HUGE SLACK, and min_j C_j is pinned at the profile top W_top = v₂(w_{m−1}) (scaling)
+
+  probe_qmin_p2_nodd_minC_scaling (EXACT, L9).  The §6bf reduction v₂(q_min) ≥ 1 + 3(m−1) − min_j C_j means the
+  floor is LINEAR as soon as min_j C_j = o(m); there is HUGE SLACK — any bound min_j C_j ≤ (3−c)m already gives a
+  positive-linear floor, so the tight §6bu ceiling (≤2) is NOT needed.  Scaling the adversary that MAXIMIZES
+  min_j C_j (n-odd orbits (2/3),(4/5),(6/7); m=4..16) found min_j C_j is not merely o(m) but NEGATIVE-LINEAR,
+  pinned at the profile-top valuation W_top := v₂(w_{m−1}), which is ORBIT-INDEPENDENT with closed form
+        W_top(m) = 1 − 3m/2   (m ≡ 0 mod 4),      W_top(m) = 2 − 3m/2   (m ≡ 2 mod 4).
+  DICHOTOMY: at m ≡ 0 mod 4 EVERY column is "leading-dominated" (max min_j C_j = W_top exactly, #lead = m); at
+  m ≡ 2 mod 4 the adversary lifts min_j C_j a BOUNDED amount above W_top (#lead = 0).  So the adversary cannot
+  push min_j C_j anywhere near +3m — it is trapped at ≈ −3m/2, giving v₂(q_min) ≈ (9/2)m, NOT via minimax but via
+  the fixed off-line profile.  Hill-climb one-sided (lower bound on the true adversarial max).  RH [OUT].
+
+### §6bz — the PROFILE-MINIMUM route: an UNCONDITIONAL exact-floor mechanism for m ≡ 0 mod 4 (no minimax)
+
+  probe_qmin_p2_nodd_profile_minimum (EXACT, L9).  Structural explanation of §6by, orbit-free.  The pairing splits
+        S_j = w_{m−1} + Σ_{i<m−1} ±e_{m−1−i}(X'_j)·w_i.
+  Each node x_t=(4t²−1)/(4t²+1) is a 2-adic UNIT ⇒ v₂(e_r(X'_j)) ≥ 0 ⇒ v₂(each lower term) ≥ v₂(w_i).  The
+  valuation PROFILE v₂(w_i) (i=0..m−1) has period-4 increments [0,−3,−1,−2] (= the PROVED FACT A / §6br spike):
+  e.g. m=8 → [−1,−1,−4,−5,−7,−7,−10,−11].  Consequence of the increment pattern:
+    • m ≡ 0 mod 4 → top index m−1 ≡ 3 mod 4 is the STRICT unique profile minimum (gap = 1 to w_{m−2});
+    • m ≡ 2 mod 4 → top index m−1 ≡ 1 mod 4 TIES w_{m−2} (gap = 0) — exactly the §6bv adjacent r=(0,1) tie.
+  At m ≡ 0 mod 4 the strict min ⇒ v₂(rest) > v₂(w_{m−1}), so by the ultrametric  C_j = v₂(S_j) = W_top for EVERY
+  column and EVERY collision — UNCONDITIONALLY, no adversary/minimax.  VERIFIED over 120 random collisions × 3
+  orbits × m∈{4..16}: all-dom = 120/120 & lifted = 0/120 at m≡0 mod4; all-dom = 0/120 & lifted = 120/120 at
+  m≡2 mod4.  Closed form W_top CONFIRMED all orbits.  So the minimax difficulty is CONFINED to m ≡ 2 mod 4.
+
+### §6ca — THEOREM CANDIDATE (m ≡ 0 mod 4, n-odd Row 2): v₂(q_min) ≥ (9/2)m − 3, from proved facts, NO minimax
+
+  probe_qmin_p2_nodd_m0mod4_theorem (EXACT, L9).  Assembling §6bf + §6br(FACT A) + §6bz:
+    (i)   FACT A (§6br, PROVED): period-4 profile ⇒ w_{m−1} strict profile min for m≡0 mod4, W_top = 1−3m/2.
+    (ii)  nodes are 2-adic units ⇒ v₂(e_r(X'_j)) ≥ 0.
+    (iii) ⇒ (ultrametric) C_j = W_top for every column & collision (leading-domination, §6bz).
+    (iv)  §6bf EXACT identity v₂(q_min) = max_j(1 + N_j − C_j) with N_j = Σ_{k≠j}v₂(x_j−x_k) ≥ 3(m−1) UNCONDITIONAL.
+    ⇒  v₂(q_min) = 1 − W_top + max_j N_j  EXACTLY  ⇒  v₂(q_min) ≥ 1 − W_top + 3(m−1) = (9/2)m − 3   [LINEAR].
+  DIRECT VERIFICATION (computing q_min the hard way via integer determinants, guarding against an identity-impl
+  error): across 3 orbits × m∈{4,8,12}, the identity "all C_j = W_top  &  v₂(q_min) = 1 − W_top + max_j N_j" is
+  OK on every sampled collision, and v₂(q_min) always exceeds (9/2)m−3.  NOTE (L5): the observed MINIMUM of
+  v₂(q_min) is STRICTLY ABOVE (9/2)m−3 (e.g. m=4→18 vs 15; m=8→44/45 vs 33; m=12→71 vs 51) because the
+  N_j ≥ 3(m−1) bound is LOOSE: node parities force some pairs to v₂(t_j²−t_k²) ≥ 2 (opposite-parity pairs
+  cannot cover all C(m,2) pairs), so min-over-collisions of max_j N_j > 3(m−1).  This does NOT weaken the theorem
+  — (9/2)m−3 is a valid LINEAR LOWER bound (exactly what OP1 needs); the exact minimum is a separate, HIGHER
+  quantity (min over collisions of max_j N_j, a clean parity/clustering sub-question, not required for OP1).
+  Period-4 profile & strict-min dichotomy re-confirmed at m=20,24 (W_top=−29,−35; top_gap=1).
+  STATUS (L5): Row 2 for m ≡ 0 mod 4 is now a THEOREM CANDIDATE resting ONLY on already-proved facts (FACT A
+  §6br + the trivial unit/ultrametric steps) — the minimax core is fully expelled to m ≡ 2 mod 4.  Awaiting a
+  formal write-up citing FACT A; until then it is discovery-tier evidence.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
