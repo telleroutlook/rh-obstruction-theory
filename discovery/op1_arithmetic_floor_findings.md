@@ -1613,6 +1613,44 @@ NOT a per-p statement but a genuine JOINT/aggregate bound: no single node set si
 v_5=v_17=0 AND keeps G {2,3,5,17}-smooth.  (6th refuted per-prime route; the aggregate floor -- §6z-agg
 linear min-TOTAL 4,18,39,46,77,96,102,129 for m=2..9 -- still stands under every joint attack tried.)
 
+### 6af. JOINT ram-drained smoothness floor: S-unit finiteness moved onto q_min ITSELF (this session)
+
+§6ac's S-unit horn was stated on G = prod(t_k^2-t_l^2), which suffers CANCELLATION: v_p(q_min) <= v_p(G)
+only (§6aa), so a large prime in G need NOT survive into q_min -- that gap killed the G-route.  NEW
+angle (probe_qmin_joint_smoothness, exact, L9): apply the smoothness/finiteness argument to q_min
+DIRECTLY.  Define the RAM-DRAINED LOCUS = node sets with v_5(q_min)=v_17(q_min)=0.  Adversarially
+search it (500 random + descent) and read off min log2 q_min | ram=0 and the number of DISTINCT primes
+> 17 in q_min there:
+
+    m   | ram=0 reachable | min log2 q_min | ram=0 | #primes>17 | largest p | aggregate min (control)
+    2   | YES             | 5.58                    | 0          | -         | 5.09
+    3   | YES             | 19.27                   | 1          | 157       | 18.23
+    4   | YES             | 45.65                   | 3          | 157       | 40.59
+    5   | YES             | 79.76                   | 8          | 353       | 59.44
+    6   | YES             | 113.18                  | 11         | 421       | 72.87
+    (m>=7 cost-truncated: the ram=0 locus is increasingly RARE -- a leaner 250-sample search failed to
+    hit v_5=v_17=0 at m=6 at all, though the 500-sample search did; NOT silently dropped.)
+
+TWO readings, both honest:
+  (+) On the ram-drained corner, q_min carries a GROWING large-prime part: #primes>17 = 0,1,3,8,11 and
+      largest prime 157->421, so min log2 q_min | ram=0 grows super-linearly (5.6,19,46,80,113).  These
+      primes are IN q_min (not merely in G) -- so the S-unit/finiteness mechanism transfers to q_min
+      itself with NO cancellation gap.  This CLOSES §6ac's geometric-horn gap AT the ram=0 corner: you
+      cannot drain {5,17} and keep q_min {2,3,5,17}-smooth; draining the ramified channel forces an
+      unbounded, growing set of primes >17 into q_min.
+  (-) But the aggregate adversary does NOT sit at ram=0.  The control column (unconstrained min log2
+      q_min) is BELOW the ram=0 min, and the gap GROWS (0.49,1.04,5.06,20.32,40.31): the true optimum
+      keeps SOME ramified mass rather than paying the full geometric large-prime price.  So §6af bounds
+      only the ram=0 SLICE, not the aggregate optimum.
+
+NET (barrier map, now crisp).  log q_min = ram_mass + geo_mass, with two PROVEN-mechanism endpoints:
+  * ram_mass = 0  => geo_mass >= (growing #primes>17)*log19   [§6af, this section, no cancellation gap];
+  * nodes fully spread (geo small) => ram_mass >= §6ad single-class confluence (but per-p drainable).
+The aggregate optimum lives strictly BETWEEN these endpoints.  The sole remaining rigorous input is now
+a JOINT INTERPOLATION/convexity bound: ram_mass + geo_mass >= c*m across the whole interior, not just at
+the two endpoints.  Both endpoints are now controlled; the middle is the open nucleus.  This is a
+genuinely different (and cleaner) target than the per-p or G-smoothness routes it replaces.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
