@@ -3467,6 +3467,28 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   single-prime instance of OP1; the remaining OP1 content is 3|(a+n) and general (adversarial) node sets (§6cn).
   RH stays [OUT].
 
+### §6cp — NO universal single small prime; but log q_min = Ω(m) holds by AGGREGATE (probe_qmin_p2_not_universal.py, L9)
+
+  Two complementary findings on the way to the full OP1 (all orbits, all node sets):
+
+  (i) p=2 floor is ORBIT-INDEPENDENT & LINEAR — but NOT universal.  v₂(q_min)=max_j(1+N_j−C_j) with
+      N_j≥3(m−1) unconditional (denominators 4t²+1 odd ⇒ v₂(x_j−x_k)≥3).  For n∈{10,14,22} — covering BOTH
+      3∤(a+n) and 3|(a+n) — the floor is IDENTICAL 5,11,16,23 (m=8,12,16,20), floor/m→~1.15.  So p=2 catches
+      many 3|(a+n) orbits that p=3 (§6co) misses.  BUT n=50 (a=1; a+n=51 ⇒ 3|(a+n)) ESCAPES: C_j=v₂(S_j)
+      grows fast enough to cancel N_j, giving floor 0,1,2,4 only.  n=50 thus escapes BOTH p=2 (weak) and p=3
+      (degenerate).  ⇒ NO single small prime gives a uniform linear floor for ALL Row-3 orbits.
+
+  (ii) DECISIVE AGGREGATE TEST.  The OP1 quantity is log q_min = Σ_p v_p(q_min)·log p, not any one prime.
+      For the EXACT integer q_min of the doubly-degenerate n=50: log₂(q_min)/m ≈ 23.2, 24.3, 24.4, 25.2, 25.6
+      at m=6,8,10,12,14 — LINEAR and INCREASING.  So log q_min = Ω(m) HOLDS for n=50 anyway, carried by its
+      large orbit-specific primes (§6cn factorization).  The barrier SURVIVES the worst small-prime orbit via
+      DISTRIBUTION across primes; the single-prime floors (§6co p=3, §6cp(i) p=2) are constructive but
+      non-universal witnesses.
+
+  READING (L5): the linear-log lower bound appears UNIVERSAL over orbits (consecutive nodes); closing OP1 fully
+  needs the AGGREGATE statement "log q_min = Ω(m) for every orbit" plus the node-set infimum (adversarial,
+  §6cn shows consecutive is near-minimal — evidence, not proof).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
