@@ -2834,10 +2834,11 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   UPDATED COVERAGE MAP (superseding §6bo's table on Row 2):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
         n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br), C_j(m)=⌊−3m/2⌋+O(1),
-                                          O(1) tie-correction BOUNDED in m (§6bt); tie is r=(0,1), FACT B =
-                                          "node-sum σ can't 2-adically hit fixed target τ=w_{m−1}/w_{m−2}
-                                          past depth A" (§6bv), floor ~(9/2)m
-                                          [profile PROVED, C_j closed form §6bs/§6bt, tie reduced §6bv → NEAR-PROVED]
+                                          O(1) tie-correction BOUNDED in m (§6bt); tie is r=(0,1) (§6bv), but
+                                          the depth ceiling is a GLOBAL MINIMAX fact, NOT a local σ-bound
+                                          (§6bw refutes the image-lemma route), floor ~(9/2)m
+                                          [profile+tie-locus PROVED §6br/§6bv; floor LINEAR to m=22 §6bt;
+                                           no-cancellation ceiling = OPEN global minimax core (§6bw)]
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
 
@@ -2935,14 +2936,34 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   the SAME shape as §6o's ψ = v_p(x_k − a_k/b_k) p-adic-distance identity, now for p=2, Row 2, ONE target.
   Verified leading units (mod 32): (2/3) m=6 u₁≡17,u₂≡19,Σ≡4 depth 2; m=10 u₁≡27,u₂≡1,Σ≡28 depth 2;
   (4/5) m=6 u₁≡27,u₂≡15,Σ≡10 depth 1; m=10 u₁≡1,u₂≡25,Σ≡26 depth 1.
-  FACT B FINAL FORM: "the node-sum σ=Σ_{k≠j}x_k cannot 2-adically approximate the fixed target
-  τ=w_{m−1}/w_{m−2} beyond depth A" — a SINGLE-TARGET 2-adic approximation bound on a sum of m−1 constrained
-  node-units x_k ∈ 1 − 2·(odd).  This is the crispest, most self-contained Row 2 open core.
-  HONEST OPEN POINT (L5): why depth stays a FIXED constant even as m grows (more nodes = more σ-freedom, which
-  naively could push σ→τ deeper) is NOT yet proved — it is the net of the global collision competition (§6ax
-  "argmax moves"): tuning σ at column j perturbs the other columns' pairings and the N_j's, so σ is not freely
-  choosable.  Empirically (§6bu) depth ≤ A ≤ 2 uniformly; the analytic reason for the ceiling is the sole
-  remaining gap.  Adversary one-sided.  RH [OUT].
+  ⚠ FACT B "FINAL FORM" (SUPERSEDED — CORRECTED by §6bw): the tempting statement "σ cannot 2-adically
+  approximate τ beyond depth A" is a SINGLE-TARGET, single-column 2-adic bound.  §6bw REFUTES it as stated:
+  σ IS freely choosable (any m−1 distinct nodes), and unconstrained it approaches τ to depth ≥ 16–20.  The
+  real ceiling is NOT a local approximation bound on σ; it is a MINIMAX-optimum statement (see §6bw).
+  Adversary one-sided.  RH [OUT].
+
+### §6bw — the Row 2 depth ceiling is a MINIMAX-optimum fact, NOT a local 2-adic bound (route decision; corrects §6bv)
+
+  probe_qmin_p2_nodd_image_vs_global (EXACT, L9).  Tests which mechanism caps the tie's cancellation depth
+  (§6bu: ≤2 under the real optimization): (1) a PURE 2-adic image bound on σ, or (2) the GLOBAL minimax.
+  DECISIVE (refutes route 1):
+    • Image sizes |U_K| = #{x_t mod 2^K, t=1..400} = 2,2,3,4,7,12,23 for K=4..10 — GROW (≈2^{K/2}), so the
+      node-value set is 2-adically rich, not O(1).
+    • UNCONSTRAINED max depth = max over (m−1)-subsets of v₂(τ−σ) GROWS, unbounded: (4/5) m=10 → 20;
+      (6/7) m=6 → 17, m=14 → 16.  So a single column's cancellation CAN be driven arbitrarily deep.
+  KEY REALISATION: in this OP1 setup ANY m distinct nodes form a valid collision, so σ=Σ_{k≠j}x_k IS freely
+  choosable — the §6bv "σ can't approach τ" bound is FALSE as a standalone statement.  The reason the REAL
+  optimization (§6bu) shows depth ≤ 2 is that the adversary maximizes min_j C_j (a MINIMAX over columns), and
+  deepening ONE column's cancellation toward τ is a LOSING move for the min-over-columns objective: it does
+  not raise the minimum, and generically lowers other columns.  So the true FACT B is:
+        "at the collision that MAXIMIZES min_j C_j, the argmin column's tie-depth is ≤ A"
+  — a statement about the STRUCTURE OF THE MINIMAX OPTIMUM (the §6ax "argmax moves" competition), NOT a local
+  2-adic Diophantine bound on σ.  ROUTE DECISION (L5): the clean single-target image-lemma route for Row 2 is
+  RETIRED; a proof must engage the global column-coupling.  This DOWNGRADES the Row 2 "NEAR-PROVED" claim: the
+  profile (§6br) and tie-locus (§6bv) are PROVED, the floor is empirically LINEAR to m=22 (§6bt), but the
+  no-cancellation ceiling is a global minimax bound with no known local reduction — a genuine open core, not a
+  2-line lemma.  Adversary/hill-climb one-sided (deeper unconstrained depths only strengthen the refutation).
+  RH [OUT].
 
 ## 4. Honesty / scope
 
