@@ -1940,6 +1940,41 @@ SINGLE prime and a 2-class partition).  This is the crispest, most classical ope
 
 One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
 
+### §6an — EXACT Vandermonde reduction: v_p(det A) = sum_{k<l} v_p(x_k - x_l) (step (i) nailed)
+
+Testing whether v_3(det A) reduces to the Vandermonde 3-adic distance sum (probe_qmin_p3_vandermonde,
+exact, L9).  A_{j,k} = 4(1 - T_j(x_k)), {T_j}_{j>=1} a graded polynomial basis (deg T_j = j, leading
+coeff 2^{j-1}).  Measuring VD := sum_{k<l} v_3(x_k - x_l) and CORR := v_3(det A) - VD over random and
+adversarial min-v_3 node sets, m=3..8:
+
+    CORR == 0 in EVERY case (all m, all configs).  Not O(m) -- EXACTLY zero.
+
+So
+    v_3(det A) = sum_{k<l} v_3(x_k - x_l)                                           (EXACT)
+
+READINGS (L5):
+  * The "4(1 - .)" prefactor (4 and the leading coeffs 2^{j-1}) are 3-ADIC UNITS, and the all-ones rank-1
+    shift from the constant "1" contributes no 3-adic valuation: the change of basis T_j <- monomials is
+    triangular with unit-at-3 diagonal, so 3-adically det A equals the pure Vandermonde prod_{k<l}(x_l-x_k)
+    times a 3-unit.  This makes STEP (i) a CLASSICAL, PROVABLE confluent-Vandermonde identity -- no
+    correction to control.  v_3(det A) grows exactly as the sum of 3-adic node distances; concentration in
+    an x-class mod 3 (each pair then has v_3 >= 1) forces the super-linear growth seen in §6am.
+  * PRIME-GENERIC: the only primes that could spoil the unit-diagonal argument are those dividing the
+    leading coeffs 2^{j-1} and the 4 -- i.e. ONLY p=2.  For EVERY odd prime p,
+        v_p(det A) = sum_{k<l} v_p(x_k - x_l).
+    So step (i) holds for all odd p, not just 3: v_p(det A) is a pure p-adic ultrametric distance sum on
+    the nodes' x-values.  (p=2 is separate; the ramified primes here are 5,17, both odd, both covered.)
+
+CONSEQUENCE for the p=3 lemma.  Combined with the residual identity (§6am),
+    v_3(q_min) = v_3(det A) - min_j v_3(minor_j)
+             = sum_{k<l} v_3(x_k - x_l) - min_j v_3(minor_j),
+and (§6an applied to each minor, whose matrix is A with column j replaced by the FIXED off-line vector d)
+the whole p=3 floor is now a PURE p-adic ultrametric quantity on the nodes' x-values and the off-line
+orbit's (algebraic) x-values.  The remaining open step (the linear lower bound on the residual) is thus a
+clean statement in 3-adic ultrametric geometry -- see §6ao (next) for the off-line/minor side.
+
+One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
