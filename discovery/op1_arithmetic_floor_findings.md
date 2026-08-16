@@ -1521,6 +1521,53 @@ statement, no longer about q_min directly:
     analytic/arithmetic number theory input, tracked as the sole open OP1 target.  Exact arithmetic
     (L9); bounded one-orbit evidence; RH stays [OUT].
 
+### 6ac. S-unit horn quantified: M(S)=4, and smooth-G forces q_min LARGE via ramified (this session)
+
+Attacking the geometric horn of (CONFLICT).  probe_qmin_sunit_horn (exact, D=425) gives two concrete
+facts.
+
+T1 (Horn-1 finiteness, empirical).  The largest set {t_k} (searched t <= 300) with EVERY pairwise
+t_k^2 - t_l^2 being {2,3,5,17}-smooth has size exactly 4: {1,2,3,7} (hand-check: differences of
+squares are -3,-8,-48,-5,-45,-40, all {2,3,5}-smooth).  No 5-element smooth-G set exists in range.
+This matches the S-unit heuristic: a_i:=t_i-t_1 with a_i,a_j,a_i-a_j all S-smooth forces the S-unit
+equation a_j/a_i + (a_i-a_j)/a_i = 1, whose solutions are finite (S-unit finiteness; NOTE: to CITE
+this as a theorem it must be source-verified per CLAUDE.md baseline discipline — here it is only a
+heuristic supported by the exact search).  So for m >= 5, G ALWAYS has a prime outside {2,3,5,17}.
+
+T2 (the sharper, asymmetric conflict).  For the smooth-G sets themselves, q_min is NOT small — it is
+LARGE and RAMIFIED-dominated:
+    nodes {1,2}      log2 q_min 12.64  (ram 11.05, geo 1.58,  #primes outside {2,3,5,17} = 0)
+    nodes {1,2,3}    log2 q_min 26.11  (ram 22.11, geo 4.00,  #nonS = 0)
+    nodes {1,2,3,7}  log2 q_min 47.91  (ram 33.16, geo 14.75, #nonS = 0)
+So draining the geometric channel (making G smooth via CLUSTERED nodes) does the OPPOSITE of draining
+q_min: the clustered nodes collide mod 5 and mod 17, driving v_5,v_17 up (this is the §6g pigeonhole
+e_max floor applied to the ramified primes) — q_min's ramified part grows ~linearly (~11/node).  The
+conflict is thus ASYMMETRIC and the floor robust: the geometric drain (smooth G) is exactly where the
+ramified channel is LARGEST, and the ramified drain (spread mod {5,17}) is exactly where G is least
+smooth (§6ab).  Neither corner is small.
+
+HONEST GAPS to an OP1 super-polynomial proof (L5), unchanged by this step:
+  (i)  CANCELLATION: v_p(q_min) <= v_p(G) can be strict (§6aa), so a non-smooth-G prime (m>=5) need
+       not survive in q_min; the geometric horn cannot lower-bound q_min by itself.
+  (ii) EVEN without cancellation, Horn-1 finiteness yields only O(1) primes outside {2,3,5,17}, i.e.
+       a CONSTANT geometric floor, not the omega(log m) that super-polynomiality needs.
+The empirically robust growth (min max(ram,geo) ~ linear, §6ab; ramified ~ linear on smooth-G, T2)
+therefore lives in the RAMIFIED channel on clustered nodes — governed by the PROVEN §6g e_max
+pigeonhole floor v_p(D_m(A)) >= ceil(2m/(p+3))-1 for p in {5,17} — but transferring that NUMERATOR
+floor to q_min = D_m(A)/D_m([A|d]) is blocked by the same augmented-gcd cancellation.  So the clean
+open target is now precise: show the augmented gcd D_m([A|d]) cannot absorb the full §6g ramified
+e_max floor uniformly, i.e. v_p(q_min) >= (a positive fraction of) ceil(2m/(p+3)) for p in {5,17}
+on clustered nodes AND the geometric horn covers the spread nodes.  That non-absorption is the one
+missing rigorous input; everything else is proved or exact-verified.  RH stays [OUT].
+
+VERIFIED combinatorial fact behind the ramified pressure (probe, exact): the map x=(4t^2-1)/(4t^2+1)
+has only TWO finite residues mod 5 ({0,4}; pole classes t == +-1 mod 5) but EIGHT mod 17 ({0,3,4,6,
+11,13,14,16}; pole classes t == +-2 mod 17).  So mod 5 any m>=3 nodes MUST collide in x-class (only 2
+classes) -> forced confluence -> strong §6g e_max pressure at p=5; mod 17 allows up to 8 distinct
+classes, so nodes can be spread through m<=8 -> 17 is the more drainable ramified prime (consistent
+with §6z-note draining v_17 to 0 through m=6 but not the tighter mod-5 side).  This asymmetry (2 vs 8
+classes) is why {5,17} behave differently and why the mod-5 confluence is the harder-to-drain corner.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
