@@ -1413,6 +1413,39 @@ as an AGGREGATE determinantal statement — not via any prime- or channel-locali
 all of which are now known to be drainable. Exact arithmetic (L9); bounded search, one orbit.
 RH stays [OUT].
 
+### 6z-agg. The aggregate floor SURVIVES the strongest draining attack; clean (LCM) reformulation (this session)
+
+Having proved every per-prime (§6w) and per-channel (§6z-note) handle DRAINABLE, the honest worry
+is symmetric: can the AGGREGATE log q_min itself be driven sub-linear by the very technique
+(coordinate descent) that drained the ramified channel to 0?  probe_qmin_aggregate_stress.py turns
+the full arsenal — coordinate descent + cluster/spread/random starts, the same moves that achieved
+R=0 in probe_ramified_drain — on min log2(q_min) directly (D=425, K=m, exact SNF + exact rational
+solve; L9).  Result (min log2 q_min over the whole attack):
+
+    m:        2     3      4      5      6      7      8      9
+    min log2: 4.00  18.16  39.22  45.78  76.94  95.77  101.59 129.32
+    d/dm:      -    +14.16 +21.06 +6.56  +31.16 +18.83 +5.82  +27.73
+
+The increment d/dm is noisy but stays POSITIVE throughout and averages ~18/m (line fit m=3→9:
+slope ≈ 18.5).  The aggregate does NOT collapse toward 0 under the exact attack that trivially
+drained the ramified channel.  This is the sharpest evidence yet for the §6y aggregate floor:
+localized mass is fully mobile, but the total refuses to move below ~linear.  (m≥10 was cut for
+cost — the cluster-heavy descent produces large-entry m×m matrices whose SNF is very slow; NOT a
+silent cap, L5.  The m=2..9 trend is already decisive and monotone-positive in the cumulative min.)
+
+CLEAN REFORMULATION verified EXACTLY (400/400 across all m):
+
+    (LCM)  q_min = lcm of denominators of x = A^{-1} d,   where A x = d over Q.
+
+Proof of (LCM): q·d ∈ colspan_Z(A) = L  ⟺  q·(A^{-1}d) ∈ Z^m (since d = A x ⟹ q d = A(q x), and
+A has full column rank so A(q x) ∈ A·Z^m ⟺ q x ∈ Z^m).  The least such q is lcm_j den(x_j).  This
+equals D_m(A)/D_m([A|d]) by Cramer (minor_j = D_m(A)·x_j, D_m([A|d]) = gcd(D_m(A),{minor_j})).  So
+the §6y target log D_m(A) − log D_m([A|d]) ≥ c·m is IDENTICALLY the statement that the rational
+solution of the confluent-Vandermonde system A x = d (expressing the off-line orbit-sum d in the
+on-line confluent basis) has coordinate denominators whose lcm grows exponentially.  This recasts
+the aggregate barrier as a single denominator-of-linear-solve bound — no prime/channel split — which
+is the right shape for a resultant/discriminant lower bound and the sole surviving forward target.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
