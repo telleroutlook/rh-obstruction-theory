@@ -1482,6 +1482,45 @@ algebraic cause.  Consequences:
        generic p (an exact upper structure on the geometric channel).  Exact arithmetic (L9); bounded
        one-orbit evidence; RH [OUT].
 
+### 6ab. The DRAIN-CONFLICT confirmed: the aggregate floor IS the two-channel incompatibility (this session)
+
+probe_qmin_conflict maps the (ram_log2, geo_log2) Pareto frontier over structured smooth families
+(consecutive / geometric / 2^k+1 nodes), random sets, mod-{5,17}-spread seeds, and coordinate descent
+targeting EACH channel and the joint total (D=425, exact SNF).  Result:
+
+    m |  min ram (geo there) | min geo (ram there) | min TOTAL | min max(ram,geo)
+    3 |   0.00 ( 25.96)      |   4.00 ( 22.11)     |   20.50   |   14.09
+    4 |   4.64 ( 52.56)      |  11.98 ( 28.52)     |   32.62   |   24.15
+    5 |   0.00 ( 76.05)      |  19.56 ( 37.25)     |   56.81   |   32.05
+    6 |   0.00 ( 96.57)      |  26.61 ( 43.66)     |   69.35   |   43.66
+    7 |   6.97 ( 91.94)      |  33.19 ( 54.71)     |   87.90   |   52.39
+    8 |   0.00 (165.33)      |  39.58 ( 65.76)     |  105.35   |   61.12
+
+The two channels are STRONGLY ANTI-CORRELATED: whenever the ramified part is driven to 0 (m=3,5,6,8)
+the geometric part is huge (25.96 -> 165.33, growing fast); whenever the geometric part is minimized
+(4->40, ~linear) the ramified cost paid is large (22->66, ~linear).  The balance witness
+min max(ram,geo) grows cleanly ~linearly (14.09, 24.15, 32.05, 43.66, 52.39, 61.12; slope ~9.4/m) and
+NEVER approaches 0.  So NO node set drains both channels: the §6z-agg aggregate floor is CONFIRMED
+(this orbit, bounded search) and is EXACTLY the two-channel incompatibility.
+
+MECHANISM (now explicit and testable): smoothing G = prod(t_k^2 - t_l^2) — the geometric drain —
+demands structured/clustered nodes (consecutive t give G that is (2m)-smooth); draining the ramified
+channel demands nodes with DISTINCT x-residues mod 5 and mod 17 — a spread condition.  Clustering for
+smoothness collides residues (raises ramified); spreading residues destroys smoothness (raises the
+odd-prime support of G, hence geometric).  These are incompatible node-family requirements.
+
+STATUS (L5): this is the sharpest EVIDENCE for OP1's aggregate floor and fully characterizes the
+barrier, but it is NOT yet a theorem.  The precise rigorous target is now a clean number-theoretic
+statement, no longer about q_min directly:
+    (CONFLICT) For D=425 there is c>0 s.t. for every m and every m-subset {t_k},
+        max( v_5,17-weight of the off-line quadrature ,  odd-prime-log of G outside {2,3,5,17} )  >= c*m,
+    i.e. one cannot simultaneously make G {2,3,5,17}-smooth AND keep the on-line nodes spread across
+    the residue classes mod 5 and mod 17.  This is an S-unit-smoothness-vs-residue-spread
+    incompatibility — plausibly attackable by S-unit finiteness (Evertse-Gyory) + a counting bound on
+    smooth Vandermonde values, and would upgrade the empirical floor to a proof.  That is genuine
+    analytic/arithmetic number theory input, tracked as the sole open OP1 target.  Exact arithmetic
+    (L9); bounded one-orbit evidence; RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
