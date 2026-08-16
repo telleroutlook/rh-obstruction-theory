@@ -3446,6 +3446,27 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   set, some prime p has v_p(q_min) ≥ c·m" (distributed, §6ch); §6cm (p=3, 3∤(a+n)) is its proved single-prime
   instance.  RH stays [OUT].
 
+### §6co — COUPLING LEMMA PROVED ⇒ §6cm is a THEOREM (ε=0, consecutive nodes): v₃(q_min) ≥ m/2 − O(1) (L9)
+
+  The last §6cm gap (the coupling "argmax lands on a 3-unit node with clus ≥ c·m") is now CLOSED.
+  Ingredients (all exact, probe_qmin_p3_coupling_lemma.py):
+  * Λ-STRUCTURE.  The ε=0 moments are w_l ≡ [1,1,2,2] period-4 mod 3, so w_l + w_{l−2} ≡ 0 (l≥2), i.e. Λ
+    ANNIHILATES the ideal (z²+1) mod 3.  Hence Λ FACTORS THROUGH F₃[z]/(z²+1) ≅ F₉ = F₃[i] via z ↦ i
+    (i²=−1; z²+1 irreducible since −4 ≡ 2 is a non-residue), and with Λ(1)=Λ(z)=1 the induced functional is
+        Λ(a + b i) = a + b.
+  * NODE RESIDUES.  x_t ≡ 0 (t≢0 mod3, class a₀) or ≡ 2 (t≡0 mod3, class a₂).  For node j, P_j ≡ z^{n₀}(z−2)^{n₂}
+    mod 3 with n₀+n₂=m−1, so S_j = Λ(P_j) ↦ i^{n₀}(i−2)^{n₂} = i^{n₀}(i+1)^{n₂} in F₉ (−2 ≡ 1).
+  * COUPLING.  (i+1)² = 2i ≡ −i mod 3, so for n₂ = 2c EVEN:  S_j ↦ (−1)^c i^{n₀+c} ∈ {±1,±i} ⇒ a+b = ±1 ≠ 0
+    ⇒ S_j is a 3-UNIT.  (n₂ odd may annihilate — irrelevant.)  The n₂-even class is always nonempty
+    (n₂ ∈ {⌊m/3⌋, ⌊m/3⌋−1}, one is even).
+  * FLOOR.  clus(j) = Σ_{k≠j}[v₃(j−k)+v₃(j+k)] ≥ Σ_{k≠j} v₃(j−k) = Σ_{i≥1} #{k: 3ⁱ|(j−k)} ≥ ~m/2 for EVERY j.
+  ⇒ ∃ node j with v₃(S_j)=0 AND clus(j) ≥ ~m/2  ⇒  v₃(q_min) = max_j(clus(j)−v₃(S_j)) ≥ m/2 − O(1).
+
+  THEOREM (ε=0, i.e. 3∤(a+n), consecutive nodes t=1..m): v₃(q_min) ≥ m/2 − O(1) at the single prime p=3, so
+  log q_min = Ω(m) = ω(log m) — a RIGOROUS single-prime super-poly lower bound.  This is the fully proved
+  single-prime instance of OP1; the remaining OP1 content is 3|(a+n) and general (adversarial) node sets (§6cn).
+  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
