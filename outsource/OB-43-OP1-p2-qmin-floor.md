@@ -107,7 +107,8 @@ So the floor is `v(det A) − min_j v(minor_j)` whenever some minor is 2-adicall
 
 > **Theorem (OP1 p=2 floor — linear valuation bound over the `v₂(β) ≥ 2` orbit family).**
 > Let `p = 2`. For every off-line orbit `(σ, τ)` whose shift-moment root satisfies `S := v₂(β) ≥ 2`
-> (equivalently `4 ∣ v₂(det B)`; this includes σ=3/4, 7/8, 5/8, 5/4, …), for every `m ≥ 2`, and every
+> (concretely: writing `ρ = σ+iτ = (p+qi)/n` in lowest terms, `4 ∣ n` with `p,q` of opposite parity, giving
+> `S = 2·v₂(n)−1 ≥ 3`; this includes σ=3/4, 7/8, 5/8, 5/4, …), for every `m ≥ 2`, and every
 > valid collision (§1.5) — equivalently every integer-node configuration with pairwise-distinct
 > x-values —
 > ```
@@ -262,16 +263,19 @@ Gaussian-integer computation with no elliptic curve, no L-value, no node, and no
 the two-point-functional derivation and the "odd real part" valuation independently, and (ii) confirm the
 family extension below — the *only* place the orbit enters is through `β` (equivalently `k=v₂(β)` and `γ`).
 
-**General-orbit note (honest scope).** The profile generalizes to `v(w'_i) = (k+1) + k·i` where `k := v₂(β)`;
-the same "odd real part" mechanism holds — VERIFIED for every `S := k ≥ 2` orbit — because `β = 2^k·γ/N`
-with `N` odd and `γ ≡ 1 mod 2` in `Z[i]` (Re odd, Im even), so `Re(γ^{i+1})` is odd and `v₂(w'_i)=k(i+1)+1`.
-When `k ≥ 2` the unique-minimum argument gives `C_j = m+k` for every node set, hence the linear floor
-`v(q_min) ≥ 2m − 2 − k`. Measured (closed-form + odd-real-part both confirmed): σ=3/4 → `k=3` (`C_j=m+3`,
-floor `2m−5`); σ=7/8, 5/8 → `k=5` (`C_j=m+5`, floor `2m−7`); σ=5/4 → `k=3`. So the σ=3/4 proof is really a
-proof for the **entire `v₂(β) ≥ 2` family**. Orbits with `k = 1` (σ=5/6, 9/10, slope 1) collapse the
-unique-minimum (min_j C_j grows at slope ≈3) and the p=2 bound is VACUOUS (measured `v(q_min)` small); orbits
-with `k < 1` (σ=4/5, 2/3) have `γ` of Re-odd/Im-odd type, a non-linear/negative profile, and a *larger* p=2
-floor by a mechanism not proved here. These need a different prime — full orbit-robustness of OP1 is
+**General-orbit note (honest scope).** β has the elementary closed form `β = (w−1)²/(2w) = 1/(2ρ(ρ−1))`
+(`w = 1−1/ρ`); writing `ρ = (p+qi)/n` in lowest terms, `β = n²/(2M)`, `M = (p²−q²−np) + q(2p−n)i`, so the
+profile slope is `S := v₂(β) = 2·v₂(n) − 1 − v₂(N(M))/2` (`N(M) = |M|²`). **THEOREM (4∣n, p,q opposite
+parity).** Then `n` even ⟹ `Im(M)` even, and opposite parity ⟹ `Re(M) ≡ p−q ≡ 1 mod 2` odd; hence
+`γ := conj(M)` has odd real / even imaginary part (`γ ≡ 1 mod 2` in `Z[i]`), `S = 2·v₂(n) − 1 ≥ 3`, and
+`β = 2^S·γ/N` with `N` odd. Since `γ ≡ 1 mod 2` is closed under multiplication, `Re(γ^{i+1})` is odd, so
+`v₂(w'_i) = S(i+1)+1`; the unique-minimum expansion (valid for `S>1`) gives `C_j = m+S` for every node set
+and the unconditional floor `v(q_min) ≥ 2m−2−S`. So the σ=3/4 proof (n=4, S=3, `2m−5`) is a proof for the
+**entire 4∣n opposite-parity family** — one elementary argument, no per-orbit verification. Verified: σ=3/4,
+7/8, 5/8, 5/4, 9/8, 1/4, 3/8, 11/12, and σ=3/4 τ=1/2 all satisfy it. The **boundary** `n ≡ 2 mod 4` (σ=5/6,
+9/10) gives `S=1`: the unique-minimum ties (coefficient `−(S−1)=0`), `C_j` is not pinned, and the floor is
+vacuous (measured `v(q_min)` small). The `n` odd regime (σ=4/5, 2/3) has `γ` of Re-odd/Im-odd type, `N(M)`
+even, `S<0`, and a larger p=2 floor by a mechanism not proved here. Full orbit-robustness of OP1 is
 multi-prime, not single-prime p=2 (see the §2 scope caveat).
 
 **Known dead-end (superseded by the Identity — do not re-derive).** The **ultrametric sum-bound**

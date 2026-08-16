@@ -2676,6 +2676,39 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
       PROVABLE nugget is exactly the S≥2 (v_2(β)≥2) family via p=2.  This narrows OB-43's "orbit-robust"
       Theorem, which overclaimed a single-prime uniform floor over ALL orbits.  RH stays [OUT].
 
+### §6bm — CLOSED FORM β = 1/(2ρ(ρ−1)) upgrades the S≥2 family floor to a PROVED THEOREM (denominator-indexed)
+
+  probe_qmin_p2_beta_closed_form (EXACT).  §6bl verified γ's parity for 4 orbits; §6bm eliminates that last
+  empirical step by giving β an elementary closed form in the off-line point ρ = σ+iτ, so the family floor
+  becomes a theorem parameterized by ρ's denominator.
+
+  (A) CLOSED FORM.  β = ξ−1, ξ = (w+1/w)/2, w = 1−1/ρ, so β = (w−1)²/(2w) = 1/(2ρ(ρ−1)).  Writing
+      ρ = (p+qi)/n in lowest terms and clearing:  β = n²/(2M),  M = Re(M)+Im(M)i,
+              Re(M) = p²−q²−np,   Im(M) = q(2p−n).
+      Hence the profile slope has the CLOSED FORM  S = v₂(β) = 2·v₂(n) − 1 − v₂(N(M))/2,  N(M)=Re(M)²+Im(M)².
+      VERIFIED S(formula)==S(recurrence) for all 13 orbits tested (incl. S=1, S=−3/2, τ=1/2), and the
+      closed-form β matches the recurrence-extracted β (up to conjugate root) in every case.
+
+  (B) THE FAMILY THEOREM (elementary; no node quantifier, no L-value, no RH).  Suppose 4 ∣ n and p,q have
+      OPPOSITE parity (⟺ N(M) odd).  Then:
+      (P1) n even ⟹ Im(M)=q(2p−n) EVEN; opposite parity ⟹ Re(M) ≡ p−q ≡ 1 (mod 2) ODD.  So γ := conj(M)
+           (times its odd rational content) has Re odd / Im even, i.e. γ ≡ 1 (mod 2·Z[i]).
+      (P2) S = 2·v₂(n) − 1 ≥ 3 (as v₂(n) ≥ 2), and β = 2^S·γ/N with N = N(M) odd.
+      (P3) γ ≡ 1 mod 2·Z[i] is closed under multiplication ⟹ Re(γ^{i+1}) ODD ⟹ v₂(2Re(γ^{i+1}))=1, so
+           w'_i = β^{i+1}+β̄^{i+1} = 2^{S(i+1)}·2Re(γ^{i+1})/N^{i+1} ⟹ v₂(w'_i) = S(i+1)+1.
+      (P4) §6bi unique-minimum: v₂(term_r) ≥ (S+1)+S(m−1)−(S−1)r STRICTLY DECREASING (S>1), unique min at
+           r=m−1 (product w'_0·∏y_k, no cancellation) = m+S ⟹ C_j = m+S for EVERY node set ⟹ the
+           UNCONDITIONAL LINEAR FLOOR  v₂(q_min) ≥ 1+3(m−1)−(m+S) = 2m − 2 − S.
+      σ=3/4 (n=4, S=3, 2m−5) is one member; every 4∣n opposite-parity orbit is proved identically.  VERIFIED
+      floor 2m−2−S vs measured v₂(q_min) for all 9 such orbits (σ=3/4,7/8,5/8,5/4,9/8,1/4,3/8,11/12, τ=1/2).
+
+  (C) THE S=1 BOUNDARY EXPLAINED.  When n ≡ 2 (mod 4) with N(M) odd (σ=5/6, 9/10), S=2v₂(n)−1=1, so the
+      §6bi coefficient −(S−1)=0: all m terms tie in valuation, the unique-minimum COLLAPSES, C_j is NOT
+      pinned (cancellation), and the floor is vacuous — §6bl's borderline class, now rigorously accounted for.
+      NET: the p=2 floor is a THEOREM exactly on the 4∣n opposite-parity family (S≥3), by an elementary
+      2-adic/Gaussian-integer argument; the S=1 boundary and the S<1 (n odd, both-odd γ) regime are outside
+      it.  Full orbit-robustness of OP1 remains a multi-prime phenomenon (§6bl(M)).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
