@@ -110,21 +110,27 @@ So the floor is `v(det A) − min_j v(minor_j)` whenever some minor is 2-adicall
 > off-line orbit `(σ, τ)` (no unimodularity or other hypothesis), and every valid collision
 > (§1.5) — equivalently every integer-node configuration with pairwise-distinct x-values —
 > ```
->     v(q_min)  =  v(det A) − min_{1 ≤ j ≤ m} v(minor_j)  ≥  c·m − O(1),
+>     v(q_min)  =  max_{1 ≤ j ≤ m} ( 1 + N_j − C_j )  ≥  c·m − O(1),
+>     N_j = Σ_{k≠j} v(x_j − x_k),   C_j = v(⟨w, ε(X'_j)⟩),   w = B^{−1}d,
 > ```
-> uniformly in `m` and in the (adversarially chosen) node set and orbit. Empirically `c ≈ 3`
-> (observed floor slope), and any absolute `c > 0` closes OP1's 2-adic channel.
+> uniformly in `m`, the (adversarially chosen) node set, and the orbit. Empirically `c ≈ 2`–`3`;
+> any absolute `c > 0` closes OP1's 2-adic channel.
 
-The identity `v(q_min) = v(det A) − min_j v(minor_j)` is a **proved premise** (§1.6, §3 Step 1);
-the open core is the lower bound `min_j v(minor_j) ≤ v(det A) − c·m`, i.e. *some* `d`-replacement
-minor is at most `c·m`-shallow relative to `det A`.
+The **exact identity** `v(q_min) = max_j (1 + N_j − C_j)` is a **proved premise** (§3 Step 3,
+verified orbit-free on 240 configs). Two facts make it powerful and orbit-free:
+- **`N_j ≥ 3(m−1)` for every column, unconditional** (§3 Step 2: each `v(x_j − x_k) ≥ 3`, no
+  clustering hypothesis) — so `v(q_min) ≥ 1 + 3(m−1) − min_j C_j`;
+- `C_j = v(⟨w, ε(X'_j)⟩)` is the 2-adic valuation of the *fixed* off-line vector `w = B^{−1}d`
+  paired against the leave-one-out symmetric vectors `ε(X'_j)` (§1.6, §3).
 
-**Why the numerator is not the whole story (the difficulty is the min over minors).** By §3
-Step 2, `v(det A) ≥ 2m² + m` — *quadratic and unconditional*. If the minors were all as deep as
-`det A`, the floor would vanish; the content is that at least one minor is `Ω(m)` shallower. The
-gcd of the minors empirically absorbs the entire quadratic part, leaving exactly a **linear**
-residue — so the theorem is a statement about how much 2-adic depth the `d`-replacement can
-*remove*, not about the (large, easy) depth of `det A` itself.
+Hence the **entire open core** is the single bilinear bound **CORE-2** (§3 Step 4):
+`min_j C_j ≤ (3 − c)·m + O(1)`. This is strictly weaker to demand than OB-42's joint p=3 bound
+and requires **no orbit hypothesis**.
+
+**Why the numerator alone is not enough.** By §3 Step 2, `v(det A) ≥ 2m² + m` — quadratic and
+unconditional — but the gcd of the minors cancels the quadratic bulk. The residue is exactly
+`max_j(1 + N_j − C_j)`, and the content is the *off-line* competition `min_j C_j`, not the (large,
+easy) depth of `det A`.
 
 ---
 
@@ -157,41 +163,59 @@ contrast with p=3:** every pair contributes `≥ 3` *unconditionally* — no res
 pigeonhole, so the adversary cannot lower the per-pair floor. This is why the p=2 route needs no
 orbit hypothesis.
 
-### Step 3 — The residual is linear (the gcd absorbs the quadratic part). **[proved-shape / measured, premise]**
-`min_j v(minor_j)` empirically tracks `v(det A)` to within a **linear** deficit: over random
-valid configs the floor `v(q_min) = v(det A) − min_j v(minor_j)` is `6, 11, 14, 18` for
-`m = 4,5,6,7` (slope ≈ 3), i.e. `min_j v(minor_j) = v(det A) − Θ(m)`. So the quadratic bulk of
-`v(det A)` is shared by every `d`-replacement minor; the open task (Step 4) is to certify that
-the shared depth falls short of `v(det A)` by at least a *linear* amount for at least one
-column. *(Measured exact; the exact per-minor factorization analogous to Step 2 — with the
-`d`-column breaking the clean Vandermonde structure — is the object of Step 4.)*
+### Step 3 — The EXACT floor identity (Step 3 upgraded from measured to proved). **[proved, premise]**
+Factor `A = B · V · diag(x_k − 1)` where `V` is the Vandermonde `V_{lk} = x_k^l` (from
+`C_i(t) = (x−1)·4q_i(x)` and `4q_i(x) = Σ_l B[i][l]x^l`), and write `d = B·w`, `w = B^{−1}d`
+(node-independent). Then `minor_j = B · (V·diag(x−1) with column j replaced by w)`, and expanding
+the replaced-Vandermonde determinant gives, **exactly**,
+```
+    v(det A) − v(minor_j) = v(x_j − 1) + Σ_{k≠j} v(x_j − x_k) − v(⟨w, ε(X'_j)⟩)
+                          = 1 + N_j − C_j,
+```
+with `N_j := Σ_{k≠j} v(x_j − x_k)`, `C_j := v(⟨w, ε(X'_j)⟩)`, and `ε(X'_j)_i = (−1)^{m−1−i}
+e_{m−1−i}(X'_j)` the signed elementary-symmetric vector of the other `m−1` x-values (`e` = elementary
+symmetric). Combining with Step 1,
+```
+    v(q_min) = max_{1 ≤ j ≤ m} ( 1 + N_j − C_j ).
+```
+*(Verified EXACT on 240 valid configs across three orbits `σ = 3/4, 7/8, 4/5`, `m = 3..7` — the identity
+is orbit-free.)* By Step 2, `N_j ≥ 3(m−1)` for **every** `j` (unconditional), so
+```
+    v(q_min) ≥ 1 + 3(m−1) − min_j C_j.        (★)
+```
 
-### Step 4 — The linear lower bound (**the hard core**). **[open]**
-> **Sub-claim (Step 4 core).** For `p = 2` and any off-line orbit, no node configuration can
-> drive `v(det A) − v(minor_j) < c·m` for *every* column `j` simultaneously; i.e.
-> `min_j v(minor_j) ≤ v(det A) − c·m`, uniformly in `m`, the node set, and the orbit.
+### Step 4 — The single leave-one-out bilinear bound (**the hard core, CORE-2**). **[open]**
+By (★) the entire remaining problem is a **single** statement about the fixed off-line vector
+`w = B^{−1}d` paired against the leave-one-out symmetric vectors:
+> **Sub-claim (CORE-2).** There is an absolute `c > 0` such that for every `m`, every orbit, and
+> every node configuration, `min_{1 ≤ j ≤ m} C_j = min_j v(⟨w, ε(X'_j)⟩) ≤ (3 − c)·m + O(1)`;
+> i.e. at least one leave-one-out pairing is not too 2-adically deep. Then by (★),
+> `v(q_min) ≥ c·m − O(1)`.
+
+**Empirical calibration (honest — do not take as proved).** `min_j C_j` is **not** bounded — it grows
+— but only with slope `≈ 1`, far below `N`'s slope `3`. Two independent adversaries converge on the
+sharp value `min_j C_j ≈ m + 3`: (a) an adversary maximizing `min_j C_j` reaches `7,8,9,10`
+(`m = 4..7`); (b) the floor-minimizing adversary drives **all** `C_j` equal to `7,8,9,10,11`
+(`m = 4..8`), giving floor `6,11,14,18,21`. This suggests the sharp form `min_j C_j ≤ m + O(1)`,
+whence `v(q_min) ≥ 2m − O(1)`; any `c > 0` suffices to close OP1.
 
 **Structural handles available.**
-- **(H-pair) The unconditional per-pair anchor.** Unlike p=3, the on-line depth `Σ_{k<l}
-  v(x_k − x_l) ≥ 3·C(m,2)` holds with no hypothesis, and equals `3·C(m,2) + Σ_{k<l} v(t_j²−t_k²)`
-  exactly. The excess `Σ v(t_j²−t_k²)` is the only adversary-tunable part of the numerator; the
-  base `3·C(m,2)` is fixed.
-- **(H-minor) The `d`-replacement factorization.** `minor_j` is `det A` with the Vandermonde
-  column of `x_j` replaced by the (cleared) target `v_off`. Expanding `minor_j` in the graded
-  basis, `minor_j = (product of the retained `(x_k−1)` and `det B` factors) × ⟨w, ε(X'_j)⟩` with
-  `w = B^{−1}d` and `ε(X'_j)` the signed elementary-symmetric vector of the other x-values
-  (exactly as in OB-42 §1.6, but now with the p=2 prefactors `Σ_{k≠j} v(x_k−1) + v(det B)` NOT
-  cancelling). The task is to bound how deeply `⟨w, ε(X'_j)⟩` and the dropped `(x_j−1)`/pair
-  factors can add 2-adic depth beyond the fixed base — for the *shallowest* column.
-- **(H-orbit-free) Why no unimodularity is needed.** At p=3 the floor required `w` 2-adically...
-  (there: 3-adically) unit, because the on-line pigeonhole alone was `m²/4` and could be
-  cancelled. At p=2 the on-line base `3·C(m,2)` is so large and rigid (every pair, always) that
-  the orbit-dependent `⟨w, ε⟩` term cannot cancel more than a linear residue regardless of `w`.
-  Converting this heuristic into a uniform bound is the crux.
+- **(H-uniform-N) The uniform on-line base.** Unlike p=3, `N_j ≥ 3(m−1)` holds for *every* column,
+  not just on average — so the reduction (★) needs no pigeonhole and no orbit hypothesis. The only
+  task is to upper-bound the off-line `min_j C_j`.
+- **(H-equalize) The extremal configuration equalizes `C_j`.** At the floor-minimizing optimum the
+  `m` values `C_j` are all equal (observed). A bound on this common value — or on `avg_j C_j =
+  (1/m)Σ_j C_j` (note `max_j(N_j − C_j) ≥ 3(m−1) − avg_j C_j` by averaging, an alternative to (★)) —
+  suffices.
+- **(H-bilinear) Newton-polygon / valuation of a fixed pairing.** `C_j = v(⟨w, ε(X'_j)⟩)` is the
+  2-adic valuation of one bilinear form of the *fixed* `w` against the leave-one-out symmetric
+  vectors of a single node set. The `m` vectors `ε(X'_1), …, ε(X'_m)` are not independent (they are
+  the leave-one-out symmetric vectors of one degree-`m` node set, coupled by Newton's identities), so
+  they cannot all be aligned to make `⟨w, ε(X'_j)⟩` deep simultaneously. Converting this coupling into
+  `min_j C_j ≤ (3−c)m` is the crux.
 
-**What to close for Step 4.** Prove the Sub-claim (any absolute `c > 0`, linear floor). A proof
-closes OP1's 2-adic channel — and, being orbit-free, closes the barrier for *every* orbit, not
-just a unimodular class.
+**What to close for Step 4.** Prove CORE-2 (any absolute `c > 0`). By (★) this gives a linear 2-adic
+floor for *every* orbit and closes OP1's 2-adic channel.
 
 **Known dead-ends (inherited from the p=3 analysis — do not re-derive).** The column-wise
 simplifications refuted for OB-42 (`max_j`-type bounds `= O(1)`, averaging `Σ = O(m)`, an
@@ -276,16 +300,18 @@ Exact, independently re-derivable by a few lines of rational arithmetic.
     x = ( 323/325,  5475/5477,  99/101,  1155/1157 ).
 ```
 Per-pair 2-adic check (Step 2b), e.g. `v(x(9) − x(37)) = 3 + v(9² − 37²) = 3 + v(−1288)`,
-`1288 = 2³·7·23` so `= 3 + 3 = 6 ≥ 3`. ✓ And `v(x(t) − 1) = 1` for each node (denominators odd,
-numerator `−2`). ✓ Then the exact formula gives
+`1288 = 2³·7·23` so `= 3 + 3 = 6 ≥ 3`. ✓ And `v(x(t) − 1) = 1` for each node. ✓ Then:
 ```
-    v(det A) = m + m(m+3)/2 + Σ_{k<l} v(x_k − x_l)   with m = 4  (⇒ 4 + 14 + Σ),
+    v(det B) = m(m+3)/2 = 14.
+    N_j = ( 19, 21, 21, 19 )   (each ≥ 3(m−1) = 9).
+    C_j = ( 7, 7, 7, 7 )        (here all equal — the equalization of handle (H-equalize)).
+    v(q_min) = max_j ( 1 + N_j − C_j ) = max(13, 15, 15, 13) = 15   (= direct v_2(q_min)).  ✓
+    reduction (★):  v(q_min) ≥ 1 + 3(m−1) − min_j C_j = 1 + 9 − 7 = 3   (loose here; the bound is
+                    asymptotic — the point is min_j C_j = 7 = m + 3 stays linear, not ~3m).
 ```
-and the floor `v(q_min) = v(det A) − min_j v(minor_j)` evaluates (by exact `Fraction` arithmetic)
-to a value `≥ m = 4`; the adversarial-min over this orbit is `6` at `m = 4` (§5). A referee should
-confirm (a) `v(x(t) − 1) = 1` for each node; (b) `v(x_j − x_k) = 3 + v(t_j² − t_k²) ≥ 3` for the
-six pairs; (c) `v(det B) = m(m+3)/2 = 14`; (d) the resulting `v(q_min) ≥ 4`.
-**Sanity only — not an input.**
+A referee should confirm (a) `v(x(t) − 1) = 1` for each node; (b) `v(x_j − x_k) = 3 + v(t_j² −
+t_k²) ≥ 3` for the six pairs; (c) `v(det B) = 14`; (d) `N_j = (19,21,21,19)`, `C_j = (7,7,7,7)`;
+(e) the identity `v(q_min) = max_j(1 + N_j − C_j) = 15`. **Sanity only — not an input.**
 
 ---
 
@@ -297,8 +323,8 @@ six pairs; (c) `v(det B) = m(m+3)/2 = 14`; (d) the resulting `v(q_min) ≥ 4`.
 | L5 (RH via divisor / circular target) | PASS — no ζ/L zeros, no real-zero product; the only "off the critical line" mention is the *definition* of the single hypothesized off-line point (§1.3), not an RH assumption. Algebraic/analytic rank never appear; `d` is a finite rational Li-type observation, not an L-value |
 | L6 (vacuous target / real atoms) | PASS — target is a finite rational determinantal floor; a non-vacuous REFUTED path (explicit orbit family with floor `= o(m)`) is available |
 | L7–L17 | N/A — no counting-function factor, growth ray, Fredholm, meromorphic-type, or externally-cited black-box steps (all premises proved/measured in-repo, stated inline) |
-| L18 (numerical anchor by script) | PASS — anchor re-derived by exact `Fraction` arithmetic: per-pair `v = 3 + v(t²−t'²)`, `v(x−1)=1`, `v(det B)=14`, floor `≥ 4` |
-| L19 (honest inconclusive verdict) | PASS — outcomes STRATEGY / PARTIAL / INCONCLUSIVE+localization all first-class; no prove-or-refute dichotomy; a sub-`ω(log m)` refutation is explicitly welcomed. Step 3 is honestly labeled measured/proved-shape, not a closed proof |
+| L18 (numerical anchor by script) | PASS — anchor re-derived by exact `Fraction` arithmetic: per-pair `v = 3 + v(t²−t'²)`, `v(x−1)=1`, `v(det B)=14`, `N_j=(19,21,21,19)`, `C_j=(7,7,7,7)`, identity `v(q_min)=max_j(1+N_j−C_j)=15` |
+| L19 (honest inconclusive verdict) | PASS — outcomes STRATEGY / PARTIAL / INCONCLUSIVE+localization all first-class; no prove-or-refute dichotomy; a sub-`ω(log m)` refutation is explicitly welcomed. §3 Step 4 honestly labels the `min_j C_j = O(1)` hope as REFUTED (it grows, slope ≈ 1); CORE-2 is stated as the open target with adversary calibration marked not-a-proof |
 | L20–L24 | N/A |
 | Self-containment | PASS — every symbol/formula in-file (`x(t)`, Chebyshev `C_j`, target `d_j`, graded basis `q_i`/`B`, `v(det B)`, `D_r`, `q_min`, `minor_j`, per-pair `v_2` identities, `v(det A)` formula); `grep "see .*\.md"` → clean; §5 provenance is a reference only, not load-bearing |
 | Deliverable breadth | PASS — a sanity-checked *proof strategy* (STRATEGY) is a successful deliverable; full proof not required |

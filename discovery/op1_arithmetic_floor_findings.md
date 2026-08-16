@@ -2455,6 +2455,42 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   orbit robustness.  Packaged as outsource OB-43 (the p=2 hypothesis-free floor), companion to OB-42 (p=3).
   RH stays [OUT].
 
+### §6bf — EXACT p=2 floor IDENTITY + reduction to a single leave-one-out bilinear bound (CORE-2)
+
+  probe_qmin_p2_floor_identity.py.  §6be framed the p=2 floor directly as v_2(det A) − v_2(gcd minors) and
+  left Step 3 (linearity) "measured".  This upgrades it to a PROVED EXACT IDENTITY and reduces the whole open
+  problem to ONE clean bilinear-valuation bound.
+
+  IDENTITY (verified EXACT, 240 configs across orbits 3/4, 7/8, 4/5, m=3..7 — orbit-free, structural):
+        v_2(q_min) = max_j ( 1 + N_j^(2) − C_j^(2) ),
+        N_j^(2) = Σ_{k≠j} v_2(x_j − x_k)  ≥ 3(m−1)   [UNCONDITIONAL, every pair v_2 ≥ 3, §6be(i)],
+        C_j^(2) = v_2(⟨w, ε(X'_j)⟩),  ε(X'_j)_i = (−1)^{m−1−i} e_{m−1−i}(others),  w = B^{−1}d.
+  DERIVATION: A = B·V·diag(x_k−1) and d = B·w ⇒ v(det A)−v(minor_j) = v(x_j−1) + Σ_{k≠j}v(x_j−x_k) −
+  v(⟨w,ε(X'_j)⟩) = 1 + N_j^(2) − C_j^(2); the "+1" is v_2(x_j−1)=1.  SAME bilinear C_j as p=3, but two
+  corrections (the +1 and the UNIFORM base 3(m−1) of N) that make the p=2 case orbit-free.
+
+  THE REDUCTION.  Because N_j^(2) ≥ 3(m−1) for EVERY column (not just on average — unconditional), taking the
+  column of minimal C gives
+        v_2(q_min)  ≥  1 + 3(m−1) − min_j C_j^(2).
+  So the ENTIRE p=2 open core is a SINGLE statement about the off-line pairing:
+        (CORE-2)  min_j C_j^(2)  ≤  (3 − c)·m + O(1)   for some absolute c > 0.
+  Any such c gives a LINEAR floor v_2(q_min) ≥ c·m − O(1) and closes OP1's 2-adic channel — with NO
+  unimodularity hypothesis (contrast p=3/OB-42).
+
+  HONEST CALIBRATION (L5 — my initial "min_j C_j = O(1)" hope is REFUTED).  min_j C_j^(2) is NOT bounded: it
+  GROWS.  But it grows with slope ≈ 1, far below N's slope 3.  TWO independent adversaries CONVERGE on the same
+  sharp constant m+3:
+    • maximize-min_j C_j (tries to inflate the pairing): reaches 7,8,9,10 (m=4..7) for 3/4; 9,10,11,12 for 7/8.
+    • minimize-floor (the correct target, D=425): at its optimum ALL C_j are EQUAL (min=avg=max) = 7,8,9,10,11
+      (m=4..8); floor = 6,11,14,18,21 (slope → 3); floor/m = 1.5,2.2,2.33,2.57,2.62.
+  Both hitting min_j C_j ≈ m+3 is strong evidence the SHARP form is  min_j C_j^(2) ≤ m + O(1), giving
+  v_2(q_min) ≥ 1 + 3(m−1) − (m+O(1)) = 2m − O(1).  (Adversaries are one-sided; this is calibration, not proof.)
+
+  STATUS.  PROVED (exact): the identity v_2(q_min)=max_j(1+N_j−C_j); N_j ≥ 3(m−1); hence the reduction
+  v_2(q_min) ≥ 1+3(m−1)−min_j C_j.  OPEN (CORE-2): min_j C_j^(2) ≤ (3−c)m+O(1) (sharp form ≤ m+O(1)).  This
+  SHARPENS OB-43: Step 3 upgraded measured→proved identity; open core is now one self-contained leave-one-out
+  bilinear bound, orbit-free.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
