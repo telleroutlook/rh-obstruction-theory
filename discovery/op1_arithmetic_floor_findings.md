@@ -2376,6 +2376,32 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   under which the irreducible joint bound max_j(N_j - C_j) >= m/2 - O(1) is expected to be provable.
   Random-min = UPPER bound on min-floor (L5).  RH stays [OUT].
 
+### §6bc — the ADJUGATE NO-CANCELLATION route is REFUTED as a reduction (5th failed simplification)
+
+  probe_qmin_adjugate_floor.py.  A fresh attempt to make Step 4 tractable by opening the black box `minor_j`.
+  Setup: floor = v(det A) − min_j v(minor_j), and expanding along the d-column,
+  `minor_j = Σ_k d_k·T_{jk}` with `T_{jk} = (−1)^{k+j} M_{kj}` the cofactors (`M_{kj}` = (m−1)-minor of A).
+  Define the NO-CANCELLATION prediction `pred_j = min_k[v(d_k)+v(T_{jk})]` (a min of explicit cofactor
+  valuations); ultrametrically `v(minor_j) ≥ pred_j` always, so `no_canc_floor := v(det A) − min_j pred_j ≥
+  floor` always.  HOPE: if floor = no_canc_floor, Step 4 reduces to a pure COFACTOR-VALUATION (Vandermonde/
+  pigeonhole) bound `min_j pred_j ≤ v(det A) − m/2` — no bilinear cancellation, far more tractable.
+
+  RESULT (L5).  The hope is FALSE.  floor == no_canc_floor for m = 4,5,6,7 (incl. the lift-adversary at those
+  sizes) — but this is a SMALL-m coincidence.  At m = 8 the lift-adversary forces, at its floor-minimizing
+  config, cancellation `gap* = v(minor_{j*}) − pred_{j*} = 17` at the pred-argmin column and `gap` over ALL
+  pred-argmin columns `= 4`, giving `floor = 5 < no_canc_floor = 9`.  So `no_canc_floor` is a LOOSE upper
+  bound with an UNBOUNDED gap; the cofactor-pigeonhole quantity `min_j pred_j` does NOT track the floor.
+  Moreover the pred-argmin's term-min is NOT achieved by a unique cofactor term for m ≥ 5 (0/40 configs), so
+  "gap = 0" is not provable via a unique dominating term — it is genuine non-cancellation of several terms,
+  which the adversary defeats once m is large enough to give it cancellation room.
+
+  WHAT SURVIVES.  The floor v(q_min) ITSELF still holds: at m = 8, floor = 5 ≥ m/2 = 4 (consistent with §6ax
+  robustness and §6bb's unimodular-orbit regime).  Only the REDUCTION dies — the p=3 floor is NOT equivalent
+  to, nor bounded below by, the adjugate no-cancellation cofactor bound.  This is the FIFTH refuted
+  simplification of the joint bound (after max C=O(1), ΣC=O(m), argmax-N bounded C, ∃ high-N low-C column):
+  the raw joint bound `max_j(N_j − C_j) ≥ m/2 − O(1)` remains irreducible.  Recorded on OB-42 as a known
+  dead-end so a referee does not re-derive it.  One orbit (D=425); adversary = one-sided (L5).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit

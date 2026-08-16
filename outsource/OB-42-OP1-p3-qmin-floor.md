@@ -200,6 +200,17 @@ why the theorem is not trivial.)*
 **What to close for Step 4.** Prove the Sub-claim (any absolute `c`, linear floor). A proof
 closes OP1's 3-adic channel and hence (with the p=3 construction) the barrier.
 
+**Known dead-ends (tested and refuted here — do not re-derive).** Besides the four column-wise
+decompositions refuted in §2, the **adjugate no-cancellation reduction** also fails: expanding
+`minor_j = Σ_k v_off_k·T_{jk}` (`T_{jk}` the cofactors of `A`) and setting `pred_j = min_k[
+v(v_off_k) + v(T_{jk})]`, one has `v(minor_j) ≥ pred_j` and `no_canc := v(det A) − min_j pred_j
+≥ v(q_min)` always, so a cofactor-valuation (Vandermonde/pigeonhole) bound `no_canc ≥ m/2` would
+be tempting. But `no_canc` is only a **loose upper bound**: at `m = 8` the adversary forces
+3-adic cancellation of depth `≥ 17` at the `pred`-minimizing column (`v(q_min) = 5` while
+`no_canc = 9`), so the gap is unbounded and `no_canc` does not track the floor. The floor is
+genuinely the *joint* `max_j(N_j − C_j)`, not a cofactor-magnitude count.
+
+
 ---
 
 ## 4. Acceptance criteria
