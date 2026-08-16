@@ -2776,6 +2776,46 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   structural: it identifies, for each orbit, WHICH single prime a proof should target, turning "prove OP1 for
   all orbits" into four separate single-prime lemmas indexed by n mod 4 and 3∣n.  RH stays [OUT].
 
+### §6bp — ROW 2 (n ODD) UPGRADED to near-proved: the v₂ profile is (1+i)-adically QUASI-LINEAR, C_j is PINNED
+
+  probe_qmin_p2_nodd_ramified + probe_qmin_p2_nodd_confirm (EXACT integer / Gaussian-integer arithmetic, L9).
+  §6bl(S)/§6bm(C) dismissed the n-odd row as "v₂(w'_i) goes negative and NON-LINEAR, floor large but by a
+  mechanism NOT proved here."  That was too pessimistic: the profile is not chaotic, it is PERIOD-4 quasi-linear,
+  and it is governed by the RAMIFIED prime π = 1+i.  Two facts, both verified exactly:
+
+  (A) THE RAMIFIED-PRIME PROFILE.  For n odd, γ (= primitive Gaussian numerator of β = 1/(2ρ(ρ−1))) is
+      BOTH-ODD (Re γ, Im γ both odd ⟺ γ ≡ 1+i mod 2), hence v_π(γ)=1 (N(γ) ≡ 2 mod 4).  The trace
+      c_j := γʲ + γ̄ʲ (a rational integer) has, VERIFIED to j=30 for 6 orbits (σ=2/3,4/5,1/5,2/5,6/7,3/7):
+            v_π(c_j) = (j+1) + a_j,   a_j PERIOD-4 in j:   a_j = (0, A, 0, 1)  for  j ≡ (1,2,3,0) mod 4,
+      with the CLOSED FORM  A = 2·v₂(Re(γ)²−Im(γ)²) − 1  (from c₂ = 2(a²−b²) ⟹ v_π(c₂)=2+2v₂(a²−b²)).
+      Consequently v₂(w'_i) = v_π(c_{i+1})/2 − (odd-free 2-part) is PERIOD-4 QUASI-LINEAR: each residue class
+      i mod 4 is an arithmetic progression with common difference exactly 4S = −6 (S = v₂(β) = −3/2), so the
+      average slope is S.  This is the §6bm linear profile "one prime up" — linear in the ramified valuation
+      v_π rather than in v₂, the extra period-4 wobble being the ramification (e=2) of π over 2.
+
+  (B) C_j IS NODE-INDEPENDENT (PINNED) with a UNIQUE (1+i)-adic minimum.  The leave-one-out pairing valuation
+      C_j = min_r [ v₂(e_r(X'_j)) + v₂(w_{m−1−r}) ] is, under a two-sided adversary (min AND max over node
+      sets), PINNED: adv-min == adv-max for every orbit and m=4,5,6,7, with the UNIVERSAL sequence
+            min_j C_j = [−5, −7, −6, −10]  at m = [4,5,6,7]   (identical across n=3,5,7 orbits).
+      The ultrametric min is UNIQUE (gap ≥ 1 to the 2nd-smallest term) except at m ≡ 2 mod 4, where two terms
+      TIE (gap=0) yet the result stays pinned — the one delicate spot a full proof must close (a no-cancellation
+      lemma for the tied pair).  Since C_j(m) ~ S·m < 0 (node-independent), the §6bf identity gives the
+            LINEAR FLOOR  v₂(q_min) ≥ 1 + 3(m−1) − C_j(m) ~ (3 − S)·m = (9/2)·m − O(1),
+      the steepest of all rows (slope ~4.5), matching §6bl's "measured 22,30,36" and §6bn's [18,26,29,38].
+
+  STATUS UPGRADE (L5).  Row 2 moves from "empirical" to NEAR-PROVED: the mechanism is a (1+i)-adic
+  unique-minimum, the SAME architecture as §6bm's proof, with two remaining gaps — (i) prove the period-4
+  law a_j=(0,A,0,1) in general (a finite Z[i]-recurrence 2-adic induction, A=2v₂(a²−b²)−1), and (ii) the
+  m≡2 mod 4 tie no-cancellation lemma.  Both are elementary, finite, RH-free.  Combined with §6bm (Row 1,
+  n≡0 mod 4, PROVED), the p=2 channel now covers BOTH n≡0 mod 4 AND n odd — 3/4 of residues mod 4 — leaving
+  only n≡2 mod 4 to the p=3 / ramified rows.  Descent = one-sided bound.  RH stays [OUT].
+
+  UPDATED COVERAGE MAP (superseding §6bo's table on Row 2):
+        n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
+        n odd                    →  p=2,  π=1+i quasi-linear, C_j pinned, floor ~(9/2)m  [NEAR-PROVED, §6bp]
+        n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
+        n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
