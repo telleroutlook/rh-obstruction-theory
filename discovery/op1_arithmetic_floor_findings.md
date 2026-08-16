@@ -1651,6 +1651,41 @@ a JOINT INTERPOLATION/convexity bound: ram_mass + geo_mass >= c*m across the who
 the two endpoints.  Both endpoints are now controlled; the middle is the open nucleus.  This is a
 genuinely different (and cleaner) target than the per-p or G-smoothness routes it replaces.
 
+### 6ag. Trade-off frontier is NOT convex: the "endpoints + convexity" reduction fails (this session)
+
+Tempting reduction of the §6af interior nucleus: if the trade-off frontier F(R) = min{ geo_mass :
+ram_mass = R } were CONVEX and decreasing with both endpoints high, then the aggregate min
+    min_node log q_min = min_R ( R + F(R) )
+would be PINNED by the two (already-controlled) endpoints -- reducing OP1 to endpoints + a convexity
+lemma.  probe_qmin_frontier_convexity maps F(R) (664 node sets/m: random + a lambda-sweep descent
+minimizing geo_mass + lambda*ram_mass, lambda in {0,.25,.5,1,2,4,8,100}, binned by ram_mass) and runs
+a discrete-convexity check (non-decreasing slopes), m=3..6:
+
+    m | agg min = min_R(R+F(R)) | frontier convex?
+    3 | 18.15                   | NO
+    4 | 34.13                   | NO
+    5 | 53.60                   | NO
+    6 | 66.69                   | NO
+
+TWO readings (L5):
+  (+) The aggregate min log2 q_min grows ~linearly (18.15, 34.13, 53.60, 66.69; slope ~16/node),
+      RECONFIRMING the §6z-agg floor under a THIRD, independent (lambda-sweep) adversary -- the floor
+      itself is robust.  (Values differ from §6z-agg's cluster-descent line 18,39,46,77 because both are
+      heuristic UPPER bounds on inf; the linear GROWTH is the invariant conclusion, not the exact value.)
+  (-) The convexity route FAILS: slopes oscillate large-positive/large-negative (e.g. m=6: +75.0, -14.2,
+      ..., +49.1, -32.7), so min_R(R+F(R)) is NOT pinned by the endpoints -- the binding configs are
+      INTERIOR.  IMPORTANT CAVEAT: F(R) here is an empirical min-ENVELOPE (each bin's geo_mass is a
+      heuristic upper bound on the true min), so the jaggedness is partly sampling noise; this does NOT
+      rigorously prove the TRUE frontier is non-convex.  What it does establish: the clean "endpoints +
+      convexity" reduction is NOT empirically supported and cannot be assumed.  The frontier shows a
+      multi-valley structure whose swing magnitude exceeds plausible single-sample noise, hinting at
+      genuine non-convexity.
+
+NET.  The floor is real and linear under three independent adversaries, but its proof cannot route
+through frontier convexity from the endpoints.  A rigorous OP1 floor must bound the INTERIOR configs
+directly (e.g. a determinantal/height lower bound on log|det A| - log D_m([A|d]) that does not split
+into the two channels), not interpolate between the ram=0 and fully-spread endpoints.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
