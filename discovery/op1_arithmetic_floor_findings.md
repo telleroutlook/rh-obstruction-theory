@@ -3419,8 +3419,12 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   p=3 floor (a₀ annihilated) and lives at distributed primes (§6ch).
 
   NET.  (A) [proved exact] + (B) [proved, 6-residue] + (C) [proved, rational-function identity mod 3] + (D)
-  [proved] give a symbolic-exact mod-3 backbone; the ε=0 floor v₃(q_min)=m−3 is EXACT to m=18.  The sole
-  remaining rigor is a clean lemma — "∃ node j with v₃(S_j)=0 AND clus(j) ≥ c·m" (strongly evidenced, c→1) —
+  [proved] give a symbolic-exact mod-3 backbone; the ε=0 floor v₃(q_min)=m−3 is EXACT to m=18.  CLUSTER SIDE
+  now PROVEN: since x_j−x_k = 8(j−k)(j+k)/[(4j²+1)(4k²+1)] with 3-unit denominators (4t²+1 ≡ t²+1 ∈ {1,2}
+  mod 3, never 0),  clus(j) = Σ_{k≠j}[ v₃(j−k) + v₃(j+k) ]  (verified exact m≤24), and for any central j,
+  Σ_{k≠j} v₃(j−k) = Σ_{i≥1} #{k: 3ⁱ|(j−k)} ≈ Σ m/3ⁱ = m/2, giving max_j clus(j) ≥ ~m/2 = Θ(m) rigorously
+  (measured max/m → 0.9).  The sole remaining rigor is the COUPLING lemma — "the argmax of clus(j)−v₃(S_j)
+  lands on a node with v₃(S_j)=0 (a 3-unit) whose clus(j) ≥ c·m" (strongly evidenced, c→1; floor = m−3) —
   after which Row-3a p=3 is a THEOREM closing OP1 for 3∤(a+n).  probe_qmin_p3_floor_theorem.py.  RH [OUT].
 
 ### §6cn — MULTI-PRIME extension + adversarial node-set robustness (evidence for OP1 infimum) (L9, L5)

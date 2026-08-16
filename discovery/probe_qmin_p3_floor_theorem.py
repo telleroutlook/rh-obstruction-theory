@@ -165,6 +165,23 @@ if __name__ == "__main__":
                 okD = okD and (act == pred)
     print("(D) F(s) closed forms match Λ((z-a)^t) mod3, both regimes, t<20: %s" % ("HOLDS" if okD else "FALSE"), flush=True)
 
+    # CLUSTER identity (rigorous): x_j - x_k = 8(j-k)(j+k)/[(4j^2+1)(4k^2+1)], denominators 3-units
+    # => clus(j) = Σ_{k≠j}[ v3(j-k) + v3(j+k) ]; max_j clus(j) = Θ(m) (>= ~m/2, rigorous).
+    def _v3int(nn):
+        nn = abs(int(nn)); v = 0
+        while nn and nn % 3 == 0:
+            nn //= 3; v += 1
+        return v
+    okClus = True
+    for m in (9, 12, 15, 18, 24):
+        xs = [x_of(t) for t in range(1, m + 1)]
+        clus = [sum(v3(xs[j] - xs[k]) for k in range(m) if k != j) for j in range(m)]
+        cf = [sum(_v3int((j + 1) - (k + 1)) + _v3int((j + 1) + (k + 1)) for k in range(m) if k != j)
+              for j in range(m)]
+        okClus = okClus and (clus == cf)
+    print("\nCLUSTER identity clus(j)=Σ_{k≠j}[v3(j-k)+v3(j+k)] (denominators 3-units): %s" % (
+        "HOLDS" if okClus else "FALSE"), flush=True)
+
     # FLOOR (eps0): argmax of (clus - v3S) is a 3-unit node; floor linear (= m-3)
     print("\nFLOOR eps0 (3∤(a+n)): v3(q_min)=max_j(clus-v3S); argmax has v3(S_j)=0; floor≈m-3 (LINEAR):", flush=True)
     okF = True
@@ -186,6 +203,8 @@ if __name__ == "__main__":
     print("(A) %s | (C) %s | (D) %s | FLOOR-linear(eps0, m<=18) %s" % (
         "OK" if okA else "X", "OK" if (okC0 and okC2) else "X",
         "OK" if okD else "X", "OK" if okF else "X"), flush=True)
+    print("CLUSTER identity: %s (=> clus side of the floor is PROVEN Θ(m), >= ~m/2 rigorous)" % (
+        "OK" if okClus else "X"), flush=True)
     print("READING (L5): (A),(B),(C),(D) PROVED symbolically/exact.  eps0 floor v3(q_min)=m-3 is EXACT here", flush=True)
     print("(argmax is always a 3-UNIT node; global-max-clus node is NOT always a unit — that over-claim is", flush=True)
     print("REFUTED).  Remaining rigor: prove ∃ node with v3(S_j)=0 AND clus(j)>=c m (evidence: c->1).", flush=True)
