@@ -3200,6 +3200,34 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   PARTIALLY proved: OP1 CLOSES for all n≢2 mod4 at p=2 (Row 1 §6bm proved; Row 2 §6cd candidate modulo the
   PROVED FACT A), and REMAINS OPEN for n≡2 mod4, pending (4″).  RH stays [OUT].
 
+### §6cg — IMPOSSIBILITY: the moment-side ultrametric (the §6cd machinery) provably CANNOT yield the Row-3 floor; the open core is intrinsically determinantal (L5)
+
+  A sharpening of §6cf shape (c), turning "§6cd cannot help" from an observation into a
+  one-line THEOREM about the method, not just the instance.  Setup (all from §6bh, prime p=3):
+  u = (Vᵀ)⁻¹w with V=(x_jᵖ) the node Vandermonde; the Cramer numerator D_j = det(V, col j←w),
+  u_j = D_j/det V; and v₃(q_min) = −min_j v₃(u_j) = v₃(det V) − min_j v₃(D_j).  Row 3 (n≡2 mod4,
+  3∤n) has w a 3-UNIT vector: v₃(w_p)=0 for every moment p (VERIFIED EXACT by the §6cf probe,
+  "flat-unit height 0"; also confirmed here across n=10 × m=4,5,6).
+
+  CLAIM.  Any argument that bounds v₃(q_min) from below using ONLY the linear/Lagrange relations
+  Σ_j g(x_j) u_j = Λ(g) (g any poly deg ≤ m−1, Λ(zᵖ)=w_p) and the ultrametric is INCAPABLE of a
+  positive floor for Row 3.
+  PROOF.  Every accessible right-hand side Λ(g) is a Z₃-combination of the UNIT moments w_p, so
+  v₃(Λ(g)) ≥ 0, with equality generically.  The ultrametric on Σ_j g(x_j) u_j = Λ(g) gives only
+  min_j v₃(u_j) ≤ v₃(Λ(g)); the STRONGEST such bound (minimising over g) is min_j v₃(u_j) ≤ 0.
+  Hence v₃(q_min) = −min_j v₃(u_j) ≥ 0 — the trivial bound.  No choice of g escapes v₃(Λ(g)) ≥ 0,
+  because Λ maps 3-integral polynomials to Z₃-combinations of units. ∎
+
+  So the Row-3 floor cannot be a valuation-TRANSFER statement; it must be the determinantal
+  NON-ABSORPTION v₃(det V) − min_j v₃(D_j) > 0 — i.e. the gcd of the m Cramer numerators D_j fails
+  to absorb the full lattice content v₃(det V) ≈ m²/4·(within-class pair density).  This is a
+  Smith-normal-form / index statement about the augmented lattice [V | w], NOT an ultrametric one,
+  and it re-derives from first principles the §6ah/§6ai conclusion ("the gcd cannot absorb the final
+  linear piece") — now as a CLEAN impossibility for the entire moment-side toolkit, not an empirical
+  wall.  CONSEQUENCE (L5): the competition lemma (4″) is correctly posed as a Smith/lattice problem;
+  no refinement of §6cd/§6bh/Lagrange can shortcut it.  This is the precise reason to OUTSOURCE (4″)
+  as a determinantal nugget rather than keep decomposing it valuation-wise.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
