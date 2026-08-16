@@ -2834,8 +2834,10 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   UPDATED COVERAGE MAP (superseding §6bo's table on Row 2):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
         n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br), C_j(m)=⌊−3m/2⌋+O(1),
-                                          O(1) tie-correction BOUNDED in m (§6bt), floor ~(9/2)m
-                                          [profile PROVED, C_j closed form §6bs/§6bt → NEAR-PROVED]
+                                          O(1) tie-correction BOUNDED in m (§6bt); tie is r=(0,1), FACT B =
+                                          "node-sum σ can't 2-adically hit fixed target τ=w_{m−1}/w_{m−2}
+                                          past depth A" (§6bv), floor ~(9/2)m
+                                          [profile PROVED, C_j closed form §6bs/§6bt, tie reduced §6bv → NEAR-PROVED]
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
 
@@ -2912,6 +2914,35 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   1 + 3(m−1) − C_j = (9/2)m − O(1) is PROVED for every n-odd orbit.  HONEST (L5): adversary/random both one-sided
   (max depth = LOWER bound on true worst); 5 orbits, m≤22; the depth-constant equals corr from §6bt as expected.
   RH [OUT].
+
+### §6bv — the tie is r=(0,1); FACT B reduces to a 2-adic DISTANCE v₂(τ−σ) to ONE fixed orbit target
+
+  probe_qmin_p2_nodd_tie_structure (EXACT, L9).  Extracts the two tied term-indices and their leading units.
+  DECISIVE STRUCTURE (both orbits (2/3),(4/5), m=6,10, every tie): the two tied terms are ALWAYS the two
+  TOP-exponent terms r=0 and r=1 (ADJACENT) of the pairing C_j = v₂(⟨w, ε(X'_j)⟩), where ε = signed
+  elem-symm coeffs of ∏_{k≠j}(X−x_k) and w = B⁻¹d is NODE-INDEPENDENT:
+        r=0  (X^{m−1} coeff, e_0=1) :  term₀ =  w_{m−1}                     — NODE-INDEPENDENT fixed constant
+        r=1  (X^{m−2} coeff, e_1)   :  term₁ = −w_{m−2}·(Σ_{k≠j} x_k)      — node-controlled via the node-sum
+  WHY THE TIE SITS AT m≡2 mod 4 (now transparent): each x_k = 1 − 2/(4t_k²+1) is an odd 2-adic unit, so
+  e_1 = Σ_{k≠j} x_k is a sum of m−1 odd units ⟹ v₂(e_1) ≡ (m−1) mod 2.  At m≡2 mod 4, m−1 is ODD ⟹ e_1 odd
+  (v₂=0) ⟹ v₂(term₁)=v₂(w_{m−2}); the tie v₂(term₀)=v₂(term₁) is then EXACTLY the profile equality
+  v₂(w_{m−1})=v₂(w_{m−2}), delivered by the PROVED FACT A period-4 law at this residue.  (At m≢2 mod 4, m−1
+  even ⟹ e_1 even ⟹ the two top terms separate ⟹ unique min ⟹ C_j pinned — matches §6bs exactly.)
+  DEPTH IS A 2-ADIC DISTANCE (the clean FACT B identity): with W:=w_{m−1}/2^V, W':=w_{m−2}/2^V fixed odd
+  units and σ := Σ_{k≠j} x_k the odd node-sum,
+        depth = v₂(term₀+term₁) − V = v₂(W − W'σ) = v₂(τ − σ),   τ := W/W' = w_{m−1}/w_{m−2}  (FIXED odd target).
+  So the adversary raises C_j by exactly the 2-adic CLOSENESS of the node-sum σ to a FIXED per-orbit target τ —
+  the SAME shape as §6o's ψ = v_p(x_k − a_k/b_k) p-adic-distance identity, now for p=2, Row 2, ONE target.
+  Verified leading units (mod 32): (2/3) m=6 u₁≡17,u₂≡19,Σ≡4 depth 2; m=10 u₁≡27,u₂≡1,Σ≡28 depth 2;
+  (4/5) m=6 u₁≡27,u₂≡15,Σ≡10 depth 1; m=10 u₁≡1,u₂≡25,Σ≡26 depth 1.
+  FACT B FINAL FORM: "the node-sum σ=Σ_{k≠j}x_k cannot 2-adically approximate the fixed target
+  τ=w_{m−1}/w_{m−2} beyond depth A" — a SINGLE-TARGET 2-adic approximation bound on a sum of m−1 constrained
+  node-units x_k ∈ 1 − 2·(odd).  This is the crispest, most self-contained Row 2 open core.
+  HONEST OPEN POINT (L5): why depth stays a FIXED constant even as m grows (more nodes = more σ-freedom, which
+  naively could push σ→τ deeper) is NOT yet proved — it is the net of the global collision competition (§6ax
+  "argmax moves"): tuning σ at column j perturbs the other columns' pairings and the N_j's, so σ is not freely
+  choosable.  Empirically (§6bu) depth ≤ A ≤ 2 uniformly; the analytic reason for the ceiling is the sole
+  remaining gap.  Adversary one-sided.  RH [OUT].
 
 ## 4. Honesty / scope
 
