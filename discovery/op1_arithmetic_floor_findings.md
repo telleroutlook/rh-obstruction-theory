@@ -3130,6 +3130,25 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   If one wants the sharp 9m/2 constant, that remains open (needs the cancellation structure) — but OP1 only
   needs ω(log m), which 3m/2 delivers.  RH stays [OUT].
 
+### §6ce — SCOPE of the Vandermonde principle: it is Row-2-specific, NOT a coverage-map unification (L5)
+
+  The §6cd bound v_p(q_min) ≥ 1 − profile_min(w; p) is VALID at any prime p where the nodes are p-adic units
+  (the whole derivation needs only: §6bf identity, Lagrange V·u = w, and unit nodes).  Natural question: does
+  it UNIFY the 4-row coverage map?  TESTED (EXACT, p=2, τ=1 orbits spanning all n mod 4; m=4,6,8):
+        n odd (3,5,7):      profile_min(p=2) = −5,−7,−11 ≈ −3m/2  ⇒ floor 6,8,12 LINEAR — §6cd CARRIES.
+        n≡0 mod4 (4,8):     profile_min(p=2) = +4,+6 CONSTANT     ⇒ floor 1−pm ≤ 0, VACUOUS (yet true v₂(q_min)
+                            = 6,16,26 IS linear — p=2 carries n≡0 via §6bm, NOT §6cd; here min_j v₂(u_j) dips
+                            FAR below profile_min, an extra V⁻¹w cancellation the simple ultrametric can't see).
+        n≡2 mod4 (2,6,10):  profile_min(p=2) = +2 CONSTANT        ⇒ floor VACUOUS; true v₂(q_min) = 0,4,5
+                            BOUNDED — p=2 genuinely does NOT carry; needs p=3 (Row 3) / ramified prime (Row 4).
+  CONCLUSION (L5): §6cd is INTRINSICALLY the Row-2 mechanism.  Its floor is linear ⟺ profile_min(w; p=2) is
+  linearly negative ⟺ n odd.  It does NOT collapse the coverage map; the 4-row split is genuine (different
+  carrying primes for different n-classes).  The earlier speculation that §6cd might unify OP1 is REFUTED.
+  META-PRINCIPLE that DOES survive: "at a prime p of unit nodes, v_p(q_min) ≥ 1 − profile_min(w;p)" is a
+  uniform lower-bound tool — but it is only USEFUL (non-vacuous) on the row whose profile at p is linearly
+  negative, i.e. Row 2 at p=2.  For Rows 1,3,4 the profile-min bound is loose/vacuous and the existing
+  row-specific mechanisms (§6bm; p=3 3-unimodular; ramified §6bo) remain necessary.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
