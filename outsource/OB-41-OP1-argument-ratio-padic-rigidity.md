@@ -1,5 +1,29 @@
 # Problem OB-41 — Uniform p-adic rigidity of the argument-ratio: the O(1) incidence-lag bound (OP1 LEG3)
 
+> **STATUS: REFUTED (2026-08-16) — theorem below is FALSE as stated; kept for the record.**
+> An external referee returned outcome **4 (REFUTED)** with an explicit valid collision,
+> independently replayed here by exact arithmetic (`discovery/verify_ob41_referee.py`):
+> orbit `ρ = 3/4+i` (the §6 anchor), `p = 29`, `m = 14`, `slack_x = 1` (the regime that
+> claimed `lag ≤ 2`), nodes `t = (1823,2113,4433,2838,6608,201,6900,7886,5276,7915,8037,
+> 1019,6993,5949)`, x-residues `(9,9,9,9,9,6,6,6,6,6,9,9,9,9) mod 29`. Verified exact:
+> `rank(A) = 14 = m` (C2), `qmin_fast` finite (C1) → **valid collision**; 9 tied
+> Φ-minimizers all give `ψ = 6` → **`lag = 6`**, far past the claimed `2`.
+>
+> **Why the theorem is wrong:** the controlling invariant is `navail` (x-classes *used*;
+> here 2), NOT `slack_x` (x-classes *available*). The prior "O(1)" evidence was a silent
+> sampling artifact — the probe generator forced `navail = m−1` (full spread) and never
+> sampled the clustered regime.
+>
+> **Why this does NOT break OP1:** `lag` was a mis-formulated *intermediate* lemma. The
+> barrier's real target is `inf_A q_min(m)` super-polynomial, whose danger is `q_min → 1`.
+> At this very counterexample `q_min ≈ 1.7·10³⁹² (log₂ = 1303)`, `v₂₉(q_min) = 2` — the
+> 6-unit lag is a negligible p-adic leak dwarfed by the Vandermonde growth clustering
+> forces into `D_m(A)`. The config has an *enormous* `q_min`: it strengthens the barrier.
+> LEG3-as-posed is retired; the open frontier reverts to the direct `q_min` bound
+> (§6c–6d / λ₁ of the findings). RH stays `[OUT]`.
+
+---
+
 **Type:** arithmetic / p-adic analysis / determinantal (lattice) geometry — a finite,
 exact, RH-free question about rational vectors and p-adic valuations.
 

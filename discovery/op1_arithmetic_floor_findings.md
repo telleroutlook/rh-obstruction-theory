@@ -1145,6 +1145,47 @@ counterexample hunt.  (Evidence only, DISCOVERY tier; NOT a proof for this case.
     [L + Z d_m : L], an exact determinantal-divisor invariant, not a vague
     denominator-blowup heuristic.
 
+### 6u. LEG3 "lag = O(1)" lemma REFUTED by external referee — REPLAYED EXACT (this session)
+
+An external referee reviewing the OB-41 outsource returned outcome **REFUTED** for the
+LEG3 intermediate lemma ("incidence lag is O(1), <=2 at slack_x>=1"). Replayed here with
+`discovery/verify_ob41_referee.py` using this repo's own §1 helpers and exact
+Fraction/Gaussian-rational arithmetic — the referee's counterexample reproduces EXACTLY:
+
+  orbit rho=3/4+i (D=425, the §6 anchor);  p=29, m=14, slack_x=1 (the "good" regime);
+  nodes t=(1823,2113,4433,2838,6608,201,6900,7886,5276,7915,8037,1019,6993,5949);
+  x-residues (9,9,9,9,9,6,6,6,6,6,9,9,9,9) mod 29  => navail = 2  (NOT m-1 = 13);
+  rank(A) = 14 = m (exact) so C2 holds; qmin_fast finite so C1 holds => VALID collision;
+  9 tied Phi-minimizers ALL give psi = 6  =>  lag = 6  >> claimed bound 2.
+
+**Diagnosis (two independent facts, both important):**
+
+1. **The lemma is genuinely false as stated, and my prior evidence was BIASED.** The
+   "lag<=2" evidence (probe_leg3_s / _twoterm, "p<=13 m<=6, 0/6000") only ever sampled
+   the FULL-SPREAD regime: `build_pool` draws `bases = sample of m-1 DISTINCT residues`,
+   forcing navail = m-1. It NEVER generated clustered node sets. So the O(1) claim was an
+   over-generalization from a silent sampling cap (L5). The controlling invariant is
+   **navail (x-classes USED), not slack_x = (p-1)/2-(m-1) (x-classes AVAILABLE)** — the
+   theorem conflated the two. (Note: naive clustering does NOT auto-give high lag — my own
+   2-class constructions gave lag <= 0; the referee's nodes are tuned to align alpha
+   p-adically deep. But one exact valid counterexample refutes a universal claim.)
+
+2. **The refutation does NOT touch the barrier.** `lag` was only an INTERMEDIATE p-adic
+   leak (v_p of Psi at Phi-minimizers), one route toward lower-bounding q_min at the prime
+   p. It is neither necessary nor sufficient for the barrier. The barrier's actual target
+   (this doc, §6/§6a) is **inf_A q_min(m) super-polynomial**, and its DANGER is q_min -> 1,
+   NOT q_min large. At the very counterexample: **q_min = 1.7e392 (log2 = 1303),
+   v_29(q_min) = 2** — the 6-unit lag is a negligible p-adic leak, dwarfed by the
+   Vandermonde/prod(x-1) growth that clustering into distinct large rationals (t up to
+   ~8000) forces into D_m(A). So this config has an ENORMOUS q_min: it STRENGTHENS the
+   barrier, not weakens it.
+
+**Consequence.** The LEG3 "lag=O(1)" lemma is RETIRED (false; a mis-formulated detour).
+OP1's real open frontier is unchanged: the direct uniform lower bound on q_min (the
+e_max / confluent-Vandermonde route of §6c-6d, or lambda_1 of §2). LEG1/LEG2 stand; the
+"third leg" as posed was the wrong quantity. RH stays [OUT] throughout — this is a
+finite exact-arithmetic correction with no bearing on RH either way.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
