@@ -1260,6 +1260,41 @@ of §6c-6d), NOT a prime-by-prime floor. §6v is hereby narrowed: the floor tran
 primes/ranges it sampled (p<=11 here) but is NOT uniform over p; do not cite it as a
 per-prime law. RH stays [OUT] — a finite exact-arithmetic correction with no RH bearing.
 
+### 6x. The AGGREGATE q_min resists the per-prime-draining attack — min log2(q_min) grows linearly (this session)
+
+With both prime-by-prime routes dead (§6u, §6w), the corrected OP1 target is the AGGREGATE
+`inf over valid collisions of log q_min = sum_p v_p(q_min) log p` super-polynomial in m.
+DECISIVE test (`discovery/probe_qmin_aggregate_min.py`, exact SNF): adversarially MINIMIZE the
+FULL log2(q_min) over valid collisions (K>=m, rank m, finite qmin), comparing three adversaries
+— CLUSTER (nodes packed into 2-3 x-classes mod p in {7,11,13}, the §6w weapon that drains a
+prime's part to 0), SPREAD (distinct x-classes), RANDOM. Orbit D=425:
+
+  m :  2     3     4     5     6     7     8     9     10
+ min: 3.9  26.7  60.0  98.1 124.2 166.9 208.7 247.3 230.2   (log2 q_min)
+  d :  -  +22.8 +33.3 +38.1 +26.1 +42.7 +41.8 +38.6 -17.1
+ arg: clu  clu   clu  spr   clu   clu   clu   clu   clu
+
+**READING.** min log2(q_min) climbs ~linearly at ~+37/step (m=3..9): q_min ~ 2^{~37 m},
+exponential => super-polynomial. The CLUSTER adversary is USUALLY the argmin — per-prime
+draining does lower q_min vs spread/random (e.g. m=9: cluster 247 vs spread 270 vs random 285)
+— but it CANNOT pull the whole q_min below the exponential trend. So the mass genuinely
+migrates between primes (as §6w's 379-bit witness already showed at a single point), and the
+aggregate q_min survives the very attack that killed both per-prime routes. First DIRECT
+evidence for the corrected (aggregate) target, under the strongest known adversary.
+
+**HONESTY (L5).** (1) At m=10 the cluster adversary found a config 17 bits (~7%) BELOW m=9 —
+a downward wobble, not a collapse (230 bits is still deep in the exponential regime; precedent
+§6a records such single-degree dips as artifacts that recover). Whether m=10 is search noise
+or a genuine "cluster bites harder at even m" is UNSETTLED — the linear trend dominates but is
+not monotone. (2) The tail m>=11 and orbits D=4, D=26 were NOT completed: SNF cost at m>=11
+(rank + Smith on ~379-bit integer columns, 150 cluster trials x 6 cells + spread + 300 random
+per m) exceeded the run budget; the sweep was stopped after D=425 m=10. Explicit truncation,
+not full coverage. (3) Bounded random search (150-300 trials/cell) gives a LOWER bound on the
+true adversarial min: the real inf could be smaller, so this is evidence the aggregate does NOT
+collapse, not a proof it grows. The rigorous target is unchanged: a DIRECT lower bound on
+log q_min (confluent-Vandermonde / det-D_m growth, §6c-6d) that no per-prime floor supplies.
+RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
