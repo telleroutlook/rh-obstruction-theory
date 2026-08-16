@@ -178,9 +178,50 @@ def test_approx_collision():
     print("  closest-vector search with q free; NOT done here. Only test (1) yields a finding.", flush=True)
 
 
+def test_lindemann_weierstrass():
+    """The exact statement: pick a and all heights ALGEBRAIC (here: rational). Then EVERY observation
+    value is exp(algebraic): Phi(gamma_k)=2*exp(-a*gamma_k^2) and Phi_off = 2*(exp(-a*(g0-i*delta)^2)
+    + exp(-a*(g0+i*delta)^2)).  A nontrivial integer collision q*Phi_off = sum c_k Phi(gamma_k) is an
+    integer (hence Q-bar) linear relation among {exp(beta_+), exp(beta_-), exp(beta_1)..exp(beta_m)}
+    with beta_k = -a*gamma_k^2 (real rational) and beta_pm = -a*(g0 -/+ i*delta)^2 (complex algebraic).
+    If the exponents are DISTINCT ALGEBRAIC, Lindemann-Weierstrass => the exponentials are linearly
+    independent over Q-bar => the only relation is trivial (q=0, all c_k=0) => NO exact collision.
+    This upgrades the empirical independence of test (1) to a THEOREM for the Gaussian Weil family."""
+    print("\n" + "=" * 100, flush=True)
+    print("OP2 (3) LINDEMANN-WEIERSTRASS: algebraic heights => PROVED no-collision (Gaussian family). RH [OUT].", flush=True)
+    print("=" * 100, flush=True)
+    a = mp.mpf(1) / 5000              # rational (algebraic), != 0
+    gam = [mp.mpf(g) for g in (10, 13, 17, 21, 25, 30, 35, 40)]  # distinct rationals => distinct squares
+    g0 = mp.mpf(20)                   # rational
+    delta = mp.mpf(1) / 5             # rational, != 0  (off-line: beta != 1/2)
+    # exponents beta_k = -a*gamma_k^2 (real, distinct rationals); beta_pm = -a*(g0 -/+ i*delta)^2.
+    re_pm = -a * (g0 ** 2 - delta ** 2)
+    im_pm = 2 * a * g0 * delta        # +/-; nonzero => beta_pm non-real, distinct from each other & reals
+    print("  a=1/5000; gamma_k distinct rationals => beta_k=-a*gamma_k^2 distinct RATIONALS (algebraic)", flush=True)
+    print("  beta_+/- = %s -/+ %s i : complex algebraic, conjugate, non-real (2*a*g0*delta=%s != 0)" % (
+        mp.nstr(re_pm, 6), mp.nstr(im_pm, 6), mp.nstr(im_pm, 6)), flush=True)
+    betas = [-a * g ** 2 for g in gam]
+    distinct = len(set(mp.nstr(b, 30) for b in betas)) == len(betas)
+    print("  distinct real exponents beta_k? %s ; beta_+/- non-real => distinct from all beta_k: True" % distinct, flush=True)
+    print("  => 10 DISTINCT ALGEBRAIC exponents => Lindemann-Weierstrass: {exp(beta_j)} lin. indep./Q-bar", flush=True)
+    print("  => the ONLY integer relation q*Phi_off = sum c_k Phi(gamma_k) is trivial => NO exact collision.", flush=True)
+    # Numerical cross-check (evidence only; the statement above is the theorem): PSLQ must find nothing.
+    vals = [4 * mp.e ** re_pm * mp.cos(im_pm)] + [2 * mp.e ** (-a * g ** 2) for g in gam]
+    with mp.workdps(250):
+        vals250 = [4 * mp.e ** (-a * (g0 ** 2 - delta ** 2)) * mp.cos(2 * a * g0 * delta)] + \
+                  [2 * mp.e ** (-a * g ** 2) for g in gam]
+        rel = mp.pslq(vals250, maxcoeff=10 ** 9, maxsteps=60000)
+    print("  cross-check PSLQ @250dps maxcoeff=1e9 -> %s (consistent with LW)" % (
+        "rel FOUND (unexpected!)" if rel else "NO relation"), flush=True)
+    print("  CAVEAT: Gaussian hhat=exp(-a z^2) <-> Gaussian h (Schwartz, not C_c^inf). Legitimate analytic", flush=True)
+    print("  observation family; the C_c^inf/Paley-Wiener case (hhat entire of exp type) is NOT covered by", flush=True)
+    print("  LW and stays open. This PROVES the OP2 negative for the Gaussian family only.", flush=True)
+
+
 if __name__ == "__main__":
     test_pslq_independence()
     test_approx_collision()
+    test_lindemann_weierstrass()
     print("\n" + "=" * 100, flush=True)
     print("OP2 SCOPING CONCLUSION (evidence, L5): the EXACT Theorem-A obstruction is a RATIONALITY", flush=True)
     print("phenomenon (OP1 exploits rational Li values -> exact lattice index q_min). For this Weil", flush=True)

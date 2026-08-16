@@ -44,4 +44,47 @@ difficulty: it is a *rationality* phenomenon, not a soft-analysis gap.
 sweep (test 2, `r=3`) used a crude `q=1`-fixed integer least-squares; its residual is noisy
 (`~0.07…0.27`, non-monotone) and does **not** demonstrate an "approximate obstruction shrinks with
 `m`" claim. A genuine bounded-height minimum needs an LLL closest-vector search with `q` free; not
-done. Only test (1) yields a finding. Bounded-height PSLQ on one family = **evidence, not proof**.
+done. Only tests (1) and (3) yield findings. Bounded-height PSLQ on one family = **evidence, not proof**.
+
+## Upgrade to a PROVED negative (Gaussian family) — Lindemann–Weierstrass
+
+The empirical independence of test (1) becomes a **theorem** once the heights are algebraic. Key
+algebraic identity (checked symbolically): with `β_± = −a(g₀²−δ²) ± i·2ag₀δ`,
+
+```
+Φ_off = 4·Re ĥ_a(g₀+iδ) = 4 e^{−a(g₀²−δ²)} cos(2ag₀δ) = 2( e^{β₊} + e^{β₋} ),
+Φ(γ_k) = 2 e^{β_k},   β_k = −a γ_k².
+```
+
+So **every** observation value is `exp(exponent)`, and a nontrivial integer collision
+`q·Φ_off = Σ_k c_k Φ(γ_k)` is exactly a nontrivial `Q̄`-linear relation
+
+```
+q·e^{β₊} + q·e^{β₋} − Σ_k c_k e^{β_k} = 0
+```
+
+among the exponentials `{e^{β₊}, e^{β₋}, e^{β_1}, …, e^{β_m}}`.
+
+**Theorem (Gaussian Weil family, OP2-negative).** Fix `a ∈ Q̄, a≠0`; on-line heights `γ_k ∈ Q̄`
+with the `γ_k²` distinct; off-line data `g₀, δ ∈ Q̄` with `g₀δ ≠ 0`. Then the exponents
+`β_k = −aγ_k²` (real algebraic, distinct) and `β_± = −a(g₀∓iδ)²` (complex-conjugate algebraic,
+non-real, hence `≠` every `β_k` and `≠` each other) are `m+2` **distinct algebraic** numbers. By
+**Lindemann–Weierstrass**, `{e^{β_j}}` are linearly independent over `Q̄`, so the only integer
+relation above is `q = 0` and all `c_k = 0`. **Hence no nontrivial exact collision exists**: the
+Theorem-A collision mechanism provably does not port to this observation family.
+
+Concrete verified instance (`a=1/5000`, `γ_k ∈ {10,13,17,21,25,30,35,40}`, `g₀=20`, `δ=1/5`):
+`10` distinct algebraic exponents; cross-check PSLQ @250 dps, maxcoeff `10⁹` → **no relation**,
+consistent with L–W.
+
+**Scope / caveat (load-bearing honesty).** `ĥ_a = exp(−a z²)` corresponds to a **Gaussian** `h`
+(Schwartz, **not** `C_c^∞`) — a legitimate analytic observation functional, but the compactly-
+supported Paley–Wiener case (`ĥ` entire of exponential type) is **not** covered by Lindemann–
+Weierstrass and stays **open**. This proves the OP2 negative **for the Gaussian family only**.
+
+**Structural upshot.** The exact information barrier of Theorem A is intrinsically a **rationality**
+phenomenon of the Li encoding: where OP1's Li observations are rational and *always* admit an exact
+collision (lattice index `q_min ≥ 1`), the Gaussian Weil observations are provably `Q̄`-independent
+and admit **none**. The two regimes are opposite, and the boundary is exactly the arithmetic nature
+of the observation values.
+
