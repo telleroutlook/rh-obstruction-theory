@@ -2111,13 +2111,43 @@ PROOF STATUS after §6as (p=3 floor v_3(q_min) >= m/2 - O(1)):
   (4) at j* = argmax_j N_j, C_{j*} = O(1)  (equiv. v_3(q_min) = max_j(N_j - C_j) >= m/2 - O(1))
                                                                 -- SOLE OPEN LEMMA.
 §6aq already confirms the CONCLUSION v_3(q_min) ~ m/2 directly (adversary cannot drive it to 0), independent
-of (4).  Step (4) reduces, via the same multilinear/graded-basis expansion applied to minor_j = det[A, col
-j -> d] with d = sum over 4 off-line atoms (x-values xi_a of norm 3, i.e. v_3(xi_a) = -1), to bounding
-        C_j = v_3( sum_a w_a (xi_a - 1) prod_{k!=j} (xi_a - x_k) ),
-where each factor (xi_a - x_k) has v_3 = v_3(xi_a) = -1 (the atoms are 3-adic POLES, uniformly far from every
-node -- they cannot selectively cluster near node j).  So the per-atom valuation is v_3(w_a) - m, and C_j =
-O(1) hinges on the 4 atom-weights w_a and their cancellation.  This is a concrete, self-contained lemma about
-ONE fixed algebraic orbit's 4 atoms and weights -- the crispest OP1 target yet and a strong EXT candidate.
+of (4).  [Step (4) reduction CORRECTED in §6at below -- the "4-atom Chebyshev" formula first sketched here was
+based on a wrong basis assumption and is RETRACTED; see §6at for the verified correct reduction.]
+
+One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
+
+### §6at — CORRECTION + the CORRECT C_j reduction (interpolation-residual valuation)
+
+HONEST RETRACTION (L5).  §6as/§6ao sketched C_j = v_3(sum_a w_a (xi_a - 1) prod_{k!=j}(xi_a - x_k)) by
+treating the off-line vector d as a sum of CHEBYSHEV columns 4(1 - T_i(xi_a)).  That is WRONG.  The on-line
+columns use C_i(t) = 4(1 - T_i(x)) (Chebyshev), but the OFF-LINE d uses a DIFFERENT family
+phi_i(rho) = 1 - (1 - 1/rho)^i (the function _phi_re), summed over atoms {3/4 +- i tau, 1/4 +- i tau} with rho
+and 1-rho.  Verified (§6at (iii)): no common x_rho gives phi_i(rho) = 4(1 - T_i(x_rho)) for all i -- e.g.
+rho=3/4, x_rho = 1 - 1/(4 rho) matches i=1 (both 4/3) but NOT i=2 (phi_2 = 8/9 vs 40/9).  The "4-atom
+Chebyshev" formula is therefore RETRACTED.
+
+CORRECT reduction, verified EXACTLY (§6at (i)+(ii), all rows True, m=3..6).  Every on-line Chebyshev column
+k has the common factor (x_k - 1), since 1 - T_i(x) = (x - 1) q_i(x) with q_i(x) := (1 - T_i(x))/(x - 1) a
+GRADED basis (deg q_i = i - 1).  Hence for minor_j = det[A, col j -> d]:
+    (i)  minor_j = [ prod_{k!=j} (x_k - 1) ] * det[ 4 q_i(x_k) (k!=j)  |  d_i ]_{i=1..m}.     [exact identity]
+Since {q_i} is a graded basis, det[q-basis at X' | d] = (fixed 3-unit triangular transform) *
+det[monomials at X'={x_k}_{k!=j} | d], and det[monomials at (m-1 nodes) | column d] = Vandermonde(X') *
+L_{X'}(d) for a divided-difference / interpolation-residual functional L_{X'}.  Therefore, for p=3 (where
+v_3(x_k - 1) = 0):
+    (ii) C_j = v_3(minor_j) - VD_j = v_3( det[4 q_i(x_k)(k!=j) | d] ) - v_3( Vandermonde(X') ) = v_3( L_{X'}(d) ).
+So C_j is the 3-ADIC VALUATION of an interpolation-residual functional of the off-line data d against the
+m-1 on-line nodes X'.  Concretely L_{X'}(d) = sum_i (+-) d_i * s_i(X') where the s_i are (signed) elementary
+symmetric functions of the m-1 nodes (the cofactors of the augmented graded-Vandermonde) -- an explicit
+bilinear pairing between the off-line data vector and the symmetric functions of the on-line nodes.
+
+OPEN LEMMA (4), restated cleanly and correctly:  v_3( L_{X'}(d) ) = O(1) uniformly in m and in the on-line
+node set X' (at least at j* = argmax_j N_j).  Empirically C_j in {0, 1} for the random configs tested here,
+and <= 9 under §6ap adversarial pressure -- consistent with O(1), now as a statement about a divided-
+difference valuation, NOT the retracted atom formula.  This bilinear-form / interpolation-residual statement
+is the crisp, self-contained open lemma and the strong EXT/outsource candidate.
+
+PROOF STATUS (p=3 floor) unchanged: steps (1) [§6as], (2) [§6ar], (3) [averaging] PROVEN; step (4) = the
+above residual-valuation lemma is the SOLE open piece; §6aq confirms the conclusion independently.
 
 One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
 
