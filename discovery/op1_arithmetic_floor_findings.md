@@ -3345,6 +3345,46 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   verifies both facts EXACT.  This is the cleanest and deepest OP1 partial-barrier result to date.
   RH stays [OUT].
 
+### §6cl — CORRECTION + analytic backbone: the classifier is e₂ mod 3 (⟺ 3|(a+n)), NOT n mod 3; FACT 3a/3b reduce to a finite F₃ recurrence (L9, L5)
+
+  §6ck's "n mod 3" classifier is REFUTED (L9): it was an artifact of only sampling a=1 (with the lone
+  n=10 case at a=3 happening to agree).  Varying a=n·sig exposes the true invariant.  Two witnesses that
+  break n mod 3: n=22,a=5 (n≡1 mod3) is ANNIHILATED (not all-units); n=14,a=3 and n=26,a=5 (n≡2 mod3) are
+  ALL-UNITS (not annihilated).  probe_qmin_p3_fact3a_recurrence.py.
+
+  ANALYTIC BACKBONE (all exact).  For the off-line orbit ρ = (a+ni)/n (τ=1, 3∤n), the d-vector reduces to
+  a palindromic-quartic power sum:
+    (A) [PROVED, exact m≤8 all orbits]  d_j = 8 − 2 p_j,  where p_j = β^j+β̄^j+β^{−j}+β̄^{−j}, β = 1−1/ρ.
+        The 4 atoms of d_vec give β-values {β, β̄, 1/β, 1/β̄}, closed under conjugation AND inversion, so
+        they are the roots of the PALINDROMIC REAL quartic x⁴ − e₁x³ + e₂x² − e₁x + 1 = (x²−gx+1)(x²−ḡx+1),
+        g = β+1/β = (2ρ²−2ρ+1)/(ρ²−ρ).  Hence e₁ = g+ḡ = 2Re g,  e₂ = |g|² + 2,  and
+            p_j = e₁ p_{j−1} − e₂ p_{j−2} + e₁ p_{j−3} − p_{j−4},   p₀=4, p₁=e₁, p₂=e₁²−2e₂, p₃=e₁³−3e₁e₂+3e₁.
+    (B) [closed form, EXHAUSTIVE over all 6 residues (a mod3, n mod3), 3∤n]:
+            e₁ ≡ 0 mod 3  ALWAYS;   e₂ ≡ 2 mod 3 ⟺ 3 | (a+n)  (else e₂ ≡ 0).
+        Equivalently e₂≡2 ⟺ 3 | N(g) ⟺ the inert prime 3 divides g=β+1/β in ℚ(i) — an orbit-intrinsic
+        statement.  [Denominators (a²+n²), (a−n)²+n² are 3-units for every 3∤n, since −1 is a non-residue
+        mod 3, so e₁,e₂ are always 3-integral.]
+    (C) Since e₁≡0 mod 3, the mod-3 recurrence DECOUPLES to  p_j ≡ −e₂ p_{j−2} − p_{j−4} mod 3, with
+        p₀≡1, p₁≡0, p₂≡e₂, p₃≡0 ⇒ all ODD p_j ≡ 0 (so d_j ≡ 2 for odd j).  Two even-index regimes:
+          ε := e₂ mod 3 = 0  (3∤(a+n)):  p_{even}: 1,0,2,0,1,0,2,… ⇒ d mod3 period-8 [2,2,2,1,2,2,2,0];
+             B⁻¹ gives w mod 3 = the PERIOD-4 unit vector [1,1,2,2,…] (verified to m=16).  As a series
+             W(y) ≡ (1+y)/(1+y²) mod 3, and 1+y² is IRREDUCIBLE mod 3 (2 is a non-residue) ⇒ bounded root
+             multiplicity ⇒ v₃(Λ((z−a)^t)) = O(1) for both node residues ⇒ v₃(S_j)=o(m) ⇒ LINEAR floor.
+          ε = 2  (3|(a+n)):  p_{even}: 1,2,1,2,… ⇒ d mod3 period-4 [2,1,2,0]; B⁻¹ gives w mod 3 = [1,0,0,…]
+             (w₀ unit, w_i≡0 mod3 ∀i≥1, verified to m=16) ⇒ Λ ≡ w₀·eval₀ mod 3 ⇒ a₀≡0 class annihilated ⇒
+             NO p=3 floor (the distributed-content case).
+        B mod 3 is a UNIVERSAL orbit-independent lower-triangular matrix (rows i≡2 mod3 are constant, diagonal
+        period-2 [2,1]); its periodic band structure is what makes the w-pattern m-independent.
+
+  NET (corrected).  The p=3 dichotomy is governed by ONE F₃ quantity — e₂ mod 3 = |g|²+2, i.e. whether the
+  inert prime 3 divides the Joukowski trace g = β+1/β (⟺ 3|(a+n)).  The p=3 LINEAR floor holds for the
+  sub-family 3∤(a+n) (v₃(q_min) ≥ ⌈m/2⌉−1 − o(m)); the sub-family 3|(a+n) has no p=3 floor and its super-poly
+  q_min is distributed (§6ch).  This SUPERSEDES §6ck's n-mod-3 split and turns the "FACT 3a" close into a
+  FINITE, provable F₃ statement: (A) palindromic-quartic reduction [proved], (B) 6-residue closed form for
+  (e₁,e₂) mod 3 [proved], (C) universal B mod 3 + periodic d ⇒ the two w-patterns [finite F₃ linear algebra;
+  the sole remaining write-up is m-independence of B⁻¹ mod 3 on the periodic d].  probe_qmin_p3_fact3a_
+  recurrence.py verifies (0)/(1)/(1b)/(2) EXACT.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
