@@ -3518,6 +3518,30 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   (2) consecutive nodes only — the true OP1 infimum over node sets is §6cn-evidenced (near-minimal), not proved.
   RH stays [OUT].
 
+### §6cr — MOMENT-POLE SUB-LAW: the mechanism behind §6cq (probe_qmin_moment_pole_sublaw.py, L9)
+
+  The §6cq carrier prime p|N acts by injecting a POLE into the moment sequence w_i.  The clean EXACT law:
+
+        v_p(N) = 1  ⟹  v_p(w_i) = −(i+1)  for all i ≥ 0.        [SUB-LAW — 1360 checks, all Row-3 orbits n<80]
+
+  MECHANISM (proof target; general-prime analogue of the §6co p=3 coupling lemma).  v_p(N)=1, p≥5, p∤n ⇒ p
+  splits in Z[i] as 𝔭𝔭̄ and exactly ONE prime above p divides numerator(β) simply ⇒ β has a SIMPLE ZERO at 𝔭
+  (v_𝔭(β)=+1).  W(y)=Σ w_i y^i is rational with denominator the reversed β-quartet (roots {β,β̄,1/β,1/β̄});
+  the partial-fraction term A/(1−(1/β)y) from the root 1/β has a SIMPLE POLE v_𝔭(1/β)=−1, and its residue has
+  v_p(A)=−1, so w_i ⊇ A·(1/β)^i ⇒ v_p(w_i) = v_p(A) − i = −(i+1).  Hence v_p(w_{m−1}) = −m.
+
+  CONSEQUENCE.  clearing that denominator forces v_p(q_min) ≥ m − O(1) (node-residue O(1) correction; §6cq
+  measures max_{p|N} v_p ≥ m).  Since 2,3∤N and every Row-3 orbit HAS a simple factor (0/460 orbits lack one),
+  every orbit has such p≥5 ⇒ log q_min ≥ (m−O(1))·log 5 = Ω(m), UNIVERSAL (consecutive nodes).
+
+  HONEST SCOPE (L5): the clean law is ONLY for v_p(N)=1.  The tentative general form v_p(w_i)=−(i+1)·min(v_p(N),2)
+  is REFUTED — split primes with v_p(N)≥2 dividing numerator(β) asymmetrically fluctuate (a=49,n=58,p=5:
+  v_5(N)=2, v_5(w_i)=[-1,-1,-3,-4,-5,-4,-7,-8,-9,...]).  The tight q_min equality v_p(q_min)=m·min(v_p(N),2) is
+  also REFUTED (v_p often m−1; some N-primes fall below m — other N-primes carry the orbit); the robust claim is
+  the §6cq existential max_{p|N} v_p(q_min) ≥ m.  SHARP OPEN LEMMAS for THEOREM: (a) the residue count v_p(A)=−1;
+  (b) every orbit has a v_p(N)=1 factor (N not a perfect power); (c) v_p(w_{m−1})=−m ⇒ v_p(q_min) ≥ m−O(1).
+  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
