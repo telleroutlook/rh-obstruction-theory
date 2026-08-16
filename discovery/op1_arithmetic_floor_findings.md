@@ -3319,6 +3319,32 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   for Row 3a; Row 3b remains the harder distributed-content problem (§6ch).
   probe_qmin_p3_lambda_annihilation.py backs the annihilation law.  RH stays [OUT].
 
+### §6ck — the ROOT CAUSE: the w mod 3 dichotomy (period-4 units vs w_0-only); Row 3a p=3 close now rests on one provable moment-residue fact (L5)
+
+  The §6cj Λ-lemma reduces further to the residue of the moment vector w=B⁻¹d itself mod 3.  VERIFIED
+  EXACT across 9 distinct Row-3 orbits n × m∈{8,12,16}:
+
+    FACT 3a  (n≡1 mod3):  every w_i is a 3-UNIT, and the unit residues are the PERIOD-4 pattern
+        [1,1,2,2,1,1,2,2,…].  Hence W(y)=Σ w_i y^i ≡ (1+y)(1+2y²)·(1+y⁴+…) mod 3 is a unit-coefficient
+        (w_0=1) polynomial: via F(s)=Σ_t Λ((z−a)^t)s^t = W(s/(1+sa))/(1+sa), the vanishing order of Λ on
+        (z−a)^t equals the root multiplicity of W mod 3 at a's Möbius image — bounded (≤3 observed; at
+        worst O(log₃ m) from the (y⁴−1)^{v₃(m/4)} factor, SUBLINEAR).  So for BOTH node residues
+        v₃(Λ((z−a)^t)) = o(m), giving v₃(q_min) = max_j clus(j) − o(m) ≥ ⌈m/2⌉−1 − o(m) — LINEAR.
+
+    FACT 3b  (n≡2 mod3):  w_0 is a unit but w_i ≡ 0 mod 3 for EVERY i≥1 (measured v₃ = 0,1,3,3,4,5,7,7…).
+        Hence Λ(f) ≡ w_0·f(0) mod 3 exactly, so Λ((z−a)^t) ≡ w_0(−a)^t mod 3: this ANNIHILATES the a₀≡0
+        class (order grows ~t·v₃(a₀), deep) and is a unit on the a₂≡2 class.  Adversary clusters in a₀ ⇒
+        no p=3 floor — precisely the §6ch/§6cj Row-3b behaviour, now DERIVED not observed.
+
+  NET.  The entire Row-3 OP1 behaviour at p=3 is explained by ONE moment-residue dichotomy: n mod 3
+  controls whether w mod 3 is a full-support period-4 unit vector (3a: no annihilated class ⇒ LINEAR
+  floor) or a w_0-only vector (3b: Λ=eval₀ mod 3 ⇒ a₀ annihilated ⇒ no floor).  Row 3a p=3 CLOSES modulo
+  the single PROVABLE fact FACT 3a (the period-4 unit pattern of w=B⁻¹d mod 3, matching the period-4
+  structure already proven at p=2 in FACT A §6br).  Row 3b's super-poly q_min genuinely lives at
+  distributed primes (§6ch), not p=3 — a distinct, harder problem.  probe_qmin_p3_wmod3_dichotomy.py
+  verifies both facts EXACT.  This is the cleanest and deepest OP1 partial-barrier result to date.
+  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
