@@ -2402,6 +2402,59 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   the raw joint bound `max_j(N_j − C_j) ≥ m/2 − O(1)` remains irreducible.  Recorded on OB-42 as a known
   dead-end so a referee does not re-derive it.  One orbit (D=425); adversary = one-sided (L5).  RH stays [OUT].
 
+### §6bd — CHANNEL SPLIT: log q_min is NOT exhausted by the p=3 floor; the dominant prime is p=2
+
+  probe_qmin_channel_split.py.  OP1 holds iff inf_A log q_min = ω(log m).  The p=3 floor (OB-42) gives
+  v_3(q_min) ≥ m/2 − O(1) ⇒ log q_min ≥ (m/2)·log 3 = Ω(m).  Question: under an adversary MINIMIZING the full
+  integer q_min, is log q_min exhausted by the 3-adic part, or is there an independent second channel?
+  Split: `log2 q_min = v_3(q_min)·log2(3) + log2(3-free residual)`.
+
+  RESULT (L5).  The residual DOMINATES.  Under the (3-adic-tuned) adversary the 3-free part of q_min carries
+  most of the magnitude, and its dominant prime is consistently **2**.  Direct measurement of v_2(q_min) vs
+  v_3(q_min) over 80 random valid configs/m (D=425): min v_2 = 6,11,14,18,23 (m=4..8) — ALL ≥ m and ≈ 2×–3×
+  the min v_3 = 2,2,4,5,5 (≈ m/2).  So the p=2 arithmetic channel is LARGER than the p=3 channel.  CAVEAT:
+  this adversary minimizes the p=3 part, so the residual is UNATTACKED here — pursued in §6be.  RH [OUT].
+
+### §6be — THE p=2 CHANNEL is orbit-robust and hypothesis-free — a strictly stronger target than p=3
+
+  probe_qmin_channel_split.qmin_exact + inline (see session).  Three exact, unconditional structural facts at
+  p = 2, then the survival test.
+
+  (i) PER-PAIR FLOOR (PROVED, unconditional, orbit-free).  For all integer nodes t_j ≠ ±t_k,
+        x(t)−1 = −2/(4t²+1)                    ⇒  v_2(x_k − 1) = 1  exactly, every node;
+        x_j − x_k = 8(t_j²−t_k²)/((4t_j²+1)(4t_k²+1))  ⇒  v_2(x_j − x_k) = 3 + v_2(t_j²−t_k²) ≥ 3.
+      Verified exact on 500 random pairs.  CONTRAST with p=3, where a pair contributes to N only when the two
+      nodes 3-adically CLUSTER (pigeonhole, adversary-avoidable per pair); at p=2 EVERY pair contributes ≥ 3
+      UNCONDITIONALLY.  This is the crux: the p=2 on-line valuation floor is adversary-proof.
+
+  (ii) EXACT det-A FORMULA (PROVED, unconditional).  From C_j(t) = (x−1)·4q_j(x) and the graded basis,
+        v_2(det A) = Σ_k v_2(x_k−1) + v_2(det B) + Σ_{k<l} v_2(x_k−x_l)
+                   = m + m(m+3)/2 + Σ_{k<l} v_2(x_k−x_l)  ≥  m + m(m+3)/2 + 3·C(m,2) = 2m² + m.
+      (v_2(det B) = Σ_{i=1}^m v_2(4·2^{i−1}) = Σ_{i=1}^m (i+1) = m(m+3)/2; e.g. m=6 → 27, matched exact.)
+      NOTE: at p=2 the §6ao clean identity v(q_min)=max_j(N_j−C_j) does NOT transfer (there v(x−1)=0 and
+      v(det B)=0 were used, both FALSE at p=2), so the p=2 floor is framed directly as v_2(det A) − v_2(gcd).
+
+  (iii) THE FLOOR is LINEAR and the gcd absorbs the quadratic part.  q_min = det A / gcd(size-m minors of
+      [A|d]); v_2(q_min) = v_2(det A) − v_2(gcd).  The numerator is quadratic (≥ 2m²+m) but the gcd of minors
+      cancels the quadratic part, leaving v_2(q_min) LINEAR: min over 60 random cfgs = 6,11,14,18 (m=4..7),
+      all ≥ m, slope ≈ 3.  The open core is thus min_j v_2(minor_j) ≤ v_2(det A) − c·m (equivalently: some
+      d-replacement minor is not too 2-adically deep) — the p=2 analog of max_j(N_j−C_j), WITHOUT the
+      unimodularity hypothesis.
+
+  (iv) DECISIVE — ORBIT ROBUSTNESS.  Adversarial-min v_2(q_min) (coord-descent = one-sided UPPER bound) across
+      orbits, m=4..7:
+        σ=3/4 (unimod, p3 floor OK)  : 6, 11, 14, 18
+        σ=7/8 (NON-unimod, p3 DIES)  : 4,  9, 12, 16
+        σ=4/5 (NON-unimod, p3 DIES)  : 18,26, 28, 38
+      On σ=7/8 and σ=4/5 the p=3 floor COLLAPSES to 0,0,0,1 (§6bb, non-unimodular ⇒ w not 3-adically unit),
+      yet the p=2 floor stays LINEAR (≥ m) on all three.  So the p=2 channel needs NO orbit hypothesis — it is
+      strictly stronger and cleaner than p=3, and its on-line side (i) is adversary-proof by construction.
+
+  STATUS.  PROVED (exact, unconditional): (i) per-pair v_2 ≥ 3, v_2(x−1)=1; (ii) exact v_2(det A), quadratic
+  lower bound.  EMPIRICAL (adversary = one-sided upper bound on inf): (iii) linear v_2(q_min) floor; (iv)
+  orbit robustness.  Packaged as outsource OB-43 (the p=2 hypothesis-free floor), companion to OB-42 (p=3).
+  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
