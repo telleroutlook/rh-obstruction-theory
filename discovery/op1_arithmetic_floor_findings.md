@@ -1374,6 +1374,45 @@ m<=9), not proof. The rigorous forward target sharpens to: lower-bound the ramif
 node-independent function of D_orbit growing with m, and combine with the §6g geometric floor.
 Exact arithmetic (L9). RH stays [OUT].
 
+### 6z-note. RETRACTION — the ramified channel IS drainable; §6z's node-independent floor was a search artifact (this session)
+
+Per CLAUDE.md ("verify load-bearing claims by script; defects are never assumed independent"),
+before building on §6z I tried to REFUTE its own key claim. §6z asserted the ramified part
+R(nodes) = v_5(q_min)*log2(5) + v_17(q_min)*log2(17) (D=425 = 5^2*17) "cannot be driven to 0 and
+rises with m", based on a GENERIC cluster/spread/random attack (`probe_qmin_ramified_channel.py`)
+that never targeted {5,17}. But §6b had recorded a D=425 config with q_min = 3^5*7^2*11 (v_5=v_17=0)
+— a direct contradiction. `discovery/probe_ramified_drain.py` runs a TARGETED attack (nodes with
+5,17 not dividing any denominator 4t^2+1; distinct x-classes mod 5 and mod 17; plus coordinate
+descent minimizing R). Result (exact SNF):
+
+  m               :   2     3     4     5     6     7     8
+  min v_5(q_min)  :   0     0     0     0     0     0     0
+  min v_17(q_min) :   0     0     0     0     0     1     1
+  min R (log2)    : 2.32  2.32  4.09  2.32  0.00  8.17 12.26
+  R = 0 found?    :  no    no    no    no   YES    no    no
+
+Each ramified prime is INDIVIDUALLY drainable to 0 at every m (min v_5 = 0 always; min v_17 = 0
+through m=6), and at m=6 a VALID collision drives BOTH to 0 simultaneously (R=0) — exactly the
+kind of config §6b saw. So the ramified channel is NOT a node-independent floor; §6z's floor claim
+is RETRACTED. The residual positive min R at m=2..5,7,8 is bounded-search DIFFICULTY (the joint
+drain is a codimension condition that is only intermittently hit), not a genuine barrier — its
+erratic pattern (0 at m=6, positive at m=7) is the signature of a search artifact, not a floor.
+
+WHAT SURVIVES §6z (still valid): (a) the (PN) per-node model refutation — the confluent-Vandermonde
+law v_p(q_min)=max(0,max_j[v_p(W_j)-v_p(Psi(S_j))]) is FALSE at ramified/collision primes (0/295 at
+"good" primes; blind to p=17); (b) the two-channel split as a DESCRIPTIVE decomposition. WHAT IS
+RETRACTED: any claim that the ramified channel carries a node-independent lower bound.
+
+CONSOLIDATED LESSON (now three times over — §6u lag, §6w per-prime floor, §6z ramified channel):
+q_min's p-adic mass is FULLY MOBILE. Any single prime, and either channel, can be adversarially
+drained to 0 individually; draining one only pushes mass elsewhere. NO per-prime and NO per-channel
+handle is a floor. The ONLY object that has resisted every draining attack is the AGGREGATE
+log q_min (§6x direct min grows ~linearly; §6y = the exact gcd-gap log D_m(A) - log D_m([A|d])).
+So the sole rigorous forward target reverts cleanly to §6y: prove log D_m(A) - log D_m([A|d]) >= c*m
+as an AGGREGATE determinantal statement — not via any prime- or channel-localized decomposition,
+all of which are now known to be drainable. Exact arithmetic (L9); bounded search, one orbit.
+RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
