@@ -123,12 +123,13 @@ verified orbit-free on 240 configs). Two facts make it powerful and orbit-free:
 - `C_j = v(⟨w, ε(X'_j)⟩)` is the 2-adic valuation of the *fixed* off-line vector `w = B^{−1}d`
   paired against the leave-one-out symmetric vectors `ε(X'_j)` (§1.6, §3).
 
-Hence the **entire open core** reduces (§3 Step 4) to a single **node-free** 2-adic lemma. For the
+Hence the **entire core** reduces (§3 Step 4) to a single **node-free** 2-adic lemma. For the
 D=425 orbit (σ=3/4) the off-line valuation is in fact an exact identity `C_j = m+3` for every column
 and every node set, so `v(q_min) ≥ 1 + 3(m−1) − (m+3) = 2m − 5` unconditionally — and the identity
-follows from the node-free profile `v(w'_i) = 4 + 3i` (`w'_i = L((X−1)^i)`), the *only* remaining open
-statement. This is strictly weaker to demand than OB-42's joint p=3 bound and requires **no orbit
-hypothesis and no node quantifier**.
+follows from the node-free profile `v(w'_i) = 4 + 3i` (`w'_i = L((X−1)^i)`), which is now **proved**
+(§3 Step 4: `w'_i = β^{i+1}+β̄^{i+1}` is a rank-2 Lucas sequence, `β = 8(−19+8i)/425`; `v = 4+3i`
+because `−19+8i ≡ 1 mod 2` in `Z[i]`). This is strictly weaker to demand than OB-42's joint p=3 bound
+and requires **no orbit hypothesis and no node quantifier**.
 
 **Why the numerator alone is not enough.** By §3 Step 2, `v(det A) ≥ 2m² + m` — quadratic and
 unconditional — but the gcd of the minors cancels the quadratic bulk. The residue is exactly
@@ -200,7 +201,7 @@ arithmetic progressions, powers-of-two; + random to `m=7`) — zero deviations, 
 (every node has `v(x_k−1)=1`, Step 2). Write `w'_i := L((X−1)^i)` and `p_j = ∏_{k≠j}(Z − y_k)`,
 `y_k = x_k−1`, so the `Z^{m−1−r}` coefficient of `p_j` is `(−1)^r e_r(y_{≠j})` with `v(e_r) ≥ r`. Then
 `L(p_j) = Σ_{r=0}^{m−1} (−1)^r w'_{m−1−r} e_r(y_{≠j})`, and
-> **Lemma (node-free).** `v(w'_i) = 4 + 3i` for the σ=3/4 orbit.
+> **Lemma (node-free, PROVED below).** `v(w'_i) = 4 + 3i` for the σ=3/4 orbit.
 
 Given the Lemma, `v(term_r) ≥ [4+3(m−1−r)] + r = 4+3(m−1) − 2r`, **strictly decreasing** in `r`; the unique
 minimum is `r = m−1`, where `term_{m−1} = w'_0·∏_{k≠j} y_k` has `v = 4 + (m−1) = m+3` **exactly** (product of
@@ -212,27 +213,44 @@ columns 400/400 at `m=4..7`.)*
 `4q_j(x) = −4(T_j(x)−1)/(x−1)`, so in `Z`: `4q_j = Σ_i G[j][i] Z^i` with
 `G[j][i] = −4·T_j^{(i+1)}(1)/(i+1)!` and `T_j^{(k)}(1) = ∏_{l=0}^{k−1}(j²−l²)/(2k−1)!!`. Because `d = Bw ⇒
 L(4q_j) = d_j`, this is a **lower-triangular system** `d_j = Σ_{i=0}^{j−1} G[j][i] w'_i` with diagonal
-`G[j][j−1] = −2^{j+1}` (`v = j+1`) — verified to reconstruct `d_j` exactly (`m ≤ 8`). So `w'_i` is determined
-recursively from the node-free target `d`: base `w'_0 = d_1/(−4)` (`v = v(d_1)−2 = 6−2 = 4`); step
-`w'_{j−1} = (d_j − Σ_{i<j−1} G[j][i] w'_i)/(−2^{j+1})`, requiring `v(numerator) = 4j+2`. **No node quantifier
+`G[j][j−1] = −2^{j+1}` (`v = j+1`) — verified to reconstruct `d_j` exactly (`m ≤ 8`). **No node quantifier
 remains** — the Lemma is a pure 2-adic statement about the Chebyshev-derivative coefficients `G` and the
-explicit orbit target `d`.
+explicit orbit target `d`. *(One could try to solve this triangular system recursively, but the numerator
+`d_j − Σ_{i<j−1} G[j][i] w'_i` requires a deep multi-term `2`-adic cancellation up to `v = 4j+2`; the clean
+route below bypasses the recursion by exhibiting `w'_i` in closed form.)*
 
-**What to close for Step 4.** Prove the **Lemma** `v(w'_i) = 4+3i` from the closed forms of `G` and `d`
-above (equivalently, `v(d_j − Σ_{i<j−1} G[j][i] w'_i) = 4j+2` by induction). This closes the Identity, hence
-`v(q_min) ≥ 2m−5` unconditionally for σ=3/4 and settles OP1's 2-adic channel for the D=425 orbit.
+**The Lemma is PROVED — `w'_i` is a rank-2 Lucas sequence (elementary, no LTE, no induction over `G`).**
+The functional `L` (defined by `L(4q_j)=d_j`) is **exactly a two-point evaluation**
+`L(f) = β·f̃(β) + β̄·f̃(β̄)`, `f̃(Z):=f(1+Z)`, with the single algebraic number
+> `β = −8(19−8i)/425 = 8γ/425`,  `γ = −19 + 8i`  (Gaussian integer, `N(γ)=19²+8²=425=D`).
 
-**The base input is a Lifting-the-Exponent identity (fully localized).** The target has the closed form
-`d_j = 4·[(1 − Re[(α/25)^j]) + (1 − Re[(α/17)^j])]` with the Gaussian integer `α = 13+16i`,
-`N(α) = 13²+16² = 425 = 25·17 = D`, `α − ᾱ = 2⁵i` (verified exact to `j=24`). Since `25,17` are odd and
-`Re[α^j]` is odd, `v(d_j) = 2 + v((25^j − Re[α^j]) + (17^j − Re[α^j]))`, and by LTE at `p=2`
-`v(25^j − Re[α^j]) = v(17^j − Re[α^j]) = 2 + v(j)` (base `2 = v(25−13)+v(25+13)−1`; Gaussian correction terms
-carry `v ≥ 7`), while the *sum* doubles to `4 + 2v(j)` via the conjugate relation `(α/25)(ᾱ/17) = N(α)/425 = 1`.
-Hence **`v(d_j) = 6 + 2v(j)`**. Feeding this into the triangular recursion (where `d_j` and the `i=0` term
-`G[j][0]·w'_0 = −4j²·w'_0` have equal valuation `6+2v(j)` and cancel, lifting the numerator to `4j+2`) yields
-`v(w'_{j−1}) = (4j+2) − (j+1) = 3j+1 = 4 + 3(j−1)`. The remaining work is the symbolic write-up of these LTE
-steps and the numerator cancellation — a self-contained 2-adic computation with **no elliptic curve, no
-L-value, no node, and no RH input**.
+*Why two points, not four.* For σ=3/4 the orbit target is `d_j = 8 − 4Re[(α/25)^j] − 4Re[(α/17)^j]`,
+`α=13+16i`, `N(α)=425=25·17=D`. The four exponentials `{α/25, ᾱ/25, α/17, ᾱ/17}` pair by the **reciprocal
+relation** `(α/25)(ᾱ/17) = N(α)/425 = 1`: set `z=α/25`, `1/z=ᾱ/17`. Then `ξ:=(z+1/z)/2` is one Chebyshev
+point, `T_j(ξ)=(z^j+z^{−j})/2`, and `T_j(ξ)+T_j(ξ̄) = Re[(α/25)^j]+Re[(α/17)^j]`. With `4q_j(x)=−4(T_j(x)−1)/(x−1)`
+and `x−1=Z`, `(ξ−1)·4q_j(ξ)=−4(T_j(ξ)−1)`; summing over `ξ,ξ̄` (where `β=ξ̄−1`) gives
+`d_j = β·4q_j(1+β) + β̄·4q_j(1+β̄)` for **all** `j` (verified exact, `j≤16`). Since `{4q_j}_{j=1..m}` is a
+**triangular basis** of `deg ≤ m−1` polynomials (`deg 4q_j = j−1`), `L` is fixed by `d_1..d_m`; the two-point
+functional matches every `d_j`, hence **equals** the `B^{-1}d` functional. Holding for every `m`,
+> `w'_i = L((X−1)^i) = β·β^i + β̄·β̄^i = β^{i+1} + β̄^{i+1} = (8^{i+1}/425^{i+1})·2·Re(γ^{i+1})`,  for all `i`.
+
+*(This closed form is `m`-independent — `w'_i` is a single stable sequence, verified identical for
+`m=4,6,…,14` — and satisfies the order-2 recurrence `w'_i = A·w'_{i−1}+B·w'_{i−2}`, `A=−304/425`, `B=−64/425`.)*
+
+*The valuation, in two lines.* `425` is odd; `γ = −19+8i ≡ 1 (mod 2)` in `Z[i]` (real part odd, imaginary
+part even), so `γ^{i+1} ≡ 1 (mod 2)` ⇒ `Re(γ^{i+1})` is **odd** ⇒ `v(2·Re(γ^{i+1})) = 1`. Therefore
+> `v(w'_i) = v(8^{i+1}) + v(2·Re(γ^{i+1})) − v(425^{i+1}) = 3(i+1) + 1 − 0 = 4 + 3i`.  **∎**
+
+No Lifting-the-Exponent, no triangular-recursion cancellation. (The earlier LTE route — `v(d_j)=6+2v(j)` for
+`α=13+16i` — remains a *true* identity but is **not** on the critical path; and the claim that the recursion
+numerator lifts to `4j+2` via a *two-term* cancellation was **incorrect**: the two lowest terms `d_j` and
+`G[j][0]w'_0` do share `v=6+2v(j)`, but the numerator's true valuation `4j+2` is a *deep multi-term*
+telescoping — the rank-2 route sidesteps this entirely.) The whole argument is a **self-contained 2-adic /
+Gaussian-integer computation with no elliptic curve, no L-value, no node, and no RH input**.
+
+**What (if anything) remains for Step 4.** The Lemma is closed for σ=3/4. A referee is invited to (i) verify
+the two-point-functional derivation and the "odd real part" valuation independently, and (ii) confirm the
+general-orbit extension below — the *only* place the value σ=3/4 enters is through `β` (equivalently `γ`).
 
 **General-orbit note (honest scope).** The profile generalizes to `v(w'_i) = OFF + S·i`; when `S>1` the same
 unique-minimum argument gives `C_j = OFF + (m−1)`, a linear floor. Measured: σ=3/4 → `(OFF,S)=(4,3)`
@@ -353,7 +371,7 @@ t_k²) ≥ 3` for the six pairs; (c) `v(det B) = 14`; (d) `N_j = (19,21,21,19)`,
 | L6 (vacuous target / real atoms) | PASS — target is a finite rational determinantal floor; a non-vacuous REFUTED path (explicit orbit family with floor `= o(m)`) is available |
 | L7–L17 | N/A — no counting-function factor, growth ray, Fredholm, meromorphic-type, or externally-cited black-box steps (all premises proved/measured in-repo, stated inline) |
 | L18 (numerical anchor by script) | PASS — anchor re-derived by exact `Fraction` arithmetic: per-pair `v = 3 + v(t²−t'²)`, `v(x−1)=1`, `v(det B)=14`, `N_j=(19,21,21,19)`, `C_j=(7,7,7,7)`, identity `v(q_min)=max_j(1+N_j−C_j)=15` |
-| L19 (honest inconclusive verdict) | PASS — outcomes STRATEGY / PARTIAL / INCONCLUSIVE+localization all first-class; no prove-or-refute dichotomy; a sub-`ω(log m)` refutation is explicitly welcomed. §3 Step 4 honestly labels the original `min_j C_j = O(1)` hope as REFUTED (it grows, slope ≈ 1) but reports the *stronger* exact identity `C_j = m+3` (node-independent, verified exhaustively) and reduces it to the single open node-free lemma `v(w'_i)=4+3i` (verified to m=8, not yet proved) |
+| L19 (honest inconclusive verdict) | PASS — outcomes STRATEGY / PARTIAL / INCONCLUSIVE+localization all first-class; no prove-or-refute dichotomy; a sub-`ω(log m)` refutation is explicitly welcomed. §3 Step 4 honestly labels the original `min_j C_j = O(1)` hope as REFUTED (it grows, slope ≈ 1) but reports the *stronger* exact identity `C_j = m+3` (node-independent, verified exhaustively) and reduces it to the node-free lemma `v(w'_i)=4+3i`, now **PROVED** (rank-2 closed form `w'_i=β^{i+1}+β̄^{i+1}`, `β=8(−19+8i)/425`) |
 | L20–L24 | N/A |
 | Self-containment | PASS — every symbol/formula in-file (`x(t)`, Chebyshev `C_j`, target `d_j`, graded basis `q_i`/`B`, `v(det B)`, `D_r`, `q_min`, `minor_j`, per-pair `v_2` identities, `v(det A)` formula); `grep "see .*\.md"` → clean; §5 provenance is a reference only, not load-bearing |
 | Deliverable breadth | PASS — a sanity-checked *proof strategy* (STRATEGY) is a successful deliverable; full proof not required |

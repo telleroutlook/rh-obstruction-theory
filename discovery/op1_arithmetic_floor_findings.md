@@ -2600,17 +2600,48 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   Hence v_2(d_j) = 2 + (4+2v_2(j)) = 6 + 2v_2(j).  (Companion: v_2(Im[α^j]) = 4 + v_2(j), textbook LTE:
   v_2(α^j−ᾱ^j) = v_2(α−ᾱ)+v_2(j) = 5+v_2(j), /2i ⇒ 4+v_2(j).)
 
-  COMPLETE PROOF ARCHITECTURE (all layers verified; last mile = symbolic write-up of the LTE steps):
+  ⚠ SUPERSEDED BY §6bk.  The L2 line below ("cancellation of the two lowest terms … lift the numerator to
+  4j+2") is WRONG: the recursion numerator's two lowest terms d_j and G[j][0]w'_0 do share v_2=6+2v_2(j), but
+  the numerator's TRUE valuation is 4j+2 — a DEEP multi-term telescoping, not a two-term lift (verified: j=8
+  term-valuations 12,12,14,19,20,27,29,34 all conspire to 34).  §6bk replaces the whole L2/L3 route with a
+  direct rank-2 closed form that proves the lemma in two lines with no LTE and no recursion.  The LTE facts of
+  §6bj (v_2(d_j)=6+2v_2(j)) remain TRUE but are no longer on the critical path.
+
+  (superseded) PROOF ARCHITECTURE:
     L1 (identity)      C_j = m+3  ⟸  v_2(w'_i)=4+3i     [PROVED: Z=X−1 shift + ultrametric unique-min, §6bi]
-    L2 (lemma→recursion) v_2(w'_i)=4+3i  ⟸  triangular recursion (diag −2^{j+1}, G[j][0]=−4j²) with
-                         v_2(d_j)=6+2v_2(j) + cancellation of the two lowest terms (d_j and the i=0 term,
-                         which have EQUAL valuation 6+2v_2(j) and cancel to lift the numerator to 4j+2) [§6bi]
-    L3 (d_j→LTE)         v_2(d_j)=6+2v_2(j)  ⟸  LTE on α=13+16i + conjugate-relation sum-doubling [§6bj, this]
-  Net: an UNCONDITIONAL LINEAR 2-adic floor v_2(q_min) ≥ 2m−5 for the σ=3/4 (D=425) barrier, reduced to
-  standard LTE + an explicit finite recursion.  HONEST (L5): the reductions L1/L2 are proved/mapped and the
-  L3 sub-valuations are verified numerically (each a standard LTE identity); the remaining work is the
-  symbolic write-up of the two LTE steps + the sum-doubling + the L2 numerator cancellation.  Added to OB-43
-  as the LTE-closed lemma.  RH stays [OUT].
+    L2 (lemma→recursion) v_2(w'_i)=4+3i  ⟸  triangular recursion … [OVER-COMPLICATED, see §6bk]
+    L3 (d_j→LTE)         v_2(d_j)=6+2v_2(j)  ⟸  LTE on α=13+16i + conjugate-relation sum-doubling [§6bj]
+  RH stays [OUT].
+
+### §6bk — the node-free lemma is PROVED: w'_i is a rank-2 Lucas sequence (β=8·(−19+8i)/425), σ=3/4
+
+  probe_qmin_p2_rank2_closed_form (EXACT).  The last mile of §6bi/§6bj closes ELEMENTARILY, and the §6bj
+  LTE/recursion detour is retired from the critical path.  Two facts, both verified exactly:
+
+  (A) w'_i is m-INDEPENDENT — a single stable infinite sequence (identical for m=4,6,…,14).  It has an
+      ORDER-2 rational recurrence w'_i = A·w'_{i−1} + B·w'_{i−2}, A=−304/425 (v_2=4), B=−64/425 (v_2=6),
+      equivalently the CLOSED FORM
+            w'_i = β^{i+1} + β̄^{i+1} = (8^{i+1}/425^{i+1})·2·Re(γ^{i+1}),
+            β = −8(19−8i)/425 = 8γ/425,   γ = −19+8i   (Gaussian integer, N(γ)=425=D).
+      DERIVED (not fitted): the functional L (L(4q_j)=d_j, w'_i=L((X−1)^i)) is EXACTLY the two-point
+      evaluation L(f)=β·f̃(β)+β̄·f̃(β̄), f̃(Z)=f(1+Z).  Reason: the four orbit exponentials pair by the
+      RECIPROCAL relation (α/25)(ᾱ/17)=N(α)/425=1, so z=α/25, 1/z=ᾱ/17 form ONE Chebyshev pair
+      ξ=(z+1/z)/2, giving T_j(ξ)+T_j(ξ̄)=Re(α/25)^j+Re(α/17)^j and hence d_j = β·4q_j(1+β)+β̄·4q_j(1+β̄)
+      (VERIFIED all j≤16).  Since {4q_j}_{j=1..m} is a triangular basis of deg≤m−1 polys, L is fixed by
+      d_1..d_m, so the two-point functional IS L; holding for every m ⇒ closed form for all i.
+
+  (B) THE VALUATION (elementary, NO LTE).  425 is odd; γ=−19+8i ≡ 1 (mod 2) in Z[i] (Re odd, Im even), so
+      γ^{i+1} ≡ 1 ⇒ Re(γ^{i+1}) is ODD ⇒ v_2(2·Re)=1.  Therefore
+            v_2(w'_i) = v_2(8^{i+1}) + v_2(2·Re(γ^{i+1})) − v_2(425^{i+1}) = 3(i+1) + 1 − 0 = 4 + 3i.   ∎
+      (Alternatively, a two-line induction on the order-2 recurrence: v_2(A·w'_{i−1})=5+3i ≠
+      v_2(B·w'_{i−2})=4+3i, so ultrametric gives min=4+3i with no cancellation.)
+
+  NET: the node-free lemma v_2(w'_i)=4+3i is now PROVED (rank-2 closed form + "odd real part"), hence
+  C_j=m+3 (§6bi) and the UNCONDITIONAL LINEAR floor v_2(q_min) ≥ 2m−5 for OP1's σ=3/4 (D=425) barrier —
+  no node quantifier, no L-value, no analytic rank, no RH input.  HONEST (L5): fully rigorous modulo the
+  [VERIFIED-exact] closed form, whose derivation (two-point functional via reciprocal pairing + triangular
+  basis uniqueness) is spelled out above and checked to j≤16 / i≤13.  σ=3/4 is the clean rank-2 case; other
+  σ give β with a different v_2 (profile OFF+S·i) and need the same per-orbit treatment.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
