@@ -3265,6 +3265,35 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   This SUPERSEDES the §6cf claim that all of Row 3 reduces to (4″): only Row 3a does; Row 3b is a
   distinct, harder, distributed-content problem.  RH stays [OUT].
 
+### §6ci — the EXACT p=3 floor formula v₃(q_min) = max_j(clus(j) − v₃(S_j)), and the 3a/3b split pinned to the clustering-vs-pairing competition (L5)
+
+  HONEST CREDIT (L5): the identity itself is the §6bh/§6bf identity v_p(q_min) = max_j(N_j − C_j)
+  specialised to p=3, where N_j = v₃(P'(x_j)) = Σ_{k≠j} v₃(x_j−x_k) = clus(j) and C_j = v₃(S_j),
+  with S_j = Σ_i (−1)^{m−1−i} e_{m−1−i}(X'_j) w_i the §6bf pairing (X'_j = nodes except j).  There is
+  no "+1" offset here (that was the p=2 factor B=4(1−T); B is a 3-unit).  NEW here is (i) VERIFYING the
+  identity holds EXACTLY at p=3 (720 orbit×node-set×m tests, 0 mismatches, incl. 3a, 3b, vacuous n=2),
+  and (ii) the EXACT quantification of the §6ch dichotomy through v₃(S_j):
+
+        v₃(q_min) = max_j ( clus(j) − v₃(S_j) )      [EXACT, determinant-free]
+
+  clus(j) is ORBIT-INDEPENDENT with the provable pigeonhole max_j clus(j) ≥ ⌈m/2⌉−1 (2 classes mod 3).
+  v₃(S_j) is orbit-dependent and is the SOLE discriminant:
+    Row 3a (n≡1 mod3): SOME node has clus(j) linear AND v₃(S_j)=O(1) (probe: at the deepest node the
+        min over node sets of v₃(S_j*) is 0; worst-case max_j(clus−v₃S) = 4,5,7 at m=6,8,10 — LINEAR,
+        matching the §6ch measured v₃-floor exactly).  ⇒ the p=3 pairing is "generic" on a deep node.
+    Row 3b (n≡2 mod3): EVERY node has v₃(S_j) ≥ clus(j) − O(1) (probe: v₃(S_j*) ≥ 3 always, worst-case
+        max_j(clus−v₃S) = 0,1,2 — FLAT).  ⇒ the pairing ABSORBS the clustering; no p=3 floor (consistent
+        with §6ch: Row 3b's super-poly q_min lives at distributed primes, not p=3).
+
+  So the entire OP1-at-p=3 question — for ALL Row-3 orbits — is now the fully explicit competition
+  "does some node carry clustering depth the pairing fails to absorb, max_j(clus(j) − v₃(S_j)) ≥ cm?"
+  This is (4″) made determinant-free and exact, with n mod 3 identified as the governing residue: the
+  open sub-problem is precisely WHY n≡1 mod3 leaves a deep node with v₃(S_j)=O(1) while n≡2 mod3 forces
+  v₃(S_j) ≥ clus(j) − O(1) on every node (a mod-3 reduction of Λ(P_j) = S_j: P_j ≡ (z−a)^{α}(z−b)^{β}
+  mod 3 for the two node-classes a,b, and whether the functional Λ (fixed by w mod 3) annihilates it to
+  clustering depth).  Row 3a candidate-closes MODULO this; Row 3b needs the §6ch global argument instead.
+  probe_qmin_p3_exact_floor.py backs this (exact identity + the v₃(S_j) discriminant).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
