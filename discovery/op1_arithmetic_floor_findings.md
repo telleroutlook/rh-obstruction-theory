@@ -2886,6 +2886,33 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   adversary one-sided (hi = UPPER bound ⇒ corr is a conservative LOWER bound on the true worst correction; a
   bounded hi is strong evidence, not proof); m≤22, 4 orbits.  RH [OUT].
 
+### §6bu — the FACT B quantity ISOLATED: the tie's cancellation depth is a fixed small constant (1–2), ≤ A
+
+  probe_qmin_p2_nodd_cancel_depth (EXACT Fractions, L9).  Pins down exactly what FACT B must bound.  At m≡2
+  mod 4 the ultrametric minimum of C_j = v₂(Σ_r (−1)^r w'_{m−1−r} e_r(y_{≠j})) ties; a tie hurts only if the
+  tied terms CANCEL, so the crux quantity is
+        depth := v₂(sum of tied terms) − V,   V = the (equal) valuation of the tied terms
+  i.e. the excess of C_j over the naive tie value.  RESULT (5 n-odd orbits, m∈{6,10,14,18,22}, adversary's-best
+  set AND 200 random valid sets):
+   • EXACTLY TWO terms tie (ntied = 2) in every case — the two lowest-valuation terms of the pairing.
+   • depth is a FIXED SMALL CONSTANT per orbit, EXACTLY constant across m=6..22:
+        (2/3,1) γ=−99−27i  A=7 :  depth = 2   (all m)
+        (4/5,1) γ=−725−375i A=5 :  depth = 1   (all m)
+        (6/7,1) γ=−539−343i A=5 :  depth = 1   (all m)
+        (2/5,1) γ=−775−125i A=5 :  depth = 1   (all m)
+        (3/5,1) γ=−775−125i A=5 :  depth = 1   (all m)
+     The adversary's max and the random-tie max coincide — depth is NOT node-inflatable.  And depth ≤ A =
+     2v₂(a²−b²)−1 with room to spare (2≤7, 1≤5): the FACT-A spike is a (loose) ceiling; the true depth is even
+     smaller.  Hence C_j = V + depth = ⌊−3m/2⌋ + O(1) with the O(1) = depth, a fixed constant.
+  CONSEQUENCE — FACT B in its FINAL, minimal form: "at m≡2 mod 4, exactly two terms tie for the C_j ultrametric
+  minimum, and their ratio is ≢ −1 mod 2^{depth+1} for a per-orbit constant depth ≤ A" — a bounded no-cancellation
+  bound on a SINGLE PAIR of explicit 2-adic units (leading units of w' from the PROVED FACT A profile, and of the
+  two e_r Newton sums), NOT a node-independence statement over all columns.  This is the crispest OP1 outsource
+  nugget: prove the two tied top terms cannot 2-adically align past depth A.  With it, Row 2's floor v₂(q_min) =
+  1 + 3(m−1) − C_j = (9/2)m − O(1) is PROVED for every n-odd orbit.  HONEST (L5): adversary/random both one-sided
+  (max depth = LOWER bound on true worst); 5 orbits, m≤22; the depth-constant equals corr from §6bt as expected.
+  RH [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
