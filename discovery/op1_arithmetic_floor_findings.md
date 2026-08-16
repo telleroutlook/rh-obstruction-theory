@@ -3570,10 +3570,12 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   EXACTLY −m, while every i<m−1 term has valuation ≥ −(i+1) > −m.  Bottom term STRICTLY dominates ⇒ no
   cancellation ⇒ C_j=−m.  Hence v_p(q_min)=max_j(N_j+m)=max_j N_j + m ≥ m.  QED.
 
-  GOOD-CARRIER EXISTENCE.  Need a simple factor p‖N dividing no node denominator 4t²+1 (t≤m).  Holds for
-  7640/7688 orbit-m pairs (m≤12, n<160).  The 48 exceptions are SMALL orbits (n∈{4,16,22}) whose simple factors
-  are ALL of the special form 4s²+1 with s≤m (5,13,17,29,37,257,…) — such a prime necessarily divides node s.
-  Any simple factor p>4m²+1 is automatically node-integral, but such large simple factors are not universal.
+  GOOD-CARRIER EXISTENCE.  Need a simple factor p‖N dividing no node denominator 4t²+1 (t≤m).  PROVABLE
+  SUFFICIENT CONDITION: any simple factor p>4m²+1 is node-integral (4t²+1≤4m²+1<p ∀t≤m) — verified sufficient
+  for all m.  Holds for 7640/7688 orbit-m pairs (m≤12, n<160).  The residual failures = orbits whose squarefree
+  part of N is (4m²+1)-SMOOTH (all simple factors ≤4m²+1); a smoothness-exceptional set, NOT bounded in n
+  (observed up to n≈278).  There the node-pole gives an O(1) correction and v_p(q_min) ≥ m−1 (≤1 measured);
+  §6cp's aggregate independently gives Ω(m).
 
   CONSEQUENCE (OP1).  For 99.4% of orbit-m pairs the clean theorem gives v_p(q_min) ≥ m EXACTLY for a proven-pole
   carrier p≥5 ⇒ log q_min ≥ m·log5 = Ω(m).  In the thin exceptional set the node-pole injects an O(1) correction

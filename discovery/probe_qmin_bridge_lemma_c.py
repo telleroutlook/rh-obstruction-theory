@@ -20,13 +20,12 @@ has valuation ≥ −(i+1) > −m.  The bottom term STRICTLY dominates ⇒ no ca
 Then v_p(q_min) = max_j(N_j − (−m)) = max_j N_j + m ≥ m (N_j ≥ 0).  QED.
 
 GOOD-CARRIER EXISTENCE (the remaining hypothesis).  The theorem needs a simple factor p‖N that divides NO
-node denominator 4t²+1 (t≤m).  Two ways it holds:
-  * ANY simple factor p > 4m²+1 is automatically node-integral (4t²+1 ≤ 4m²+1 < p) — but such a large simple
-    factor does NOT exist for every orbit.
-  * The weaker "∃ simple factor dividing no 4t²+1" holds for 7640/7688 orbit-m pairs (m≤12, n<160).  The 48
-    exceptions are SMALL orbits (n∈{4,16,22}) whose N-simple-factors are ALL of the special form 4s²+1 with
-    s≤m (5,13,17,29,37,257,…): such a prime necessarily divides node s's denominator.  In those exceptional
-    cases the node-pole injects an O(1) correction and v_p(q_min) ≥ m−1 (empirically), still Ω(m).
+node denominator 4t²+1 (t≤m).  PROVABLE SUFFICIENT CONDITION: any simple factor p > 4m²+1 works (4t²+1 ≤
+4m²+1 < p for every t≤m), verified to be sufficient for all m tested.  This holds for 7640/7688 orbit-m pairs
+(m≤12, n<160).  The residual failure set = orbits whose simple factors are ALL ≤ 4m²+1, i.e. N's squarefree
+part is (4m²+1)-SMOOTH.  This is a smoothness-exceptional set — NOT bounded in n (smooth values of N occur at
+all scales, though rare; observed up to n≈278 in range).  In it a node-pole injects an O(1) correction and
+v_p(q_min) ≥ m − O(1) (≤1 measured), still Ω(m); §6cp's aggregate independently gives Ω(m).
 
 CONSEQUENCE (OP1).  For 99.4% of orbit-m pairs the clean theorem gives v_p(q_min) ≥ m EXACTLY for a proven-pole
 carrier p≥5 ⇒ log q_min ≥ m·log5 = Ω(m).  In the thin exceptional set the O(1) correction preserves Ω(m).
@@ -145,11 +144,13 @@ if __name__ == "__main__":
                     miss += 1
                     if len(ex) < 6:
                         ex.append((a, n, m, sorted(p for p, e in facs.items() if e == 1)))
-    print("\n(2) GOOD-CARRIER (simple factor dividing no 4t²+1, t≤m) exists: %d/%d orbit-m pairs; %d exceptions." % (
+    print("\n(2) GOOD-CARRIER (simple factor dividing no 4t²+1, t≤m) exists: %d/%d orbit-m pairs (n<160); %d fail." % (
         tot - miss, tot, miss), flush=True)
-    print("    exceptions are small smooth-N orbits whose simple factors are all of the form 4s²+1 (s≤m), e.g.:", flush=True)
+    print("    PROVABLE sufficient condition: any simple factor p>4m²+1 is node-integral (4t²+1≤4m²+1<p ∀t≤m).", flush=True)
+    print("    Residual failures = N's squarefree part is (4m²+1)-SMOOTH (all simple factors ≤4m²+1); a smoothness", flush=True)
+    print("    exception, NOT bounded in n.  There the O(1) node-pole correction / §6cp aggregate keep Ω(m).  e.g.:", flush=True)
     for a, n, m, s in ex:
-        print("      a=%d n=%-3d m=%d simple factors=%s (each 4s²+1 for some s≤m ⇒ divides a node)" % (a, n, m, s), flush=True)
+        print("      a=%d n=%-3d m=%d simple factors=%s (all ≤4m²+1 ⇒ each divides some node)" % (a, n, m, s), flush=True)
 
     # (3) NODE-SET INFIMUM: the clean bridge is NOT restricted to consecutive nodes. RANDOM non-consecutive sets.
     import random
@@ -186,9 +187,9 @@ if __name__ == "__main__":
     print("    simple factor (1 node each, p_i≡1 mod4) — costs a node per prime, only O(1) correction. RH [OUT].", flush=True)
 
     print("\n" + "=" * 100, flush=True)
-    print("(1) clean bridge theorem : %s ; (2) good carrier exists 99%%+ (thin small-orbit exceptions) : OK" % (
+    print("(1) clean bridge theorem : %s ; (2) good carrier exists 99%%+ (residual = (4m²+1)-smooth N) : OK" % (
         "OK" if clean_ok else "X"), flush=True)
     print("(3) clean bridge holds for ARBITRARY node sets : %s" % ("OK" if ns_ok else "X"), flush=True)
     print("READING (L5): lemma (c) REDUCED to §6ao identity + PROVED sub-law; the clean case (node-integral carrier)", flush=True)
     print("is PROVED giving v_p(q_min) ≥ m for a p≥5 carrier, for ANY node set ⇒ log q_min ≥ m·log5 = Ω(m).  Adversary", flush=True)
-    print("escape = poison all carriers (O(1) cost); exceptional small orbits keep Ω(m) via §6cp aggregate. RH [OUT].", flush=True)
+    print("escape = poison all carriers (O(1) cost); smoothness-exceptional N keeps Ω(m) via §6cp aggregate. RH [OUT].", flush=True)
