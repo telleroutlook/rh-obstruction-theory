@@ -217,6 +217,17 @@ whence `v(q_min) ≥ 2m − O(1)`; any `c > 0` suffices to close OP1.
 **What to close for Step 4.** Prove CORE-2 (any absolute `c > 0`). By (★) this gives a linear 2-adic
 floor for *every* orbit and closes OP1's 2-adic channel.
 
+**Known dead-end (tested and refuted here — do not re-derive).** The **ultrametric sum-bound** fails:
+writing `S_j = ⟨w, ε(X'_j)⟩ = L(P/(X−x_j))` for the functional `L(X^i)=w_i` and `P = ∏_k(X−x_k)`, and
+using `Σ_j P/(X−x_j) = P'`, one gets `Σ_j S_j = L(P')`, hence (ultrametric) `min_j C_j ≤ v(L(P'))` where
+`L(P') = Σ_i (i+1) w_i p_{i+1}` is a *single* explicit bilinear form. This reduction is valid, but
+`v(L(P'))` is **not** `≤ (3−c)m`: an adversary aligning the `m` terms drives `v(L(P')) → 20, 24` at
+`m = 4, 8` (`≫ 3(m−1)`) while `min_j C_j` stays at `m+3`. Any single linear combination `Σ_j c_j S_j`
+(including Lagrange weights `c_j = Q(x_j)/P'(x_j)`, which reintroduce the `N_j = v(P'(x_j))` denominator)
+collapses to the weak `∃ j: C_j ≤ N_j`. CORE-2 needs the genuine *coupling* of the `m` vectors
+`ε(X'_j)` (Newton identities / a Newton-polygon bound on `S = E·w`, `E` the signed-symmetric matrix), not
+one combination.
+
 **Known dead-ends (inherited from the p=3 analysis — do not re-derive).** The column-wise
 simplifications refuted for OB-42 (`max_j`-type bounds `= O(1)`, averaging `Σ = O(m)`, an
 argmax column with bounded correction, a single shallow-correction high-depth column) and the

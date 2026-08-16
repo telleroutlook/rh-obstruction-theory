@@ -2491,6 +2491,30 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   SHARPENS OB-43: Step 3 upgraded measured→proved identity; open core is now one self-contained leave-one-out
   bilinear bound, orbit-free.  RH stays [OUT].
 
+### §6bg — CORE-2 proof attempt: the ultrametric sum-bound is PROVED but too weak (recorded dead route)
+
+  probe_qmin_p2_floor_identity + inline.  Attempt to PROVE CORE-2 (min_j C_j ≤ (3−c)m).  Writing
+  S_j = ⟨w, ε(X'_j)⟩ = L(P/(X−x_j)) for the fixed functional L(X^i)=w_i and P(X)=∏_k(X−x_k), and using
+  Σ_j P/(X−x_j) = P'(X), one gets Σ_j S_j = L(P').  By the ultrametric (v_2(Σ) ≥ min),
+        min_j C_j = min_j v_2(S_j)  ≤  v_2(Σ_j S_j)  =  v_2(L(P')),
+        L(P') = Σ_{i=0}^{m−1} (i+1)·w_i·p_{i+1},   p = coeffs of P  (a SINGLE explicit bilinear form).
+  This reduction is EXACT/PROVED (verified on 600 configs, m=4..8: min_j C_j ≤ v_2(L(P')) always).  HOPE: if
+  v_2(L(P')) ≤ (3−c)m then CORE-2 closes with NO min-over-columns.
+
+  RESULT (L5).  The hope is FALSE.  v_2(L(P')) is NOT ≤ (3−c)m: an adversary maximizing it reaches
+  20,8,10,10,24 for m=4..8 — e.g. 20 ≫ 3(m−1)=9 at m=4, 24 > 21 at m=8.  Because Σ_j S_j collapses the m
+  terms into one, the adversary can 2-adically ALIGN them so the SUM is far deeper than any single term while
+  min_j C_j stays at m+3.  So the sum-bound, though valid, is too lossy to certify CORE-2.  Related weightings
+  (Lagrange L(Q)=Σ_j [Q(x_j)/P'(x_j)]S_j, or Q=X^i with v_2(x_j)=0) all reintroduce the N_j=v_2(P'(x_j))
+  denominator and collapse to the weak "∃ j: C_j ≤ N_j".  A proof of CORE-2 needs the genuine COUPLING of the
+  m leave-one-out vectors ε(X'_j) (Newton's identities / a Newton-polygon bound on S = E·w, E the
+  signed-elementary-symmetric matrix), not a single linear combination.
+
+  WHAT SURVIVES.  CORE-2's sharp empirical form min_j C_j ≤ m+3 is UNSHAKEN (600 random configs + two
+  adversaries all cap at m+3), and the reduction v_2(q_min) ≥ 1+3(m−1)−min_j C_j is proved.  Only this
+  particular proof route dies.  Recorded on OB-43 as a known dead-end (its 1st, analogous to OB-42's adjugate
+  dead-end).  σ=3/4; adversary one-sided (L5).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
