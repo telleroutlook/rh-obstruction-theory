@@ -1325,6 +1325,55 @@ handle yet and, unlike the per-prime floor (§6w), it is aggregate so it survive
 migration. IDENT is a candidate [THM] (exact, 5307/5307); the gcd-gap lower bound is OPEN.
 Bounded search, K=m, m<=9 — evidence, not proof. RH stays [OUT].
 
+### 6z. TWO-CHANNEL decomposition: q_min splits into a GEOMETRIC (Vandermonde) channel and a node-independent RAMIFIED channel (this session)
+
+Attacking the §6y gcd-gap, I tried to make it interpretable via a clean per-node law. Using the
+§6g/§6i factorizations, the j-th augmented minor (drop node j, keep d) equals D_m(A)*Psi(S_j)/W_j
+up to a global unit, W_j := (x_j-1)*prod_{l!=j}(x_l-x_j) the confluent factor of node j and
+Psi(S_j) := 2 Re[(u-1) prod_{l!=j}(u-x_l)]. Since `cleared_columns` scales EVERY column (incl. d)
+by one common denominator, the per-node clearing factor cancels, and det(A) itself is one of the
+augmented minors (drop the d-column), so the exact law is
+
+    (EXACT, tautological)  v_p(q_min) = -min(0, min_j [ v_p(minor_j) - v_p(D_m(A)) ]),
+    (PN, model)            v_p(q_min) =? max(0, max_j [ v_p(W_j) - v_p(Psi(S_j)) ]).
+
+`discovery/probe_qmin_pernode_formula.py`: (PN) held only ~83% over odd p | q_min.
+`discovery/probe_pn_diagnose.py`: per node, `actual_j := v_p(minor_j)-v_p(D_m(A))` vs
+`model_j := v_p(Psi(S_j))-v_p(W_j)`. The offset `actual_j - model_j` is CONSTANT across j at some
+primes (e.g. p=17: -4,-4,-4,-4 => model right up to a global unit) but VARIES across j at others
+(p=5: -6,-6,-6,-5). `discovery/probe_pn_goodprime.py` was decisive: at every "GOOD" prime (nodes
+distinct mod p, denominators invertible) the model held 0/295 — at p=17 (D=425 = 5^2*17) the model
+predicts pred=0 while v_17(q_min) = 3,4,5 for m=3,4,5 with nodes fully generic mod 17. So the
+confluent-Vandermonde per-node model is STRUCTURALLY BLIND to the orbit-ramified primes, even when
+the node geometry is non-degenerate there. Their mass comes from the off-line vector d's own
+arithmetic (ramification of the orbit field Q(u)), not from node isolation.
+
+This forces a two-channel picture:
+
+    log q_min = [ GEOMETRIC:  sum_{p geometric}  v_p log p ]   (node clustering; §6g Vandermonde floor governs this)
+              + [ RAMIFIED:   sum_{p | D_orbit}   v_p log p ]   (off-line d arithmetic; node-INDEPENDENT)
+
+`discovery/probe_qmin_ramified_channel.py` (D=425, ramified odd primes {5,17}) adversarially
+MINIMIZES each channel separately over cluster/spread/random, m=2..9:
+
+  m               :   2     3      4      5      6      7      8      9
+  min RAMIFIED log2:  2.32  4.09  11.05  15.14  23.22  30.28  29.73  48.40
+  min GEOMETRIC log2: 0.00 14.21  28.52  56.36  74.75 104.96 146.48 170.08
+
+The GEOMETRIC channel is drainable to 0 (m=2) but the RAMIFIED channel CANNOT be driven to 0 — its
+minimum stays positive and RISES ~linearly with m (min = log2(5) at m=2, i.e. v_5 >= 1 forced),
+independent of node geometry. READING (L5): this is a NEW, node-independent lower-bound ingredient
+that the §6g Vandermonde floor does not touch, and it explains BOTH earlier prime-by-prime failures
+(§6u lag, §6w per-prime floor): those routes lived in the geometric channel and were blind to the
+ramified channel that actually pins q_min from below. The danger q_min -> 1 now requires draining
+BOTH channels at once, and the ramified channel is bounded below by the orbit's ramification (a
+D_orbit-dependent, node-free quantity). SCOPE/HONESTY: (PN) is a candidate [THM] only at good
+(unramified, non-collision) primes and is FALSE at the mass-carrying ramified primes; the two-
+channel split and the ramified floor are EVIDENCE (bounded search, one orbit fully tabulated,
+m<=9), not proof. The rigorous forward target sharpens to: lower-bound the ramified channel by a
+node-independent function of D_orbit growing with m, and combine with the §6g geometric floor.
+Exact arithmetic (L9). RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
