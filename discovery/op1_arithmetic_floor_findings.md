@@ -2965,6 +2965,30 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   2-line lemma.  Adversary/hill-climb one-sided (deeper unconstrained depths only strengthen the refutation).
   RH [OUT].
 
+### §6bx — the p=2 floor COLLAPSES to a node-Vandermonde solve: v₂(q_min) = 1 − min_j v₂((V⁻¹w)_j) (verified; NOT prime-agnostic)
+
+  probe_qmin_vandermonde_reduction (EXACT, L9).  The Lagrange interpolation identities
+  Σ_j x_j^r·(S_j/P'(x_j)) = w_r (r=0..m−1; S_j = off-line pairing ⟨w, coeffs ∏_{k≠j}(X−x_k)⟩,
+  P'(x_j)=∏_{k≠j}(x_j−x_k)) say the vector y_j := S_j/P'(x_j) (whose v_p = C_j − N_j) solves V y = w with
+  V[r][j]=x_j^r the NODE VANDERMONDE and w the FIXED off-line vector — i.e. y = V⁻¹w = the Lagrange
+  QUADRATURE WEIGHTS of the functional L(Q)=⟨w,coeffs Q⟩ (⟨w,coeffs Q⟩ = Σ_j y_j Q(x_j), deg Q ≤ m−1).
+  VERIFIED (all 5 orbits (2/3),(3/4),(4/5),(6/7),(2/5); m=4..7):
+    • Lagrange identity y_j == S_j/P'(x_j) HOLDS exactly (y = V⁻¹w confirmed).
+    • p=2: off_2 := v₂(q_min)+min_j v₂(y_j) ≡ 1 UNIFORMLY ⇒ v₂(q_min) = 1 − min_j v₂((V⁻¹w)_j).  CONFIRMED,
+      matches the PROVED §6bf floor identity, now in closed Vandermonde form.
+    • p=3: off_3 ≡ 0 ⇒ v₃(q_min) = −min_j v₃((V⁻¹w)_j).
+  REFUTED (honest, L5): the reduction is NOT prime-agnostic — for p=5 the offset is non-constant (∈{0,−1,2,…}),
+  so there is NO single universal Vandermonde object across all primes; the offset is p-special.  My "unify all
+  4 rows into one V⁻¹w object" hope is thus only valid on the p=2 rows (1,2) and the p=3 row (3), not globally.
+  CRAMER FORM (p=2):  v₂(q_min) = 1 + v₂(det V) − min_j v₂(det V^{(j)}),  V^{(j)} = V with column j → w.
+  STRUCTURAL READING: v₂(det V) = Σ_{k<l} v₂(x_l−x_k) ≥ 3·C(m,2) is QUADRATIC in m, while the floor is LINEAR
+  (~(9/2)m), so the floor is a DELICATE LINEAR GAP between two quadratic-in-m valuations (det V vs min_j det V^{(j)}).
+  The one free global identity Σ_j y_j = w_0 gives only min_j v₂(y_j) ≤ v₂(w_0) ⇒ a CONSTANT lower bound on
+  v₂(q_min) (loose: the y_j are ~v₂ −3m each and cancel to the small w_0).  So this reframing is CLEAN and
+  CORRECT for p=2/p=3 but does NOT dissolve the §6bw hard-minimax difficulty — it re-expresses it as "some
+  Lagrange weight of the fixed functional w, on nodes with pairwise v₂≥3 differences, has 2-power denominator
+  ≥ 2^{(9/2)m}".  Structural identity check (adversary-free).  RH [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
