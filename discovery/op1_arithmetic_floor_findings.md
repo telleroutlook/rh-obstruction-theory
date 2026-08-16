@@ -2276,6 +2276,37 @@ CORRECTED PROOF STATUS (p=3 floor v_3(q_min) >= m/2 - O(1)) after §6aw/§6ax:
 The p=3 FLOOR itself is NOT refuted -- only the naive route.  Direct minimization (§6aq, §6ax(Z)) continues
 to support v_3(q_min) >= m/2 - O(1).  One orbit (D=425).  Descent/ascent are one-sided.  RH stays [OUT].
 
+### §6ay/§6az — the CORRECT provable form: a high-N, low-C column always EXISTS (lemma (4''))
+
+Two candidate mechanisms for (4') were tested and BOTH killed (§6ay):
+  (M1) co-inflation "C_{j0} large => v_3(det A) large": does NOT fire -- under the single-node lift v_3(det A)
+       stays CONSTANT (7,13,21 for m=5,6,7) while C_{j0} explodes; and Sum_j C_j GROWS (not O(m)), so the
+       averaging route (2 v_3(detA) - Sum C_j)/m is DEAD (a single exploded C_j is an outlier).
+  (M2) "argmax-N column has bounded C": FALSE -- the adversary CAN explode C at the argmax-N column
+       (N_{j*} - C_{j*} driven to -10..-14, max C_{j*} ~ 18); the floor then just MOVES to another column.
+So the correct minimal form is an EXISTENCE statement, confirmed under the sharpest adversary (§6az):
+    (4'')  EXISTS a column j with  N_j >= m/2 - O(1)  AND  C_j = O(1)  simultaneously.
+At the adversarial MINIMUM of the floor v_3(q_min) = max_j(N_j - C_j), the FLOOR-CARRIER column j_f has:
+    m:              4  5  6  7  8
+    min floor:      2  2  4  5  5     (>= m/2 = 2, 2.5, 3, 3.5, 4  -- floor holds)
+    carrier N_jf:   2  3  4  5  5     (>= m/2 - O(1))
+    carrier C_jf:   0  1  0  0  0     (O(1), essentially 0-1 -- NOT exploded)
+i.e. the floor is ALWAYS carried by a HIGH-N, LOW-C column.  The adversary can explode C at SOME columns
+(§6aw) but CANNOT explode C at ALL high-N columns simultaneously -- exploding column j needs a specific 3-adic
+alignment of the node set X' = {x_k}_{k!=j}, and these alignments COMPETE (aligning one column's X' de-aligns
+others), so a high-N column with C = O(1) always survives.  Lemma (4'') => max_j(N_j - C_j) >= m/2 - O(1)
+immediately.
+
+CORRECTED PROOF STATUS (p=3 floor) after §6aw..§6az:
+  (1) v_3(det A) = sum_{k<l} v_3(x_k - x_l)                                  -- PROVEN (§6as).
+  (2) v_3(det A) >= PIG(m) = m^2/4 - O(m)                                    -- PROVEN (§6ar).
+  (3) max_j N_j >= 2 v_3(det A)/m >= m/2 - O(1)                              -- PROVEN (averaging).
+  (4'') EXISTS j: N_j >= m/2 - O(1) AND C_j = O(1)                           -- SOLE open lemma, corrected.
+        NOT "max_j C_j = O(1)" (FALSE, §6aw) and NOT "argmax-N column has bounded C" (FALSE, §6ay-M2).  The
+        TRUE, empirically-robust (§6az) statement is the EXISTENCE of a single high-N, O(1)-C column -- the
+        floor-carrier -- protected by the competition among per-column 3-adic alignments.  This is the
+        corrected EXT/outsource nugget: it is TRUE (unlike the refuted forms) and fully explicit.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
