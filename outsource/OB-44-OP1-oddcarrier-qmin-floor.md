@@ -361,7 +361,12 @@ Steps 1–3 were verified by exact-arithmetic scripts in this repository's disco
 (1060 simple-factor checks, `n < 70`); the clean bridge (Step 3) — `C_j = −m`,
 `v_p(q_min) = max_j N_j + m ≥ m` — in the bridge probe (798 consecutive + 252 random
 non-consecutive node sets). The `2 ∤ N`, `3 ∤ N` facts (min prime factor `≥ 5`) and `gcd(re, n) = 1`
-(⇒ sum of coprime squares) were checked on 2969 / 12124 Row-3 orbits. These scripts are
+(⇒ sum of coprime squares) were checked on 2969 / 12124 Row-3 orbits. The **assembled** chain
+(identity → sub-law → bridge, not just the pieces) was re-confirmed on 213 fresh orbits outside
+the original range (`m = 5`, `n = 62…120`): `v_p(q_min) = max_j N_j + m ≥ m` held on all, with the
+minimum realized value exactly `m = 5`. A widened powerful/mod-4 scan (9856 orbits, `n < 360`)
+found **0** powerful `N`, **0** orbits without a simple factor, and **every** prime factor `≡ 1
+(mod 4)` (consistent with the coprime-squares reduction). These scripts are
 reproducible; the referee need not consult them (all premises are stated inline).
 
 ---

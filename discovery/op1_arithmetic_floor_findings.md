@@ -3571,6 +3571,16 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   (gcd(re,n)=1 proven ⇒ N sum of two coprime squares; 0/12124 orbits n<400 powerful); (c) REDUCED + clean case
   proved in §6cs below.  RH stays [OUT].
 
+  CONSOLIDATION (2026-08-16, L9).  The coprime-squares reduction has a sharper consequence: a PRIMITIVE
+  rep re²+(n²)² (gcd(re,n²)=gcd(a²,n)²=1) forces EVERY prime factor of N to be ≡1 (mod 4), so the Gaussian
+  and rational notions of "powerful" COINCIDE — Lemma (b) is exactly the purely RATIONAL statement
+  "N=(a²+n²−na)²+n⁴ is never a powerful integer" (some v_p(N)=1), no Gaussian machinery needed in the final
+  ask.  Widened scan (probe, this session): 0 powerful N / 9856 orbits (n<360), 0 orbits without a simple
+  factor, and ALL prime factors ≡1 mod4 (confirms the reduction).  The ASSEMBLED chain (identity §6ao →
+  sub-law §6cr → bridge §6cs, not just the pieces) re-confirmed on 213 fresh orbits (m=5, n=62..120):
+  v_p(q_min)=max_j N_j+m ≥ m held on all, min realized value exactly m=5.  Open core unchanged: (b) N never
+  powerful, and good-carrier existence (simple factor p>4m²+1 node-integral).  RH stays [OUT].
+
 ### §6cs — BRIDGE LEMMA (c): sub-law ⇒ q_min lower bound (probe_qmin_bridge_lemma_c.py, L9)
 
   Closes the gap between the PROVED §6cr pole (v_p(w_i)=−(i+1)) and the OP1 quantity v_p(q_min), via the
