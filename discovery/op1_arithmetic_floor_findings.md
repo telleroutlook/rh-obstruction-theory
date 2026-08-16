@@ -3094,27 +3094,31 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   forbids joint alignment — but no clean argument is in hand.  This is the live open sub-problem for Row 2.
   RH stays [OUT].
 
-### §6cd — BREAKTHROUGH: the VANDERMONDE-COUPLING floor — a UNIFORM, minimax-free proof for BOTH parities
+### §6cd — the VANDERMONDE-COUPLING floor for Row 2 (n odd): completing §6bh's dismissed ultrametric route
 
-  probe_qmin_p2_nodd_vandermonde_floor (EXACT, L9).  The refuted σ_j route tried to bound a SINGLE column's
-  lift; the correct object is the COUPLING of all m columns.  Set P(z) = Π_k(z − x_k), P_j = P/(z − x_j),
-  and Λ the linear functional Λ(z^d) = w_d.  Matching the §6bf pairing term-for-term,
-        S_j = Σ_i (−1)^{m−1−i} e_{m−1−i}(X'_j) w_i = Λ(P_j),   X'_j = nodes except j.
-  Define u_j := S_j / P'(x_j).  Then:
-    (i)  v₂(u_j) = C_j − N_j    [C_j = v₂(S_j);  v₂(P'(x_j)) = Σ_{k≠j} v₂(x_j − x_k) = N_j].
-    (ii) LAGRANGE INTERPOLATION: ℓ_j := P_j/P'(x_j) is the Lagrange basis, Σ_j Q(x_j) ℓ_j = Q for deg Q ≤ m−1;
-         apply Λ with Q = z^p:  Σ_j x_j^p · u_j = Λ(z^p) = w_p  for every p = 0..m−1.
-  So V·u = w with V = (x_j^p)_{p,j} a UNIT Vandermonde (the nodes x_j = (4t²−1)/(4t²+1) are 2-adic UNITS).
-  By the ultrametric,  v₂(w_p) = v₂(Σ_j x_j^p u_j) ≥ min_j v₂(u_j)  for EVERY p, hence
-        min_j v₂(u_j) ≤ min_p v₂(w_p) = W_top       (profile min = TOP index, since the profile DECREASES; FACT A §6br).
-  The §6bf identity gives v₂(q_min) = 1 + max_j(N_j − C_j) = 1 − min_j v₂(u_j), so
+  PROVENANCE / HONEST CREDIT (L5): the factorization is NOT new here — §6bh already proved
+        C_j = N_j + v₂(u_j),   u := (V^T)⁻¹ w,   v₂(q_min) = 1 − min_j v₂(u_j)   (★★),
+  with u_l = S_l/P'(x_l) the Lagrange/quadrature weights.  §6bh ran the ultrametric on the SINGLE relation
+  Σ_l u_l = w_0 (the p=0 row of V^T u = w), got min_l v₂(u_l) ≤ v₂(w_0), and — examining ONLY σ=3/4 (Row 1,
+  where the profile v₂(w_i)=4+3i INCREASES so w_0 IS the min) — dismissed the ultrametric as "trivial/lossy."
+  §6cd's ACTUAL (smaller) new content is twofold: (1) use ALL m relations Σ_l x_l^p u_l = w_p (p=0..m−1),
+  giving min_l v₂(u_l) ≤ min_p v₂(w_p) — accessing w_{m−1} needs the p=m−1 row §6bh never used; (2) the
+  observation that for n ODD the profile DECREASES, so min_p v₂(w_p) = W_top = v₂(w_{m−1}) ≈ −3m/2, and the
+  same ultrametric §6bh called trivial becomes a LINEAR floor.
+
+  probe_qmin_p2_nodd_vandermonde_floor (EXACT, L9).  With (★★) from §6bh and V = (x_j^p) a UNIT Vandermonde
+  (nodes x_j = (4t²−1)/(4t²+1) are 2-adic UNITS), the ultrametric on V·u = w gives v₂(w_p) ≥ min_j v₂(u_j)
+  for EVERY p, hence
+        min_j v₂(u_j) ≤ min_p v₂(w_p) = W_top       (profile min = TOP index for n odd, since it DECREASES; FACT A §6br).
+  Therefore
         ┌─────────────────────────────────────────────────────────────────────────┐
         │  v₂(q_min) ≥ 1 − W_top = 3m/2 − 1 (m≡2 mod4) or 3m/2 (m≡0 mod4)  UNIFORM   │
         └─────────────────────────────────────────────────────────────────────────┘
-  LINEAR, both parities, NO minimax, NO σ_j mechanism.  Since log q_min ≥ (3m/2 − 1)·log 2 = Ω(m) ≫ ω(log m),
-  this CLOSES OP1 on the entire n-odd Row 2.  Dependencies: ONLY (a) the §6bf floor identity, (b) the classical
-  Lagrange interpolation identity, (c) FACT A (profile decreasing ⇒ min at top index, §6br PROVED).  It does
-  NOT use §6cb (refuted), §6cc, or §6bw — the whole minimax core is BYPASSED.
+  LINEAR in m, BOTH parities of m, NO minimax, NO σ_j mechanism.  Since log q_min ≥ (3m/2 − 1)·log 2 = Ω(m)
+  ≫ ω(log m), this CLOSES OP1 on the entire n-odd Row 2.  Dependencies: (a) the §6bf/§6bh floor identity (★★),
+  (b) classical Lagrange interpolation, (c) FACT A (profile decreasing ⇒ min at top index, §6br PROVED for
+  n odd).  It does NOT use §6cb (refuted), §6cc, or §6bw — the minimax core is bypassed.  It is NOT a new
+  factorization (that is §6bh); it is the completion of §6bh's route for the n-odd profile.
 
   MEASURED (EXACT Fraction, orbits (2/3),(4/5),(6/7) i.e. n=3,5,7; m=4..18, both parities):
     • identity V·u = w holds EXACTLY for every p, every collision (id V·u=w = OK), all orbits/m;

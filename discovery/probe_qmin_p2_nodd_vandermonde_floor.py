@@ -2,23 +2,30 @@
 """
 DISCOVERY TIER (program §12.1) — conjecture/evidence only; NOT imported into proofs. No RH input.
 
-§6cd — the VANDERMONDE COUPLING floor: a UNIFORM, minimax-free LINEAR bound v₂(q_min) ≥ 1 − W_top for BOTH
-parities of m, replacing the refuted §6cb σ_j route.
+§6cd — the VANDERMONDE COUPLING floor: completing §6bh's dismissed ultrametric route for the n-odd profile.
+
+HONEST CREDIT (L5): the factorization is §6bh, NOT new here.  §6bh already proved v₂(u_j)=C_j−N_j,
+u=(V^T)⁻¹w, and v₂(q_min)=1−min_j v₂(u_j) (its identity ★★), with u_l=S_l/P'(x_l).  §6bh ran the ultrametric
+on the SINGLE relation Σ_l u_l = w_0 (the p=0 row), got min ≤ v₂(w_0), and — examining ONLY σ=3/4 (Row 1,
+profile v₂(w_i)=4+3i INCREASING so w_0 IS the min) — dismissed it as trivial.  §6cd's actual new content:
+(1) use ALL m rows Σ_j x_j^p u_j = w_p (reaching w_{m−1} needs the p=m−1 row §6bh never used); (2) for n ODD
+the profile DECREASES so min_p v₂(w_p)=W_top=v₂(w_{m−1})≈−3m/2, turning §6bh's "trivial" bound LINEAR.
 
 STRUCTURE.  Let P(z) = Π_k (z − x_k) (all m nodes), P_j(z) = P(z)/(z − x_j) = Π_{k≠j}(z − x_k), and Λ the
 linear functional Λ(z^d) = w_d on the w-vector.  Then (matching the §6bf pairing exactly)
       S_j = Σ_i (−1)^{m−1−i} e_{m−1−i}(X'_j) w_i = Λ(P_j),   X'_j = nodes except j.
-Define u_j := S_j / P'(x_j).  Two facts:
+Define u_j := S_j / P'(x_j).  Two facts (both from §6bh):
   (i)  v₂(u_j) = C_j − N_j   [C_j = v₂(S_j); v₂(P'(x_j)) = Σ_{k≠j} v₂(x_j−x_k) = N_j].
   (ii) LAGRANGE: for every p ≤ m−1,  Σ_j x_j^p u_j = Λ(z^p) = w_p   (ℓ_j = P_j/P'(x_j), Σ_j Q(x_j)ℓ_j = Q).
 So V·u = w with V = (x_j^p)_{p,j} a UNIT Vandermonde (nodes x_j are 2-adic units).  By the ultrametric,
       v₂(w_p) = v₂(Σ_j x_j^p u_j) ≥ min_j v₂(u_j)   for EVERY p,
 hence  min_j v₂(u_j) ≤ min_p v₂(w_p) = W_top  (profile min = top index, FACT A §6br, the profile DECREASES).
-Since §6bf gives  v₂(q_min) = 1 + max_j(N_j − C_j) = 1 − min_j v₂(u_j),
+Since §6bf/§6bh give  v₂(q_min) = 1 + max_j(N_j − C_j) = 1 − min_j v₂(u_j),
       v₂(q_min) ≥ 1 − W_top = 3m/2 − 1 (m≡2 mod4)  or  3m/2 (m≡0 mod4)   — LINEAR, uniform, NO minimax.
 
-This PROVES OP1 on the n-odd Row 2 (log q_min = Ω(m) ≫ ω(log m)) from only: §6bf identity, the classical
+This CLOSES OP1 on the n-odd Row 2 (log q_min = Ω(m) ≫ ω(log m)) from only: §6bh's ★★ identity, the classical
 Lagrange interpolation identity, and FACT A (profile min at the top index).  It DOES NOT need §6cb/§6cc/§6bw.
+It is NOT a new factorization (that is §6bh); it is §6bh's route finished for the n-odd (decreasing) profile.
 
 THIS PROBE (EXACT, L9), n-odd orbits × m (both parities), many collisions:
   (A) verify the identity V·u = w EXACTLY (Fraction), where u_j = S_j/P'(x_j);
