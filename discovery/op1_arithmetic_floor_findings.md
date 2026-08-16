@@ -3160,6 +3160,46 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   (Row 2: RHS = 1 − W_top ≈ 3m/2 ≫ 0, identity holds 25/25) but confirms the framework is meaningful only in
   the non-vacuous regime, reinforcing that §6cd is a Row-2 tool.  RH stays [OUT].
 
+### §6cf — SYNTHESIS: the floor MECHANISM is dictated by the w-profile SHAPE at the working prime; the 4-row split IS the shape trichotomy governed by v₂(n)
+
+  probe (EXACT, L9; wvec + vp_frac, m=6,8; verified for the orbits listed).  §6cd/§6ce prompt the unifying
+  question — WHY does each row carry at the prime it does?  Answer: the whole family of results (§6bm/§6bi,
+  §6cd, §6ao) is one principle — the FLOOR MECHANISM is fixed by the SHAPE of the profile v_p(w_i), i=0..m−1,
+  of the fixed moment vector w = B⁻¹d at the working prime p.  Three shapes, three mechanisms:
+
+     (a) STRICTLY DECREASING profile (min at the TOP index m−1, linearly negative).  Then min_p v_p(w_p)=W_top
+         is deep-negative and the §6cd ultrametric on V·u=w gives v_p(q_min) ≥ 1−W_top directly.  CLEANEST —
+         no C_j control, no minimax.  Occurs: p=2, n ODD (Row 2).  Measured v₂(w_i)=[−1,−1,−4,−5,−7,−7,−10,−11]
+         (m=8), W_top≈−3m/2.
+
+     (b) EXACTLY CONSTANT profile at height h≥4 (h even).  A flat profile PINS the bilinear pairing:
+         C_j = ⟨w,ε(X'_j)⟩ has a UNIQUE ultrametric-min term (the anchored e_0=w_{m−1} product), so C_j = m+(h−1)
+         NODE-INDEPENDENT (§6bi) and v_p(q_min)=1+3(m−1)−C_j = 2m−2−(h−1) linear.  Occurs: p=2, 4|n (Row 1).
+         MEASURED LAW (exact, n=4,8,12,16): v₂(w_i) ≡ 2·v₂(n) constant, so h=2v₂(n), S:=h−1=2v₂(n)−1≥3 (§6bm).
+
+     (c) CONSTANT profile at the S=1 BOUNDARY (height h=2), OR FLAT-AT-UNIT profile (height 0).  Here the
+         ultrametric min TIES (two equal top terms at h=2, S=1) or there is no depth at all (unit), so C_j is
+         NOT pinned — the adversary can 3-adically LIFT C_j to any depth (§6aw), and the floor survives only
+         through the un-proved COMPETITION bound (4″) max_j(N_j−C_j)≥cm.  OPEN.  Occurs: p=2 n≡2 mod4 (height 2,
+         S=1, MEASURED v₂(w_i)≡2 for n=2,10,14 — Row 3's p=2 is VACUOUS by the tie); and p=3 for Row 3
+         (MEASURED v₃(w_i)≡0 flat-unit — no basis depth since B and 3∤D make w a 3-unit).
+
+  GOVERNING PARAMETER (p=2): the shape is a clean trichotomy in v₂(n):
+        v₂(n)=0 (n odd)      → DECREASING  → §6cd,  floor 3m/2−O(1)      [Row 2]
+        v₂(n)≥2 (4|n)        → CONSTANT h=2v₂(n)≥4, S≥3 → §6bm/§6bi, floor 2m−2−S   [Row 1]
+        v₂(n)=1 (n≡2 mod4)   → CONSTANT h=2, S=1, TIE → p=2 VACUOUS → must use p=3   [Row 3]
+  So Rows 1 and 2 do NOT share one p=2 argument (Row 1 is CONSTANT-pinned, Row 2 is DECREASING-ultrametric);
+  §6cd is genuinely the special DEEP-PROFILE row.  This corrects any instinct to merge them.
+
+  WHY Rows 3,4 ARE OPEN (sharp): a DECREASING or CONSTANT-S≥2 profile can only come from B's 2-adic content
+  (the offline d is 2-integral; only the Chebyshev basis B=4(1−T_j) carries 2-adic denominators).  For n≡2 mod4
+  that content lands exactly at the S=1 tie, and at every ODD prime B is a unit ⇒ w is unit (flat-0) unless p
+  RAMIFIES in the orbit.  Hence Rows 3,4 have NO shape-(a)/(b) prime available: they are forced onto shape (c),
+  i.e. the node-clustering floor whose sole open core is the competition lemma (4″).  §6cd cannot help (it needs
+  a negative profile min; Row 3's p=2 min is +2, p=3 min is 0).  This is the precise reason the barrier is only
+  PARTIALLY proved: OP1 CLOSES for all n≢2 mod4 at p=2 (Row 1 §6bm proved; Row 2 §6cd candidate modulo the
+  PROVED FACT A), and REMAINS OPEN for n≡2 mod4, pending (4″).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
