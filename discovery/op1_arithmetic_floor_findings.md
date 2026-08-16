@@ -3524,11 +3524,15 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
 
         v_p(N) = 1  ⟹  v_p(w_i) = −(i+1)  for all i ≥ 0.        [SUB-LAW — 1360 checks, all Row-3 orbits n<80]
 
-  MECHANISM (proof target; general-prime analogue of the §6co p=3 coupling lemma).  v_p(N)=1, p≥5, p∤n ⇒ p
-  splits in Z[i] as 𝔭𝔭̄ and exactly ONE prime above p divides numerator(β) simply ⇒ β has a SIMPLE ZERO at 𝔭
-  (v_𝔭(β)=+1).  W(y)=Σ w_i y^i is rational with denominator the reversed β-quartet (roots {β,β̄,1/β,1/β̄});
-  the partial-fraction term A/(1−(1/β)y) from the root 1/β has a SIMPLE POLE v_𝔭(1/β)=−1, and its residue has
-  v_p(A)=−1, so w_i ⊇ A·(1/β)^i ⇒ v_p(w_i) = v_p(A) − i = −(i+1).  Hence v_p(w_{m−1}) = −m.
+  MECHANISM (STRUCTURAL PROOF SKETCH, order-2 — supersedes the earlier β-quartet guess).  The B-matrix
+  (Chebyshev) collapses the moment generating function: the moments satisfy a minimal ORDER-2 recurrence
+  w_i = c₁w_{i−1} + c₂w_{i−2} whose integer characteristic polynomial is
+        P(x) = N·x² − B·x + C,   leading coefficient EXACTLY N,  and PRIMITIVE gcd(N,B,C)=1
+  (both verified over 364 Row-3 orbits n<70).  For p|N with v_p(N)=1, take a Gaussian prime 𝔭|p: 𝔭|N=lead once,
+  but 𝔭∤gcd(N,B,C) by primitivity, so mod 𝔭 the leading coeff vanishes while P≢0 — a DEGREE DROP.  Hence
+  exactly ONE root escapes, v_𝔭(ρ₊)=−v_𝔭(N)=−1 (simple pole), the other 𝔭-integral.  Then w_i=A₊ρ₊^i+A₋ρ₋^i
+  with the simple-pole residue v_𝔭(A₊)=−1 (carries N⁻¹ once), so v_p(w_i)=−1−i=−(i+1).  QED modulo the routine
+  residue-valuation step.  ⇒ v_p(w_{m−1})=−m.
 
   CONSEQUENCE.  clearing that denominator forces v_p(q_min) ≥ m − O(1) (node-residue O(1) correction; §6cq
   measures max_{p|N} v_p ≥ m).  Since 2,3∤N and every Row-3 orbit HAS a simple factor (0/460 orbits lack one),
@@ -3538,9 +3542,10 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   is REFUTED — split primes with v_p(N)≥2 dividing numerator(β) asymmetrically fluctuate (a=49,n=58,p=5:
   v_5(N)=2, v_5(w_i)=[-1,-1,-3,-4,-5,-4,-7,-8,-9,...]).  The tight q_min equality v_p(q_min)=m·min(v_p(N),2) is
   also REFUTED (v_p often m−1; some N-primes fall below m — other N-primes carry the orbit); the robust claim is
-  the §6cq existential max_{p|N} v_p(q_min) ≥ m.  SHARP OPEN LEMMAS for THEOREM: (a) the residue count v_p(A)=−1;
-  (b) every orbit has a v_p(N)=1 factor (N not a perfect power); (c) v_p(w_{m−1})=−m ⇒ v_p(q_min) ≥ m−O(1).
-  RH stays [OUT].
+  the §6cq existential max_{p|N} v_p(q_min) ≥ m.  SHARP OPEN LEMMAS for THEOREM: (a) the residue count v_𝔭(A)=−1
+  (routine, from the simple pole); (b) every orbit has a v_p(N)=1 factor (N not a perfect power — 0/460 fail);
+  (c) v_p(w_{m−1})=−m ⇒ v_p(q_min) ≥ m−O(1) (Smith/denominator clearing).  The order-2 degree-drop reduces the
+  main content to elementary Newton-polygon arithmetic.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
