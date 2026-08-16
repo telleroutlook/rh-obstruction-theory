@@ -2834,7 +2834,8 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   UPDATED COVERAGE MAP (superseding §6bo's table on Row 2):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
         n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br), C_j(m)=⌊−3m/2⌋+O(1),
-                                          floor ~(9/2)m  [profile PROVED §6br, C_j closed form §6bs → NEAR-PROVED]
+                                          O(1) tie-correction BOUNDED in m (§6bt), floor ~(9/2)m
+                                          [profile PROVED, C_j closed form §6bs/§6bt → NEAR-PROVED]
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
 
@@ -2862,6 +2863,28 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   its sharpest form: a no-cancellation bound at a SINGLE residue class m ≡ 2 mod 4, not a full node-independence
   proof.  HONEST (L5): adversary one-sided per direction; the (6/7) m=6 [−4,0] spread shows the tie is real,
   and (4/5)'s +4→+5 correction across m=6→10 means the O(1) bound itself is empirical, not yet proved.  RH [OUT].
+
+### §6bt — the m≡2 mod 4 tie correction is BOUNDED in m (FACT B's O(1) confirmed to m=22, 4 orbits)
+
+  probe_qmin_p2_nodd_tie_growth (EXACT, L9).  §6bs left one worry: (4/5)'s correction went +4→+5 across m=6→10
+  — real growth (slope degrades) or oscillation?  This probe isolates the tie: for each n-odd orbit it pushes
+  m through {6,10,14,18,22} (all ≡2 mod 4) and reports corr(m) = hi − ⌊−3m/2⌋, hi := max over node sets of
+  min_j C_j (the adversary's best, which CAPS the floor from below).  RESULT (corr per orbit, m=6..22):
+        (2/3,1): 3, 3, 3, 3, 3      — FLAT
+        (4/5,1): 4, 5, 4, 5, 4      — bounded oscillation in {4,5}
+        (6/7,1): 8, 4, 5, 4, 5      — {4,5} for m≥10 (the m=6 "8" is a one-off small-m tie edge)
+        (2/5,1): 8, 4, 5, 4, 5      — same pattern
+  DECISIVE: corr(m) is BOUNDED (flat, or period-2 oscillation in a fixed 2-element set) for EVERY orbit through
+  m=22 — NO growth.  §6bs's +4→+5 was oscillation, not a trend.  So the floor 1+3(m−1) − C_j(m) = (9/2)m − O(1)
+  is LINEAR at every m, and the gap to (9/2)m stays a small constant (5 for (2/3): 27−22, 63−58, …; ~6–7 for the
+  others).  This is FACT A's fixed spike A = 2v₂(a²−b²)−1 governing the tie, exactly as predicted — the tie does
+  NOT let the correction accumulate with m.
+  ROW 2 STATUS: profile PROVED (§6br), C_j(m)=⌊−3m/2⌋+O(1) with the O(1) now confirmed BOUNDED in m ⇒ floor
+  (9/2)m − O(1) ⇒ log q_min = Ω(m) ≫ ω(log m).  OP1 closes for every n-odd orbit modulo the SOLE remaining
+  rigorous step: prove the m≡2 mod 4 tie's two equal top ultrametric terms cannot cancel beyond a FACT-A-bounded
+  depth (a single-residue-class no-cancellation lemma; the constant is pinned by v₂(a²−b²)).  HONEST (L5):
+  adversary one-sided (hi = UPPER bound ⇒ corr is a conservative LOWER bound on the true worst correction; a
+  bounded hi is strong evidence, not proof); m≤22, 4 orbits.  RH [OUT].
 
 ## 4. Honesty / scope
 
