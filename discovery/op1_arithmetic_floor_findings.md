@@ -2080,6 +2080,47 @@ targets, in order of tractability: prove the §6an identity (step 1), then close
 
 One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
 
+### §6as — STEP (1) PROVEN as an EXACT ALGEBRAIC IDENTITY (Vandermonde via graded basis)
+
+Step (1) is no longer empirical.  The following exact closed form was verified EXACTLY (Fraction equality,
+L9) over m=2..8 and a targeted case, ALL matches True:
+    det[ 4(1 - T_j(x_k)) ]_{j,k=1..m}  =  4^m * (-1)^m * 2^{m(m-1)/2} * prod_k (x_k - 1) * prod_{k<l}(x_l - x_k).
+PROOF.  T_j(1) = 1, so 1 - T_j(x) vanishes at x=1: 1 - T_j(x) = (x-1) q_j(x) with deg q_j = j-1 and
+leadcoeff q_j = -2^{j-1}.  Row-factor 4 (=> 4^m) and column-... : det[1 - T_j(x_k)] = prod_k(x_k-1) *
+det[q_j(x_k)]; {q_j}_{j=1..m} is a graded basis (degrees 0..m-1), so det[q_j(x_k)] = (prod_j -2^{j-1}) *
+Vandermonde = (-1)^m 2^{m(m-1)/2} prod_{k<l}(x_l-x_k).  QED (confirmed by exact computation, not just p-adic).
+
+CONSEQUENCE for p=3 (the floor prime): x_k - 1 = -2/(4 t_k^2 + 1), and 4 t^2 + 1 is NEVER divisible by 3
+(t!=0 mod3 -> 5=2; t=0 mod3 -> 1), so v_3(x_k - 1) = 0 for all k.  Taking v_3 of the identity (4^m, 2^{...}
+are 3-units):
+        v_3(det A) = sum_k v_3(x_k - 1) + sum_{k<l} v_3(x_l - x_k) = 0 + sum_{k<l} v_3(x_l - x_k).
+So step (1) at p=3 is a THEOREM: v_3(det A) = sum_{k<l} v_3(x_k - x_l).  (The cleared-columns integer det has
+the same v_3 because clearing multiplies each column by a power of 4 t^2 + 1, a 3-adic unit.)
+
+CORRECTION to §6an (L5, honest).  §6an reported "v_p(det A) = sum_{k<l} v_p(x_k - x_l), CORR = 0 for ALL odd
+p".  That was the CLEARED INTEGER det.  For the RATIONAL matrix the true identity carries an EXTRA term
+sum_k v_p(x_k - 1), which is NONZERO for p=5,17: e.g. ts=[1,4,6,9] gives 4t^2+1 = 5,65,145,325 (all divisible
+by 5) and sum_k v_5(x_k - 1) = -5, yet the exact closed form STILL holds.  The extra term vanishes ONLY at
+p=3 (and any p not dividing any 4 t^2 + 1); the cleared-columns normalization cancels it at every odd p, which
+is why §6an's integer-det CORR was 0.  This does not affect the p=3 floor (the only prime the floor uses).
+
+PROOF STATUS after §6as (p=3 floor v_3(q_min) >= m/2 - O(1)):
+  (1) v_3(det A) = sum_{k<l} v_3(x_k - x_l)                     -- PROVEN (§6as exact identity).
+  (2) v_3(det A) >= PIG(m) = m^2/4 - O(m)                       -- PROVEN (§6ar, F1+F2 pigeonhole given (1)).
+  (3) max_j N_j >= 2 v_3(det A)/m >= m/2 - O(1)                 -- PROVEN (averaging, sum_j N_j = 2 v_3(det A)).
+  (4) at j* = argmax_j N_j, C_{j*} = O(1)  (equiv. v_3(q_min) = max_j(N_j - C_j) >= m/2 - O(1))
+                                                                -- SOLE OPEN LEMMA.
+§6aq already confirms the CONCLUSION v_3(q_min) ~ m/2 directly (adversary cannot drive it to 0), independent
+of (4).  Step (4) reduces, via the same multilinear/graded-basis expansion applied to minor_j = det[A, col
+j -> d] with d = sum over 4 off-line atoms (x-values xi_a of norm 3, i.e. v_3(xi_a) = -1), to bounding
+        C_j = v_3( sum_a w_a (xi_a - 1) prod_{k!=j} (xi_a - x_k) ),
+where each factor (xi_a - x_k) has v_3 = v_3(xi_a) = -1 (the atoms are 3-adic POLES, uniformly far from every
+node -- they cannot selectively cluster near node j).  So the per-atom valuation is v_3(w_a) - m, and C_j =
+O(1) hinges on the 4 atom-weights w_a and their cancellation.  This is a concrete, self-contained lemma about
+ONE fixed algebraic orbit's 4 atoms and weights -- the crispest OP1 target yet and a strong EXT candidate.
+
+One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
