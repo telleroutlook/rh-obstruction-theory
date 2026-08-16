@@ -2187,6 +2187,43 @@ PROOF STATUS (p=3 floor v_3(q_min) >= m/2 - O(1)) after §6au:
 
 One orbit (D=425).  Ascent = LOWER bound on max_j C_j.  Evidence, not proof.  RH stays [OUT].
 
+### §6av — 3-adic profile of the fixed vector w: all w_i are 3-units (the MECHANISM behind lemma (4))
+
+The bilinear form C_j = v_3( sum_i (-1)^{m-1-i} e_{m-1-i}(X') w_i ), w = B^{-1} d, isolates the entire
+open content into the FIXED vector w.  Profiling w 3-adically (exact rationals, L9) for m = 4..22:
+
+    v_3(w_i) = 0  for EVERY coordinate i and EVERY m = 4..22   (min = max = 0; v_3(w_{m-1}) = 0).
+
+Every coordinate of w is a 3-adic UNIT.  The closed rationals expose why: for m=4,
+w = [-304/425, -91184/180625, -25884464/76765625, -6963575344/32625390625], i.e. w_i = N_i / 425^{i+1}
+with denominators exact powers of D = 425 = 5^2 * 17 (coprime to 3) and 3-coprime numerators
+(304 = 16*19, etc.).  Since 3 does NOT divide the orbit discriminant D = 425, the off-line moments are
+3-adic units -- this is precisely why p = 3 is a "good" prime for this orbit and the reason the floor was
+built at p = 3.
+
+MECHANISM for lemma (4).  Reindex l = m-1-i: the pairing is
+    S = sum_{l=0}^{m-1} (-1)^l e_l(X') w_{m-1-l} = < w , coefficient vector of prod_{k!=j}(y - x_k) >
+    = L(m_{X'}),  where m_{X'}(y) = prod_{k!=j}(y - x_k) is the MONIC node polynomial (deg m-1) and L is the
+    FIXED linear functional with unit "moments" L(y^i) = w_i (all v_3 = 0).
+Because the on-line nodes x_k = (4t^2-1)/(4t^2+1) lie in Z_3 (denominator 4t^2+1 is a 3-unit), every
+e_l(X') is a 3-adic INTEGER, and the monic leading term contributes the fixed e_0 = 1 coefficient paired
+with w_{m-1} (a 3-unit).  Hence:
+  * every term (+-) w_i e_{m-1-i}(X') has v_3 >= 0  (unit x 3-integer), so C_j = v_3(S) >= 0 always;
+  * the e_0 = 1 term equals +- w_{m-1}, a 3-unit with v_3 = 0, ANCHORING the sum's low end;
+  * therefore C_j > 0 requires 3-adic cancellation of the anchored unit term against the others -- and
+    C_j = c requires cancellation to depth 3^c.  The observed cap (max_j C_j <= 12, §6au) is exactly a
+    bound on this cancellation depth.
+So the O(1) bound is NOT a numerical coincidence: it is the statement that a fixed unit-moment functional
+applied to the monic node polynomial cannot be 3-adically annihilated beyond a bounded depth by any choice
+of on-line nodes.  The remaining open piece of lemma (4) is precisely to bound that cancellation depth
+absolutely (the unit structure of w gives v_3(S) >= 0 and a guaranteed unit term for free; the cap on how
+high the adversary can push v_3(S) is the crisp EXT/outsource nugget).
+
+Honest (L5): v_3(w_i) = 0 verified only to m = 22 (one orbit).  A single w_i with v_3 != 0 at larger m
+would refine, not overturn, the "unit-moment" framing (the pairing would still be a fixed-functional
+valuation).  Ascent still = LOWER bound on max_j C_j; the anchor argument bounds v_3(S) from BELOW at 0,
+not from above -- the upper cap remains the open lemma.  One orbit (D=425).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
