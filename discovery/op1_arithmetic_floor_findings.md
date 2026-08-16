@@ -3423,6 +3423,25 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   remaining rigor is a clean lemma — "∃ node j with v₃(S_j)=0 AND clus(j) ≥ c·m" (strongly evidenced, c→1) —
   after which Row-3a p=3 is a THEOREM closing OP1 for 3∤(a+n).  probe_qmin_p3_floor_theorem.py.  RH [OUT].
 
+### §6cn — MULTI-PRIME extension + adversarial node-set robustness (evidence for OP1 infimum) (L9, L5)
+
+  §6cm closes only 3∤(a+n); OP1's infimum is controlled by 3|(a+n).  Three exact findings (probe_qmin_p3_
+  multiprime_adversary.py):
+  (1) GENERAL prime classifier.  The §6cl palindromic-quartic reduction holds at every prime p∤n; the p-floor
+      is non-degenerate iff 1+e₂s²+s⁴ stays separable mod p, i.e. e₂ ≢ ±2 mod p (⟺ e₂²−4 ≢ 0).  e₂=|g|²+2 is a
+      FIXED rational per orbit ⇒ only FINITELY many degenerate primes ⇒ every orbit is non-degenerate at all but
+      finitely many p — a MULTI-PRIME route to a uniform floor.  (p=3 is the e₂≡±2 special case: e₂≡2 ⟺ 3|(a+n).)
+  (2) FACTORIZATION of q_min at consecutive nodes t=1..m confirms 3|(a+n) orbits still have log q_min=Ω(m),
+      carried by large orbit-specific primes (n=14,a=1: 73,197^~m; n=22,a=5: 509,773^~m) plus v₂~m — NOT p=3.
+  (3) ADVERSARIAL trend: minimizing log₂q_min over random node sets gives values LARGER than the consecutive
+      set t=1..m (m=6,8: consec 102,146 vs random-min 129,209 for 3∤; 118,167 vs 159,225 for 3|).  So consecutive
+      is near the minimizer and is already LINEAR (~20–28/node) for BOTH regimes; spreading nodes only raises
+      q_min (can't dodge clustering at every prime — the §6ch distributed-pigeonhole intuition).
+  SCOPE (L5): EVIDENCE, not proof, for the OP1 infimum.  "min over random sets" ≠ true infimum over structured
+  node sets; §6cm's exact floor is for consecutive nodes only.  Clean open lemma to CLOSE OP1: "for EVERY node
+  set, some prime p has v_p(q_min) ≥ c·m" (distributed, §6ch); §6cm (p=3, 3∤(a+n)) is its proved single-prime
+  instance.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
