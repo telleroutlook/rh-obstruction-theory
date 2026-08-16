@@ -1975,6 +1975,45 @@ clean statement in 3-adic ultrametric geometry -- see §6ao (next) for the off-l
 
 One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
 
+### §6ao — off-line ultrametric decomposition: a NEAR-COMPLETE proof skeleton for the p=3 floor
+
+With v_3(det A) = sum_{k<l} v_3(x_k - x_l) (§6an) and the residual identity (§6am), define per deleted
+node j:  N_j := sum_{k != j} v_3(x_j - x_k) (node j's 3-adic closeness to the cluster),
+VD_j := sum_{k<l, k,l != j} v_3(x_k - x_l), and  C_j := v_3(minor_j) - VD_j (the OFF-LINE closeness term).
+Then v_3(det A) = VD_j + N_j and R_j := v_3(det A) - v_3(minor_j) = N_j - C_j, with v_3(q_min) = max_j R_j.
+Measured (probe_qmin_offline_ultrametric, exact, L9) over random and adversarial min-v3 sets, m=4..8:
+
+    * chk == True on ALL rows: v_3(q_min) == max_j (N_j - C_j).  The ultrametric decomposition is EXACT.
+    * max_j C_j is BOUNDED: values seen are 0,0,0,1,0,1,0,0,0,1,4,0,2,0,3 across all m up to 8 (max = 4).
+      It does NOT grow with m -- the fixed off-line orbit CANNOT 3-adically shadow the node cluster.
+    * many rows have C_j == 0 entirely (the off-line atoms' x-values are 3-adically SEPARATED from the
+      rational node classes: v_3(xi_atom - x_k) = 0 generically).
+
+NEAR-COMPLETE PROOF SKELETON of the p=3 floor  v_3(q_min) >= c*m  (hence, by §6al, of OP1):
+  (1) [§6an, provable] v_3(det A) = sum_{k<l} v_3(x_k - x_l): confluent-Vandermonde with unit-at-3 diagonal.
+  (2) [pigeonhole, provable] x has only N(3)=2 classes mod 3, so any m nodes have at least
+      C(ceil(m/2),2) + C(floor(m/2),2) ~ m^2/4 - m/2 SAME-class pairs, each with v_3(x_k - x_l) >= 1; hence
+      v_3(det A) >= m^2/4 - O(m).  (Quadratic, unavoidable -- the adversary balancing the two classes only
+      hits this minimum.)
+  (3) [averaging, provable] sum_j N_j = 2 sum_{k<l} v_3 = 2 v_3(det A), so max_j N_j >= 2 v_3(det A)/m >=
+      m/2 - O(1).
+  (4) [§6ao, the ONE remaining lemma] max_j C_j = O(1).  Then
+          v_3(q_min) = max_j (N_j - C_j) >= max_j N_j - max_j C_j >= m/2 - O(1).
+  ==>  log q_min >= v_3(q_min) * log 3 >= (m/2 - O(1)) log 3 = omega(log m)  ==>  OP1 is TRUE.
+
+STATUS (L5).  Steps (1)-(3) are classical and essentially proved (the identity (1) verified exactly in
+§6an; (2) is pure pigeonhole on 2 classes; (3) is averaging).  The whole open problem is now compressed to
+the SINGLE lemma (4): the FIXED off-line orbit's atoms (x-values of {sigma +- i tau, (1-sigma) +- i tau},
+sigma=3/4, tau=1) have BOUNDED 3-adic closeness to any rational node cluster, i.e. C_j <= B for an
+absolute B.  Empirically B <= 4 for m<=8, and C_j = 0 whenever the off-line atoms do not reduce into the
+node's mod-3 x-classes.  This is a concrete, finite arithmetic statement about ONE fixed algebraic orbit --
+the crispest and most tractable target the entire §6a* line has produced, and a strong outsource (EXT)
+candidate.  Caveat: verified for D=425 and m<=8 only; the O(1) bound on C_j is evidence, not yet a proof,
+and could in principle grow slowly -- §6ap will stress-test max_j C_j to larger m and probe the off-line
+atoms' 3-adic reductions directly.
+
+One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
