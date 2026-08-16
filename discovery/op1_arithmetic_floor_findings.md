@@ -2643,6 +2643,39 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   basis uniqueness) is spelled out above and checked to j≤16 / i≤13.  σ=3/4 is the clean rank-2 case; other
   σ give β with a different v_2 (profile OFF+S·i) and need the same per-orbit treatment.  RH stays [OUT].
 
+### §6bl — THE ORBIT TRICHOTOMY: rank-2 is UNIVERSAL; the σ=3/4 proof generalizes to the v_2(β)≥2 family
+
+  probe_qmin_p2_orbit_trichotomy (EXACT).  The §6bk structure is not special to σ=3/4; it is one leaf of a
+  clean structural law scanned over off-line orbits (σ,τ).  Three facts, all verified exactly:
+
+  (U) UNIVERSAL RANK 2.  For EVERY orbit, w'_i = L((X−1)^i) satisfies an order-2 rational recurrence
+      w'_i = A·w'_{i−1} + B·w'_{i−2}, equivalently w'_i = β^{i+1}+β̄^{i+1} with β,β̄ the roots of r²−Ar−B
+      (β = the shifted Chebyshev point of the reciprocal-paired orbit exponentials, §6bk).  Confirmed via
+      Hankel rank = 2 for all orbits tested (σ = 3/4, 7/8, 5/8, 5/4, 5/6, 9/10, 4/5, 2/3).
+
+  (S) THE 2-ADIC SLOPE S := v_2(β) = v_2(B)/2 governs the profile and the floor — a TRICHOTOMY:
+        • S ≥ 2  (σ=3/4→k=3; σ=7/8,5/8→k=5; σ=5/4→k=3):  β = 2^k·γ/N with N odd and γ a Gaussian integer
+          of ODD REAL / EVEN IMAG part (γ ≡ 1 mod 2 in Z[i]).  Then w'_i = 2^{k(i+1)}·2Re(γ^{i+1})/N^{i+1}
+          with Re(γ^{i+1}) ODD, so v_2(w'_i) = k(i+1)+1 (LINEAR, slope k≥2); the §6bi unique-minimum
+          expansion gives C_j = m+k for every column/node set, hence the UNCONDITIONAL LINEAR FLOOR
+                v_2(q_min) ≥ 1 + 3(m−1) − (m+k) = 2m − 2 − k.
+          The closed form (cf=True) and odd-real-part (odd=True) are VERIFIED for every S≥2 orbit; σ=3/4
+          (k=3, floor 2m−5) is PROVED in §6bk and the whole S≥2 family shares the IDENTICAL two-line proof.
+        • S = 1  (σ=5/6, 9/10):  BORDERLINE.  γ still has odd real part but slope k=1, so the unique-minimum
+          collapses (multiple lowest terms), min_j C_j grows at slope ≈3, and the p=2 bound 1+3(m−1)−min_j C_j
+          is VACUOUS.  Measured v_2(q_min) is SMALL (σ=9/10: 1,2,4 at m=4,5,6) — p=2 does NOT carry the barrier.
+        • S < 1  (σ=4/5, 2/3: v_2(B)=−3, S=−3/2):  β has 2 in the DENOMINATOR (γ here has Re-odd/IM-ODD, a
+          DIFFERENT structure); v_2(w'_i) goes negative and non-linear, so C_j<0 and the floor is LARGE
+          (measured v_2(q_min)=22,30,36) — p=2 closes these easily but by a mechanism NOT proved here.
+
+  (M) HONEST scope (L5) — the single-prime p=2 floor is NOT orbit-robust.  No fixed prime is uniformly linear
+      across all orbits; the S=1 orbits defeat p=2.  BUT the TOTAL barrier is orbit-robust in the tested range:
+      worst-case (min over node subsets of {1..13}) log_2(q_min) grows LINEARLY for every orbit (σ=3/4:
+      36,49,66; σ=5/6: 42,57,74; σ=9/10: 55,70,91 at m=4,5,6), the barrier MIGRATING to larger primes when
+      p=2 is weak.  So OP1 plausibly closes for all orbits as a MULTI-PRIME phenomenon; the clean single-prime
+      PROVABLE nugget is exactly the S≥2 (v_2(β)≥2) family via p=2.  This narrows OB-43's "orbit-robust"
+      Theorem, which overclaimed a single-prime uniform floor over ALL orbits.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit

@@ -105,16 +105,25 @@ So the floor is `v(det A) − min_j v(minor_j)` whenever some minor is 2-adicall
 
 ## 2. The theorem to be verified
 
-> **Theorem (OP1 p=2 floor — orbit-robust linear valuation bound).**
-> Let `p = 2`. There is an absolute constant `c > 0` such that for every `m ≥ 2`, **every**
-> off-line orbit `(σ, τ)` (no unimodularity or other hypothesis), and every valid collision
-> (§1.5) — equivalently every integer-node configuration with pairwise-distinct x-values —
+> **Theorem (OP1 p=2 floor — linear valuation bound over the `v₂(β) ≥ 2` orbit family).**
+> Let `p = 2`. For every off-line orbit `(σ, τ)` whose shift-moment root satisfies `S := v₂(β) ≥ 2`
+> (equivalently `4 ∣ v₂(det B)`; this includes σ=3/4, 7/8, 5/8, 5/4, …), for every `m ≥ 2`, and every
+> valid collision (§1.5) — equivalently every integer-node configuration with pairwise-distinct
+> x-values —
 > ```
->     v(q_min)  =  max_{1 ≤ j ≤ m} ( 1 + N_j − C_j )  ≥  c·m − O(1),
+>     v(q_min)  =  max_{1 ≤ j ≤ m} ( 1 + N_j − C_j )  ≥  2m − 2 − k,   k := v₂(β) = S,
 >     N_j = Σ_{k≠j} v(x_j − x_k),   C_j = v(⟨w, ε(X'_j)⟩),   w = B^{−1}d,
 > ```
-> uniformly in `m`, the (adversarially chosen) node set, and the orbit. Empirically `c ≈ 2`–`3`;
-> any absolute `c > 0` closes OP1's 2-adic channel.
+> uniformly in `m` and the (adversarially chosen) node set. The floor slope is `2 > 0`, closing OP1's
+> 2-adic channel for the entire `v₂(β) ≥ 2` family. (σ=3/4, `k=3`: `2m − 5`.)
+>
+> **Scope caveat (not a single-prime universal — L5 honesty).** The p=2 floor is NOT orbit-robust over
+> ALL orbits. Orbits with `S = 1` (σ=5/6, 9/10, …) defeat p=2: the unique-minimum collapses, `min_j C_j`
+> grows at slope ≈3, and the bound is vacuous (measured `v(q_min)` stays small: σ=9/10 gives 1,2,4).
+> Orbits with `S < 1` (σ=4/5, 2/3) instead have a LARGE p=2 floor by a different (unproved) mechanism.
+> Full orbit-robustness of OP1 is a MULTI-PRIME phenomenon: worst-case `log₂ q_min` still grows linearly
+> for every orbit tested, but the carrying prime migrates. The clean single-prime provable nugget is
+> exactly this `S ≥ 2` family.
 
 The **exact identity** `v(q_min) = max_j (1 + N_j − C_j)` is a **proved premise** (§3 Step 3,
 verified orbit-free on 240 configs). Two facts make it powerful and orbit-free:
@@ -248,15 +257,22 @@ numerator lifts to `4j+2` via a *two-term* cancellation was **incorrect**: the t
 telescoping — the rank-2 route sidesteps this entirely.) The whole argument is a **self-contained 2-adic /
 Gaussian-integer computation with no elliptic curve, no L-value, no node, and no RH input**.
 
-**What (if anything) remains for Step 4.** The Lemma is closed for σ=3/4. A referee is invited to (i) verify
+**What (if anything) remains for Step 4.** The Lemma is closed for the entire `v₂(β) ≥ 2` orbit family
+(σ=3/4, 7/8, 5/8, 5/4, …), each by the identical two-line argument. A referee is invited to (i) verify
 the two-point-functional derivation and the "odd real part" valuation independently, and (ii) confirm the
-general-orbit extension below — the *only* place the value σ=3/4 enters is through `β` (equivalently `γ`).
+family extension below — the *only* place the orbit enters is through `β` (equivalently `k=v₂(β)` and `γ`).
 
-**General-orbit note (honest scope).** The profile generalizes to `v(w'_i) = OFF + S·i`; when `S>1` the same
-unique-minimum argument gives `C_j = OFF + (m−1)`, a linear floor. Measured: σ=3/4 → `(OFF,S)=(4,3)`
-(`C_j=m+3`); σ=7/8 → `(6,5)` (`C_j=m+5`). Orbits with `S≤1` (e.g. σ=5/6, slope 1) or a non-linear profile
-(σ=4/5, 2/3: irregular, even *negative* `C_j`, i.e. a *larger* floor) are node-independent too but need
-separate handling; σ=3/4 is the clean D=425 case and suffices for OP1.
+**General-orbit note (honest scope).** The profile generalizes to `v(w'_i) = (k+1) + k·i` where `k := v₂(β)`;
+the same "odd real part" mechanism holds — VERIFIED for every `S := k ≥ 2` orbit — because `β = 2^k·γ/N`
+with `N` odd and `γ ≡ 1 mod 2` in `Z[i]` (Re odd, Im even), so `Re(γ^{i+1})` is odd and `v₂(w'_i)=k(i+1)+1`.
+When `k ≥ 2` the unique-minimum argument gives `C_j = m+k` for every node set, hence the linear floor
+`v(q_min) ≥ 2m − 2 − k`. Measured (closed-form + odd-real-part both confirmed): σ=3/4 → `k=3` (`C_j=m+3`,
+floor `2m−5`); σ=7/8, 5/8 → `k=5` (`C_j=m+5`, floor `2m−7`); σ=5/4 → `k=3`. So the σ=3/4 proof is really a
+proof for the **entire `v₂(β) ≥ 2` family**. Orbits with `k = 1` (σ=5/6, 9/10, slope 1) collapse the
+unique-minimum (min_j C_j grows at slope ≈3) and the p=2 bound is VACUOUS (measured `v(q_min)` small); orbits
+with `k < 1` (σ=4/5, 2/3) have `γ` of Re-odd/Im-odd type, a non-linear/negative profile, and a *larger* p=2
+floor by a mechanism not proved here. These need a different prime — full orbit-robustness of OP1 is
+multi-prime, not single-prime p=2 (see the §2 scope caveat).
 
 **Known dead-end (superseded by the Identity — do not re-derive).** The **ultrametric sum-bound**
 `min_j C_j ≤ v(L(P'))` (`Σ_j S_j = L(P')`, `L(P') = Σ_i (i+1) w_i p_{i+1}`) is valid but too lossy:
