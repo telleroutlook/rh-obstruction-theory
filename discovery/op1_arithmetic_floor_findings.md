@@ -1851,6 +1851,52 @@ minimize v_3(q_min) alone over m=3..9 to test whether min v_3 grows linearly and
 
 One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
 
+### §6al — the p=3 single-prime floor SUFFICES for OP1 (super-log threshold)
+
+Aggressively minimizing v_3(q_min) alone (probe_qmin_p3_floor, 24-40 coordinate descents per m from
+random + structured mod-3 starts, exact, L9).  x mod 3 takes only N(3)=2 values (classes {0},{2}); with m
+nodes forced into 2 x-classes, the confluent-Vandermonde v_3(det A) is large, and the question is whether
+the augmented gcd can absorb it to v_3(q_min)=0.
+
+    m | min v_3 found | reached 0? | PH3=ceil(m/3)-1 | log2 q there
+    3 |      0        |    True    |       0         |   64.80    (small-m boundary: drainable)
+    4 |      2        |    False   |       1         |  102.17
+    5 |      2        |    False   |       1         |  160.31
+    6 |      4        |    False   |       1         |  218.99
+    7 |      5        |    False   |       2         |  244.13
+    8 |      5        |    False   |       2         |  322.25
+    (m=9 cost-truncated: qmin_fast on the m=9 large-integer SNF exceeded the 500s budget; NOT silently
+     dropped -- the m=4..8 trend is the evidence.)
+
+READINGS (L5):
+  (1) For m>=4, v_3(q_min) NEVER reaches 0 despite aggressive minimization (24-40 restarts + structured
+      starts packing/spreading the two mod-3 classes), and GROWS (2,2,4,5,5 ~ 0.7(m-2)), always >= PH3.
+      Prime 3 carries a POSITIVE, non-drainable per-prime floor for m>=4.  (m=3 drains to 0 -- a small-m
+      boundary effect, excluded from the asymptotic claim.)
+  (2) HONEST scope of the carrier: v_3*log3 ~ 8 bits at m=7 is a SMALL fraction of the ~88-bit total
+      log q_min.  So prime 3 is NOT the dominant carrier -- the full floor is genuinely aggregate (§6ak).
+      A "reduce the WHOLE floor to p=3" claim would be FALSE.
+
+THE KEY CONSEQUENCE (why this still settles OP1).  OP1 is TRUE iff inf_A q_min(m) is super-polynomial in
+m, i.e. log q_min = OMEGA-of-omega(log m) -- merely SUPER-LOGARITHMIC growth.  A single-prime LINEAR floor
+    v_3(q_min) >= c*m   (c>0, m>=4)
+gives  log q_min >= v_3(q_min)*log 3 >= c*log3 * m = omega(log m),  which SETTLES OP1 affirmatively
+REGARDLESS of the small constant c.  We do NOT need the dominant carrier or the tight constant; ONE prime
+with a linear (even much weaker, any super-log) floor is enough.  Prime 3 -- with the SMALLEST image
+N(3)=2 and hence the simplest confluent-Vandermonde structure -- is the most tractable candidate.
+
+REFRAME (the crisp open target, replacing the abstract residue bound).  Prove:
+    THERE EXIST c>0, m_0 such that for all node sets and all m>=m_0,  v_3(q_min) >= c*m.
+Route (classical, self-contained): (i) columns of A mod 3 fall into <= N(3)=2 equal-column classes (x_k
+mod 3 determines the column mod 3), so rank_3(A) <= 2 and the confluent staircase gives v_3(det A) >=
+c1*m; (ii) via the RESIDUAL identity v_3(q_min) = v_3(det A) - min_j v_3(minor_j) (minor_j = det with
+col j -> the FIXED d), bound min_j v_3(minor_j) <= v_3(det A) - c*m, i.e. the fixed d cannot 3-adically
+align with ALL m column-deletions at once.  This is a finite mod-3 incidence statement -- the same shape
+as the §6d pigeonhole but now for a FIXED augmentation vector.  Next (§6am): verify v_3(det A) >= c1*m
+directly and measure how much the augmented gcd absorbs, to confirm the residual gap is linear.
+
+One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
