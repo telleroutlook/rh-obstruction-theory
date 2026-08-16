@@ -2149,7 +2149,43 @@ is the crisp, self-contained open lemma and the strong EXT/outsource candidate.
 PROOF STATUS (p=3 floor) unchanged: steps (1) [§6as], (2) [§6ar], (3) [averaging] PROVEN; step (4) = the
 above residual-valuation lemma is the SOLE open piece; §6aq confirms the conclusion independently.
 
-One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
+One arbitrary interior j.  One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not
+proof.  RH stays [OUT].
+
+### §6au — C_j as an EXPLICIT BILINEAR FORM; lemma (4) empirically bounded to m=21
+
+The §6at residual functional is now fully explicit.  Write 4 q_i(x) = sum_l B[i][l] x^l (B is m x m LOWER-
+TRIANGULAR, diagonal 4*(-2^{i-1}), all 3-units, so v_3(det B)=0).  Then [node-cols | d] = B [monomials | w]
+with w := B^{-1} d a FIXED vector (depends only on the off-line data and the basis, NOT on the nodes).  The
+augmented-Vandermonde identity det[(x_k^l)_{l, k in X'} | w] = Vandermonde(X') * sum_i (-1)^{m-1-i}
+e_{m-1-i}(X') w_i gives, for p=3:
+    C_j = v_3( sum_{i=0}^{m-1} (-1)^{m-1-i} e_{m-1-i}(X') * w_i ),   w = B^{-1} d,     [VERIFIED EXACT, m=3..7]
+i.e. C_j is the 3-adic valuation of a BILINEAR PAIRING <w, signed elementary symmetric functions of X'>.
+Check (a): this equals the §6ao/§6at integer-det C_j EXACTLY for all j, m=3..7 (ALL MATCH True).
+
+LEMMA (4) STRESS TEST (cheap: the bilinear form needs no determinants -- w once, e_l(X') by product, one dot
+product -- so adversarial ascent reaches large m).  Adversarially MAXIMIZING max_j C_j over m=4..21:
+    m:          4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21
+    max_j C_j:  6 10  8 11  9  8 12 10  8  8 10 12  9  9 10  9 10 10
+BOUNDED in [6, 12] with NO GROWTH across all 18 values of m.  This is exactly lemma (4): the pairing
+valuation v_3(<w, e(X')>) = O(1) (empirically <= 12 for D=425), uniformly in m and in the adversarial node
+set.  Since C_{j*} <= max_j C_j <= ~12 at the argmax-N node j*, this gives directly
+    v_3(q_min) = max_j (N_j - C_j) >= N_{j*} - C_{j*} >= max_j N_j - 12 >= m/2 - O(1),
+so the p=3 floor holds -- now confirmed to m=21 (vs m=10 in §6aq) via the exactly-verified bilinear form.
+(m=22..24 ascent cost-truncated: O(m^2) symmetric functions x m j-values x ascent budget exceeds the run
+ceiling -- reported, not silently dropped, L5.)  Ascent = LOWER bound on max_j C_j, so the true max could be
+marginally higher, but 18 consecutive m with no upward trend is strong.
+
+PROOF STATUS (p=3 floor v_3(q_min) >= m/2 - O(1)) after §6au:
+  (1) v_3(det A) = sum_{k<l} v_3(x_k - x_l)                                 -- PROVEN (§6as).
+  (2) v_3(det A) >= PIG(m) = m^2/4 - O(m)                                   -- PROVEN (§6ar).
+  (3) max_j N_j >= 2 v_3(det A)/m >= m/2 - O(1)                             -- PROVEN (averaging).
+  (4) max_j C_j = v_3(<w, e(X')>) = O(1) uniformly                          -- SOLE open lemma; empirically
+      bounded (<= 12) to m=21 via the explicit, verified bilinear form.  This is the crisp, fully-explicit,
+      self-contained EXT/outsource nugget: a FIXED rational vector w = B^{-1} d (from the off-line orbit) has
+      bounded 3-adic pairing valuation against the elementary symmetric functions of ANY on-line node set.
+
+One orbit (D=425).  Ascent = LOWER bound on max_j C_j.  Evidence, not proof.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
