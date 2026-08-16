@@ -3294,6 +3294,31 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   clustering depth).  Row 3a candidate-closes MODULO this; Row 3b needs the §6ch global argument instead.
   probe_qmin_p3_exact_floor.py backs this (exact identity + the v₃(S_j) discriminant).  RH stays [OUT].
 
+### §6cj — the MECHANISM behind n mod 3: Λ_w has a deeply-3-annihilated node-residue class iff n≡2 mod3; reduces Row 3a to a clean m-independent Λ-lemma (L5)
+
+  Since S_j = Λ(P_j) with Λ(z^i)=w_i and P_j(z)=Π_{k≠j}(z−x_k), at the deepest node j* (in the larger
+  3-adic class, size ≥⌈m/2⌉ by pigeonhole) P_{j*} ≡ (z−a)^{s−1}·(z−b)^{m−s} mod 3, where a,b are the two
+  ORBIT-INDEPENDENT node residues mod 3.  The nodes x_t=(4t²−1)/(4t²+1) split into exactly two classes:
+  a₀ ≡ 0 mod 3 (t≡1,2 mod 3) and a₂ ≡ 2 mod 3 (t≡0 mod 3).  So v₃(S_{j*}) is governed by the VANISHING
+  ORDER of the functional Λ on (z−a)^t.  Measured law (max_{t≤m−1} v₃(Λ((z−a)^t)), 8 distinct n, m=10,14):
+
+        n≡1 mod3 (n=10,22,34,46,58):  a₀-class → 0 ;  a₂-class → 2–3     (BOTH O(1), m-independent)
+        n≡2 mod3 (n=14,26,38):        a₀-class → GROWS ~linearly in m (10→15, 20→29) ;  a₂-class → 0
+
+  So Λ_w has a DEEPLY-3-ANNIHILATED residue class IFF n≡2 mod3, and it is the a₀ (x≡0) class.  This is
+  the exact mechanism of §6ch/§6ci:
+    • Row 3a (n≡1 mod3): NEITHER class is deeply annihilated ⇒ v₃(S_j)=O(1) for the deep node ⇒
+      v₃(q_min) = max_j clus(j) − O(1) ≥ ⌈m/2⌉−1 − O(1).  LINEAR ⇒ OP1 CLOSES at p=3.
+    • Row 3b (n≡2 mod3): the adversary clusters nodes in the annihilated a₀ class ⇒ v₃(S_j) ≥ clus(j)−O(1)
+      ⇒ margin O(1) ⇒ no p=3 floor (its super-poly q_min lives at distributed primes, §6ch).
+
+  NET (the sharpest OP1 statement to date):  OP1 closes at p=3 for Row 3a MODULO the clean, m-independent
+  Λ-LEMMA:  "for n≡1 mod3, max_t v₃(Λ_w((z−a)^t)) = O(1) uniformly in t and m for both node residues
+  a∈{a₀,a₂}."  This is a statement about w mod 3 alone (w=B⁻¹d, B the Chebyshev-basis matrix) — a bounded,
+  concrete, likely-provable target, NOT the intractable raw (4″).  It is the natural EXT/next-proof nugget
+  for Row 3a; Row 3b remains the harder distributed-content problem (§6ch).
+  probe_qmin_p3_lambda_annihilation.py backs the annihilation law.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
