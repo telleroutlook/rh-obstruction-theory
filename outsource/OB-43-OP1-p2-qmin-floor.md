@@ -213,6 +213,20 @@ whence `v(q_min) ≥ 2m − O(1)`; any `c > 0` suffices to close OP1.
   the leave-one-out symmetric vectors of one degree-`m` node set, coupled by Newton's identities), so
   they cannot all be aligned to make `⟨w, ε(X'_j)⟩` deep simultaneously. Converting this coupling into
   `min_j C_j ≤ (3−c)m` is the crux.
+- **(H-lagrange) Single-vector restatement (equivalent to `(★)`, may be the cleanest target).** The
+  coefficient matrix `E` (rows `ε(X'_j)`, the coeffs of `p_j = ∏_{k≠j}(X−x_k)`) satisfies
+  `E·V^T = diag(P'(x_j))` since `p_j(x_l) = δ_{jl} P'(x_j)` (`V` = Vandermonde in the `x_l`). Hence the
+  pairing vector `S = E·w` factors as `S = diag(P')·(V^T)^{−1} w`, giving `C_j = N_j + v(u_j)` with
+  `u := (V^T)^{−1} w`, and the floor identity collapses to a **single vector**:
+  `v(q_min) = 1 − min_j v(u_j)`. Here `u_l = L(ℓ_l)` are the quadrature weights of the fixed functional
+  `L` on the Lagrange basis `ℓ_l`, so `Σ_l u_l = L(1) = w_0` is a fixed orbit constant. CORE-2 ⟺
+  **the inverse-Vandermonde-dual `u = (V^T)^{−1} w` of the fixed `w` has a coordinate of valuation
+  `≤ −(3−c)m`** — i.e. some quadrature weight has a deep 2-adic denominator. This recenters the crux on
+  one explicit vector (inverse-Vandermonde entries / Newton-form divided differences of `w`) rather than
+  a min over `m` bilinear forms. *Caveat (do not re-derive):* the ultrametric on `Σ_l u_l = w_0` only
+  yields `min_l v(u_l) ≤ v(w_0) = O(1)`, hence the trivial `floor ≥ 1 − O(1)` — the deep-denominator
+  weights must **cancel** to the shallow `w_0`, the same wall as the sum-bound below. Verified
+  200/200 (m=3..7).
 
 **What to close for Step 4.** Prove CORE-2 (any absolute `c > 0`). By (★) this gives a linear 2-adic
 floor for *every* orbit and closes OP1's 2-adic channel.

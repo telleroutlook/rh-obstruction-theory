@@ -2515,6 +2515,35 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   particular proof route dies.  Recorded on OB-43 as a known dead-end (its 1st, analogous to OB-42's adjugate
   dead-end).  σ=3/4; adversary one-sided (L5).  RH stays [OUT].
 
+### §6bh — Lagrange-weight factorization: v_2(q_min) = 1 − min_l v_2(L(ℓ_l)), a single-vector CORE-2
+
+  probe_qmin_p2_floor_identity + inline (VERIFIED 200/200, m=3..7, σ=3/4; the Σu=w_0 relation 150/150).
+  A PROVED exact repackaging of the §6bf identity into one clean analytic object.  The coefficient matrix
+  E (rows = ε(X'_j), the coeffs of p_j(X)=∏_{k≠j}(X−x_k)) satisfies E·V^T = diag(P'(x_j)) because
+  p_j(x_l)=δ_{jl}P'(x_j) (V the Vandermonde in the x_l).  Hence the pairing vector S = E·w factors as
+        S = diag(P') · (V^T)^{−1} w,    so   C_j = v_2(S_j) = N_j + v_2(u_j),   u := (V^T)^{−1} w,
+  and the §6bf floor identity becomes
+        v_2(q_min) = max_j(1 + N_j − C_j) = 1 − min_j v_2(u_j).                    (★★)
+  Meaning of u: solving V^T u = w (Σ_l x_l^i u_l = w_i, i=0..m−1) says u_l are the QUADRATURE WEIGHTS
+  representing the fixed orbit functional L (L(X^i)=w_i) as L(Q)=Σ_l u_l Q(x_l) for deg Q ≤ m−1.  So
+        u_l = L(ℓ_l),   ℓ_l = Lagrange basis poly = p_l/P'(x_l)  ⇒  u_l = S_l/P'(x_l)  (consistent w/ C_l=N_l+v_2(u_l)).
+  Because Σ_l ℓ_l = 1, this gives a FIXED, orbit-only constraint on the whole weight vector:
+        Σ_l u_l = L(1) = w_0.       [VERIFIED: v_2(w_0)=4 constant across m=3..7 for σ=3/4.]
+
+  RESTATED CORE-2 (equivalent, single-vector form).  A linear floor v_2(q_min) ≥ c·m ⟺ min_l v_2(u_l) ≤ 1−c·m,
+  i.e. SOME Lagrange/quadrature weight u_l has a deep 2-adic DENOMINATOR (v_2 ≤ −(c m−1)).  Empirically the
+  min-C column has C_l ≈ m+3 and N_l ≈ 3(m−1), so v_2(u_l) ≈ (m+3)−3(m−1) = −2m+6 and floor ≈ 2m−5 — matching
+  the observed 2m−O(1) floor.  This is ALGEBRAICALLY the same identity (§6bf), but recentered on the fixed
+  vector u = (V^T)^{−1}w instead of m separate bilinear forms: CORE-2 is now "the inverse-Vandermonde-dual of
+  the fixed w has a coordinate of valuation ≤ −(3−c)m", a cleaner target for divided-difference / Newton-polygon
+  2-adic analysis.
+
+  WHY IT ISN'T YET A PROOF (L5).  The ultrametric on Σ_l u_l = w_0 gives min_l v_2(u_l) ≤ v_2(w_0)=4, hence only
+  floor ≥ 1−4 = −3 (trivial) — the SAME lossy direction as §6bg: the deeply-negative weights must CANCEL to the
+  shallow sum w_0, and that cancellation is the crux.  What (★★) adds is a sharper handle for OB-43 Step 4:
+  bound the deepest 2-adic denominator of u = (V^T)^{−1}w directly (explicit inverse-Vandermonde entries, or
+  Newton-form divided differences of the fixed w), rather than a min over m bilinear pairings.  σ=3/4; RH [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
