@@ -3228,6 +3228,43 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   no refinement of §6cd/§6bh/Lagrange can shortcut it.  This is the precise reason to OUTSOURCE (4″)
   as a determinantal nugget rather than keep decomposing it valuation-wise.  RH stays [OUT].
 
+### §6ch — the SINGLE-PRIME-CERTIFICATE BLIND SPOT: Row 3 splits by n mod 3; OP1 holds everywhere but is only single-prime-certifiable on half of it (L5, HONEST NEGATIVE)
+
+  A direct-magnitude probe (qmin_exact_orbit over random on-line node sets; genuine Row-3 orbits
+  n≡2 mod4, 3∤n) uncovers a dichotomy that CORRECTS the §6cf picture ("Rows 3,4 → the single lemma
+  (4″)").  The nodes x_t=(4t²−1)/(4t²+1) are orbit-INDEPENDENT, so the clustering depth clus(j)=
+  Σ_{k≠j} v₃(x_j−x_k) and max_j clus(j) are orbit-independent; but v₃(q_min) is orbit-dependent, and
+  it splits SHARPLY by n mod 3:
+
+    Row 3a  (n≡1 mod3; e.g. n=10, 22):  p=3 carries a LINEAR valuation floor.  Empirically
+        v₃(q_min) = max_j clus(j) − C with a BOUNDED defect C≤3 up to m=12 (n=10: floor 4,6,8,10 at
+        m=6,8,10,12; n=22: floor 3,4,5,5 at m=5..8).  Combined with the PROVABLE pigeonhole
+        max_j clus(j) ≥ ⌈m/2⌉−1 (m nodes, only N(3)=2 residue classes mod 3 ⇒ some class has ≥m/2
+        nodes ⇒ its members are pairwise 3-adically close), this is a CANDIDATE single-prime close
+        of Row 3a — MODULO the bounded-defect lemma  v₃(q_min) ≥ max_j clus(j) − O(1)  (unproved; the
+        determinantal statement min_j v₃(D_j) ≤ v₃(det V) − max_j clus(j) + O(1), i.e. replacing the
+        deepest-clustered node's column by the unit w loses essentially all its clustering depth).
+
+    Row 3b  (n≡2 mod3; e.g. n=14, 26):  NO small prime carries a linear floor.  Over 40 node sets,
+        min v₂(q_min) stays O(1) (n=26: 1,1,1,2 at m=5..8), v₃(q_min)≈0–1 (FLAT, defect C grows ~m),
+        and every other small prime shows only sporadic single-sample floors of 1 (noise, not
+        structure).  YET the ACTUAL magnitude is still super-polynomial: log(min q_min) grows
+        ~linearly-to-quadratically in m (n=26: 89,114,139,166,204,234 at m=5..10; control n=10:
+        74…210) ≫ log m.  So OP1 HOLDS for Row 3b as well — but its content is DISTRIBUTED across
+        many primes, with NO single prime carrying a certificate.  It is NOT archimedean either:
+        |det V| < 1 since every node x_t ∈ (0,1), so the size lives entirely at finite primes.
+
+  READING (L5, HONEST NEGATIVE).  OP1 appears TRUE for ALL orbits (verified: min q_min super-poly on
+  both n mod 3 classes), but the SINGLE-PRIME valuation-floor STRATEGY — the entire §6bm/§6cd/§6cf/
+  §6cg toolkit, which proves the barrier by exhibiting ONE prime with a v_p(q_min)=Ω(m) floor — has a
+  genuine BLIND SPOT on Row 3b: no such prime exists there.  This RELOCATES the true OP1 frontier: it
+  is not that OP1 fails anywhere, but that closing Row 3b needs a GLOBAL/distributed lower bound on
+  log q_min = Σ_p v_p(q_min)·log p (the gcd of the m Cramer numerators D_j fails to absorb det V's
+  finite content across ALL primes simultaneously) — neither a single-prime floor NOR an archimedean
+  size bound.  Row 3a remains single-prime-certifiable (p=3, modulo the bounded-defect lemma).
+  This SUPERSEDES the §6cf claim that all of Row 3 reduces to (4″): only Row 3a does; Row 3b is a
+  distinct, harder, distributed-content problem.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
