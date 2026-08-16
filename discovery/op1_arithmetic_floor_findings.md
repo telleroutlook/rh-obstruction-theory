@@ -3149,6 +3149,13 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   negative, i.e. Row 2 at p=2.  For Rows 1,3,4 the profile-min bound is loose/vacuous and the existing
   row-specific mechanisms (§6bm; p=3 3-unimodular; ramified §6bo) remain necessary.  RH stays [OUT].
 
+  IDENTITY-SCOPE FOOTNOTE (L9, checked per-collision): the §6bf identity v₂(q_min) = 1 − min_j(C_j − N_j)
+  itself holds 25/25 for n≡0 mod4, n odd, and n=6, but FAILS for n=2 (σ=1/2): it predicts −1 where the true
+  v₂(q_min) = 0.  It breaks exactly when the RHS would be < 0 — i.e. the VACUOUS regime where q_min is a
+  2-adic unit; the correct statement is v₂(q_min) = max(0, 1 − min_j(C_j − N_j)).  This does NOT affect §6cd
+  (Row 2: RHS = 1 − W_top ≈ 3m/2 ≫ 0, identity holds 25/25) but confirms the framework is meaningful only in
+  the non-vacuous regime, reinforcing that §6cd is a Row-2 tool.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
