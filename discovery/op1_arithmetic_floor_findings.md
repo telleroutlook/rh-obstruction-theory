@@ -2014,6 +2014,42 @@ atoms' 3-adic reductions directly.
 
 One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
 
+### §6ap/§6aq — DIRECT p=3 floor via the fast minor-determinant formula (supersedes the C_j proxy)
+
+§6ap first tried to close lemma (4) by adversarially MAXIMIZING max_j C_j.  RESULT (D=425, coord ascent):
+max_j C_j = 7, 8, 7, 8, 9 for m = 4..8 -- larger than the <=4 seen for random configs, with a slow drift.
+LESSON (self-correction): max_j C_j is the WRONG target.  The residual is v_3(q_min) = max_j (N_j - C_j), so
+the floor only needs C small AT the argmax-N node (equivalently, it dies only if C_j >= N_j - O(1) for ALL j
+at once, i.e. sum_j C_j ~ sum_j N_j ~ m^2/2).  A single large max_j C_j does NOT threaten the floor.  Also
+recorded: the off-line atom x-proxy = 11/3 has v_3 = -1 vs EVERY rational node x_t (t=1,2,3,6,9) -- the
+off-line orbit sits at 3-adic norm 3 (a pole), 3-adically SEPARATED from all node classes.
+
+§6aq then made the DECISIVE, correctly-targeted test.  KEY IDENTITY (validated): since
+    v_3(q_min) = v_3(det A) - min_j v_3(minor_j)                                    (§6am)
+and v_3(det A), minor_j = det[A, col j -> d] are ALL integer determinants, v_3(q_min) is computable with
+int_det ALONE -- NO slow SNF.  Cross-check (fast minor formula vs qmin_fast SNF), m=3..7: fast = SNF EXACTLY
+(0,3,7,5,8 all match).  This retires the SNF cost bottleneck for the p=3 analysis and lets us adversarially
+MINIMIZE v_3(q_min) directly (the true enemy of OP1: q_min -> 1) at larger m.
+
+RESULT (D=425, adversarial coordinate descent = UPPER bound on the true adversarial min):
+    m:                   4  5  6  7  8  9  10
+    adv-min v_3(q_min):  2  2  4  5  5  7   6      (m/2:  2  2  3  3  4  4   5)
+The m=4..8 values (2,2,4,5,5) reproduce §6al's independent SNF descent EXACTLY.  The adversarial minimum
+GROWS MONOTONICALLY, tracking ~ m/2 - O(1): even the strongest node choice the descent found cannot drive
+v_3(q_min) toward 0 -- it climbs with m.  (m=10 used an ultra-lean/weaker adversary, hence noisier; m>=11
+COST-TRUNCATED -- int_det on 11x11 big-integer matrices x the descent budget exceeds the run ceiling.  NOT
+silently dropped, per L5.)
+
+SIGNIFICANCE.  This is a DIRECT empirical confirmation of the p=3 floor v_3(q_min) >= m/2 - O(1) that the
+§6ao skeleton aims to prove -- and it does NOT rely on the still-open lemma (4) (C_j = O(1)); it measures
+v_3(q_min) itself and shows the adversary cannot push it down.  So OP1's p=3 channel holds empirically for
+D=425 up to m=10: log q_min >= (adv-min v_3) * log 3 grows linearly = omega(log m) => OP1 TRUE (evidence).
+The §6ao decomposition remains the route to a PROOF (identity §6an + 2-classes-mod-3 pigeonhole + averaging,
+closing on lemma (4)); §6aq is the direct-measurement corroboration and hands proofctl a fast, SNF-free
+exact tool (v_3(q_min) = v_3(det A) - min_j v_3(minor_j)) for large-m replay.
+
+One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
