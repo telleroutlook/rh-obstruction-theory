@@ -276,6 +276,18 @@ Lemma B is therefore the statement "**`z = re + n²i` is never a powerful Gaussi
 Row-3 `(a, n)`**" — a squarefree/powerful-values question for a binary quartic form. Evidence:
 **0 / 12124** Row-3 orbits (`n < 400`) give a powerful `N`.
 
+*Sharper reduction via `N = |M|²` (Step 2), recommended for a STRATEGY attempt.* With
+`M = (a²−n²−na) + n(2a−n)i`, the identity `N = |M|²` (proved symbolically) gives a **second**
+Gaussian representation. Here `g := gcd(Re M, Im M) ∈ {1, 5}` for **every** Row-3 orbit (verified
+6840/6840, `n < 300`; provable: a prime `ℓ ∣ n` has `ℓ ∤ Re M ≡ a² (mod ℓ)`, `Re M` is odd so
+`2 ∤ Re M`, and a prime `q ∣ (2a−n)` with `q ∤ n` divides `Re M ≡ −5a² (mod q)` only for `q = 5`).
+Thus `M' := M/g` is a **primitive** Gaussian integer (coprime coordinates), and `N` is powerful
+`⟺` `M'` is a **powerful Gaussian integer** (every Gaussian prime factor of `M'` to multiplicity
+`≥ 2`). Since `M'` is an **explicit** primitive Gaussian integer with coordinates quadratic in
+`(a, n)`, Lemma B becomes "**`M' = M/gcd` is never a powerful Gaussian integer**" — a cleaner
+target than the quartic `z`, because a **simple** factor of `N` is exactly a Gaussian prime
+`𝔭 ‖ M'` of multiplicity 1, the object the whole proof needs (Step 2's pole).
+
 **Good-carrier (node-integral) existence.** Given Lemma B, one still needs a simple factor that is
 node-integral. **Provable sufficient condition:** any simple factor `p > 4·(max_k t_k)² + 1` is
 node-integral. For consecutive nodes `t ≤ m` this is `p > 4m²+1`, and such a factor exists for
@@ -313,8 +325,9 @@ outcome is a first-class result — do **not** force a prove/refute dichotomy.
 2. **STRATEGY (feasible proof route — a full proof is NOT required).** A concrete, plausible plan
    for Lemma B. To qualify it must: (a) name the main tool it would invoke (e.g. a
    squarefree-sieve / square-free-values-of-polynomials result à la Hooley/Greaves, a
-   Gaussian-integer factorization argument on `z = re + n²i`, a descent showing `z` cannot be
-   `w²·u` with `u` a unit, a bound on powerful values of a binary quartic form, …) and why it
+   Gaussian-integer factorization argument on `z = re + n²i` or the sharper `M' = M/gcd` (§3
+   Step 4), a descent showing `M'` cannot be `w²·u` with `u` a unit, a bound on powerful values of
+   a binary quadratic/quartic form, …) and why it
    applies; (b) break Lemma B into sub-lemmas and say which are standard vs genuinely new;
    (c) include a **lightweight check** — verify the key sub-lemma on the §6 anchor and one larger
    orbit. Identify the one step most likely to fail. A sanity-checked strategy for the

@@ -3553,6 +3553,9 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   is 𝔭-integral ⇒ strict domination ⇒ v_p(w_i)=v_𝔭(w_i)=−(i+1).  This IS OB-43's "γ≡1 mod2 ⇒ Re odd" argument
   with the split-prime pole LOCATION (v_𝔭(M)=1) doing the work.  Only the two-point collapse itself is
   verified-not-derived (270 orbits) — OB-43's proved technique; N=|M|² and the valuation are fully rigorous.
+  SHARPENED LEMMA (b): N=|M|² ⇒ N powerful ⟺ M'=M/gcd(M) is a POWERFUL Gaussian integer, where
+  gcd(Re M,Im M)∈{1,5} for ALL Row-3 (6840/6840 n<300; provable: ℓ|n⇒ℓ∤Re M≡a²; Re M odd⇒2∤; q|(2a−n),q∤n⇒
+  q|Re M≡−5a² only q=5). M' is PRIMITIVE, coords quadratic in (a,n) — a cleaner outsource target than z=re+n²i.
 
   CONSEQUENCE.  clearing that denominator forces v_p(q_min) ≥ m − O(1) (node-residue O(1) correction; §6cq
   measures max_{p|N} v_p ≥ m).  Since 2,3∤N and every Row-3 orbit HAS a simple factor (0/460 orbits lack one),
