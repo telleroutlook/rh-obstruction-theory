@@ -1721,6 +1721,56 @@ but is blocked on an irreducible O(m) core.  The rigorous target is therefore a 
 RESIDUE log|det A| - log D_m([A|d]) that is NOT via |det A| magnitude and NOT via per-p or convexity --
 it must capture why the gcd's absorption saturates at det/O(m).  This is the true open nucleus.
 
+### §6ai — Smith-invariant anatomy: WHERE the un-absorbable linear residue sits
+
+The §6ah reframe (floor = the linear residue log|det A| - log D_m([A|d]) the gcd cannot eat) is made
+STRUCTURAL by decomposing q_min per Smith invariant (probe_qmin_smith_anatomy, exact, L9).  Write the
+integer matrix A = U diag(s) V (U,V unimodular over Z, s_1|s_2|...|s_m the invariant factors).  Then
+Z^m/A Z^m = (+)_i Z/s_i, the class [d] maps to c = U^{-1} d, and the order of [d] -- which equals q_min
+(the §6x IDENT) -- is
+    q_min = lcm_i ( o_i ),   o_i := s_i / gcd(s_i, c_i).                       (ORDER)
+The probe computes s and c exactly via a self-contained pivot-minimization SNF that also accumulates the
+row transform U (an earlier hand-rolled clearing loop infinite-looped; the pivot-minimization version has
+guaranteed termination), then checks lcm_i(o_i) == qmin_fast independently.
+
+VALIDATION: xchk == True on ALL rows (m=3..7, min-q and generic adversaries) and 240/240 in the separate
+validation run -- the ORDER formula and the SNF are confirmed.
+
+ANATOMY (m=3..7; "min-q" = coordinate-descent minimizing log2 q_min; "generic" = random valid):
+
+    m | adversary | log2 q_min | #o_i>1 | top-3 o_i (log2)        | log2 s_top
+    3 | min-q     |      39.45 |      3 | [39.45, 19.91, 12.26]   |     190.78
+    3 | generic   |      61.43 |      3 | [61.43, 19.23, 19.23]   |     212.12
+    4 | min-q     |      68.47 |      4 | [68.47, 38.20, 27.22]   |     255.52
+    4 | generic   |      97.16 |      4 | [97.16, 32.26, 21.55]   |     300.68
+    5 | min-q     |      64.77 |      3 | [64.77, 33.91, 14.40]   |     334.23
+    5 | generic   |     145.70 |      5 | [145.70, 51.27, 41.25]  |     520.00
+    6 | min-q     |      85.25 |      5 | [85.25, 45.54, 25.17]   |     381.33
+    6 | generic   |     189.66 |      6 | [189.66, 90.73, 69.37]  |     734.75
+    7 | min-q     |     118.40 |      6 | [118.40, 86.75, 60.33]  |     581.34
+    7 | generic   |     246.14 |      6 | [246.14, 100.94, 78.14] |     944.73
+
+READINGS (L5):
+  (structure) The floor is TOP-HEAVY: in every sampled row the largest o_i equals log2 q_min to the
+      printed precision, i.e. q_min is often carried by a SINGLE cyclic component Z/s_j.  A dedicated
+      50-per-m test (m=3..7, 250 node sets) makes this precise and HONEST: q_min == max_i o_i in
+      213/250 = 85% of cases, but NOT universally -- in 37/250 = 15% the lcm genuinely spreads across
+      >1 invariant (different primes peaking on different s_j), with q_min up to 289x (~8 bits) larger
+      than the top single o_i.  So the floor is USUALLY, but NOT provably, a one-dimensional statement
+      about a single cyclic factor; a rigorous reduction to "one component" would have to handle the
+      15% multi-component tail, so it is NOT a clean localization.
+  (gap) The surviving o_i>1 number ~m (3,4,3,5,6 at min-q) -- moderately diffuse, not O(1)-bounded.
+  (mechanism) The TOP Smith invariant is enormous: log2 s_top grows ~QUADRATICALLY (190..581 at min-q,
+      matching log|det A| = sum_i log s_i ~ O(m^2)), yet its surviving order contribution o_top is only
+      log-LINEAR (39..118).  So the adversary aligns d with all but an O(m)-bit residue of the top
+      invariant's factorization -- gcd(s_top, c_top) ~ s_top / exp(O(m)) -- but CANNOT eliminate that
+      residue.  This is exactly the §6ah picture localized: the gcd eats the quadratic bulk of the top
+      invariant and stalls on a linear core.  What it does NOT give is WHY c_top cannot be made to share
+      the last O(m) bits of s_top's factorization; that (a bound on how well the fixed d aligns with the
+      top cyclic factor) remains the open nucleus, now stated per-invariant rather than per-prime.
+
+Bounded search, one orbit (D=425).  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
