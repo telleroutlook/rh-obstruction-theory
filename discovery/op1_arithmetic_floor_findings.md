@@ -1568,6 +1568,51 @@ classes, so nodes can be spread through m<=8 -> 17 is the more drainable ramifie
 with §6z-note draining v_17 to 0 through m=6 but not the tighter mod-5 side).  This asymmetry (2 vs 8
 classes) is why {5,17} behave differently and why the mod-5 confluence is the harder-to-drain corner.
 
+### 6ad. NON-ABSORPTION on clustered nodes CONFIRMED, but NARROW (this session)
+
+Direct test of the §6ac "missing rigorous input" (probe_qmin_nonabsorption, exact, L9).  Using the
+IDENT identity q_min = D_m(A)/D_m([A|d]) and Cramer (K=m), the m-minors of [A|d] are {det A} and
+{minor_j := det(A, col j -> d) = D_m(A)*x_j}, so
+    v_p(q_min) = v_p(det A) - min_j v_p(minor_j)                              (RESIDUAL)
+(cross-checked against qmin_fast, independent SNF, 100% on every row below).
+
+On the MAX-CLUSTER family {t0 + p*i : i<m} (a SINGLE on-line x-class mod p, full §6g confluence),
+the augmented gcd does NOT absorb the numerator floor -- v_p(q_min) GROWS LINEARLY, and a coordinate-
+descent adversary RESTRICTED to single-class nodes cannot drive it below that line:
+    p=5 : v_5(q_min)  = 5, 8, 11, 14, 18, 21, 24   for m=2..8   (~3m-1, slope ~3/node)
+    p=17: v_17(q_min) = 3, 5, 7, 9, 11, 13, 15     for m=2..8   (EXACTLY 2m-1)
+Contrast (T3, spread family, distinct x-classes): v_17(q_min) drops to 2,3,4,5,6,7 -- drainable
+(consistent with §6z-note).  So NON-ABSORPTION is REAL but requires FULL single-class clustering.
+
+### 6ae. Per-p pigeonhole floor REFUTED: the adversary drains v_p to 0 (this session)
+
+The tempting upgrade: the number of finite on-line x-classes mod p is FIXED
+    N(3)=2, N(5)=2, N(7)=4, N(13)=6, N(17)=8   (probe_qmin_pigeonhole_floor T0, exact;
+    N(p) is the image size of x=(4t^2-1)/(4t^2+1) mod p, ~ (p-1)/2 for larger p, but only 2 for 3,5).
+Since N(5)=2, pigeonhole forces >= ceil(m/2) nodes into one x-class mod 5 for EVERY node set, so IF
+§6ad non-absorption held at that PARTIAL confluence depth, v_5(q_min) would have an UNCONDITIONAL
+floor ~ m/2 -- a clean per-p rigorous nugget, and the danger q_min->1 would be impossible.
+
+It does NOT.  The UNRESTRICTED per-p adversary (random + pigeonhole-optimal spread + descent
+minimizing v_p) drives BOTH primes to ZERO:
+    m       = 2  3  4  5  6  7  8
+    min v_5(q_min)  = 0  0  0  0  0  0  0
+    min v_17(q_min) = 0  0  0  0  0  0  0
+(m=9 cost-truncated: the m=9 unrestricted-descent SNF hit the large-integer pathology and was
+stopped, NOT silently dropped; the m=2..8 trend is unambiguous.)  So the pigeonhole-forced PARTIAL
+confluence (ceil(m/2) nodes in one class) IS fully absorbed by the augmented gcd: min_j v_p(minor_j)
+rises to meet v_p(det A) once the adversary uses BOTH classes with a suitable p-adic pattern.  §6ad's
+non-absorption is genuine but bites ONLY at FULL single-class clustering, which the adversary avoids.
+
+CONSEQUENCE (the barrier is IRREDUCIBLY AGGREGATE).  No single ramified prime carries an OP1 floor:
+for each p in {5,17} the adversary has a node set with v_p(q_min)=0.  This CLOSES the entire "per-p
+clustered non-absorption lemma" route (the last per-prime hope) and confirms the §6ab picture: the
+floor, if real, lives ONLY in the two-channel INCOMPATIBILITY (draining every p at once forces some
+OTHER channel -- geometric G, or a different ramified prime -- large).  The rigorous target is thus
+NOT a per-p statement but a genuine JOINT/aggregate bound: no single node set simultaneously makes
+v_5=v_17=0 AND keeps G {2,3,5,17}-smooth.  (6th refuted per-prime route; the aggregate floor -- §6z-agg
+linear min-TOTAL 4,18,39,46,77,96,102,129 for m=2..9 -- still stands under every joint attack tried.)
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
