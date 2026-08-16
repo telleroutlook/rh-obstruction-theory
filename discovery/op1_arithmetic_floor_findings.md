@@ -2050,6 +2050,36 @@ exact tool (v_3(q_min) = v_3(det A) - min_j v_3(minor_j)) for large-m replay.
 
 One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
 
+### §6ar — STEP (2) made RIGOROUS: v_3(det A) >= PIG(m) ~ m^2/4 (2-class-mod-3 pigeonhole)
+
+The §6ao skeleton's step (2) is now an airtight pigeonhole bound.  Two facts, both verified EXACTLY (L9):
+  (F1) den(x_t) = 4 t^2 + 1 is a 3-adic UNIT for every t != 0 (t != 0 mod 3: 4+1=5=2 mod 3; t=0 mod 3: 1),
+       so x_t is a 3-adic integer with a well-defined class mod 3, and there are EXACTLY 2 classes:
+       t != 0 mod 3 -> x = 0, t = 0 mod 3 -> x = 2.  (Checked t=1..60: class0=40, class2=20, other=0.)
+  (F2) same mod-3 x-class => v_3(x_k - x_l) >= 1.  (Checked exhaustively over all same-class pairs t=1..60:
+       True, no counterexample.)
+Combined with the §6an identity v_3(det A) = sum_{k<l} v_3(x_k - x_l), this PROVES (modulo §6an):
+    v_3(det A) = sum_{k<l} v_3(x_k - x_l) >= #{same-class pairs} >= min over 2-class splits = PIG(m),
+    where PIG(m) := C(ceil(m/2),2) + C(floor(m/2),2) = m^2/4 - O(m).
+The adversary minimizing v_3(det A) balances the 2 classes to minimize same-class pairs, so PIG(m) is the
+floor.  DIRECT check (adversarial coordinate descent minimizing v_3(det A), one int_det per config):
+    m:                 4  5  6  7   8   9
+    adv-min v_3(detA): 3  5  9 14  19  25       (PIG:  2  4  6  9  12  16 ;  m^2/4:  4  6  9 12 16 20)
+adv-min v_3(det A) >= PIG(m) in EVERY case (3>=2, 5>=4, 9>=6, 14>=9, 19>=12, 25>=16) and is QUADRATIC -- the
+pigeonhole lower bound holds with room to spare (same-class pairs often contribute v_3 > 1).  (m>=10 int_det
+cost-truncated on big-integer Bareiss -- reported, not silently dropped, per L5.  The bound itself is
+analytic, not dependent on larger-m data.)  The split at the minimizer is class0-heavy, not perfectly
+balanced, because class0 (t != 0 mod 3) supplies twice as many usable distinct nodes as class2.
+
+PROOF STATUS after §6ar.  Of the four §6ao steps: (2) is now RIGOROUS (this section, given §6an), (3)
+[averaging: sum_j N_j = 2 v_3(det A) => max_j N_j >= m/2 - O(1)] is rigorous, (1) [§6an identity] is
+empirically exact (CORR=0) and is a classical graded-basis / confluent-Vandermonde determinant fact awaiting
+a written proof, and (4) [C control at the argmax-N node] is the sole genuine open lemma.  §6aq's direct
+measurement already confirms the CONCLUSION (v_3(q_min) ~ m/2) independently of (4).  The crisp remaining
+targets, in order of tractability: prove the §6an identity (step 1), then close the C-control lemma (step 4).
+
+One orbit (D=425).  Descent = UPPER bound on the adversarial min.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
