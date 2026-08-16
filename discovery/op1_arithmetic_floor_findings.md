@@ -3385,6 +3385,44 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   the sole remaining write-up is m-independence of B⁻¹ mod 3 on the periodic d].  probe_qmin_p3_fact3a_
   recurrence.py verifies (0)/(1)/(1b)/(2) EXACT.  RH stays [OUT].
 
+### §6cm — Row-3a p=3 LINEAR FLOOR: (C) upgraded to an exact identity, F(s) closed forms, and the floor is v₃(q_min)=m−3 (L9, L5)
+
+  Closes the §6cl item (C) write-up gap and assembles the full chain, with one honesty correction of a
+  §6cm-internal over-claim.  probe_qmin_p3_floor_theorem.py verifies everything below EXACT.
+
+  (C) UPGRADED from "verified to m=16" to a RATIONAL-FUNCTION IDENTITY mod 3 (all m at once).  Since B is
+      lower-triangular with 3-unit diagonal, B w = d has a UNIQUE mod-3 solution, so it suffices to show the
+      claimed closed-form W reproduces d.  With the moment map Λ_x[1/(1−u x)] = W(u) applied to the Chebyshev
+      generating function G(x,s) = Σ_{i≥1} 4 q_i(x) s^i = (4/(x−1))[ s/(1−s) − s(x−s)/(1−2sx+s²) ], set
+      D_w(s) := Λ_x G(x,s) (partial-fraction in x, evaluate W at the Möbius images).  Against the proven
+      D(s) := Σ_{i≥1} d_i s^i = 8s/(1−s) − 2(P(s)−4), P(s)=4 − sQ*'/Q*, Q* = 1 − e₁s + e₂s² − e₁s³ + s⁴:
+          ε=0 (3∤(a+n)):  D_w[ (1+u)/(1+u²) ] ≡ D[e₁=0,e₂=0]  mod 3   → W(y) ≡ (1+y)/(1+y²) mod 3, all m.
+          ε=2 (3|(a+n)):  D_w[ 1 ]            ≡ D[e₁=0,e₂=2]  mod 3   → W(y) ≡ 1          mod 3, all m.
+      (numerator of the difference is 3-divisible as a polynomial in s — an exact proof for every m).  [PROVED]
+
+  (D) F(s) := Σ_t Λ((z−a)^t) s^t = W(s/(1+sa))/(1+sa).  Substituting the ε=0 W and reducing mod 3:
+          F(s) ≡ (1 + (a+1)s) / (1 + 2a s + (a²+1)s²)   mod 3,
+      whose denominator discriminant is (2a)²−4(a²+1) = −4 ≡ 2 mod 3, a NON-RESIDUE ⇒ the denominator is
+      IRREDUCIBLE over F₃ ⇒ the sequence Λ((z−a)^t) mod 3 is purely periodic and NEVER eventually zero.  In
+      particular the node class a₀≡0 has F(s)=(1+s)/(1+s²) (coeffs period-4 [1,1,2,2], no zeros) — never
+      annihilated; a₂≡2 has only bounded (periodic) vanishing.  ε=2: W≡1 ⇒ F(s)=1/(1+as) ⇒ Λ((z−a)^t)≡(−a)^t,
+      so a₀≡0 gives (−0)^t=0 (t≥1) — DEEP annihilation (measured v₃ climbs 22–24 by t≤22), the no-floor case.
+      [PROVED; matches Λ((z−a)^t) mod 3 for both regimes, all tested orbits.]
+
+  FLOOR (v₃(q_min) = max_j ( clus(j) − v₃(S_j) ), S_j = Λ(P_j), clus(j)=v₃(P′(x_j))).  HONESTY (L5): the
+  earlier §6cm-draft claim "v₃(S_{j*})=0 at the GLOBAL-max-cluster node" is REFUTED — at m=15 that node's
+  v₃(S) climbs to 1..3.  The CORRECT exact statement (m≤18, all five ε=0 orbits, uniform):
+      the ARGMAX of (clus − v₃S) is ALWAYS a node with v₃(S_j)=0 (a 3-UNIT), and
+          v₃(q_min) = m − 3   (6,9,12,15 for m=9,12,15,18; floor/m → 1) — LINEAR in m,
+  far above the ⌈m/2⌉−1 first guess.  ⇒ log q_min = Ω(m) = ω(log m) at the SINGLE prime p=3 ⇒ the OP1
+  super-poly barrier CLOSES for the ε=0 (3∤(a+n)) sub-family.  The ε=2 (3|(a+n)) sub-family has no single
+  p=3 floor (a₀ annihilated) and lives at distributed primes (§6ch).
+
+  NET.  (A) [proved exact] + (B) [proved, 6-residue] + (C) [proved, rational-function identity mod 3] + (D)
+  [proved] give a symbolic-exact mod-3 backbone; the ε=0 floor v₃(q_min)=m−3 is EXACT to m=18.  The sole
+  remaining rigor is a clean lemma — "∃ node j with v₃(S_j)=0 AND clus(j) ≥ c·m" (strongly evidenced, c→1) —
+  after which Row-3a p=3 is a THEOREM closing OP1 for 3∤(a+n).  probe_qmin_p3_floor_theorem.py.  RH [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
