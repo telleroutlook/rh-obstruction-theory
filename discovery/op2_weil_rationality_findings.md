@@ -92,14 +92,27 @@ of the observation values.
 
 The L–W argument uses only that each value is `(algebraic)·exp(algebraic exponent)`. So it extends
 verbatim to **any** even test function `ĥ(z) = P(z)·e^{−a z²}` with `P` a polynomial with algebraic
-coefficients: then `Φ(γ_k) = 2 P(γ_k) e^{β_k}` and the off-line value is an algebraic combination of
-`e^{β₊}, e^{β₋}`, all with algebraic coefficients. A nontrivial integer collision is
-`Σ_j α_j e^{β_j} = 0` with `α_j` algebraic and **nonzero** (integer multiplicities times the nonzero
-`P`-factors — require `P(γ_k) ≠ 0`, i.e. heights off the roots of `P`). L–W kills it, so **no exact
+coefficients: then `Φ(γ_k) = 2 P(γ_k) e^{β_k}` and the off-line value is
+`Φ_off = α₊ e^{β₊} + α₋ e^{β₋}` with `α_± = 2 P(g₀±iδ)` algebraic (conjugate pair). A nontrivial
+integer collision is `Σ_j c_j·(algebraic factor)·e^{β_j} = 0`; the algebraic factors are **nonzero**
+provided `P(γ_k) ≠ 0` (on-line) **and `P(g₀±iδ) ≠ 0`** (off-line). L–W then kills it, so **no exact
 collision**. This covers the **Schwartz-dense algebra** `{P·Gaussian : P even, algebraic coeffs}`.
 
+> **Required hypotheses (both, else degenerate).** `P(γ_k) ≠ 0` for every on-line height *and*
+> `P(g₀±iδ) ≠ 0` for the off-line datum. If `P(g₀±iδ) = 0` then `α_± = 0`, so `Φ_off = 0`, and
+> `(q=1, all c_k=0)` is a *degenerate* collision — the off-line quartet is simply invisible to that
+> test function. This is not a failure of L–W; it just means `ĥ` annihilates the quartet, so a
+> genuine no-collision statement must exclude it. (Referee-flagged; fix applied 2026-08-16.)
+
 Verified instance: `ĥ = H_2(√a z) e^{−a z²}` (`a=1/5000`, same rational heights, `P`-factors
-`4aγ_k²−2 ≠ 0`); cross-check PSLQ @250 dps, maxcoeff `10⁹` → **no relation**, consistent with L–W.
+`4aγ_k²−2 ≠ 0` on-line and `4a(g₀+iδ)²−2 ≈ −1.68 ≠ 0` off-line); cross-check PSLQ @250 dps,
+maxcoeff `10⁹` → **no relation**, consistent with L–W.
+
+> **Multiple off-line quartets.** The statement extends from one quartet to any finite set of them:
+> distinct quartets give distinct exponent pairs, since `(g₀,δ) ↦ (g₀²−δ², g₀δ)` is injective up to
+> the quartet's own sign symmetry, so no two genuinely distinct quartets share an exponent `β`. Thus
+> the negative result covers finite configurations with several off-line quartets, not just one.
+
 
 **Only genuinely open case:** true compact support `h ∈ C_c^∞` (as OP2 states it), where `ĥ` is
 entire of exponential type and its values are **periods**, not `exp(algebraic)` — L–W does not apply.

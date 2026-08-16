@@ -222,8 +222,10 @@ def test_hermite_gaussian():
     """Generalization: ANY even test function hhat(z) = P(z)*exp(-a z^2) with P a polynomial with
     ALGEBRAIC coefficients gives observation values (algebraic)*exp(beta), beta = -a z^2 algebraic.
     A nontrivial integer collision is then sum (algebraic_j) exp(beta_j) = 0 with algebraic_j != 0
-    (integer c_k times the nonzero P-factor). Lindemann-Weierstrass (distinct algebraic exponents)
-    forces every coefficient to 0 => no collision. So the OP2-negative covers the whole SCHWARTZ-DENSE
+    (integer c_k times the nonzero P-factor). REQUIRES P(gamma_k) != 0 (on-line) AND P(g0+/-i*delta)
+    != 0 (off-line): if the off-line P-factor vanishes then Phi_off = 0 and (q=1, c=0) is a degenerate
+    collision. Under both, Lindemann-Weierstrass (distinct algebraic exponents) forces every
+    coefficient to 0 => no collision. So the OP2-negative covers the whole SCHWARTZ-DENSE
     algebra {P*Gaussian, P even, algebraic coeffs}, not just the pure Gaussian. Test: Hermite H_2."""
     print("\n" + "=" * 100, flush=True)
     print("OP2 (4) HERMITE-GAUSSIAN hhat=H_2(sqrt(a) z)exp(-a z^2): PROVED no-collision (dense class). RH [OUT].", flush=True)
@@ -241,8 +243,10 @@ def test_hermite_gaussian():
         vals = [offline] + online
         rel = mp.pslq(vals, maxcoeff=10 ** 9, maxsteps=60000)
     pfac = [4 * a * g ** 2 - 2 for g in gam]
-    print("  a=1/5000; P=H_2; P-factors 4a*g^2-2 all != 0? %s (=> algebraic coeffs nonzero)" % all(
-        abs(p) > mp.mpf(10) ** (-20) for p in pfac), flush=True)
+    pfac_off = 4 * a * (g0 + mp.mpc(0, 1) * delta) ** 2 - 2   # P-factor at off-line arg (must be != 0)
+    print("  a=1/5000; P=H_2; on-line P-factors 4a*g^2-2 all != 0? %s ; off-line P(g0+i*delta) != 0? %s" % (
+        all(abs(p) > mp.mpf(10) ** (-20) for p in pfac), abs(pfac_off) > mp.mpf(10) ** (-20)), flush=True)
+    print("  (BOTH nonzero required: if P(g0+/-i*delta)=0 then Phi_off=0 => degenerate collision.)", flush=True)
     print("  Phi_off=%s ; Phi(gamma_k)=[%s]" % (
         mp.nstr(vals[0], 8), ", ".join(mp.nstr(v, 8) for v in vals[1:])), flush=True)
     print("  cross-check PSLQ @250dps maxcoeff=1e9 -> %s (consistent with LW)" % (
