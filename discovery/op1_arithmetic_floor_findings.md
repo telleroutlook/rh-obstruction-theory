@@ -2835,11 +2835,13 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
         n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br); W_top=v₂(w_{m−1})=1−3m/2
                                           (m≡0 mod4) / 2−3m/2 (m≡2 mod4), orbit-independent (§6by).
-                                          SPLIT (§6bz/§6ca): m≡0 mod4 → strict profile min ⇒ C_j=W_top for ALL
-                                          columns UNCONDITIONALLY (leading-domination) ⇒ v₂(q_min)≥(9/2)m−3
-                                          [THEOREM CANDIDATE from proved facts, NO minimax]; m≡2 mod4 → top-two
-                                          TIE r=(0,1) (§6bv), the bounded lift = sole OPEN global minimax core
-                                          (§6bw refutes the local image-lemma route), floor still ~(9/2)m
+                                          BOTH HALVES CLOSE (candidate): m≡0 mod4 → strict profile min ⇒ C_j=W_top
+                                          for ALL columns UNCONDITIONALLY ⇒ v₂(q_min)≥(9/2)m−3 (§6bz/§6ca, NO
+                                          minimax); m≡2 mod4 → top-two TIE, but lift_j≤v₂(τ−σ_j) & σ_j=T−x_j ⇒
+                                          deep lift forces clustering (N_j≥(m−1)L) ⇒ min_j(lift−excess)≤3 ⇒
+                                          v₂(q_min)≥(9/2)m−7 (§6cb, joint, NO minimax). Direct q_min confirms both.
+                                          [Row 2 = COMPLETE floor THEOREM CANDIDATE, all m; formal gaps: FACT A
+                                           §6br + lift≤v₂(τ−σ) from §6bv; discovery-tier, not machine-checked]
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
 
@@ -3037,6 +3039,31 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   STATUS (L5): Row 2 for m ≡ 0 mod 4 is now a THEOREM CANDIDATE resting ONLY on already-proved facts (FACT A
   §6br + the trivial unit/ultrametric steps) — the minimax core is fully expelled to m ≡ 2 mod 4.  Awaiting a
   formal write-up citing FACT A; until then it is discovery-tier evidence.  RH stays [OUT].
+
+### §6cb — m ≡ 2 mod 4 CLOSES too: the "lift ≤ excess" joint inequality via σ_j = T − x_j (Row 2 complete candidate)
+
+  probe_qmin_p2_nodd_m2mod4_joint (EXACT, L9).  At m≡2 mod4 the top two profile entries TIE (v₂(w_{m−1}) =
+  v₂(w_{m−2}) = W_top = 2 − 3m/2), so S_j can cancel; define lift_j := C_j − W_top ≥ 0 (top-two cancellation
+  depth) and excess_j := N_j − 3(m−1) ≥ 0 (extra clustering of column j).  The §6bf identity gives
+        v₂(q_min) = 9m/2 − 4 − min_j(lift_j − excess_j),
+  so the floor is LINEAR iff Q := max over collisions of min_j(lift_j − excess_j) is BOUNDED.
+  JOINT PROOF SKETCH: from §6bv, S_j = w_{m−2}(τ − σ_j) + higher, τ = w_{m−1}/w_{m−2}, σ_j = Σ_{k≠j}x_k = T − x_j
+  (T = total node sum), so lift_j ≤ v₂(τ − σ_j).  If min_j lift_j ≥ L then v₂(τ − σ_j) ≥ L for every j, and
+  σ_j − σ_{j'} = x_{j'} − x_j ⇒ (ultrametric) v₂(x_j − x_{j'}) ≥ L for ALL pairs ⇒ N_j ≥ (m−1)L ⇒ excess_j ≥
+  (m−1)(L−3).  Hence min_j(lift − excess) ≤ L − (m−1)(L−3) = 3(m−1) − (m−2)L ≤ 3 for L ≥ 3 (and ≤ L ≤ 2 for
+  L < 3).  So Q ≤ 3 ⇒ v₂(q_min) ≥ 9m/2 − 7, LINEAR.  The excess overwhelms the lift by factor (m−2): deep
+  cancellation REQUIRES clustering that costs far more than it saves.
+  MEASURED (adversary MAXIMIZING min_j(lift_j − excess_j); orbits (2/3),(4/5),(6/7); m=6,10,14): Q is not just
+  ≤3 but NEGATIVE (−4 … −21) and decreasing in m; min_j lift_j stays ≤ 3 (adversary cannot even push the MIN
+  lift up), min pairwise v₂ = 3 (mechanism "min-lift ≤ min-pairwise-v₂" holds everywhere).  So the floor at
+  m≡2 mod4 is ≥ 9m/2 − 7 with large margin.  DIRECT q_min (integer determinants, independent of the identity):
+  min over 80 collisions × 3 orbits of v₂(q_min) = 27–29 (m=6), 53–55 (m=10) — all ≥ 9m/2 − 7 (20, 38).  ✓
+  STATUS (L5): with §6ca (m≡0 mod4) this makes Row 2 a COMPLETE floor THEOREM CANDIDATE for ALL m, all n-odd
+  orbits: v₂(q_min) ≥ (9/2)m − O(1) ⇒ log q_min = Ω(m) ≫ ω(log m), OP1 closes on the n-odd row.  The remaining
+  FORMAL gaps (to promote from discovery-tier): (1) lift_j ≤ v₂(τ − σ_j) rigorously from the §6bv term
+  structure incl. the profile gap at i=m−3; (2) FACT A period-4 profile (already §6br).  Hill-climb one-sided
+  (Q is a LOWER bound on the true adversarial max), but the analytic Q ≤ 3 argument does not depend on it and
+  the direct q_min check corroborates.  NOT machine-checked; NOT promoted to proof/.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
