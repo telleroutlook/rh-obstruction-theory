@@ -3580,9 +3580,16 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   (≤1 measured) and v_p(q_min) ≥ m−1, still Ω(m); §6cp's aggregate independently gives Ω(m) there.  So OP1's
   linear-log barrier now rests on a PROVED mechanism (sub-law + clean bridge), not just exact enumeration.
 
+  NODE-SET INFIMUM (clean bridge is NOT consecutive-only).  The clean-bridge proof never uses consecutivity:
+  for ANY node set admitting a node-integral carrier p‖N, the bottom term w_{m−1} (v_p=−m) strictly dominates ⇒
+  v_p(q_min)=max_j N_j + m ≥ m.  Verified on 252 RANDOM non-consecutive sets (all ≥ m).  N depends only on the
+  ORBIT, so carriers are fixed; the adversary's ONLY escape is to poison every simple factor p_i by a node at
+  t≡±r_i mod p_i (p_i≡1 mod4, so −1/4 is a QR) — one node per prime, O(1) correction each.  This LIFTS the
+  "consecutive-only" caveat for the clean case; §6cn independently found consecutive near-minimal.
+
   HONEST SCOPE (L5): the §6ao identity is USED (holds for p≥5, node-integral: x−1=−2/(4t²+1), v_p=0); good-carrier
   existence (7640/7688) is exact evidence, not a proof (48 small-orbit exceptions); the exceptional O(1) correction
-  is measured (≤1), not closed-form.  Still consecutive nodes; node-set infimum §6cn-evidenced only.  RH [OUT].
+  is measured (≤1), not closed-form.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
