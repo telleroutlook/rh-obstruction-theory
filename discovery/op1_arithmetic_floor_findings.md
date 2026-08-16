@@ -2833,10 +2833,35 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
 
   UPDATED COVERAGE MAP (superseding §6bo's table on Row 2):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
-        n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br), C_j pinned, floor ~(9/2)m
-                                          [profile PROVED, C_j-pinning empirical → NEAR-PROVED]
+        n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br), C_j(m)=⌊−3m/2⌋+O(1),
+                                          floor ~(9/2)m  [profile PROVED §6br, C_j closed form §6bs → NEAR-PROVED]
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
+
+### §6bs — the pinned C_j(m) closed form: C_j(m) = ⌊−3m/2⌋ + period4(m); the tie only shifts a bounded O(1)
+
+  probe_qmin_p2_nodd_Cj_form (EXACT, L9; two-sided adversary, m=4..10, orbits (2/3,1),(4/5,1),(6/7,1)).
+  Sharpens FACT B by extracting the exact closed form of the node-independent C_j(m) and localizing the tie.
+  RESULT — C_j(m) for m=4..10 (orbit (2/3,1)): [−5,−7,−6,−10,−11,−13,−12], and the correction
+        C_j(m) − ⌊−3m/2⌋ = [1, 1, 3, 1, 1, 1, 3]  (period-4-in-m).
+  READINGS:
+   • PINNED (adversary min == max, i.e. C_j node-independent) at EVERY m EXCEPT m ≡ 2 mod 4.  For m ≢ 2 the
+     argmin term index r* is UNIQUE (uniq-min gap ≥ 1: gaps 1,4,3,1,5 at m=4,5,7,8,9), so the ultrametric
+     minimum is clean and C_j is pinned — the §6bm/§6bi unique-minimum machinery applies verbatim.
+   • m ≡ 2 mod 4 is EXACTLY the tie (uniq-min gap = 0): two equal top terms.  There the correction jumps
+     (+3 for (2/3); +4→+5 for (4/5) — the per-orbit spike A = 2v₂(a²−b²)−1 of FACT A), and for orbit (6/7)
+     at m=6 the two-sided adversary gives C_j ∈ [−4, 0] — pinning genuinely BREAKS (node-dependent) at the tie.
+   • DECISIVE for the barrier: even at the tie, the adversary's best (max over node sets) min_j C_j stays
+     ≈ ⌊−3m/2⌋ + O(1), the O(1) a bounded per-orbit constant (FACT A's fixed spike, NOT growing in m).  Hence
+     the floor 1 + 3(m−1) − C_j(m) ≈ (9/2)m − O(1) is LINEAR at EVERY m.  Measured floors (2/3): 15,20,22,29,
+     33,38,40 — clean linear growth, the m≡2 entries only a small constant dip, never a collapse.
+  CONSEQUENCE: the m≡2 mod 4 ultrametric tie does NOT break Row 2's floor; it shifts C_j by a bounded per-orbit
+  constant (governed by the PROVED FACT A spike).  So Row 2 gives log q_min = Ω(m) ≫ ω(log m) — OP1 closes for
+  every n-odd orbit — MODULO one remaining lemma: that the tie's max-over-nodes min_j C_j correction is O(1)
+  uniform in m (i.e. the two tied top terms cannot cancel to arbitrary depth as m grows).  This is FACT B in
+  its sharpest form: a no-cancellation bound at a SINGLE residue class m ≡ 2 mod 4, not a full node-independence
+  proof.  HONEST (L5): adversary one-sided per direction; the (6/7) m=6 [−4,0] spread shows the tie is real,
+  and (4/5)'s +4→+5 correction across m=6→10 means the O(1) bound itself is empirical, not yet proved.  RH [OUT].
 
 ## 4. Honesty / scope
 
