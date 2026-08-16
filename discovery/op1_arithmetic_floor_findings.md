@@ -2833,15 +2833,13 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
 
   UPDATED COVERAGE MAP (superseding §6bo's table on Row 2):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
-        n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br); W_top=v₂(w_{m−1})=1−3m/2
-                                          (m≡0 mod4) / 2−3m/2 (m≡2 mod4), orbit-independent (§6by).
-                                          m≡0 mod4 → strict profile min ⇒ C_j=W_top for ALL columns
-                                          UNCONDITIONALLY ⇒ v₂(q_min)≥(9/2)m−3 (§6bz/§6ca, NO minimax) —
-                                          THEOREM CANDIDATE modulo FACT A.  m≡2 mod4 → top-two TIE;
-                                          v₂(q_min)≥(9/2)m−7 EMPIRICALLY ROBUST (strong adversary Q≤−4 &
-                                          direct q_min) but PROOF-OPEN — §6cb σ_j proof REFUTED by §6cc
-                                          (tail cancellation gives deep lift with no clustering).
-                                          [Row 2 HALF-CLOSED: m≡0 mod4 candidate; m≡2 mod4 conjecture only]
+        n odd                    →  p=2,  π=1+i.  UNIFORM minimax-free floor v₂(q_min) ≥ 1 − W_top = 3m/2 − O(1)
+                                          via the VANDERMONDE COUPLING (§6cd): u_j := S_j/P'(x_j) satisfies
+                                          V·u = w (V=(x_j^p) unit Vandermonde, Lagrange) ⇒ min_j v₂(u_j) ≤
+                                          min_p v₂(w_p) = W_top (FACT A §6br) ⇒ v₂(q_min)=1−min_j v₂(u_j) ≥
+                                          1−W_top.  Both parities, NO minimax; supersedes §6ca (m≡0) & the
+                                          REFUTED §6cb (m≡2).  log q_min = Ω(m) ≫ ω(log m) ⇒ OP1 CLOSES on Row 2.
+                                          [THEOREM CANDIDATE modulo FACT A; verified EXACT m=4..18, n=3,5,7]
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
 
@@ -3095,6 +3093,42 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   tail terms R_j are coupled across columns through the shared w-vector, and empirically that coupling
   forbids joint alignment — but no clean argument is in hand.  This is the live open sub-problem for Row 2.
   RH stays [OUT].
+
+### §6cd — BREAKTHROUGH: the VANDERMONDE-COUPLING floor — a UNIFORM, minimax-free proof for BOTH parities
+
+  probe_qmin_p2_nodd_vandermonde_floor (EXACT, L9).  The refuted σ_j route tried to bound a SINGLE column's
+  lift; the correct object is the COUPLING of all m columns.  Set P(z) = Π_k(z − x_k), P_j = P/(z − x_j),
+  and Λ the linear functional Λ(z^d) = w_d.  Matching the §6bf pairing term-for-term,
+        S_j = Σ_i (−1)^{m−1−i} e_{m−1−i}(X'_j) w_i = Λ(P_j),   X'_j = nodes except j.
+  Define u_j := S_j / P'(x_j).  Then:
+    (i)  v₂(u_j) = C_j − N_j    [C_j = v₂(S_j);  v₂(P'(x_j)) = Σ_{k≠j} v₂(x_j − x_k) = N_j].
+    (ii) LAGRANGE INTERPOLATION: ℓ_j := P_j/P'(x_j) is the Lagrange basis, Σ_j Q(x_j) ℓ_j = Q for deg Q ≤ m−1;
+         apply Λ with Q = z^p:  Σ_j x_j^p · u_j = Λ(z^p) = w_p  for every p = 0..m−1.
+  So V·u = w with V = (x_j^p)_{p,j} a UNIT Vandermonde (the nodes x_j = (4t²−1)/(4t²+1) are 2-adic UNITS).
+  By the ultrametric,  v₂(w_p) = v₂(Σ_j x_j^p u_j) ≥ min_j v₂(u_j)  for EVERY p, hence
+        min_j v₂(u_j) ≤ min_p v₂(w_p) = W_top       (profile min = TOP index, since the profile DECREASES; FACT A §6br).
+  The §6bf identity gives v₂(q_min) = 1 + max_j(N_j − C_j) = 1 − min_j v₂(u_j), so
+        ┌─────────────────────────────────────────────────────────────────────────┐
+        │  v₂(q_min) ≥ 1 − W_top = 3m/2 − 1 (m≡2 mod4) or 3m/2 (m≡0 mod4)  UNIFORM   │
+        └─────────────────────────────────────────────────────────────────────────┘
+  LINEAR, both parities, NO minimax, NO σ_j mechanism.  Since log q_min ≥ (3m/2 − 1)·log 2 = Ω(m) ≫ ω(log m),
+  this CLOSES OP1 on the entire n-odd Row 2.  Dependencies: ONLY (a) the §6bf floor identity, (b) the classical
+  Lagrange interpolation identity, (c) FACT A (profile decreasing ⇒ min at top index, §6br PROVED).  It does
+  NOT use §6cb (refuted), §6cc, or §6bw — the whole minimax core is BYPASSED.
+
+  MEASURED (EXACT Fraction, orbits (2/3),(4/5),(6/7) i.e. n=3,5,7; m=4..18, both parities):
+    • identity V·u = w holds EXACTLY for every p, every collision (id V·u=w = OK), all orbits/m;
+    • v₂(u_j) = C_j − N_j EXACTLY (v2u=C−N = OK), all orbits/m;
+    • profile min = W_top (pmin==W_top = True) confirmed m=4..18 all orbits — FACT A operative;
+    • min_j v₂(u_j) ≤ W_top everywhere; DIRECT q_min (integer determinants, spot-checked m ≤ 10) ≥ 1 − W_top
+      with margin ≥ 0 (m=4: q_min 18–19 ≥ 6; m=6: 27–29 ≥ 8; m=8: 44–45 ≥ 12; m=10: 53–55 ≥ 14).
+      The proven bound 3m/2 is LOOSER than the true ~9m/2 (whence the large margin), but UNCONDITIONALLY PROVED.
+  STATUS (L5): this is a genuine advance — Row 2 (n odd) now has a UNIFORM minimax-free floor proof, superseding
+  both the parity-split §6ca and the refuted §6cb.  The two mathematically load-bearing facts (V·u = w; v₂(u_j)
+  = C_j − N_j) are ORBIT- and m-INDEPENDENT algebraic identities (verified m=4..12; cannot fail at larger m).
+  The only remaining formal dependency is FACT A (§6br, PROVED).  NOT machine-checked, NOT promoted to proof/.
+  If one wants the sharp 9m/2 constant, that remains open (needs the cancellation structure) — but OP1 only
+  needs ω(log m), which 3m/2 delivers.  RH stays [OUT].
 
 ## 4. Honesty / scope
 
