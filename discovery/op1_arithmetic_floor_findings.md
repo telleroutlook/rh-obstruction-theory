@@ -2307,6 +2307,37 @@ CORRECTED PROOF STATUS (p=3 floor) after §6aw..§6az:
         floor-carrier -- protected by the competition among per-column 3-adic alignments.  This is the
         corrected EXT/outsource nugget: it is TRUE (unlike the refuted forms) and fully explicit.
 
+### §6ba — pigeonhole route REFUTED; the floor is an IRREDUCIBLE joint bound (O(1) slack is essential)
+
+The natural proof of (4'') -- "each specially-aligned node explodes O(1) columns, so a high-N column with
+tiny C survives by pigeonhole" -- is FALSE:
+  (A) K_expl(thr) = max #{j : C_j >= thr} achievable is NEARLY m, not O(1):
+        m:              4  5  6  7  8
+        K_expl(>=2):    4  3  4  6  5     (up to ALL / m-1 columns explodable at once)
+        K_expl(>=5):    3  3  3  3  3
+      A single lifted node feeds X' for many columns, and the adversary can align several at once -- most
+      columns are simultaneously explodable.  "O(1) explodable columns" is refuted.
+  (B) the strict survivor #{j : N_j >= m/2-2 AND C_j <= 1} can be DRIVEN TO 0 (m=4 and m=7): the adversary
+      CAN push EVERY high-N column to C >= 2.  So "EXISTS a high-N column with C <= 1" (the clean (4'') form)
+      is ALSO FALSE.
+IMPORTANT (L5): survivor=0 does NOT collapse the floor.  The floor max_j(N_j - C_j) tolerates C = O(1): a
+carrier with N_j = m/2, C_j = 2 still gives N_j - C_j = m/2 - 2 >= m/2 - O(1).  Direct floor minimization
+(§6ax(Z), §6az) drove max_j(N_j - C_j) only down to 2,2,4,5,5 for m=4..8 -- all >= m/2 - O(1) -- so the floor
+STANDS; it is just NOT reducible to a clean per-column existence with C <= 1.
+
+FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
+  (4-floor)  max_j ( N_j - C_j ) >= m/2 - O(1),  uniformly in m and the adversarial node set.
+  This is IRREDUCIBLE: it is NOT equivalent to any of
+    - max_j C_j = O(1)                    (FALSE, §6aw: C_j unbounded),
+    - Sum_j C_j = O(m) / averaging        (FALSE, §6ay: Sum_j C_j grows),
+    - argmax-N column has bounded C       (FALSE, §6ay-M2),
+    - EXISTS high-N column with C <= 1    (FALSE, §6ba-B: survivor -> 0).
+  The O(1) additive slack is ESSENTIAL -- the floor-carrier trades N against a bounded C.  Empirically robust
+  (min floor 2,2,4,5,5 for m=4..8 under the sharpest 3-adic adversary), but it resists every elementary
+  decomposition tried.  This raw joint bound -- a competition between the pairwise-difference valuations
+  (N_j) and the fixed-unit-moment pairing valuations (C_j) that no single-column attack can defeat -- is the
+  precise, honest EXT/outsource nugget for the p=3 floor of OP1.  One orbit (D=425).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
