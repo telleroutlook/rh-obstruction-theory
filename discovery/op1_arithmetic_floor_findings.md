@@ -2581,6 +2581,37 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   PROVEN from the closed forms of G and d; that single 2-adic bookkeeping step is all that remains to close
   OP1's 2-adic channel with an unconditional linear floor.  RH stays [OUT].
 
+### §6bj — the target lemma v_2(d_j)=6+2v_2(j) is a Lifting-the-Exponent statement on 13+16i (N=425)
+
+  probe_qmin_p2_dj_lte (EXACT to j=24).  §6bi's node-free lemma v_2(w'_i)=4+3i is fed by the triangular
+  recursion d_j = Σ_i G[j][i] w'_i; its base input is the 2-adic profile of the orbit target d_j.  Traced to
+  a CLOSED FORM + a standard number-theoretic tool.  For σ=3/4, τ=1 the orbit is ρ ∈ {3/4±i, 1/4±i}, and
+        1 − 1/ρ = (13+16i)/25  (ρ=3/4+i)   and   (13+16i)/17  (ρ=1/4+i),
+  with the Gaussian integer α = 13+16i,  N(α) = 13²+16² = 425 = 25·17 = D,  α−ᾱ = 32i = 2⁵i.  The target is
+  (VERIFIED exact, j≤24):
+        d_j = 4·[ (1 − Re[(α/25)^j]) + (1 − Re[(α/17)^j]) ] = 4·[ (25^j−Re[α^j])/25^j + (17^j−Re[α^j])/17^j ].
+  Since 25,17 odd and Re[α^j] is ODD (v_2=0 always), v_2(d_j) = 2 + v_2( (25^j−Re) + (17^j−Re) ).  Verified
+  sub-valuations (each a p=2 LTE identity):
+        v_2(25^j − Re[α^j]) = 2 + v_2(j),   v_2(17^j − Re[α^j]) = 2 + v_2(j)
+            [base 2 = v_2(25−13)+v_2(25+13)−1 = 2+1−1; the Gaussian corrections C(j,2k)13^{…}16^{2k}(−1)^k
+             carry v_2 ≥ 7, deeper];
+        SUM has v_2 = 4 + 2v_2(j)  — a FURTHER cancellation DOUBLING the valuation, sourced by the conjugate
+             relation (α/25)(ᾱ/17) = N(α)/425 = 1.
+  Hence v_2(d_j) = 2 + (4+2v_2(j)) = 6 + 2v_2(j).  (Companion: v_2(Im[α^j]) = 4 + v_2(j), textbook LTE:
+  v_2(α^j−ᾱ^j) = v_2(α−ᾱ)+v_2(j) = 5+v_2(j), /2i ⇒ 4+v_2(j).)
+
+  COMPLETE PROOF ARCHITECTURE (all layers verified; last mile = symbolic write-up of the LTE steps):
+    L1 (identity)      C_j = m+3  ⟸  v_2(w'_i)=4+3i     [PROVED: Z=X−1 shift + ultrametric unique-min, §6bi]
+    L2 (lemma→recursion) v_2(w'_i)=4+3i  ⟸  triangular recursion (diag −2^{j+1}, G[j][0]=−4j²) with
+                         v_2(d_j)=6+2v_2(j) + cancellation of the two lowest terms (d_j and the i=0 term,
+                         which have EQUAL valuation 6+2v_2(j) and cancel to lift the numerator to 4j+2) [§6bi]
+    L3 (d_j→LTE)         v_2(d_j)=6+2v_2(j)  ⟸  LTE on α=13+16i + conjugate-relation sum-doubling [§6bj, this]
+  Net: an UNCONDITIONAL LINEAR 2-adic floor v_2(q_min) ≥ 2m−5 for the σ=3/4 (D=425) barrier, reduced to
+  standard LTE + an explicit finite recursion.  HONEST (L5): the reductions L1/L2 are proved/mapped and the
+  L3 sub-valuations are verified numerically (each a standard LTE identity); the remaining work is the
+  symbolic write-up of the two LTE steps + the sum-doubling + the L2 numerator cancellation.  Added to OB-43
+  as the LTE-closed lemma.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit

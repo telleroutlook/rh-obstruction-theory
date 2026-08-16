@@ -222,6 +222,18 @@ explicit orbit target `d`.
 above (equivalently, `v(d_j − Σ_{i<j−1} G[j][i] w'_i) = 4j+2` by induction). This closes the Identity, hence
 `v(q_min) ≥ 2m−5` unconditionally for σ=3/4 and settles OP1's 2-adic channel for the D=425 orbit.
 
+**The base input is a Lifting-the-Exponent identity (fully localized).** The target has the closed form
+`d_j = 4·[(1 − Re[(α/25)^j]) + (1 − Re[(α/17)^j])]` with the Gaussian integer `α = 13+16i`,
+`N(α) = 13²+16² = 425 = 25·17 = D`, `α − ᾱ = 2⁵i` (verified exact to `j=24`). Since `25,17` are odd and
+`Re[α^j]` is odd, `v(d_j) = 2 + v((25^j − Re[α^j]) + (17^j − Re[α^j]))`, and by LTE at `p=2`
+`v(25^j − Re[α^j]) = v(17^j − Re[α^j]) = 2 + v(j)` (base `2 = v(25−13)+v(25+13)−1`; Gaussian correction terms
+carry `v ≥ 7`), while the *sum* doubles to `4 + 2v(j)` via the conjugate relation `(α/25)(ᾱ/17) = N(α)/425 = 1`.
+Hence **`v(d_j) = 6 + 2v(j)`**. Feeding this into the triangular recursion (where `d_j` and the `i=0` term
+`G[j][0]·w'_0 = −4j²·w'_0` have equal valuation `6+2v(j)` and cancel, lifting the numerator to `4j+2`) yields
+`v(w'_{j−1}) = (4j+2) − (j+1) = 3j+1 = 4 + 3(j−1)`. The remaining work is the symbolic write-up of these LTE
+steps and the numerator cancellation — a self-contained 2-adic computation with **no elliptic curve, no
+L-value, no node, and no RH input**.
+
 **General-orbit note (honest scope).** The profile generalizes to `v(w'_i) = OFF + S·i`; when `S>1` the same
 unique-minimum argument gives `C_j = OFF + (m−1)`, a linear floor. Measured: σ=3/4 → `(OFF,S)=(4,3)`
 (`C_j=m+3`); σ=7/8 → `(6,5)` (`C_j=m+5`). Orbits with `S≤1` (e.g. σ=5/6, slope 1) or a non-linear profile
