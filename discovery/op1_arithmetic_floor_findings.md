@@ -1686,6 +1686,41 @@ through frontier convexity from the endpoints.  A rigorous OP1 floor must bound 
 directly (e.g. a determinantal/height lower bound on log|det A| - log D_m([A|d]) that does not split
 into the two channels), not interpolate between the ram=0 and fully-spread endpoints.
 
+### 6ah. Shrink-ratio kappa = log|detA|/log q_min is UNBOUNDED: determinant route fails, floor reframed (this session)
+
+Direct test of the §6ag-suggested route (probe_qmin_shrink_ratio, exact, L9).  Since q_min = |det A| /
+D_m([A|d]) and D_m([A|d]) >= 1, always q_min <= |det A|, so kappa := log|det A| / log q_min >= 1.  IF
+kappa were uniformly bounded by K, a PURE-determinant lower bound (Vandermonde/Hadamard, no gcd) would
+give log q_min >= log|det A|/K -- OP1's floor without touching the two-channel interior.  Adversarially
+maximizing kappa (= minimizing q_min, the OP1 danger direction):
+
+    m | min log2 q_min | log2|det A| there | kappa there | MAX kappa seen
+    2 | 3.32           | 52.59             | 15.83       | 15.83
+    3 | 18.41          | 215.26            | 11.69       | 12.38
+    4 | 35.96          | 357.18            | 9.93        | 13.80
+    5 | 53.36          | 887.84            | 16.64       | 20.85
+    6 | 77.95          | 1782.80           | 22.87       | 27.41
+    (m=7 cost-truncated: the m=7 min-q descent was killed at the time budget before the final print; NOT
+    silently dropped; the m=2..6 trend is decisive.)
+
+READINGS (L5):
+  (-) MAX kappa GROWS (15.8 -> 27.4; mild/noisy but clearly not constant), so the shrink ratio is NOT
+      uniformly bounded: a constant-K reduction "log q_min >= log|det A|/K" FAILS.  The augmented gcd
+      D_m([A|d]) can absorb an unboundedly growing SHARE of log|det A|.  Determinant-magnitude alone is
+      NOT the source of the floor -- honest close of the direct-determinant route.
+  (+) But log|det A| grows ~QUADRATICALLY (52,215,357,888,1783 ~ O(m^2), Vandermonde-in-x scale) while
+      min log2 q_min grows LINEARLY (3.3,18.4,36.0,53.4,78.0) -- a FOURTH independent adversary
+      reconfirming the linear floor.  So the gcd absorbs a QUADRATIC amount of det, leaving a LINEAR
+      residue, and it is that last linear residue that is floored.
+
+REFRAME (sharper than before).  OP1's floor is emphatically NOT "det A is large" (it is hugely large,
+O(m^2) in log) -- the entire difficulty is that the augmented gcd cannot absorb the FINAL linear piece
+of log|det A|.  That un-absorbable linear residue is precisely the two-channel content (§6ab/§6af): the
+gcd freely eats the O(m^2) "bulk" (both the smooth Vandermonde growth and per-prime cancellable mass)
+but is blocked on an irreducible O(m) core.  The rigorous target is therefore a lower bound on the
+RESIDUE log|det A| - log D_m([A|d]) that is NOT via |det A| magnitude and NOT via per-p or convexity --
+it must capture why the gcd's absorption saturates at det/O(m).  This is the true open nucleus.
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
