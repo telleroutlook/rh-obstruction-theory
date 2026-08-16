@@ -1295,6 +1295,36 @@ collapse, not a proof it grows. The rigorous target is unchanged: a DIRECT lower
 log q_min (confluent-Vandermonde / det-D_m growth, §6c-6d) that no per-prime floor supplies.
 RH stays [OUT].
 
+### 6y. VERIFIED determinantal identity q_min = D_m(A)/D_m([A|d]) — the aggregate reduces to a gcd-gap (this session)
+
+`discovery/probe_qmin_det_ratio.py` (exact integer Bareiss dets, minimal valid collisions K=m).
+Tested the clean identity for the aggregate barrier quantity:
+
+    (IDENT)   q_min  =  D_m(A) / D_m([A|d])        D_r = gcd of r x r minors.
+
+HELD EXACTLY on 5307/5307 valid collisions, all 3 orbits, cluster/spread/random adversaries
+(cross-checked against the independent SNF `qmin_fast`). So (IDENT) is a verified determinantal
+reformulation: log q_min = log D_m(A) - log D_m([A|d]). For K=m this is concrete —
+D_m(A)=|det of the m x m matrix| = (unit)*prod_k(x_k-1)*prod_{k<l}(x_l-x_k) (§6g factorization),
+and D_m([A|d]) = gcd over the m drop-one-column augmented m-minors, each = (unit)*prod(x_k-1)*
+Vand(S')*Psi(S') (§6i). Adversarial-MIN q_min channel decomposition (log2), D=425:
+
+  m        :  2      3      4      5       6       7       8       9
+  D_m(A)   : 45.2  280.3  473.9  1038.1  2444.6  3160.7  4401.7  8315.0
+  D_m([A|d]): 41.3  248.5  403.2   935.6  2327.6  2998.0  4193.6  8060.0
+  q_min    :  3.9   31.8   70.8   102.5   117.0   162.7   208.1   255.0   (= difference)
+
+Both determinantal channels grow QUADRATICALLY in log2 (the prod_{k<l}(x_l-x_k) confluent-
+Vandermonde mass), but the adversary keeps the d-augmented gcd within a LINEAR gap of the full
+determinant — the difference log q_min grows ~+35/step (linear). Identical pattern on D=4, D=26
+(both reach ~245-255 at m=9). READING (L5): the aggregate OP1 target now has a SHARP rigorous
+form — prove log D_m(A) - log D_m([A|d]) >= c*m. Both sides are explicit determinantal divisors
+of the SAME confluent-Vandermonde structure (d is the off-line orbit-sum column); the barrier
+is "the d-augmented gcd cannot track the full determinant to within o(m)". This is the cleanest
+handle yet and, unlike the per-prime floor (§6w), it is aggregate so it survives prime-mass
+migration. IDENT is a candidate [THM] (exact, 5307/5307); the gcd-gap lower bound is OPEN.
+Bounded search, K=m, m<=9 — evidence, not proof. RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
