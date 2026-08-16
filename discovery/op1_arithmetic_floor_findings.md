@@ -1186,6 +1186,39 @@ e_max / confluent-Vandermonde route of §6c-6d, or lambda_1 of §2). LEG1/LEG2 s
 "third leg" as posed was the wrong quantity. RH stays [OUT] throughout — this is a
 finite exact-arithmetic correction with no bearing on RH either way.
 
+### 6v. §6u follow-up — the clustering attack does NOT break the floor where it is ACTIVE (this session)
+
+The §6u refutation killed "lag = O(1)" in the LARGE-p regime (p >= 2m-1). But lag =
+e_max - v_p(q_min), and the PROVED e_max floor (§6g, e_max >= ceil(2m/(p+3))-1) is only
+nontrivial in the SMALL-p regime p <= 2m-1. The barrier needs the floor to TRANSFER:
+v_p(q_min) >= floor - O(1). Decisive test (`discovery/probe_qmin_floor_attack.py`): run the
+referee's own weapon — genuinely CLUSTERED valid collisions (nodes packed into c << m-1
+x-classes as distinct large rationals, NOT the navail=m-1 pools that `build_pool` silently
+forces) — but in the ACTIVE regime, and adversarially MINIMIZE v_p(q_min) to try to push it
+below the floor. Orbit D=425, exact SNF/DVR (`emax_smith`, `qmin_fast`):
+
+  p= 7 m= 8  floor=1 : navail=2 -> v_p(q_min)=3 (e_max=3, lag=0);  navail=3 -> 2 (e_max=3, lag=1)
+  p= 7 m=10  floor=1 : navail=2 -> v_p(q_min)=4 (e_max=5, lag=1);  navail=3 -> 3 (e_max=3, lag=0)
+  p=11 m=12  floor=1 : navail=2 -> v_p(q_min)=5 (e_max=5, lag=0)
+
+**READING.** In every observed case the adversarial MIN v_p(q_min) stayed at or ABOVE the
+floor (gap 1..4); the floor TRANSFER survives. The contrast with §6u is the whole point:
+the very clustering that drives lag to 6 in the large-p regime (where e_max ~ 0, so a large
+lag just means v_p(q_min) ~ 0 = the trivial floor, harmless) instead drives e_max UP in the
+small-p regime (confluent-Vandermonde, exactly the §6c-6d mechanism), and v_p(q_min) TRACKS
+it with lag <= 1. De-biasing the generator (clustered + max-spread, not build_pool's forced
+navail=m-1) did NOT expose a large-lag attack where the floor is active — it strengthened
+the §6e/§6h transfer evidence rather than overturning it. So the §6u refutation retires a
+lemma stated in the wrong regime; it does NOT damage OP1's per-prime linear q_min floor.
+
+**HONESTY (L5).** Bounded random sampling (250 trials/cell), one orbit, small m, p in {7,11}
+(p=5 is x-class-degenerate: den(x(t))=4t^2+1 ≡ 0 mod 5 collapses the classes). Evidence of
+survival, not proof. The PROVED input is e_max >= floor (§6g); the OPEN piece remains the
+uniform transfer v_p(q_min) >= e_max - O(1) IN THE ACTIVE REGIME — now re-supported on a
+de-biased generator. The sharp open target is unchanged and correctly regime-scoped: prove,
+for p <= 2m-1, that the fixed off-line d-bar meets the top p-part of Z^m/L up to a bounded
+deficit. RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
