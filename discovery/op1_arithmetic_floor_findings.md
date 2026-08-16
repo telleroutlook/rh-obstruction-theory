@@ -1812,6 +1812,45 @@ ceil(2m/(p+3))-1 to see which small primes are "active" and whether the aggregat
 Trial division bounded (large cofactor would be left unfactored, but none occurs).  One orbit (D=425).
 Bounded search.  Evidence, not proof.  RH stays [OUT].
 
+### §6ak — CRT-tension cross-table: the floor is a SIMULTANEOUS small-prime pigeonhole
+
+The §6aj nucleus (simultaneous small-prime pigeonhole) is tested head-on (probe_qmin_simul_pigeonhole,
+exact, L9) with a cross-table: each ROW runs a coordinate descent MINIMIZING v_p(q_min) for one target
+prime p; the ENTRIES are the resulting v_q(q_min) for every small q at that config; last columns are the
+total log2 q_min and #{small primes with v_q=0}.  SMALL = {3,5,7,11,13,17,19,23}.
+
+    m=4  min-q:   v=[7,4,1,0,0,0,0,0]  log2 q= 34.05  #zeroed=5     PH(3,4)=1
+         min v_3: v=[2,5,1,1,1,5,2,1]  log2 q= 91.26  #zeroed=0
+    m=6  min-q:   v=[6,6,3,1,0,2,1,0]  log2 q= 79.16  #zeroed=2
+         min v_3: v=[4,5,2,2,2,6,0,1]  log2 q=202.23  #zeroed=1
+    m=7  min-q:   v=[6,5,2,1,0,7,0,1]  log2 q= 88.19  #zeroed=2
+         min v_3: v=[5,17,7,1,0,5,0,1] log2 q=239.78  #zeroed=2
+    (min v_5/v_7/.../v_23 rows: each drives ITS target low but log2 q balloons to 57..268 -- see probe.)
+
+READINGS (L5):
+  (A) CRT TENSION IS REAL AND DECISIVE.  Along EVERY single-prime-target row the total log2 q_min balloons
+      FAR above the balanced min-q row (m=4: 34 vs 57..114; m=6: 79 vs 133..202; m=7: 88 vs 185..268).
+      Draining one prime FORCES the others up so much the total explodes: no configuration is good for all
+      small primes at once.  The min-q optimum instead keeps ~6 of 8 small primes ACTIVE at moderate
+      valuations -- the aggregate/balanced floor, exactly the §6aj picture.
+  (B) #SIMULTANEOUSLY-ZEROABLE SHRINKS WITH m: the best row zeroes 5 primes at m=4, but only 3 at m=6 and
+      2 at m=7 (min-q zeroes 5,2,2).  Pigeonhole pressure grows with m -- fewer small primes can be jointly
+      killed -- so the un-zeroable complement (hence the aggregate floor) grows.
+  (C) PRIME 3 IS A NON-DRAINABLE FLOOR CARRIER.  Unlike 5,7,17 (individually drainable to 0), prime 3 --
+      the smallest x-image, N(3)=2 -- CANNOT be zeroed even when directly targeted: min v_3 = 2, 4, 5 at
+      m = 4, 6, 7, GROWING ~linearly and always > PH(3,m)=ceil(2m/6)-1.  With m nodes forced into only 2
+      x-classes mod 3, the confluent-Vandermonde v_3(det A) is huge and the augmented gcd cannot absorb it
+      to 0.  This suggests the SHARPEST possible nucleus: a UNIFORM single-prime floor v_3(q_min) >= c*m,
+      which alone would give log q_min >= c*m*log 3.  (Not yet confirmed un-drainable at larger m -- §6al.)
+
+REFRAME (candidate reduction).  If v_3(q_min) >= c*m holds uniformly (the p=3 confluent-pigeonhole floor
+survives the augmented-gcd absorption), OP1 reduces from an aggregate-over-all-small-primes statement to a
+SINGLE-prime pigeonhole+confluence bound mod 3 -- classical and self-contained.  The cross-table already
+shows 3 (and to a lesser degree 5) resisting drainage while 7,11,13,17 fall.  Next (§6al): aggressively
+minimize v_3(q_min) alone over m=3..9 to test whether min v_3 grows linearly and never reaches 0.
+
+One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
