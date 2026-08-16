@@ -1897,6 +1897,49 @@ directly and measure how much the augmented gcd absorbs, to confirm the residual
 
 One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
 
+### §6am — p=3 floor mechanism: both proof-route steps verified empirically
+
+Direct exact measurement (probe_qmin_p3_mechanism, L9) of the §6al two-step route, over the adversarial
+min-v_3 config and random configs (n0 = #nodes with t !≡ 0 mod 3 [x-class 0], n2 = #nodes with t ≡ 0
+mod 3 [x-class 2]; n0+n2=m).  Residual identity: v_3(q_min) = v_3(det A) - min_j v_3(minor_j).
+
+    m | config | (n0,n2) | v3(detA) | min_j v3(minor) | resid=v3(qmin) | xchk
+    4 | min-v3 | (2,2)   |    3     |      1          |     2          | True
+    4 | rand   | (4,0)   |   12     |      5          |     7          | True
+    5 | min-v3 | (3,2)   |    6     |      4          |     2          | True
+    6 | min-v3 | (4,2)   |    9     |      5          |     4          | True
+    6 | rand   | (5,1)   |   21     |     11          |    10          | True
+    7 | min-v3 | (5,2)   |   15     |     10          |     5          | True
+    8 | min-v3 | (5,3)   |   21     |     16          |     5          | True
+    8 | rand   | (8,0)   |   39     |     27          |    12          | True
+
+READINGS (L5):
+  (i) STEP (i) HOLDS.  v_3(det A) grows SUPER-linearly and is driven by WITHIN-class confluence: it is
+      largest when nodes concentrate in one class ((8,0)->39, (7,1)->32, (6,1)->25) and smallest when the
+      two classes are balanced.  Even the adversarial minimum (which balances) has v3(detA)=3,6,9,15,21
+      for m=4..8 -- comfortably >= c1*m.  A confluent-Vandermonde staircase ~ sum_i C(n_i,2) (+ a cleared-
+      denominator correction of ~1.5x) fits the ordering; the exact constant is not pinned but the LINEAR
+      (indeed super-linear) lower bound is robust.
+  (ii) STEP (ii) HOLDS.  The augmented gcd absorbs the super-linear BULK (min_j v3(minor) = 1,4,5,10,16 at
+      the adversary, tracking most of v3(detA)) but CANNOT close the gap: the residual v_3(q_min) stays
+      2,2,4,5,5 (~0.7(m-2), LINEAR, > 0) even under direct minimization.  The fixed d 3-adically aligns
+      with most column-deletions but a linear residue survives.  xchk == True on ALL rows (residual
+      identity == qmin_fast) -- the decomposition is validated.
+  (iii) ADVERSARY STRUCTURE (new).  The min-v_3 optimum keeps n2 (class t ≡ 0 mod 3) SMALL (≈2) and packs
+      the rest into class 0 -- but does NOT push n2 to 0: pure concentration (n2=0: (4,0),(8,0)) gives a
+      HIGHER residual (7,12).  There is an INTERIOR optimum at small n2.  Interpretation: the fixed d
+      absorbs the class-0 confluence well but leaves an un-absorbable residue tied to the presence of a
+      few class-2 nodes -- localizing WHERE the linear floor lives (the minority class relative to d).
+
+STATUS OF THE p=3 LEMMA.  Both steps of the §6al route are empirically supported with the residual identity
+validated.  The one hard step remaining for a PROOF is the linear LOWER bound in (ii): showing the fixed d
+cannot 3-adically align with all m column-deletions to within o(m) -- a fixed-vector mod-3 incidence bound
+(the same shape as the §6c/§6d "fixed off-line vector meets the top cyclic factor" gap, now isolated to a
+SINGLE prime and a 2-class partition).  This is the crispest, most classical open sub-problem the whole
+§6a* line has produced.  It is a candidate for an outsource problem (EXT) once stated self-contained.
+
+One orbit (D=425).  Bounded search.  Evidence, not proof.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
