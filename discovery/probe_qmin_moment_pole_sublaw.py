@@ -31,6 +31,22 @@ This REPLACES the earlier (wrong) β-quartet order-4/5 picture: the B-matrix (Ch
 generating function to an order-2 rational function whose denominator, cleared, is C·y² − B·y + N with the
 carrier norm N as the constant/leading pair — the p-adic degree drop is the whole story.
 
+CLOSED-FORM DERIVATION of the order-2 structure (§6cr-cf, this file section (5); verified 270 orbits, n<60).
+The moment functional L (defined by L(4q_j)=d_j, so w_i = L(x^i)) is EXACTLY a two-point evaluation
+        L(f) = β·f(1+β) + β̄·f(1+β̄),   β = n²/(2M),   M = (a²−n²−na) + n(2a−n) i,
+(the 4-atom → 2-point reciprocal-pairing collapse, generalizing OB-43 §3 Step 4 from σ=3/4 to all Row-3).
+Hence the moments have the CLOSED FORM (a rank-2 Lucas sequence, roots 1+β, 1+β̄; coefficient λ = β exactly):
+        w_i = β·(1+β)^i + β̄·(1+β̄)^i,   for all i ≥ 0.
+KEY ALGEBRAIC IDENTITY (proved symbolically):  N = |M|²,  i.e. (a²+n²−na)²+n⁴ = (a²−n²−na)²+(n(2a−n))².
+The p-adic POLE, now transparent.  For a simple factor p‖N=|M|²: p ≡ 1 (mod 4) (N a sum of two coprime
+squares) so p SPLITS in ℤ[i]; v_p(|M|²)=1 ⇒ M is divisible by EXACTLY ONE prime 𝔭|p, to order 1
+(v_𝔭(M)=1, v_𝔭̄(M)=0).  Since p∤n (p|N, p|n ⇒ p|re²=… contradiction), β=n²/(2M) has v_𝔭(β)=−1, v_𝔭̄(β)=0.
+Then 1+β has v_𝔭(1+β)=−1 (the pole dominates the +1), so the term β(1+β)^i has v_𝔭 = −1 + i·(−1) = −(i+1),
+while the conjugate term β̄(1+β̄)^i has v_𝔭 ≥ 0 (𝔭-integral).  Strict domination ⇒ no cancellation ⇒
+v_p(w_i) = v_𝔭(w_i) = −(i+1) (w_i ∈ ℚ).  ∎  This is the same argument as OB-43's "γ≡1 mod 2 ⇒ Re odd", here
+with the split-prime pole LOCATION (v_𝔭(M)=1 at exactly one 𝔭|p) doing the work.  Only step 1 (the two-point
+collapse) is verified-not-derived; it is OB-43's proved reciprocal-pairing technique, generalized.
+
 CONSEQUENCE.  The top moment used in an m-node collision has v_p(w_{m−1}) = −m; clearing this denominator forces
 v_p(q_min) ≥ m − O(1)  (node-residue interactions give an O(1) correction; §6cq measures max_{p|N} v_p ≥ m).
 Since 2,3 ∤ N (proven, §6cq) every simple factor is ≥5, and every Row-3 orbit HAS a simple factor (0/460
@@ -180,10 +196,63 @@ if __name__ == "__main__":
     print("    [den(w0)=N is NON-universal: held %d, failed %d — the per-prime valuation (iii) is the right base case.]" % (
         den_eqN, den_neN), flush=True)
 
+    # (5) CLOSED-FORM DERIVATION: w_i = β(1+β)^i + β̄(1+β̄)^i, β=n²/(2M), M=(a²−n²−na)+n(2a−n)i; N=|M|².
+    #     This DERIVES the order-2 structure (roots 1+β,1+β̄) and makes the pole transparent (v_𝔭(β)=−1).
+    def _cmul(x, y):
+        return (x[0] * y[0] - x[1] * y[1], x[0] * y[1] + x[1] * y[0])
+
+    def _cinv(x):
+        dd = x[0] * x[0] + x[1] * x[1]
+        return (x[0] / dd, -x[1] / dd)
+
+    def _powc(x, i):
+        r = (Fr(1), Fr(0))
+        for _ in range(i):
+            r = _cmul(r, x)
+        return r
+
+    def _Mof(av, nv):
+        return (av * av - nv * nv - nv * av, nv * (2 * av - nv))
+
+    Neq = cf_ok = pole_cf = True
+    ncf = 0
+    for n in range(4, 60, 2):
+        if n % 3 == 0:
+            continue
+        for a in range(1, n):
+            if not _rowok(a, n):
+                continue
+            M = _Mof(a, n)
+            if Nnorm(a, n) != M[0] ** 2 + M[1] ** 2:
+                Neq = False
+            beta = _cinv((Fr(2 * M[0]), Fr(2 * M[1])))
+            beta = (n * n * beta[0], n * n * beta[1])           # β = n²/(2M)
+            bb = (beta[0], -beta[1])
+            r1 = (1 + beta[0], beta[1])
+            r2 = (1 + bb[0], bb[1])
+            w = [Fr(x) for x in wvec(9, Fr(a, n), Fr(1))]
+            for i in range(9):
+                t1 = _cmul(beta, _powc(r1, i))
+                t2 = _cmul(bb, _powc(r2, i))
+                s = (t1[0] + t2[0], t1[1] + t2[1])
+                if s[1] != 0 or s[0] != w[i]:
+                    cf_ok = False
+            for p, e in factorint(Nnorm(a, n)).items():
+                if e != 1 or p < 5:
+                    continue
+                ncf += 1
+                if any(vp(w[i], p) != -(i + 1) for i in range(9)):
+                    pole_cf = False
+    print("\n(5) CLOSED-FORM DERIVATION (%d simple-factor checks, n<60):" % ncf, flush=True)
+    print("    N=|M|², M=(a²−n²−na)+n(2a−n)i : %s ; w_i = β(1+β)^i+β̄(1+β̄)^i, β=n²/(2M) : %s ; sub-law from it : %s" % (
+        "OK" if Neq else "X", "OK" if cf_ok else "X", "OK" if pole_cf else "X"), flush=True)
+    print("    simple p‖N=|M|² ⇒ p≡1 mod4 splits, v_𝔭(M)=1 at one 𝔭|p, p∤n ⇒ v_𝔭(β)=−1 ⇒ v_p(w_i)=−(i+1). QED", flush=True)
+    print("    (only the two-point collapse w_i=L(x^i)=β f(1+β)+β̄ f(1+β̄) is verified-not-derived — OB-43's technique).", flush=True)
+
     print("\n" + "=" * 100, flush=True)
-    print("(1) sub-law + simple-factor existence : %s ; (3) order-2 + primitivity : %s ; (4) base-case induction : %s" % (
+    print("(1) sub-law+simple-factor : %s ; (3) order-2+primitivity : %s ; (4) base-case : %s ; (5) closed form : %s" % (
         "OK" if (ok and no_simple == 0) else "X", "OK" if (ord2 and prim) else "X",
-        "OK" if (base_ok and Bdom and c2ok) else "X"), flush=True)
-    print("READING (L5): v_p(N)=1 ⇒ moment pole −(i+1), now FULLY PROVED (order-2 recurrence + explicit base case", flush=True)
-    print("v_p(w0)=−1,v_p(w1)=−2 + strict-domination induction — no residue computation); every orbit has such p≥5", flush=True)
-    print("⇒ v_p(w_{m−1})=−m ⇒ v_p(q_min)≥m−O(1) ⇒ log q_min=Ω(m), universal (consecutive nodes). Open: (b),(c). RH [OUT].", flush=True)
+        "OK" if (base_ok and Bdom and c2ok) else "X", "OK" if (Neq and cf_ok and pole_cf) else "X"), flush=True)
+    print("READING (L5): v_p(N)=1 ⇒ moment pole −(i+1), DERIVED two ways — (4) order-2 recurrence + base case, and", flush=True)
+    print("(5) closed form w_i=β(1+β)^i+c.c. with β=n²/(2M), N=|M|² (exact), pole v_𝔭(β)=−1 at one prime 𝔭|p.", flush=True)
+    print("⇒ v_p(w_{m−1})=−m ⇒ v_p(q_min)≥m−O(1) ⇒ log q_min=Ω(m). Open: (b) N never powerful, good-carrier. RH [OUT].", flush=True)

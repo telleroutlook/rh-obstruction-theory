@@ -3542,6 +3542,18 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   NOTE (L5): the stronger guess "den(w₀)=N exactly" is NON-universal (held 306/364); the correct universal base
   case is the per-prime VALUATION (iii), which holds 1060/1060.
 
+  CLOSED-FORM DERIVATION (§6cr-cf, probe section (5); 770 simple-factor checks n<60 — DERIVES the order-2
+  structure and makes the pole transparent).  The moment functional L (w_i=L(x^i)) is a TWO-POINT evaluation
+  L(f)=β·f(1+β)+β̄·f(1+β̄) — the 4-atom→2-point reciprocal collapse of OB-43 §3 Step 4, generalized to all
+  Row-3 — giving the CLOSED FORM (rank-2 Lucas, roots 1+β,1+β̄, coefficient λ=β exactly):
+        w_i = β·(1+β)^i + β̄·(1+β̄)^i,   β = n²/(2M),   M = (a²−n²−na) + n(2a−n) i.
+  KEY IDENTITY (PROVED SYMBOLICALLY):  N = |M|², i.e. (a²+n²−na)²+n⁴ = (a²−n²−na)²+(n(2a−n))².
+  POLE, transparent: simple p‖N=|M|² ⇒ p≡1 mod4 SPLITS, v_p(|M|²)=1 ⇒ v_𝔭(M)=1 at ONE prime 𝔭|p (v_𝔭̄(M)=0);
+  p∤n ⇒ v_𝔭(β)=−1, v_𝔭̄(β)=0; v_𝔭(1+β)=−1 (pole dominates +1) ⇒ term β(1+β)^i has v_𝔭=−(i+1), conjugate term
+  is 𝔭-integral ⇒ strict domination ⇒ v_p(w_i)=v_𝔭(w_i)=−(i+1).  This IS OB-43's "γ≡1 mod2 ⇒ Re odd" argument
+  with the split-prime pole LOCATION (v_𝔭(M)=1) doing the work.  Only the two-point collapse itself is
+  verified-not-derived (270 orbits) — OB-43's proved technique; N=|M|² and the valuation are fully rigorous.
+
   CONSEQUENCE.  clearing that denominator forces v_p(q_min) ≥ m − O(1) (node-residue O(1) correction; §6cq
   measures max_{p|N} v_p ≥ m).  Since 2,3∤N and every Row-3 orbit HAS a simple factor (0/460 orbits lack one),
   every orbit has such p≥5 ⇒ log q_min ≥ (m−O(1))·log 5 = Ω(m), UNIVERSAL (consecutive nodes).
