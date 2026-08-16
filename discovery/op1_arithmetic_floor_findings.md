@@ -2544,6 +2544,43 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   bound the deepest 2-adic denominator of u = (V^T)^{−1}w directly (explicit inverse-Vandermonde entries, or
   Newton-form divided differences of the fixed w), rather than a min over m bilinear pairings.  σ=3/4; RH [OUT].
 
+### §6bi — BREAKTHROUGH: C_j ≡ m+3 (node-independent) ⇒ CORE-2 collapses to a node-free 2-adic recursion
+
+  probe_qmin_p2_Cj_identity (EXHAUSTIVE + m≤8).  CORE-2 asked only for min_j C_j ≤ (3−c)m.  In fact something
+  FAR stronger is true for the D=425 orbit (σ=3/4):
+        C_j = m+3   for EVERY column j AND EVERY node set.                       [IDENTITY, not inequality]
+  Exhaustively verified: ALL 1365 sets at m=4 (t∈1..15), all 792 at m=5 (t<13), + consecutive blocks,
+  arithmetic progressions, powers-of-two, random to m=7 — ZERO deviations, while N_j ranges 9..22.  Since the
+  min column also has C=m+3, the §6bf reduction gives an UNCONDITIONAL LINEAR floor:
+        v_2(q_min) ≥ 1 + 3(m−1) − (m+3) = 2m − 5    (σ=3/4, every representative, every node set).
+
+  PROOF CHAIN (rigorous modulo ONE node-free lemma).  Shift Z=X−1 (every node: v_2(x_k−1)=1, PROVED §6be).
+  With w'_i := L((X−1)^i) and p_j = ∏_{k≠j}(Z−y_k), y_k=x_k−1 (so the Z^{m−1−r} coeff is (−1)^r e_r(y_{≠j}),
+  v_2(e_r) ≥ r):
+        L(p_j) = Σ_{r=0}^{m−1} (−1)^r w'_{m−1−r} e_r(y_{≠j}),   v_2(term_r) = v_2(w'_{m−1−r}) + v_2(e_r).
+  LEMMA (node-free):  v_2(w'_i) = 4 + 3i   (verified to m=8).  Given it, v_2(term_r) ≥ [4+3(m−1−r)]+r =
+  4+3(m−1)−2r, STRICTLY decreasing in r, so the UNIQUE minimum is r=m−1:  term_{m−1} = w'_0·∏_{k≠j} y_k has
+  v_2 = 4 + (m−1) = m+3 EXACTLY (product of m−1 valuation-1 factors — no cancellation), while every r<m−1 term
+  is ≥ m+5.  Ultrametric with a unique minimum ⇒ v_2(L(p_j)) = m+3.  QED (modulo the lemma).  [Term-margin
+  asserts passed on 6000 configs; C_j==m+3 all cols 400/400 at m=4..7; v_2(q_min) ≥ 2m−5 400/400.]
+
+  THE LEMMA IS A FINITE, EXPLICIT, NODE-FREE COMPUTATION.  Since T_j(1)=1, 4q_j(x) = −4(T_j(x)−1)/(x−1), so in
+  Z=X−1:  4q_j = Σ_i G[j][i] Z^i with  G[j][i] = −4·T_j^{(i+1)}(1)/(i+1)!  and  T_j^{(k)}(1) =
+  ∏_{l=0}^{k−1}(j²−l²)/(2k−1)!!.  Because d = Bw ⇒ L(4q_j) = d_j, this is a LOWER-TRIANGULAR system
+        d_j = Σ_{i=0}^{j−1} G[j][i] w'_i,   diagonal G[j][j−1] = −2^{j+1}  (v_2 = j+1),
+  VERIFIED to reconstruct d_j exactly (m≤8).  Solving recursively determines w'_i from the node-free target d.
+  So the lemma v_2(w'_i)=4+3i is a pure 2-adic statement about the Chebyshev-derivative coeffs G and the
+  orbit target d — NO node quantifier.  Base: w'_0 = d_1/(−4), v_2 = v_2(d_1)−2 = 6−2 = 4 ✓.  Recursion:
+  w'_{j−1} = (d_j − Σ_{i<j−1} G[j][i]w'_i)/(−2^{j+1}); need v_2(numerator) = 4j+2.
+
+  ORBIT DEPENDENCE (L5).  The profile generalizes to v_2(w'_i) = OFF + S·i; when S>1 the SAME unique-minimum
+  argument gives C_j = OFF + (m−1).  Measured: σ=3/4 → (OFF,S)=(4,3) ⇒ C_j=m+3; σ=7/8 → (6,5) ⇒ C_j=m+5
+  (both node-independent, both linear floors).  σ with S≤1 (e.g. 5/6: slope 1) or non-linear profile (4/5, 2/3:
+  irregular, even negative C_j — an even LARGER floor) need separate treatment, but σ=3/4 (OP1's D=425 target)
+  is the clean case.  HONEST: the node-free lemma v_2(w'_i)=4+3i is VERIFIED (exhaustive + m≤8) but not yet
+  PROVEN from the closed forms of G and d; that single 2-adic bookkeeping step is all that remains to close
+  OP1's 2-adic channel with an unconditional linear floor.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
