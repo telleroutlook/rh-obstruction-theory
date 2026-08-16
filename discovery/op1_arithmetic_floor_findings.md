@@ -2709,6 +2709,73 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
       2-adic/Gaussian-integer argument; the S=1 boundary and the S<1 (n odd, both-odd γ) regime are outside
       it.  Full orbit-robustness of OP1 remains a multi-prime phenomenon (§6bl(M)).  RH stays [OUT].
 
+### §6bn — MULTI-PRIME COMPLEMENTARITY: the {p=2, p=3} coverage map (attacks the §6bl(M) orbit-robustness gap)
+
+  probe_qmin_multiprime_complementarity (EXACT q_min, adversarial per-prime descent = one-sided UPPER bound
+  on the true adv-min).  §6bm PROVED p=2 only for 4∣n opposite-parity orbits; OP1 orbit-robustness needs
+  EVERY off-line orbit (every putative RH violator; the adversary picks ρ, we do not) to have a linear floor
+  at SOME prime.  Scanning orbits across all n mod 4 classes and adversarially MINIMIZING v_p(q_min) for
+  p ∈ {2,3,5}, m=4..7 (the OP1 danger direction — drive the collision cheap):
+
+    orbit    n%4  S(p2)  p=2 adv-min        p=3 adv-min      p=5
+    3/4  n=4  0    3     [6,11,14,18] LIN   [2,2,4,5] LIN     [0,1,2,3]
+    5/8  n=8  0    5     [4,9,12,16]  LIN   [2,2,4,5] LIN     [0,0,0,0]
+    5/6  n=6  2    1     [0,3,3,3]    flat  [0,0,2,3] weak    [0,0,0,0]
+    9/10 n=10 2    1     [0,0,1,1]    flat  [2,2,4,5] LIN     [0,0,0,0]
+    3/10 n=10 2    1     [0,3,3,3]    flat  [2,2,4,5] LIN     [0,0,0,0]
+    2/3  n=3  odd -3/2   [18,26,29,38] LIN  [0,0,2,3] weak    [0,0,0,0]
+    4/5  n=5  odd -3/2   [18,26,28,38] LIN  [0,0,0,1] weak    [0,0,0,0]
+
+  THE UNIFIED COMPLEMENTARITY LAW (empirical, L5).  The two smallest primes give two LARGELY-INDEPENDENT
+  linear floors whose failure sets are governed by n's own factorization:
+    * p=2 floor is LINEAR unless v_2(n)=1 (i.e. 2‖n, n≡2 mod 4): n≡0 mod 4 → S≥3 (PROVED §6bm); n odd → S<0,
+      β has 2 in the denominator, floor LARGE (18,26,29,38 — slope ~7, the strongest of all).  Only 2‖n gives
+      S=1 (vacuous).  [So the §6bm "4∣n" family plus the n-odd regime already cover 3/4 of residues mod 4.]
+    * p=3 floor is LINEAR unless 3∣n: the ON-LINE N_j side is orbit-free and, when w=B^{-1}d is 3-adically
+      unimodular (§6bb, ⟺ 3∤ the orbit denominator), C_j=O(1) gives the IDENTICAL floor [2,2,4,5] for EVERY
+      such orbit (3/4, 5/8, 9/10, 3/10 all coincide) — a genuinely n-mod-4-INDEPENDENT second barrier that
+      covers the n≡2 mod 4 orbits where p=2 dies.  It degrades to [0,0,2,3] exactly when 3∣n (5/6, 2/3).
+  CONSEQUENCE (coverage): {p=2, p=3} already carry a linear floor for EVERY orbit EXCEPT the class
+  "v_2(n)=1 AND 3∣n" (⟺ 6∣n, 4∤n; smallest σ=5/6, n=6), where BOTH small primes are killed by n=2·3.  There
+  the barrier must migrate to a RAMIFIED prime | N(M) (for σ=5/6, N(M)=2257=37·61, not in {2,3,5} — which is
+  exactly why p=5 is 0 there) — pursued in §6bo.  So the §6bl(M) "multi-prime phenomenon" is now a PRECISE,
+  finite coverage map, not a vague hope: three prime-families (2, 3, ramified) indexed by n's factorization.
+  Descent = UPPER bound (a row that stays >0 and grows is strong floor evidence; a "flat/weak" row is NOT a
+  proof the floor fails — only that this descent could not certify it).  One-τ (τ=1) slice.  RH stays [OUT].
+
+### §6bo — the {2,3}-GAP CLOSES: every 6∣n orbit is carried by a RAMIFIED prime ∣ N(M) (coverage map COMPLETE)
+
+  probe_qmin_ramified_gap (EXACT q_min; adversarial per-prime descent = one-sided UPPER bound).  §6bn left
+  ONE uncovered orbit class: v_2(n)=1 AND 3∣n (⟺ 6∣n, 4∤n; both small primes killed by n=2·3).  The
+  ramified primes of an orbit are the odd primes dividing N(M), M=(p²−q²−np)+q(2p−n)i (the analog of D=425's
+  {5,17}, which is N(M) for σ=3/4).  Adversarially minimizing v_p(q_min) at those primes on the n=6 orbits:
+
+    orbit    N(M)          ramified   p=3        best ramified floor (m=4..7)
+    5/6  n=6  2257=37·61   {37,61}    [0,0,2,3]  p=61: [2,3,4,5] LINEAR   (p=37: [0,1,2,3])
+    1/6  n=6  2257=37·61   {37,61}    [0,0,2,3]  p=61: [2,3,4,5] LINEAR   (p=37: [0,1,2,3])
+    7/6  n=6  3145=5·17·37 {5,17,37}  [0,0,2,3]  p=37: [1,2,3,4] LINEAR   (p=17: [0,0,1,2]; p=5: [0,0,0,0])
+
+  RESULT (L5).  For EVERY 6∣n orbit tested, SOME ramified prime ∣ N(M) carries a clean growing (linear) floor
+  — p=61 for N(M)=2257, p=37 for N(M)=3145.  NOT every ramified prime works (p=5 is dead for σ=7/6, p=37 is
+  only weakly growing for σ=5/6), but at least one always does, so the class is covered.  Notably the ramified
+  floor does NOT need a small prime (61 is large) — it is the §6aa "ramified/atom-norm" mechanism (v_p positive,
+  absent from the geometric Vandermonde channel, growing with m), not mod-p pigeonhole, so large ramified primes
+  still work.
+
+  THE COMPLETE OP1 ORBIT-ROBUSTNESS COVERAGE MAP (empirical, one τ=1 slice, m≤7; the §6bl(M) gap now filled):
+        n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3   [PROVED, §6bm]
+        n odd                    →  p=2,  S < 0 (β 2-denominator), floor LARGE (~7·m)   [empirical]
+        n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]   [empirical; OB-42 mechanism]
+        n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)   [empirical, this section]
+  Every off-line orbit (τ=1) falls in exactly one row and has a prime with a linear q_min floor ⇒ inf over
+  node sets of log q_min = Ω(m) = ω(log m) ⇒ OP1's arithmetic barrier holds ORBIT-ROBUSTLY (evidence tier).
+  This upgrades §6bl(M)'s "plausibly multi-prime" to a concrete, per-orbit-decidable map.  HONEST SCOPE (L5):
+  (i) only p=2 is PROVEN (§6bm), and only on its row; p=3 and the ramified rows are one-sided-descent evidence,
+  not proofs; (ii) the p=3 row inherits OB-42's still-open irreducible joint bound; (iii) the ramified row has
+  no proof at all yet — it is the §6aa mechanism, uncertified; (iv) only τ=1 and m≤7 scanned.  The VALUE is
+  structural: it identifies, for each orbit, WHICH single prime a proof should target, turning "prove OP1 for
+  all orbits" into four separate single-prime lemmas indexed by n mod 4 and 3∣n.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
