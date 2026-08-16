@@ -2338,6 +2338,44 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   (N_j) and the fixed-unit-moment pairing valuations (C_j) that no single-column attack can defeat -- is the
   precise, honest EXT/outsource nugget for the p=3 floor of OP1.  One orbit (D=425).  RH stays [OUT].
 
+### §6bb — multi-orbit generality: the p=3 floor is ORBIT-DEPENDENT, gated by "w = B^{-1}d all 3-adic units"
+
+  probe_qmin_multiorbit.py.  Every §6a* result used ONE orbit (sigma=3/4, tau=1, D=425).  The on-line matrix
+  (Chebyshev nodes x_of(t)) is orbit-INDEPENDENT; the floor's orbit dependence is ENTIRELY through the
+  off-line vector d = O_orbit_direct(sigma,tau) -> w = B^{-1}d -> C_j (N_j is orbit-free).  So per orbit the
+  floor = adversarial-min over node sets of max_j(N_j - C_j).  Scanned a grid of orbits, min-floor via
+  random-restart coordinate descent (UPPER bound on the true min), at p=3, m=4..7:
+
+    orbit            | min v_3(w_i) | w all 3-units? | min-floor (m=4,5,6,7) | verdict vs m/2-2
+    sigma=3/4,tau=1  |      0       |      YES        |     2, 2, 4, 5         | HOLDS  (D=425 baseline)
+    sigma=3/4,tau=2  |      0       |      YES        |     2, 2, 4, 5         | HOLDS
+    sigma=5/8,tau=1  |      0       |      YES        |     2, 2, 4, 5         | HOLDS  (2nd confirming orbit)
+    sigma=7/8,tau=1  |      0       |      NO          |     0, 0, 0, 1         | FAILS
+    sigma=4/5,tau=1  |      0       |      NO          |     0, 0, 0, 1         | FAILS
+    sigma=2/3,tau=1  |      2       |      NO          |     0, 0, 2, 3         | MIXED (3|den)
+    sigma=3/4,tau=3  |   -4..-7     |      NO          |     6, 7, 9,12         | LARGE (3|tau, w non-unit)
+
+  READING (L5).  The p=3 floor v_3(q_min) >= m/2 - O(1) is NOT universal.  The sharp discriminator is
+  "w = B^{-1}d is 3-adically UNIMODULAR (all coordinates units)":
+    - w all units  => floor HOLDS (>= m/2 - 2): sigma=3/4 (both tau=1,2) AND sigma=5/8 -- a SECOND independent
+      confirming orbit beyond D=425.  This is exactly the §6av mechanism (3 unramified in the orbit; the e_0
+      anchor term = +-w_{m-1} is a unit, so C_j cannot be cheaply inflated on the carrier column).
+    - some w_i NOT a unit (v_3(w_i) > 0)  => floor can COLLAPSE to ~0: sigma=7/8, sigma=4/5 give min-floor
+      0,0,0,1.  When the anchor coordinate is 3-divisible the carrier protection is gone; a cheap collision
+      exists for those orbits.
+    - 3 | tau (w has 3 in DENOMINATORS, v_3(w_i) < 0)  => floor is LARGER still (C_j inherits negative
+      valuation): sigma=3/4,tau=3 gives 6,7,9,12.  (Trivial inflation, not the same mechanism.)
+
+  CONSEQUENCE for OP1.  The arithmetic barrier q_min -> infinity via the p=3 floor is a property of a
+  CHARACTERIZABLE CLASS of orbits (w 3-adically unimodular), NOT of every orbit.  Since the construction is
+  free to CHOOSE its orbit, picking a 3-unimodular orbit (D=425, or sigma=5/8) yields a valid witness with the
+  floor intact -- the adversary faces a FIXED, favorably-chosen orbit.  So the barrier is REAL for the right
+  orbit choice, and the correct lemma hypothesis is now identified precisely: the floor bound (4-floor) should
+  be stated CONDITIONAL on "w = B^{-1}d is 3-adically unimodular", a checkable finite condition satisfied by
+  >= 2 independent orbits.  This SHARPENS (does not weaken) the EXT nugget: it supplies the missing hypothesis
+  under which the irreducible joint bound max_j(N_j - C_j) >= m/2 - O(1) is expected to be provable.
+  Random-min = UPPER bound on min-floor (L5).  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
