@@ -3552,8 +3552,37 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   also REFUTED (v_p often m−1; some N-primes fall below m — other N-primes carry the orbit); the robust claim is
   the §6cq existential max_{p|N} v_p(q_min) ≥ m.  SHARP OPEN LEMMAS for THEOREM: (a) DONE — the sub-law is now
   fully proved (order-2 recurrence + base case (iii) + strict-domination induction, above; no residue count
-  needed); (b) every orbit has a v_p(N)=1 factor (N not a perfect power — 0/460 fail); (c) v_p(w_{m−1})=−m ⇒
-  v_p(q_min) ≥ m−O(1) (Smith/denominator clearing).  RH stays [OUT].
+  needed); (b) every orbit has a v_p(N)=1 factor — reduced to "N=re²+(n²)² is never a POWERFUL Gaussian norm"
+  (gcd(re,n)=1 proven ⇒ N sum of two coprime squares; 0/12124 orbits n<400 powerful); (c) REDUCED + clean case
+  proved in §6cs below.  RH stays [OUT].
+
+### §6cs — BRIDGE LEMMA (c): sub-law ⇒ q_min lower bound (probe_qmin_bridge_lemma_c.py, L9)
+
+  Closes the gap between the PROVED §6cr pole (v_p(w_i)=−(i+1)) and the OP1 quantity v_p(q_min), via the
+  general-prime §6ao identity  v_p(q_min) = max_j (N_j − C_j),  N_j = Σ_{k≠j} v_p(x_j−x_k),
+  C_j = v_p(⟨w, ε(X'_j)⟩) = v_p( Σ_i (−1)^{m−1−i} e_{m−1−i}(X'_j) w_i ),  x_t=(4t²−1)/(4t²+1).
+
+  CLEAN BRIDGE THEOREM (proved structurally; 798/798 exact checks).
+        IF p‖N (v_p(N)=1) AND p ∤ (4t²+1) for every node t∈{1..m}  ("node-integral carrier"),
+        THEN C_j = −m for EVERY j, and v_p(q_min) = max_j N_j + m ≥ m.
+  PROOF.  Node-integral ⇒ every x_t is p-integral ⇒ e_{m−1−i}(X'_j) is p-integral (v_p≥0) and N_j≥0.  In the
+  pairing, term i has valuation ≥ −(i+1) (sub-law); the i=m−1 term is (−1)⁰·e₀·w_{m−1} = w_{m−1}, valuation
+  EXACTLY −m, while every i<m−1 term has valuation ≥ −(i+1) > −m.  Bottom term STRICTLY dominates ⇒ no
+  cancellation ⇒ C_j=−m.  Hence v_p(q_min)=max_j(N_j+m)=max_j N_j + m ≥ m.  QED.
+
+  GOOD-CARRIER EXISTENCE.  Need a simple factor p‖N dividing no node denominator 4t²+1 (t≤m).  Holds for
+  7640/7688 orbit-m pairs (m≤12, n<160).  The 48 exceptions are SMALL orbits (n∈{4,16,22}) whose simple factors
+  are ALL of the special form 4s²+1 with s≤m (5,13,17,29,37,257,…) — such a prime necessarily divides node s.
+  Any simple factor p>4m²+1 is automatically node-integral, but such large simple factors are not universal.
+
+  CONSEQUENCE (OP1).  For 99.4% of orbit-m pairs the clean theorem gives v_p(q_min) ≥ m EXACTLY for a proven-pole
+  carrier p≥5 ⇒ log q_min ≥ m·log5 = Ω(m).  In the thin exceptional set the node-pole injects an O(1) correction
+  (≤1 measured) and v_p(q_min) ≥ m−1, still Ω(m); §6cp's aggregate independently gives Ω(m) there.  So OP1's
+  linear-log barrier now rests on a PROVED mechanism (sub-law + clean bridge), not just exact enumeration.
+
+  HONEST SCOPE (L5): the §6ao identity is USED (holds for p≥5, node-integral: x−1=−2/(4t²+1), v_p=0); good-carrier
+  existence (7640/7688) is exact evidence, not a proof (48 small-orbit exceptions); the exceptional O(1) correction
+  is measured (≤1), not closed-form.  Still consecutive nodes; node-set infimum §6cn-evidenced only.  RH [OUT].
 
 ## 4. Honesty / scope
 
