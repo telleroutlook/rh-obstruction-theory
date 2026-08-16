@@ -218,10 +218,45 @@ def test_lindemann_weierstrass():
     print("  LW and stays open. This PROVES the OP2 negative for the Gaussian family only.", flush=True)
 
 
+def test_hermite_gaussian():
+    """Generalization: ANY even test function hhat(z) = P(z)*exp(-a z^2) with P a polynomial with
+    ALGEBRAIC coefficients gives observation values (algebraic)*exp(beta), beta = -a z^2 algebraic.
+    A nontrivial integer collision is then sum (algebraic_j) exp(beta_j) = 0 with algebraic_j != 0
+    (integer c_k times the nonzero P-factor). Lindemann-Weierstrass (distinct algebraic exponents)
+    forces every coefficient to 0 => no collision. So the OP2-negative covers the whole SCHWARTZ-DENSE
+    algebra {P*Gaussian, P even, algebraic coeffs}, not just the pure Gaussian. Test: Hermite H_2."""
+    print("\n" + "=" * 100, flush=True)
+    print("OP2 (4) HERMITE-GAUSSIAN hhat=H_2(sqrt(a) z)exp(-a z^2): PROVED no-collision (dense class). RH [OUT].", flush=True)
+    print("=" * 100, flush=True)
+    a = mp.mpf(1) / 5000
+    gam = [mp.mpf(g) for g in (10, 13, 17, 21, 25, 30, 35, 40)]  # none = 50 => P-factor 4a*g^2-2 != 0
+
+    def hhat(z):
+        return mp.hermite(2, mp.sqrt(a) * z) * mp.e ** (-a * z ** 2)  # H_2(x)=4x^2-2; even in z
+
+    g0, delta = mp.mpf(20), mp.mpf(1) / 5
+    with mp.workdps(250):
+        online = [2 * hhat(g) for g in gam]                       # real
+        offline = 4 * mp.re(hhat(g0 + mp.mpc(0, 1) * delta))       # 4 Re hhat(g0+i delta)
+        vals = [offline] + online
+        rel = mp.pslq(vals, maxcoeff=10 ** 9, maxsteps=60000)
+    pfac = [4 * a * g ** 2 - 2 for g in gam]
+    print("  a=1/5000; P=H_2; P-factors 4a*g^2-2 all != 0? %s (=> algebraic coeffs nonzero)" % all(
+        abs(p) > mp.mpf(10) ** (-20) for p in pfac), flush=True)
+    print("  Phi_off=%s ; Phi(gamma_k)=[%s]" % (
+        mp.nstr(vals[0], 8), ", ".join(mp.nstr(v, 8) for v in vals[1:])), flush=True)
+    print("  cross-check PSLQ @250dps maxcoeff=1e9 -> %s (consistent with LW)" % (
+        "rel FOUND (unexpected!)" if rel else "NO relation"), flush=True)
+    print("  => LW argument extends verbatim: no exact collision for P*Gaussian (algebraic data) family.", flush=True)
+    print("  Uncovered: genuine C_c^inf (hhat entire of exponential type, values are periods, not", flush=True)
+    print("  exp-of-algebraic) -- LW does not apply; stays OPEN.", flush=True)
+
+
 if __name__ == "__main__":
     test_pslq_independence()
     test_approx_collision()
     test_lindemann_weierstrass()
+    test_hermite_gaussian()
     print("\n" + "=" * 100, flush=True)
     print("OP2 SCOPING CONCLUSION (evidence, L5): the EXACT Theorem-A obstruction is a RATIONALITY", flush=True)
     print("phenomenon (OP1 exploits rational Li values -> exact lattice index q_min). For this Weil", flush=True)

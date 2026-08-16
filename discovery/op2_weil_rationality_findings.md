@@ -88,3 +88,23 @@ collision (lattice index `q_min ≥ 1`), the Gaussian Weil observations are prov
 and admit **none**. The two regimes are opposite, and the boundary is exactly the arithmetic nature
 of the observation values.
 
+## Generalization to a Schwartz-dense class (Hermite–Gaussian)
+
+The L–W argument uses only that each value is `(algebraic)·exp(algebraic exponent)`. So it extends
+verbatim to **any** even test function `ĥ(z) = P(z)·e^{−a z²}` with `P` a polynomial with algebraic
+coefficients: then `Φ(γ_k) = 2 P(γ_k) e^{β_k}` and the off-line value is an algebraic combination of
+`e^{β₊}, e^{β₋}`, all with algebraic coefficients. A nontrivial integer collision is
+`Σ_j α_j e^{β_j} = 0` with `α_j` algebraic and **nonzero** (integer multiplicities times the nonzero
+`P`-factors — require `P(γ_k) ≠ 0`, i.e. heights off the roots of `P`). L–W kills it, so **no exact
+collision**. This covers the **Schwartz-dense algebra** `{P·Gaussian : P even, algebraic coeffs}`.
+
+Verified instance: `ĥ = H_2(√a z) e^{−a z²}` (`a=1/5000`, same rational heights, `P`-factors
+`4aγ_k²−2 ≠ 0`); cross-check PSLQ @250 dps, maxcoeff `10⁹` → **no relation**, consistent with L–W.
+
+**Only genuinely open case:** true compact support `h ∈ C_c^∞` (as OP2 states it), where `ĥ` is
+entire of exponential type and its values are **periods**, not `exp(algebraic)` — L–W does not apply.
+So OP2 as literally posed (`C_c^∞`) remains open; but for the natural analytic/Schwartz families the
+answer is a **provable NO**, which pins the difficulty of the open case precisely on the
+arithmetic nature (period vs. `exp`-of-algebraic) of Paley–Wiener values.
+
+
