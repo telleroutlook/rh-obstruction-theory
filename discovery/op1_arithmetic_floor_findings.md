@@ -2224,6 +2224,58 @@ would refine, not overturn, the "unit-moment" framing (the pairing would still b
 valuation).  Ascent still = LOWER bound on max_j C_j; the anchor argument bounds v_3(S) from BELOW at 0,
 not from above -- the upper cap remains the open lemma.  One orbit (D=425).  RH stays [OUT].
 
+### §6aw — REFUTATION of lemma (4): C_j = v_3(S) is UNBOUNDED (single 3-adic node lift)
+
+The upper cap (§6au's plateau max_j C_j <= 12) was tested adversarially with SMALL t (random ascent = a mere
+LOWER bound on the true max).  A TARGETED 3-adic lift attack refutes it.  Split one free node: X' = {x_free}
+U Y (|Y| = m-2), g(y) = prod_Y(y - x_k); then S = <w, coeffs prod_{X'}(y-x_k)> is AFFINE in x_free:
+    S = a - x_free * b,   a = sum_j g_j w_{j+1} = L(y g),   b = sum_j g_j w_j = L(g)   [VERIFIED EXACT].
+If b is a 3-unit the adversary wants x_free ≈ a/b =: alpha.  Since x_of(t) = alpha solves to
+t^2 = (1+alpha)/(4(1-alpha)) =: R, whenever R is a 3-ADIC SQUARE (and alpha has reachable residue in {0,2}
+mod 3) an EXACT t* in Z_3 gives x_of(t*) = alpha, so integer t ≡ t* mod 3^c force v_3(S) >= c.  Census: R is
+a 3-adic square in 11%-54% of random Y-sets (m=4,5,6).  Hensel-lifting a sqrt t* to precision 3^c and taking
+the integer t_free = t* mod 3^c:
+    c:        3   6  10  15  20  30
+    v_3(S):   m=4:  5   8  12  17  22  34      m=5:  3   6  10  15  20  30      m=6:  3   6  11  15  20  30
+v_3(S) = C_j TRACKS c upward without bound in all three m.  Hence:
+    LEMMA (4) AS STATED (uniform max_j C_j = O(1)) is REFUTED for D=425.  C_j is UNBOUNDED; §6au's <=12
+    plateau was a shallow-random-search artifact (small-t ascent never reaches the deep 3-adic solutions).
+CONSEQUENCE: the §6au/§6av proof ROUTE "v_3(q_min) >= max_j N_j - max_j C_j >= m/2 - O(1)" is DEAD --
+subtracting an UNBOUNDED max_j C_j is vacuous.  (The §6av anchor still gives v_3(S) >= 0 and a free unit
+term; it bounds C_j only from BELOW, never from above.)  Honest negative result (L5).  One orbit (D=425).
+
+### §6ax — but the FLOOR SURVIVES: v_3(q_min) = max_j(N_j - C_j) is robust; the argmax just moves
+
+The floor is the JOINT quantity v_3(q_min) = max_j (N_j - C_j) (§6ao, cross-checked EXACT vs the SNF-free
+integer-det v3_qmin_fast here, ALL MATCH).  Inflating ONE column's C_j only removes THAT column from the
+argmax; the max over the OTHER columns can still be >= m/2.  Tested directly:
+  (Y) SINGLE-LIFT (drive C_{j0} -> huge via the §6aw lift, then read the full v_3(q_min)):
+        m=4: C_{j0}=5,12,22,34  ->  v_3(q_min)=5,5,5,5 (argmax stays j=0)
+        m=5: C_{j0}=4,11,21,31  ->  v_3(q_min)=3,3,3,3 (argmax stays j=0)
+        m=6: C_{j0}=4,11,21,32  ->  v_3(q_min)=8,7,7,7 (argmax stays j=1)
+      v_3(q_min) is CONSTANT as C_{j0} explodes -- the argmax simply moves to a non-exploded column, and the
+      floor (>= m/2) holds throughout.  The C-explosion is invisible to the max.
+  (Z) STRUCTURED-MIN (adversarially minimize v_3(q_min) WITH lifts -- stronger than §6aq random ascent):
+        m:                 4  5  6  7
+        min v_3(q_min):    2  2  4  5     (vs m/2 = 2, 2.5, 3, 3.5)   -> floor holds for all m.
+      Even the sharpest per-column 3-adic lift cannot push v_3(q_min) below ~m/2 (matches §6aq's random-ascent
+      minima 2,2,4,5,5,7,6 for m=4..10).
+
+CORRECTED PROOF STATUS (p=3 floor v_3(q_min) >= m/2 - O(1)) after §6aw/§6ax:
+  (1) v_3(det A) = sum_{k<l} v_3(x_k - x_l)                                 -- PROVEN (§6as).
+  (2) v_3(det A) >= PIG(m) = m^2/4 - O(m)                                   -- PROVEN (§6ar).
+  (3) max_j N_j >= 2 v_3(det A)/m >= m/2 - O(1)                             -- PROVEN (averaging).
+  (4') max_j (N_j - C_j) >= m/2 - O(1)                                      -- CORRECTED sole open lemma.
+       NOT "max_j C_j = O(1)" (that is FALSE, §6aw).  The correct statement is JOINT: at the column that
+       attains the floor, C_j is controlled RELATIVE to N_j.  Mechanism to prove: a 3-adic lift that inflates
+       one column's C_j either co-inflates that column's N_j (the aligned node 3-adically clusters, raising
+       the Vandermonde valuation) OR leaves another column with N_{j'} - C_{j'} >= m/2.  Empirically robust
+       (§6ax(Y),(Z)) but UNPROVEN.  This joint-correlation lemma is the corrected EXT/outsource nugget --
+       sharper and TRUE, unlike the refuted C_j = O(1) form.
+
+The p=3 FLOOR itself is NOT refuted -- only the naive route.  Direct minimization (§6aq, §6ax(Z)) continues
+to support v_3(q_min) >= m/2 - O(1).  One orbit (D=425).  Descent/ascent are one-sided.  RH stays [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
