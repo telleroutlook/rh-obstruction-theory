@@ -2835,13 +2835,13 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
         n ≡ 0 mod 4              →  p=2,  S = 2v₂(n)−1 ≥ 3,  floor 2m−2−S      [PROVED, §6bm]
         n odd                    →  p=2,  π=1+i quasi-linear (PROFILE PROVED §6br); W_top=v₂(w_{m−1})=1−3m/2
                                           (m≡0 mod4) / 2−3m/2 (m≡2 mod4), orbit-independent (§6by).
-                                          BOTH HALVES CLOSE (candidate): m≡0 mod4 → strict profile min ⇒ C_j=W_top
-                                          for ALL columns UNCONDITIONALLY ⇒ v₂(q_min)≥(9/2)m−3 (§6bz/§6ca, NO
-                                          minimax); m≡2 mod4 → top-two TIE, but lift_j≤v₂(τ−σ_j) & σ_j=T−x_j ⇒
-                                          deep lift forces clustering (N_j≥(m−1)L) ⇒ min_j(lift−excess)≤3 ⇒
-                                          v₂(q_min)≥(9/2)m−7 (§6cb, joint, NO minimax). Direct q_min confirms both.
-                                          [Row 2 = COMPLETE floor THEOREM CANDIDATE, all m; formal gaps: FACT A
-                                           §6br + lift≤v₂(τ−σ) from §6bv; discovery-tier, not machine-checked]
+                                          m≡0 mod4 → strict profile min ⇒ C_j=W_top for ALL columns
+                                          UNCONDITIONALLY ⇒ v₂(q_min)≥(9/2)m−3 (§6bz/§6ca, NO minimax) —
+                                          THEOREM CANDIDATE modulo FACT A.  m≡2 mod4 → top-two TIE;
+                                          v₂(q_min)≥(9/2)m−7 EMPIRICALLY ROBUST (strong adversary Q≤−4 &
+                                          direct q_min) but PROOF-OPEN — §6cb σ_j proof REFUTED by §6cc
+                                          (tail cancellation gives deep lift with no clustering).
+                                          [Row 2 HALF-CLOSED: m≡0 mod4 candidate; m≡2 mod4 conjecture only]
         n ≡ 2 mod 4, 3 ∤ n       →  p=3,  3-unimodular w, floor [2,2,4,5]       [empirical; OB-42 mechanism]
         n ≡ 2 mod 4, 3 ∣ n (6∣n) →  a ramified prime ∣ N(M)                     [empirical, §6bo]
 
@@ -3058,12 +3058,43 @@ FINAL CORRECTED STATUS of the sole open lemma (after §6au..§6ba):
   lift up), min pairwise v₂ = 3 (mechanism "min-lift ≤ min-pairwise-v₂" holds everywhere).  So the floor at
   m≡2 mod4 is ≥ 9m/2 − 7 with large margin.  DIRECT q_min (integer determinants, independent of the identity):
   min over 80 collisions × 3 orbits of v₂(q_min) = 27–29 (m=6), 53–55 (m=10) — all ≥ 9m/2 − 7 (20, 38).  ✓
-  STATUS (L5): with §6ca (m≡0 mod4) this makes Row 2 a COMPLETE floor THEOREM CANDIDATE for ALL m, all n-odd
-  orbits: v₂(q_min) ≥ (9/2)m − O(1) ⇒ log q_min = Ω(m) ≫ ω(log m), OP1 closes on the n-odd row.  The remaining
-  FORMAL gaps (to promote from discovery-tier): (1) lift_j ≤ v₂(τ − σ_j) rigorously from the §6bv term
-  structure incl. the profile gap at i=m−3; (2) FACT A period-4 profile (already §6br).  Hill-climb one-sided
-  (Q is a LOWER bound on the true adversarial max), but the analytic Q ≤ 3 argument does not depend on it and
-  the direct q_min check corroborates.  NOT machine-checked; NOT promoted to proof/.  RH stays [OUT].
+  STATUS (L5) — DOWNGRADED by §6cc: the JOINT PROOF SKETCH above is REFUTED.  Its load-bearing step
+  lift_j ≤ v₂(τ − σ_j) is FALSE (see §6cc: deep lift can come from TAIL cancellation in the higher-order
+  R_j terms, decoupled from σ_j).  The FLOOR bound v₂(q_min) ≥ 9m/2 − 7 at m≡2 mod4 remains EMPIRICALLY
+  robust (strong lift-seeking adversary maximizing min_j(lift−excess) gives Q ≤ −4, decreasing in m; direct
+  q_min ≥ bound) — but it is now an UNPROVEN CONJECTURE for m≡2 mod4, NOT a theorem candidate.  Contrast
+  §6ca (m≡0 mod4): that half IS a clean theorem candidate (strict profile min ⇒ lift ≡ 0 unconditionally,
+  no σ_j mechanism needed).  So Row 2 is HALF-CLOSED: m≡0 mod4 proved-modulo-FACT-A; m≡2 mod4 empirical
+  only, proof mechanism dead.  RH stays [OUT].
+
+### §6cc — REFUTATION of the §6cb mechanism; and RECONCILIATION confirming the m≡2 mod4 floor holds
+
+  probe_qmin_p2_nodd_lift_bound (EXACT, L9), and a strong lift-seeking adversary.  TWO findings:
+
+  (1) REFUTED (§6cb's key step): lift_j ≤ v₂(τ − σ_j) is FALSE.  Writing S_j = w_{m−2}(τ − σ_j) + R_j with
+  v₂(R_j) ≥ g := v₂(w_{m−3}) − W_top, the tie can be broken by TAIL cancellation inside R_j at depths ≥ g,
+  giving lift_j ≫ v₂(τ − σ_j).  Measured violations (lift, dd=v₂(τ−σ)): orbit 6/7 m=14 → (12, 3); orbit 4/5
+  m=10 → (6, 4),(5, 4); orbit 6/7 m=6 → (4, 3).  g = 2 everywhere.  So "deep lift ⇒ σ_j ≈ τ ⇒ clustering ⇒
+  excess" collapses: a single column CAN have large lift with NO clustering (excess=0) — verified directly,
+  e.g. (lift,excess)=(15,0) at n=7 m=6 and (12,0) at n=5 m=10.  The §6cb σ_j-clustering proof is DEAD.
+
+  (2) RECONCILED (the floor still holds): the floor uses min_j(lift−excess), NOT max_j.  A single high-lift
+  column does not lower q_min = det/gcd; the adversary must raise the MINIMUM over ALL m columns.  A strong
+  adversary (lift-seeking clustered inits + cluster/align moves, 120 restarts × 14 rounds) MAXIMIZING
+  min_j(lift_j − excess_j) achieves only:
+        Q = max_collisions min_j(lift−excess):  n=5 → −5(m=6), −11(m=10), −20(m=14);
+                                                 n=7 → −4(m=6), −13(m=10), −18(m=14).
+  Q is NEGATIVE and DECREASING in m ⇒ floor = 9m/2 − 4 − Q is ABOVE 9m/2 − 7 with growing margin.  The
+  earlier "floor violated (15,0)" alarm was a max-over-columns vs min-over-columns conflation: high-lift/
+  zero-excess columns exist but are NEVER simultaneous across all columns — some column always keeps
+  lift−excess ≤ −4.
+
+  STATUS (L5): m≡2 mod4 floor v₂(q_min) ≥ 9m/2 − 7 is EMPIRICALLY ROBUST (strong adversary + direct q_min)
+  but PROOF-OPEN — both the σ_j route (§6cb) and the single-target image-lemma route (§6bw) are RETIRED.
+  A valid proof must explain why the m columns cannot SIMULTANEOUSLY carry deep tail-cancellation lift; the
+  tail terms R_j are coupled across columns through the shared w-vector, and empirically that coupling
+  forbids joint alignment — but no clean argument is in hand.  This is the live open sub-problem for Row 2.
+  RH stays [OUT].
 
 ## 4. Honesty / scope
 
