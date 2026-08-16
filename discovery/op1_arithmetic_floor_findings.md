@@ -1446,6 +1446,42 @@ on-line confluent basis) has coordinate denominators whose lcm grows exponential
 the aggregate barrier as a single denominator-of-linear-solve bound — no prime/channel split — which
 is the right shape for a resultant/discriminant lower bound and the sole surviving forward target.
 
+### 6aa. RESULTANT ANATOMY of q_min: two channels pinned; naive S-unit lower bound REFUTED (this session)
+
+Chasing the (LCM) target we identified the exact algebraic structure.  From C_j = 4(1 - T_j(x)) and
+_phi_re = Re[1-(1-1/rho)^j], the moment variable is w = 1 - 1/rho: ON-LINE (rho=1/2+it) has |w|=1 so
+Re[w^j]=T_j(x), x=(4t^2-1)/(4t^2+1) — pure Chebyshev; OFF-LINE (sigma!=1/2) has |w|!=1 — a general
+moment.  So A = 4(J - M), M_{jk}=T_j(x_k) (Chebyshev-Vandermonde), and c = A^{-1}d is the quadrature
+reproducing off-line moments with on-line unit-circle nodes.  probe_qmin_resultant_anatomy +
+probe_qmin_geometric_identity (exact, D=425) pin q_min's prime anatomy into TWO channels:
+
+  * GEOMETRIC: with G := prod_{k<l}(t_k^2 - t_l^2) (Vandermonde in t^2; note x_k-x_l =
+    8(t_k^2-t_l^2)/[(4t_k^2+1)(4t_l^2+1)]), for GENERIC odd primes p (p not in {2,3} and not an
+    off-line norm prime) the observed relation is the ONE-DIRECTIONAL bound
+        v_p(q_min)  <=  v_p(G)      (delta_p := v_p(q_min)-v_p(G) is <=0 in EVERY sample, never >0).
+  * RAMIFIED: p in {5,17} = odd parts of the atom norms |rho|^2 = sigma^2+tau^2 = 25/16 and
+    (1-sigma)^2+tau^2 = 17/16 (this is literally why D=425=5^2*17).  Here v_p(q_min) is POSITIVE,
+    absent from G, and GROWS with m (v_17: ~3-4 at m=3, ~5-6 at m=5).  A separate source.
+
+REFUTATION (L5) of the naive lower-bound route: the clean identity v_p(q_min)=v_p(G) is FALSE.
+delta_p<=0 always, and the delta==0 fraction DECAYS with m: 0.851, 0.792, 0.641, 0.548 for m=3,4,5,6.
+So G strictly OVER-counts the geometric channel more and more; the "lost" valuation v_p(G)-v_p(q_min)
+is exactly the per-prime cancellation absorbed by the augmented gcd D_m([A|d]) (off-line column d
+sharing p with the minors).  That is the SAME per-prime mobility seen in §6w/§6z-note, now given its
+algebraic cause.  Consequences:
+  (i)  the geometric channel is UPPER-bounded by G, hence drainable by making G {2,3,5,17}-smooth —
+       confirming §6z-agg's finding that this channel alone collapses;
+  (ii) the naive "log q_min >= log(G with small primes removed)" S-unit lower bound does NOT go
+       through, because v_p(q_min) can be 0 while v_p(G)>0 (full cancellation);
+  (iii) therefore the AGGREGATE floor has NO per-prime closed form: it is precisely the two-channel
+       DRAIN-CONFLICT — smoothing G (geometric drain) needs one node family, spreading nodes mod
+       {5,17} (ramified drain) needs an incompatible one; §6z-agg shows they cannot be satisfied at
+       once, leaving the ~linear residual.  A rigorous OP1 bound must quantify this conflict (e.g. an
+       S-unit/smoothness impossibility for G SIMULTANEOUS with a mod-{5,17} spread), not a single
+       resultant.  WHAT SURVIVES as a clean sub-result: the one-directional v_p(q_min) <= v_p(G) for
+       generic p (an exact upper structure on the geometric channel).  Exact arithmetic (L9); bounded
+       one-orbit evidence; RH [OUT].
+
 ## 4. Honesty / scope
 
   * RH stays [OUT].  Everything here is finite exact-arithmetic about explicit
