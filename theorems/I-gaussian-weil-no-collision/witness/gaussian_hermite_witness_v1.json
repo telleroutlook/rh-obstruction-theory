@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "theorem_id": "I-gaussian-weil-no-collision",
+  "field": {
+    "squarefree_radical": 2
+  },
+  "a": "1/100",
+  "online_heights": [
+    {
+      "rational": "0",
+      "sqrt_coefficient": "1"
+    },
+    {
+      "rational": "0",
+      "sqrt_coefficient": "2"
+    },
+    "3"
+  ],
+  "polynomial": {
+    "coefficients": [
+      {
+        "degree": 0,
+        "coefficient": "12"
+      },
+      {
+        "degree": 2,
+        "coefficient": "-48"
+      },
+      {
+        "degree": 4,
+        "coefficient": "16"
+      }
+    ]
+  },
+  "quartets": [
+    {
+      "g": {
+        "rational": "0",
+        "sqrt_coefficient": "2"
+      },
+      "delta": "1/2"
+    }
+  ]
+}

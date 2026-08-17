@@ -6,6 +6,14 @@ used as proof.
 
 ## Step A — Reduce an integer collision to an algebraic linear relation among exponentials
 
+### Normalization audit
+
+With `z=(rho-1/2)/i`, a zero `rho=1/2+sigma+i t` contributes `G(t-i sigma)`.
+Hence an on-line pair collapses at `z=+-gamma`, and an off-line quartet gives
+the two arguments `g+i delta` and `g-i delta` (in the opposite order from the
+sign of `sigma`, which is immaterial because both are present). This is the
+normalization used in the displayed identities below.
+
 Keep the notation of `statement.md`. Put
 
 ```
@@ -70,9 +78,10 @@ satisfies the nonvanishing hypotheses, that coordinate alone forces all
 integers to vanish.
 
 For several quartets with parameters `(g_l,δ_l)`, each quartet contributes
-two exponents `-a(g_l±iδ_l)^2`. For `g_l>0`, `δ_l≠0`, the unordered pair is
-determined by `(g_l^2-δ_l^2, 2g_lδ_l)`; hence genuinely distinct quartets give
-disjoint exponent pairs. Repeating Step A produces one Lindemann-Weierstrass
+two exponents `-a(g_l±iδ_l)^2`. Assume explicitly that their unordered
+exponent pairs are disjoint. (For `g_l>0`, this is equivalent to distinct pairs
+`(g_l^2-δ_l^2, 2g_lδ_l)` up to replacing `δ_l` by `-δ_l`, which gives the same
+quartet.) Repeating Step A produces one Lindemann-Weierstrass
 relation with coefficients `q_lP(g_l±iδ_l)`. Distinct exponents force every
 `q_l=0`, and then the on-line coefficients vanish.
 
@@ -82,3 +91,13 @@ The proof uses the special form `(algebraic polynomial)·exp(algebraic exponent)
 It gives no statement for compactly supported `h`, whose Fourier transform is
 Paley-Wiener rather than Gaussian, and it gives no quantitative bound on
 approximate bounded-height relations.
+
+## Finite exact replay boundary
+
+`checker/gaussian_instance_check.py` deterministically replays one raw witness
+in `Q(sqrt(2))`: it checks positivity/nonvanishing hypotheses, evenness, exact
+exponent distinctness, conjugacy, and reconstruction of the collapsed pair and
+quartet formulas. It does not evaluate exponentials and does not prove the
+Lindemann-Weierstrass premise. Therefore this finite replay is evidence for the
+finite normalization/algebraic identities only, not a computational proof of
+the analytic theorem.

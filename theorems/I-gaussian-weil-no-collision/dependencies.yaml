@@ -1,7 +1,7 @@
 theorem_id: I-gaussian-weil-no-collision
 status:
   mathematical: PROOF-DRAFT
-  computational: EXPLORATORY
+  computational: REPRODUCIBLE
 dependencies:
   - id: LINDEMANN-WEIERSTRASS-LINEAR-INDEPENDENCE
     statement: >
@@ -34,4 +34,5 @@ gate_a_note: >
   The theorem is ready for independent mathematical review. It must not be
   promoted to INDEPENDENTLY-CHECKED until the whole statement, the normalization
   of Phi_G, the nondegeneracy hypotheses, and the Lindemann-Weierstrass
-  invocation are externally checked.
+  invocation are externally checked. The finite checker replays one quadratic
+  witness and mutation suite; it does not close Gate A.

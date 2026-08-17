@@ -2,7 +2,7 @@
 
 **Theorem ID:** I-gaussian-weil-no-collision  
 **Mathematical status:** PROOF-DRAFT (prepared for Gate-A review; not independently checked)  
-**Computational status:** NONE for the analytic theorem (finite sanity scripts do not certify it)  
+**Computational status:** REPRODUCIBLE finite quadratic-witness replay; no finite computation certifies the analytic theorem
 **Program ref:** Paper A Open Problem 2 / observation-encoding arithmetic  
 **Paper target:** Paper A v2
 
@@ -86,6 +86,15 @@ The hypotheses `P(γ_k)≠0` and `P(g+iδ)≠0` are necessary. If, for example,
 invisible to `G`; `(q,c_1,...,c_m)=(1,0,...,0)` is then a degenerate integer
 relation. This is not a failure of the no-collision argument: it means the
 chosen test function annihilates the distinction being observed.
+
+### Normalization audit
+
+The observation coordinate is `(rho-1/2)/i`. Thus an on-line point
+`1/2+i gamma` maps to `gamma`, while `1/2+delta+i g` maps to `g-i delta` and
+`1/2-delta+i g` maps to `g+i delta`. Since the quartet contains both signs of
+`delta`, the displayed unordered pair `P(g+i delta), P(g-i delta)` is exactly
+the reconstructed pair; the labels `+/-` alone carry no convention-dependent
+meaning.
 
 ## §4. Status boundary
 
