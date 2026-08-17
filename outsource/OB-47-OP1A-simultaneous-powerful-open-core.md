@@ -145,28 +145,28 @@ branches are handled.
 
 ## 6. Suggested proof approaches (not yet tried)
 
-### Approach A — S-unit equations over ℤ[i]
+### Approach A — S-unit equations over ℤ[i] (square-based sketch only)
 
 Write `w₊ = (1+2i)^{f₁}(1−2i)^{g₁} ξ₊²` and `w₋ = (1+2i)^{f₂}(1−2i)^{g₂} ξ₋²`
-in ℤ[i] (ignoring cube factors for the sketch; the full case includes a "`v³`"
-component). The shift identity `w₊ − w₋ = n` becomes
+in ℤ[i]. This is the square-based subcase, not the full powerful parametrization;
+the full case also has a cube-factor component `U`. The shift identity is
+`w₊ − w₋ = 2a−n`, giving
 ```
-(1+2i)^{f₁}(1−2i)^{g₁} ξ₊² − (1+2i)^{f₂}(1−2i)^{g₂} ξ₋² = n.
+(1+2i)^{f₁}(1−2i)^{g₁} ξ₊² − (1+2i)^{f₂}(1−2i)^{g₂} ξ₋² = 2a−n.
 ```
-For each fixed tuple `(f₁, g₁, f₂, g₂) ∈ {0,1}⁴` (only finitely many 5-adic
-types), this is an **S-unit equation over ℤ[i]** with `S = {(1+2i),(1−2i)}`.
-By Evertse–Schlickewei–Schmidt (or the Gaussian analogue of Thue–Mahler for
-norm forms), the number of solutions in `(ξ₊, ξ₋)` is finite for each fixed
-`n`. The task is to turn this into a uniform bound over all `n`.
+The support of `ξ₊ξ₋` is not `{(1+2i),(1−2i)}`: its primes come from `A±`, and
+`gcd(A±,n)=1` puts the non-5 part outside the factor set of `n`. Any Evertse
+application must fix the **actual** support of `ξ₊ξ₋` (and `U₊U₋` in the full
+powerful case), not just the two Gaussian primes above 5.
 
-*What is needed:* a version of Evertse's S-unit theorem over ℤ[i] that gives
-a bound on the height of `ξ₊, ξ₋` in terms of `n`, rather than just
-finiteness for each fixed `n`.
+*What is needed:* a uniform effective theorem for these moving actual supports.
+A fixed actual support and fixed normalized equation is a different hypothesis from
+a cardinality-only bound.
 
 ### Approach B — Thue–Mahler / norm-form equations for fixed n
 
 For fixed `n` and `eᵢ ∈ {0, 1}`, the equation `a² + n² = 5^{eᵢ} s²`
-(simplest case: powerful = perfect square times 5-power) is a **norm equation**
+(square-based subcase `N=5^e m²`) is a **norm equation**
 in ℤ[i]:
 ```
 N(a + ni) = 5^{eᵢ} s²  ⟹  a + ni = (1±2i)^{eᵢ} · α²
@@ -175,8 +175,10 @@ for some `α ∈ ℤ[i]` with `N(α) = s` and `gcd(α, 5) = 1`. Taking real part
 gives `a = Re[(1±2i)^{eᵢ} α²]`, a degree-2 polynomial equation in
 `Re(α), Im(α)`. **For fixed `n`**, the constraint that both `a² + n²` and
 `(a−n)² + n²` have this form simultaneously defines an intersection of two
-genus-1 curves (for each fixed `n` and `eᵢ` tuple), which by Faltings has
-finitely many rational points. The task is to carry this out for the general
+genus-1 curves (for each fixed `n` and `eᵢ` tuple). Faltings does not apply:
+rank 0 permits torsion enumeration, rank 1 may permit Chabauty after supplying
+its setup, and rank >1 needs another effective bound. The task is to carry this
+out for the general
 "powerful" case (not just "square times 5-power"), where the parametrization is
 `w₊ = (1±2i)^{f} u₊² v₊³`.
 
@@ -215,7 +217,10 @@ application requires bounding both `A₋` and `k` together.
 
 *What is needed:* a powerful-gap bound that applies when the gap itself scales
 as `k ≍ A₋` (rather than `k` being fixed), possibly via a more careful abc
-application over ℤ[i] with explicit exponents.
+application over ℤ[i] with explicit exponents. A **gap-only** version is false:
+`4=2²` and `8=2³` are powerful away from 5 and differ by a quantity comparable to
+their size. Any useful NT-D input must also use the Row-3 coupling (same `n`, gcd,
+congruences, and Gaussian norm shape).
 
 ---
 

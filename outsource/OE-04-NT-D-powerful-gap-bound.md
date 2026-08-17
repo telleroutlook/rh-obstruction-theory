@@ -1,10 +1,17 @@
 # Problem OE-04 — NT-D: Powerful-gap Bound for Gaps of Order A
 
+**Returned-feedback status (2026-08-17):** the geometric/Vojta reply is **REJECTED as
+a CONFIRMED result**. Its square-case elliptic argument is incomplete and already
+covered by Theorem L; its fixed-cube-factor curves are genus one, not genus >1; and the
+Darmon-Granville/Vojta scope is not established. A salvaged exact outcome is that the
+**gap-only route is REFUTED** by `4=2^2` and `8=2^3`, whose gap is comparable to their
+size. See `outsource/solutions/OE-04-geometric-feedback-review.md`.
+
 **Type:** Pure arithmetic / Diophantine (powerful numbers, gap problems, ABC conjecture)
 
 **Non-circularity:** All hypotheses are elementary arithmetic over ℤ and ℤ[i]. No zeros of ζ, no RH, no Li coefficients, no ordinate values. RH stays `[OUT]`.
 
-**Relation to Paper E.** This is blocking theorem NT-D (Paper E, thm:NTD). Classical powerful-gap results (Molsen 1939, Stormer, Pillai, Granville 1998) require the gap k ≪ A^{1/2} or k fixed; for Row-3 pairs the gap k = n(2a−n) satisfies k ≍ A, which is outside all classical regimes. The ABC approach is a known dead end (proved in Paper E). An independent Diophantine argument or a new powerful-gap result in the regime k ≍ A would close NT-D.
+**Relation to Paper E.** This is blocking theorem NT-D (Paper E, thm:NTD). Classical powerful-gap results (Molsen 1939, Stormer, Pillai, Granville 1998) require the gap k ≪ A^{1/2} or k fixed; for Row-3 pairs the gap k = n(2a−n) satisfies k ≍ A, which is outside all classical regimes. The ABC approach is a known dead end (proved in Paper E). A Row-3-specific Diophantine argument that uses more than gap size would be needed to close NT-D.
 
 ---
 
@@ -124,7 +131,9 @@ Systematically review:
     - gap k ≍ A: this problem.
 
 (b) Are there any known powerful pairs (A₁, A₂) with A₂ ≍ A₁ and |A₂−A₁| ≍ A₁?
-    (If such pairs exist, NT-D via this approach is impossible.)
+    Yes: `4=2²` and `8=2³` are powerful away from 5 and have gap `4~4`.
+    Therefore NT-D via gap size alone is impossible; only the additional Row-3
+    coupling could matter.
 
 **What to close:** Either identify a literature result covering gap k ≍ A, or
 explicitly construct (or prove non-existence of) powerful pairs with gap ≍ A.
@@ -179,8 +188,8 @@ If the standard ABC dead end (exponent 3, shown above) is insufficient, investig
 ## Acceptance criteria
 
 1. **CONFIRMED — unconditional:** Proof that no pair (A⁺, A⁻) satisfying all Row-3
-   constraints (or more generally: two powerful-away-from-5 integers with gap ≍ their
-   size) can exist for values beyond some explicit bound C.
+   constraints can exist for values beyond some explicit bound C. The more general
+   gap-only statement is false (`4,8`).
 
 2. **CONFIRMED — conditional:** Same result under a clearly stated conjecture (ABC over
    ℤ[i], Vojta's conjecture, etc.) with a proof that the conjecture implies the bound.
@@ -195,6 +204,7 @@ If the standard ABC dead end (exponent 3, shown above) is insufficient, investig
    powerful-away-from-5 integers with gap ≍ A (outside the Row-3 family), showing
    that the gap alone does not force non-powerful. This would not disprove the core
    conjecture but would close NT-D as an approach.
+   **Current status:** satisfied for the gap-only route by `4=2²`, `8=2³`.
 
 5. **INCONCLUSIVE:** A precise localization of the obstruction: "NT-D via the gap
    argument is blocked because [X]. An alternative approach in [direction Y] is not
@@ -222,6 +232,10 @@ Row-3 pairs and gap sizes:
   |Δ|/A⁻≈0.016. 12401=?? 12401=113×109+24... let me check: neither is powerful.
 
 Zero Row-3 pairs with both A⁺ and A⁻ powerful away from 5 for n≤3000.
+
+Exact non-Row-3 adversary: `4=2²` and `8=2³` are both powerful away from 5 and
+have gap `4`, comparable to the smaller number. Thus gap size alone cannot force
+non-powerfulness.
 
 ---
 

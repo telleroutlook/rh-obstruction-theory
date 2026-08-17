@@ -1,5 +1,10 @@
 # Problem OE-01 — NT-C: Gaussian Zsygmondy for the Row-3 Family
 
+**Status update (2026-08-17):** the square/t=1 subcase is now covered by Theorems L
+and M (repository status `PROOF-DRAFT`). The remaining active target is the cube-factor
+case, reformulated more precisely as OE-05. The support correction below is part of the
+post-review audit.
+
 **Type:** Pure arithmetic / Diophantine geometry  
 **Non-circularity:** All hypotheses are elementary: even integers, odd integers, gcd,
 norms in ℤ[i]. No zeros of ζ, no RH, no Li coefficients, no ordinate values.
@@ -129,8 +134,8 @@ which factors as y² = (x²−xb−b²)(x²+xb−b²) over ℤ.
 **What to close for Step 2:** Determine all integer points on C with the Row-3
 constraints (3 ∤ m, a odd, gcd(a, 2m) = 1). Specifically:
 
-- Compute the rank of C over ℚ (likely rank 0, whence Siegel gives finitely many
-  integer points).
+- Compute the rank of C over ℚ. Rank 0 permits direct torsion enumeration; rank 1
+  requires a fully set-up Chabauty argument; rank >1 is not closed by this protocol.
 - Identify all rational points and check that none satisfy the Row-3 constraints for
   n > C.
 
@@ -142,18 +147,22 @@ Magma/SageMath) apply.
 ### Step 3 — Extension to the general powerful case
 
 When A⁺ = 5^{e₁}·s₁²·t₁³ (Erdős–Szekeres, with cube factor t₁ ≥ 2), the Gaussian
-factorization gives w⁺ = 5^{e₁}·U·α² where U is a Gaussian integer supported on
-primes above n, and α ∈ ℤ[i] satisfies N(α²)·N(U) = A⁺/5^{2e₁}.
+factorization gives w⁺ = unit · (5-part) · U·α², where U is a Gaussian integer supported
+on Gaussian primes above the split primes in t₁ (together with the odd 5-part, if any).
+Because gcd(a,n)=1 implies gcd(A⁺,n)=1, those non-5 primes are **outside** the prime
+divisors of n. Thus the support of U is not bounded by S(n).
 
-The difference w⁺ − w⁻ = n remains. With both w⁺ and w⁻ "Gaussian powerful
-away from 5n," their difference n = w⁺ − w⁻ yields a Gaussian S-unit equation:
+The difference w⁺ − w⁻ = 2a−n remains. With both w⁺ and w⁻ powerful away from 5,
+this yields a varying Gaussian S-unit equation:
 
 ```
 U₁α² − U₂β² = n,
 ```
 
-where U₁, U₂ are supported on Gaussian primes above 5n. The allowed prime set S
-grows with n (|S| = O(ω(n))), blocking direct Evertse–Schmidt.
+where U₁, U₂ (and also the square parts α, β) contribute prime support outside 5n.
+The allowed prime set S is not determined by the factor set of n; in particular it is
+not correct to write |S|=O(ω(n)). The actual support grows through the cube-factor
+primes of A⁺ and A⁻, blocking direct Evertse–Schmidt.
 
 **Obstacle (cube factor / growing S):** No current theorem gives effective uniform
 bounds on the S-unit equation X − Y = n when |S| → ∞ with n. The cube-factor case

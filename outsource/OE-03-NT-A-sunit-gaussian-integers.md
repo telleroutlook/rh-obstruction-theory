@@ -1,5 +1,15 @@
 # Problem OE-03 — NT-A: Uniform Effective S-unit Theorem over ℤ[i] with Growing S
 
+**Post-review status (2026-08-17): RETIRED AS WRITTEN; do not resend.**
+The parametrization `w=5-part*xi^2` is only the square-based `t=1` subcase, not the
+full powerful-away-from-5 case. It is also false that `xi` is an `S(5n)`-unit:
+`gcd(a,n)=1` implies `gcd(Apm,n)=1`, so the prime support of `wpm` lies outside the
+prime divisors of `n`. The original `S(n)` theorem statement below is retained only as
+the audited source of the defect. A replacement prompt must parametrize
+`w=unit*5-part*U*xi^2` with `U` carrying odd exponents at least three and must state
+whether the actual support, merely its cardinality, the coefficients, and the right-hand
+side are fixed.
+
 **Type:** Analytic / algebraic number theory (S-unit equations, Baker theory, effective heights)
 
 **Non-circularity:** All hypotheses are elementary arithmetic over ℤ and ℤ[i]. No zeros of ζ, no RH, no Li coefficients, no ordinate values. RH stays `[OUT]`.

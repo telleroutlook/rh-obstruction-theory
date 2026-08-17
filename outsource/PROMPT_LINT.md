@@ -267,6 +267,74 @@ uniformly" while proof.md §3, OB-03-confirmed, proved a fixed-`N` witness at ra
 
 ---
 
+## L25 — Powerful-away-from-5 is not `5^e*square`; preserve the cube factor (hit OE-03 geometric feedback)
+NEVER collapse `powerful-away-from-5` to `N=5^e X^2`. The latter means every non-5
+exponent is **even**; powerfulness only requires every non-5 exponent to be **at least
+two**, so exponents `3,5,7,...` remain and are exactly the OE-05 cube-factor case.
+CHECK with an exact factorization witness: `13^3` is powerful away from 5 but not
+`5^e*square`; equivalently `(3+2i)^3` is a Gaussian element whose norm has a nontrivial
+odd exponent. Any quadric/elliptic model using `Apm=5^e X^2` must be labeled **t=1 /
+square-based only**, and must not be called a model of the full powerful locus. Grep for
+`powerful.*square`, `5^e`, and `perfect square` near a powerful-value target before
+promoting the model.
+
+## L26 — Fixed actual support `S` is not a cardinality bound `|S|<=M` (hit OE-05 Baker feedback)
+NEVER replace "the actual finite set `S` is fixed" by "the number of supporting primes is
+at most `M`" when invoking Evertse, Baker, or Matveev. Cardinality does not control which
+primes occur, their exponents, the S-unit coefficients, or logarithmic heights. CHECK the
+exact theorem inputs: field, list of fixed logarithms/algebraic numbers, degrees, heights,
+and whether the right-hand side is fixed. The family `13^(2j+3)` has one supporting prime,
+unbounded height, and a nontrivial cube factor. A displayed constant may depend on
+`2^|S|` only after proving that all other height parameters are fixed or separately
+bounded. In particular, a bound for fixed actual `S` and fixed normalized right-hand side
+is not a uniform `C(M)` over all supports of size `M`.
+
+## L27 — Genus/rank protocols must match their effective scope (hit OE-03 geometric feedback)
+NEVER say "compute the Mordell-Weil group, then Siegel/Chabauty closes the problem" as an
+unqualified algorithm. CHECK each scope separately: rank 0 plus exact torsion can enumerate
+rational points, but the descent must be independently checked; Chabauty-Coleman needs
+rank at most genus and an explicit Mordell-Weil setup; rank > 1 is not covered; Siegel's
+finiteness for integral points is non-effective; and a quadratic/Pell-type equation is
+genus zero, so Faltings does not apply without an additional S-unit/higher-genus
+constraint. A varying family of curves additionally needs uniformity over the family, not
+just one curve computation.
+
+## L28 — Recompute curve invariants from the roots, not from a nearby formula (hit OE-05 Frey feedback)
+NEVER paste a discriminant, conductor, or level-lowering formula without recomputing it
+for the displayed model. CHECK the roots first: for
+`Y^2=(X-r_1)(X-r_2)(X-r_3)`, `Delta=16*product_{i<j}(r_i-r_j)^2`. The OE-05 reply
+used `Y^2=X(X-w_+)(X+n)` but wrote a discriminant involving `-w_-`; the correct cubic
+invariant contains `(w_+ + n)^2`. A conductor or level-lowering claim derived from the
+wrong discriminant is not evidence.
+
+## L29 — Gap-only powerful claims need an explicit adversary search (hit OE-04 geometric feedback)
+NEVER claim that two powerful-away-from-5 numbers cannot have a gap comparable to their
+size without first searching trivial prime-power adversaries. CHECK pairs `q^2,q^3`:
+`4=2^2` and `8=2^3` are both powerful away from 5 and have gap `4~4`; `9=3^2` and
+`27=3^3` are another example. A gap-only theorem is therefore false. Any remaining gap
+argument must use the Row-3 coupling (same `n`, congruences, gcd, Gaussian norm shape),
+not gap size alone.
+
+## L30 — Darmon-Granville / Vojta citations must state the exact orbifold and conclusion (hit OE-04 geometric feedback)
+NEVER invoke Darmon-Granville for `F(x,y)=Y^2Z^3` with `Z` variable as though it were
+`F(x,y)=z^p` with fixed `p`. CHECK the source statement in `baseline/`: fixed
+exponents/signature, reciprocal-sum condition, primitive-solution scope, and whether
+the exponent tuple is hyperbolic. The tuple `(4,2,3)` has reciprocal sum `13/12>1`.
+NEVER turn Lang-Vojta non-density into an absolute height bound for all integral points.
+CHECK that the log pair `(V,D)` is actually log-general type and state the predicted
+proper Zariski-closed containment; `K_V>0` or two "ramified conditions" is not a proof.
+
+## L31 — Elliptic model, j-invariant, torsion, and twist family must be consistent (hit OE-05 biquadratic feedback)
+NEVER switch between allegedly equivalent elliptic models without comparing exact
+invariants, and NEVER attach an `x mod squares` descent to a curve with no rational
+2-torsion/2-isogeny. CHECK: compute `j`; list rational 2-torsion; identify the exact
+2-isogeny; derive the quadratic-twist parameter; and show the claimed rank statement
+for every twist, not just one member. A fixed `j` does not imply fixed rank, and a
+varying family of quadratic twists is not closed by a single local calculation at 2
+and 5.
+
+---
+
 ### Self-containment gate (CLAUDE.md checklist #5, always)
 Every symbol/formula/premise defined in-file; proved results inlined as premises; full
 formulas written out (not point values); no "see other file" for load-bearing content
