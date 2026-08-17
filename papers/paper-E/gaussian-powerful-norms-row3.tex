@@ -27,6 +27,8 @@
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\NN}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
 \newcommand{\Zi}{\mathbb{Z}[i]}
 \newcommand{\vp}{v_p}
 \newcommand{\Aplus}{A_{+}}
@@ -121,12 +123,18 @@ is ever powerful is the final unresolved arithmetic core of that program.
 The three theorems proved here are fully independent of any analytic
 number theory; they are unconditional arithmetic facts about the Row-3
 family and do not assume the Riemann Hypothesis in any form.
+A fourth theorem (Theorem~D, \S\ref{sec:thmsquare}) resolves the \emph{square
+subcase} of the main open problem unconditionally via 2-isogeny descent on an
+elliptic curve, showing that $\Aplus$ and $\Aminus$ cannot both be perfect
+squares simultaneously.
 
 \medskip
 \noindent\textbf{Organization.}
 Section~\ref{sec:setup} establishes definitions and notation.
 Section~\ref{sec:lemmas} collects elementary lemmas used throughout.
 Sections~\ref{sec:thm3}--\ref{sec:thmgcd} contain the three main theorems.
+Section~\ref{sec:thmsquare} proves Theorem~D (NT-C square subcase) via elliptic
+curve descent.
 Section~\ref{sec:numerical} presents the computational evidence.
 Section~\ref{sec:open} formulates the open core and the four blocking
 theorems (NT-A/B/C/D).
@@ -171,7 +179,7 @@ prime $p\neq 5$ dividing $X$; no condition is imposed on $v_5(X)$.
 \begin{definition}[Gaussian formulation]
 \label{def:gaussian}% xref-only
 In the Gaussian integers $\Zi$, a Gaussian prime above a rational prime
-$p\equiv 1\pmod{4}$ splits as $p=\pi_p\bar\pi_p$.  Since $\gcd(a,n)=1$,
+$p\equiv 1\pmod{4}$ splits as $p=\pi_p\bar\pi_p$ \cite{Ireland1990}.  Since $\gcd(a,n)=1$,
 both $w_{+}$ and $w_{-}$ are \emph{primitive} (their real and imaginary
 parts are coprime).  Primitivity forces $v_{\pi_p}(w_{+}) = v_p(\Aplus)$
 for each prime $p\equiv 1\pmod{4}$, so
@@ -195,7 +203,7 @@ $2a\equiv n\pmod{5}$ (equivalently, $5\mid\Aplus$ and $5\mid\Aminus$).
 %---------------------------------------------------------------------
 
 \begin{lemma}[Shift identity]
-\label{lem:shift}% xref-only
+\label{lem:shift}
 $\Aplus - \Aminus = n(2a-n)$.
 \end{lemma}
 
@@ -204,7 +212,7 @@ Direct expansion: $(a^2+n^2)-((a-n)^2+n^2) = a^2-(a-n)^2 = n(2a-n)$.
 \end{proof}
 
 \begin{lemma}[Primitivity]
-\label{lem:primitive}% xref-only
+\label{lem:primitive}
 For every Row-3 pair, $\gcd(a,n)=\gcd(a-n,n)=1$, so $w_{+}$ and $w_{-}$
 are primitive Gaussian integers.
 \end{lemma}
@@ -285,7 +293,7 @@ $p\mid a^2$, hence $p\mid a$, contradicting $\gcd(a,n)=1$), we may write
 $(a/n)^2\equiv -1\pmod{p}$.  This means $-1$ is a quadratic residue
 modulo $p$, which by Fermat's criterion holds if and only if
 $p\equiv 1\pmod{4}$.  The same argument with $\Aminus$ and $a-n$
-(noting $\gcd(a-n,n)=1$) gives every prime $p\mid\Aminus$ satisfies
+(noting $\gcd(a-n,n)=1$ by Lemma~\ref{lem:primitive}) gives every prime $p\mid\Aminus$ satisfies
 $p\equiv 1\pmod{4}$.
 
 \emph{Part (ii).}  Since $a$ is odd, $a^2\equiv 1\pmod{8}$.
@@ -321,7 +329,7 @@ For every Row-3 pair $(a,n)$:
 \begin{proof}
 \emph{Part (i).}  Let $p\mid\gcd(\Aplus,\Aminus)$.  If $p\mid n$ then
 $p\mid a^2$, so $p\mid a$, contradicting $\gcd(a,n)=1$.  Hence $p\nmid n$.
-Then $p\mid\Aplus-\Aminus = n(2a-n)$ forces $p\mid 2a-n$.  Since also
+Then $p\mid\Aplus-\Aminus = n(2a-n)$ (Lemma~\ref{lem:shift}) forces $p\mid 2a-n$.  Since also
 $p\mid\Aplus = a^2+n^2$ and $n\equiv 2a\pmod{p}$, we get
 $\Aplus\equiv a^2+(2a)^2 = 5a^2\pmod{p}$.  Since $p\nmid a$,
 this gives $p\mid 5$, so $p=5$.
@@ -347,6 +355,88 @@ Outside $\mathcal{F}_5$, at least one factor is coprime to~$5$.
 $N$ is powerful if and only if: $\Aplus$ and $\Aminus$ are both powerful
 away from~$5$, and $v_5(\Aplus)+v_5(\Aminus)\neq 1$.
 \end{corollary}
+
+%---------------------------------------------------------------------
+\section{Theorem D: no simultaneous perfect squares (NT-C square subcase)}
+\label{sec:thmsquare}% xref-only
+%---------------------------------------------------------------------
+
+\begin{mainthm}[NT-C square subcase]
+\label{thm:square}
+There are no Row-3 pairs $(a,n)$ such that $\Aplus = a^2+n^2$ and
+$\Aminus = (n-a)^2+n^2$ are simultaneously perfect squares.
+\end{mainthm}
+
+\begin{proof}
+Write $n=2m$.  Suppose $\Aplus = x^2$ and $\Aminus = y^2$ for positive integers
+$x,y$.  Since $a$ is odd and $x^2\equiv 1\pmod{4}$, $x$ is odd; the Pythagorean
+parametrization gives $s_1 t_1 = m^2$, $t_1 - s_1 = a$ and $s_2 t_2 = m^2$,
+$t_2 - s_2 = n - a$.  Setting $S = s_1+s_2$ and $P = s_1 s_2$, the constraint
+$(t_1-s_1)+(t_2-s_2) = 2m$ forces $P = Sm^2/(S+2m)$ to be a positive integer
+and the discriminant $\Delta = S^2-4P$ to be a perfect square.  Substituting
+the identity $\Delta = (S-2m)(u-v)^2/[4(S+2m)]$ (where $uv=5m^2$, $u+v=S$)
+reduces the problem to rational points on the genus-1 curve
+\[
+  C : y^2 = x^4 - 3x^2 + 1,\qquad x = a/(2m) \in (0,1)\cap\QQ.
+\]
+Using the rational base point $(0,1)$ on~$C$ and the substitution
+$U=(y+1)/x^2$, one obtains the birational equivalence
+\[
+  C \cong E: Y^2 = X^3 + 3X^2 - 4X = X(X+4)(X-1),
+\]
+with $E(\QQ)_{\mathrm{tors}} = \{\mathcal{O},(0,0),(1,0),(-4,0)\}$ (full 2-torsion).
+
+\medskip
+\noindent\emph{Rank 0.}  Apply 2-isogeny descent with $\phi:E\to E'$ having
+kernel $\langle(0,0)\rangle$, where $E': Y^2=X^3-6X^2+25X$.
+
+\emph{$\phi$-Selmer group.}  Candidates $d\in\{\pm1,\pm2\}$ (divisors of $b=-4$).
+The homogeneous space $N^2 = dM^4+3M^2e^2-(4/d)e^4$: $d=\pm1$ are soluble;
+$d=2$ fails in $\QQ_2$ (checking $N^2 \bmod 8$ for all primitive $(M,e)$ gives
+$2, 2, 6, 3 \bmod 8$, none squares); $d=-2$ fails by group structure.
+Hence $|S^{(\phi)}|=2$.
+
+\emph{$\hat\phi$-Selmer group.}  Candidates $d\in\{\pm1,\pm5\}$.
+The space $N^2 = dM^4-6M^2e^2+(25/d)e^4$: $d=\pm1$ gives soluble ($d=1$) and
+negative definite ($d=-1$, fails over~$\RR$); $d=5$ soluble at $(M,e)=(1,1)$
+($N=2$); $d=-5$ negative definite.  Hence $|S^{(\hat\phi)}|=2$.
+
+\emph{Rank bound.}  Since $E(\QQ)[2]\cong(\ZZ/2\ZZ)^2$ (four 2-torsion points),
+$\dim_{\FF_2}(E(\QQ)/2E(\QQ)) = r + 2$ where $r$ is the rank.  The combined
+descent bound gives $r + 2 \leq \dim S^{(\phi)} + \dim S^{(\hat\phi)} = 2$,
+so $r \leq 0$, i.e.\ $r = 0$.
+
+Therefore $E(\QQ) = E(\QQ)_{\mathrm{tors}}=\{\mathcal{O},(0,0),(1,0),(-4,0)\}$.
+
+\medskip
+\noindent\emph{Pullback to~$C$.}  Tracing each torsion point back through
+the birational map (via $U=X_1/2$, $X_1=X_2$, $X_2=X_3+1$):
+\begin{align*}
+  X_3=\infty &\;\Rightarrow\; x = 0,\\
+  X_3=0      &\;\Rightarrow\; x^2 = 8/3\notin\QQ^2,\\
+  X_3=1      &\;\Rightarrow\; x = \infty,\\
+  X_3=-4     &\;\Rightarrow\; x^2 = -24/5 < 0.
+\end{align*}
+The only rational values of $x$ on~$C$ are $x\in\{0,\infty\}$.
+Since the Row-3 parametrization requires $x = a/(2m)$ with $a\geq1$ odd and
+$m\geq2$, we have $x\in(0,1)$, excluding both $0$ and $\infty$.
+\end{proof}
+
+\begin{corollary}[NT-C: square subcase]
+\label{cor:NTC-square}
+For every Row-3 pair $(a,n)$, at least one of $\Aplus$, $\Aminus$ is not a
+perfect square.  In particular, neither can be powerful-away-from-$5$ via the
+perfect-square path $s^2t^3$ with $t=1$.
+\end{corollary}
+
+\begin{remark}
+Theorem~\ref{thm:square} does not yet resolve NT-C in full: the powerful-away-from-$5$
+condition also includes cube-factor cases $s^2t^3$ with $t\geq 2$.
+The full NT-C claim (that \emph{both} $\Aplus$ and $\Aminus$ are powerful
+away from~$5$) remains open for $t\geq2$.  The proof above uses only the
+Pythagorean structure and a 2-isogeny descent on a specific genus-1 curve;
+it does not import RH or any zero-location hypothesis.
+\end{remark}
 
 %---------------------------------------------------------------------
 \section{Numerical evidence}
@@ -422,7 +512,7 @@ $w_{+}=(1+2i)^{f_1}(1-2i)^{g_1}\xi_{+}^2$ and
 $w_{-}=(1+2i)^{f_2}(1-2i)^{g_2}\xi_{-}^2$ reduces the shift identity
 $w_{+}-w_{-}=n$ to an S-unit equation over $\Zi$ with
 $S=S_0\cup S(n)$ growing with $n$ ($|S(n)|=O(\omega(n))$).
-The Evertse--Schlickewei--Schmidt theorem and its Gaussian analogues
+The Evertse--Schlickewei--Schmidt theorem \cite{Evertse1984,Schmidt1990} and its Gaussian analogues
 give finiteness for fixed $S$ but do not provide height bounds
 uniform in $|S|$.
 
@@ -438,7 +528,7 @@ explicit height bounds in terms of $n$ and $|S(n)|$.
 The powerful parametrization
 $w_{+}=(1\pm 2i)^{f}u_{+}^2 v_{+}^3$ gives 5 unknowns and 2 equations
 (shift + imaginary part), defining a \emph{$3$-fold} for each fixed $n$.
-Faltings' theorem does not apply (requires a curve).
+Faltings' theorem \cite{Faltings1983} does not apply (requires a curve).
 Bombieri--Lang would give sparse rational points on the $3$-fold but is
 unproved.
 
@@ -456,23 +546,28 @@ Faltings/Bombieri--Lang for the norm-form $3$-fold, or an effective rank
 control plus uniform height bound for the elliptic curve family, uniform in $n$.
 \end{theorem}
 
-\begin{theorem}[Blocking theorem NT-C]
+\begin{theorem}[Blocking theorem NT-C, partial resolution]
 \label{thm:NTC}
 \textup{(Primitive divisor obstruction.)}
 A Zsygmondy-type theorem for the family $\{a+ni : a\text{ odd},\,\gcd(a,n)=1\}$
 in $\Zi$ would show that for all but finitely many Row-3 pairs,
 $w_{+}=a+ni$ has a Gaussian prime $\mathfrak{p}\nmid 5$ appearing to
 exactly first power, preventing $\Aplus$ from being powerful away from~$5$.
-The Bilu--Hanrot--Voutier primitive divisor theorem applies to Lucas and
+The Bilu--Hanrot--Voutier primitive divisor theorem \cite{Bilu2001} applies to Lucas and
 Lehmer sequences (with fixed characteristic roots) but not to this
 polynomial family.
 
+\textup{(Square subcase, Theorem~\ref{thm:square}.)}  The special case where $\Aplus$ and
+$\Aminus$ are simultaneously perfect squares is resolved unconditionally by
+Theorem~\ref{thm:square} via a 2-isogeny descent on the elliptic curve
+$E: Y^2 = X(X+4)(X-1)$.  The remaining open case is $t\geq 2$ in the
+Erd\H{o}s--Szekeres representation $\Aplus = s^2 t^3$.
+
 \medskip
-\noindent\emph{What is needed} \textup{(NT-C)}: a Zsygmondy primitive divisor
-theorem for the shifted Gaussian norm family $\{a+ni\}$ in $\Zi$,
-giving an absolute constant $C$ such that for $n>C$, at least one of
-$w_{+}$, $w_{-}$ has a Gaussian prime factor $\mathfrak{p}\nmid 5n$
-appearing to exactly first power.
+\noindent\emph{What is still needed} \textup{(NT-C full)}: a Zsygmondy primitive
+divisor theorem for the shifted Gaussian norm family $\{a+ni\}$ in $\Zi$
+covering the cube-factor case $t\geq 2$, or a uniform S-unit result with
+growing allowed prime set.
 \end{theorem}
 
 \begin{theorem}[Blocking theorem NT-D]
@@ -509,7 +604,8 @@ NT-A & Uniform effective S-unit over $\Zi$, growing $S$ & S-unit equations \\
 NT-B & Effective Bombieri--Lang for norm-form $3$-fold;
   & Thue--Mahler / \\
 & or rank control + uniform bound for genus-$1$ curve & norm-form \\
-NT-C & Gaussian Zsygmondy for shifted Gaussian norm family & Primitive divisors \\
+NT-C & Gaussian Zsygmondy (cube-factor case, $t\geq2$) & Primitive divisors \\
+& \emph{Square case $t=1$ resolved by Theorem~\ref{thm:square}.} & \\
 NT-D & Powerful-gap bound for $k\asymp A$ & Gap argument \\
 \bottomrule
 \end{tabular}
@@ -547,12 +643,14 @@ attempted without new input:
 %---------------------------------------------------------------------
 
 \begin{enumerate}
-\item \textbf{NT-C (Theorem~\ref{thm:NTC}) is the most tractable entry point.}
-  A Gaussian Zsygmondy theorem for the family $\{a+ni\}$ is a
-  plausible extension of the Bilu--Hanrot--Voutier theory; the key
-  difficulty is the absence of a linear recurrence.  A one-sided
-  version (just for $w_{+}$) would suffice to resolve
-  Conjecture~\ref{conj:core}.
+\item \textbf{NT-C (Theorem~\ref{thm:NTC}) cube-factor case is the remaining open entry point.}
+  Theorem~\ref{thm:square} resolves the square subcase ($t=1$ in the Erd\H{o}s--Szekeres
+  representation $\Aplus = s^2t^3$) via 2-isogeny descent on the elliptic
+  curve $E: Y^2=X(X+4)(X-1)$ (rank~0; Corollary~\ref{cor:NTC-square}).
+  The remaining case $t\geq 2$ requires extending the analysis to the
+  cube-factor locus; a Gaussian Zsygmondy theorem for $\{a+ni\}$ covering
+  $t\geq 2$ would complete NT-C.  The key difficulty is the absence of a
+  linear recurrence; a one-sided version (just for $w_{+}$) would suffice.
 
 \item \textbf{Pasten-type lattice methods.}
   Recent work of Pasten~\cite{Pasten2024} constructs arithmetic-derivative

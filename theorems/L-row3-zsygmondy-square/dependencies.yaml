@@ -31,13 +31,11 @@ dependencies:
     computational: NONE
     role: structural
 
-  - id: sha-trivial-assumption
+  - id: dimension-bound-2-isogeny
     description: >
-      The rank formula 2^r = |S^phi|*|S^phi-hat|/4 assumes Sha(E)[phi]=Sha(E')[phi-hat]=trivial.
-      This is an implicit assumption in the descent; not separately verified.
-      For rank 0 curves with full 2-torsion, Sha[2] is often trivial (Cassels pairing = 0),
-      but this step is a gap in the current PROOF-DRAFT status.
-    mathematical: CONJECTURE
+      The combined 2-isogeny descent bound: dim(E(Q)/2E(Q)) <= dim S^phi + dim S^phi-hat.
+      Used to conclude r+t2 <= 2, and since t2=2, rank r=0. No Sha triviality needed.
+    mathematical: REFEREED
     computational: NONE
-    role: gap-to-close
-    note: "Verify with Sage/Magma: E.sha().an() or direct 2-descent output"
+    role: rank-zero-conclusion
+    citation: "Silverman AEC Ch. X §4; Cassels Lectures on Elliptic Curves §14"

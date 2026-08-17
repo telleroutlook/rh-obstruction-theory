@@ -15,15 +15,17 @@ The cube-factor case: A⁺ = 5^{e}·s²·t³ (t>1) requires the Gaussian S-unit 
 of OE-01 Step 3, which remains blocked by growing-S Evertse obstacle. NT-C full
 proof requires new tools (see OE-01).
 
-### L2 — Sha assumption is a gap
-The rank formula 2^r = |S^φ|·|S^{φ̂}|/4 = 1 assumes trivial Sha[φ] and Sha[φ̂].
-This is standard for curves with full 2-torsion and agrees with numerical evidence,
-but has not been independently verified with a CAS (Sage/Magma). To upgrade from
-PROOF-DRAFT to INDEPENDENTLY-CHECKED, run:
+### L2 — Sha: not a gap in the rank proof
 
-    sage: E = EllipticCurve([0, 3, 0, -4, 0])
-    sage: E.rank()        # should return 0
-    sage: E.torsion_order()  # should return 4
+The proof does NOT require trivial Sha. The rank-0 conclusion follows from the
+dimension bound alone (no Sha assumption needed):
+
+- dim_{F₂}(E(Q)/2E(Q)) = r + t₂  where r = rank and t₂ = dim_{F₂} E(Q)[2] = 2
+  (since E(Q)[2] = {O,(0,0),(1,0),(−4,0)} ≅ (Z/2Z)²).
+- The combined 2-isogeny descent gives: dim E(Q)/2E(Q) ≤ dim S^φ + dim S^{φ̂} = 1+1 = 2.
+- Therefore r+2 ≤ 2, giving r ≤ 0, i.e., r = 0. □
+
+No Sha triviality is assumed. The former note about a Sha gap was incorrect.
 
 ### L3 — Square subcase does not cover the full NT-C symmetry
 NT-C states: at least one of w⁺ = a+ni or w⁻ = (a−n)+ni has a Gaussian prime
