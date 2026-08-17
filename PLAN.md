@@ -126,16 +126,104 @@ Next: write Paper D outline (Theorem G); submit A and C for independent review.
   yields only x∈{0,∞}; Row-3 conditions exclude both. Zero simultaneous perfect-square
   pairs for all n (proved), verified up to n=2000 by checker. Status: PROOF-DRAFT
   (no Sha assumption needed; rank=0 follows from dimension bound). Cube-factor case remains open via OE-01.
+- **Theorem M added (NT-C t=1 case):**
+  `theorems/M-row3-square-powerful-complete/`. The square-based locus
+  `A±=5^e m²` is claimed closed by congruences plus descent on E: Y²=X³−32X+64.
+  Status remains mathematical PROOF-DRAFT. The finite CAS gap is closed: PARI/GP
+  2.17.4 independently returns certified rank bounds `[0,0]` on the original,
+  translated, 2-isogenous, and corrected-quartic models. Human review of the
+  direct 5-conic reduction and torsion pullback remains the Gate-A gap. The
+  cube-factor case t≥2 is untouched.
+- **OE-03 retired as written.** The S(n)-unit formulation used the square-only
+  parametrization for the full powerful problem and incorrectly placed the support of
+  `w±` above the primes of n. Since gcd(A±,n)=1, the actual non-5 support lies in the
+  factor sets of A±. The later geometric feedback is also only a t=1 model; its three
+  quartics are exact but omit odd exponents ≥3. Audit:
+  `outsource/solutions/OE-03-geometric-feedback-review.md`.
+- **OE-05 cube-factor feedback audited.** The proposed Baker/Matveev
+  cardinality-bound theorem is not established: fixed actual support and
+  `|S|≤M` are different hypotheses, and heights remain unbounded even with one
+  supporting prime (`13^{2j+3}`). NT-C t≥2 remains open. Audit:
+  `outsource/solutions/OE-05-cubefactor-feedback-review.md`.
+- **OE-04 geometric/Vojta feedback audited and rejected.** The symmetric quartic
+  identity is correct, but the supplied square-case elliptic models have different
+  `j`-invariants, the fixed cube-factor system is genus one rather than genus >1, and
+  Darmon-Granville/Vojta are not supplied in an applicable source-backed scope. Exact
+  salvage: `4=2²` and `8=2³` refute OE-04's gap-only route; the Row-3-specific core
+  remains open. Audit: `outsource/solutions/OE-04-geometric-feedback-review.md`.
+- **OE-05 biquadratic/fixed-j feedback audited and rejected.** Exact samples refute
+  both claimed pencil determinants; the proposed `E0:y²=x³−21x+10` has
+  `j=98784/53`, not `148176/25`, and has no rational 2-torsion, so the advertised
+  `x mod squares` descent is invalid. NT-C t≥2 remains open. Audit:
+  `outsource/solutions/OE-05-biquadratic-feedback-review.md`.
+- **New prompt-lint failure classes L25–L31** record the recurring arithmetic-geometry
+  defects: powerful ≠ square-based, fixed actual support ≠ support cardinality,
+  effective rank/Chabauty scope, recomputing curve invariants from roots, explicit
+  large-gap powerful pairs, exact Darmon-Granville/Vojta scope, and model/j/twist
+  consistency. The active prompt/theorem corpus was re-grepped; remaining matches are
+  confined to explicitly retired historical text or corrective notes.
+- **Verification after integration (2026-08-17):** `python3 -m pytest -q` →
+  `86 passed`; `checker/audit_OE03_OE05_feedback.py`,
+  `checker/audit_OE04_OE05_followup.py`, `checker/OE01_anchor.py`,
+  Theorem L/M/OE-02 checkers, and `ruff check` on both new audit checkers all
+  succeeded. Paper E rebuilt with `tectonic -X compile` (exit 0; existing layout
+  warnings remain).
+- **OP2-B internal audit/checker complete (2026-08-17):** Theorem I now has an
+  explicit `(rho-1/2)/i` normalization audit and a stdlib-only exact replay over
+  `Q(sqrt(2))` from raw witness data. The mutation suite exposed and fixed a
+  sparse-polynomial evaluation bug in the checker (missing powers for skipped
+  degrees); final replay checks positivity/nonvanishing, evenness, exponent
+  distinctness/conjugacy, and independent pair/quartet collapse. This upgrades
+  only the theorem's finite computational axis to `REPRODUCIBLE`; Gate A remains
+  open because Lindemann–Weierstrass and the full algebraic argument still need
+  independent mathematical review. Verification: `ruff check <checker/test>` →
+  `All checks passed!`; Theorem I checker → 6 exact `PASS` lines;
+  `python3 -m pytest -q` → `103 passed`.
+- **Theorem M independent CAS replay complete (2026-08-17):** Installed PARI/GP
+  2.17.4 locally and replayed `ellrank`/`elltors` on E and both descent models.
+  All three rank computations return certified bounds `[0,0,0,[]]`; E torsion is
+  cyclic of order 4. Added raw GP witness, pinned transcript, offline/live checker,
+  and mutation tests. This upgrades only the computational axis to
+  `INDEPENDENT-CHECKER`; the analytic theorem stays `PROOF-DRAFT` pending human
+  review. Verification: targeted `ruff check` → `All checks passed!`;
+  `verify_OE02_pari_replay.py --run` → all rank/torsion/model checks `PASS`;
+  `python3 -m pytest -q` → `110 passed`; Paper E rebuilt with
+  `tectonic -X compile` (exit 0; existing layout warnings remain).
+- **Theorem M toy-first audit found and repaired the OE-02 normalization (2026-08-17):**
+  (1) The theorem statement incorrectly claimed an individual `4|n` exclusion and
+  reversed the parity conclusion for `4∤n`. The exact Row-3 witness
+  `(a,n)=(15,8)` gives `A⁺=17²`, so only the *simultaneous* theorem is valid;
+  individual `4|n` odd exponents remain impossible, while individual `4∤n` even
+  exponents remain impossible. (2) The external OE-02 Gaussian solution dropped
+  the load-bearing factor `5`: after `x=b/n`, the correct system is
+  `x²+1=5r²`, `x²−2x+2=5s²`, not two unscaled conics. Its quartic
+  `t⁴−4t³+...` is therefore not the reduction of the original Row-3 system.
+  (3) The direct corrected route supersedes the unproven 16-unit Gaussian split:
+  parameterize the first 5-conic, obtain
+  `Y²=10t⁴−20t³+24t²−12t+2`, then map explicitly to `E:Y²=X³−32X+64`.
+  The inverse is also explicit. PARI now replays rank 0/torsion on E, both
+  descent models, and the corrected quartic Jacobian `[0,24,0,160,320]`.
+  Exact polynomial identities, four torsion pullbacks (`all give x=1/2`,
+  hence `a=n/2` and `n=2`), and the `(15,8)` boundary example are in
+  `theorems/M-row3-square-powerful-complete/checker/verify_OE02_quartic_map.py`.
+  The external OE-02 verdict is retracted as written and replaced by the repaired
+  internal record. Remaining Gate-A gap: human review of the corrected direct
+  reduction and birational identities; no Gaussian unit-case split remains.
+  Verification: targeted `ruff check` → `All checks passed!`;
+  `verify_OE02_quartic_map.py` → 7 exact `PASS` lines;
+  `verify_OE02_pari_replay.py --run` → corrected-quartic rank/torsion and model
+  checks `PASS`; `python3 -m pytest -q` → `116 passed`; Paper E rebuilt with
+  `tectonic -X compile` (exit 0; pre-existing layout warnings remain).
 
 ### Open-problem execution register (current source of truth)
 
 | ID | Open problem | Current status | Next execution step | Promotion / closure condition |
 |---|---|---|---|---|
-| **OP1-A** | For every off-line Row-3 `(a,n)` with `n≥4`, `N=(a²+n²−na)²+n⁴` is not powerful (equivalently, has a simple carrier prime). | **PARTIALLY RESOLVED + INCONCLUSIVE core** (2026-08-17): Thm 1 (`3∤N`), Thm 2 (all primes `p≡1 mod 4`, 8-adic), Thm 3 (5-adic automatic in ℱ₅) proved unconditionally. OB-47 returned INCONCLUSIVE: each approach A–D blocked by a distinct new theorem (NT-A: uniform S-unit over ℤ[i] with growing S; NT-B: effective Bombieri–Lang for norm-form 5-fold; NT-C: Zsygmondy primitive divisor for shifted Gaussian norms; NT-D: powerful-gap bound for k≍A). Verdict recorded in `outsource/solutions/OB-47-referee-verdict.md`. | Internal proof attempt for NT-C (2026-08-17): growing-S Evertse blocked cube-factor case; square subcase reduces to elliptic curve y²=x⁴−3x²b²+b⁴ (rank-0 conjecture). NT-D requires ABC over ℤ[i]. OE-01 sent for NT-C. **Theorem L proved (2026-08-17): NT-C square subcase confirmed via 2-isogeny descent (PROOF-DRAFT, complete — no Sha gap).** See EXT-6 for Pasten-lattice direction. | NT-C proved in full (cube-factor case); or NT-A/NT-D enters literature |
+| **OP1-A** | For every off-line Row-3 `(a,n)` with `n≥4`, `N=(a²+n²−na)²+n⁴` is not powerful (equivalently, has a simple carrier prime). | **PARTIALLY RESOLVED + INCONCLUSIVE core** (2026-08-17): Thm 1 (`3∤N`), Thm 2 (all primes `p≡1 mod 4`, 8-adic), Thm 3 (5-adic automatic in ℱ₅) proved unconditionally. OB-47 returned INCONCLUSIVE: each approach A–D blocked by a distinct new theorem (NT-A: varying-support S-units over ℤ[i]; NT-B: effective Bombieri–Lang for norm-form 5-fold; NT-C: Zsygmondy primitive divisor for shifted Gaussian norms; NT-D: Row-3-specific powerful-gap argument). Verdict recorded in `outsource/solutions/OB-47-referee-verdict.md`. Theorems L/M cover only the square/t=1 subcase at PROOF-DRAFT; Theorem M's rank/torsion computation now has independent PARI/GP replay, but its corrected direct 5-conic reduction remains under human Gate-A review. Cube factors t≥2 remain open. OE-04's **gap-only** route is refuted by `4,8`, but the Row-3-specific core is open. | Continue from corrected OE-05 only. Do not use an `S(n)`-unit model, cardinality-only Baker bounds, gap-only powerful-pair heuristics, or the rejected fixed-j/twist model. A viable next prompt must keep `U±` with odd exponents ≥3 and distinguish fixed actual support from `|S|≤M`; alternatively pursue the structural/local OE-05 Steps 1–2. See EXT-6 for Pasten-lattice direction. | NT-C proved in full (cube-factor case with independently replayed evidence); or a source-backed NT-A/NT-D result enters the literature |
 | **OP1-B** | When CRT node choices poison every simple carrier, prove a full relation-size floor or construct a poisoning family with collapse. `q_min` alone is insufficient: `(19286,26164)` has `q_min=18`, zero carrier valuations, but coefficient sup-norm `3292056116081922725`; with `K=m+1`, `(1005,7883,-10398)` gives `q_min=1` and full sup-norm `16156893919328`. | **OPEN**; clean unpoisoned bridge is square-only and conditional on a node-integral simple carrier. The replacement-minor identity is now explicit and checked for arbitrary rational `w`; `K≥m` is part of the external target | Send only after final human review of the third-round OB-44B revision; any external ask must include both off-line and on-line coefficients | Full-size linear/super-log lower bound, height-refined partial theorem, or explicit full-size collapse family |
 | **OP1-C** | Promote the finite arithmetic packages I/J/K from `PROOF-DRAFT` to independently checked theorem status. | **GATE-A OPEN**; no external verdict | Consolidate statements/proofs and send one Gate-A package only if internal adversarial review cannot settle them | Separate Gate-A verdicts for I, J, and K; no blanket promotion |
 | **OP2-A** | Define a sharp algebraically controlled compactly supported / Paley–Wiener test class for which exact integer collisions are nontrivial. | **OPEN / NOT YET WELL-POSED** | Construct explicit algebraic compact-support data or prove that the literal arbitrary-`C_c^∞` question splits by chosen test function | A self-contained class + theorem or counterexample; do not claim all Paley–Wiener values are periods |
-| **OP2-B** | Certify the algebraic Gaussian/Hermite-Gaussian no-collision theorem. | **PROOF-DRAFT**; proof is a direct Lindemann–Weierstrass reduction | Finish internal normalization audit and exact checker; external paid review is not a discovery priority | Gate-A PASS after checking normalization, evenness, and nonvanishing hypotheses |
+| **OP2-B** | Certify the algebraic Gaussian/Hermite-Gaussian no-collision theorem. | **PROOF-DRAFT + finite computational REPRODUCIBLE**; normalization audit and exact `Q(sqrt(2))` checker/mutation suite are complete. Proof remains a direct Lindemann–Weierstrass reduction | Independent Gate-A mathematical review only; no further paid discovery review is needed for the checker | Gate-A PASS after external review of normalization, evenness, nonvanishing, and Lindemann–Weierstrass invocation |
 | **OP3** | Formalize the observation hierarchy separation level without overclaiming a classification. | **BLOCKED BY OP1/OP2** | Wait for OP1-A/B and OP2-A/B outcomes; retain as a map, not a theorem | Precise theorem only after its encoding classes and separation predicate are fixed |
 | **PAPER-A-V2** | Decide whether the Gaussian no-collision addition and revised open problems belong in a submitted version. | **PUBLICATION HOLD LIFTED (2026-08-17)** — preprint-ready; all PAPER_LINT checks pass | Keep draft current; run Zenodo/arXiv submission workflow when author is ready | Submitted to arXiv or Zenodo |
 
