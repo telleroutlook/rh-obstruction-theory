@@ -39,16 +39,22 @@ If A⁺ and A⁻ are both powerful away from 5:
 - Combined: rad(A⁺ · A⁻) ≤ 25 · √(A⁺ · A⁻) ≍ n².
 
 **The classical powerful-gap landscape:**
-- **Catalan (proved by Mihailescu 2002):** The only consecutive perfect powers are 8,9.
-  Not directly applicable (powerful ≠ perfect power).
-- **Stormer's theorem:** For any pair of consecutive powerful numbers (gap = 1), there
-  are only finitely many with the gap being 1 (conditional on Catalan; unconditional
-  for the powerful case by other methods). Requires gap = 1.
-- **Molsen (1939):** No two powerful numbers in [X, X+X^{1/2}] for X large.
-  Requires gap ≤ X^{1/2}; does not apply when gap ≍ X.
-- **Granville (1998):** Under ABC, no two powerful numbers can be within O(X^{1/2+ε})
-  of each other for X the larger one — conditional and still gap ≪ X^{1/2+ε}. Same
-  regime as Molsen (gap ≪ A^{1/2+ε}); inapplicable when gap ≍ A.
+- **Catalan–Mihailescu (2002):** The only consecutive PERFECT POWERS are 8 and 9.
+  Not applicable here: powerful numbers (every prime factor appears with exponent ≥ 2)
+  are far more numerous than perfect powers.  There are infinitely many consecutive
+  powerful numbers (gap = 1): e.g. 8=2³, 9=3²; 288=2⁵·3², 289=17²; 675=3³·5², 676=2²·13².
+  These arise from Pell-type equations and are not a finite set.
+- **Stormer's theorem:** Applies to pairs of consecutive *S-smooth* integers (all prime
+  factors in a fixed finite set S): for each S, only finitely many such consecutive pairs.
+  Does NOT apply to consecutive powerful numbers in general (S is not fixed).
+- **Molsen (1939) and Pillai:** Paper E cites these results as requiring gap k ≪ A^{1/2}.
+  The exact scope should be verified from the source: Molsen (1939)
+  "Zur Verallgemeinerung des Fermatschen Satzes", Archiv Math. Naturvid. 43.
+  Do not assume the specific statement without checking; the key point from Paper E
+  is that all classical results need k ≪ A^{1/2}, leaving k ≍ A uncharted.
+- **Granville (1998):** "ABC implies that there are infinitely many powerful numbers
+  but no two powerful numbers are within O(X^{1/2+ε})" — CONDITIONAL on ABC.
+  Same regime as Molsen (gap ≪ A^{1/2+ε}); inapplicable when gap ≍ A.
 
 ---
 
@@ -109,8 +115,8 @@ No improvement over the above.
 
 Systematically review:
 (a) All results on pairs of powerful numbers with gap k:
-    - gap k=1 (Catalan, Stormer): classical, finite list.
-    - gap k=2 (Ljunggren, etc.): finite or empty.
+    - gap k=1: infinitely many consecutive powerful pairs (Pell-type; 8,9; 288,289; ...).
+    - gap k=2 (Ljunggren, etc.): finitely many? Verify from source.
     - gap k fixed: Finitely many (by Runge's method or descent).
     - gap k ≤ A^{1/3}: any results?
     - gap k ≤ A^{1/2}: Molsen, Granville-conditional.
