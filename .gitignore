@@ -3,9 +3,12 @@
 *.out
 *.toc
 *.pdf
+*.bbl
+*.blg
 __pycache__/
 *.pyc
 .DS_Store
+.claude/
 coverage.out
 
 # one-off session handoff (local only, not versioned)
