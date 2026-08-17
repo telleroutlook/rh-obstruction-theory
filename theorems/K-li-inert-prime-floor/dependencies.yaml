@@ -1,0 +1,31 @@
+theorem_id: K-li-inert-prime-floor
+status:
+  mathematical: PROOF-DRAFT
+  computational: EXPLORATORY
+dependencies:
+  - id: CHEBYSHEV-INTEGRAL-COEFFICIENTS-AND-LEADING-TERM
+    statement: >
+      T_j(z) has integer coefficients and leading coefficient 2^(j-1) for j>=1.
+    source: >
+      Standard recurrence T_0=1, T_1=z, T_{j+1}=2zT_j-T_{j-1}; proved directly
+      in proof.md. No external premise is needed.
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: Used to locate the p-adic leading pole of T_j(u_0).
+  - id: INERT-PRIME-RESIDUE-FIELD
+    statement: >
+      If p=3 mod 4, then -1 is not a square mod p and the residue field of
+      Z[i] at p is F_{p^2}.
+    source: >
+      Standard quadratic-reciprocity / inert-prime fact; the needed -1
+      nonsquare part follows from Euler's criterion (-1)^((p-1)/2)=-1.
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: Establishes on-line p-integrality and the finite residue field.
+gate_a_status: OPEN
+gate_a_note: >
+  Ready for independent review. The reviewer must check the Chebyshev
+  normalization, the p-adic valuation extension, the trace-nonzero multiple-of-N
+  argument, and the exact conservative bound.

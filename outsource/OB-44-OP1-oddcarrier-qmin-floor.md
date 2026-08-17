@@ -1,5 +1,10 @@
 # Problem OB-44 — The odd-carrier-prime floor of q_min: an orbit-universal, node-set-uniform linear bound via a proved moment pole (OP1 direct route)
 
+> **SEND STATUS: SUPERSEDED — do not send this combined version.** It is retained
+> for provenance. The two focused replacements are:
+> `OB-44A-OP1-powerful-binary-quartic.md` and
+> `OB-44B-OP1-poisoned-carrier-aggregate-floor.md`.
+
 **Type:** arithmetic / p-adic valuation theory (p an odd prime dividing an explicit quartic
 norm) / determinantal (lattice) geometry — a finite, exact, RH-free question about rational
 vectors and their p-adic valuations, together with **one** analytic-number-theory lemma

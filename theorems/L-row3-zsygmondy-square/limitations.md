@@ -49,7 +49,7 @@ immaterial here since Theorem L holds for ALL n, not just large n.
 
 | Claim | Status |
 |---|---|
-| No simultaneous perfect squares (Theorem L) | PROOF-DRAFT (Sha gap pending CAS check) |
+| No simultaneous perfect squares (Theorem L) | PROOF-DRAFT (complete; pending independent check) |
 | NT-C square subcase (no simultaneous A±=x²) | Equivalent to Theorem L above |
 | NT-C full case (no simultaneous powerful A±) | OPEN — cube factor case unresolved |
 | NT-C implies OP1-A | Not implied; OP1-A is a different (stronger) simultaneous condition |

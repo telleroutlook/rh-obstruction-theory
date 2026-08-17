@@ -74,6 +74,15 @@ SOURCE-VERIFIED; see `lesch-dg-ga-9708010/PROVENANCE.md`):
   so `c_0` constant → **leading term `t^{-n/m}` carries no log** (exactly D's need).
 - Proof follows Grubb–Seeley 1995 (Invent. Math. 121) Thm 2.7 (cited in-proof).
 
+### Delaygue 2210.12046 — `delaygue-2210.12046-lindemann/PROVENANCE.md`
+*E. Delaygue, "A Lindemann-Weierstrass theorem for E-functions", arXiv:2210.12046v2.*
+Checked statement (Theorem I dependency):
+- **Theorem C (Lindemann–Weierstrass)**: if `alpha_1,...,alpha_n` are distinct
+  algebraic numbers, then `exp(alpha_1),...,exp(alpha_n)` are linearly independent
+  over `Qbar`.
+
+The source excerpt and comparison table are in the directory's `PROVENANCE.md`.
+
 ## To re-verify
 ```bash
 mkdir -p /tmp/v && tar xzf suzuki-2606.09096-weil-screw-function.tar.gz -C /tmp/v

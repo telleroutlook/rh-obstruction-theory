@@ -1,5 +1,9 @@
 # Problem OB-42 — The p=3 arithmetic floor of q_min: an irreducible joint valuation bound (OP1 direct route)
 
+> **SEND STATUS: HOLD — do not send without revision.** Later OP1 work proved
+> parts of the p=3 route and reframed the remaining adversary. The current
+> preferred OP1 sends are OB-44A and OB-44B.
+
 **Type:** arithmetic / p-adic valuation theory / determinantal (lattice) geometry — a finite,
 exact, RH-free question about rational vectors and 3-adic valuations.
 

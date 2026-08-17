@@ -47,15 +47,21 @@ Row-3 requires x = a/(2m) ∈ (0,1) ∩ ℚ; none qualify. □
 
 ---
 
-## 3. Open gap (Sha assumption)
+## 3. Sha: not a gap
 
-The rank formula assumes Ш(E)[φ] = Ш(E')[φ̂] = trivial. This is not separately
-verified analytically. To upgrade to INDEPENDENTLY-CHECKED, run:
+The proof does NOT require trivial Sha.  The combined 2-isogeny descent bound gives:
 
-    sage: EllipticCurve([0,3,0,-4,0]).rank()      # expect 0
-    sage: EllipticCurve([0,3,0,-4,0]).sha().an()  # expect 1
+    dim_{F₂}(E(Q)/2E(Q)) ≤ dim S^φ + dim S^{φ̂} = 1 + 1 = 2
 
-Until this CAS check is recorded, Theorem L status is `PROOF-DRAFT`.
+Since E(Q)[2] ≅ (Z/2Z)² (four 2-torsion points), dim_{F₂}(E(Q)/2E(Q)) = r + 2.
+Therefore r + 2 ≤ 2, giving r = 0 unconditionally.  No Sha triviality is assumed.
+
+This was confirmed by running `theorems/L-row3-zsygmondy-square/checker/verify_L.py`
+(all five checks PASS: torsion points, pullback irrationality, numerical sweep n≤2000,
+d=2 local obstruction mod 8, d=5 Selmer solution).
+
+The status PROOF-DRAFT is retained pending an *independent human* check of the analytic
+steps, not pending a CAS oracle.
 
 ---
 

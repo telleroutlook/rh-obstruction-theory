@@ -1,0 +1,37 @@
+theorem_id: I-gaussian-weil-no-collision
+status:
+  mathematical: PROOF-DRAFT
+  computational: EXPLORATORY
+dependencies:
+  - id: LINDEMANN-WEIERSTRASS-LINEAR-INDEPENDENCE
+    statement: >
+      If alpha_1,...,alpha_n are distinct algebraic numbers, then
+      exp(alpha_1),...,exp(alpha_n) are linearly independent over the field of
+      algebraic numbers.
+    source: >
+      E. Delaygue, "A Lindemann-Weierstrass theorem for E-functions",
+      arXiv:2210.12046v2, Theorem C. The statement is attributed there to the
+      classical Lindemann-Weierstrass theorem. Source check:
+      baseline/delaygue-2210.12046-lindemann/PROVENANCE.md.
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: >
+      Sole external premise. It converts the algebraic observation identity into
+      vanishing of each integer coefficient.
+  - id: B2-LI-EXACT-COLLISION
+    statement: >
+      Rational Li observations admit exact integer collisions in the finite
+      symmetric multiset model.
+    source: theorems/B2-exact-collision/statement.md
+    mathematical: INDEPENDENTLY-CHECKED
+    computational: INDEPENDENT-CHECKER
+    usable_as_premise: false
+    role: >
+      Motivational contrast only. The proof of Theorem I does not depend on B2.
+gate_a_status: OPEN
+gate_a_note: >
+  The theorem is ready for independent mathematical review. It must not be
+  promoted to INDEPENDENTLY-CHECKED until the whole statement, the normalization
+  of Phi_G, the nondegeneracy hypotheses, and the Lindemann-Weierstrass
+  invocation are externally checked.

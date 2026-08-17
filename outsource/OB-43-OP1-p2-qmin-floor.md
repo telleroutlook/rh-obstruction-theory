@@ -1,5 +1,9 @@
 # Problem OB-43 — The p=2 arithmetic floor of q_min: an orbit-robust, hypothesis-free linear bound (OP1 direct route)
 
+> **SEND STATUS: HOLD — do not send without revision.** Later OP1 work narrowed
+> and partly superseded this p=2 route. The current preferred OP1 sends are
+> OB-44A and OB-44B.
+
 **Type:** arithmetic / 2-adic valuation theory / determinantal (lattice) geometry — a finite,
 exact, RH-free question about rational vectors and 2-adic valuations.
 

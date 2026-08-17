@@ -1,0 +1,23 @@
+theorem_id: J-li-collision-lattice-floor
+status:
+  mathematical: PROOF-DRAFT
+  computational: EXPLORATORY
+dependencies:
+  - id: SMITH-NORMAL-FORM-INDEX
+    statement: >
+      For an integer matrix B of rank m, the index of BZ^r in Z^m equals the
+      greatest common divisor of the m-by-m minors of B (equivalently, the
+      product of the nonzero Smith invariants).
+    source: >
+      Standard Smith normal form theorem. The proof is included from first
+      principles via the uniqueness/construction of Smith normal form; no
+      external analytic premise is used.
+    mathematical: REFEREED
+    computational: NONE
+    usable_as_premise: true
+    role: Gives the determinantal-divisor formula in Theorem J.3.
+gate_a_status: OPEN
+gate_a_note: >
+  Ready for independent review. The whole-theorem review should check the rank
+  assumptions, the index formula, and the application's denominator-clearing
+  convention.

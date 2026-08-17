@@ -17,6 +17,10 @@ problem.
 
 | # | File | Theorem | Content | Status |
 |---|---|---|---|---|
+| OB-44A | `OB-44A-OP1-powerful-binary-quartic.md` | OP1 arithmetic core | Pure powerful-values problem for `N=(a²+n²−na)²+n⁴` on the Row-3 family | **LOCAL REVISION COMPLETE — human review before send** |
+| OB-44B | `OB-44B-OP1-poisoned-carrier-aggregate-floor.md` | OP1 adversary core | CRT rational-node poisoning and full relation-size lower bound; POLE/BRIDGE inlined | **LOCAL REVISION COMPLETE — human review before send** |
+| OB-44 | `OB-44-OP1-oddcarrier-qmin-floor.md` | OP1 combined route | Original combined odd-carrier prompt | **SUPERSEDED by OB-44A/B — do not send** |
+| OB-46 | `OB-46-OP1A-simultaneous-gaussian-powerful.md` | OP1-A arithmetic core | Focused simultaneous shifted Gaussian-powerful problem with the exact `5`-adic branch | **WRITTEN / READY TO SEND after final human review** |
 | OB-01 | `OB-01-D-heat-trace-log-singularity.md` | D | BGV/Gilkey no-log citation + log-poly exception | RESOLVED — integrated 2026-08-11 |
 | OB-02 | `OB-02-B2-integer-collision.md` | B2 | Vandermonde rank + integer scaling construction | RESOLVED — integrated 2026-08-11 |
 | OB-03 | `OB-03-E-tail-estimate.md` | E §3 | Hadamard growth + Vandermonde IFT non-uniqueness | RESOLVED — integrated 2026-08-11 |
