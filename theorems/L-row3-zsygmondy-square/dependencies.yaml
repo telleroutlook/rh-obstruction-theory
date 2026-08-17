@@ -1,0 +1,43 @@
+dependencies:
+  - id: theorem-C-paper-E
+    description: "gcd(A+, A-) in {1,5} for Row-3 pairs (Paper E Theorem C)"
+    mathematical: PROOF-DRAFT
+    computational: REPRODUCIBLE
+    role: prerequisite-identity
+
+  - id: pythagorean-parametrization
+    description: "Integer solutions to a^2+n^2=x^2 via s*t=m^2 factorization"
+    mathematical: REFEREED
+    computational: NONE
+    role: classical-algebraic-identity
+
+  - id: birational-map-genus1
+    description: "Birational equivalence C ~ E via rational point (0,1) on C"
+    mathematical: PROOF-DRAFT
+    computational: REPRODUCIBLE
+    role: main-reduction
+    note: "All intermediate algebra script-verified (checker/verify_L.py)"
+
+  - id: 2-isogeny-descent
+    description: "2-isogeny descent for curves Y^2=X(X^2+aX+b) over Q"
+    mathematical: REFEREED
+    computational: NONE
+    role: rank-bound
+    citation: "Silverman, Arithmetic of Elliptic Curves, Ch. X §4; Cassels, Lectures on Elliptic Curves §14"
+
+  - id: rank-zero-torsion-only
+    description: "rank=0 implies E(Q)=E(Q)_tors"
+    mathematical: REFEREED
+    computational: NONE
+    role: structural
+
+  - id: sha-trivial-assumption
+    description: >
+      The rank formula 2^r = |S^phi|*|S^phi-hat|/4 assumes Sha(E)[phi]=Sha(E')[phi-hat]=trivial.
+      This is an implicit assumption in the descent; not separately verified.
+      For rank 0 curves with full 2-torsion, Sha[2] is often trivial (Cassels pairing = 0),
+      but this step is a gap in the current PROOF-DRAFT status.
+    mathematical: CONJECTURE
+    computational: NONE
+    role: gap-to-close
+    note: "Verify with Sage/Magma: E.sha().an() or direct 2-descent output"
