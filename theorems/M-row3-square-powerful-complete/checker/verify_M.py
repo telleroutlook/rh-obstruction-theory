@@ -27,6 +27,8 @@ def verify_mod16_obstruction() -> None:
     odd_sq_mod16 = {(x * x) % 16 for x in range(1, 16, 2)}
     five_odd_sq_mod16 = {(5 * x * x) % 16 for x in range(1, 16, 2)}
     ap_mod16 = {(a * a) % 16 for a in range(1, 16, 2)}  # a odd, 16k^2≡0
+    assert squares_mod16 == {0, 1, 4, 9}, f"squares mod 16: {squares_mod16}"
+    assert odd_sq_mod16 == {1, 9}, f"odd squares mod 16: {odd_sq_mod16}"
     assert ap_mod16 == {1, 9}, f"A+ mod 16 for 4|n: {ap_mod16}"
     assert five_odd_sq_mod16 == {5, 13}, f"5T^2 mod 16 (T odd): {five_odd_sq_mod16}"
     assert ap_mod16.isdisjoint(five_odd_sq_mod16), "Should not overlap"
@@ -54,7 +56,6 @@ def verify_casewise_mod8(n_max: int = 500) -> None:
     for n in range(4, n_max + 1, 2):
         if n % 3 == 0:
             continue
-        m = n // 2
         for a in range(1, n, 2):
             if gcd(a, n) != 1:
                 continue
@@ -83,7 +84,7 @@ if __name__ == "__main__":
     print("3. Verifying Theorem B mod-8 congruences for n≤500...")
     verify_casewise_mod8(500)
 
-    print(f"4. Numerical sweep n≤3000: checking for simultaneous 5^e*□ pairs...")
+    print("4. Numerical sweep n≤3000: checking for simultaneous 5^e*□ pairs...")
     count = numerical_sweep(3000)
     print(f"   {count} instances found")
     assert count == 0, f"Expected 0, found {count}"

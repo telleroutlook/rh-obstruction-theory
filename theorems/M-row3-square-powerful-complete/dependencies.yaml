@@ -25,3 +25,20 @@ dependencies:
     mathematical: REFEREED
     computational: NONE
     role: mod-16-obstruction
+
+  - id: OE02-direct-5-conic-reduction
+    description: >
+      Direct reduction of the simultaneous (5S^2,5T^2) case to two rational
+      5-conics, the corrected quartic Y^2=10t^4-20t^3+24t^2-12t+2, and
+      E: Y^2=X^3-32X+64; rank 0 and torsion Z/4Z pull back only to a=n/2.
+    mathematical: PROOF-DRAFT
+    computational: INDEPENDENT-CHECKER
+    role: odd-5-part-exclusion
+    note: >
+      PARI/GP 2.17.4 independently returns certified rank bounds [0,0] on E,
+      its translated model, its 2-isogenous model, and the corrected-quartic
+      Jacobian; see witness/oe02_pari_replay_v1.gp and
+      checker/verify_OE02_pari_replay.py. The 5-conic parameterization and
+      forward/inverse quartic-map polynomial identities are independently
+      replayed by checker/verify_OE02_quartic_map.py. Human Gate-A review of
+      the direct reduction remains open.

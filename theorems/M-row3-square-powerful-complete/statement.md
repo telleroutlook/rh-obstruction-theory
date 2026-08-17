@@ -2,29 +2,32 @@
 # Theorem M — Row-3: Complete Square-Powerful Obstruction (t=1 Case of NT-C)
 
 **Mathematical status:** `PROOF-DRAFT`  
-**Computational status:** `REPRODUCIBLE`
+**Computational status:** `INDEPENDENT-CHECKER` for the elliptic rank/torsion and birational-map replays (PARI/GP 2.17.4 + exact polynomial checker; finite surveys remain sanity evidence)
 
-**Note:** The 4∤n case was an open problem (OE-02). Proof received 2026-08-17
-via Gaussian factorization + 2-isogeny descent on E: Y²=X³−32X+64 (rank 0).
-CAS verification of the Selmer group computation is the remaining Gate-A gap.
+**Note:** The 4∤n case was an open problem (OE-02). The corrected 2026-08-17
+route is a direct pair of rational 5-conics reducing to E: Y²=X³−32X+64 (rank 0).
+The rank/torsion computation has been independently replayed by PARI/GP.
+Gate A remains open for independent review of the corrected direct 5-conic
+reduction and explicit birational map, not for the finite CAS rank computation.
 
 ---
 
 ## Statement
 
-**Theorem M.** For every Row-3 pair (a, n), neither A⁺ = a²+n² nor A⁻ = (n−a)²+n²
-can simultaneously be of the form 5^e · m² (e ≥ 0, m ∈ ℤ, i.e., "square-based
+**Theorem M.** For every Row-3 pair (a, n), A⁺ = a²+n² and A⁻ = (n−a)²+n²
+cannot both be of the form 5^e · m² (e ≥ 0, m ∈ ℤ, i.e., "square-based
 powerful-away-from-5").
 
 More precisely:
 
-**(i) Sub-family 4|n:** Neither A⁺ nor A⁻ is of the form 5^e · m² for any integers
-e ≥ 0, m. (The individual impossibility is unconditional — no simultaneity required.)
+**(i) Sub-family 4|n:** If either of A⁺ or A⁻ is of the form 5^e·m², then its
+exponent `e` is even. Thus an individual odd-`e` representation is impossible;
+the remaining simultaneous perfect-square case is excluded by Theorem L.
 
-**(ii) Sub-family 4∤n:** A⁺ = 5^e · m² forces e even (i.e., A⁺ must be a perfect
-square). Same for A⁻. In particular, both A⁺ and A⁻ cannot simultaneously be
-square-based-powerful-away-from-5 (since the simultaneous perfect-square case is
-excluded by Theorem L / Theorem D of Paper E).
+**(ii) Sub-family 4∤n:** If either of A⁺ or A⁻ is of the form 5^e·m², then its
+exponent `e` is odd. Thus an individual even-`e` representation is impossible;
+the remaining simultaneous `(5S²,5T²)` case is excluded by the direct
+5-conic-to-elliptic reduction.
 
 **Corollary (NT-C t=1 resolved):** The t=1 case of NT-C is completely resolved:
 no Row-3 pair has both A⁺ and A⁻ powerful-away-from-5 via the square-only path
@@ -57,8 +60,12 @@ No Row-3 pair has A⁺ = x² and A⁻ = y² simultaneously.
 
 - Theorem M completely resolves the t=1 (square-only powerful) case of NT-C.
 - NT-C in full (t ≥ 2, cube-factor case) remains open (see `outsource/OE-01-...`).
-- The proof of parts (i) and (ii) uses only elementary congruence arithmetic
-  (mod 8 and mod 16). Part (ii) for the simultaneous case invokes Theorem L.
+- Parts (i) and (ii) use elementary congruence arithmetic to force the parity of
+  `e`. The remaining simultaneous square case in (i) invokes Theorem L; the
+  remaining simultaneous `(5S²,5T²)` case in (ii) invokes the OE-02 descent.
+- The theorem makes no claim that individual square representations are impossible.
+  For example, the Row-3 pair `(a,n)=(15,8)` has `A⁺=17²`; this illustrates why
+  the individual even-`e` case cannot be excluded in the `4|n` branch.
 - This theorem does NOT assume or imply RH. RH stays `[OUT]`.
 - This theorem does NOT assume ABC, any conjecture, or Sha triviality.
 
@@ -68,5 +75,5 @@ No Row-3 pair has A⁺ = x² and A⁻ = y² simultaneously.
 
 | Axis | Status |
 |---|---|
-| Mathematical | `PROOF-DRAFT` (elementary mod 8/16 proof; full details in `proof.md`) |
-| Computational | `REPRODUCIBLE` (checker in `checker/`, n≤3000 survey: 0 instances) |
+| Mathematical | `PROOF-DRAFT` (elementary congruences plus direct 5-conic reduction; awaiting independent Gate-A review) |
+| Computational | `INDEPENDENT-CHECKER` for rank/torsion (PARI/GP replay); `REPRODUCIBLE` finite surveys only |

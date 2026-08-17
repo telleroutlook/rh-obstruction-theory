@@ -143,9 +143,9 @@ For the elliptic curve(s) C(n) from Step 2:
 - If rank 0 for all n ≡ 10 mod 20: the rational points are torsion. Enumerate all
   torsion points and check whether any give valid Row-3 solutions (a odd, gcd(a,n)=1,
   1 ≤ a < n).
-- If rank > 0 for some n: apply Chabauty–Coleman or explicit height bounds to
-  restrict rational points to a finite computable set, then check each against
-  Row-3 constraints.
+- If rank = 1 for some n: Chabauty–Coleman may apply after supplying the explicit
+  Mordell-Weil setup and a suitable prime. Rank >1 is not covered without a separate
+  effective height bound.
 
 ### Step 4 — Row-3 compatibility check
 
