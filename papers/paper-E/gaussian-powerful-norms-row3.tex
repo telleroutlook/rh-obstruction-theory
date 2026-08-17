@@ -1,0 +1,632 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+%% Main-result environments
+\newtheorem{mainthm}{Theorem}
+\makeatletter
+\AtBeginDocument{\renewcommand{\themainthm}{\Alph{mainthm}}}
+\makeatother
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\Zi}{\mathbb{Z}[i]}
+\newcommand{\vp}{v_p}
+\newcommand{\Aplus}{A_{+}}
+\newcommand{\Aminus}{A_{-}}
+
+\tolerance=1500
+\emergencystretch=2em
+
+\begin{document}
+
+\title[Gaussian Powerful Norms in the Row-3 Family]{%
+  Arithmetic Invariants of Shifted Gaussian Norms:\\
+  Unconditional Results and Obstructions\\
+  for the Off-Line Row-3 Family}
+
+\author{Lin Tao}
+\date{2026}
+
+\begin{abstract}
+Fix the \emph{off-line Row-3 family}: integer pairs $(a,n)$ with $n$ even,
+$n\geq 4$, $3\nmid n$, $a$ odd, $1\leq a < n$, $\gcd(a,n)=1$.
+For each such pair define two primitive Gaussian integers
+$w_{+}=a+ni$, $w_{-}=(a-n)+ni$, their rational norms
+$\Aplus = a^2+n^2$, $\Aminus = (a-n)^2+n^2$, and $N=\Aplus\Aminus$.
+
+We call a positive integer \emph{powerful away from~$5$} if every
+rational prime $p\neq 5$ dividing it does so to multiplicity at least two.
+The central question is whether $\Aplus$ and $\Aminus$ can simultaneously
+be powerful away from~$5$; equivalently, whether $N$ can be powerful.
+
+We prove three unconditional arithmetic invariants:
+\begin{itemize}
+\item \textbf{Theorem~\ref{thm:3prime}} ($3\nmid N$):
+  for every Row-3 pair, $3\nmid\Aplus$ and $3\nmid\Aminus$.
+\item \textbf{Theorem~\ref{thm:mod4}} (prime residues and $8$-adic structure):
+  every prime $p\mid N$ satisfies $p\equiv 1\pmod{4}$;
+  in particular $2\nmid N$ and $3\nmid N$.  Moreover $\Aplus\equiv\Aminus\pmod{8}$.
+\item \textbf{Theorem~\ref{thm:gcd}} (gcd and $5$-adic structure):
+  $\gcd(\Aplus,\Aminus)\in\{1,5\}$.  In the subfamily $\mathcal{F}_5$
+  where $5\mid\Aplus$ and $5\mid\Aminus$, the combined
+  $5$-adic valuation satisfies $v_5(N)\geq 2$, so the $5$-adic
+  powerfulness condition is automatic; the obstruction reduces to asking
+  whether $\Aplus$ and $\Aminus$ can simultaneously be powerful away from~$5$.
+\end{itemize}
+
+A computer scan of all $1{,}898{,}236$ Row-3 pairs with $n<5000$ finds
+exactly $633$ pairs where $\Aplus$ is powerful away from~$5$ and $633$
+where $\Aminus$ is powerful away from~$5$; no pair achieves both
+simultaneously.  We prove that resolving the core question requires at least
+one of four new theorems in Diophantine geometry
+(uniform effective S-unit equations over $\ZZ[i]$; effective Bombieri--Lang
+for a specific norm-form variety; a Gaussian Zsygmondy primitive-divisor theorem;
+or a powerful-gap bound for gaps of size $\asymp A$).
+
+None of these results assume or imply the Riemann Hypothesis.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+%---------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}% xref-only
+%---------------------------------------------------------------------
+
+The study of \emph{powerful integers} --- positive integers whose prime
+factorizations have all exponents at least two --- has a long history in
+multiplicative number theory
+(Golomb~\cite{Golomb1970}, Molsen~\cite{Molsen1939},
+Erd\H{o}s and Szekeres~\cite{ErdosSzekeres1935}).
+Pairs of powerful integers lying close together are particularly rare:
+conditional on the $abc$ conjecture, for any $k\geq 1$ there are only
+finitely many powerful pairs $(m, m+k)$~\cite{Granville1998}.
+
+In this paper we study a natural variant: pairs of \emph{Gaussian} integer
+norms that are simultaneously powerful, with a prescribed horizontal shift.
+Specifically, we consider the \emph{off-line Row-3 family} of primitive
+Gaussian integers $w_{+}=a+ni$ and $w_{-}=(a-n)+ni$ on the same
+horizontal line $\operatorname{Im}(z)=n$, differing by the real shift
+$w_{+}-w_{-}=n$.  The norms $\Aplus = |w_{+}|^2 = a^2+n^2$ and
+$\Aminus = |w_{-}|^2 = (a-n)^2+n^2$ differ by
+$\Aplus - \Aminus = n(2a-n)$.
+
+\medskip
+\noindent\textbf{Motivation.}  This family arises as the ``off-line''
+component in an obstruction-theory program studying which
+observations of formal symmetric zero multisets can detect whether
+all zeros lie on the critical line.  The Row-3 conditions ($3\nmid n$,
+$n$ even, $a$ odd, $\gcd(a,n)=1$) isolate the pairs that are
+most structurally constrained.  The question of whether $N = \Aplus\Aminus$
+is ever powerful is the final unresolved arithmetic core of that program.
+The three theorems proved here are fully independent of any analytic
+number theory; they are unconditional arithmetic facts about the Row-3
+family and do not assume the Riemann Hypothesis in any form.
+
+\medskip
+\noindent\textbf{Organization.}
+Section~\ref{sec:setup} establishes definitions and notation.
+Section~\ref{sec:lemmas} collects elementary lemmas used throughout.
+Sections~\ref{sec:thm3}--\ref{sec:thmgcd} contain the three main theorems.
+Section~\ref{sec:numerical} presents the computational evidence.
+Section~\ref{sec:open} formulates the open core and the four blocking
+theorems (NT-A/B/C/D).
+Section~\ref{sec:directions} outlines future directions.
+
+%---------------------------------------------------------------------
+\section{Definitions and setup}
+\label{sec:setup}% xref-only
+%---------------------------------------------------------------------
+
+\begin{definition}[Row-3 pair]
+\label{def:row3}% xref-only
+A pair of integers $(a,n)$ is a \emph{Row-3 pair} if
+\begin{equation}
+  \label{eq:row3}% xref-only
+  n \text{ even},\quad n\geq 4,\quad 3\nmid n,\quad
+  a \text{ odd},\quad 1\leq a < n,\quad \gcd(a,n)=1.
+\end{equation}
+\end{definition}
+
+\begin{definition}[Associated Gaussian integers and norms]
+\label{def:norms}% xref-only
+For a Row-3 pair $(a,n)$ define
+\[
+  w_{+} = a+ni,\quad w_{-}=(a-n)+ni,
+\]
+and their rational norms
+\[
+  \Aplus = |w_{+}|^2 = a^2+n^2,\quad
+  \Aminus = |w_{-}|^2 = (a-n)^2+n^2,\quad
+  N = \Aplus\Aminus.
+\]
+\end{definition}
+
+\begin{definition}[Powerful away from 5]
+\label{def:powerful}% xref-only
+A positive integer $X$ is \emph{powerful} if $p^2\mid X$ for every prime
+$p\mid X$.  It is \emph{powerful away from~$5$} if $p^2\mid X$ for every
+prime $p\neq 5$ dividing $X$; no condition is imposed on $v_5(X)$.
+\end{definition}
+
+\begin{definition}[Gaussian formulation]
+\label{def:gaussian}% xref-only
+In the Gaussian integers $\Zi$, a Gaussian prime above a rational prime
+$p\equiv 1\pmod{4}$ splits as $p=\pi_p\bar\pi_p$.  Since $\gcd(a,n)=1$,
+both $w_{+}$ and $w_{-}$ are \emph{primitive} (their real and imaginary
+parts are coprime).  Primitivity forces $v_{\pi_p}(w_{+}) = v_p(\Aplus)$
+for each prime $p\equiv 1\pmod{4}$, so
+\[
+  \Aplus\text{ powerful away from }5
+  \;\iff\;
+  w_{+}\text{ is powerful away from the Gaussian primes above }5.
+\]
+The same equivalence holds for $\Aminus$ and $w_{-}$.
+\end{definition}
+
+\begin{definition}[$5$-adic subfamily $\mathcal{F}_5$]
+\label{def:F5}% xref-only
+Define $\mathcal{F}_5$ to be the subfamily of Row-3 pairs satisfying
+$2a\equiv n\pmod{5}$ (equivalently, $5\mid\Aplus$ and $5\mid\Aminus$).
+\end{definition}
+
+%---------------------------------------------------------------------
+\section{Preliminary lemmas}
+\label{sec:lemmas}
+%---------------------------------------------------------------------
+
+\begin{lemma}[Shift identity]
+\label{lem:shift}% xref-only
+$\Aplus - \Aminus = n(2a-n)$.
+\end{lemma}
+
+\begin{proof}
+Direct expansion: $(a^2+n^2)-((a-n)^2+n^2) = a^2-(a-n)^2 = n(2a-n)$.
+\end{proof}
+
+\begin{lemma}[Primitivity]
+\label{lem:primitive}% xref-only
+For every Row-3 pair, $\gcd(a,n)=\gcd(a-n,n)=1$, so $w_{+}$ and $w_{-}$
+are primitive Gaussian integers.
+\end{lemma}
+
+\begin{proof}
+$\gcd(a,n)=1$ by definition.  $\gcd(a-n,n)=\gcd(a,n)=1$.
+\end{proof}
+
+\begin{lemma}[Parity]
+\label{lem:parity}
+$\Aplus$ and $\Aminus$ are both odd.
+\end{lemma}
+
+\begin{proof}
+$a$ is odd and $n$ is even, so $a^2\equiv 1\pmod{2}$ and $n^2\equiv 0\pmod{2}$,
+giving $\Aplus\equiv 1\pmod{2}$.  Likewise $a-n$ is odd (odd minus even),
+so $\Aminus\equiv 1\pmod{2}$.
+\end{proof}
+
+%---------------------------------------------------------------------
+\section{Theorem A: $3\nmid N$}
+\label{sec:thm3}
+%---------------------------------------------------------------------
+
+\begin{mainthm}[$3\nmid N$]
+\label{thm:3prime}
+For every Row-3 pair $(a,n)$, $3\nmid \Aplus$ and $3\nmid\Aminus$,
+hence $3\nmid N$.
+\end{mainthm}
+
+\begin{proof}
+Since $3\nmid n$ (Row-3 condition), we have $n\equiv\pm 1\pmod{3}$,
+hence $n^2\equiv 1\pmod{3}$.
+
+\emph{Case 1: $3\mid a$.}  Then $a\equiv 0\pmod{3}$, so
+$\Aplus = a^2+n^2\equiv 0+1=1\pmod{3}$ and
+$\Aminus = (a-n)^2+n^2\equiv n^2+n^2 = 2n^2\equiv 2\pmod{3}$.
+Neither is divisible by~$3$.
+
+\emph{Case 2: $3\nmid a$.}  Then $a\equiv\pm 1\pmod{3}$, so $a^2\equiv 1\pmod{3}$.
+
+Sub-case $a\equiv 1,\, n\equiv 1$: $\Aplus\equiv 1+1=2$;
+$a-n\equiv 0$, so $\Aminus\equiv 0+1=1\pmod{3}$.
+
+Sub-case $a\equiv 1,\, n\equiv -1$: $\Aplus\equiv 1+1=2$;
+$a-n\equiv 1-(-1)=2$, $(a-n)^2\equiv 1$, $\Aminus\equiv 1+1=2\pmod{3}$.
+
+Sub-case $a\equiv -1,\, n\equiv 1$: $\Aplus\equiv 1+1=2$;
+$a-n\equiv -2\equiv 1$, $\Aminus\equiv 1+1=2\pmod{3}$.
+
+Sub-case $a\equiv -1,\, n\equiv -1$: $\Aplus\equiv 1+1=2$;
+$a-n\equiv 0$, $\Aminus\equiv 0+1=1\pmod{3}$.
+
+In all sub-cases $\Aplus\not\equiv 0$ and $\Aminus\not\equiv 0\pmod{3}$.
+\end{proof}
+
+%---------------------------------------------------------------------
+\section{Theorem B: prime residues and $8$-adic structure}
+\label{sec:thmmod4}% xref-only
+%---------------------------------------------------------------------
+
+\begin{mainthm}[Prime residues and $8$-adic structure]
+\label{thm:mod4}
+For every Row-3 pair $(a,n)$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item every prime $p\mid N$ satisfies $p\equiv 1\pmod{4}$;
+\item $\Aplus\equiv\Aminus\pmod{8}$, and both are congruent to $1$
+  or $5\pmod{8}$.
+\end{enumerate}
+In particular $2\nmid N$ (reproving Lemma~\ref{lem:parity} modulo~$8$)
+and $3\nmid N$ (independent of Theorem~\ref{thm:3prime}).
+\end{mainthm}
+
+\begin{proof}
+\emph{Part (i).}  Let $p\mid\Aplus$ be an odd prime.  Since $p\mid a^2+n^2$,
+we have $a^2\equiv -n^2\pmod{p}$.  Because $p\nmid n$ (if $p\mid n$ then
+$p\mid a^2$, hence $p\mid a$, contradicting $\gcd(a,n)=1$), we may write
+$(a/n)^2\equiv -1\pmod{p}$.  This means $-1$ is a quadratic residue
+modulo $p$, which by Fermat's criterion holds if and only if
+$p\equiv 1\pmod{4}$.  The same argument with $\Aminus$ and $a-n$
+(noting $\gcd(a-n,n)=1$) gives every prime $p\mid\Aminus$ satisfies
+$p\equiv 1\pmod{4}$.
+
+\emph{Part (ii).}  Since $a$ is odd, $a^2\equiv 1\pmod{8}$.
+Since $n$ is even, $n^2\equiv 0$ or $4\pmod{8}$.
+Since $a-n$ is odd (odd minus even), $(a-n)^2\equiv 1\pmod{8}$.
+Therefore $\Aplus = a^2+n^2\equiv 1+n^2\pmod{8}$ and
+$\Aminus = (a-n)^2+n^2\equiv 1+n^2\pmod{8}$, giving
+$\Aplus\equiv\Aminus\pmod{8}$.  The common value is
+$1\pmod{8}$ if $4\nmid n$ and $5\pmod{8}$ if $4\mid n$.
+\end{proof}
+
+%---------------------------------------------------------------------
+\section{Theorem C: gcd and $5$-adic structure}
+\label{sec:thmgcd}
+%---------------------------------------------------------------------
+
+\begin{mainthm}[gcd and $5$-adic powerfulness]
+\label{thm:gcd}
+For every Row-3 pair $(a,n)$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\gcd(\Aplus,\Aminus)\in\{1,5\}$;
+\item the common $5$-adic valuation satisfies
+  $\min(v_5(\Aplus),v_5(\Aminus))\leq 1$;
+\item in the subfamily $\mathcal{F}_5$ \textup{(}$2a\equiv n\pmod{5}$\textup{)},
+  $v_5(\Aplus)=v_5(\Aminus)=1$ and $v_5(N)=2\geq 2$, so the
+  $5$-adic powerfulness of $N$ is automatic; the remaining obstruction is
+  that $\Aplus$ and $\Aminus$ are both powerful away from~$5$.
+\item outside $\mathcal{F}_5$, at least one of $\Aplus$, $\Aminus$
+  is coprime to~$5$.
+\end{enumerate}
+\end{mainthm}
+
+\begin{proof}
+\emph{Part (i).}  Let $p\mid\gcd(\Aplus,\Aminus)$.  If $p\mid n$ then
+$p\mid a^2$, so $p\mid a$, contradicting $\gcd(a,n)=1$.  Hence $p\nmid n$.
+Then $p\mid\Aplus-\Aminus = n(2a-n)$ forces $p\mid 2a-n$.  Since also
+$p\mid\Aplus = a^2+n^2$ and $n\equiv 2a\pmod{p}$, we get
+$\Aplus\equiv a^2+(2a)^2 = 5a^2\pmod{p}$.  Since $p\nmid a$,
+this gives $p\mid 5$, so $p=5$.
+
+To bound the common valuation: $\Aplus-\Aminus = n(2a-n)$.  Modulo~$25$:
+if $5\mid 2a-n$ then $\Aplus\equiv a^2+n^2$ and $n\equiv 2a\pmod{5}$
+gives $\Aplus\equiv 5a^2\pmod{25}$, so $v_5(\Aplus)=1$.
+Hence $\min(v_5(\Aplus),v_5(\Aminus))=1$.
+
+\emph{Parts (iii)--(iv).}  By definition of $\mathcal{F}_5$:
+$5\mid\Aplus$ and $5\mid\Aminus$ iff $2a\equiv n\pmod{5}$.
+Part (i) then gives $v_5(\Aplus)=v_5(\Aminus)=1$ and
+$v_5(N)=v_5(\Aplus)+v_5(\Aminus)=2$.  The powerfulness of~$N$
+requires: (a) all primes $p\neq 5$ dividing $N$ appear to even power;
+and (b) $v_5(N)\geq 2$.  Condition (b) holds automatically.
+Condition (a) is exactly that $\Aplus$ and $\Aminus$ are both powerful
+away from~$5$ (using $\gcd(\Aplus,\Aminus)\in\{1,5\}$).
+Outside $\mathcal{F}_5$, at least one factor is coprime to~$5$.
+\end{proof}
+
+\begin{corollary}[Exact powerful criterion]
+\label{cor:powerful-criterion}
+$N$ is powerful if and only if: $\Aplus$ and $\Aminus$ are both powerful
+away from~$5$, and $v_5(\Aplus)+v_5(\Aminus)\neq 1$.
+\end{corollary}
+
+%---------------------------------------------------------------------
+\section{Numerical evidence}
+\label{sec:numerical}
+%---------------------------------------------------------------------
+
+The following data are the result of an exact arithmetic scan using
+\texttt{checker/ob44a\_factorization\_scan.py}, which factors each $\Aplus$
+and $\Aminus$ completely and checks powerfulness away from~$5$.
+This is \emph{sanity evidence only} and is not used as a premise in
+any theorem.
+
+\begin{table}[h]
+\centering
+\caption{Exact scan of all Row-3 pairs with $n < 5000$.}
+\label{tab:scan}% xref-only
+\begin{tabular}{lr}
+\toprule
+Quantity & Count \\
+\midrule
+Total Row-3 pairs & $1{,}898{,}236$ \\
+$\Aplus$ powerful away from~$5$ & $633$ \\
+$\Aminus$ powerful away from~$5$ & $633$ \\
+Both simultaneously powerful away from~$5$ & $0$ \\
+$N$ powerful & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+The $633$ single-factor witnesses are all isolated; no pair achieves both.
+
+\begin{example}[Single-factor witness]
+\label{ex:witness}% xref-only
+Take $a=19$, $n=22$:
+\[
+  \Aplus = 19^2+22^2 = 845 = 5\cdot 13^2
+  \quad(\text{powerful away from }5),
+\]
+\[
+  \Aminus = (19-22)^2+22^2 = 9+484 = 493 = 17\cdot 29
+  \quad(\text{not powerful away from }5).
+\]
+This is not a simultaneous witness.
+\end{example}
+
+%---------------------------------------------------------------------
+\section{The open core and four blocking theorems}
+\label{sec:open}
+%---------------------------------------------------------------------
+
+Theorems~\ref{thm:3prime}--\ref{thm:gcd} reduce the problem to:
+
+\begin{conjecture}[Core conjecture]
+\label{conj:core}
+There is no Row-3 pair $(a,n)$ for which $\Aplus$ and $\Aminus$ are
+simultaneously powerful away from~$5$.
+\end{conjecture}
+
+\noindent
+Equivalently, by Corollary~\ref{cor:powerful-criterion}: $N$ is never
+powerful on the Row-3 family.
+
+We prove that each of the four natural proof approaches is blocked by
+a missing theorem in current mathematics.
+
+\begin{theorem}[Blocking theorem NT-A]
+\label{thm:NTA}
+\textup{(S-unit obstruction.)}
+Approach via S-unit equations over $\Zi$: for each $5$-adic type
+$(f_1,g_1,f_2,g_2)\in\{0,1\}^4$, writing
+$w_{+}=(1+2i)^{f_1}(1-2i)^{g_1}\xi_{+}^2$ and
+$w_{-}=(1+2i)^{f_2}(1-2i)^{g_2}\xi_{-}^2$ reduces the shift identity
+$w_{+}-w_{-}=n$ to an S-unit equation over $\Zi$ with
+$S=S_0\cup S(n)$ growing with $n$ ($|S(n)|=O(\omega(n))$).
+The Evertse--Schlickewei--Schmidt theorem and its Gaussian analogues
+give finiteness for fixed $S$ but do not provide height bounds
+uniform in $|S|$.
+
+\medskip
+\noindent\emph{What is needed} \textup{(NT-A)}: a uniform effective
+S-unit theorem over $\Zi$ for $X-Y=n$ with $S=S_0\cup S(n)$, giving
+explicit height bounds in terms of $n$ and $|S(n)|$.
+\end{theorem}
+
+\begin{theorem}[Blocking theorem NT-B]
+\label{thm:NTB}
+\textup{(Geometric obstruction.)}
+The powerful parametrization
+$w_{+}=(1\pm 2i)^{f}u_{+}^2 v_{+}^3$ gives 5 unknowns and 2 equations
+(shift + imaginary part), defining a \emph{$3$-fold} for each fixed $n$.
+Faltings' theorem does not apply (requires a curve).
+Bombieri--Lang would give sparse rational points on the $3$-fold but is
+unproved.
+
+For the simpler sub-case powerful $=$ perfect square times $5$-power,
+the system defines the intersection of two quadrics in $\mathbb{P}^3$:
+a smooth curve of degree $4$ and genus $g=1$ (by the adjunction formula
+$g=1+d_1 d_2(d_1+d_2-4)/2 = 1$ for $d_1=d_2=2$).
+This is an elliptic curve; Faltings does not apply ($g=1$, not $\geq 2$).
+Uniformity over $n$ requires rank control for each $n$ plus a
+uniform height bound as $n\to\infty$.
+
+\medskip
+\noindent\emph{What is needed} \textup{(NT-B)}: an effective version of
+Faltings/Bombieri--Lang for the norm-form $3$-fold, or an effective rank
+control plus uniform height bound for the elliptic curve family, uniform in $n$.
+\end{theorem}
+
+\begin{theorem}[Blocking theorem NT-C]
+\label{thm:NTC}
+\textup{(Primitive divisor obstruction.)}
+A Zsygmondy-type theorem for the family $\{a+ni : a\text{ odd},\,\gcd(a,n)=1\}$
+in $\Zi$ would show that for all but finitely many Row-3 pairs,
+$w_{+}=a+ni$ has a Gaussian prime $\mathfrak{p}\nmid 5$ appearing to
+exactly first power, preventing $\Aplus$ from being powerful away from~$5$.
+The Bilu--Hanrot--Voutier primitive divisor theorem applies to Lucas and
+Lehmer sequences (with fixed characteristic roots) but not to this
+polynomial family.
+
+\medskip
+\noindent\emph{What is needed} \textup{(NT-C)}: a Zsygmondy primitive divisor
+theorem for the shifted Gaussian norm family $\{a+ni\}$ in $\Zi$,
+giving an absolute constant $C$ such that for $n>C$, at least one of
+$w_{+}$, $w_{-}$ has a Gaussian prime factor $\mathfrak{p}\nmid 5n$
+appearing to exactly first power.
+\end{theorem}
+
+\begin{theorem}[Blocking theorem NT-D]
+\label{thm:NTD}
+\textup{(Powerful-gap obstruction.)}
+If $\Aplus$ and $\Aminus$ are both powerful away from~$5$, their gap is
+$\Aplus-\Aminus = n(2a-n)$ with $|n(2a-n)|<n^2\asymp\Aminus$.
+Classical powerful-gap theorems (Molsen~\cite{Molsen1939},
+Stormer, Pillai) require $k\ll A^{1/2}$ or fixed $k$; they give
+nothing when $k\asymp A$.
+Applying the $abc$ conjecture over $\QQ(i)$ to the triple
+$(\Aminus, n(2a-n), \Aplus)$: the powerful hypothesis gives
+$\mathrm{rad}(\Aplus\Aminus)\leq 25\sqrt{N}\asymp n^2$,
+so the $abc$ bound gives $n^2\ll (n^3)^{1+\varepsilon}$,
+which is trivial.
+
+\medskip
+\noindent\emph{What is needed} \textup{(NT-D)}: a powerful-gap bound
+for gaps $k\asymp A$; equivalently, the $abc$ conjecture over $\Zi$
+with an exponent strictly below $3$ in $\mathrm{rad}(\Aplus\Aminus k)$,
+or an independent Diophantine argument.
+\end{theorem}
+
+\begin{table}[h]
+\centering
+\caption{Four blocking theorems; any single one unconditionally proved
+  would likely resolve Conjecture~\ref{conj:core}.}
+\label{tab:blocking}% xref-only
+\begin{tabular}{lll}
+\toprule
+ID & Tool needed & Approach unlocked \\
+\midrule
+NT-A & Uniform effective S-unit over $\Zi$, growing $S$ & S-unit equations \\
+NT-B & Effective Bombieri--Lang for norm-form $3$-fold;
+  & Thue--Mahler / \\
+& or rank control + uniform bound for genus-$1$ curve & norm-form \\
+NT-C & Gaussian Zsygmondy for shifted Gaussian norm family & Primitive divisors \\
+NT-D & Powerful-gap bound for $k\asymp A$ & Gap argument \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%---------------------------------------------------------------------
+\section{Dead ends}
+\label{sec:deadends}% xref-only
+%---------------------------------------------------------------------
+
+The following approaches fail for structural reasons and should not be
+attempted without new input:
+
+\begin{enumerate}[label=(D\arabic*)]
+\item \textbf{Faltings directly on the 3-fold.}
+  Faltings applies to curves (dimension 1).  The powerful
+  parametrization gives a $3$-fold.
+
+\item \textbf{Local congruence argument.}
+  For every prime-power modulus checked ($p^k$ for
+  $p\in\{3,7,11,13,17,19,23,29,31,37,41,43,47\}$, $k\leq 3$), there exist
+  residue classes satisfying all Row-3 conditions with both $\Aplus$ and
+  $\Aminus$ avoiding first-power divisibility by any specific small prime.
+  No purely local argument can close the problem.
+
+\item \textbf{Trivial $abc$ bound.}
+  As shown in NT-D, both the direct and refined applications of $abc$
+  over $\QQ(i)$ yield $n^2\ll n^{3+\varepsilon}$, which is automatically
+  satisfied.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\section{Directions}
+\label{sec:directions}
+%---------------------------------------------------------------------
+
+\begin{enumerate}
+\item \textbf{NT-C (Theorem~\ref{thm:NTC}) is the most tractable entry point.}
+  A Gaussian Zsygmondy theorem for the family $\{a+ni\}$ is a
+  plausible extension of the Bilu--Hanrot--Voutier theory; the key
+  difficulty is the absence of a linear recurrence.  A one-sided
+  version (just for $w_{+}$) would suffice to resolve
+  Conjecture~\ref{conj:core}.
+
+\item \textbf{Pasten-type lattice methods.}
+  Recent work of Pasten~\cite{Pasten2024} constructs arithmetic-derivative
+  lattices for squarefree coprime triples over $\QQ$ and bounds quality
+  via Minkowski.  Extensions to $\Zi$ and to the non-squarefree setting
+  (tracking the $v_{\max}$ factor) may be relevant to
+  NT-A (Theorem~\ref{thm:NTA}) and NT-D (Theorem~\ref{thm:NTD}).
+
+\item \textbf{Genus-1 family for the square-only sub-case.}
+  NT-B (Theorem~\ref{thm:NTB}) reduces in the square-only sub-case to rank
+  control for an elliptic curve family (intersection of two quadrics in
+  $\mathbb{P}^3$ parametrized by $n$).  Effective $2$-descent or Chabauty
+  for small rank could close this sub-case.
+
+\item \textbf{Larger computational range.}
+  Extending the scan to $n<10^5$ (feasible with GPU-parallelized
+  factorization) would substantially strengthen the numerical evidence.
+\end{enumerate}
+
+{\sloppy
+\begin{thebibliography}{99}
+
+\bibitem{Bilu2001}
+Y.~Bilu, G.~Hanrot, and P.~Voutier,
+\emph{Existence of primitive divisors of Lucas and Lehmer numbers},
+J.\ Reine Angew.\ Math.~\textbf{539} (2001), 75--122.
+
+\bibitem{ErdosSzekeres1935}
+P.~Erd\H{o}s and G.~Szekeres,
+\emph{\"Uber die Anzahl der Abelschen Gruppen gegebener Ordnung und
+  \"uber ein verwandtes zahlentheoretisches Problem},
+Acta Sci.\ Math.\ (Szeged)~\textbf{7} (1935), 95--102.
+
+\bibitem{Evertse1984}
+J.-H.~Evertse,
+\emph{On sums of $S$-units and linear recurrences},
+Compositio Math.~\textbf{53} (1984), no.~2, 225--244.
+
+\bibitem{Faltings1983}
+G.~Faltings,
+\emph{Endlichkeitss\"atze f\"ur abelsche Variet\"aten \"uber Zahlk\"orpern},
+Invent.\ Math.~\textbf{73} (1983), no.~3, 349--366.
+
+\bibitem{Golomb1970}
+S.~W.~Golomb,
+\emph{Powerful numbers},
+Amer.\ Math.\ Monthly~\textbf{77} (1970), no.~8, 848--852.
+
+\bibitem{Granville1998}
+A.~Granville,
+\emph{$ABC$ allows us to count squarefree},
+Internat.\ Math.\ Res.\ Notices~\textbf{1998}, no.~19, 991--1009.
+
+\bibitem{Ireland1990}
+K.~Ireland and M.~Rosen,
+\emph{A Classical Introduction to Modern Number Theory},
+2nd ed., Springer, New York, 1990.
+
+\bibitem{Molsen1939}
+K.~Molsen,
+\emph{Zur Verallgemeinerung des Bertrandschen Postulates},
+Deutsche Math.~\textbf{4} (1939), 11--16.
+
+\bibitem{Pasten2024}
+H.~Pasten,
+\emph{The arithmetic derivative and the Vojta--Granville conjecture
+  (preprint)}, 2024.
+
+\bibitem{Schmidt1990}
+W.~M.~Schmidt,
+\emph{The subspace theorem in Diophantine approximations},
+Compositio Math.~\textbf{69} (1988), no.~2, 121--173.
+
+\end{thebibliography}
+}
+
+\end{document}

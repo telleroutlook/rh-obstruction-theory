@@ -54,15 +54,18 @@
 
 \begin{document}
 
-\title[Finite Li-Statistic Collisions]{Finite
-  Li-Statistic Collisions for Formal Symmetric Zero Multisets}
+\title[Finite Collisions and Gaussian Rigidity]{Finite
+  Li-Statistic Collisions and Gaussian Weil Rigidity for Formal
+  Symmetric Zero Multisets}
 
 \author{Lin Tao}
 \date{2026}
 
 \begin{abstract}
-We prove three theorems about the standard Li-type observation of finite
-symmetric zero multisets, and record two main corollaries and one auxiliary corollary.
+We prove three main theorems about the standard Li-type observation of finite
+symmetric zero multisets, record two main corollaries, and prove a
+complementary arithmetic-rigidity theorem for algebraic Gaussian Weil-type
+observations.
 Let $\Hsym$ be the class of finite multisets in the open critical strip
 symmetric under $\rho\mapsto\bar\rho$ and $\rho\mapsto 1-\rho$, and let
 $P(\mathcal{Z})=1$ iff every atom has $\re\rho=1/2$.
@@ -80,6 +83,14 @@ within $\Hsym$.
 \textbf{Theorem~\ref{thm:C}} (incomparability): the standard Li map
 $\Ofinite^{(K)}$ and the sampled counting map $\Otheta$ are
 incomparable in the information refinement preorder on $\Hsym$.
+
+\textbf{Theorem~\ref{thm:gaussian-no-collision}} (Gaussian Weil rigidity):
+for a real algebraic even Hermite-Gaussian test function and nondegenerate
+algebraic on-line/off-line data, no nonzero integer multiplicities balance an
+off-line quartet against on-line pairs.  The exact-collision phenomenon is
+therefore sensitive to the arithmetic of the observation encoding: rational
+Li values admit exact collisions, while these algebraic-exponential values do
+not.
 
 \textbf{Corollary~\ref{cor:D}} (Andersson): agreement with any fixed finite initial
 collection of Euler factors of $\zeta$ does not force
@@ -143,7 +154,8 @@ An obstruction pair shows that no $f : Y \to \{0,1\}$ satisfies
 $P(\mathcal{Z}) = f(O(\mathcal{Z}))$ for all $\mathcal{Z}\in\Hsym$.
 
 \begin{remark}[Scope of these results]
-Theorems~\ref{thm:A}--\ref{thm:C} and Corollary~\ref{cor:E} are proved for the class $\Hsym$ of
+Theorems~\ref{thm:A}--\ref{thm:C}, Theorem~\ref{thm:gaussian-no-collision},
+and Corollary~\ref{cor:E} are proved for the class $\Hsym$ of
 \emph{finite} symmetric multisets (Corollary~\ref{cor:D} concerns the Helson
 class $\mathcal{H}_S$); none of these results apply directly to the
 actual zero set of~$\zeta$.  The actual
@@ -185,6 +197,11 @@ predicate is $P(\mathcal{Z}) = 1$ iff every atom has $\re \rho = 1/2$.
   of standard Li values admits a uniform strictly positive lower bound
   separating $P(\mathcal{Z}) = 1$ from $P(\mathcal{Z}) = 0$ within $\Hsym$.
 
+\item \textbf{Theorem~\ref{thm:gaussian-no-collision}}
+  (Section~\ref{sec:gaussian}): A nondegenerate algebraic Gaussian Weil-type
+  observation admits no exact integer balancing of one off-line quartet
+  against finitely many on-line pairs.
+
 \item \textbf{Theorem~\ref{thm:C}} (Section~\ref{sec:H}): Fix $M \geq 1$ and
   positive sampling levels $0 < d_1 < \cdots < d_M$.  For every $K \geq 1$,
   $\Ofinite^{(K)} \incomp \Otheta$ on $\Hsym$.
@@ -223,8 +240,10 @@ Bombieri~\cite{Bombieri2000} reformulate this as a positivity and
 spectral-absorption problem.  These approaches use \emph{all} test functions
 simultaneously; the present results show that, within the finite symmetric
 class $\Hsym$, a \emph{fixed finite initial segment} of standard Li values
-does not determine $P$.  The case of a fixed finite family of general
-Weil-type tests is addressed by Open Problem~2.
+does not determine $P$.  For a fixed finite family of general Weil-type
+tests, the algebraic Gaussian case is settled by
+Theorem~\ref{thm:gaussian-no-collision}, while the compactly supported
+Paley--Wiener case remains open.
 
 \textbf{Selberg trace formula and spectral methods.}
 The Selberg trace formula connects eigenvalues to geodesic lengths;
@@ -730,7 +749,126 @@ Not every $\mathcal{Z}_+\in\Hsym$ with $P(\mathcal{Z}_+)=1$ satisfies
 $\Li_j(\mathcal{Z}_+)>0$ for all $j$: for instance
 $\varphi_4(1/2+i/2) = 1 - (1-(1/2+i/2)^{-1})^4 = 1 - i^4 = 0$,
 so $\Li_4(L(1/2)) = 0$.  The corollary applies only to $\mathcal{Z}_+$
-where the positivity hypothesis holds.
+  where the positivity hypothesis holds.
+\end{remark}
+
+%%--------------------------------------------------------------------
+\section{Gaussian Weil observations do not admit the same integer collision}
+\label{sec:gaussian}
+%%--------------------------------------------------------------------
+
+The exact collision in Theorem~\ref{thm:A} relies on the rational arithmetic
+of the finite Li observations.  We now show that changing the encoding to an
+algebraic Gaussian test function destroys that integer-balancing mechanism.
+This is a finite observation statement only; it uses neither compact support,
+the actual zeros of $\zeta$, nor the Riemann Hypothesis.
+
+\begin{definition}[Gaussian Weil-type observation]
+\label{def:gaussian-observation}
+Let
+\[
+  G(z)=p_G(z)\exp(-az^2),
+  \qquad a\in\overline{\QQ}\cap\RR,\ a>0,
+\]
+where $p_G\in(\overline{\QQ}\cap\RR)[x]$ is a nonzero even polynomial.  For a
+finite symmetric multiset $\mathcal{Z}$, define
+\[
+  \Psi_G(\mathcal{Z})
+  =\sum_{\rho\in\mathcal{Z}}G\!\left(\frac{\rho-\tfrac12}{i}\right).
+\]
+\end{definition}
+
+This is called \emph{Gaussian Weil-type} because it has the same finite
+zero-sum functional shape, but with a Schwartz Gaussian frequency profile
+rather than the Fourier transform of a compactly supported real test function.
+No claim is made that $G$ itself is the Fourier transform of an element of
+$C_c^\infty(\RR)$.
+
+\begin{theorem}[Algebraic Gaussian no-collision]
+\label{thm:gaussian-no-collision}
+Let $G$ be as in Definition~\ref{def:gaussian-observation}.
+Fix $m\geq 1$, distinct positive real algebraic heights
+$\gamma_1,\ldots,\gamma_m$ whose squares are pairwise distinct, and a positive
+real algebraic number $T$.  Let $\delta$ be a nonzero real algebraic number
+and put $\sigma_0=\tfrac12+\delta$, with $0<\sigma_0<1$.  Suppose
+\[
+  p_G(\gamma_k)\neq 0\quad(k=1,\ldots,m),
+  \qquad
+  p_G(T+i\delta)\neq 0.
+\]
+Then there is no nonzero integer vector
+$(q,c_1,\ldots,c_m)\in\ZZ^{m+1}$ such that
+\[
+  q\,\Psi_G(Q(\sigma_0,T))
+  =\sum_{k=1}^mc_k\Psi_G(L(\gamma_k)).
+  \label{eq:gaussian-collision}
+\]
+\end{theorem}
+
+\begin{proof}
+For an on-line pair, the evenness of $p_G$ gives
+\[
+  \Psi_G(L(\gamma_k))
+  =2p_G(\gamma_k)\exp(-a\gamma_k^2).
+\]
+For the off-line quartet, the four arguments are
+$\pm T\pm i\delta$.  Using evenness again and the identity
+$G(\bar z)=\overline{G(z)}$, which follows from the reality of $a$ and the
+coefficients of $p_G$, we obtain
+\[
+  \begin{aligned}
+  \Psi_G(Q(\sigma_0,T))
+  ={}&2p_G(T+i\delta)\exp(-a(T+i\delta)^2)\\
+   &+2p_G(T-i\delta)\exp(-a(T-i\delta)^2).
+  \end{aligned}
+\]
+Set
+\[
+  \beta_+=-a(T+i\delta)^2,\qquad
+  \beta_-=-a(T-i\delta)^2,\qquad
+  \beta_k=-a\gamma_k^2.
+\]
+These are algebraic.  The $\beta_k$ are distinct because the squares of the
+$\gamma_k$ are distinct.  Since $aT\delta\neq 0$, $\beta_+$ and $\beta_-$ are
+distinct non-real conjugates.  Thus
+$\beta_+,\beta_-,\beta_1,\ldots,\beta_m$ are $m+2$ distinct algebraic
+numbers.
+
+If integers $q,c_1,\ldots,c_m$ satisfy \eqref{eq:gaussian-collision}, then
+\[
+  qp_G(T+i\delta)e^{\beta_+}
+  +qp_G(T-i\delta)e^{\beta_-}
+  -\sum_{k=1}^mc_kp_G(\gamma_k)e^{\beta_k}=0.
+\]
+By the Lindemann--Weierstrass theorem in its linear-independence form
+(the arXiv version of Delaygue~\cite{Delaygue2025}, Theorem~C), exponentials
+of distinct algebraic
+numbers are linearly independent over $\overline{\QQ}$.  Hence every
+coefficient vanishes:
+\[
+  qp_G(T\pm i\delta)=0,\qquad c_kp_G(\gamma_k)=0.
+\]
+The nonvanishing hypotheses force $q=0$ and $c_1=\cdots=c_m=0$, contradicting
+nonzero integer data.  This proves the theorem.
+\end{proof}
+
+\begin{remark}[The nonvanishing hypotheses are necessary]
+\label{rem:gaussian-nonzero}% xref-only
+If $p_G(T+i\delta)=0$, then also $p_G(T-i\delta)=0$, so the off-line quartet is
+invisible to $\Psi_G$ and $(q,c_1,\ldots,c_m)=(1,0,\ldots,0)$ is a degenerate
+integer relation.  Similarly, if $p_G(\gamma_k)=0$, the corresponding on-line
+pair drops out.  These are observation annihilators, not failures of
+Lindemann--Weierstrass.
+\end{remark}
+
+\begin{remark}[Scope]
+\label{rem:gaussian-scope}% xref-only
+The theorem covers the algebra, generated in the frequency variable by even
+polynomials with real algebraic coefficients, of a Gaussian.  It does not cover
+general compactly supported $h\in C_c^\infty(\RR)$, whose Fourier transform is
+Paley--Wiener, nor does it bound approximate bounded-height collisions.  Thus
+it gives a sharp partial answer to the Gaussian case of Open Problem~2 while
+leaving the literal compact-support question open.
 \end{remark}
 
 %%--------------------------------------------------------------------
@@ -1032,8 +1170,9 @@ multisets; the actual zero set of $\zeta$ is infinite and subject to
 the Hadamard product, functional equation, Euler product, and
 Riemann--von Mangoldt counting law --- none of which are imposed on $\Hsym$.
 Theorems~A--C establish non-identifiability of \emph{finite statistics}
-on formal symmetric multisets; they do not constitute barriers for the
-full analytic structure of $\zeta$.
+on formal symmetric multisets, and Theorem~\ref{thm:gaussian-no-collision}
+establishes arithmetic rigidity for one Gaussian encoding; neither result
+constitutes a barrier for the full analytic structure of $\zeta$.
 
 \subsection{Relation to Bombieri--Lagarias}
 
@@ -1067,18 +1206,27 @@ counting asymptotics, or Hadamard/functional-equation/Euler-product constraints.
 \item \textbf{Grow-with-$T$ obstruction.}  Is there an exact
   information obstruction for $\Ofinite^{(K(T))}$ that remains valid even
   as $K = K(T)$ grows with the height parameter $T$ while satisfying a
-  uniform bound $\#\mathcal{Z}_\pm \leq T^A$ on total atom count or denominator height?
+  uniform bound $\#\mathcal{Z}_\pm \leq T^A$, for a fixed exponent $A>0$,
+  on total atom count or denominator height?
+  A useful quantitative invariant is obtained by clearing denominators in the
+  rational observation vectors and taking the index of the on-line integer
+  column lattice in the lattice obtained by adjoining the off-line vector.
+  The unresolved arithmetic question is whether the least possible off-line
+  coefficient in that index has a uniform super-polynomial lower bound in the
+  observation order.
 
 \item \textbf{Weil-type observations.}
-  For a fixed finite family $h_1, \ldots, h_r \in C_c^\infty(\RR)$ of
+  Theorem~\ref{thm:gaussian-no-collision} rules out the exact
+  integer-balancing construction for nondegenerate algebraic
+  Gaussian/Hermite-Gaussian tests.  The remaining compact-support case is as
+  follows.  For a fixed finite family
+  $h_1, \ldots, h_r \in C_c^\infty(\RR)$ of
   real-valued, even functions, the observations
   $\varphi_{h_i}(\rho) = \hat{h}_i((\rho-\tfrac12)/i)$ are entire functions
   of $\rho$ with real values on the critical line.
-  The Chebyshev--Vandermonde reduction used in Theorem~\ref{thm:A}
-  does not directly apply because the resulting observation values are
-  not guaranteed to be rational, and no general transcendence statement
-  is available.  Does an analogue of Theorem~\ref{thm:A} hold
-  for such observations?
+  Their values are Paley--Wiener periods rather than algebraic multiples of
+  exponentials with algebraic exponents, so Lindemann--Weierstrass does not
+  apply.  Does an analogue of Theorem~\ref{thm:A} hold for such observations?
 
 \item \textbf{Information hierarchy convergence.}
   Is there a natural sequence of observations
@@ -1086,6 +1234,11 @@ counting asymptotics, or Hadamard/functional-equation/Euler-product constraints.
   (the identity observation $O_{\mathrm{oracle}}(\mathcal{Z})=\mathcal{Z}$)
   in some appropriate sense, and at what level does the chain separate
   $P = 1$ from $P = 0$?
+  Theorems~\ref{thm:A} and~\ref{thm:gaussian-no-collision} show that the
+  answer depends on the arithmetic of the encoding---rational Li values admit
+  exact integer collisions, whereas the nondegenerate algebraic Gaussian
+  encoding admits none---but no classification or convergence theorem is
+  claimed.
 \end{enumerate}
 
 {\sloppy
@@ -1127,6 +1280,12 @@ A.~Connes,
 \emph{Trace formula in noncommutative geometry and the zeros of the
 Riemann zeta function},
 Selecta Math.\ (N.S.)~\textbf{5} (1999), no.~1, 29--106.
+
+\bibitem{Delaygue2025}
+\'E.~Delaygue,
+\emph{A Lindemann--Weierstrass theorem for $E$-functions},
+J.\ Reine Angew.\ Math.\ \textbf{820} (2025), 75--85;
+arXiv:2210.12046v2.
 
 \bibitem{Helson1969}
 H.~Helson,

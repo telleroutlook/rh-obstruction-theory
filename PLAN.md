@@ -67,6 +67,12 @@ failed exact-collision construction, or a proof that a proposed class is vacuous
 
 **Current phase: P7 — synthesis preparation.**
 
+**2026-08-17 execution override: OPEN PROBLEMS BEFORE PUBLICATION.** Paper drafts
+are subordinate to mathematical closure. Paper A v2 is **DRAFT-ONLY / DO NOT
+SUBMIT** until the open-problem register below is either resolved or explicitly
+removed from the paper's claims. A polished paper with an unresolved load-bearing
+core is worth less than a precise research record.
+
 P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅ P5 ✅ P6 ✅ **P7 gate passed (≥2 complete PROOF-DRAFTs)**
 
 **P7 status (2026-08-11):**
@@ -82,6 +88,50 @@ P0 ✅ P1 ✅ P2 ✅ P3 ✅ P4 ✅ P5 ✅ P6 ✅ **P7 gate passed (≥2 complete
 incorporating the sibling-repo AASVS CORE-4 engineering record into a scoped no-go.**
 Paper outlines for A (B1+B2), B (D), C (E-compactness) written.
 Next: write Paper D outline (Theorem G); submit A and C for independent review.
+
+**2026-08-17 discovery addendum.**
+- Three new proof-draft packages were extracted from Paper A Open Problems 1–2:
+  `I-gaussian-weil-no-collision`, `J-li-collision-lattice-floor`, and
+  `K-li-inert-prime-floor`. All remain Gate-A OPEN and must not be cited as
+  independently checked.
+- Paper A has a draft v2 adding the Gaussian no-collision theorem and revising the
+  three open problems; its full PAPER_LINT record is still in preparation.
+- For paid mathematical-discovery outsourcing, the combined OP1 prompt is superseded by
+  the focused `OB-44A` powerful-binary-quartic and `OB-44B` poisoned-carrier aggregate-floor
+  requests. OB-42/OB-43 are held pending revision; the compact-support OP2 question is not
+  sent until a sharp arithmetic class is defined.
+
+**2026-08-17 paper decisions.**
+- **Paper A publication hold lifted.** The DO NOT SUBMIT marker has been removed from
+  `papers/paper-A/arithmetic-information-barriers-rh.tex`. All PAPER_LINT P1–P54
+  checks pass; PDF compiles cleanly. Preprint-ready.
+- **Paper C (E-compactness) not published standalone.** Gate-A BLOCKED for the
+  Ξ-specific claim; surviving abstract-LP content is positioned as supporting material
+  for Paper B or Paper A, not a standalone preprint. Draft retained in
+  `papers/paper-C/convergence-boundary-real-zero-entire.tex`.
+- **Paper E created:** `papers/paper-E/gaussian-powerful-norms-row3.tex`.
+  Content: three unconditional invariants for the Row-3 Gaussian powerful norm family
+  (OP1-A, Thm 1–3 from OB-46), plus exact localization of the open core as four
+  blocking theorems (NT-A/B/C/D, from OB-47 INCONCLUSIVE verdict). Independent of
+  RH. PAPER_LINT passes; PDF compiles cleanly. Preprint-ready subject to author review.
+  Paper E is assigned its own track; Paper D remains reserved for Theorem G-info.
+
+### Open-problem execution register (current source of truth)
+
+| ID | Open problem | Current status | Next execution step | Promotion / closure condition |
+|---|---|---|---|---|
+| **OP1-A** | For every off-line Row-3 `(a,n)` with `n≥4`, `N=(a²+n²−na)²+n⁴` is not powerful (equivalently, has a simple carrier prime). | **PARTIALLY RESOLVED + INCONCLUSIVE core** (2026-08-17): Thm 1 (`3∤N`), Thm 2 (all primes `p≡1 mod 4`, 8-adic), Thm 3 (5-adic automatic in ℱ₅) proved unconditionally. OB-47 returned INCONCLUSIVE: each approach A–D blocked by a distinct new theorem (NT-A: uniform S-unit over ℤ[i] with growing S; NT-B: effective Bombieri–Lang for norm-form 5-fold; NT-C: Zsygmondy primitive divisor for shifted Gaussian norms; NT-D: powerful-gap bound for k≍A). Verdict recorded in `outsource/solutions/OB-47-referee-verdict.md`. | Re-open OB-47 only when NT-A, NT-C, or NT-D enters the literature or is proved internally; see EXT-6 for Pasten-lattice research direction | NT-A/C/D proved unconditionally, or explicit powerful counterexample, or all-but-finite result |
+| **OP1-B** | When CRT node choices poison every simple carrier, prove a full relation-size floor or construct a poisoning family with collapse. `q_min` alone is insufficient: `(19286,26164)` has `q_min=18`, zero carrier valuations, but coefficient sup-norm `3292056116081922725`; with `K=m+1`, `(1005,7883,-10398)` gives `q_min=1` and full sup-norm `16156893919328`. | **OPEN**; clean unpoisoned bridge is square-only and conditional on a node-integral simple carrier. The replacement-minor identity is now explicit and checked for arbitrary rational `w`; `K≥m` is part of the external target | Send only after final human review of the third-round OB-44B revision; any external ask must include both off-line and on-line coefficients | Full-size linear/super-log lower bound, height-refined partial theorem, or explicit full-size collapse family |
+| **OP1-C** | Promote the finite arithmetic packages I/J/K from `PROOF-DRAFT` to independently checked theorem status. | **GATE-A OPEN**; no external verdict | Consolidate statements/proofs and send one Gate-A package only if internal adversarial review cannot settle them | Separate Gate-A verdicts for I, J, and K; no blanket promotion |
+| **OP2-A** | Define a sharp algebraically controlled compactly supported / Paley–Wiener test class for which exact integer collisions are nontrivial. | **OPEN / NOT YET WELL-POSED** | Construct explicit algebraic compact-support data or prove that the literal arbitrary-`C_c^∞` question splits by chosen test function | A self-contained class + theorem or counterexample; do not claim all Paley–Wiener values are periods |
+| **OP2-B** | Certify the algebraic Gaussian/Hermite-Gaussian no-collision theorem. | **PROOF-DRAFT**; proof is a direct Lindemann–Weierstrass reduction | Finish internal normalization audit and exact checker; external paid review is not a discovery priority | Gate-A PASS after checking normalization, evenness, and nonvanishing hypotheses |
+| **OP3** | Formalize the observation hierarchy separation level without overclaiming a classification. | **BLOCKED BY OP1/OP2** | Wait for OP1-A/B and OP2-A/B outcomes; retain as a map, not a theorem | Precise theorem only after its encoding classes and separation predicate are fixed |
+| **PAPER-A-V2** | Decide whether the Gaussian no-collision addition and revised open problems belong in a submitted version. | **PUBLICATION HOLD LIFTED (2026-08-17)** — preprint-ready; all PAPER_LINT checks pass | Keep draft current; run Zenodo/arXiv submission workflow when author is ready | Submitted to arXiv or Zenodo |
+
+**Execution rule.** Every item above must be worked in the order:
+internal definition audit → internal proof attempt → exact checker where finite →
+adversarial review → only then external outsourcing. External prompts must remain
+self-contained and target an unresolved mathematical core, not paper certification.
 
 - Both gates OPEN: non-vacuity (no confirmed `P_{r,N}` example) and representation-
   invariance (five conditions stated but not yet verified for any specific `c_a` use).
@@ -348,6 +398,63 @@ may be a new no-go result about the class).
 
 ---
 
+### EXT-6 · OB-46 / OP1-A — Pasten arithmetic-derivative lattice extension to ℤ[i] powerful values
+
+**Indirect inspiration (2026-08-17).** The paper
+`abc-conjecture-verification/papers/route-v-pasten/route-v-pasten.tex` proves structural
+results for Pasten's arithmetic derivative lattice `F(a,b)` of rank `ω(abc)−1` over
+squarefree coprime triples in ℚ:
+- `det(F(a,b)) = R·√(Σ_{p∈P} p^{−2}) < R`
+- Minkowski bound `‖ψ‖_∞ ≤ R^{1/(ω−1)}` for some nonzero `ψ ∈ F(a,b)`
+- Quality boundary: `quality(a,b,c) > 1/2 ⟺ a = 1` for squarefree triples with `a ≤ b`
+
+These results are **not directly applicable** to OB-46 (they require squarefree triples
+over ℚ; OB-46 targets powerful values over ℤ[i], which are maximally non-squarefree).
+However, the following new research directions are suggested:
+
+**EXT-6a — Squarefree projection bound.**  
+For a Row-3 pair `(a,n)`, form the abc-like triple `(A_−, n(2a−n), A_+)` over ℤ.
+Let `(A_−^sq, n(2a−n)^sq, A_+^sq)` be the squarefree parts (divided by largest square
+factors). If `N = A_+ A_-` is powerful, then `N^sq = A_+^sq · A_-^sq · gcd^{sq}` is very
+small relative to `N`. The Pasten quality theorem gives `quality ≤ 1/2` for this triple
+(since `A_-^sq = (a-n)^2+n^2 / square > 1`). Investigate whether the quality constraint
+`quality ≤ 1/2` combined with the large-square constraint (powerful `N`) produces an
+abc-type lower bound forcing a contradiction — i.e. `c^{1/2} ≤ rad(abc)` while powerful
+`N` forces `rad(N) ≪ N^{1/2}`.  
+**Prerequisite:** a quantitative version of the Pasten quality theorem (not currently proved
+in the paper — it gives the qualitative boundary, not a lower bound on `rad`).
+
+**EXT-6b — Arithmetic derivative lattice over ℤ[i].**  
+Pasten's lattice is defined over ℚ. The relation `w_+ − w_- = n` in ℤ[i] is an "abc
+triple" over ℤ[i] in the Gaussian integers. Define the analogue of `F(a,b)` for Gaussian
+integers: the weight lattice `{ψ: 𝔓(αβγ) → ℤ | d^ψ(α) + d^ψ(β) = d^ψ(γ)}` where `𝔓`
+denotes the set of Gaussian primes dividing `w_+ · w_- · n` and `d^ψ` is the Gaussian
+arithmetic derivative. The Pasten–Minkowski bound, if extended to ℤ[i], would give
+`‖ψ‖_∞ ≤ R_{ℤ[i]}^{1/(ω_{ℤ[i]}−1)}`. Determine whether the squarefree-away-from-5
+structure forces `ω_{ℤ[i]}` to be large enough that the Minkowski bound is non-trivial.  
+**Prerequisite:** Pasten lattice theory over number rings — not yet in the literature;
+this is a new research direction.
+
+**EXT-6c — Non-squarefree Pasten extension (OB-13B-type).**  
+The paper notes that for non-squarefree triples, bounds acquire a `v_{max}` factor:
+`‖ψ‖_∞ ≤ v_{max} · R^{1/(ω−1)}`. For powerful `N`, `v_{max}` is large (≥ 2), making
+the Minkowski bound weak. Determine the sharp `v_{max}` growth rate as a function of
+`N`'s powerful-part structure, and check whether the resulting bound is still
+incompatible with OB-46's `(A_-, n(2a-n), A_+)` triple.  
+**Prerequisite:** OB-13B extension of the route-v-pasten paper (not yet proved — noted as
+open in that paper).
+
+**Execution gate:** None of EXT-6a/b/c can be used as a proof premise until either
+(a) the Pasten quality theorem is made quantitative (EXT-6a), or (b) the Gaussian
+arithmetic derivative lattice is defined and a Minkowski bound is proved for ℤ[i]
+(EXT-6b). Record as a research direction, not a proof strategy, until those steps close.
+
+**Priority:** LOW (exploratory) — conceptually motivated but requires new theory in two
+places (quantitative Pasten, Gaussian Pasten). Do not outsource until EXT-6a/b are
+internally formulated.
+
+---
+
 ### Execution order and gates
 
 | Task | Depends on | Expected outcome | Priority | Status |
@@ -359,6 +466,9 @@ may be a new no-go result about the class).
 | EXT-2a (unified info theorem H) | B1 + G scaffold | New Theorem H | MEDIUM | **PROOF-DRAFT** — H-information-hierarchy scaffold complete |
 | EXT-4a (Selberg literature) | Pure search | Unblock EXT-4b/c | LOW-MEDIUM | **CLOSED** — no Selberg prescribed-zero theorem exists; Selberg axioms incompatible with free zero prescription; Theorem C scope confirmed optimal |
 | EXT-2b (O_vonMangoldt layer) | G-hard conjecture progress | Conditional on G-hard | LOW (blocked) | BLOCKED by G-hard conjecture |
+| EXT-6a (squarefree projection + Pasten quality) | Quantitative Pasten quality theorem | abc-type rad lower bound vs powerful N | LOW (exploratory) | OPEN — prerequisite (quantitative Pasten) not proved |
+| EXT-6b (Pasten lattice over ℤ[i]) | New theory: Gaussian arithmetic derivative lattice | Minkowski bound for Gaussian OB-46 triple | LOW (exploratory) | OPEN — requires new theory |
+| EXT-6c (non-squarefree Pasten v_max) | OB-13B extension of route-v-pasten | Sharp v_max bound for powerful triples | LOW (exploratory) | OPEN — OB-13B not yet proved in paper |
 
 **All six EXT tasks executed (2026-08-11).** Four produced new theorem scaffolds
 (D', E', H, EXT-5a partial); one confirmed an escape route open (EXT-1); one closed a

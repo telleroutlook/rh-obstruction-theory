@@ -1,0 +1,469 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+
+%% Main-result environments
+\newtheorem{mainthm}{Theorem}
+\makeatletter
+\AtBeginDocument{%
+  \renewcommand{\themainthm}{\Alph{mainthm}}%
+}
+\makeatother
+
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\LP}{\mathrm{LP}}
+
+\tolerance=1500
+\emergencystretch=2em
+
+\begin{document}
+
+\title[Convergence Boundary for Real-Zero Entire Functions]{%
+  Finite-Evidence Records and the Convergence Boundary\\
+  for Real-Zero Entire Functions}
+
+\author{Lin Tao}
+\date{2026}
+
+\begin{abstract}
+Let $L$ be a Laguerre--P\'olya entire function of order one with a given real,
+simple, square-summable zero set $\{\pm\lambda_n\}_{n\geq 1}$.
+We establish two complementary theorems about sequences of entire functions
+matching a finite evidence record derived from $L$.
+
+\textbf{Theorem~\ref{thm:neg}} (per-$N$ non-identifiability): for every $N\geq 1$,
+the finite evidence record $\mathcal{E}_N$ (matching the first $k_N$ zeros and
+the first $J_N$ even Taylor coefficients of $L$) does not pin $L$ down.
+Concretely, there exists an entire function $F$ satisfying $\mathcal{E}_N$ with
+$\sup_{|z|\leq R_N}|F(z)-L(z)|\geq\varepsilon_N > 0$, where $R_N\geq 2\lambda_{k_N+1}$.
+The construction is explicit: an implicit-function-theorem branch on the tail
+Hadamard product, matched by a scaled Vandermonde system, separated by a
+Cauchy coefficient estimate on the first unmatched log-power-sum.
+
+\textbf{Theorem~\ref{thm:pos}} (conditional convergence): if a sequence
+$(F_N)_{N\geq 1}$ satisfying $\mathcal{E}_N$ additionally has a local uniform
+bound (H-bound) and a tail-reciprocal-square control (H-tail), then $F_N\to L$
+locally uniformly, and the zeros of $F_N$ converge to those of $L$ by
+Hurwitz's theorem.
+
+We apply this framework to the Connes--Consani--Moscovici (CCM)
+spectral-triple determinant sequence~\cite{CCM2025}, identify the three
+conditions that are open in~\cite{CCM2025}, and record that specializing
+$L=\Xi$ (the shifted Riemann xi function) is exactly equivalent to RH and
+is never assumed. None of these results prove, disprove, or claim progress
+toward the Riemann Hypothesis.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+%---------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+%---------------------------------------------------------------------
+
+A Laguerre--P\'olya entire function of order one,
+\begin{equation}
+  \label{eq:LP}
+  L(z) = C\prod_{n=1}^{\infty}\!\left(1-\frac{z^2}{\lambda_n^2}\right),
+  \quad C>0,\quad 0<\lambda_1<\lambda_2<\cdots,\quad
+  \sum_{n=1}^{\infty}\frac{1}{\lambda_n^2}<\infty,
+\end{equation}
+is the canonical form of an entire function whose zeros are all real and whose
+Hadamard genus is one.  The class includes many functions arising in spectral
+theory and analytic number theory, most famously $\Xi(z)=\xi(1/2+iz)$
+--- but only \emph{conditionally}: $L=\Xi$ requires all zeros of $\Xi$ to be
+real, which is the Riemann Hypothesis (RH).  We never assume this.  RH is
+$[\mathrm{OUT}]$ in this paper.
+
+A natural strategy for studying $L$ is to approximate it by entire functions
+that agree with $L$ on a growing finite record --- the first $k_N$ zeros and
+the first $J_N$ even Taylor coefficients.  Such \emph{finite-evidence-record
+sequences} arise naturally: the CCM determinant sequence $\det_{\mathrm{reg}}
+(\mathfrak{D}_{\lambda,N}-z)$~\cite{CCM2025} satisfies conditions of this
+type for $\Xi$ (conditional on RH).
+
+\medskip
+\noindent\textbf{The central question.}
+Does the finite record $\mathcal{E}_N$ force a sequence to converge to $L$?
+
+The present paper answers this in two directions:
+
+\begin{itemize}
+\item \textbf{Negative (Theorem~\ref{thm:neg}).}  No: for each fixed $N$,
+  the record $\mathcal{E}_N$ alone leaves a Hadamard tail degree of freedom
+  large enough to push a witness function $\varepsilon_N$ away from $L$ on a
+  disk $|z|\leq R_N$ that already contains all $k_N$ matched zeros.
+
+\item \textbf{Positive (Theorem~\ref{thm:pos}).}  Yes, provided the sequence
+  additionally satisfies a local uniform bound and a tail-reciprocal-square
+  control: under those two hypotheses Montel's theorem gives a normal family,
+  and Hurwitz's theorem then transfers real-zero location.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Relation to the CCM program.}
+Connes, Consani, and Moscovici~\cite{CCM2025} establish that the regularized
+determinant of their spectral-triple Dirac operator satisfies
+$\det_{\mathrm{reg}}(\mathfrak{D}_{\lambda,N}-z)=-i\lambda^{-iz}\hat{\xi}(z)$,
+where $\hat{\xi}$ is the Fourier transform of $\xi$ (entire, all zeros real =
+spectrum).  The \emph{open step} in~\cite{CCM2025} is that a suitably
+normalized sequence of such determinants converges to $\Xi$.  The
+$\lambda^{-iz}$ phase factor preserves zeros but not the locally uniform
+limit; ``suitably normalized'' is load-bearing.  Section~\ref{sec:ccm}
+identifies (H-bound), (H-uorder), and (H-div) as the three missing
+conditions, and explains why (H-div) over $\Xi$ specifically would imply RH.
+
+\medskip
+\noindent\textbf{Scope and limitations.}  This paper works with an
+\emph{abstract} Laguerre--P\'olya target $L$; no property of the Riemann
+zeta function is assumed.  Specializing $L=\Xi$ is RH-conditional and is
+always labelled as such.  The Suzuki meromorphic target $z^2\xi/\xi'$
+(poles at the zeros of $\xi'$)~\cite{Suzuki2026} is out of scope: Hurwitz's
+theorem does not apply to meromorphic limits, and a separate pole/residue
+version of the positive theorem would be needed.
+
+%---------------------------------------------------------------------
+\section{Setting}
+\label{sec:setting}
+%---------------------------------------------------------------------
+
+Throughout, $L$ denotes a fixed Laguerre--P\'olya function as in~\eqref{eq:LP}.
+Write $a_n:=\lambda_n^{-2}$ for the reciprocal-square parameters; the
+hypothesis $\sum a_n<\infty$ is the Hadamard summability condition.
+
+\begin{definition}[Finite evidence record]
+\label{def:record}
+Fix integers $k_N, J_N\geq 1$.  An entire function $F$ \emph{satisfies the
+finite evidence record} $\mathcal{E}_N$ (relative to $L$) if:
+\begin{enumerate}[label=(\arabic*)]
+\item $F$ is entire of order one.
+\item $F$ is even: $F(-z)=F(z)$.
+\item $F$ is real on the real axis: $F(\bar{z})=\overline{F(z)}$.
+\item All zeros of $F$ are real.
+\item The first $k_N$ positive zeros of $F$ (ordered by size) equal
+  $\lambda_1\leq\lambda_2\leq\cdots\leq\lambda_{k_N}$.
+\item Base-point normalization: $F(0)=L(0)=C$.
+\item Even Taylor coefficients match:
+  $F^{(2j)}(0)=L^{(2j)}(0)$ for $j=0,1,\ldots,J_N$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+\label{rem:log-power-sums}
+By the Hadamard factorization, conditions~(1)--(4) force $F$ to have the form
+$F(z)=C_F\prod_{n}(1-z^2/r_n^2)$ for some real sequence $(r_n)$.  The
+Taylor conditions~(6)--(7) are equivalent to matching the \emph{log-power-sums}
+$P_r(F):=\sum_n r_n^{-2r}=\sum_n a_n^r$ for $r=1,\ldots,J_N$ (together with
+$F(0)=C$).  This is the key reformulation used in the proof.
+\end{remark}
+
+%---------------------------------------------------------------------
+\section{Theorem A: per-\texorpdfstring{$N$}{N} non-identifiability}
+\label{sec:neg}
+%---------------------------------------------------------------------
+
+\begin{mainthm}[Finite record does not identify $L$]
+\label{thm:neg}
+For every $N\geq 1$ there exist $\varepsilon_N>0$, $R_N\geq 2\lambda_{k_N+1}$,
+and an entire function $F$ satisfying $\mathcal{E}_N$ with
+\[
+  \sup_{|z|\leq R_N}\lvert F(z)-L(z)\rvert \;\geq\; \varepsilon_N.
+\]
+Equivalently, the fiber $\{F : F \text{ satisfies } \mathcal{E}_N\}$ is not
+contained in any $\varepsilon$-neighbourhood of $L$ on $\{|z|\leq R_N\}$.
+\end{mainthm}
+
+\begin{remark}[Per-$N$, not sequence divergence]
+\label{rem:per-N}
+Theorem~\ref{thm:neg} is a \emph{per-$N$} statement: for each fixed $N$ there
+is a single witness $F$ (depending on $N$) separated from $L$.  It does not
+assert that any particular \emph{sequence} $(F_N)$ fails to converge locally
+uniformly.  Under the extra assumption $k_N\to\infty$, the radii $R_N$ escape
+to infinity, but the witnesses are not required to form a sequence satisfying
+all $\mathcal{E}_N$ simultaneously.  The content is precisely that
+$\mathcal{E}_N$ \emph{alone} leaves a tail degree of freedom.
+\end{remark}
+
+\begin{proof}
+Fix $N$; write $k:=k_N$, $J:=J_N$, $a_m:=\lambda_{k+m}^{-2}$ for $m\geq 1$.
+We construct the witness in three steps.
+
+\medskip
+\textbf{Step~1 (one-parameter tail deformation).}
+For $m>J$ define
+\[
+  b_m(c) \;:=\; a_m\bigl(1+c/m\bigr)^{-2},\qquad c\in(-1,1).
+\]
+At $c=0$, $b_m(0)=a_m$.  Note that $\sum_m b_m(c)<\infty$ for all $c$ in a
+neighbourhood of $0$ (by dominated convergence, since $\sum a_m<\infty$).
+
+\medskip
+\textbf{Step~2 (IFT matching).}
+Let $u=(u_1,\ldots,u_J)$ be the reciprocal squares of the first $J$ free
+tail zeros, and define the log-power-sum matching system
+\[
+  \Phi_r(u,c) \;:=\; \sum_{\ell=1}^{J} u_\ell^r + \sum_{m>J} b_m(c)^r
+                \;-\; \sum_{m\geq 1} a_m^r \;=\; 0,\qquad r=1,\ldots,J.
+\]
+At $(u^{(0)},c)=((a_1,\ldots,a_J),0)$ we have $\Phi=0$.  The Jacobian
+$(\partial\Phi_r/\partial u_\ell)|_{u^{(0)},0} = r\,a_\ell^{r-1}$ is an
+exact scaled Vandermonde matrix with nodes $a_1>\cdots>a_J>0$ (all distinct
+since $\lambda_n$ are simple), so its determinant is nonzero.  By the implicit
+function theorem there exist $\delta>0$ and a $C^1$ branch $u(c)$ with
+$\Phi(u(c),c)=0$ for $0<c<\delta$.
+
+Define
+\[
+  F_c(z) \;:=\; C\prod_{n=1}^{k}\!\left(1-\frac{z^2}{\lambda_n^2}\right)
+               \cdot\prod_{\ell=1}^{J}\!\bigl(1-u_\ell(c)\,z^2\bigr)
+               \cdot\prod_{m>J}\!\bigl(1-b_m(c)\,z^2\bigr).
+\]
+By construction $F_c$ is entire of order one, even, real on $\RR$, has all
+real zeros, first $k$ positive zeros equal to $\lambda_1,\ldots,\lambda_k$,
+and satisfies $F_c(0)=C$ and $P_r(F_c)=P_r(L)$ for $r=1,\ldots,J$.  Thus
+$F_c$ satisfies $\mathcal{E}_N$.
+
+\medskip
+\textbf{Step~3 (Cauchy separation).}
+The first unmatched log-power-sum is
+$\Delta_{J+1}(c):=P_{J+1}(F_c)-P_{J+1}(L)$.  Differentiating the IFT
+solution at $c=0$ gives
+\[
+  \Delta_{J+1}'(0) \;=\;
+  -(J+1)\sum_{m>J} \frac{2a_m}{m}\,\prod_{\ell=1}^{J}(a_m-a_\ell),
+\]
+where every factor $\prod_{\ell}(a_m-a_\ell)$ has sign $(-1)^J$ (since
+$a_m<a_J<\cdots<a_1$), so the sum is nonzero (all terms have the same sign).
+Shrinking $\delta$ we have $\Delta_{J+1}(c)\neq 0$ for $0<c<\delta$.
+
+Since $F_c^{(2J+2)}(0)\neq L^{(2J+2)}(0)$, the difference $F_c-L$ is an
+entire function with a zero of order exactly $2J+2$ at the origin.  Writing
+$F_c(z)-L(z)=A_c z^{2J+2}+O(z^{2J+4})$ with $A_c\neq 0$, Cauchy's
+inequality on the disk $|z|\leq R$ gives
+\[
+  \sup_{|z|\leq R}\lvert F_c(z)-L(z)\rvert \;\geq\; |A_c|\,R^{2J+2}.
+\]
+Setting $R_N:=\max\{2\lambda_{k+1},\,(\varepsilon/|A_c|)^{1/(2J+2)}\}$ for any
+fixed $\varepsilon>0$ completes the proof.
+\end{proof}
+
+%---------------------------------------------------------------------
+\section{Theorem B: conditional convergence}
+\label{sec:pos}
+%---------------------------------------------------------------------
+
+\begin{definition}[Hypotheses for convergence]
+\label{def:hypotheses}
+Let $(F_N)_{N\geq 1}$ be a sequence of entire functions satisfying
+$\mathcal{E}_N$.  We say the sequence satisfies:
+\begin{itemize}
+\item[(H-norm)] \emph{Base-point convergence}: $F_N(z_0)\to L(z_0)\neq 0$
+  for some $z_0\in\CC$.
+\item[(H-bound)] \emph{Local uniform boundedness}: for every $R>0$ there
+  exists $M_R>0$ such that $\sup_N\sup_{|z|\leq R}|F_N(z)|\leq M_R$.
+\item[(H-tail)] \emph{Tail reciprocal-square control}: writing
+  $(r_{n,N})_{n\geq 1}$ for the positive zeros of $F_N$ and setting
+  $\tilde{a}_{n,N}:=r_{n,N}^{-2}$, we have
+  $\sum_{n=1}^{\infty}|\tilde{a}_{n,N}-a_n|<C$ uniformly in $N$ for some
+  constant $C<\infty$.
+\end{itemize}
+\end{definition}
+
+\begin{mainthm}[Conditional convergence to $L$]
+\label{thm:pos}
+Let $(F_N)_{N\geq 1}$ satisfy $\mathcal{E}_N$ and hypotheses
+\textup{(H-norm)}, \textup{(H-bound)}, and \textup{(H-tail)}.
+Then $F_N\to L$ locally uniformly on $\CC$, and the zeros of $F_N$
+converge to the zeros of $L$ \textup{(}with multiplicity\textup{)} by
+Hurwitz's theorem.
+\end{mainthm}
+
+\begin{proof}
+\textbf{Normal family.}  By~(H-bound), the family $\{F_N\}$ is locally
+uniformly bounded; Montel's theorem gives a locally uniformly convergent
+subsequence $F_{N_j}\to G$ for some entire function $G$.
+
+\textbf{Identification $G=L$.}  The function $G$ is entire of order at most
+one (by~(H-tail) and the Hadamard factorization: $G=C_G\prod_n(1-z^2/r_n^2)$
+where $r_n$ are real, and $\sum r_n^{-2}=\lim \sum\tilde{a}_{n,N}<\infty$
+by~(H-tail)).  Moreover $G$ is even and real on $\RR$ (by uniform convergence
+from~(2)--(3) of $\mathcal{E}_N$).  By~(H-norm), $G(z_0)=L(z_0)\neq 0$,
+so $G\not\equiv 0$.  The matching conditions~(5)--(7) of $\mathcal{E}_N$
+(finite zero agreement + Taylor coefficients) pass to the limit: $G$ agrees
+with $L$ on $k_N\to\infty$ zeros and on all even Taylor coefficients, so
+by the Hadamard factorization uniqueness theorem (an even entire function of
+order one is determined by its zero set and one nonzero value) we have $G=L$.
+
+Since every subsequence of $(F_N)$ has a further subsequence converging to
+$L$, the full sequence $F_N\to L$ locally uniformly.
+
+\textbf{Zeros.}  $L$ has only simple zeros (the $\lambda_n$ are distinct
+by assumption), so Hurwitz's theorem applies: for each $\lambda_n$ and
+$\varepsilon>0$, all zeros of $F_N$ in $|\lambda_n-z|<\varepsilon$ converge
+to $\lambda_n$ for large $N$.
+\end{proof}
+
+%---------------------------------------------------------------------
+\section{Application to the CCM determinant sequence}
+\label{sec:ccm}
+%---------------------------------------------------------------------
+
+Connes, Consani, and Moscovici~\cite{CCM2025} prove the determinant identity
+\begin{equation}
+  \label{eq:ccm}
+  \det_{\mathrm{reg}}(\mathfrak{D}_{\lambda,N}-z)
+  \;=\; -i\,\lambda^{-iz}\,\hat{\xi}(z),
+\end{equation}
+where $\hat{\xi}$ is the Fourier transform of $\xi$ and is an entire function
+with all zeros real (= spectrum of $\mathfrak{D}_{\lambda,N}$).
+The target for convergence is $\Xi(z)=\xi(1/2+iz)$, not $\hat{\xi}$.
+The $\lambda^{-iz}$ phase factor in~\eqref{eq:ccm} preserves the zero set
+but alters the locally uniform limit: ``suitably normalized'' in~\cite{CCM2025}
+is the load-bearing step that Theorems~\ref{thm:neg}--\ref{thm:pos} analyze.
+
+\begin{table}[h]
+\centering
+\caption{Status of convergence conditions for the CCM sequence
+  (assuming RH for~(5) and~(H-div); all else stated in~\cite{CCM2025}).}
+\label{tab:ccm}
+\begin{tabular}{lll}
+\hline
+Condition & Status & Reference \\
+\hline
+(1) Entire & \textsc{proved} & CCM det.\ identity \\
+(2)--(3) Even, real on $\RR$ & \textsc{proved} & Symmetry of $\mathfrak{D}$ \\
+(4) Real zeros & \textsc{proved} & CCM Thm., real spectrum \\
+(5) First $k_N$ zeros agree & \textsc{open} & Numerical; no analytic proof \\
+(6) Base-point normalization & \textsc{partial} & $\lambda^{-iz}$ phase obstacle \\
+(H-norm) $F_N(z_0)\to\Xi(z_0)$ & \textsc{open} & The ``suitably normalized'' step \\
+(H-bound) Local uniform bound & \textsc{open} & No tail envelope in~\cite{CCM2025} \\
+(H-tail) Tail reciprocal-square & \textsc{open} & No spectral tail bound \\
+\hline
+\end{tabular}
+\end{table}
+
+The three open conditions (H-norm), (H-bound), (H-tail) are precisely
+what Theorem~\ref{thm:pos} needs to conclude $F_N\to\Xi$ locally uniformly.
+
+\begin{remark}[Why (H-div) over $\Xi$ implies RH]
+\label{rem:hdiv-rh}
+In the original formulation~\cite{CCM2025}, a condition (H-div) required
+the zero divisors of $F_N$ to converge to the zero divisor of $\Xi$.
+This forces every zero of $\Xi$ to be a real limit of real zeros of $F_N$.
+If the zero set of $\Xi$ is \emph{complete} (i.e., $\Xi$ has no zeros off
+the real line), then this is exactly the statement that all zeros of $\Xi$
+are real --- which is RH.  Thus (H-div) over $\Xi$ is an RH-strong hypothesis.
+We do not impose it.  RH is $[\mathrm{OUT}]$.
+\end{remark}
+
+\begin{remark}[Suzuki meromorphic target out of scope]
+\label{rem:suzuki}
+Suzuki~\cite{Suzuki2026} proves the implication: if $W(a,\theta;z)\to
+z^2\xi(1/2-iz)/\xi'(1/2-iz)$ locally uniformly on compact subsets, then RH
+follows (Corollary~6).  The target $z^2\xi/\xi'$ is \emph{meromorphic} (poles
+at the zeros of $\xi'$).  Theorem~\ref{thm:pos} applies only to entire targets;
+the Hurwitz step fails for meromorphic limits because zeros of approximants
+can accumulate at poles rather than at zeros of the target.  A separate
+pole/residue version of the positive theorem is needed for the Suzuki target.
+\end{remark}
+
+%---------------------------------------------------------------------
+\section{Limitations}
+\label{sec:limitations}
+%---------------------------------------------------------------------
+
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{$\Xi$-specific version requires RH.}  Specializing $L=\Xi$
+  in Theorem~\ref{thm:neg} requires $\Xi$ to be an LP function of the
+  form~\eqref{eq:LP} --- i.e., all zeros of $\Xi$ are real --- which is RH.
+  The abstract-$L$ statement is RH-free; the $\Xi$ instance is not claimed.
+
+\item \textbf{Simplicity of zeros.}  The IFT step (Step~2 of the proof of
+  Theorem~\ref{thm:neg}) uses the scaled Vandermonde nonsingularity, which
+  requires the $\lambda_n$ to be simple (distinct).  For $\Xi$, zero
+  simplicity is an open problem; it is an explicit hypothesis on $L$.
+
+\item \textbf{Suzuki target excluded.}  See Remark~\ref{rem:suzuki}.
+
+\item \textbf{Sequence convergence not ruled out.}  Theorem~\ref{thm:neg}
+  is a per-$N$ statement (Remark~\ref{rem:per-N}).  It does not rule out
+  locally uniform convergence $F_N\to L$ for a particular sequence satisfying
+  all $\mathcal{E}_N$ simultaneously; the CCM sequence is believed to converge
+  after suitable normalization.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\section{Open problems}
+\label{sec:open}
+%---------------------------------------------------------------------
+
+\begin{enumerate}
+\item \textbf{LP functions with dependent zero sets.}
+  The proof of Theorem~\ref{thm:neg} uses the simplicity and summability
+  of $\{\lambda_n\}$.  Can the result be extended to LP functions with
+  double zeros, or to functions of order greater than one?
+
+\item \textbf{Effective $R_N$.}  The proof gives $R_N\geq 2\lambda_{k_N+1}$;
+  can one give an explicit $R_N$ as a function of $N$, $\lambda_1,\ldots,
+  \lambda_{k_N+1}$, and $J_N$, with a certified $\varepsilon_N>0$?
+
+\item \textbf{Uniform tail bound from spectral theory.}
+  For the CCM sequence, can (H-tail) be derived from spectral estimates
+  on $\mathfrak{D}_{\lambda,N}$ (e.g., via Suzuki's $\lambda(a)$ bounds
+  from~\cite{Suzuki2026})?  Closing this gap would unconditionally supply
+  the tail-reciprocal-square control, reducing Theorem~\ref{thm:pos} to
+  requiring only (H-norm) and (H-bound) for the CCM case.
+\end{enumerate}
+
+{\sloppy
+\begin{thebibliography}{99}
+
+\bibitem{CCM2025}
+A.~Connes, C.~Consani, and H.~Moscovici,
+\emph{Zeta spectral triples},
+arXiv:2511.22755, 2025.
+
+\bibitem{CvS2025}
+A.~Connes and W.~van Suijlekom,
+\emph{Spectral truncations in noncommutative geometry and operator systems},
+Commun.\ Math.\ Phys.~\textbf{406} (2025), article 15.
+
+\bibitem{Suzuki2026}
+M.~Suzuki,
+\emph{Weil's quadratic form via the screw function},
+arXiv:2606.09096, 2026.
+
+\bibitem{Levin1996}
+B.~Ya.~Levin,
+\emph{Lectures on Entire Functions},
+Translations of Mathematical Monographs, vol.~150,
+Amer.\ Math.\ Soc., Providence, RI, 1996.
+
+\bibitem{Conway1978}
+J.~B.~Conway,
+\emph{Functions of One Complex Variable},
+2nd ed., Springer, New York, 1978.
+
+\end{thebibliography}
+}
+
+\end{document}
