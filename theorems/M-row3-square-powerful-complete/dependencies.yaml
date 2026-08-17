@@ -1,0 +1,27 @@
+dependencies:
+  - id: theorem-B-paper-E
+    description: "4|n → A+ ≡ A- ≡ 1 mod 8; 4∤n → A+ ≡ A- ≡ 5 mod 8 for Row-3 pairs (thm:mod4)"
+    mathematical: PROOF-DRAFT
+    computational: REPRODUCIBLE
+    role: main-congruence-input
+
+  - id: theorem-L
+    description: "No simultaneous A+=x^2, A-=y^2 for Row-3 pairs (Theorem D, Paper E)"
+    mathematical: PROOF-DRAFT
+    computational: REPRODUCIBLE
+    role: case-A-perfect-square-exclusion
+    citation: "theorems/L-row3-zsygmondy-square/"
+
+  - id: squares-mod-8
+    description: "m^2 mod 8 ∈ {0,1,4}; 5m^2 mod 8 ∈ {0,4,5}. Elementary."
+    mathematical: REFEREED
+    computational: NONE
+    role: arithmetic-foundation
+
+  - id: squares-mod-16
+    description: >
+      For odd a: a^2 mod 16 ∈ {1,9}. For odd T: 5T^2 mod 16 ∈ {5,13}.
+      These sets are disjoint, giving the mod-16 obstruction for 4|n.
+    mathematical: REFEREED
+    computational: NONE
+    role: mod-16-obstruction

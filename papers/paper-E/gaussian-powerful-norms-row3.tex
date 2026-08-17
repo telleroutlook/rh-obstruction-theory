@@ -142,7 +142,7 @@ Section~\ref{sec:directions} outlines future directions.
 
 %---------------------------------------------------------------------
 \section{Definitions and setup}
-\label{sec:setup}% xref-only
+\label{sec:setup}
 %---------------------------------------------------------------------
 
 \begin{definition}[Row-3 pair]
@@ -279,8 +279,8 @@ In all sub-cases $\Aplus\not\equiv 0$ and $\Aminus\not\equiv 0\pmod{3}$.
 For every Row-3 pair $(a,n)$:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item every prime $p\mid N$ satisfies $p\equiv 1\pmod{4}$;
-\item $\Aplus\equiv\Aminus\pmod{8}$, and both are congruent to $1$
-  or $5\pmod{8}$.
+\item $\Aplus\equiv\Aminus\pmod{8}$; the common value is $5\pmod{8}$
+  if $4\nmid n$, and $1\pmod{8}$ if $4\mid n$.
 \end{enumerate}
 In particular $2\nmid N$ (reproving Lemma~\ref{lem:parity} modulo~$8$)
 and $3\nmid N$ (independent of Theorem~\ref{thm:3prime}).
@@ -302,7 +302,7 @@ Since $a-n$ is odd (odd minus even), $(a-n)^2\equiv 1\pmod{8}$.
 Therefore $\Aplus = a^2+n^2\equiv 1+n^2\pmod{8}$ and
 $\Aminus = (a-n)^2+n^2\equiv 1+n^2\pmod{8}$, giving
 $\Aplus\equiv\Aminus\pmod{8}$.  The common value is
-$1\pmod{8}$ if $4\nmid n$ and $5\pmod{8}$ if $4\mid n$.
+$5\pmod{8}$ if $4\nmid n$ and $1\pmod{8}$ if $4\mid n$.
 \end{proof}
 
 %---------------------------------------------------------------------
@@ -358,7 +358,7 @@ away from~$5$, and $v_5(\Aplus)+v_5(\Aminus)\neq 1$.
 
 %---------------------------------------------------------------------
 \section{Theorem D: no simultaneous perfect squares (NT-C square subcase)}
-\label{sec:thmsquare}% xref-only
+\label{sec:thmsquare}
 %---------------------------------------------------------------------
 
 \begin{mainthm}[NT-C square subcase]
@@ -436,6 +436,72 @@ The full NT-C claim (that \emph{both} $\Aplus$ and $\Aminus$ are powerful
 away from~$5$) remains open for $t\geq2$.  The proof above uses only the
 Pythagorean structure and a 2-isogeny descent on a specific genus-1 curve;
 it does not import RH or any zero-location hypothesis.
+\end{remark}
+
+%---------------------------------------------------------------------
+\section{Theorem E: square-based powerful obstruction (NT-C $t=1$, partial)}
+\label{sec:thmE}% xref-only
+%---------------------------------------------------------------------
+
+\begin{mainthm}[NT-C $t=1$: complete for $4\mid n$, partial for $4\nmid n$]
+\label{thm:squarepow}
+Let $(a,n)$ be a Row-3 pair.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textup{(Complete, $4\mid n$).}  Neither $\Aplus$ nor $\Aminus$ individually
+  equals $5^e m^2$ for any $e\geq 1$ with $e$ odd.  Consequently no simultaneous
+  pair $(\Aplus,\Aminus) = (5^{e_1}m_1^2,\, 5^{e_2}m_2^2)$ exists: the odd-$e$
+  cases are ruled out individually by a mod-$16$ obstruction, and the even-$e$
+  (simultaneous perfect square) case is excluded by Theorem~\ref{thm:square}.
+\item \textup{(Partial, $4\nmid n$).}  For each of $\Aplus$ and $\Aminus$
+  individually, $e$ even is impossible: $5^{e_{\mathrm{even}}}m^2=\square$ while
+  $\Aplus\equiv\Aminus\equiv5\pmod{8}$, but $\square\in\{0,1,4\}\pmod{8}$.
+  Hence any square-based powerful representation must have $e$ odd for both.
+  The simultaneous case $\Aplus=5S^2$, $\Aminus=5T^2$ is unresolved by elementary
+  methods; it is numerically absent for all $n\leq 3000$ (exact scan) but
+  remains open analytically.
+\end{enumerate}
+\end{mainthm}
+
+\begin{proof}
+Throughout, $m^2\in\{0,1,4\}\pmod{8}$ and $5m^2\in\{0,4,5\}\pmod{8}$.
+
+\emph{Part (i): $4\mid n$.}
+By Theorem~\ref{thm:mod4}, $\Aplus\equiv\Aminus\equiv1\pmod{8}$.
+
+\emph{Odd $e$:} Write $5^e m^2 = 5T^2$ with $T=5^{(e-1)/2}m$.  Then
+$5T^2\in\{0,4,5\}\pmod{8}$.  Since $1\notin\{0,4,5\}$, we have $\Aplus\neq 5T^2$
+(and identically $\Aminus\neq 5T^2$). This rules out any odd-$e$ representation
+individually.
+
+For a sharper bound: with $n=4k$, $\Aplus=a^2+16k^2\equiv a^2\pmod{16}$, so
+$\Aplus\equiv 1$ or $9\pmod{16}$ ($a$ odd).  For $T$ odd, $5T^2\equiv 5$ or
+$13\pmod{16}$; for $T$ even, $5T^2\equiv 0$ or $4\pmod{16}$.  Neither set meets
+$\{1,9\}$, confirming the obstruction mod $16$.
+
+\emph{Even $e$:} $5^e m^2=(5^{e/2}m)^2=\square$.  The simultaneous case
+$\Aplus=\square$ and $\Aminus=\square$ is excluded by Theorem~\ref{thm:square}
+(elliptic rank-$0$ argument).  Since the odd-$e$ case is already impossible
+individually, any surviving representation must have $e=0$ for both, which
+Theorem~\ref{thm:square} rules out.
+
+\emph{Part (ii): $4\nmid n$.}
+By Theorem~\ref{thm:mod4}, $\Aplus\equiv\Aminus\equiv5\pmod{8}$.
+
+\emph{Even $e$:} $5^e m^2=\square\in\{0,1,4\}\pmod{8}$.  Since $5\notin\{0,1,4\}$,
+this is impossible for either $\Aplus$ or $\Aminus$ individually.
+
+\emph{Odd $e$:} $5T^2\equiv5\pmod{8}$ (for $T$ odd), which is \emph{consistent}
+with $\Aplus\equiv5\pmod{8}$.  A mod-$16$ refinement ($n=4k+2$, so
+$\Aplus\equiv a^2+4\pmod{16}\in\{5,13\}$, and $5T^2\in\{5,13\}\pmod{16}$ for $T$
+odd) also gives no contradiction.  The simultaneous case $(\Aplus,\Aminus)=(5S^2,5T^2)$
+is therefore not excluded by local methods at $2$, and the analytic proof is
+outstanding.
+\end{proof}
+
+\begin{remark}
+No assumption on RH or on Sha($E$) is imported.  The open case in (ii) is the
+simultaneous $(\Aplus,\Aminus)=(5S^2,5T^2)$ for $4\nmid n$; an exact scan over all
+Row-3 pairs with $n\leq3000$ finds no instances.
 \end{remark}
 
 %---------------------------------------------------------------------
@@ -647,6 +713,10 @@ attempted without new input:
   Theorem~\ref{thm:square} resolves the square subcase ($t=1$ in the Erd\H{o}s--Szekeres
   representation $\Aplus = s^2t^3$) via 2-isogeny descent on the elliptic
   curve $E: Y^2=X(X+4)(X-1)$ (rank~0; Corollary~\ref{cor:NTC-square}).
+  Theorem~\ref{thm:squarepow} extends this to all square-based powerful forms
+  ($5^e m^2$): complete for $4\mid n$, partial for $4\nmid n$ (the case
+  $(\Aplus,\Aminus)=(5S^2,5T^2)$ is numerically absent for $n\leq3000$ but
+  analytic proof is outstanding).
   The remaining case $t\geq 2$ requires extending the analysis to the
   cube-factor locus; a Gaussian Zsygmondy theorem for $\{a+ni\}$ covering
   $t\geq 2$ would complete NT-C.  The key difficulty is the absence of a
