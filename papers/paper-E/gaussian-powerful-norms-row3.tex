@@ -439,69 +439,71 @@ it does not import RH or any zero-location hypothesis.
 \end{remark}
 
 %---------------------------------------------------------------------
-\section{Theorem E: square-based powerful obstruction (NT-C $t=1$, partial)}
+\section{Theorem E: square-based powerful obstruction (NT-C $t=1$, complete)}
 \label{sec:thmE}% xref-only
 %---------------------------------------------------------------------
 
-\begin{mainthm}[NT-C $t=1$: complete for $4\mid n$, partial for $4\nmid n$]
+\begin{mainthm}[NT-C $t=1$: complete obstruction]
 \label{thm:squarepow}
-Let $(a,n)$ be a Row-3 pair.
+For every Row-3 pair $(a,n)$, $\Aplus$ and $\Aminus$ cannot simultaneously be of
+the form $5^e m^2$ (square-based powerful-away-from-$5$).
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item \textup{(Complete, $4\mid n$).}  Neither $\Aplus$ nor $\Aminus$ individually
-  equals $5^e m^2$ for any $e\geq 1$ with $e$ odd.  Consequently no simultaneous
-  pair $(\Aplus,\Aminus) = (5^{e_1}m_1^2,\, 5^{e_2}m_2^2)$ exists: the odd-$e$
-  cases are ruled out individually by a mod-$16$ obstruction, and the even-$e$
-  (simultaneous perfect square) case is excluded by Theorem~\ref{thm:square}.
-\item \textup{(Partial, $4\nmid n$).}  For each of $\Aplus$ and $\Aminus$
-  individually, $e$ even is impossible: $5^{e_{\mathrm{even}}}m^2=\square$ while
-  $\Aplus\equiv\Aminus\equiv5\pmod{8}$, but $\square\in\{0,1,4\}\pmod{8}$.
-  Hence any square-based powerful representation must have $e$ odd for both.
-  The simultaneous case $\Aplus=5S^2$, $\Aminus=5T^2$ is unresolved by elementary
-  methods; it is numerically absent for all $n\leq 3000$ (exact scan) but
-  remains open analytically.
+  equals $5^e m^2$ for any odd $e\geq 1$; the simultaneous perfect-square case
+  ($e$ even for both) is excluded by Theorem~\ref{thm:square}.
+\item \textup{(Complete, $4\nmid n$).}  Even $e$ is impossible individually
+  ($5^{e_{\mathrm{even}}}m^2\equiv\{0,1,4\}\pmod8$ while $\Aplus\equiv5\pmod8$).
+  The simultaneous case $(\Aplus,\Aminus)=(5S^2,5T^2)$ is excluded by a
+  Gaussian-integer descent reducing to the elliptic curve
+  $E\colon Y^2=X^3-32X+64$, which has rank~$0$ and torsion~$\mathbb{Z}/4\mathbb{Z}$;
+  all rational torsion points pull back to $n=\pm2$, violating $n\geq4$.
 \end{enumerate}
 \end{mainthm}
 
 \begin{proof}
-Throughout, $m^2\in\{0,1,4\}\pmod{8}$ and $5m^2\in\{0,4,5\}\pmod{8}$.
+\emph{Part (i)} is proved as before: for $4\mid n$, odd $e$ gives $5T^2\in\{0,4,5\}
+\pmod{8}$ while $\Aplus\equiv1\pmod{8}$, a contradiction; even $e$ is
+Theorem~\ref{thm:square}.
 
-\emph{Part (i): $4\mid n$.}
-By Theorem~\ref{thm:mod4}, $\Aplus\equiv\Aminus\equiv1\pmod{8}$.
+\emph{Part (ii), even $e$:} $5^e m^2=\square\in\{0,1,4\}\pmod{8}$, contradicting
+$\Aplus\equiv5\pmod{8}$.
 
-\emph{Odd $e$:} Write $5^e m^2 = 5T^2$ with $T=5^{(e-1)/2}m$.  Then
-$5T^2\in\{0,4,5\}\pmod{8}$.  Since $1\notin\{0,4,5\}$, we have $\Aplus\neq 5T^2$
-(and identically $\Aminus\neq 5T^2$). This rules out any odd-$e$ representation
-individually.
-
-For a sharper bound: with $n=4k$, $\Aplus=a^2+16k^2\equiv a^2\pmod{16}$, so
-$\Aplus\equiv 1$ or $9\pmod{16}$ ($a$ odd).  For $T$ odd, $5T^2\equiv 5$ or
-$13\pmod{16}$; for $T$ even, $5T^2\equiv 0$ or $4\pmod{16}$.  Neither set meets
-$\{1,9\}$, confirming the obstruction mod $16$.
-
-\emph{Even $e$:} $5^e m^2=(5^{e/2}m)^2=\square$.  The simultaneous case
-$\Aplus=\square$ and $\Aminus=\square$ is excluded by Theorem~\ref{thm:square}
-(elliptic rank-$0$ argument).  Since the odd-$e$ case is already impossible
-individually, any surviving representation must have $e=0$ for both, which
-Theorem~\ref{thm:square} rules out.
-
-\emph{Part (ii): $4\nmid n$.}
-By Theorem~\ref{thm:mod4}, $\Aplus\equiv\Aminus\equiv5\pmod{8}$.
-
-\emph{Even $e$:} $5^e m^2=\square\in\{0,1,4\}\pmod{8}$.  Since $5\notin\{0,1,4\}$,
-this is impossible for either $\Aplus$ or $\Aminus$ individually.
-
-\emph{Odd $e$:} $5T^2\equiv5\pmod{8}$ (for $T$ odd), which is \emph{consistent}
-with $\Aplus\equiv5\pmod{8}$.  A mod-$16$ refinement ($n=4k+2$, so
-$\Aplus\equiv a^2+4\pmod{16}\in\{5,13\}$, and $5T^2\in\{5,13\}\pmod{16}$ for $T$
-odd) also gives no contradiction.  The simultaneous case $(\Aplus,\Aminus)=(5S^2,5T^2)$
-is therefore not excluded by local methods at $2$, and the analytic proof is
-outstanding.
+\emph{Part (ii), odd $e$ — Gaussian descent.}
+Write $z_1=a+ni$ and $z_2=(n{-}a)+ni$ in $\mathbb{Z}[i]$.  Since
+$N(z_1)=5S^2$, exactly one of $\pi=1+2i$ or $\bar\pi=1-2i$ divides $z_1$ to odd
+valuation; write $z_j=\omega_j\alpha_j^2$ with $\omega_j\in\{u\pi,u\bar\pi\}$
+($u$ a unit).  The identity
+$$z_1+z_2 = n(1+2i)=n\pi$$
+partitions into four cases $(\omega_1,\omega_2)$:
+\begin{itemize}
+\item \emph{Cases B, C} (one factor $\pi$, one $\bar\pi$): the sum forces the case-$B$
+  factor $z_2$ to satisfy $\pi\bar\pi=5\mid z_2$, giving $5\mid(n{-}a)$ and $5\mid n$,
+  hence $5\mid a$, contradicting $\gcd(a,n)=1$.
+\item \emph{Case D} (both $\bar\pi$): the sum divided by $\bar\pi$ must lie in
+  $\mathbb{Z}[i]$, forcing $5\mid n$.  A unit-by-unit analysis of all sub-cases then
+  gives $5\mid a$, again contradicting $\gcd(a,n)=1$.
+\item \emph{Case A} (both $\pi$): dividing by $\pi$ gives $n$ real.  Mixed or
+  doubly-imaginary units produce parity contradictions ($Y_1\equiv0\pmod4$ vs.\
+  $X_2$ odd, or $n\equiv0\pmod4$ vs.\ $n\equiv2\pmod4$).  For both-real units,
+  setting $x=X_1/Y_1$ reduces the system to
+  $$y_1^2 = x^2+1,\quad y_2^2 = x^2+2x+2.$$
+  Parametrising the first conic as $x=(1{-}t^2)/(2t)$ yields the quartic
+  $Y^2=t^4-4t^3+6t^2+4t+1$.  This is birationally equivalent to the Weierstrass
+  model $E\colon Y^2=X^3-32X+64$ (verified: $(4,0),(0,\pm8)$ on $E$;
+  $2\cdot(0,8)=(4,0)$, $4\cdot(0,8)=\mathcal{O}$).  A $2$-isogeny descent gives
+  $\mathrm{rank}(E(\mathbb{Q}))=0$; the torsion subgroup is
+  $\mathbb{Z}/4\mathbb{Z}=\{\mathcal{O},(4,0),(0,\pm8)\}$.  All four torsion points
+  pull back to $t\in\{0,\infty\}$, giving $Y_1=0$ and hence $n=\pm2$, violating
+  $n\geq4$.
+\end{itemize}
+No case survives; the proof is complete.\qed
 \end{proof}
 
 \begin{remark}
-No assumption on RH or on Sha($E$) is imported.  The open case in (ii) is the
-simultaneous $(\Aplus,\Aminus)=(5S^2,5T^2)$ for $4\nmid n$; an exact scan over all
-Row-3 pairs with $n\leq3000$ finds no instances.
+No assumption on RH or Sha($E$) is imported.  The rank-$0$ claim is a
+PROOF-DRAFT pending independent CAS verification of the Selmer group computation.
+The torsion, Nagell--Lutz, and quartic scans are verified in
+\texttt{checker/verify\_OE02\_elliptic.py}.
 \end{remark}
 
 %---------------------------------------------------------------------

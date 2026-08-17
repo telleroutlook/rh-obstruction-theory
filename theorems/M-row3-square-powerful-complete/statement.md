@@ -4,6 +4,10 @@
 **Mathematical status:** `PROOF-DRAFT`  
 **Computational status:** `REPRODUCIBLE`
 
+**Note:** The 4∤n case was an open problem (OE-02). Proof received 2026-08-17
+via Gaussian factorization + 2-isogeny descent on E: Y²=X³−32X+64 (rank 0).
+CAS verification of the Selmer group computation is the remaining Gate-A gap.
+
 ---
 
 ## Statement
@@ -40,9 +44,9 @@ Write n = 2m. Then A⁺ = a² + 4m², A⁻ = (2m−a)² + 4m².
 iff N = 5^e · m² for some integers e ≥ 0, m ≥ 1. (This is the t=1 case of the
 Erdős–Szekeres powerful decomposition N = 5^e · s² · t³ with t=1.)
 
-**Theorem B** (proved, Paper E): For every Row-3 pair,
-- 4∤n → A⁺ ≡ A⁻ ≡ 1 (mod 8)
-- 4|n → A⁺ ≡ A⁻ ≡ 5 (mod 8)
+**Theorem B** (proved, Paper E, thm:mod4): For every Row-3 pair,
+- 4∤n → A⁺ ≡ A⁻ ≡ **5** (mod 8)
+- 4|n → A⁺ ≡ A⁻ ≡ **1** (mod 8)
 
 **Theorem L / Theorem D of Paper E** (proved, `theorems/L-row3-zsygmondy-square/`):
 No Row-3 pair has A⁺ = x² and A⁻ = y² simultaneously.

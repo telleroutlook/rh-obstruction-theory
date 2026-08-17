@@ -33,6 +33,8 @@ This is stronger than needed for the t=1 case of NT-C but is worth recording.
 
 | Claim | Status |
 |---|---|
-| t=1 case of NT-C (Theorem M) | PROOF-DRAFT (elementary mod 8/16 + Theorem L) |
+| t=1 case of NT-C, 4\|n (Theorem M/E part i) | PROOF-DRAFT (elementary mod 8/16 + Theorem L) |
+| t=1 case of NT-C, 4∤n — (5□,5□) case (Theorem M/E part ii) | PROOF-DRAFT (Gaussian descent + E: Y²=X³−32X+64, rank 0; CAS descent pending) |
+| t=1 case of NT-C complete | PROOF-DRAFT (both sub-families covered) |
 | t≥2 case of NT-C (cube factors) | OPEN — via OE-01 |
 | OP1-A (N not powerful) | OPEN — requires full NT-C |
